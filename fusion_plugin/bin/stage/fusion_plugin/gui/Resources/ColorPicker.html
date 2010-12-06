@@ -1,0 +1,86 @@
+<html>
+<head>
+<script language="JavaScript">
+<!-- 
+//returnColor method returns the color to the opener window as a
+//value to the target text field.
+function returnColor(color){
+  //If the opener is defined and open and target field has been defined.
+  if (opener && !opener.closed && opener.setTargetField){
+    opener.setTargetField(targetField, color);
+  }
+  //Close this window
+  window.close();
+}
+//-->
+</script>
+<link rel=stylesheet HREF='Style.css'>
+<title>Color Picker</title></head>
+<body font="Verdana" size="2" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#ffffff">
+<table width='100%' align=center cellpadding=0 cellspacing=0>
+	<TR>
+		<TD align=center>
+			<br><SPAN CLASS=text>Please click on the color button to select it</SPAN><br><br>
+		</TD>
+	</TR>
+	<tr>
+		<td align=center> 
+		<script language="javascript">
+		  fixed="B";
+		  left="R";
+		  upper="G";
+		  value=Array;
+		  value[0]="N/A";
+		  value[1]="00";
+		  value[2]="33";
+		  value[3]="66";
+		  value[4]="99";
+		  value[5]="CC";
+		  value[6]="FF";
+		
+		
+		  for (fixedamount=1; fixedamount<=6;fixedamount=fixedamount+1)
+			{
+			  fixedvalue=value[fixedamount];
+			  document.write("<table border='0'><tr><td>"); 
+			
+			  for (row=0; row<=6;row=row+1)
+				 { document.write("<tr>");
+				  for (table=1; table<=3; table=table+1)
+				 	{
+					  if (table==1) {fixed="B"; left="R";  upper="G";}
+					  if (table==2) {fixed="R"; left="G";  upper="B";}
+					  if (table==3) {fixed="G"; left="B";  upper="R";}
+					
+					  for (column=0; column<=6; column=column+1)
+					  {
+					   if (fixed=="R") {redvalue=fixedvalue; fixedcolor="#CC0000"};
+					   if (fixed=="G") {greenvalue=fixedvalue; fixedcolor="#009900"};
+					   if (fixed=="B") {bluevalue=fixedvalue; fixedcolor="#0000CC"};
+					   if (left=="R") {redvalue=value[row]; leftcolor="#CC0000"};
+					   if (left=="G") {greenvalue=value[row]; leftcolor="#009900"};
+					   if (left=="B") {bluevalue=value[row]; leftcolor="#0000CC"};
+					   if (upper=="R") {redvalue=value[column]; uppercolor="#CC0000"};   
+					   if (upper=="G") {greenvalue=value[column]; uppercolor="#009900"};   
+					   if (upper=="B") {bluevalue=value[column]; uppercolor="#0000CC"};   
+					
+					   if (column==0 && row==0) {document.write("<td bgColor="+fixedcolor+"><font face='Verdana' size=1 color='#FFFFFF' size='1'>"+value[fixedamount]+"</font></td>")};
+					   if (column==0 && row!=0) {document.write("<td bgColor="+leftcolor+"><font face='Verdana' size=1 color='#FFFFFF'  size='1'>"+value[row]+"</font></td>")};
+					   if (column!=0 && row==0) {document.write("<td bgColor="+uppercolor+"><font face='Verdana' size=1 color='#FFFFFF' size='1'>"+value[column]+"</font></td>")};
+					   styleclause="width:20;height:20;background-color:#" + redvalue + greenvalue + bluevalue + ";";
+					   onclickclause="returnColor(\"" + redvalue + greenvalue + bluevalue +  "\");";					   
+					   if (column!=0 && row!=0){document.write("<td><button value=' ' style='" + styleclause + "' onClick='" + onclickclause + "'></td>")};
+					  } if (table<3) {document.write("<td bgColor=#FFFFF4>&nbsp;&nbsp;&nbsp;&nbsp;</td>")};
+					 }
+				 document.write("</font></tr>");
+				 }  
+			 document.write("</td></tr></table>");
+		}
+	</script>
+	</td>
+	</tr>
+</table>
+</body>
+</html>
+
+

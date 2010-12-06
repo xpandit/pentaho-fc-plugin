@@ -1,0 +1,103 @@
+.pageheader
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12pt;	
+}
+.header
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 8pt;	
+}
+.headerwhite
+{
+	COLOR: #FFFFFF;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 8pt;	
+}
+.pageHeader
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12pt;	
+}
+.text
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 8pt;	
+}
+.textBold
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 8pt;	
+}
+.textOrange
+{
+	COLOR: #F79911;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 8pt;	
+}
+.textError
+{
+	COLOR: #FF0000;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 8pt;	
+}
+.textOrangeBig
+{
+	COLOR: #F79911;
+	FONT-FAMILY: Verdana;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12pt;	
+}
+A
+{
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 8pt;	
+}
+A:hover
+{
+	COLOR: #F79911;
+}
+.textbox
+{
+	BACKGROUND: #FFFFFF;
+	BORDER: 1px solid #CCCCCC;
+	COLOR: #333333;
+	FONT-FAMILY: Verdana;
+	FONT-SIZE: 11px;	
+}
+.textarea
+{
+    BACKGROUND: #FFFFFF;
+    BORDER: #CCCCCC 1px solid;
+    COLOR: #333333;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 11px;              
+}
+.select
+{
+    BACKGROUND: #FFFFFF;
+    BORDER: 1px solid #CCCCCC;
+    COLOR: #333333;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 8pt;    
+}
+.greyTR{
+BACKGROUND: #EAEAEA;
+}
+.lightYellowTr{
+	BACKGROUND: #F6D58E;
+}
+.trVeryLightYellowBg{
+	BACKGROUND: #FEF1CF;
+}
