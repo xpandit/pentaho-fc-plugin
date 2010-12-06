@@ -1,0 +1,8 @@
+<index>
+
+	<name>Fusion Plugin</name>
+	<description>Creating Our Own Fusion Plugin</description>
+	<icon>samples.png</icon>
+	<visible>true</visible>
+	<display-type>icons</display-type>
+</index>

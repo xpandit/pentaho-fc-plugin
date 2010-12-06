@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+
+    <!-- DataSource definition. 
+	
+	Type controls what the datasource type is.
+	The connection and query controls how the data is fetched. These values
+	are specific to each access type
+
+	-->
+    <DataSources>
+        <Connection id="1" type="sql.jndi">
+            <Jndi>SampleData</Jndi>
+        </Connection>
+    </DataSources>
+    <!-- DataAccess object controls the query itself
+
+	Access controls if the datasource can be seen from the outside or is to
+	be used from a Compound datasource only
+
+	-->
+    <DataAccess id="1" connection="1" type="sql" access="public" cache="true" cacheDuration="3600">
+		<Name>Sql Query on SampleData - Jndi</Name>
+        <Query>
+					SELECT 
+						STATE, sum(QUANTITYORDERED)
+					FROM
+						customer_w_ter a, orderfact b 
+					WHERE
+						a.customernumber = b.customernumber 
+						and country = 'USA'
+					GROUP BY 
+						state
+					ORDER BY 
+						state;		
+				</Query>
+        <!-- All parameters are passed as string from the outside. Their
+		type is defined here. If needed, a conversion pattern must be specified
+
+		Supported types: String, Date, Integer, Numeric
+		-->
+        <Parameters>
+        </Parameters>
+        <!-- 
+		Columns block allow specifying name and CalculatedColumn the creation of new
+		columns based on formulas
+		-->
+		<Columns>
+			<Column idx="0">
+				<Name>State</Name>
+			</Column>
+			<Column idx="1">
+				<Name>Quantity</Name>
+			</Column>
+		</Columns>
+        <!-- Settings block here overrides defaults and general settings -->
+        <Settings>
+        </Settings>
+        <!-- Output controls what is outputed and by what order. Defaults to everything -->
+        <Output indexes="0,1"/>
+    </DataAccess>
+</CDADescriptor>
