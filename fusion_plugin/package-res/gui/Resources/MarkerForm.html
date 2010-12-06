@@ -1,0 +1,116 @@
+<html>
+<head>
+<script language="JavaScript">
+<!-- 
+//returnData method returns the data to the opener window.
+function returnData(){
+  //If the opener is defined and open
+  if (opener && !opener.closed){
+  	//We need to return data to opener    
+	var frm = this.document.markerdetails;
+	//If id has been defined, only then we proceed
+	if (frm.id.value!=""){
+		//Now, we check if this marker already exists in our list
+		var i;
+		var exists = false;		
+		for (i=0; i<markerList.length; i++){		
+			//Make a case in-sensitive check
+			if (markerList[i].toLowerCase()==frm.id.value.toLowerCase()){
+				exists=true;
+				break;
+			}
+		}		
+		//If the marker ID doesn't already exist, we add it
+		if (exists==false){
+			opener.createMarker(x, y, frm.id.value, frm.label.value, frm.labelPos.value, frm.show.checked);					
+			//Close the window
+			window.close();
+		}else{
+			//We ask the user to update the ID
+			alert("Duplicate ID entered for the marker. A marker with the same ID already exists on the map. Please enter a different one.");
+			frm.id.focus();
+			return false;
+		}		
+	} else{
+		//Alert
+		alert("You necessarily need to define a unique Id for each Marker.");
+		frm.id.focus();
+		return true;
+	}
+  }  
+}
+function cancelAction(){
+	//Cancel - so close window and nothing to dispatch
+	window.close();
+	return false;
+}
+//-->
+</script>
+<link rel=stylesheet HREF='Style.css'>
+<title>Enter Marker details</title></head>
+<body>
+<form name='markerdetails'>
+<table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>
+	<TR bgColor='#E0E0E0'>
+		<TD align=center colspan='2'>
+			<SPAN CLASS=text>Please enter <B>Unique</B> Id, Label & Label Position for the Marker:</SPAN>
+		</TD>
+	</TR>	
+	<TR height="10">
+		<td></td>
+	</TR>
+	<TR>
+		<TD width="40%" align="left">
+			<span class='text'>&nbsp;Id:</span>
+		</TD>
+		<TD width="60%" align="left">
+			<input type="text" class='textbox' size='6' name='id' />
+		</TD>
+	</TR>
+	<TR>
+		<TD width="40%" align="left">
+			<span class='text'>&nbsp;Label:</span>
+		</TD>
+		<TD width="60%" align="left">
+			<input type="text" class='textbox' size='20' name='label' />
+		</TD>
+	</TR>
+	<TR>
+		<TD width="40%" align="left">
+			<span class='text'>&nbsp;Label Position:</span>
+		</TD>
+		<TD width="60%" align="left">
+			<select name='labelPos' class='select'>
+				<option value='top' selected>Top
+				<option value='bottom'>Bottom
+				<option value='center'>Center
+				<option value='left'>Left
+				<option value='right'>Right
+			</select>
+		</TD>
+	</TR>
+	<TR>
+		<TD width="40%" align="left">
+			<span class='text'>&nbsp;Show Marker on Map?</span>
+		</TD>
+		<TD width="60%" align="left">
+			<input type="checkbox" name='show' checked/>
+		</TD>
+	</TR>
+	<TR>
+		<TD colspan="2" align="right">
+			<input type="button" value='Create' class="select" name='btnMarkerCreate' onClick="javascript:returnData();">
+			&nbsp;
+			<input type="button" value='Cancel' class="select" name='btnMarkerCancel' onClick="javascript:cancelAction();">
+			&nbsp;&nbsp;
+		</TD>
+	</TR>
+	<TR height="2">
+		<td></td>
+	</TR>
+</table>
+</form>
+</body>
+</html>
+
+

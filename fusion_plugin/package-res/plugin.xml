@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin title="Fusion Plugin">
+  
+ 
+  <webservice
+    id="fusionService"
+    type="xml"
+    title="Fusion Service"
+    description="A service that will describe the implemented maps, and the format that each map expects for data."
+    class="com.xpandit.fusionplugin.FusionService"/>
+    
+  <content-type type="xfusion" mime-type="text/html">
+    <title>Fusion Config</title>
+    <description>Fusion Config File</description>
+    <icon-url>content/fusion/res/icon.gif</icon-url>
+    <meta-provider>com.xpandit.fusionplugin.content.FusionContentTypeMetaProvider</meta-provider> 
+    <operations>
+      <operation>
+        <id>RUN</id>
+        <command>content/fusion?solution={solution}&amp;path={path}&amp;action={name}</command>
+      </operation>
+    </operations>
+  </content-type>
+  
+   <content-generator
+    id="fusion"
+    title="Fusion Component"
+    type="xfusion"
+    class="com.xpandit.fusionplugin.content.FusionContentGenerator"/>
+ 
+   
+    <static-paths>
+      <static-path url="/fusion/res" localFolder="resources"/>
+      <static-path url="/fusion/js" localFolder="js"/>
+      <static-path url="/fusion/maps" localFolder="maps"/>
+      <static-path url="/fusion/charts" localFolder="charts"/>
+      <static-path url="/fusion/widgets" localFolder="widgets"/>
+    </static-paths>  
+    
+    <bean id="fusionComponent" class="com.xpandit.fusionplugin.FusionComponent"/>
+
+</plugin>
