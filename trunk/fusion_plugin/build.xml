@@ -1,0 +1,12 @@
+<project name="fusion_plugin" basedir="." default="default">
+<!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
+  <import file="build-res/subfloor-pkg.xml" />
+
+	
+  <target name="assemble.copy-libs">
+    <copy todir="${approot.stage.dir}/lib">
+      <fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
+    </copy>
+  </target>
+
+</project>

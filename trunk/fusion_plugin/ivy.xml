@@ -1,0 +1,15 @@
+<ivy-module version='2.0'>
+  <info organisation='com.pentaho' module='fusion_plugin' revision='${project.revision}' />
+  <configurations>
+    <conf name='default' />
+    <conf name='test' visibility='private' />
+  </configurations>
+  <publications>
+    <artifact name='${ivy.artifact.id}' type='jar' conf='default' />
+  </publications>
+  <dependencies>
+    <dependency org='pentaho' name='pentaho-bi-platform-api' rev='${dependency.bi-platform.revision}' changing='true' transitive='false' />
+    <dependency org='pentaho' name='pentaho-bi-platform-engine-services' rev='${dependency.bi-platform.revision}' changing='true' transitive='true' />
+    <dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='false' />
+  </dependencies>
+</ivy-module>
