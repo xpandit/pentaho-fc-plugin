@@ -1,0 +1,15 @@
+Bar chart:
+
+http://localhost:8080/pentaho/ViewAction?solution=Fusion%20Plugin&path=&action=Fusion%20BarChart.xaction
+
+Line chart:
+
+http://localhost:8080/pentaho/ViewAction?solution=Fusion%20Plugin&path=&action=Fusion%20LineChart.xaction
+
+Pie Chart:
+
+http://localhost:8080/pentaho/ViewAction?solution=Fusion%20Plugin&path=&action=Fusion%20PieChart.xaction
+
+Scroll Bar Chart:
+
+http://localhost:8080/pentaho/ViewAction?solution=Fusion%20Plugin&path=&action=Fusion%20ScrollBarChart.xaction

@@ -1,0 +1,8 @@
+meta.author=Gretchen Moran
+meta.description=US Map: Product Quantities Sold
+meta.title=Fusion USA Map
+cda.file=pab_course_solution/day4_lab/usa-quantity-ordered.cda
+cda.dataAccessId=1
+chartTitle=Gráfico de Barras
+xAxisName=X Axis Name
+yAxisName=Y Axis Name
