@@ -1,0 +1,40 @@
+
+	<div>
+		<div id="chartdiv" align="center" style="position:absolute; z-index:1; left:41; top:-112">
+				FusionCharts.
+		</div>
+		<img src="content/fusion/res/Gauge_background.png" alt="Gauge" style="position:absolute; z-index:-1;"/>
+		<div>
+			<div>
+				<span style="position:absolute; z-index:2;  left:95; top:140; font-family:'Arial'; font-weight:bold; font-size:30px; ">0,13€/h</span>
+				<span style="position:absolute; z-index:2;  left:120; top:180; font-family:'Arial'; font-weight:bold; font-size:15px; color:#9A9C9F; ">2.014W</span>
+			</div>
+			
+			<div><span style="position:absolute; z-index:2;  left:265; top:40; font-family:'Arial'; font-weight:bold; font-size:12px; color:#58585A; ">Maio</span></div>
+			<div><span style="position:absolute; z-index:2;  left:265; top:55; font-family:'Arial'; font-weight:bold; font-size:38px; color:#0F9447; ">95€</span></div>
+			<div>
+				<span style="position:absolute; z-index:2;  left:265; top:99; font-family:'Arial'; font-weight:bold; font-size:12px; color:#0F9447;" >835 kWh</span>
+				<span style="position:absolute; z-index:2;  left:320; top:99; font-family:'Arial'; font-weight:bold; font-size:12px; color:#58585A;">| Total Mês</span>
+			</div>
+			
+			<div><span style="position:absolute; z-index:2;  left:265; top:130; font-family:'Arial'; font-size:12px; font-weight:bold; color:#58585A; ">14 Junho</span></div>
+			<div><span style="position:absolute; z-index:2;  left:265; top:145; font-family:'Arial'; font-size:38px; font-weight:bold; color:#0F9447; ">40€</span></div>
+			<div>
+				<span style="position:absolute; z-index:2;  left:265; top:189; font-family:'Arial'; font-size:12px; font-weight:bold; color:#0F9447;">3,5 kWh</span>
+				<span style="position:absolute; z-index:2;  left:320; top:189;  font-family:'Arial';font-size:12px; font-weight:bold; color:#58585A;">| Total Dia</span>
+			</div>
+		</div>
+    <div>
+    
+   <script language="JavaScript" src="content/fusion/js/FusionCharts.js"></script>
+   <script type="text/javascript">
+
+			function renderMap(div){
+		        var chart = new FusionCharts("content/fusion/widgets/AngularGauge.swf", "Chart4Id", "213", "250", "0", "0");
+				chart.setTransparent(true);
+		        chart.setDataXML("{mapXml}");
+		        chart.render(div);
+			}
+	   	renderMap("chartdiv");
+		alert(document.getElementById("mantle").id);
+   </script>

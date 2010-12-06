@@ -1,0 +1,662 @@
+<HEAD>
+	<TITLE>FusionMaps v3 GUI</TITLE>		
+	<link rel="stylesheet" href="Resources/Tabber.css" TYPE="text/css" MEDIA="screen"/>
+	<link rel="stylesheet" href="Resources/Style.css" />	
+	<script language="javascript">
+	<!--
+	//Before we load tabber class, we need to change default behaviour.
+	//Temporarily hide the "tabber" class so it does not "flash"
+    //on the page as plain HTML. After tabber runs, the class is changed
+    //to "tabberlive" and it will appear.
+	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+	
+	//Is the map a forced re-load (workaround for Firefox bug)
+	var isReload = false;
+	var markerWinOpened = false;
+	//We avoid automatic onLoad of tabber and force a manual load
+	var tabberOptions = {
+	  'manualStartup':true,		
+	  /* Code to run after each tabber object has initialized */		
+	  'onLoad': function(argsObj) {
+		//argsObj.tabber.id gives the tab id of the tab that has loaded
+		return;
+	  },
+	
+	  /* Optional:  */
+	
+	  'onClick': function(argsObj) {
+		/*
+		code to run when the user clicks a tab. If this
+		 function returns boolean false then the tab will not be changed
+		 (the click is canceled). 		 
+		*/
+		 var t = argsObj.tabber; // Tabber object 
+		 var id = t.id; // ID of the main tabber DIV 
+		 var i = argsObj.index; // Which tab was clicked (0 is the first tab)
+		 var e = argsObj.event; // Event object
+		 //If the user has switched to marker defintion tab, we need to set
+		 //map to choose mode.
+		 if (i==2){
+  			mapGUI.enableChooseMode();
+ 		 }else{
+			mapGUI.disableChooseMode();
+		 }
+		 if (i==3){
+		 	//Render XML code
+			mapGUI.renderXMLCode();
+		 }
+		 if (i==4){
+		 	//Render HTML code
+			mapGUI.renderHTMLCode();
+		 }
+		 if (i==5){
+		 	//Preview map
+			mapGUI.previewMap();
+			return true;
+		 }
+	  },		
+	  //Set an ID for each tab navigation link
+	  'addLinkId': true		
+	};	
+	//-->
+	</script>
+	<script language="JavaScript" type="text/javascript" src="Resources/Tabber.js"></script>	
+	<script language="JavaScript" type="text/javascript" src="Resources/FusionMaps.js"></script>
+	<script language="JavaScript" type="text/javascript" src="Resources/FusionMapsGUI.js"></script>	
+	<script language="JavaScript" type="text/javascript" src="Resources/TableFunctions.js"></script>	
+	<script language="javascript">	
+	<!--	
+	//Page scope variable to store reference to GUI.
+	var mapGUI;
+		
+	function renderGUI(){		
+		//This method creates an instance of the GUI and renders it.
+		mapGUI = new FusionMapsGUI();		
+		//Render the map drop down selection box in mapSelectionDiv
+		mapGUI.renderMapSelectionBox("mapSelectionDiv");
+	}
+	function FC_Rendered(mapID){
+		//This method is invoked when the map has loaded and initialized.
+		//So, ask GUI to update its reference to the map.
+		mapGUI.getReferenceToMap();
+		//If it's not a forced re-load, we refresh (re-create) GUI
+		if (isReload==false){
+			//Create the tab interface & forms for the new map.
+			mapGUI.createTabs();
+		}
+	}	
+	function changeMap(index){
+		//This method is called when the user changes the map in drop down.
+		//Check if this index actually belongs to a map
+		if (mapGUI.isMapIndex(index)==true){
+			//Re-initialize the GUI state
+			mapGUI.reInit();
+			//Update flag that it's a user re-load and not a self forced one.
+			isReload = false;
+			//Load the new map
+			mapGUI.loadMap(index);
+			//Clear the forms - so that data pertinent to old map is not shown to user.
+			mapGUI.clearForms();
+		}
+	}	
+	function openColorPicker(targetField){
+		//This method helps open the color picker file and passing the required parameters.
+		//targetField - text field in which the value from color picker would be returned.
+		var w = window.open('Resources/ColorPicker.html','colorPicker','width=600,height=500,scrollbars=1,toolbars=no,menu=no');
+		w.targetField = targetField;
+		w.focus();
+		return false;
+	}
+	//Callback function for color picker. 
+	function setTargetField(targetField, color){
+	  if (targetField){
+		targetField.value = color;
+	  }
+	  window.focus();
+	}
+	function registerMarker(x,y){
+		//This method is invoked when the user registers a marker on the chart.
+		//If X <0 or Y<0, we show appropriate message to user		
+		if (x<0 || y<0){
+			window.alert("You can define Markers only within the map bounds. Please click within the red rectangle in the map to define Markers.");
+			return true;
+		}else{						
+			//Show the marker pop up window			
+			var wM = window.open('Resources/MarkerForm.html','MarkerSelectWin','width=450,height=225,scrollbars=0,toolbars=no,menu=no,status=1');
+			//Proxy X and Y data 
+			wM.x = String(x);
+			wM.y = String(y);
+			//Pass markers array for duplicate check 
+			wM.markerList = mapGUI.getMarkers();
+			wM.focus();	
+			//Update flag
+			markerWinOpened = true;								
+			return true;
+		}		
+	}
+	//Call back handler for add marker pop up.
+	function createMarker(mX, mY, mId, mLabel, mLabelPos, mShow){	
+		//We need to create marker
+		//First, add marker to array
+		mapGUI.addMarker(mX, mY, mId, mLabel, mLabelPos, mShow);		
+	}	
+	//Call back handler for delete marker
+	function deleteMarker(markerId){
+		//Confirm from user.
+		var con = window.confirm("Are you sure you want to delete the marker '" + markerId + "'?");
+		//If confirmed, delete.
+		if (con){
+			//Delete the marker and update UI			
+			mapGUI.deleteMarker(markerId);
+		}
+	}
+	//Call back handler for the update XML from source button
+	function updateMapData(){
+		//Update the map with the XML data contained in text area.
+		mapGUI.updateMapfromXML();
+	}
+	//-->
+	</script>	
+	
+</HEAD>
+<body onLoad="javascript:renderGUI();">
+	<div align="center">
+		<span class='pageheader'><a href='http://www.fusioncharts.com' target="_blank" class='pageheader' title='Go to FusionCharts Website'>FusionMaps v3</a></span>
+		<br>
+		<span class='textbold'>Map GUI</span>
+	</div>
+	<div align="center">
+		<BR>
+	</div>
+	<div id='mapNameDiv' align="center">		
+	</div>
+	<div id="mapdiv" align="center">
+		<table width='700' align='center' style='Border:#CCCCCC 1px solid;' cellpadding="2">
+			<tr>
+				<td>
+	    		  <span class='text'>
+				  Using the FusionMaps GUI, you can do the following:
+				  <UL>
+				  	<li>Visually define and configure values for your map entities</li>
+					<li>Visually define the markers for your map</li>
+					<li>Create full XML data document for the map</li>
+					<li>Generate XML entities template</li>
+					<li>Generate XML markers template</li>
+				  </UL>
+				  Please select a map from the drop-down below to start the process.
+				  <p class="text"><b>Troubleshooting Information</b><br> If the GUI doesn't work and gives JavaScript errors (or fails silently), you need to check for the following:
+				  <UL>
+				  <LI>Make sure that your browser is JavaScript enabled.
+				  <LI>Make sure that you have Flash Player 8 (or above) installed for this browser.
+				  <LI>Make sure that Flash Player settings is configured to enable JavaScript interaction. To configure the Flash Player Settings, you need to go to <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html"><U>the Settings Manager at Adobe's website</U></a>. There, add this folder (from which you're running this file) as a secure location (Always Allow).
+				  <LI>Or, if you do not want to change the JavaScript settings, you can run this page from a web server (either local or remote). In that case, the permissions do not need to be changed. 
+				  </UL>
+				  </p>
+				  </span>				  
+				</td>
+			</tr>
+		</table>			
+	</div>
+	
+	<BR>
+	
+	<form name='guiFORM' id='guiFORM'>		
+		<table width='760' align='center' cellpadding="2" cellspacing="1">
+			<tr>
+				<td>
+				<div id="mapSelectionDiv" align="center">
+					<p class='text'>Unable to run JavaScript. Please see the trouble shooting options listed above.</p>
+				</div>		
+				</td>
+			</tr>
+			
+			<tr>
+				<td>	
+				<div id='tabDiv' style="display:none;">
+					<div class="tabber" id='maintab'>				
+						<div class="tabbertab tabbertabdefault" title="Configuration">
+						 	<div>
+							  <span class='text'>							  							  
+							  <p>Here, you can define the various configurations for the map. Please select the appropriate values here and then switch to other tabs to fill in data.</p>
+							  <p>Changes would NOT be automatically reflected on the map. To view the changes, click the "Preview" tab.</p>
+							  <p><B>Please note that this GUI just covers only the basic properties of FusionMaps.</B> Using the XML data source, you can configure a LOT more properties and features like advanced font handling, custom shapes & images for markers, gradient fills, custom animations, custom effects etc.</p>
+							  </span>
+							 </div>
+							 <div id='configFormDiv'>
+							 	<table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>
+									
+									<tr>
+										<td width='30%' bgColor='#f5f5f5' valign="top">
+											<table width="99%" align="center" cellpadding="2">
+												<tr>
+													<td width='80%' class='text'>
+														Animate Map?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mAnimation" />
+													</td>
+												</tr>
+												<tr>
+													<td width='80%' class='text'>
+														Drop Shadow?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mShowShadow" />
+													</td>
+												</tr>
+												<tr>
+													<td width='80%' class='text'>
+														Use Bevel Effect?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mShowBevel" />
+													</td>
+												</tr>
+												<tr>
+													<td width='80%' class='text'>
+														Use Hover Effect?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mUseHoverColor" checked/>
+													</td>
+												</tr>	
+												<tr>
+													<td width='80%' class='text'>
+														Show Legend?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mShowLegend" checked/>
+													</td>
+												</tr>						
+												<tr>
+													<td width='80%' class='text'>
+														Show Labels?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mShowLabels" checked/>
+													</td>
+												</tr>
+													<tr>
+													<td width='80%' class='text'>
+														Show Marker Labels?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mShowMarkerLabels" checked/>
+													</td>
+												</tr>
+												<tr>
+													<td width='80%' class='text'>
+														Include Name in Labels?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mIncludeNameInLabels" checked/>
+													</td>
+												</tr>
+												<tr>
+													<td width='80%' class='text'>
+														Include Value in Labels?
+													</td>
+													<td align="center">
+														<input type="checkbox" name="mIncludeValueInLabels"/>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width='35%' valign="top">
+											<table width="99%" align="center" cellpadding="2">
+												<tr>
+													<td width='60%' class='text'>
+														Default Fill Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' value='F1f1f1' size='6' name='mFillColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mFillColor);">
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Entities Border Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' value='000000' name='mBorderColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mBorderColor);">
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Connector Line Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mConnectorColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mConnectorColor);">
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Hover Effect Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mHoverColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mHoverColor);">
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Canvas Border Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mCanvasBorderColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mCanvasBorderColor);">
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Font Face:
+													</td>
+													<td align="left">
+														<select class='select' name='mBaseFont'>
+															<option value='Arial'>Arial
+															<option value='Tahoma'>Tahoma
+															<option value='Times New Roman'>Times NR
+															<option value='Verdana' selected>Verdana
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Font Size:
+													</td>
+													<td align="left">
+														<select class='select' name='mBaseFontSize'>
+															<option value='1'>1
+															<option value='2'>2
+															<option value='3'>3
+															<option value='4'>4
+															<option value='5'>5
+															<option value='6'>6
+															<option value='7'>7
+															<option value='8'>8
+															<option value='9'>9
+															<option value='10' selected>10
+															<option value='11'>11
+															<option value='12'>12
+															<option value='13'>13
+															<option value='14'>14
+															<option value='15'>15
+															<option value='16'>16
+															<option value='17'>17
+															<option value='18'>18
+															<option value='19'>19
+															<option value='20'>20
+														</select>
+													</td>
+												</tr>			
+												<tr>
+													<td width='60%' class='text'>
+														Font Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mBaseFontColor' />&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mBaseFontColor);">
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Legend Position:
+													</td>
+													<td align="left">
+														<select class='select' name='mLegendPosition'>
+															<option value='bottom' selected>Bottom
+															<option value='right'>Right
+														</select>
+													</td>
+												</tr>									
+											</table>
+										</td>
+										<td width='35%' bgColor='#f5f5f5' valign="top">
+											<table width="99%" align="center" cellpadding="2">
+												
+												<tr>
+													<td width='60%' class='text'>
+														Show Entity Tool Tip?
+													</td>
+													<td align="left">
+														<input type="checkbox" name="mShowToolTip" checked/>
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Short Name in Tool Tip?
+													</td>
+													<td align="left">
+														<input type="checkbox" name="mUseSNameInToolTip"/>
+													</td>
+												</tr>						
+												<tr>
+													<td width='60%' class='text'>
+														Show Marker Tool Tip?
+													</td>
+													<td align="left">
+														<input type="checkbox" name="mShowMarkerToolTip" checked/>
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Marker Border Color:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mMarkerBorderColor' value='000000'/>&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mMarkerBorderColor);">
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Marker Background:
+													</td>
+													<td align="left">
+														<input type='text' class='textbox' size='6' name='mMarkerBgColor' value='FF5904'/>&nbsp;<input type='button' value='...' style='width:20;' class='select' onClick="javascript:openColorPicker(document['guiFORM'].mMarkerBgColor);">
+													</td>
+												</tr>
+												<tr>
+													<td width='60%' class='text'>
+														Marker Radius:
+													</td>
+													<td align="left">
+														<input type="text" class='textbox' name="mMarkerRadius" size='2' value='6'/>
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Format Number Scale?
+													</td>
+													<td align="left">
+														<input type="checkbox" name="mFormatNumberScale" checked/>
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Number Prefix:
+													</td>
+													<td align="left">
+														<input type="text" class='textbox' name="mNumberPrefix" size='4'/>
+													</td>
+												</tr>												
+												<tr>
+													<td width='60%' class='text'>
+														Number Suffix:
+													</td>
+													<td align="left">
+														<input type="text" class='textbox' name="mNumberSuffix" size='4'/>
+													</td>
+												</tr>												
+											</table>
+										</td>
+									</tr>
+								</table>
+							 </div>
+							 <div>
+							 &nbsp;
+							 </div>
+						 </div>	
+						 
+						 <div class="tabbertab" title="Data">
+						 	<div>
+							  <span class='text'>
+							  Here, you can define the data that you want to show on the map. Each map is divided into entities like countries, counties, regions etc. You can provide a numerical data value for each entity. Also, along with the data, you can provide the following additional information for each entity:
+							  <UL>
+							  <lI>A text display value (optional), which gets displayed as the label for the entity, instead of the normal label,value.
+							  <LI>A hex color code (optional), if you want to color the specific entity differently
+							  <LI>Tool-text (optional), if you want to show additional information as tool tip when your users roll over the entity
+							  </UL>
+							  </span>
+							  <p class='text'>Please fill in data for the map below.</p>
+							 </div>
+							 <div id='entityFormDiv'>
+							 </div>
+						 </div>	
+					
+						 <div class="tabbertab" title="Markers" id='MarkerDiv'>
+							  <div>
+								  <span class='text'>
+								  Using the <I>Marker</I> feature of FusionMaps, you can easily create user-defined points on the map. It can be effectively used to pin-point locations like cities, junctions, houses, malls, shops, offices etc. You can define any number of markers for each map and then opt to show just a few out of them. <BR><BR>
+								  To create a marker on the map, follow the steps below: 
+								  <UL>
+								  <lI>Click on the specific point on the map (above) where you want the marker to be present. You can only click within the RED rectangle above. <b>If you've pop-up blockers installed, you would need to disable them or Ctrl+Click on the map.</b>
+								  <LI>In the pop-up window, enter the following marker properties:
+									<UL>
+									  <LI>Unique Id - Each marker needs to have a unique ID (alpha numeric), by which it will be identified on the map.
+									  <LI>Display Label - This label would show up beside the respective marker.
+									  <LI>Label Position - Where the label should appear with respect to marker?
+									  <LI>Show Marker on Map - Where to show this marker on the map by default? FusionMaps allows you define any number of marker points and then show just a few out of them. 
+									 </UL>
+								  <LI>Review the Markers in the table below (visible once you start defining Markers).
+								  <LI>Click the Preview Tab to see the defined markers on the map.
+								  </UL>
+								  </span>
+							 </div>
+							 <table width='95%' align='center' border="0">
+							 	<tr>
+									<td>
+									<span class='header'>Markers defined by you</span>
+									</td>
+								</tr>
+							 </table>	
+							 <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td width='10%' class='header' valign='top'>&nbsp;Id</td>
+									<td width='30%' class='header' valign='top'>&nbsp;Label</td>
+									<td width='15%' class='header' valign='top' align="center">&nbsp;Label Position</td>
+									<td width='15%' class='header' valign='top' align="center">&nbsp;Show on Map?</td>
+									<td width='15%' class='header' valign='top' align="center">&nbsp;Draw As*</td>
+									<td width='10%' class='header' valign='top' align="center">&nbsp;Delete</td>
+								</tr>
+							 </table>
+							 <table width='95%' align='center' cellpadding='3' cellspacing='1' id='tblMarker'>								
+							 </table>
+							 <table width='95%' align='center' border="0">
+							 	<tr>
+									<td align='left'>
+									<span class='text'>*Using this GUI, you can select only the default shapes for each marker. If you wish to define custom shapes or use external image icons for markers, you'll need to do the same in XML data source.</span>
+									</td>
+								</tr>
+							 </table>	
+							 <BR>
+						 </div>
+					
+						 <div class="tabbertab" title="XML Output" id='xmloutputtab'>
+						  <div>
+						  <p class='text'>Given below is the XML data generated for this map, in various modes. If you want to make any changes to the XML source, you can do so in the first text-area below and then test it against the map.</p>
+						   <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td class='header' align='left' valign='top'>&nbsp;Full XML Data Document for the Map (Editable)</td>
+								</tr>
+								<tr>
+									<td align='center'>
+										<textarea name='xmlDataFull' class='textarea' rows='16' cols='110'></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td align='right'>
+										<input type='button' class='select' value='Update Map' onClick='javascript:updateMapData();'>&nbsp;&nbsp;
+									</td>
+								</tr>
+							 </table>
+							 <BR>
+							 <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td class='header' align='left' valign='top'>&nbsp;Entities XML Only</td>
+								</tr>
+								<tr>
+									<td align='center'>
+										<textarea name='xmlEntityTemplate' class='textarea' rows='12' cols='110'></textarea>
+									</td>
+								</tr>
+							 </table>
+							 <BR>
+							 <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td class='header' align='left' valign='top'>&nbsp;Marker XML (Definition & Application)</td>
+								</tr>
+								<tr>
+									<td align='center'>
+										<textarea name='xmlMarkerFull' class='textarea' rows='10' cols='110'></textarea>
+									</td>
+								</tr>
+							 </table>
+							 <BR>
+							 <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td class='header' align='left' valign='top'>&nbsp;Marker XML Definition Only (Read-only)</td>
+								</tr>
+								<tr>
+									<td align='center'>
+										<textarea name='xmlMarkerDef' class='textarea' rows='10' cols='110' readonly="readonly"></textarea>
+									</td>
+								</tr>
+							 </table>
+							 <BR>
+						  </div>
+						 </div>	
+						 
+						 <div class="tabbertab" title="HTML Output" id='htmloutputtab'>
+						 <div>
+						  <p class='text'>To embed the above map in your web pages, you can use the HTML code below. Please make sure to:
+						  <UL class='text'>
+						  <LI>Save the XML Data and update its path/name in the code below.
+						  <LI>Copy <I>PowerMap.js</I> file at the relevant location and update its path/name in the code below.
+						  <LI>Update the width and height of the map (as per your requirements) in the code below.
+						  <LI>If you're placing more than one map on the same page, make sure to change the DIV Ids, map IDs and reference variables.
+						  </UL>
+						  </p>						  
+						   <table width='95%' align='center' cellpadding='2' cellspacing='2' style='border:1px #CCCCCC solid;'>							 	
+								<tr bgColor='#E0E0E0'>
+									<td class='header' align='left' valign='top'>&nbsp;HTML Code</td>
+								</tr>
+								<tr>
+									<td align='center'>
+										<textarea name='htmlCode' class='textarea' rows='15' cols='110'></textarea>
+									</td>
+								</tr>
+							 </table>
+							 <BR>
+						  </div>
+						 </div>	
+						 
+						 <div class="tabbertab" title="Preview" id='previewtab'>
+						  <div>
+						 	<p class='text'>The map has been updated with the new configuration / data / markers. Please see the map above.</p>
+							<p class='text'>To copy the XML or HTML code generated for this map, please switch to the appropriate tab.</p>
+							<p class='text'>If you're unable to see the map above, please check for the following:
+							<UL class='text'>
+							  <LI>Make sure that your browser is JavaScript enabled.
+							  <LI>Make sure that you have Flash Player 8 (or above) installed for this browser.
+							  <LI>Make sure that Flash Player settings is configured to enable JavaScript interaction. To configure the Flash Player Settings, you need to go to <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html"><U>the Settings Manager at Adobe's website</U></a>. There, add this folder (from which you're running this file) as a secure location (Always Allow).
+							  </UL>
+							 </p>
+							</div>
+						 </div>	
+					</div>
+				</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<script language="javascript">
+		//Set tabber options
+		tabberAutomatic(tabberOptions);
+	</script>		
+</BODY>
