@@ -5,8 +5,18 @@
 	
   <target name="assemble.copy-libs">
     <copy todir="${approot.stage.dir}/lib">
-      <fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
+    	<!-- Add CDA jar file -->
+    	<fileset file="${devlib.dir}/cda-*.jar" />
+		<fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
     </copy>
+  </target>
+	
+  <target name="install-plugin" depends="assemble.copy-libs">
+  	<copy todir="${pentaho.system}/${package.root.dir}" >
+  		<fileset dir="${approot.stage.dir}" />
+  	</copy>
+  	<echo message="${approot.stage.dir}"></echo>
+  	<echo message="${pentaho.system}/${package.root.dir}"></echo>
   </target>
 
 </project>
