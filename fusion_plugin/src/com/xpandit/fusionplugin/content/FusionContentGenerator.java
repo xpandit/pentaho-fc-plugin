@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin.content;
+package com.xpandit.fusionplugin.content;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,10 +27,10 @@ import com.fusioncharts.ChartFactory;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
-import com.promosoft.fusionplugin.FusionComponent;
-import com.promosoft.fusionplugin.PropertiesManager;
-import com.promosoft.fusionplugin.exception.InvalidDataResultSetException;
-import com.promosoft.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.FusionComponent;
+import com.xpandit.fusionplugin.PropertiesManager;
+import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 public class FusionContentGenerator extends SimpleContentGenerator {
 	private static final long serialVersionUID = 997953797244958291L;
