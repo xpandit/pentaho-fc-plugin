@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +27,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.platform.api.engine.IPentahoSession;
 import org.pentaho.platform.api.engine.IPluginResourceLoader;
@@ -33,275 +37,193 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.fusioncharts.ChartFactory;
+import com.fusioncharts.ChartType;
+import com.fusioncharts.FusionGraph;
+import com.fusioncharts.Series;
+import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+
 public class FusionComponent {
 
-  private static final long serialVersionUID = -4782203780348114858L;
+	/**
+	 * 
+	 */
+	private static final String WIDTH				= "width";
+	private static final String HEIGHT				= "height";
+	private static final String FREE				= "free";
+	
 
-  private Logger log = Logger.getLogger(FusionComponent.class);
+	private static final long serialVersionUID = -4782203780348114858L;
 
-  private OutputStream out;
+	private Logger log = Logger.getLogger(FusionComponent.class);
 
-  // input parameters
-  private IPentahoResultSet data;
-  private String chartType = "";
-  private String chartTitle = "";
-  private String xAxisName = "";
-  private String yAxisName = "";
+	private static final String[] specialParameters={WIDTH,HEIGHT,FREE}; 
+	private OutputStream out;
 
-  private InputStream mapTemplate = null;
+	// input parameters
+	private IPentahoResultSet data;
+	private String chartType = "";
+	private String chartTitle = "";
+	private String xAxisName = "";
+	private String yAxisName = "";
 
-  private InputStream htmlTemplate = null;
+	private InputStream mapTemplate = null;
 
-  public boolean validate() {
-    return true;
-  }
+	private InputStream htmlTemplate = null;
 
-  public boolean execute() {
+	private FusionGraph graph	= null; // Fusion chart Graph Object 
+	
+	private boolean isFreeVersion=true;
 
-    String map = null;
-    String html = null;
-    try {
+	/***************************************************************************
+	 * Constructor for a FusionComponent object.
+	 *
+	 * @param  graphId
+	 *         The graph name.
+	 *         
+	 * @param  graphType
+	 *         The graph type ie:(pie graph, column chart)        
+	 *         
+	 * @param  length
+	 *         The length of the categories.
+	 *         
+	 *         
+	 ***************************************************************************/
+	public FusionComponent(String string, ChartType column3d, int length) {
+		graph = new FusionGraph(string,column3d,length);
+	}
 
-      if (data != null) {
-        map = assembleMapandData(data);
-      }
+	public boolean validate() {
+		return true;
+	}
 
-      if (getHtmlTemplate() != null) {
-        html = IOUtils.toString(getHtmlTemplate());
-        html = TemplateUtil.applyTemplate(html, "mapXml", map);
-      }
+	/**
+	 * 
+	 * @param isFreeVersion renders the chart to be used with free version or not
+	 * @return
+	 * @throws Exception
+	 */
+	public String execute() throws Exception {
 
-      if (out != null) {
-        out.write(html.getBytes("UTF-8"));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return true;
-  }
+		ChartFactory chart	= new ChartFactory(isFreeVersion());   
+		//attach graph to chart factory
+		chart.insertGraph(graph);
+		return chart.buildDOMFusionChart(graph.getGraphId());
 
-  private String assembleMapandData(IPentahoResultSet entityData) {
+	}
+	/**
+	 * 
+	 * Set data to chart
+	 * 
+	 * @param data Pentaho ResultSet with data from a query
+	 * @throws InvalidDataResultSetException when reult set is invalid 
+	 */
+	public void setData(IPentahoResultSet data) throws InvalidDataResultSetException {
+		if(data==null)
+			throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "data is null");
+		this.data = data;
 
-    assert (entityData != null);
+		// get Data Set Metadata
+		IPentahoMetaData metadata = data.getMetaData();
+		//verify meta data
+		int metadataSize= metadata.getColumnCount();
+		if(metadataSize<2)
+			throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 2");
 
-    String template = "";
 
-    DocumentBuilderFactory dbf;
-    DocumentBuilder db;
-    Document doc;
+		for(int seriesCount=1;seriesCount<metadataSize;++seriesCount)
+		{
+			// get measure column name to set series title
+			String seriesTitle=metadata.getColumnHeaders()[0][seriesCount].toString();
+			
+			//TODO:Improve Code
+			String[] seriesTitleArr=seriesTitle.split("/.")[0].split("\\]\\.");
+			seriesTitle=seriesTitleArr[seriesTitleArr.length-1].replace("]","").replace("[","");
 
-    try {
-      dbf = DocumentBuilderFactory.newInstance();
-      db = dbf.newDocumentBuilder();
-      doc = db.parse(getMapTemplate());
-      
-      /*Element chart = doc.createElement("chart");
-      chart.setAttribute("chartTitle", chartTitle);
-      chart.setAttribute("xAxisName", xAxisName);
-      chart.setAttribute("yAxisName", yAxisName);*/
-      
-      Node dataElement = doc.getElementsByTagName("chart").item(0);
+			Series series = graph.createSeries(seriesTitle);
+			//get data
+			int rowCount=data.getRowCount();
+			for (int i = 0; i < rowCount; i++) {
+				try
+				{
+					graph.setCategory(i,data.getValueAt(i,0).toString());
+					series.setValue(i,Double.parseDouble((data.getValueAt(i,seriesCount).toString())));
+				}
+				catch(Exception e)
+				{
+					log.error("Problem in result set. Probably null values fouded at index:"+i, e);
+				}
+			}  
+		}
+	} 
 
-      int rowCount = entityData.getRowCount();
+	/**
+	 * 
+	 * Set chart Properties by name and value
+	 * The properties set with the same key will be replaced
+	 * 
+	 * @param key key of property
+	 * @param value value of property
+	 */
+	public void setChartProperties(String key, String value) {
+		if(isSpecialParam(key))
+			processSpecialParameters(key,value);
+		else
+			graph.setChartProperties(key,value);
 
-      if(chartType.equals("BarChart") || chartType.equals("PieChart")){
-    	  for (int i = 0; i < rowCount; i++) {
-	        Object[] row = entityData.getDataRow(i);
-	        Element node = doc.createElement("set");
-	        node.setAttribute("label", String.valueOf(row[0]));
-	        node.setAttribute("value", String.valueOf(row[1]));
-	        dataElement.appendChild(node);
-	      }
-      }    	  
-      else if(chartType.equals("ScrollBarChart")){
-    	  
-    	  Element nodeCategories = doc.createElement("categories");
-    	  Element nodeDataSet = doc.createElement("dataset");
-    	  
-    	  for (int i = 0; i < rowCount; i++) {
-  	        Object[] row = entityData.getDataRow(i);
-  	        Element nodeCategory = doc.createElement("category");
-  	        Element nodeSet = doc.createElement("set");
-  	        nodeCategory.setAttribute("label", String.valueOf(row[0]));
-  	        nodeSet.setAttribute("value", String.valueOf(row[1]));
-  	        
-  	        nodeCategories.appendChild(nodeCategory);
-  	        nodeDataSet.appendChild(nodeSet);
-  	      }
-    	  
-    	  dataElement.appendChild(nodeCategories);
-    	  dataElement.appendChild(nodeDataSet);
-      }
-      else if(chartType.equals("GaugeChart")){
-    	  
-    	  Object[] row = entityData.getDataRow(0);
-    	  
-    	  org.apache.xerces.dom.NamedNodeMapImpl dialAttributes = (org.apache.xerces.dom.NamedNodeMapImpl)doc.getElementsByTagName("dial").item(0).getAttributes();
-    	  
-    	  Node dialValue = dialAttributes.getNamedItem("value");
-    	  dialValue.setNodeValue(String.valueOf(row[0]));
-    	  
-    	  /*org.apache.xerces.dom.NamedNodeMapImpl pointAttributes = (org.apache.xerces.dom.NamedNodeMapImpl)doc.getElementsByTagName("point").item(0).getAttributes();
-    	  
-    	  Node pointValue = pointAttributes.getNamedItem("value");
-    	  pointValue.setNodeValue(String.valueOf(row[1]));*/
-      }
-      else if(chartType.equals("LineChart")){
-    	  
-    	  /*
-    	  Element nodeCategories = doc.createElement("categories");
-    	  
-    	  
-    	  for (int i = 0; i < rowCount; i++) {
-	  	        Object[] row = entityData.getDataRow(i);
-	  	        Element nodeCategory = doc.createElement("category");
-	  	        nodeCategory.setAttribute("label", String.valueOf(row[0]));
-	  	        
-	  	        nodeCategories.appendChild(nodeCategory);
-	  	      }
-    	  
-    	  int columnCount = entityData.getColumnCount(); 
-    	  Element nodeDataSet = doc.createElement("dataset");
-    	  
-    	  for (int i = 0; i < rowCount; i++) {
-	    	  for (int j = 0; j < columnCount; j++) {
-	  	        Object value = entityData.getValueAt(i, j);
-	  	        Element nodeSet = doc.createElement("set");
-	  	        nodeSet.setAttribute("value", String.valueOf(value));
-	  	        
-	  	        nodeDataSet.appendChild(nodeSet);
-	  	      }
-    	  }
-    	  dataElement.appendChild(nodeCategories);
-    	  dataElement.appendChild(nodeDataSet);*/
-      }
-      
-      //doc.appendChild(dataElement);
-      
-      template = docToString(doc).toString();
-      template = template.replaceAll("\"", "'");
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+	}
+	/**
+	 * 
+	 * Set chart Properties by map
+	 * The properties set with the same key will be replaced
+	 * 
+	 * @param params map with all parameters
+	 */
+	public void setChartProperties(TreeMap<String, String> params) {
+		Set<String> keys=params.keySet();
+		for (String mapKey : keys) {
+			setChartProperties(mapKey,params.get(mapKey));
+		}
+	}
+	/**
+	 * 
+	 * @param parameter
+	 * @return
+	 */
+	private boolean isSpecialParam(String parameter)
+	{
+		for (int i=0;i<specialParameters.length;++i)
+		{
+			if(specialParameters[i].equals(parameter))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * 
+	 * Do special treatment to special parameters
+	 * 
+	 * @param parameterKey
+	 * @param parameterValue
+	 */
+	private void processSpecialParameters(String parameterKey, String parameterValue)
+	{
+		if(parameterKey.equals(WIDTH))
+			graph.setWidth(Integer.parseInt(parameterValue));
+		if(parameterKey.equals(HEIGHT))
+			graph.setHeight(Integer.parseInt(parameterValue));
+		if(parameterKey.equals(FREE))
+			setFreeVersion(Boolean.parseBoolean(parameterValue));
+	}
 
-    return template;
-  }
+	
+	private void setFreeVersion(boolean isFreeVersion) {
+		this.isFreeVersion = isFreeVersion;
+	}
 
-  public void done() {
-  }
-
-  public void setSession(IPentahoSession session) {
-
-  }
-
-  public void setOutputStream(OutputStream stream) {
-    out = stream;
-  }
-
-  public OutputStream getOutputStream() {
-    return out;
-  }
-
-  public void configure(Map<String, String> map) {
-  }
-
-  public String getMimeType() {
-    return "text/html";
-  }
-
-  public void setData(IPentahoResultSet data) {
-    this.data = data;
-  }
-
-  public void setChartType(String chartType) {
-    this.chartType = chartType;
-  }
-  
-  public void setChartTitle(String chartTitle) {
-    this.chartTitle = chartTitle;
-  }
-  
-  public void setXAxisName(String xAxisName) {
-    this.xAxisName = xAxisName;
-  }
-  
-  public void setYAxisName(String yAxisName) {
-    this.yAxisName = yAxisName;
-  }
-
-  public void setHtmlTemplate(InputStream htmlTemplate) {
-    this.htmlTemplate = htmlTemplate;
-  }
-
-  public void setMapTemplate(InputStream mapTemplate) {
-    this.mapTemplate = mapTemplate;
-  }
-
-  public InputStream getMapTemplate() {
-
-    if (mapTemplate == null) {
-    	if(chartType.equals("BarChart"))
-    		mapTemplate = getFromLocation("component-def/bar-template.xml");
-    	else if(chartType.equals("PieChart"))
-    		mapTemplate = getFromLocation("component-def/pie-template.xml");
-    	else if(chartType.equals("ScrollBarChart"))
-    		mapTemplate = getFromLocation("component-def/scroll-bar-template.xml");
-    	else if(chartType.equals("GaugeChart"))
-    		mapTemplate = getFromLocation("component-def/gauge-template.xml");
-    	else if(chartType.equals("LineChart"))
-    		mapTemplate = getFromLocation("component-def/line-template.xml");
-    }
-    return mapTemplate;
-  }
-
-  public InputStream getHtmlTemplate() {
-
-    if (htmlTemplate == null) {
-    	if(chartType.equals("BarChart"))
-    		htmlTemplate = getFromLocation("component-def/bar-html-template.html");
-    	else if(chartType.equals("PieChart"))
-    		htmlTemplate = getFromLocation("component-def/pie-html-template.html");
-    	else if(chartType.equals("ScrollBarChart"))
-    		htmlTemplate = getFromLocation("component-def/scroll-bar-html-template.html");
-    	else if(chartType.equals("GaugeChart"))
-    		htmlTemplate = getFromLocation("component-def/gauge-html-template.html");
-    	else if(chartType.equals("LineChart"))
-    		htmlTemplate = getFromLocation("component-def/line-html-template.html");
-    }
-    return htmlTemplate;
-  }
-
-  /**
-   *  Demonstrates how to retrieve resources from within the plugin structure
-   *  without creating path dependencies
-   *  
-   * @param location relative path to resource, including full filename and extension
-   * @return inputStream contents of the resource
-   */
-  private final InputStream getFromLocation(String location) {
-
-    InputStream in = null;
-    IPluginResourceLoader resLoader = PentahoSystem.get(IPluginResourceLoader.class, null);
-    in = resLoader.getResourceAsStream(FusionComponent.class, location);
-    return in;
-  }
-
-  private final StringBuffer docToString(final org.w3c.dom.Document doc)
-                          throws TransformerConfigurationException, TransformerException {
-
-    StringBuffer sb = null;
-    StringWriter writer = new StringWriter();
-
-    TransformerFactory tf = TransformerFactory.newInstance();
-    Transformer t = tf.newTransformer(); // can throw TransformerConfigurationException
-    t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-    Source docSrc = new DOMSource(doc);
-
-    t.transform(docSrc, new StreamResult(writer)); // can throw TransformerException
-    sb = writer.getBuffer();
-
-    return sb;
-  }
-
+	private boolean isFreeVersion() {
+		return isFreeVersion;
+	}
 }
