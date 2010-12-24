@@ -2,13 +2,13 @@
 
 <plugin title="Fusion Plugin">
   
- <lifecycle-listener class="com.promosoft.fusionplugin.FcLifecycleListener"/>
+ <lifecycle-listener class="com.xpandit.fusionplugin.FcLifecycleListener"/>
      
   <!--<content-type type="xfusion" mime-type="text/html">
     <title>Fusion Config</title>
     <description>Fusion Config File</description>
     <icon-url>content/fusion/res/icon.gif</icon-url>
-    <meta-provider>com.promosoft.fusionplugin.content.FusionContentTypeMetaProvider</meta-provider> 
+    <meta-provider>com.xpandit.fusionplugin.content.FusionContentTypeMetaProvider</meta-provider> 
     <operations>
       <operation>
         <id>RUN</id>
@@ -21,7 +21,7 @@
     id="fusion"
     title="Fusion Component"
     type="xfusion"
-    class="com.promosoft.fusionplugin.content.FusionContentGenerator"/>
+    class="com.xpandit.fusionplugin.content.FusionContentGenerator"/>
  
    
     <static-paths>
@@ -32,7 +32,7 @@
       <static-path url="/fusion/widgets" localFolder="widgets"/>
     </static-paths>  
     
-    <bean id="fusionComponent" class="com.promosoft.fusionplugin.FusionComponent"/>
+    <bean id="fusionComponent" class="com.xpandit.fusionplugin.FusionComponent"/>
 	
 	<menu-items>
 		<menu-item id="xFusion_refresh" anchor="tools-refresh-submenu" label="xFusion Cache" command="content/fusion/clearCache" type="MENU_ITEM" how="LAST_CHILD"/>
