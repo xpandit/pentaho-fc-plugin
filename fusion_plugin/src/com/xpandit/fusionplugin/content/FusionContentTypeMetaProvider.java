@@ -1,4 +1,4 @@
-package com.xpandit.fusionplugin.content;
+package com.promosoft.fusionplugin.content;
 
 import java.io.IOException;
 import java.io.InputStream;
