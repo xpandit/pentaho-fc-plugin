@@ -1,12 +1,4 @@
-/*
- * Pentaho Fusion Charts Plugin Project
- *
- * Copyright (C) 2010 Xpand IT.
- *
- * This software is proprietary.
- */
-
-package com.xpandit.fusionplugin;
+package com.promosoft.fusionplugin;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,7 +13,7 @@ import org.pentaho.platform.api.repository.ISolutionRepository;
 import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import com.promosoft.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 

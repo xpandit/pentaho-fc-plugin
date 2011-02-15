@@ -1,17 +1,10 @@
-/*
- * Pentaho Fusion Charts Plugin Project
- *
- * Copyright (C) 2010 Xpand IT.
- *
- * This software is proprietary.
- */
-
-package com.xpandit.fusionplugin.content;
+package com.promosoft.fusionplugin.content;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,18 +24,27 @@ import pt.webdetails.cda.CdaQueryComponent;
 import pt.webdetails.cda.dataaccess.AbstractDataAccess;
 import pt.webdetails.cda.settings.SettingsManager;
 
+import com.fusioncharts.Category;
 import com.fusioncharts.ChartFactory;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
-import com.xpandit.fusionplugin.FusionComponent;
-import com.xpandit.fusionplugin.PropertiesManager;
-import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import com.promosoft.fusionplugin.FusionComponent;
+import com.promosoft.fusionplugin.FusionComponentFactory;
+import com.promosoft.fusionplugin.PropertiesManager;
+import com.promosoft.fusionplugin.exception.InvalidDataResultSetException;
+import com.promosoft.fusionplugin.exception.InvalidParameterException;
 
+/**
+ * 
+ * This this the Plugin content Generator
+ * 
+ * @author dduque
+ *
+ */
 public class FusionContentGenerator extends SimpleContentGenerator {
 	private static final long serialVersionUID = 997953797244958291L;
- 
+
 	private static final String CDANAME             = "cdaName";
 	private static final String CDAID				= "cdaDataAccessId";
 	private static final String CDAPATH             = "cdaPath";
@@ -54,35 +56,45 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	private static final String SOLUTION			= "solution";
 	private static final String PATH				= "path";
 	private static final String ISDASHBOARDMODE		= "dashboard-mode";
-	
+	private static final String CHARTXML			= "chartXML";
+	private static final String TARGETVALUECDAID	= "targetValueCdaId";
+	private static final String RANGEVALUECDAID		= "rangeValueCdaId";
 
 
-	CdaQueryComponent cdaQueryComponent;
-	
+
+	CdaQueryComponent cdaQueryComponent;//cda query component 
+
 	IParameterProvider requestParams;
-	
-	PropertiesManager pm;
 
+	PropertiesManager pm;//properties Manager
+
+	/**
+	 * 
+	 * Util method to get the url method invoked 
+	 * 
+	 * @param pathString url path
+	 * @return method
+	 */
 	private String extractMethod(final String pathString)
-	  {
-	    if (StringUtils.isEmpty(pathString))
-	    {
-	      return null;
-	    }
-	    final String pathWithoutSlash = pathString.substring(1);
-	    if (pathWithoutSlash.indexOf('/') > -1)
-	    {
-	      return null;
-	    }
-	    final int queryStart = pathWithoutSlash.indexOf('?');
-	    if (queryStart < 0)
-	    {
-	      return pathWithoutSlash;
-	    }
-	    return pathWithoutSlash.substring(0, queryStart);
-	  }
-	
-	
+	{
+		if (StringUtils.isEmpty(pathString))
+		{
+			return null;
+		}
+		final String pathWithoutSlash = pathString.substring(1);
+		if (pathWithoutSlash.indexOf('/') > -1)
+		{
+			return null;
+		}
+		final int queryStart = pathWithoutSlash.indexOf('?');
+		if (queryStart < 0)
+		{
+			return pathWithoutSlash;
+		}
+		return pathWithoutSlash.substring(0, queryStart);
+	}
+
+
 	//Example URL
 	//http://172.21.2.33:18080/bankabi/content/fusion?solution=fusionSolution&name=usa-quantity-ordered.cda&cdaDataAccessId=1
 	//
@@ -90,22 +102,22 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	public void createContent(OutputStream out) throws Exception {
 
 		requestParams=parameterProviders.get(IParameterProvider.SCOPE_REQUEST);
-		
-		
-		IParameterProvider pathParams = parameterProviders.get("path");
-        String pathString = pathParams.getStringParameter("path", null);
-        String method = extractMethod(pathString);
 
-        
-        if (method == null)
-        {
-        	processChart(out);
-        }
-        if ("clearCache".equals(method))
-        {
-        	clearCache(requestParams, out);
-        	return;
-        }
+
+		IParameterProvider pathParams = parameterProviders.get("path");
+		String pathString = pathParams.getStringParameter("path", null);
+		String method = extractMethod(pathString);
+
+
+		if (method == null)
+		{
+			processChart(out);
+		}
+		if ("clearCache".equals(method))
+		{
+			clearCache(requestParams, out);
+			return;
+		}
 	}
 
 
@@ -121,9 +133,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 * @throws IOException
 	 */
 	private void processChart(OutputStream out)
-			throws UnsupportedEncodingException, Exception,
-			InvalidParameterException, InvalidDataResultSetException,
-			IOException {
+	throws UnsupportedEncodingException, Exception,
+	InvalidParameterException, InvalidDataResultSetException,
+	IOException {
 		/** 
 		 * 
 		 * 
@@ -137,37 +149,23 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		 */
 
 		//set proeprties
-		setProperties(requestParams);
-		
-		IPentahoResultSet resultset=invokeCDA();
-		if(resultset==null)
+		setProperties(requestParams); 
+
+		Map<String, ArrayList<IPentahoResultSet>> resultSets=invokeCDA();
+		if(resultSets==null)
 			getLogger().error("Error : resultset is null -> see previous error");
-		
-		// get the requested chartType
-		String chartTypeParam=pm.getParams().get("chartType").toString(); 
-		if(chartTypeParam==null)
-			throw new InvalidParameterException(InvalidParameterException.ERROR_001);
-		
-		ChartType[] values=ChartType.values();
-		ChartType cType=null;
-		for( int v=0;v<values.length;++v)
-		{
-			if(values[v].name().equals(chartTypeParam.toUpperCase()))
-			{
-				cType=values[v];
-			}
-		}
-		if(cType==null)
-			throw new InvalidParameterException(InvalidParameterException.ERROR_002);
-		
+
+
 		//init chart
-		FusionComponent fusionComponent = new FusionComponent("chart",cType,resultset.getRowCount());
-		
-		//set data
-		fusionComponent.setData(resultset);
-		
+		FusionComponent fusionComponent =FusionComponentFactory.getFusionComponent(pm,resultSets.get("results"));
+
+
 		//fill the properties of chart
 		fusionComponent.setChartProperties(pm.getParams());
+
+		//set data
+		fusionComponent.setData(resultSets);
+
 
 		//generate output
 		gererateOutput(out,fusionComponent);
@@ -176,8 +174,12 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	/**
 	 * 
 	 * Generate the output html 
+	 * 
+	 * if CHARTXML is set renders only the chart xml
+	 * if not, try to find dashboard mode
+	 * 
 	 * If ISDASHBOARDMODE is set to false does't render the all html page
-	 * IS ISDASHBOARDMODE not defined or is true does't render the all html page
+	 * If ISDASHBOARDMODE not defined or is true does't render the all html page
 	 * 
 	 * @param out Out Stremam 
 	 * @param fusionComponent Fusion Component to render
@@ -186,6 +188,14 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 */
 	private void gererateOutput(OutputStream out,FusionComponent fusionComponent) throws Exception, IOException {
 		TreeMap<String, String> params = pm.getParams();
+		if(params.containsKey(CHARTXML))
+		{
+			if(!Boolean.parseBoolean(params.get(CHARTXML)))
+			{
+				out.write(fusionComponent.execute().getBytes());
+				return;
+			}
+		}
 		if(params.containsKey(ISDASHBOARDMODE))
 		{
 			if(!Boolean.parseBoolean(params.get(ISDASHBOARDMODE)))
@@ -234,9 +244,11 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 * @return Result of the invocation of the cda
 	 * @throws Exception
 	 */
-	private IPentahoResultSet invokeCDA() throws Exception {
+	private Map<String, ArrayList<IPentahoResultSet>> invokeCDA() throws Exception {
 		final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
 		final ISolutionFile file = repository.getSolutionFile(getAction().toString(), ISolutionRepository.ACTION_EXECUTE);
+
+		Map<String,ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String,ArrayList<IPentahoResultSet>>();
 
 		if (file==null){
 			getLogger().error("No solution file found: ".concat(getAction().toString()));
@@ -246,25 +258,124 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		cdaQueryComponent = new CdaQueryComponent();
 		cdaQueryComponent.setFile(file.getFullPath());
 
-		//get dataAccess ID from request
 		Map <String, Object> cdaInputs = new HashMap <String, Object>();
-		cdaInputs.put("dataAccessId", pm.getParams().get(CDAID));
 		cdaInputs.put("cdaParameterString",cdaParames());
-		cdaQueryComponent.setInputs(cdaInputs);
-		
+
 		IPentahoResultSet resultset = null;
+
+		if(pm.getParams().get(CDAID)==null)
+		{
+			throw new InvalidParameterException(InvalidParameterException.ERROR_006+CDAID);
+		}
+		//get dataAccessIDs from request
+		String[] queryIDs = pm.getParams().get(CDAID).split(";");
+		ArrayList<IPentahoResultSet> aux=new ArrayList<IPentahoResultSet>();
+		for (String queryID : queryIDs) {
+			// set data access id
+			cdaInputs.put("dataAccessId", queryID);
+			cdaQueryComponent.setInputs(cdaInputs);
+
+			try
+			{
+				//execute query
+				if (cdaQueryComponent.execute()){
+					resultset = cdaQueryComponent.getResultSet();
+					aux.add(resultset);
+
+					if (resultset==null){
+						throw new Exception("resultset==null Querie ID:"+queryID);
+					}
+				}
+			}
+			catch(Exception e )
+			{
+				throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Querie ID:"+queryID,e);
+			}
+		}
+		resultSets.put("results", aux);
+
+		//get the targetValue result set if  targetValueCdaId property exists
+		try
+		{
+			if(pm.getParams().containsKey(TARGETVALUECDAID))
+				resultSets.put("targetValue", getTargetValueCDA(cdaInputs, resultset));
+		}catch(Exception e)
+		{
+			getLogger().error("Error retrieving data: cdaQueryComponent failed to return data. Querie ID"+TARGETVALUECDAID,e);
+		}
+		//get the targetValue result set if  rangeValueCdaId property exists
+
+		if(pm.getParams().containsKey(RANGEVALUECDAID))
+			resultSets.put("rangeValues", getRangeValuesCDA(cdaInputs, resultset));
+
+		return resultSets;
+
+	}
+
+
+	/**
+	 * 
+	 * Invoke the CDA to get the Target Value of a chart
+	 * 
+	 * @param cdaInputs
+	 * @param resultset
+	 * @return
+	 * @throws Exception
+	 */
+	private ArrayList<IPentahoResultSet> getTargetValueCDA(Map<String, Object> cdaInputs,
+			IPentahoResultSet resultset)
+			throws Exception {
+		ArrayList<IPentahoResultSet> aux= new ArrayList<IPentahoResultSet>();
+		//invoke to get target value
+		String queryID=pm.getParams().get(TARGETVALUECDAID);
+		// set data access id
+		cdaInputs.put("dataAccessId", queryID);
+		cdaQueryComponent.setInputs(cdaInputs);
 
 		//execute query
 		if (cdaQueryComponent.execute()){
 			resultset = cdaQueryComponent.getResultSet();
+			aux.add(resultset);
+		}
+		return aux;
+	}
+
+
+	/**
+	 * 
+	 * Invoke the CDA to get the list of range colors and the base value to calculate the range values
+	 * 
+	 * @param cdaInputs
+	 * @param resultset
+	 * @return
+	 */
+	private ArrayList<IPentahoResultSet> getRangeValuesCDA(Map<String, Object> cdaInputs,
+			IPentahoResultSet resultset)
+			throws Exception {
+		ArrayList<IPentahoResultSet> aux= new ArrayList<IPentahoResultSet>();
+		String queryID=pm.getParams().get(RANGEVALUECDAID);
+		//invoke to get ranges values
+
+		String[] queryIDArray=queryID.split(";");
+		for (int i = 0; i < queryIDArray.length; i++) {
+		try
+		{
+			// set data access id
+			cdaInputs.put("dataAccessId", queryIDArray[i]);
+			cdaQueryComponent.setInputs(cdaInputs);
+
+			//execute query
+			if (cdaQueryComponent.execute()){
+				resultset = cdaQueryComponent.getResultSet();
+				aux.add(resultset);
+			}
+		}catch(Exception e)
+		{
+			getLogger().error("Error retrieving data: cdaQueryComponent failed to return data. Querie ID"+RANGEVALUECDAID,e);
+		}
 		}
 
-		if (resultset==null){
-			getLogger().error("Error retrieving data: cdaQueryComponent failed to return data. ");
-			return null;
-		}
-		return resultset;
-
+		return aux;
 	}
 
 	/**
@@ -273,7 +384,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 * The requested parameter names are in cdaParameters Ex. cdaParameters=name1;name2;name3...... 
 	 * 
 	 * @return return parameters as requested by CDA
-	 */
+	 */ 
 	private String cdaParames() {
 		StringBuffer cdaParametersInput=new StringBuffer();
 		TreeMap<String, String> params = pm.getParams();
@@ -327,106 +438,8 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 */
 	public void clearCache(final IParameterProvider pathParams, final OutputStream out) throws Exception
 	{
-	    SettingsManager.getInstance().clearCache();
-	    AbstractDataAccess.clearCache();
-	    out.write("Cache cleared".getBytes());
+		SettingsManager.getInstance().clearCache();
+		AbstractDataAccess.clearCache();
+		out.write("Cache cleared".getBytes());
 	}
-	
-	public FusionGraph dummyChartPie()
-	{
-		//Initialize FusionChart variables
-		FusionGraph graph		= null;
-		ChartFactory chart	= null;
-		String errMsg = null;
-
-		try
-		{
-			/**
-			 * Start code of building the graph
-			 *
-			 **/
-			//create graph object
-			graph = new FusionGraph("columnsGraph",ChartType.COLUMN3D,5);
-
-			//set chart properties and chart look
-			graph.setWidth(390);
-			graph.setHeight(150);
-			graph.setChartProperties("showZeroPies","0");
-			graph.setChartProperties("bgColor","FFFFFF,CCCC33");
-			graph.setChartProperties("smartLineThickness","2");
-			graph.setChartProperties("baseFont","Arial");
-			graph.setChartProperties("baseFontSize","12");
-			graph.setChartProperties("showToolTipShadow","1"); 
-			graph.setChartProperties("toolTipBgColor","D9E5F1");
-			graph.setChartProperties("pieRadius","90");
-
-			//create series
-			Series series = graph.createSeries("bar series");
-			String[] categories = {"a","b","c","d","e"};
-			Double[] seriesValues = {100.0,150.0,120.0,130.0,140.0};
-			String[] seriesColors = {"FFFFFF","FFFCCC","33FF00","6600CC","990000"};
-
-			//lets pretend that we got categories and seriesValues from data instead of hardcoding it
-			for(int i = 0; i< categories.length;i++)
-			{
-				graph.setCategory(i,categories[i]);
-
-				series.setValue(i,seriesValues[i]);
-				series.setColor(i,seriesColors[i]);
-			}
-		}
-		catch (Exception e)
-		{
-			errMsg = "Error: "+ e;
-		}
-		return graph;
-	}
-
-	public FusionGraph dummyChartBar()
-	{
-		//Initialize FusionChart variables
-		FusionGraph graph		= null;
-		try
-		{
-			/**
-			 * Start code of building the graph
-			 *
-			 **/
-			//create graph object
-			graph = new FusionGraph("pieGraph",ChartType.PIE3D,5);
-
-			//set chart properties and chart look
-			graph.setWidth(390);
-			graph.setHeight(150);
-			graph.setChartProperties("showZeroPies","0");
-			graph.setChartProperties("bgColor","FFFFFF,CCCC33");
-			graph.setChartProperties("smartLineThickness","2");
-			graph.setChartProperties("baseFont","Arial");
-			graph.setChartProperties("baseFontSize","12");
-			graph.setChartProperties("showToolTipShadow","1");
-			graph.setChartProperties("toolTipBgColor","D9E5F1");
-			graph.setChartProperties("pieRadius","90");
-
-			//create series
-			Series series = graph.createSeries("pie series");
-			String[] categories = {"a","b","c","d","e"};
-			Double[] seriesValues = {100.0,150.0,120.0,130.0,140.0};
-			String[] seriesColors = {"FFFFFF","FFFCCC","33FF00","6600CC","990000"};
-
-			//lets pretend that we got categories and seriesValues from data instead of hardcoding it
-			for(int i = 0; i< categories.length;i++)
-			{
-				graph.setCategory(i,categories[i]);
-
-				series.setValue(i,seriesValues[i]);
-				series.setColor(i,seriesColors[i]);
-			}
-		}
-		catch (Exception e)
-		{
-		}
-		return graph;
-	}
-
-
 }
