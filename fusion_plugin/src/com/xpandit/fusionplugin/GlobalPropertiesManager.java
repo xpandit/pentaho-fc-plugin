@@ -1,27 +1,16 @@
-/*
- * Pentaho Fusion Charts Plugin Project
- *
- * Copyright (C) 2010 Xpand IT.
- *
- * This software is proprietary.
- */
-
-package com.xpandit.fusionplugin;
+package com.promosoft.fusionplugin;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
-import org.pentaho.reporting.libraries.base.config.Configuration;
 
 /**
  * 

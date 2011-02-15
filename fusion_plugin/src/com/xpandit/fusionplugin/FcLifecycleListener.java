@@ -1,17 +1,7 @@
-/*
- * Pentaho Fusion Charts Plugin Project
- *
- * Copyright (C) 2010 Xpand IT.
- *
- * This software is proprietary.
- */
-
-package com.xpandit.fusionplugin;
+package com.promosoft.fusionplugin;
 
 import org.pentaho.platform.api.engine.IPluginLifecycleListener;
 import org.pentaho.platform.api.engine.PluginLifecycleException;
-
-import pt.webdetails.cda.CdaBoot;
 
 /**
  * This class inits fc plugin within the bi-platform
