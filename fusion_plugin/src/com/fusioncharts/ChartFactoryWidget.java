@@ -97,8 +97,6 @@ public class ChartFactoryWidget extends ChartFactory {
 	throws WritingException {
 		
 		// range values
-		// TODO: Fill range values with the result set obtained from the table
-		//		 config_intervalos_formatacao (schema bankabi_refdata).
 		//
 		// Os valores dos ranges podem ser obtidos através da seguinte linha :
 		// 
@@ -154,8 +152,6 @@ public class ChartFactoryWidget extends ChartFactory {
 	throws WritingException {
 		
 		// range values
-		// TODO: Fill range values with the result set obtained from the table
-		//		 config_intervalos_formatacao (schema bankabi_refdata).
 		//
 		// Os valores dos ranges podem ser obtidos através da seguinte linha :
 		// 
