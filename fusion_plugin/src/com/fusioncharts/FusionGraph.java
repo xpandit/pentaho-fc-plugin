@@ -340,7 +340,6 @@ public class FusionGraph extends Graph {
 	}
 
 	
-	
 	/***************************************************************************
 	* HELPER METHODS
 	* 

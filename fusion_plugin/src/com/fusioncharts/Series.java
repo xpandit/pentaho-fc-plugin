@@ -40,6 +40,10 @@ implements Cloneable
 	private Double[]      	value;
 	private String[]		toolText;
 	private SeriesType		seriesType;
+	private String 			parentYAxis;
+	private	Double[]		xValue;
+	private	Double[]		yValue;
+	private	Double[]		zValue;
   
   /***************************************************************************
   * Creates a Series object. The series is set to a BAR series by default.
@@ -65,7 +69,11 @@ implements Cloneable
     this.value  = new Double[count];
     this.toolText = new String[count];
     this.seriesType = SeriesType.BAR; //default bar series
+    this.xValue=new Double[count];
+    this.yValue=new Double[count];
+    this.zValue=new Double[count];
   }//Series
+
 
 /***************************************************************************
  * Accessor method to return the series type.
@@ -308,25 +316,25 @@ public void setSeriesType(SeriesType seriesType) {
   }//getEvent
 
   /***************************************************************************
-  * Sets the data value at the specified indice.
+  * Sets the x value at the specified indice.
   * 
   * @param  index
   *         The indice of the data to set.
   * @param  value
-  *         The data value.
+  *         The x value.
   *
   * @throws ArrayIndexOutOfBoundsException
   *         If the index is less than zero or greater than or equal to the
   *         length.
   ***************************************************************************/
-  public void setValue(int index, Double value)
+  public void setXValue(int index, Double value)
   throws ArrayIndexOutOfBoundsException
   {
-    this.value[index] = value;
+    this.xValue[index] = value;
   }//setValue
   
   /***************************************************************************
-  * Sets the data values.  The first value corresponds to index 0.  If the
+  * Sets the x values.  The first value corresponds to index 0.  If the
   * length of the array passed is less than the length of the value array,
   * the last value is the array passed will be used to fill the remaining
   * values. 
@@ -334,14 +342,14 @@ public void setSeriesType(SeriesType seriesType) {
   * @param  value
   *         The data value(s).
   ***************************************************************************/    
-  public void setValue(Double ... value)
+  public void setXValue(Double ... value)
   {
-    for (int i = 0; i < this.value.length; i++)
-      this.value[i] = i >= value.length ? value[value.length-1] : value[i];      
+    for (int i = 0; i < this.xValue.length; i++)
+      this.xValue[i] = i >= value.length ? value[value.length-1] : value[i];      
   }//setValue
   
  /***************************************************************************
-  * Returns the data values.
+  * Returns the x values.
   * 
   * @param  index
   *         The indice of the data to get.
@@ -353,11 +361,170 @@ public void setSeriesType(SeriesType seriesType) {
   *         If the index is less than zero or greater than or equal to the
   *         length.
   ***************************************************************************/  
-  public Double getValue(int index)
+  public Double getXValue(int index)
   throws ArrayIndexOutOfBoundsException
   {
-	return this.value[index];
+	return this.xValue[index];
   }
+  
+  
+  /***************************************************************************
+   * Sets the y value at the specified indice.
+   * 
+   * @param  index
+   *         The indice of the data to set.
+   * @param  value
+   *         The data value.
+   *
+   * @throws ArrayIndexOutOfBoundsException
+   *         If the index is less than zero or greater than or equal to the
+   *         length.
+   ***************************************************************************/
+   public void setYValue(int index, Double value)
+   throws ArrayIndexOutOfBoundsException
+   {
+     this.yValue[index] = value;
+   }//setValue
+   
+   /***************************************************************************
+   * Sets the Y values.  The first value corresponds to index 0.  If the
+   * length of the array passed is less than the length of the value array,
+   * the last value is the array passed will be used to fill the remaining
+   * values. 
+   * 
+   * @param  value
+   *         The data value(s).
+   ***************************************************************************/    
+   public void setYValue(Double ... value)
+   {
+     for (int i = 0; i < this.yValue.length; i++)
+       this.yValue[i] = i >= value.length ? value[value.length-1] : value[i];      
+   }//setValue
+   
+  /***************************************************************************
+   * Returns the Y values.
+   * 
+   * @param  index
+   *         The indice of the data to get.
+   *         
+   * @return value
+   *         The data values.
+   * 
+   * @throws ArrayIndexOutOfBoundsException
+   *         If the index is less than zero or greater than or equal to the
+   *         length.
+   ***************************************************************************/  
+   public Double getYValue(int index)
+   throws ArrayIndexOutOfBoundsException
+   {
+ 	return this.yValue[index];
+   }
+   
+   
+   /***************************************************************************
+    * Sets the Z value at the specified indice.
+    * 
+    * @param  index
+    *         The indice of the data to set.
+    * @param  value
+    *         The data value.
+    *
+    * @throws ArrayIndexOutOfBoundsException
+    *         If the index is less than zero or greater than or equal to the
+    *         length.
+    ***************************************************************************/
+    public void setZValue(int index, Double value)
+    throws ArrayIndexOutOfBoundsException
+    {
+      this.zValue[index] = value;
+    }//setValue
+    
+    /***************************************************************************
+    * Sets the Z values.  The first value corresponds to index 0.  If the
+    * length of the array passed is less than the length of the value array,
+    * the last value is the array passed will be used to fill the remaining
+    * values. 
+    * 
+    * @param  value
+    *         The data value(s).
+    ***************************************************************************/    
+    public void setZValue(Double ... value)
+    {
+      for (int i = 0; i < this.zValue.length; i++)
+        this.zValue[i] = i >= value.length ? value[value.length-1] : value[i];      
+    }//setValue
+    
+   /***************************************************************************
+    * Returns the Z values.
+    * 
+    * @param  index
+    *         The indice of the data to get.
+    *         
+    * @return value
+    *         The data values.
+    * 
+    * @throws ArrayIndexOutOfBoundsException
+    *         If the index is less than zero or greater than or equal to the
+    *         length.
+    ***************************************************************************/  
+    public Double getZValue(int index)
+    throws ArrayIndexOutOfBoundsException
+    {
+  	return this.zValue[index];
+    }
+    
+    
+    /***************************************************************************
+     * Sets the data value at the specified indice.
+     * 
+     * @param  index
+     *         The indice of the data to set.
+     * @param  value
+     *         The data value.
+     *
+     * @throws ArrayIndexOutOfBoundsException
+     *         If the index is less than zero or greater than or equal to the
+     *         length.
+     ***************************************************************************/
+     public void setValue(int index, Double value)
+     throws ArrayIndexOutOfBoundsException
+     {
+       this.value[index] = value;
+     }//setValue
+     
+     /***************************************************************************
+     * Sets the data values.  The first value corresponds to index 0.  If the
+     * length of the array passed is less than the length of the value array,
+     * the last value is the array passed will be used to fill the remaining
+     * values. 
+     * 
+     * @param  value
+     *         The data value(s).
+     ***************************************************************************/    
+     public void setValue(Double ... value)
+     {
+       for (int i = 0; i < this.value.length; i++)
+         this.value[i] = i >= value.length ? value[value.length-1] : value[i];      
+     }//setValue
+     
+    /***************************************************************************
+     * Returns the data values.
+     * 
+     * @param  index
+     *         The indice of the data to get.
+     *         
+     * @return value
+     *         The data values.
+     * 
+     * @throws ArrayIndexOutOfBoundsException
+     *         If the index is less than zero or greater than or equal to the
+     *         length.
+     ***************************************************************************/  
+     public Double getValue(int index)
+     throws ArrayIndexOutOfBoundsException
+     {
+   	return this.value[index];
+     }
 
  /***************************************************************************
   * Returns the tooltip popup value.
@@ -410,6 +577,28 @@ public void setSeriesType(SeriesType seriesType) {
      this.toolText[index] = toolText;
    }//setValue
   
+   /***************************************************************************
+    * 
+    * get the parentYAxis value for this series
+    * 
+    * @return
+    * 
+    ***************************************************************************/
+   public String getParentYAxis() {
+		return parentYAxis;
+	}
+   /***************************************************************************
+    * 
+    * set the parentYAxis value for this series
+    * 
+    * @param parentYAxis 
+    * 
+    ***************************************************************************/
+	public void setParentYAxis(String parentYAxis) {
+		this.parentYAxis = parentYAxis;
+	}
+   
+   
   /***************************************************************************
   * Returns the number of data values.
   * 
