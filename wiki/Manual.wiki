@@ -15,7 +15,3 @@
 == Xactions ==
 
 The Fusion Charts plugin is not available to use on Xactions. The chart library relies on the Flash technology and requires a browser to render the objects.
-
-= Supported Charts =
-
-For available parameters check [http://code.google.com/p/pentaho-fc-plugin/wiki/SupportedParameters]
