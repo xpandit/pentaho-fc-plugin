@@ -25,8 +25,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || CDA File Solution  || cdaSolution  || String || no  || -  || Solution of CDA File  || cdaSolution=fusionSolution || -  ||
 || CDA File Path  || cdaPath  || String || no  || -  || Path of CDA file  || cdaPath=path  || -  ||
 || CDA Parameters  || cdaParameters || String  || no  || ""  || Parameters to be passed to CDA  || cdaParameters=year;day || -  ||
-|| CDA ID Range Value || rangeValueCdaId || int ()  || no  || -  || Cda ID for the query that will get the color range values 
-When only one value is set the the range value will multiply with the valeu of targetValueCdaId query. If is set two values the first value will multiply with the second one.  || rangeValueCdaId=3;5 || -  ||
+|| CDA ID Range Value || rangeValueCdaId || int ()  || no  || -  || Cda ID for the query that will get the color range values. When only one value is set the the range value will multiply with the value of targetValueCdaId query. If is set two values the first value will multiply with the second one.  || rangeValueCdaId=3;5 || -  ||
 || CDA ID Target Value || targetValueCdaId || int  || no  || -  || Cda ID for the query that will get the target value  || targetValueCdaId=4 || -  ||
 || Color Range  || colorRange || string()  || no  || -  || Array of color codes to use in color range  || colorRange=FF654F;FF654F;F6BD0F;8BBA00 || -  ||
 || Dashboard Mode  || dashboard-mode || Boolean  || no  || true  || it's to render the chart into a dashboard  || dashboard-mode=true || - ||
@@ -34,6 +33,6 @@ When only one value is set the the range value will multiply with the valeu of t
 || seriesTypes || seriesTypes || string() || no  || -  || This attribute defines what the particular data-set will be plotted as || seriesTypes=BAR;AREA || COLUMN, AREA or LINE ||
 || Series Param Name  || seriesParam || string  || no  || -  || This attribute sets the name of the series parameter in&nbsp; Chart Link Template || seriesParam=series || ||
 || Categories Param Name  || categoriesParam || string  || no  || -  || This attribute sets the name of the categories parameter in&nbsp; Chart Link Template || categoriesParam=categories || ||
-|| Chart Link Template  || chartLink || string  || no  || -  || This parameter have the&nbsp; chart link parameter to be called when click the user click in the chart  || {code}chartLink=JavaScript:
-drillFunction('{series}','{categories}'){code} || ||
+|| Chart Link Template  || chartLink || string  || no  || -  || The chart link parameter to be called when the user clicks on the chart.  || {{{chartLink=JavaScript:
+drillFunction('{series}','{categories}') }}}|| ||
 || Chart XML Mode  || chartXML || boolean  || no  || false  || Defines when should be rendered only the chart xml&nbsp;  || chartXML=true || ||
