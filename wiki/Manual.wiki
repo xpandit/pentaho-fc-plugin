@@ -1,5 +1,5 @@
 #labels Phase-Deploy,Manual
-#Contains all the necessary instructions on how to use the plugin.
+#Instruction for plugin usage.
 
 = Installation =
 
@@ -17,4 +17,4 @@ The Fusion Charts plugin is not available to use on Xactions. The chart library 
 
 = Supported Charts =
 
-For available parameters check [http://pentaho-fc-plugin/supportedparameters]
+For available parameters check [http://code.google.com/p/pentaho-fc-plugin/wiki/SupportedParameters]
