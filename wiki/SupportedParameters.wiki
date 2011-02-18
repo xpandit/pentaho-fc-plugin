@@ -11,34 +11,33 @@ Parameters are used to set the way that plugin works and also to describe and fo
 
 
 = List of parameters =
-h2. List Of Supported Parameters
 
 || Name  || Key  || DataType  || IsMandatory  || Default  || Description  || Example  || Available Values  ||
-| Data Access ID  | cdaDataAccessId | int[]  | yes  | -  | define witch data access to be used in CDA file&nbsp;  | cdaDataAccessId=2;3 | -  |
-| Name  | name  | string  | yes  | ""  | file of fusion plugin properties to use  | name=usa-quantity-ordered.cda | -  |
-| Solution  | solution  | string  | yes  | ""  | solution where fusion plugin properties is  | solution=fusionSolution | -  |
-| Path  | path  | string  | no  | ""  | path where fusion plugin properties is | path=path  | -  |
-| Chart Type | chartType | string  | yes  | -  | chart type  | | [Column2D,Column3D,Pie3D,Pie2D,Line,Bar2D,MSColumn2D,MSColumn3D,MSLine, 
+|| Data Access ID  || cdaDataAccessId || int[]  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
+|| Name  || name  || string  || yes  || ""  || file of fusion plugin properties to use  || name=usa-quantity-ordered.cda || -  ||
+|| Solution  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
+|| Path  || path  || string  || no  || ""  || path where fusion plugin properties is || path=path  || -  ||
+|| Chart Type || chartType || string  || yes  || -  || chart type  || || [Column2D,Column3D,Pie3D,Pie2D,Line,Bar2D,MSColumn2D,MSColumn3D,MSLine, 
 MSBar2D,MSBar3D,MSCombi2D,MSCombi3D,,StackedColumn2D,StackedColumn3D, 
-MSColumnLine3D,MSColumn3DLineDY,AngularGauge]  |
-| Width | width | int  | no  | ?  | chart width | width=200 | -  |
-| Height  | height  | int  | no  | ?  | chart height | height=200 | -  |
-| Free Version  | free  | boolean  | no  | true  | renders the chart for free or not free version. 
-If true renders free version.  | free=true | -  |
-| CDA File Name  | cdaName  | String  | no  | -  | File Name of CDA  | cdaName=usa-quantity-ordered.cda | -  |
-| CDA File Solution  | cdaSolution  | String | no  | -  | Solution of CDA File  | cdaSolution=fusionSolution | -  |
-| CDA File Path  | cdaPath  | String | no  | -  | Path of CDA file  | cdaPath=path  | -  |
-| CDA Parameters  | cdaParameters | String  | no  | ""  | Parameters to be passed to CDA  | cdaParameters=year;day | -  |
-| CDA ID Range Value | rangeValueCdaId | int []  | no  | -  | Cda ID for the query that will get the color range values 
+MSColumnLine3D,MSColumn3DLineDY,AngularGauge]  ||
+|| Width || width || int  || no  || ?  || chart width || width=200 || -  ||
+|| Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
+|| Free Version  || free  || boolean  || no  || true  || renders the chart for free or not free version. 
+If true renders free version.  || free=true || -  ||
+|| CDA File Name  || cdaName  || String  || no  || -  || File Name of CDA  || cdaName=usa-quantity-ordered.cda || -  ||
+|| CDA File Solution  || cdaSolution  || String || no  || -  || Solution of CDA File  || cdaSolution=fusionSolution || -  ||
+|| CDA File Path  || cdaPath  || String || no  || -  || Path of CDA file  || cdaPath=path  || -  ||
+|| CDA Parameters  || cdaParameters || String  || no  || ""  || Parameters to be passed to CDA  || cdaParameters=year;day || -  ||
+|| CDA ID Range Value || rangeValueCdaId || int []  || no  || -  || Cda ID for the query that will get the color range values 
 When only one value is set the the range value will multiply with the valeu of&nbsp; targetValueCdaId query. 
-if is set two values the first value will multiply wirh the seconde one.&nbsp;  | rangeValueCdaId=3;5 | -  |
-| CDA ID Target Value | targetValueCdaId | int  | no  | -  | Cda ID for the query that will get the target value  | targetValueCdaId=4 | -  |
-| Color Range  | colorRange | string[]  | no  | -  | Array of color codes to use in color range  | colorRange=FF654F;FF654F;F6BD0F;8BBA00 | -  |
-| Dashboard Mode  | dashboard-mode | Boolean  | no  | true  | it's to render the chart into a dashboard  | dashboard-mode=true | - |
-| parentYAxis | parentYAxis | string[]  | no  | -  | parentYAxis to each serie  | parentYAxis=P;P;S | |
-| seriesTypes | seriesTypes | string[] | no  | -  | This attribute defines what the particular data-set will be plotted as | seriesTypes=BAR;AREA | COLUMN, AREA or LINE |
-| Series Param Name  | seriesParam | string  | no  | -  | This attribute sets the name of the series parameter in&nbsp; Chart Link Template | seriesParam=series | |
-| Categories Param Name  | categoriesParam | string  | no  | -  | This attribute sets the name of the categories parameter in&nbsp; Chart Link Template | categoriesParam=categories | |
-| Chart Link Template  | chartLink | string  | no  | -  | This parameter have the&nbsp; chart link parameter to be called when click the user click in the chart  | {code}chartLink=JavaScript:
-drillFunction('{series}','{categories}'){code} | |
-| Chart XML Mode  | chartXML | boolean  | no  | false  | Defines when should be rendered only the chart xml&nbsp;  | chartXML=true | |
+if is set two values the first value will multiply wirh the seconde one.&nbsp;  || rangeValueCdaId=3;5 || -  ||
+|| CDA ID Target Value || targetValueCdaId || int  || no  || -  || Cda ID for the query that will get the target value  || targetValueCdaId=4 || -  ||
+|| Color Range  || colorRange || string[]  || no  || -  || Array of color codes to use in color range  || colorRange=FF654F;FF654F;F6BD0F;8BBA00 || -  ||
+|| Dashboard Mode  || dashboard-mode || Boolean  || no  || true  || it's to render the chart into a dashboard  || dashboard-mode=true || - ||
+|| parentYAxis || parentYAxis || string[]  || no  || -  || parentYAxis to each serie  || parentYAxis=P;P;S || ||
+|| seriesTypes || seriesTypes || string[] || no  || -  || This attribute defines what the particular data-set will be plotted as || seriesTypes=BAR;AREA || COLUMN, AREA or LINE ||
+|| Series Param Name  || seriesParam || string  || no  || -  || This attribute sets the name of the series parameter in&nbsp; Chart Link Template || seriesParam=series || ||
+|| Categories Param Name  || categoriesParam || string  || no  || -  || This attribute sets the name of the categories parameter in&nbsp; Chart Link Template || categoriesParam=categories || ||
+|| Chart Link Template  || chartLink || string  || no  || -  || This parameter have the&nbsp; chart link parameter to be called when click the user click in the chart  || {code}chartLink=JavaScript:
+drillFunction('{series}','{categories}'){code} || ||
+|| Chart XML Mode  || chartXML || boolean  || no  || false  || Defines when should be rendered only the chart xml&nbsp;  || chartXML=true || ||
