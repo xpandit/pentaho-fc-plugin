@@ -1,0 +1,29 @@
+#summary Documentation for developers and people interested on the implementation.
+#labels Phase-Support
+#sidebar TocTechnicalManual
+
+= Introduction =
+
+This page contains all the necessary information to get the code and understand it. 
+
+
+
+= Pre-Requirements =
+
+ * [http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/ Pentaho BI Platform] 3.7 or above should be installed.
+ * [http://ant.apache.org/bindownload.cgi Ant] is installed
+ * Have an SVN client or plugin for you favourite IDE
+
+= How to start =
+
+To have the project deployed on your server:
+ * Get the project from SVN [http://pentaho-fc-plugin.googlecode.com/svn/trunk/]
+ * Configure the _pentaho.system_ variable in the _build.properties_ file. This variable should be configured with your Pentaho _solutions\system_ directory.
+ * Run ant default target
+ * Run ant _install-plugin_ target
+
+To see the samples working:
+_Not yet available_
+<wiki:comment>
+Create samples folder inside SVN and ant target to deploy on platform. Put instructions in here.
+</wiki:comment>
