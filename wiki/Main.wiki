@@ -1,4 +1,5 @@
 #summary Entry page for project documentation.
+#sidebar TocMain
 
 = Introduction =
 
