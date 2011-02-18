@@ -1,5 +1,7 @@
 #summary Table of contents for main page.
 
-# [Manual User Manuals]
-# [TechnicalDocumentation Technical Documentation]
-# [DeveloperGuide Developer Guide]
+ * [Manual User Manuals]
+
+ * [TechnicalDocumentation Technical Documentation]
+
+ * [DeveloperGuide Developer Guide]
