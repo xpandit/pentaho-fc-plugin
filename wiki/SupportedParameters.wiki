@@ -12,7 +12,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 
 = List of parameters =
 
-|| Name  || Key  || DataType  || IsMandatory  || Default  || Description  || Example  || Available Values  ||
+|| *Name*  || *Key*  || *DataType*  || *IsMandatory*  || *Default*  || *Description*  || *Example*  || *Available Values*  ||
 || Data Access ID  || cdaDataAccessId || int[]  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
 || Name  || name  || string  || yes  || ""  || file of fusion plugin properties to use  || name=usa-quantity-ordered.cda || -  ||
 || Solution  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
