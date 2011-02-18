@@ -1,9 +1,5 @@
 #summary Entry page for project documentation.
 
-{{{
-<div>
-}}}
+`<div>`
 [Manual]
-{{{
-</div>
-}}}
+`</div>`
