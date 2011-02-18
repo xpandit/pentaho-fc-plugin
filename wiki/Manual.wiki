@@ -1,5 +1,5 @@
+#summary Instructions for plugin usage.
 #labels Phase-Deploy,Manual
-#Instruction for plugin usage.
 
 = Installation =
 
