@@ -1,5 +1,6 @@
 #summary Manual for developers and people interested on how it is implemented.
 #labels Phase-Support
+#sidebar TocTechnicalManual
 
 = Introduction =
 
