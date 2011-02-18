@@ -1,0 +1,18 @@
+#labels Phase-Deploy,Manual
+= Installation =
+
+== CDF Extensions ==
+
+= Usage =
+
+== Render on PUC ==
+
+== Build Dashboards ==
+
+== Xactions ==
+
+The Fusion Charts plugin is not available to use on Xactions. The chart library relies on the Flash technology and requires a browser to render the objects.
+
+= Supported Charts =
+
+
