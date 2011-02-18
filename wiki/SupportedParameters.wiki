@@ -20,8 +20,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Chart Type || chartType || string  || yes  || -  || chart type  || || (Column2D, Column3D, Pie3D, Pie2D, Line, Bar2D, MSColumn2D, MSColumn3D, MSLine, MSBar2D, MSBar3D, MSCombi2D,MSCombi3D, StackedColumn2D,  StackedColumn3D, MSColumnLine3D, MSColumn3DLineDY, AngularGauge)  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
-|| Free Version  || free  || boolean  || no  || true  || renders the chart for free or not free version. 
-If true renders free version.  || free=true || -  ||
+|| Free Version  || free  || boolean  || no  || true  || Renders the chart for free (true) or not free version (false). || free=true || -  ||
 || CDA File Name  || cdaName  || String  || no  || -  || File Name of CDA  || cdaName=usa-quantity-ordered.cda || -  ||
 || CDA File Solution  || cdaSolution  || String || no  || -  || Solution of CDA File  || cdaSolution=fusionSolution || -  ||
 || CDA File Path  || cdaPath  || String || no  || -  || Path of CDA file  || cdaPath=path  || -  ||
