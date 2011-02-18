@@ -1,5 +1,5 @@
 #summary Entry page for project documentation.
 
+= Introduction =
 
-[Manual]
-[TechnicalManual Technical Manual]
+= Licensing = 
