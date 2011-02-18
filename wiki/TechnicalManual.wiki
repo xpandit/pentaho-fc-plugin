@@ -1,0 +1,8 @@
+#summary Manual for developers and people interested on how it is implemented.
+#labels Phase-Support
+
+= Introduction =
+
+This page contains all the necessary information to get the code and understand it. 
+
+= Details =
