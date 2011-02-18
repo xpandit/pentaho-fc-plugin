@@ -9,8 +9,8 @@ This page contains all the necessary information to get the code and understand 
 
 = Pre-Requirements =
 
- * [Pentaho BI Platform|http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/] 3.7 or above should be installed.
- * [Ant|http://ant.apache.org/bindownload.cgi] is installed
+ * [http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/ Pentaho BI Platform] 3.7 or above should be installed.
+ * [http://ant.apache.org/bindownload.cgi Ant] is installed
  * Have an SVN client or plugin for you favourite IDE
 
 = How to start =
