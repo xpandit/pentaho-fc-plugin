@@ -33,6 +33,8 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || seriesTypes || seriesTypes || string() || no  || -  || This attribute defines what the particular data-set will be plotted as || seriesTypes=BAR;AREA || COLUMN, AREA or LINE ||
 || Series Param Name  || seriesParam || string  || no  || -  || This attribute sets the name of the series parameter in&nbsp; Chart Link Template || seriesParam=series || ||
 || Categories Param Name  || categoriesParam || string  || no  || -  || This attribute sets the name of the categories parameter in&nbsp; Chart Link Template || categoriesParam=categories || ||
-|| Chart Link Template  || chartLink || string  || no  || -  || The chart link parameter to be called when the user clicks on the chart. || {{{chartLink=JavaScript:
-drillFunction('{series}','{categories}') }}}|| ||
+|| Chart Link Template  || chartLink || string  || no  || -  || The chart link parameter to be called when the user clicks on the chart. || {{{ 
+chartLink=JavaScript:
+drillFunction('{series}','{categories}') 
+}}}|| ||
 || Chart XML Mode  || chartXML || boolean  || no  || false  || Defines when should be rendered only the chart xml&nbsp;  || chartXML=true || ||
