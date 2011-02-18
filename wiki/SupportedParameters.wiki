@@ -1,14 +1,44 @@
-#summary One-sentence summary of this page.
+#summary Describes supported parameters.
 #labels Phase-Deploy
 
 = Introduction =
 
-Add your content here.
+Parameters are used to set the way that plugin works and also to describe and format the chart that will be rendered. The plugin has two types of parameters:
+
+ * Special Parameters - This type of parameters requires special treatments like labels, width, heigh, ... They either set the way that the plugin works or are placed on specific places according to Fusion Charts specification.
+
+ * Regular Parameters - This type of parameters are just added to the FusionGraph object.
 
 
-= Details =
+= List of parameters =
+h2. List Of Supported Parameters
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+|| Name \\ || Key \\ || DataType \\ || IsMandatory \\ || Default \\ || Description \\ || Example \\ || Available Values \\ ||
+| Data Access ID \\ | cdaDataAccessId | int\[\] \\ | yes \\ | \- \\ | define witch data access to be used in CDA file&nbsp; \\ | cdaDataAccessId=2;3 | \- \\ |
+| Name \\ | name \\ | string \\ | yes \\ | "" \\ | file of fusion plugin properties to use \\ | name=usa-quantity-ordered.cda | \- \\ |
+| Solution \\ | solution \\ | string \\ | yes \\ | "" \\ | solution where fusion plugin properties is \\ | solution=fusionSolution | \- \\ |
+| Path \\ | path \\ | string \\ | no \\ | "" \\ | path where fusion plugin properties is | path=path \\ | \- \\ |
+| Chart Type | chartType | string \\ | yes \\ | \- \\ | chart type \\ | | \[Column2D,Column3D,Pie3D,Pie2D,Line,Bar2D,MSColumn2D,MSColumn3D,MSLine, \\
+MSBar2D,MSBar3D,MSCombi2D,MSCombi3D,,StackedColumn2D,StackedColumn3D, \\
+MSColumnLine3D,MSColumn3DLineDY,AngularGauge\] \\ |
+| Width | width | int \\ | no \\ | ? \\ | chart width | width=200 | \- \\ |
+| Height \\ | height \\ | int \\ | no \\ | ? \\ | chart height | height=200 | \- \\ |
+| Free Version \\ | free \\ | boolean \\ | no \\ | true \\ | renders the chart for free or not free version. \\
+If true renders free version. \\ | free=true | \- \\ |
+| CDA File Name \\ | cdaName \\ | String \\ | no \\ | \- \\ | File Name of CDA \\ | cdaName=usa-quantity-ordered.cda | \- \\ |
+| CDA File Solution \\ | cdaSolution \\ | String | no \\ | \- \\ | Solution of CDA File \\ | cdaSolution=fusionSolution | \- \\ |
+| CDA File Path \\ | cdaPath \\ | String | no \\ | \- \\ | Path of CDA file \\ | cdaPath=path \\ | \- \\ |
+| CDA Parameters \\ | cdaParameters | String \\ | no \\ | "" \\ | Parameters to be passed to CDA \\ | cdaParameters=year;day | \- \\ |
+| CDA ID Range Value | rangeValueCdaId | int \[\] \\ | no \\ | \- \\ | Cda ID for the query that will get the color range values \\
+When only one value is set the the range value will multiply with the valeu of&nbsp; targetValueCdaId query. \\
+if is set two values the first value will multiply wirh the seconde one.&nbsp; \\ | rangeValueCdaId=3;5 | \- \\ |
+| CDA ID Target Value | targetValueCdaId | int \\ | no \\ | \- \\ | Cda ID for the query that will get the target value \\ | targetValueCdaId=4 | \- \\ |
+| Color Range \\ | colorRange | string\[\] \\ | no \\ | \- \\ | Array of color codes to use in color range \\ | colorRange=FF654F;FF654F;F6BD0F;8BBA00 | \- \\ |
+| Dashboard Mode \\ | dashboard-mode | Boolean \\ | no \\ | true \\ | it's to render the chart into a dashboard \\ | dashboard-mode=true | \- |
+| parentYAxis | parentYAxis | string\[\] \\ | no \\ | \- \\ | parentYAxis to each serie \\ | parentYAxis=P;P;S | |
+| seriesTypes | seriesTypes | string\[\] | no \\ | \- \\ | This attribute defines what the particular data-set will be plotted as | seriesTypes=BAR;AREA | COLUMN, AREA or LINE |
+| Series Param Name \\ | seriesParam | string \\ | no \\ | \- \\ | This attribute sets the name of the series parameter in&nbsp; Chart Link Template | seriesParam=series | |
+| Categories Param Name \\ | categoriesParam | string \\ | no \\ | \- \\ | This attribute sets the name of the categories parameter in&nbsp; Chart Link Template | categoriesParam=categories | |
+| Chart Link Template \\ | chartLink | string \\ | no \\ | \- \\ | This parameter have the&nbsp; chart link parameter to be called when click the user click in the chart \\ | {code}chartLink=JavaScript:
+drillFunction('{series}','{categories}'){code} | |
+| Chart XML Mode \\ | chartXML | boolean \\ | no \\ | false \\ | Defines when should be rendered only the chart xml&nbsp; \\ | chartXML=true | |
