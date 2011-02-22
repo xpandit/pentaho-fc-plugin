@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import org.pentaho.platform.api.engine.IPluginLifecycleListener;
 import org.pentaho.platform.api.engine.PluginLifecycleException;

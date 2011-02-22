@@ -4,7 +4,7 @@
   
  <lifecycle-listener class="com.xpandit.fusionplugin.FcLifecycleListener"/>
      
-  <!--<content-type type="xfusion" mime-type="text/html">
+  <content-type type="xfusion" mime-type="text/html">
     <title>Fusion Config</title>
     <description>Fusion Config File</description>
     <icon-url>content/fusion/res/icon.gif</icon-url>
@@ -12,11 +12,11 @@
     <operations>
       <operation>
         <id>RUN</id>
-        <command>content/fusion?solution={solution}&amp;path={path}&amp;action={name}</command>
+        <command>content/fusion?solution={solution}&amp;path={path}&amp;name={name}&amp;dashboard-mode=false</command>
       </operation>
     </operations>
   </content-type>
-  -->
+  
    <content-generator
     id="fusion"
     title="Fusion Component"
