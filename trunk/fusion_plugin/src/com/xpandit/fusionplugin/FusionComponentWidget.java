@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,8 +8,8 @@ import org.pentaho.commons.connection.IPentahoResultSet;
 import com.fusioncharts.ChartFactoryWidget;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.ColorRange;
-import com.promosoft.fusionplugin.exception.InvalidDataResultSetException;
-import com.promosoft.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

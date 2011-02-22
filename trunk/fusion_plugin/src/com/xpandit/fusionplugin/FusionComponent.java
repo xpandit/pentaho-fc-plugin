@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,7 +17,7 @@ import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.fusioncharts.Series.SeriesType;
-import com.promosoft.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 
 
 public class FusionComponent {

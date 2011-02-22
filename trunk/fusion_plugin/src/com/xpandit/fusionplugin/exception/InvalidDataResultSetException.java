@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin.exception;
+package com.xpandit.fusionplugin.exception;
 
 /**
  * 

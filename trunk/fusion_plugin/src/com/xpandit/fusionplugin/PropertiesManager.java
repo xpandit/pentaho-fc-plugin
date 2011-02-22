@@ -1,4 +1,4 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import org.pentaho.platform.api.repository.ISolutionRepository;
 import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
-import com.promosoft.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 

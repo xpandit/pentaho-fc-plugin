@@ -1,11 +1,11 @@
-package com.promosoft.fusionplugin;
+package com.xpandit.fusionplugin;
 
 import java.util.ArrayList;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.fusioncharts.ChartType;
-import com.promosoft.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
