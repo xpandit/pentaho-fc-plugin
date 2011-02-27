@@ -46,17 +46,22 @@ public class FusionComponentFactory {
 		}
 		if(cType==null)
 			throw new InvalidParameterException(InvalidParameterException.ERROR_002);
-				
-		// choose the right value  FusionComponent
-		if(cType==ChartType.BUBBLE)
-			return new FusionComponent("chart", cType, 1);
-		if(cType.getChartLibrary()==ChartType.ChartOrWidgetOrMapsOrPower.CHARTS)
-			return new FusionComponent("chart", cType, resultSets.get(0).getRowCount());
-		if(cType==ChartType.ANGULARGAUGE)
-			return new FusionComponentWidget("widget", cType, resultSets.size());
-		if(cType==ChartType.HBULLET||cType==ChartType.VBULLET)
-			return new FusionComponentWidget("widget", cType, 1);
-
+		
+		int length=0;
+	        
+        if(cType.getChartLibrary()==ChartType.ChartOrWidgetOrMapsOrPower.CHARTS)
+            length = resultSets.get(0).getRowCount();
+        if(cType==ChartType.ANGULARGAUGE)
+            length = resultSets.size();
+        if(cType==ChartType.HBULLET||cType==ChartType.VBULLET || cType==ChartType.BUBBLE)
+            length = 1;
+		
+		if(cType.getChartLibrary()==ChartType.ChartOrWidgetOrMapsOrPower.CHARTS){
+		    return new FusionComponentChart(cType, length);
+		}else if(cType.getChartLibrary()==ChartType.ChartOrWidgetOrMapsOrPower.WIDGETS){
+		    return new FusionComponentWidget(cType, length);
+		}
+		
 		throw new InvalidParameterException(InvalidParameterException.ERROR_004+":"+chartTypeParam);
 	
 	}

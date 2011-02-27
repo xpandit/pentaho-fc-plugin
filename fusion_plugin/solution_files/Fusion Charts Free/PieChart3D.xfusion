@@ -1,10 +1,11 @@
-cdaName=ColumnChart2D.cda
+cdaName=PieChart3D.cda
+cdaPath=Fusion Charts Free
 cdaDataAccessId=2
 cdaSolution=fusionSolution
 chartTitle=Sales Per year
 xAxisName=Years
 yAxisName=Sales
-chartType=Column2D
+chartType=Pie3D
 height=200
 width=500
-year=2009
+free=true

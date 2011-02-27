@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+
+    <!-- DataSource definition. 
+	
+	Type controls what the datasource type is.
+	The connection and query controls how the data is fetched. These values
+	are specific to each access type
+
+	-->
+    <DataSources>
+        <Connection id="1" type="mondrian.jdbc">
+            <Driver>org.hsqldb.jdbcDriver</Driver>
+            <Url>jdbc:hsqldb:hsql://localhost:9001/sampledata</Url>
+            <User>pentaho_user</User>
+            <Pass>password</Pass>
+			      <Catalog>./steelwheels.mondrian.xml</Catalog>
+			      <Cube>SteelWheelsSales</Cube>
+        </Connection>
+	</DataSources>
+	<DataAccess id="1" connection="1" type="mdx" access="public">
+        <Query>
+			select {[Measures].[Sales]} ON COLUMNS
+			from [SteelWheelsSales]
+		</Query>
+    </DataAccess>
+	<DataAccess id="2" connection="1" type="mdx" access="public">
+        <Query>
+			WITH MEMBER [Measures].[Sales Objective] AS [Measures].[Sales] + 3000000
+			select {[Measures].[Sales Objective]} ON COLUMNS
+			from [SteelWheelsSales]
+		</Query>
+    </DataAccess>
+	<DataAccess id="3" connection="1" type="mdx" access="public">
+        <Query>
+			with member [Measures].[PERCENT_INITIAL] as 0.0
+				  member [Measures].[PERCENT_RANGE_1] as 0.3
+				  member [Measures].[PERCENT_RANGE_2] as 0.6
+				  member [Measures].[PERCENT_FINAL] as 1.1
+			select {[Measures].[PERCENT_INITIAL], [Measures].[PERCENT_RANGE_1], [Measures].[PERCENT_RANGE_2], [Measures].[PERCENT_FINAL]} ON COLUMNS
+			from [SteelWheelsSales]		
+		</Query>
+    </DataAccess>
+</CDADescriptor>
+

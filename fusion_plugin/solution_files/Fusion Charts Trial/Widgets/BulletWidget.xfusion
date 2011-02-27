@@ -1,0 +1,17 @@
+cdaName=BulletWidget.cda
+cdaPath=Fusion Charts Trial/Widgets
+cdaDataAccessId=1
+cdaSolution=fusionSolution
+chartType=VBullet
+cdaDataAccessId=1
+targetValueCdaId=2
+rangeValueCdaId=3;3
+cdaSolution=fusionSolution
+numberDials=2
+formatNumberScale=1
+height=300
+width=190
+dashboard-mode=false
+colorRange=FF654F;FF654F;F6BD0F;8BBA00
+bgColor=FFFFFF
+showBorder=0
