@@ -15,8 +15,6 @@ To have the project deployed on your server:
  * Run ant _install-plugin_ target
  * Run ant _install-samples_ target
 
-To see the samples working:
-_Not yet available_
 <wiki:comment>
 Create samples folder inside SVN and ant target to deploy on platform. Put instructions in here.
 </wiki:comment>
