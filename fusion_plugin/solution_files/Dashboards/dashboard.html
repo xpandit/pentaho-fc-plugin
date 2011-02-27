@@ -1,0 +1,104 @@
+<script type="text/javascript" src="GetCDFResource?resource=/fusionSolution/Dashboards/FCPluginCDFComponent.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/fusionSolution/Dashboards/MetaLayerCharts.js"></script>
+
+<div class="dashboardContent">
+    <div id="dashboardRow1" style="position:relative; width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Angular Gauge Widget
+            </div>
+            <div id="angularGauge">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Pie Chart
+            </div>
+            <div id="pieChart">
+            </div>
+        </div>
+    </div>
+    <div id="dashboardRow2" style="position:relative;width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Column Chart
+            </div>
+            <div id="columnChart">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center; font-weight:bold;">
+                Bar Chart
+            </div>
+            <div id="barChart">
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+
+    var angularGauge = {
+        name: "angularGauge",
+        solution: "fusionSolution",
+        path: "Fusion Charts Trial/Widgets",
+        action: "AngularGauge.xfusion",
+        executeAtStart: true,
+        htmlObject: "angularGauge",
+        chartDefinition: MetaLayerCharts.angularGaugeDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+
+    var pieChart = {
+        name: "pieChart",
+        solution: "fusionSolution",
+        path: "Fusion Charts Trial/Charts",
+        action: "PieChart3D.xfusion",
+        executeAtStart: true,
+        htmlObject: "pieChart",
+        chartDefinition: MetaLayerCharts.pieChartDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+    
+
+    var columnChart = {
+        name: "columnChart",
+        solution: "fusionSolution",
+        path: "Fusion Charts Trial/Charts",
+        action: "ColumnChart3D.xfusion",
+        executeAtStart: true,
+        htmlObject: "columnChart",
+        chartDefinition: MetaLayerCharts.columnChartDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+
+    var barChart = {
+            name: "barChart",
+            solution: "fusionSolution",
+            path: "Fusion Charts Trial/Charts",
+            action: "BarChart2D.xfusion",
+            executeAtStart: true,
+            htmlObject: "barChart",
+            chartDefinition: MetaLayerCharts.barChartDef,
+            type: "FusionChartComponent",
+            postExecution: function(){
+            }
+        }
+    
+    function load(){
+
+        var components = [angularGauge , pieChart , columnChart , barChart];
+        
+        Dashboards.init(components);
+        
+    }
+    load();
+</script>
