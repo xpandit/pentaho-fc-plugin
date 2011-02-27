@@ -1,9 +1,11 @@
-cdaName=LineChart.cda
+cdaName=PieChart2D.cda
+cdaPath=Fusion Charts Free
 cdaDataAccessId=2
 cdaSolution=fusionSolution
 chartTitle=Sales Per year
 xAxisName=Years
 yAxisName=Sales
-chartType=Line
+chartType=Pie2D
 height=200
 width=500
+free=true

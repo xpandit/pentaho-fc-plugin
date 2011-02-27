@@ -18,5 +18,13 @@
   	<echo message="${approot.stage.dir}"></echo>
   	<echo message="${pentaho.system}/${package.root.dir}"></echo>
   </target>
+	
+  <target name="install-samples">
+	<copy todir="${pentaho.system}/../fusionSolution" >
+		<fileset dir="solution_files" />
+	</copy>
+	<echo message="${approot.stage.dir}"></echo>
+	<echo message="${pentaho.system}/${package.root.dir}"></echo>
+  </target>
 
 </project>

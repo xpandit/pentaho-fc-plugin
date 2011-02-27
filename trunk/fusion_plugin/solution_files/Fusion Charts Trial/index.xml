@@ -1,6 +1,6 @@
 <index>
 
-	<name>Fusion Charts Solution</name>
+	<name>%name</name>
 	<description>%description</description>
 	<icon>samples.png</icon>
 	<visible>true</visible>

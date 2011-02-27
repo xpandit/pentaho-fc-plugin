@@ -24,9 +24,6 @@ public class FusionComponentWidget extends  FusionComponent {
 
 	/***************************************************************************
 	 * Constructor for a FusionComponent object.
-	 *
-	 * @param  graphId
-	 *         The graph name.
 	 *         
 	 * @param  graphType
 	 *         The graph type ie:(pie graph, column chart)        
@@ -36,8 +33,8 @@ public class FusionComponentWidget extends  FusionComponent {
 	 *         
 	 *         
 	 ***************************************************************************/
-	public FusionComponentWidget(String string, ChartType column3d, int length) {
-		super(string, column3d, length);
+	public FusionComponentWidget(ChartType graphType , int length) {
+		super("widget", graphType, length);
 	}
 
 	/**
