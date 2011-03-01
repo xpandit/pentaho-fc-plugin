@@ -7,7 +7,7 @@
   <content-type type="xfusion" mime-type="text/html">
     <title>Fusion Config</title>
     <description>Fusion Config File</description>
-    <icon-url>content/fusion/res/icon.gif</icon-url>
+    <icon-url>content/fusion/res/icon.jpg</icon-url>
     <meta-provider>com.xpandit.fusionplugin.content.FusionContentTypeMetaProvider</meta-provider> 
     <operations>
       <operation>
