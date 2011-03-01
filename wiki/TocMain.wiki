@@ -1,6 +1,5 @@
 #summary Table of contents for main page.
 
- * [Main Home]
  * [Manual User Manuals]
   * [SupportedCharts Supported Charts]
   * [SupportedParameters Supported Parameters ]
