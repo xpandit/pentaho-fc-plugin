@@ -3,5 +3,5 @@
  * [Manual User Manuals]
 
  * [TechnicalDocumentation Technical Documentation]
-
+  * [Architecture Architecture] 
  * [DeveloperGuide Developer Guide]
