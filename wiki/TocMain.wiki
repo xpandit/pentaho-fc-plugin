@@ -2,6 +2,8 @@
 
  * [Main Home]
  * [Manual User Manuals]
+  * [SupportedCharts Supported Charts]
+  * [SupportedParameters Supported Parameters ]
  * [TechnicalDocumentation Technical Documentation]
   * [Architecture Architecture] 
  * [DeveloperGuide Developer Guide]
