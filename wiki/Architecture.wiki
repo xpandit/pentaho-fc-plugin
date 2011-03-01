@@ -1,0 +1,9 @@
+#summary Describes the main components of the plugin and how they interact.
+#labels Phase-Implementation
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
