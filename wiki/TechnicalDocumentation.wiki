@@ -1,9 +1,7 @@
 #summary Documentation for developers and people interested on the implementation.
 #labels Phase-Support
-#sidebar TocTechnicalManual
+#sidebar TocMain
 
 = Introduction =
 
 This page contains all the necessary information to get the code and understand it. 
-
-
