@@ -1,3 +1,0 @@
-#summary Technical Manual Table of Contents.
-
-* [Architecture]
