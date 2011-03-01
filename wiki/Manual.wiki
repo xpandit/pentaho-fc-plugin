@@ -1,6 +1,6 @@
 #summary Documentation for plugin usage.
 #labels Phase-Deploy,Manual
-#sidebar ManualTableOfContents
+#sidebar TocMain
 
 = Installation =
 
