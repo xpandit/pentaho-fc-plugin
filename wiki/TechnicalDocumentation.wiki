@@ -7,8 +7,8 @@
  # Install your favorite IDE and include and SVN client. 
  # Get the project through SVN by setting the url on the source tab
  # Setup build.properties 
- #* Specify your Pentaho installation directory on _dir.pentaho_
- #* Specify your Pentaho solutions directory on _dir.solution_
+  # Specify your Pentaho installation directory on _dir.pentaho_
+  # Specify your Pentaho solutions directory on _dir.solution_
  # Execute ant default task
  # Execute ant install-plugin to get the plugin copied to your Pentaho installation
  # Execute ant install-samples to copy the samples to the solution folder
