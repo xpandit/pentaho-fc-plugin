@@ -1,6 +1,7 @@
 <project name="fusion_plugin" basedir="." default="default">
 <!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
   <import file="build-res/subfloor-pkg.xml" />
+  <property name="pentaho.system" value="${dir.pentaho}/pentaho-solutions/system/"/>
 
 	
   <target name="assemble.copy-libs">
@@ -20,7 +21,7 @@
   </target>
 	
   <target name="install-samples">
-	<copy todir="${pentaho.system}/../fusionSolution" >
+	<copy todir="${dir.solutions}/fusionSolution" >
 		<fileset dir="solution_files" />
 	</copy>
 	<echo message="${approot.stage.dir}"></echo>
