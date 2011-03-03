@@ -21,7 +21,7 @@
   </target>
 	
   <target name="install-samples">
-	<copy todir="${dir.developers}/fusionSolution" >
+	<copy todir="${dir.developers}/fusion-samples" >
 		<fileset dir="solution_files" />
 	</copy>
 	<echo message="${approot.stage.dir}"></echo>

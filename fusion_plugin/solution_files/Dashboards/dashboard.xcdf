@@ -5,4 +5,5 @@
 	<description></description>
 	<icon></icon>
 	<template>dashboard.html</template>
+	<style>clean</style>
 </cdf>
