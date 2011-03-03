@@ -1,9 +1,9 @@
 cdaName=AngularGauge.cda
-cdaPath=Fusion Charts Trial/Widgets
+cdaPath=fusion-samples/Fusion Charts Trial/Widgets
 cdaDataAccessId=1
 targetValueCdaId=2
 rangeValueCdaId=3
-cdaSolution=fusionSolution
+cdaSolution=bi-developers
 chartType=AngularGauge
 height=200
 width=500

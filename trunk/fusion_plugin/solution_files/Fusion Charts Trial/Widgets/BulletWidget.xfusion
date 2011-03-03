@@ -1,12 +1,12 @@
 cdaName=BulletWidget.cda
-cdaPath=Fusion Charts Trial/Widgets
+cdaPath=fusion-samples/Fusion Charts Trial/Widgets
 cdaDataAccessId=1
-cdaSolution=fusionSolution
+cdaSolution=bi-developers
 chartType=VBullet
 cdaDataAccessId=1
 targetValueCdaId=2
 rangeValueCdaId=3;3
-cdaSolution=fusionSolution
+cdaSolution=bi-developers
 numberDials=2
 formatNumberScale=1
 height=300
