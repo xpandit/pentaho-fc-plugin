@@ -423,26 +423,7 @@ public class ChartFactory extends Object {
 	public String buildDOMFusionChart(String graphName)
 	throws WritingException, IllegalArgumentException
 	{		
-		String dataXml = this.buildFusionChart(graphName);
-		if(chartXMLMode) 
-			return dataXml;
-		FusionGraph graph = (FusionGraph)this.graph.get(graphName);
-		String chartType = graph.getGraphType().toString();
-		chartType=(isFreeVersion()?"FCF_":"")+chartType;//append "FCF_" string if is chart free
-		int width = graph.getWidth();
-		int height = graph.getHeight();
-		String swfPath=PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"/content/fusion/"+graph.getGraphType().getChartLibrary().toString().toLowerCase()+"/";
-		String wmode = graph.getWMode();
-		
-		String domWrapper =
-			"<fusioncharts chartType=\""+chartType+"\" width=\""+width+"\" height=\""+height+"\" WMode=\""+wmode+"\" SWFPath=\""+swfPath+"\">" +
-			"<data><!--[CDATA[" +
-			dataXml +
-			"]]--></data>" +
-			"</fusioncharts>";
-
-		//xml string wrapped in dom format
-		return domWrapper; 
+		return this.buildFusionChart(graphName);
 	}
 
 	protected String escapeGoofyCharacters(String value)
