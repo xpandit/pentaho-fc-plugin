@@ -28,7 +28,7 @@
       <static-path url="/fusion/res" localFolder="resources"/>
       <static-path url="/fusion/js" localFolder="js"/>
       <static-path url="/fusion/maps" localFolder="maps"/>
-      <static-path url="/fusion/charts" localFolder="charts"/>
+      <static-path url="/fusion/swf" localFolder="charts"/>
       <static-path url="/fusion/widgets" localFolder="widgets"/>
     </static-paths>  
     

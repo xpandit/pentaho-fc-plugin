@@ -190,7 +190,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		TreeMap<String, String> params = pm.getParams();
 		if(params.containsKey(CHARTXML))
 		{
-			if(!Boolean.parseBoolean(params.get(CHARTXML)))
+			if(Boolean.parseBoolean(params.get(CHARTXML)))
 			{
 				out.write(fusionComponent.execute().getBytes());
 				return;
@@ -200,13 +200,27 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		{
 			if(!Boolean.parseBoolean(params.get(ISDASHBOARDMODE)))
 			{
+				String chartType=fusionComponent.getChartType();
+				chartType=(fusionComponent.isFreeVersion()?"FCF_":"")+chartType;
+				
+				
 				String output="<html><head>" +
 				"  <title>Example Graph</title>  " +
 				" <SCRIPT LANGUAGE='Javascript' SRC='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/js/FusionCharts.js'></SCRIPT>" +
-				"<script type='text/javascript' src='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/js/FusionChartsDOM_commented.js'></script></head>" +
-				"<body onload=\"setTimeout('FusionChartsDOM.RenderAllCharts(true)',1000)\">";
-				output+=fusionComponent.execute();
-				output+="</body></html>";
+				"<script type='text/javascript' src='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/js/standaloneChartRender.js'></script></head>" +
+				"<script type='text/javascript'>"+
+				"var chartData="+
+				"	{"+
+							"xmlData:'"+fusionComponent.execute()+"',"+
+							"chartType:'"+chartType+"',"+
+							"width:"+fusionComponent.getWidth()+","+
+							"height:"+fusionComponent.getWidth()+","+
+							"WMode:'"+fusionComponent.getWMode()+"'"+
+				"	}"+
+				"</script>"+
+				"<body onload=\"renderChart()\">"+
+				"<div id='chartPlaceHolder'></div>"+
+				"</body></html>";
 				out.write(output.getBytes());
 				return;
 			}
