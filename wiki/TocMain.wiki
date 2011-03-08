@@ -6,5 +6,5 @@
  * [TechnicalDocumentation Technical Documentation]
   * [Workflow Workflow]
   * [Architecture Architecture] 
-  * [CDFComponent CDF Component]
+  * [CDFComponent FusionChartComponent]
  * [DeveloperGuide Developer Guide]
