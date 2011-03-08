@@ -4,6 +4,6 @@
   * [SupportedCharts Supported Charts]
   * [SupportedParameters Supported Parameters ]
  * [TechnicalDocumentation Technical Documentation]
-  * [Workflow]
+  * [Workflow Workflow]
   * [Architecture Architecture] 
  * [DeveloperGuide Developer Guide]
