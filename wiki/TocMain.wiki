@@ -7,4 +7,5 @@
   * [Workflow Workflow]
   * [Architecture Architecture] 
   * [CDFComponent CDF FusionChartComponent]
+  * [FusionChartLibrary Fusion Chart Library]
  * [DeveloperGuide Developer Guide]
