@@ -22,7 +22,4 @@ The CDA is used to get data to all types of charts and widgets. Some times the p
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Add more detailed information here.
