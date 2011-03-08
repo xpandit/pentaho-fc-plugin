@@ -35,8 +35,6 @@ var MetaLayerFusionCharts={
 }
 
 
-
-
 = Details =
 
 Add more detailed information here.
