@@ -92,10 +92,23 @@
             postExecution: function(){
             }
         }
+
+    var barChartFree = {
+            name: "barChartFree",
+            solution: "bi-developers",
+            path: "fusion-samples/Fusion Charts Trial/Charts",
+            action: "BarChart2D.xfusion",
+            executeAtStart: true,
+            htmlObject: "barChart",
+            chartDefinition: MetaLayerCharts.barChartDef,
+            type: "FusionChartComponent",
+            postExecution: function(){
+            }
+        }
     
     function load(){
 
-        var components = [angularGauge , pieChart , columnChart , barChart];
+        var components = [barChartFree /*angularGauge , pieChart , columnChart , barChart*/];
         
         Dashboards.init(components);
         
