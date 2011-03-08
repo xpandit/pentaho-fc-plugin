@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary This page explains the process of rendering a chart, configuring properties and acessing data.
 
 = Introduction =
 
