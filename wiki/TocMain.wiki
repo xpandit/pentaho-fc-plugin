@@ -6,4 +6,5 @@
  * [TechnicalDocumentation Technical Documentation]
   * [Workflow Workflow]
   * [Architecture Architecture] 
+  * [CDF Component CDF Component]
  * [DeveloperGuide Developer Guide]
