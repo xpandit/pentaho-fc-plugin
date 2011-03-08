@@ -8,4 +8,5 @@
   * [Architecture Architecture] 
   * [CDFComponent CDF FusionChartComponent]
   * [FusionChartLibrary Fusion Chart Library]
+  * [Licensing Licensing]
  * [DeveloperGuide Developer Guide]
