@@ -8,7 +8,7 @@ This framework have a CDF component that can be used like another CDF component.
 
 TODO:describe the include of the JS File
 
-To use this component you have to create a CDF component with type: "FusionChartComponent\".
+To use this component you have to create a CDF component with type: "FusionChartComponent&quot;.
 
 Example:
 
@@ -19,7 +19,7 @@ var fusionChartsCDFComponent = {
 		path: "xFileSolutionFilePath",
 		type: "FusionChartComponent",
                 chartDefinition: MetaLayerFusionCharts\.CdfMetalayer,
-		htmlObject: "numContratosLineChartId\",
+		htmlObject: "numContratosLineChartId&quot;,
 		executeAtStart: true
 }
 
