@@ -450,7 +450,10 @@ public class FusionComponent {
 		if(parameterKey.equals(HEIGHT))
 			graph.setHeight(Integer.parseInt(parameterValue));
 		if(parameterKey.equals(FREE))
+		{	
+			graph.setChartProperties(parameterKey,parameterValue);
 			setFreeVersion(Boolean.parseBoolean(parameterValue));
+		}
 		if(parameterKey.equals(WMODE))
 			graph.setWMode(parameterValue);
 		if(parameterKey.equals(CHARTXML))

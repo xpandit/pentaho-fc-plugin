@@ -206,7 +206,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 				
 				String output="<html><head>" +
 				"  <title>Example Graph</title>  " +
-				" <SCRIPT LANGUAGE='Javascript' SRC='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/js/FusionCharts.js'></SCRIPT>" +
+				" <SCRIPT LANGUAGE='Javascript' SRC='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/JSClass/FusionCharts.js'></SCRIPT>" +
 				"<script type='text/javascript' src='"+PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()+"content/fusion/js/standaloneChartRender.js'></script></head>" +
 				"<script type='text/javascript'>"+
 				"var chartData="+
@@ -214,7 +214,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 							"xmlData:'"+fusionComponent.execute()+"',"+
 							"chartType:'"+chartType+"',"+
 							"width:"+fusionComponent.getWidth()+","+
-							"height:"+fusionComponent.getWidth()+","+
+							"height:"+fusionComponent.getHeight()+","+
 							"WMode:'"+fusionComponent.getWMode()+"'"+
 				"	}"+
 				"</script>"+
