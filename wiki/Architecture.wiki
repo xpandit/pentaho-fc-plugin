@@ -1,9 +1,11 @@
-#summary Describes the main components of the plugin and how they interact.
+#summary This page contains information about the Fusion Charts Plugin architecture.
 #labels Phase-Implementation
 
 = Introduction =
 
-Add your content here.
+<a target='_blank' href='http://img848.imageshack.us/i/pchparchitecture.jpg/'><img src='http://img848.imageshack.us/img848/4206/pchparchitecture.th.jpg' border='0'/></a>
 
 
 = Details =
+
+Add more detailed information here.
