@@ -1,13 +1,15 @@
 <script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-samples/Dashboards/FCPluginCDFComponent.js"></script>
 <script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-samples/Dashboards/MetaLayerCharts.js"></script>
 
+<script type='text/javascript' src='GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js'></script>
+
 <div class="dashboardContent">
     <div id="dashboardRow1" style="position:relative; width:900px;">
         <div style="float:left; padding:10px;">
             <div style="text-align:center;font-weight:bold;">
-                Angular Gauge Widget
+                Line Chart
             </div>
-            <div id="angularGauge">
+            <div id="lineChart">
             </div>
         </div>
         <div style="float:right; padding:10px;">
@@ -40,14 +42,14 @@
     // Dashboard Parameters
     Dashboards.globalContext = false;
 
-    var angularGauge = {
-        name: "angularGauge",
+    var lineChart = {
+        name: "lineChart",
         solution: "bi-developers",
-        path: "fusion-samples/Fusion Charts Trial/Widgets",
-        action: "AngularGauge.xfusion",
+        path: "fusion-samples/Fusion Charts Free",
+        action: "LineChart.xfusion",
         executeAtStart: true,
-        htmlObject: "angularGauge",
-        chartDefinition: MetaLayerCharts.angularGaugeDef,
+        htmlObject: "lineChart",
+        chartDefinition: MetaLayerCharts.lineChartDef,
         type: "FusionChartComponent",
         postExecution: function(){
         }
@@ -56,7 +58,7 @@
     var pieChart = {
         name: "pieChart",
         solution: "bi-developers",
-        path: "fusion-samples/Fusion Charts Trial/Charts",
+        path: "fusion-samples/Fusion Charts Free",
         action: "PieChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "pieChart",
@@ -70,7 +72,7 @@
     var columnChart = {
         name: "columnChart",
         solution: "bi-developers",
-        path: "fusion-samples/Fusion Charts Trial/Charts",
+        path: "fusion-samples/Fusion Charts Free",
         action: "ColumnChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "columnChart",
@@ -83,20 +85,7 @@
     var barChart = {
             name: "barChart",
             solution: "bi-developers",
-            path: "fusion-samples/Fusion Charts Trial/Charts",
-            action: "BarChart2D.xfusion",
-            executeAtStart: true,
-            htmlObject: "barChart",
-            chartDefinition: MetaLayerCharts.barChartDef,
-            type: "FusionChartComponent",
-            postExecution: function(){
-            }
-        }
-
-    var barChartFree = {
-            name: "barChartFree",
-            solution: "bi-developers",
-            path: "fusion-samples/Fusion Charts Trial/Charts",
+            path: "fusion-samples/Fusion Charts Free",
             action: "BarChart2D.xfusion",
             executeAtStart: true,
             htmlObject: "barChart",
@@ -108,7 +97,7 @@
     
     function load(){
 
-        var components = [barChartFree /*angularGauge , pieChart , columnChart , barChart*/];
+        var components = [lineChart , pieChart , columnChart , barChart];
         
         Dashboards.init(components);
         
