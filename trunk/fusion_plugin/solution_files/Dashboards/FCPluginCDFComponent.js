@@ -16,16 +16,13 @@ var FusionChartComponent = BaseComponent.extend({
 		
 		var url = webAppPath + '/content/fusion';
 		var myself=this;
-		
-	
-	
 	
 		// get the xml chart
 		var resultXml=$.ajax({url: url, data: options, async: false}).responseText;
 		
 		//test if is for free version
 		var isFree=eval($(resultXml).attr("free"));
-		options.chartType=(!isFree==false?options.chartType:"FCF_"+options.chartType);
+		options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
 		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
