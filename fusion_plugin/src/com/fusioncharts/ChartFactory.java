@@ -199,7 +199,7 @@ public class ChartFactory extends Object {
 		xmlwriter.writeEntity("categories");
 		for (int i=0; i < graph.getNumberOfCategories(); i++) {
 			xmlwriter.writeEntity("category");
-			xmlwriter.writeAttribute("label", escapeGoofyCharacters(graph.getCategory(i).getLable()));
+			xmlwriter.writeAttribute(isFreeVersion()?"name":"label", escapeGoofyCharacters(graph.getCategory(i).getLable()));
 			if(graph.getCategory(i).getxValue()!=null)
 				xmlwriter.writeAttribute("x", escapeGoofyCharacters(graph.getCategory(i).getxValue().toString()));
 			xmlwriter.writeAttribute("showVerticalLine", escapeGoofyCharacters(graph.getCategory(i).getShowVerticalLine().toString()));
@@ -258,7 +258,7 @@ public class ChartFactory extends Object {
 			//for single series charts
 			if(graph.getGraphType().isSingleSeries())
 			{
-				xmlwriter.writeAttribute("label", escapeGoofyCharacters(graph.getCategory(i).getLable()));				
+				xmlwriter.writeAttribute(isFreeVersion()?"name":"label", escapeGoofyCharacters(graph.getCategory(i).getLable()));				
 
 				//Make sure we don't put null attributes
 				if(singleSeries.getColor(i) != null)
