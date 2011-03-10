@@ -237,9 +237,10 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 * 
 	 * @param requestParams parameters to be used in all processing of the charts, this request parameters should have parameters
 	 * propPath, propSolution and propPath if you want to use a Properties File
-	 * @throws UnsupportedEncodingException thrown where encoding is not suported
+	 * @throws UnsupportedEncodingException thrown where encoding is not supported
+	 * @throws InvalidParameterException 
 	 */
-	private void setProperties(IParameterProvider requestParams) throws UnsupportedEncodingException 
+	private void setProperties(IParameterProvider requestParams) throws UnsupportedEncodingException, InvalidParameterException 
 	{
 		//get properties file name path and solution
 		String fileName=URLDecoder.decode(requestParams.getStringParameter(NAME, ""), ENCODING);
@@ -265,8 +266,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		Map<String,ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String,ArrayList<IPentahoResultSet>>();
 
 		if (file==null){
-			getLogger().error("No solution file found: ".concat(getAction().toString()));
-			return null;
+			throw new InvalidParameterException(InvalidParameterException.ERROR_005+"No solution file found: "+getAction().getSolutionName()+"/"+getAction().getPath()+"/"+getAction().getActionName());
 		}
 
 		cdaQueryComponent = new CdaQueryComponent();

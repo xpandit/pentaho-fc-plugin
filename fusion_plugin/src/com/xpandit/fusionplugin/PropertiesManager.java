@@ -53,8 +53,9 @@ public class PropertiesManager {
 	 * @param propSolution Solution Name of local file properties 
 	 * @param parameters Url Parameters 
 	 * @param encoding Encoding of URL params
+	 * @throws InvalidParameterException 
 	 */
-	public PropertiesManager(String propFile ,String propPath, String propSolution, IParameterProvider parameters, String encoding)
+	public PropertiesManager(String propFile ,String propPath, String propSolution, IParameterProvider parameters, String encoding) throws InvalidParameterException
 	{
 		this.propFile=propFile;
 		this.propPath=propPath;
@@ -65,8 +66,9 @@ public class PropertiesManager {
 	}
 	/**
 	 * fill all instance parameters based on solution file
+	 * @throws InvalidParameterException 
 	 */
-	private void fillLocalParameters() {
+	private void fillLocalParameters() throws InvalidParameterException {
 		localProperties=new TreeMap<String, String>();
 		
 		//get file 
@@ -79,15 +81,14 @@ public class PropertiesManager {
 		    if (file.getData()==null)
 		    {
 		    	if(!propFile.equals(""))
-		    		log.warn(new InvalidParameterException("No solution file found to set properties:"+"propSolution->"+propSolution+";propPath-->"+propPath+";propFile-->"+propFile));
+		    		throw new InvalidParameterException(InvalidParameterException.ERROR_005+":"+"No solution file found to set properties:"+"propSolution->"+propSolution+";propPath-->"+propPath+";propFile-->"+propFile);
 		    	return;
 		    }
 	    }
 	    else
 	    {
 	    	if(!propFile.equals(""))
-	    		log.warn(new InvalidParameterException("No solution file found to set properties:"+"propSolution->"+propSolution+";propPath-->"+propPath+";propFile-->"+propFile));
-	    	return;
+	    		throw new InvalidParameterException(InvalidParameterException.ERROR_005+":"+"No solution file found to set properties:"+"propSolution->"+propSolution+";propPath-->"+propPath+";propFile-->"+propFile);
 	    }
 	    	
 	    	
