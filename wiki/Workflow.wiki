@@ -1,4 +1,4 @@
-#summary This page explains the process of rendering a chart, configuring properties and acessing data.
+#summary This page explains the process of rendering a chart, configuring properties and accessing data.
 
 = Introduction =
 
