@@ -1,10 +1,10 @@
 #summary Table of contents for main page.
 
- * [Manual Users Manual]
+ * [Manual User's Manual]
   * [SupportedCharts Supported Charts]
   * [SupportedParameters Supported Parameters ]
  * [TechnicalDocumentation Technical Documentation]
-  * [DeveloperGuide Developer Guide]
+  * [DeveloperGuide Developer's Guide]
   * [Workflow Workflow]
   * [Architecture Architecture] 
   * [CDFComponent CDF FusionChartComponent]
