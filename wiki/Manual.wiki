@@ -4,8 +4,13 @@
 
 = Installation =
 
+ # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
+ # Extract the fusion samples zip file into the _pentaho-solutions/bi-developers_ path.
  # Set _bi-developers_ folder to visible
-  # Edit file index.xml and set <visible>true</visible>
+  # Edit file index.xml and set `<visible>true</visible>`
+ # Open the Pentaho User Console (PUC) and refresh the solution repository.
+ # Go to the _pentaho-solutions/bi-developers/fusion-samples_ and run the examples.
+
 
 == CDF Extensions ==
 
