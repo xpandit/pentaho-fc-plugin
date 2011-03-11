@@ -1,6 +1,6 @@
 #summary Table of contents for main page.
 
- * [Manual User Manuals]
+ * [Manual Users Manual]
   * [SupportedCharts Supported Charts]
   * [SupportedParameters Supported Parameters ]
  * [TechnicalDocumentation Technical Documentation]
