@@ -9,11 +9,17 @@
 
 == CDF Extensions ==
 
+The integration with CDF was made by creating a CDF component called FusionComponent that permits the definition of the charts in the client side and communicates with the server side getting the chart. This component can be found in the samples directory (fusion-samples/Dashboards) in the FCPluginCDFComponent.js file.
+
 = Usage =
 
 == Render on PUC ==
 
+To test the samples in the Pentaho User Console all you need to do is extract the samples zip file into the bi-developers solution, refresh the solution repository and run the samples.
+
 == Build Dashboards ==
+
+
 
 == Xactions ==
 
