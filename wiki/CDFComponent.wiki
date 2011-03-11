@@ -9,39 +9,26 @@ This framework have a CDF component that can be used like another CDF component.
 To use this component you have to create a CDF component with type: "FusionChartComponent".
 
 Example:
-
+{{{
 var fusionChartsCDFComponent = {
                 name: "fusionChartsComponent",
-
 		action: "xFusionFile.xfusion",
-
 		solution: "xFusionFileSolution",
-
 		path: "xFileSolutionFilePath",
-
 		type: "FusionChartComponent",
-
                 chartDefinition: MetaLayerFusionCharts.CdfMetalayer,
-
 		htmlObject: "numContratosLineChartId",
-
 		executeAtStart: true
-
 }
 
 var MetaLayerFusionCharts={
            numClientesLineChartDef: {
-
 		width: "460",
-
 		height: "210",
-
                 cdaDataAccessId:"1",
-
 		chartType: "MSColumn3D",
-
 		cdaParameters:"data",
-
 		data:function(){ return data;}
 	}
 }
+}}}
