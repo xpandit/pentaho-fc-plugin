@@ -3,10 +3,10 @@
 
 = Introduction =
 
-In this section you can find simple plugin usage and development documentation.
+In this section you can find the users manual and technical documentation.
 
-  * Simple plugin usage documentation guides you through the process of installing the plugin and the samples into the Pentaho BI Server.
-  * Development documentation guides you through the process of downloading the source code, compiling and installing it. It also contains detailed information about the plugin implementation and related specifications.
+  * The users manual documentation guides you through the process of installing the plugin and the samples into the Pentaho BI Server.
+  * The technical documentation guides you through the process of downloading the source code, compiling and installing it. It also contains detailed information about the plugin implementation and related specifications.
 
 = Licensing =
 
