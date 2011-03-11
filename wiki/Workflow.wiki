@@ -6,7 +6,7 @@ The process of rendering a chart using the Fusion Chant Pentaho Plugin starts wi
 
 The following image shows an overview of the workflow:
 
-´<a target='_blank' title='ImageShack - Image And Video Hosting' href='http://img545.imageshack.us/i/pchpworkflow.jpg/'><img src='http://img545.imageshack.us/img545/5008/pchpworkflow.jpg' border='0'/></a>
+<a target='_blank' title='ImageShack - Image And Video Hosting' href='http://img854.imageshack.us/i/pchpworkflow.jpg/'><img src='http://img854.imageshack.us/img854/5008/pchpworkflow.jpg' border='0'/></a>
 
 The Properties Manager  have one Global Properties Manager and two maps of properties. On the first request, the Global Properties Manager loads the global properties (called global properties) in fusionCharts,properties file on root folder of the plugin.
 In each request, if the request parameters have the location of an xFusion File the  Properties Manager loads all the properties of that file (called local properties) . Finally are loaded the properties sent in the request (called instance properties).
