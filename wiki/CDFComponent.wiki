@@ -45,8 +45,3 @@ var MetaLayerFusionCharts={
 		data:function(){ return data;}
 	}
 }
-
-
-= Details =
-
-Add more detailed information here.
