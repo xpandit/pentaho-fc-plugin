@@ -4,6 +4,9 @@
 
 = Installation =
 
+ # Set _bi-developers_ folder to visble
+  # Edit file index.xml and set <visible>true</visible>
+
 == CDF Extensions ==
 
 = Usage =
