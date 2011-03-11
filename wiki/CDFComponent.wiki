@@ -6,8 +6,6 @@ The Fusion Chart Plugin have a javascript framework to easily add a chart to a C
 
 This framework have a CDF component that can be used like another CDF component. 
 
-TODO:describe the include of the JS File
-
 To use this component you have to create a CDF component with type: "FusionChartComponent".
 
 Example:
