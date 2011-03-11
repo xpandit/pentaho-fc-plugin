@@ -18,7 +18,7 @@ The following charts are supported:
   * Column2D
   * Line
 
-= Licensed Version Charts =
+= Licensed Version Charts and Widgets =
 
 The following charts and widgets are supported when using the Licensed Fusion Charts version.
 
