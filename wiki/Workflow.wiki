@@ -22,8 +22,3 @@ All properties have an override order:
 After all properties are loaded, it's time to invoke the CDA to get data.
 
 The CDA is used to get data to all types of charts and widgets. Some times the plugin have to execute more than one query depending the type of the chart and all the results are available in a map. After the CDA returned, is created a Fusion Component with chart type. Next, properties and map with all results from CDA is set to the Fusion Component and finally the Fusion Component renders the chart.
-
-
-= Details =
-
-Add more detailed information here.
