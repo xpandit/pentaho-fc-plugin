@@ -13,11 +13,9 @@ In each request, if the request parameters have the location of an xFusion File 
 
 All properties have an override order:
 
-1. Global Properties - Are the base properties
-
-2. Local Properties  - override Global Properties
-
-3. Instance Properties - Override Global Properties and Local Properties
+ # Global Properties - Are the base properties
+ # Local Properties  - override Global Properties
+ # Instance Properties - Override Global Properties and Local Properties
 
 After all properties are loaded, it's time to invoke the CDA to get data.
 
