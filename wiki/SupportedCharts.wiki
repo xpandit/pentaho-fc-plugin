@@ -9,4 +9,14 @@ However the plugin is built on a flexible way where most of the parameters recei
 
 = Charts =
 
+The following charts are supported:
+
+* Bar2D
+* Bar3D
+* Pie2D
+* Pie3D
+* Column3D
+* Column2D
+* Line
+
 = Widgets =
