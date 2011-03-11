@@ -9,7 +9,7 @@
 
 == CDF Extensions ==
 
-The integration with CDF was made by creating a CDF component called FusionComponent that permits the definition of the charts in the client side and communicates with the server side getting the chart. This component can be found in the samples directory (fusion-samples/Dashboards) in the FCPluginCDFComponent.js file.
+The integration with CDF was made by creating a CDF component called [FusionComponent] that permits the definition of the charts in the client side and communicates with the server side getting the chart. This component can be found in the samples directory (fusion-samples/Dashboards) in the FCPluginCDFComponent.js file.
 
 = Usage =
 
