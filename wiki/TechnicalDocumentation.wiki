@@ -14,5 +14,5 @@
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
  # Restart Pentaho
  # Open the user console
- # Go to path _pentaho-solutions/bi-developers/fusion-samples_
+ # Go to path _bi-developers/fusion-samples_
  # Double click on the samples available
