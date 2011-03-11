@@ -7,12 +7,11 @@ This page contains the list of supported charts.
 However the plugin is built on a flexible way where most of the parameters received as input are just sent to the XML. This means that other charts or widgets with a similar structure might already be supported.
 
 
-= Charts =
+= Free Version Charts =
 
 The following charts are supported:
 
   * Bar2D
-  * Bar3D
   * Pie2D
   * Pie3D
   * Column3D
@@ -25,7 +24,26 @@ The following charts and widgets are also supported when using the Licensed Fusi
 
 == Charts ==
 
+  * Column2D
+  * Column3D
+  * Pie3D
+  * Pie2D
+  * Line
+  * Bar2D
+  * MSColumn2D
+  * MSColumn3D 
+  * MSLine
+  * MSBar2D
+  * MSBar3D
+  * MSCombi2D
+  * MSCombi3D
+  * StackedColumn2D
+  * StackedColumn3D
+  * MSColumnLine3D
+  * MSColumn3DLineDY
 
 == Widgets ==
 
   * Angular Gauge
+  * VBullet
+  * Bubble
