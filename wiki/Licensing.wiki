@@ -7,7 +7,3 @@ Fusion charts library is available in two distinct ways:
     * <a href="http://www.fusioncharts.com/">Fusion Charts V3</a> - Enterprise version Link
 
 The open source version is distributed with a GPL license, while the enterprise version is proprietary.
-
-= Details =
-
-Add more detailed information here.
