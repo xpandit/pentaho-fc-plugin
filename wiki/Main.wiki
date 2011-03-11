@@ -3,7 +3,7 @@
 
 = Introduction =
 
-In this section you can find the users manual and technical documentation.
+In this section you can find the user's manual and technical documentation.
 
   * The user's manual documentation guides you through the process of installing the plugin and the samples into the Pentaho BI Server.
   * The technical documentation guides you through the process of downloading the source code, compiling and installing it. It also contains detailed information about the plugin implementation and related specifications.
