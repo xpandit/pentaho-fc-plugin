@@ -1,4 +1,4 @@
-#summary This page contains an overview about the documentation section and information about the plugin licensing.
+#summary This page contains an overview about the documentation and about the plugin licensing.
 #sidebar TocMain
 
 = Introduction =
