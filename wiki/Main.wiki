@@ -1,4 +1,4 @@
-#summary Entry page for project documentation.
+#summary This page contains an introduction to the documentation section.
 #sidebar TocMain
 
 = Introduction =
