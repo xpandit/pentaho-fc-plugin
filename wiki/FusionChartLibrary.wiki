@@ -3,8 +3,3 @@
 = Introduction =
 
 The Fusion Charts have the ability to render charts in HTML 5. This features is very useful to be used in web application for desktop and iPhone/iPad at the same time. To enable this feature internally the fusion charts library use the <a href="http://www.highcharts.com/">Highcharts</a> library.
-
-
-= Details =
-
-Add more detailed information here.
