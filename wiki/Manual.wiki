@@ -24,7 +24,7 @@ To test the samples in the Pentaho User Console all you need to do is extract th
 
 == Build Dashboards ==
 
-To build a dashboard you'll need an HTML structure and the [CDFComponent FusionChartComponent] to define the charts that will be used in the dashboard. A dashboard example can be found in the samples directory (_bi-developers/fusion-samples/Dashboards_).
+To build a dashboard you'll need an HTML structure, the [CDFComponent FusionChartComponent] and the chart metalayer to define the charts that will be used in the dashboard. A dashboard example can be found in the samples directory (_bi-developers/fusion-samples/Dashboards_).
 
 == Xactions ==
 
