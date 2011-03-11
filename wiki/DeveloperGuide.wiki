@@ -10,7 +10,7 @@
 
 To have the project deployed on your server:
  * Get the project from SVN [http://pentaho-fc-plugin.googlecode.com/svn/trunk/]
- * Configure the _pentaho.system_ variable in the _build.properties_ file. This variable should be configured with your Pentaho _solutions\system_ directory.
+ * Configure the _pentaho.system_ variable in the _build.properties_ file. This variable should be configured with your Pentaho _solutions/system_ directory.
  * Run ant default target
  * Run ant _install-plugin_ target
  * Run ant _install-samples_ target
