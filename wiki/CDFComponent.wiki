@@ -16,7 +16,7 @@ var fusionChartsCDFComponent = {
 		solution: "xFusionFileSolution",
 		path: "xFileSolutionFilePath",
 		type: "FusionChartComponent",
-                chartDefinition: MetaLayerFusionCharts.CdfMetalayer,
+                chartDefinition: MetaLayerFusionCharts.numClientesLineChartDef,
 		htmlObject: "numContratosLineChartId",
 		executeAtStart: true
 }
