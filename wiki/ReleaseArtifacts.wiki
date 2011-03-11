@@ -1,4 +1,4 @@
-#summary Contains files and information for each release.
+#summary Contains the links for the files and information for each release.
 
 = Releases =
 
