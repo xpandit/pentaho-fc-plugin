@@ -20,7 +20,7 @@ The following charts are supported:
 
 = Licensed Version Charts =
 
-The following charts and widgets are also supported when using the Licensed Fusion Charts version.
+The following charts and widgets are supported when using the Licensed Fusion Charts version.
 
 == Charts ==
 
