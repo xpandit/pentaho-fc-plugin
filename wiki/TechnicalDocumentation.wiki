@@ -11,7 +11,7 @@
  # Execute ant default task
  # Execute ant install-plugin to get the plugin copied to your Pentaho installation
  # Execute ant install-samples to copy the samples to the solution folder
- # Change the file _system\pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
+ # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
  # Restart Pentaho
  # Open the user console
  # Go to path _pentaho-solutions/bi-developers/fusion-samples_
