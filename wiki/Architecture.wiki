@@ -1,8 +1,18 @@
 #summary This page contains information about the Fusion Charts Plugin architecture.
 #labels Phase-Implementation
 
-= Introduction =
+= Overview =
 
 The following UML diagram represents the Fusion Charts Plugin architecture:
 
 <a target='_blank' title='ImageShack - Image And Video Hosting' href='http://img848.imageshack.us/i/pchparchitecture.jpg/'><img src='http://img848.imageshack.us/img848/4206/pchparchitecture.jpg' border='0'/></a>
+
+= Package Details =
+
+== com.bga ==
+
+== com.fusioncharts ==
+
+== com.generationjava ==
+
+== com.xpandit.fusionplugin ==
