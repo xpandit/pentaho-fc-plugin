@@ -1,18 +1,3 @@
 #summary Documentation for developers and people interested on the implementation.
 #labels Phase-Support
 #sidebar TocMain
-
-= How to start developing =
-
- # Install your favorite IDE and include and SVN client. 
- # Get the project through SVN by setting the url on the source tab
- # Setup build.properties 
-  # Specify your Pentaho solutions directory on _dir.solutions_
- # Execute ant default task
- # Execute ant install-plugin to get the plugin copied to your Pentaho installation
- # Execute ant install-samples to copy the samples to the solution folder
- # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
- # Restart Pentaho
- # Open the user console
- # Go to path _bi-developers/fusion-samples_
- # Double click on the samples available
