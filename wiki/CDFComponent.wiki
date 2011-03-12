@@ -1,11 +1,9 @@
 #summary This page contains information about the CDF FusionChartComponent.
 
-= Introduction =
+= Summary =
+The Fusion Chart Plugin provides CDF component that can be used like another CDF component. 
 
-The Fusion Chart Plugin has a javascript framework to easily add a chart to a CDF dashboard.
-
-This framework has a CDF component that can be used like another CDF component. 
-
+= How to use =
 To use this component you have to create a CDF component with the following type: "FusionChartComponent".
 
 Example:
