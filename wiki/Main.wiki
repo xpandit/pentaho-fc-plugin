@@ -8,7 +8,7 @@ The left menu contains all the necessary documentation:
   * If you are a technical user and feel curious about how it works or you want to do some changes, open the technical documentation. You'll get information about the build process and documentation for the architecture and specifications.
 
 = Licensing =
-This plugin is licensed as [http://www.gnu.org/licenses/lgpl.html LGPL]. 
+This plugin is licensed under [http://www.gnu.org/licenses/lgpl.html LGPL]. 
 
 Fusion charts library is available in two distinct ways:
     * [http://www.fusioncharts.com/free/ Fusion Charts Free] - Open source [http://www.fusioncharts.com/free/license/ GPL license] and free 
