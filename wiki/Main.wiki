@@ -16,4 +16,4 @@ Fusion charts library is available in two distinct ways:
 
 The plugin is shipped with the free version of Fusion Charts, *however it can also be used with Fusion Charts V3*. 
 
-| *If you really want amazing dashboards you'll need Fusion Chars V3. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team]* |
+|| *If you really want amazing dashboards you'll need Fusion Chars V3. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team]* ||
