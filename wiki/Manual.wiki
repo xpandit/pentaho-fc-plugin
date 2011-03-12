@@ -19,7 +19,7 @@ To test the samples on the Pentaho User Console all you need to do is:
  # Open Pentaho User Console (PUC)
  # Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the Fusion Plugin icon.
 
-== Parameters Configuration ==
+== Charts Configuration ==
 
 For each chart there is an associated .cda file where the querys are defined and a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the _bi-developers/fusion-samples/Fusion Charts Free_.
 
