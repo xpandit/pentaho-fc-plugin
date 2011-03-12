@@ -1,0 +1,23 @@
+<ivy-module version='2.0'>
+  <info organisation='com.pentaho' module='fusion_plugin' revision='${project.revision}' />
+  <configurations>
+  	<conf name='runtime' />
+    <conf name='master' />
+    <conf name='default' />
+    <conf name='codegen' />
+    <conf name='test' visibility='private' />
+  </configurations>
+  <publications>
+    <artifact name='${ivy.artifact.id}' type='jar' conf='default' />
+  </publications>
+ 
+  <dependencies>
+    <dependency org="pentaho" name="pentaho-bi-platform-scheduler" rev="${dependency.bi-platform.revision}" transitive="false" changing="true"/>
+    <dependency org='pentaho' name='pentaho-bi-platform-api' rev='${dependency.bi-platform.revision}' changing='true' transitive='false' />
+    <dependency org='pentaho' name='pentaho-bi-platform-engine-services' rev='${dependency.bi-platform.revision}' changing='true' transitive='true' />
+    <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core-platform-plugin" rev="${dependency.bi-platform.revision}" changing="true"></dependency>
+	<dependency org="pentaho" name="pentaho-bi-platform-plugin-actions" rev="${dependency.bi-platform.revision}" changing="true"/>
+    <dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='false' />
+    <!--<dependency org='pentaho' name='cda' rev='TRUNK-SNAPSHOT'  transitive='false'/>-->
+  </dependencies>
+</ivy-module>
