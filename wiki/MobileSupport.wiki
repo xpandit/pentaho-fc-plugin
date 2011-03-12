@@ -2,4 +2,4 @@
 
 The Fusion Charts have the ability to render charts in HTML 5. This features is very useful in web application for desktop and iPhone/iPad at the same time.
 
-For more information chack this page [http://kb.fusioncharts.com/questions/392/How+do+I+render+charts+in+iPhone%7B47%7DiPod%7B47%7DiPad%3F]
+For more information check this page [http://kb.fusioncharts.com/questions/392/How+do+I+render+charts+in+iPhone%7B47%7DiPod%7B47%7DiPad%3F Fusion Charts Kb article]
