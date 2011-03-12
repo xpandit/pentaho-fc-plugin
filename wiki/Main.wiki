@@ -5,7 +5,7 @@
 
 The left menu contains all the necessary documentation:
   * If want to quickly install and use the plugin *check the user's manual*. It will guide you through the steps of the process of installing the plugin and samples into the Pentaho BI Server.
-  * If you are a technical user and feel curious about how it works or you want to do some changes, open the *technical documentation*. You'll get information about the build process and documentation for the architecture and specifications.
+  * If you are a technical user and feel curious about how it works or you want to do some changes, open the technical documentation. You'll get information about the build process and documentation for the architecture and specifications.
 
 = Licensing =
 This plugin is licensed as [http://www.gnu.org/licenses/lgpl.html LGPL]. 
