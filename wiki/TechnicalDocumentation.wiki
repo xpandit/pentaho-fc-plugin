@@ -1,3 +1,5 @@
 #summary Documentation for developers and people interested on the implementation.
 #labels Phase-Support
 #sidebar TocMain
+
+This section contains all the necessary information from a developer perspective. This includes a detailed guide on how to start [DeveloperGuide] and general overview on how the plugin was built and how it works.
