@@ -3,6 +3,4 @@
 = Releases =
 
 || Release || Date || Description || Files || Release Notes ||
-|| 0.0.1 || 14/03/2011 || Initial release ||  || Initial Relase ||
-
-[http://code.google.com/p/pentaho-fc-plugin/source/browse/branches/fusion_plugin_0.0.1/fusion_plugin/dist/fusion_plugin-0.0.1.jar fusion_plugin-0.0.1.jar]
+|| 0.0.1 || 14/03/2011 || Initial release || [http://code.google.com/p/pentaho-fc-plugin/source/browse/branches/fusion_plugin_0.0.1/fusion_plugin/dist/fusion_plugin-0.0.1.jar fusion_plugin-0.0.1.jar] || Initial Relase ||
