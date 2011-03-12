@@ -8,12 +8,17 @@
 
 = How to start =
 
-To have the project deployed on your server:
- * Get the project from SVN [http://pentaho-fc-plugin.googlecode.com/svn/trunk/]
- * Configure the _pentaho.system_ variable in the _build.properties_ file. This variable should be configured with your Pentaho _solutions/system_ directory.
- * Run ant default target
- * Run ant _install-plugin_ target
- * Run ant _install-samples_ target
+ # Get the project through SVN by setting the url on the source tab
+ # Setup _build.properties_ 
+  # Specify your Pentaho solutions directory on _dir.solutions_
+ # Execute _ant_ default task (dist)
+ # Execute _ant install-plugin_ to get the plugin copied to your Pentaho installation
+ # Execute _ant install-samples_ to copy the samples to the solution folder
+ # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
+ # Restart Pentaho
+ # Open the user console
+ # Go to path _bi-developers/fusion-samples_
+ # Double click on the samples available
 
 <wiki:comment>
 Create samples folder inside SVN and ant target to deploy on platform. Put instructions in here.
