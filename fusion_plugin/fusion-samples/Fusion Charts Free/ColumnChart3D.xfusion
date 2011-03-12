@@ -1,0 +1,11 @@
+cdaName=ColumnChart3D.cda
+cdaPath=fusion-samples/Fusion Charts Free
+cdaDataAccessId=2
+cdaSolution=bi-developers
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=Column3D
+height=200
+width=500
+free=true
