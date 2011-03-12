@@ -8,23 +8,29 @@
  # Extract the fusion samples zip file into the _pentaho-solutions/bi-developers_ path.
  # Set _bi-developers_ folder to visible
   # Edit file index.xml and set `<visible>true</visible>`
+ # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: _`<acl-files>...,xfusion</acl-files>`_
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
- # Go to the _pentaho-solutions/bi-developers/fusion-samples_ and run the examples.
-
-
-== CDF Extensions ==
-
-The integration with CDF was made by creating a CDF component called [CDFComponent FusionChartComponent] that permits the definition of the charts in the client side and communicates with the server side getting the chart. This component can be found in the samples directory (fusion-samples/Dashboards) in the FCPluginCDFComponent.js file.
 
 = Usage =
 
 == Render on PUC ==
 
-To test the samples in the Pentaho User Console all you need to do is extract the samples zip file into the _bi-developers_ solution, refresh the solution repository and run the samples.
+To test the samples on the Pentaho User Console all you need to do is:
+# Open Pentaho User Console (PUC)
+# Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the Fusion Plugin icon.
 
 == Build Dashboards ==
 
-To build a dashboard you'll need an HTML structure, the [CDFComponent FusionChartComponent] and the chart metalayer to define the charts that will be used in the dashboard. A dashboard example can be found in the samples directory (_bi-developers/fusion-samples/Dashboards_).
+Th plugin can easily be used on a CDF dashboard. 
+
+=== CDF Integration ===
+
+To allow a seamless integration with CDF, the plugin ships with a new component called [CDFComponent FusionChartComponent]. This component works the exact same way as the existing chart components and allows to easily display the chart on a dashboard. This component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_.
+
+=== How to? ===
+Create a CDF dashboard the same way you used to!! Add the new component to show Fusion Charts. A dashboard sample can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
+
+= Not available =
 
 == Xactions ==
 
