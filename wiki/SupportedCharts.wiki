@@ -2,15 +2,14 @@
 #labels Phase-Deploy
 
 = Introduction =
-This page contains the list of supported charts.
-
-However the plugin is built on a flexible way where most of the parameters received as input are just sent to the XML. This means that other charts or widgets with a similar structure might already be supported.
+This page contains the list of supported charts. However the plugin is built on a flexible way where most of the parameters received as input are just sent to the XML. *This means that other charts or widgets with a similar structure might already be supported.*
 
 
-= Free Version Charts =
+= Free Version =
 
-The following charts are supported:
+The following charts are supported.
 
+== Charts ==
   * Bar2D
   * Pie2D
   * Pie3D
@@ -18,7 +17,7 @@ The following charts are supported:
   * Column2D
   * Line
 
-= Licensed Version Charts and Widgets =
+= Licensed Version =
 
 The following charts and widgets are supported when using the Licensed Fusion Charts version.
 
