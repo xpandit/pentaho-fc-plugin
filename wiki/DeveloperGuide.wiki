@@ -19,7 +19,3 @@
  # Open the user console
  # Go to path _bi-developers/fusion-samples_
  # Double click on the samples available
-
-<wiki:comment>
-Create samples folder inside SVN and ant target to deploy on platform. Put instructions in here.
-</wiki:comment>
