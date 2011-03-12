@@ -1,7 +1,6 @@
 #summary List of supported charts and widgets.
 #labels Phase-Deploy
 
-= Introduction =
 This page contains the list of supported charts. However the plugin is built on a flexible way where most of the parameters received as input are just sent to the XML. *This means that other charts or widgets with a similar structure might already be supported.*
 
 
