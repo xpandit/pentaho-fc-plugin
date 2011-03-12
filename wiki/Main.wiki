@@ -1,18 +1,19 @@
-#summary This page contains an overview about the documentation and about the plugin licensing.
+#summary This page contains an overview about the documentation and licensing.
 #sidebar TocMain
 
-= Introduction =
+= Summary =
 
-In this section you can find the user's manual and technical documentation.
-
-  * The user's manual documentation guides you through the process of installing the plugin and the samples into the Pentaho BI Server.
-  * The technical documentation guides you through the process of downloading the source code, compiling and installing it. It also contains detailed information about the plugin implementation and related specifications.
+The left menu contains all the necessary documentation:
+  * If want to quickly install and use the plugin *check the user's manual*. It will guide you through the steps of the process of installing the plugin and samples into the Pentaho BI Server.
+  * If you are a technical user and feel curious about how it works or you want to do some changes, open the *technical documentation*. You'll get information about the build process and documentation for the architecture and specifications.
 
 = Licensing =
+This plugin is licensed as [http://www.gnu.org/licenses/lgpl.html LGPL]. 
 
 Fusion charts library is available in two distinct ways:
+    * [http://www.fusioncharts.com/free/ Fusion Charts Free] - Open source [http://www.fusioncharts.com/free/license/ GPL license] and free 
+    * [http://www.fusioncharts.com/ Fusion Charts V3] - Enterprise version which is paid and proprietary.
 
-    * <a href="http://www.fusioncharts.com/free/">Fusion Charts Free</a> - Open source and free 
-    * <a href="http://www.fusioncharts.com/">Fusion Charts V3</a> - Enterprise version Link
+The plugin is shipped with the free version of Fusion Charts, *however it can also be used with Fusion Charts V3*. 
 
-The open source version is distributed with a GPL license, while the enterprise version is proprietary.
+| =If you really want amazing dashboards you'll need Fusion Chars V3. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team]= |
