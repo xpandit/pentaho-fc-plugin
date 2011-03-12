@@ -21,11 +21,7 @@ To test the samples on the Pentaho User Console all you need to do is:
 
 == Build Dashboards ==
 
-Th plugin can easily be used on a CDF dashboard. 
-
-=== CDF Integration ===
-
-To allow a seamless integration with CDF, the plugin ships with a new component called [CDFComponent FusionChartComponent]. This component works the exact same way as the existing chart components and allows to easily display the chart on a dashboard. This component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_.
+The plugin can easily be used on a CDF dashboard. To allow a seamless integration with, the plugin ships with a new component called [CDFComponent FusionChartComponent]. This component works the exact same way as the existing chart components. The component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_.
 
 === How to? ===
 Create a CDF dashboard the same way you used to!! Add the new component to show Fusion Charts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
