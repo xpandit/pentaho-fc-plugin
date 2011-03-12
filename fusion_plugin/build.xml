@@ -23,7 +23,7 @@
 	
   <target name="install-samples">
 	<copy todir="${dir.developers}/${dir.samples}" >
-		<fileset dir="solution_files" />
+		<fileset dir="${dir.samples}" />
 	</copy>
 	<echo message="${approot.stage.dir}"></echo>
 	<echo message="${dir.system}/${package.root.dir}"></echo>
