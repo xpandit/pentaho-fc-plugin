@@ -21,7 +21,7 @@ To test the samples on the Pentaho User Console all you need to do is:
 
 == Parameters Configuration ==
 
-For each chart there is an associated .cda file where the querys are defined and a xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the _bi-developers/fusion-samples/Fusion Charts Free_.
+For each chart there is an associated .cda file where the querys are defined and a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the _bi-developers/fusion-samples/Fusion Charts Free_.
 
 == Build Dashboards ==
 
