@@ -27,7 +27,7 @@ On the first request, the global properties are loaded, this properties are defi
 
 === Dashboard Chart ===
 
-When defining a chart in the context of a dashboard you can define the chart parameters in an .xFusion file (local properties) or define them in the metalayer (instance properties) that can be associated to the FusionChartComponent's _chartDefinition_ property as you can see in this [CDFComponent example]. You can find some examples in the _bi-developers/fusion-samples/Dashboards_.
+When defining a chart in the context of a dashboard you can define the chart parameters in an .xFusion file (local properties) or define them in the metalayer (instance properties) that can be associated to the [FusionChartComponent]'s _chartDefinition_ property as you can see in this [CDFComponent example]. You can find some examples in the _bi-developers/fusion-samples/Dashboards_.
 
 === Standalone Chart ===
 
