@@ -19,7 +19,7 @@ To test the samples on the Pentaho User Console all you need to do is:
  # Open Pentaho User Console (PUC)
  # Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the Fusion Plugin icon.
 
-== Chart Parameters Configuration ==
+== Chart Configuration ==
 
 The process of rendering a chart using the Fusion Chant Pentaho Plugin starts with the load of two properties files and the load of request [SupportedParameters parameters].
 
