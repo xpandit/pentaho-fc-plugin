@@ -33,7 +33,7 @@ When defining a chart in the context of a dashboard you can define the chart par
 
 === Standalone Chart ===
 
-When defining a standalone chart you must create a .cda file where the querys are defined and a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
+When defining a standalone chart you must create a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
 
 == Build Dashboards ==
 
