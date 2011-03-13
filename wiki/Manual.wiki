@@ -21,7 +21,7 @@ To test the samples on the Pentaho User Console all you need to do is:
 
 == Chart Parameters Configuration ==
 
-The process of rendering a chart using the Fusion Chant Pentaho Plugin starts with the load of two properties files and the load of request parameters.
+The process of rendering a chart using the Fusion Chant Pentaho Plugin starts with the load of two properties files and the load of request [SupportedParameters parameters].
 
 On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of a .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
 
@@ -33,7 +33,7 @@ When defining a chart in the context of a dashboard you can define the chart par
 
 === Standalone Chart ===
 
-When defining a standalone chart you must create a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
+When defining a standalone chart you must create a .xFusion file where the parameters can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
 
 == Build Dashboards ==
 
