@@ -23,15 +23,17 @@ To test the samples on the Pentaho User Console all you need to do is:
 
 The process of rendering a chart using the Fusion Chant Pentaho Plugin starts with the load of two properties files and the load of request parameters.
 
-On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of an .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
+On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of a .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
+
+Each chart must have a .cda file with the respective querys.
 
 === Dashboard Chart ===
 
-When defining a chart in the context of a dashboard you can define the chart parameters in an .xFusion file (local properties) or define them in the metalayer (instance properties) that can be associated to the [FusionChartComponent]'s _chartDefinition_ property as you can see in this [CDFComponent example]. You can find some examples in the _bi-developers/fusion-samples/Dashboards_.
+When defining a chart in the context of a dashboard you can define the chart parameters in a .xFusion file (local properties) or define them in the metalayer (instance properties). This two ways of defining the chart parameters can be associated to the FusionChartComponent's by setting the property _path_ with the .xFusion file path and by setting the _chartDefinition_ property with the metalayer, respectively. You can see a chart definition [CDFComponent here] and find some examples in the following path _bi-developers/fusion-samples/Dashboards_.
 
 === Standalone Chart ===
 
-For each chart there is an associated .cda file where the querys are defined and a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the _bi-developers/fusion-samples/Fusion Charts Free_.
+When defining a standalone chart you must create a .cda file where the querys are defined and a .xFusion file where the [SupportedParameters parameters] can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
 
 == Build Dashboards ==
 
