@@ -18,7 +18,7 @@ The following charts are supported.
 
 = Licensed Version =
 
-The following charts and widgets are supported when using the Licensed Fusion Charts version. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team].
+The following charts and widgets are supported when using the Licensed Fusion Charts version. For more information about licensing check the [Main main] page.
 
 == Charts ==
 
