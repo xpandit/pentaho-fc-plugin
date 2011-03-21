@@ -39,7 +39,7 @@ The following charts and widgets are supported when using the Licensed Fusion Ch
   * StackedColumn3D
   * MSColumnLine3D
   * MSColumn3DLineDY
-  * Marimekko(New) 
+  * Marimekko 
 
 == Widgets ==
 
