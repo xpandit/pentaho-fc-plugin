@@ -26,6 +26,8 @@ If the chart you want to add has a similar XML structure to the ones already ava
 
 If you want to add a chart or widget with a different XML structure from the ones who already exist, you will need to do some development on the _ChartFactoryWidget.java_ or _ChartFactoryChart.java_ files depending on the kind of chart you want do add. Check some code examples on how to add an Angular Gauge or Bullet widgets in the _ChartFactoryWidget.java_ file.
 
+The swf files associated to the new charts should be placed in the _fusioncharts/charts_ path.
+
 After making the development: 
  * create a sample that tests the chart 
  * submit the code and the sample by opening an issue
