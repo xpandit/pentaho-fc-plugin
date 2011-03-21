@@ -17,7 +17,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Name  || name  || string  || yes  || ""  || file of fusion plugin properties to use  || name=usa-quantity-ordered.cda || -  ||
 || Solution  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
 || Path  || path  || string  || no  || ""  || path where fusion plugin properties is || path=path  || -  ||
-|| Chart Type || chartType || string  || yes  || -  || chart type  || || (Column2D, Column3D, Pie3D, Pie2D, Line, Bar2D, MSColumn2D, MSColumn3D, MSLine, MSBar2D, MSBar3D, MSCombi2D,MSCombi3D, StackedColumn2D,  StackedColumn3D, MSColumnLine3D, MSColumn3DLineDY, AngularGauge)  ||
+|| Chart Type || chartType || string  || yes  || -  || chart type  || || (Column2D, Column3D, Pie3D, Pie2D, Line, Bar2D, MSColumn2D, MSColumn3D, MSLine, MSBar2D, MSBar3D, MSCombi2D,MSCombi3D, StackedColumn2D,  StackedColumn3D, MSColumnLine3D, MSColumn3DLineDY,Marimekko, AngularGauge)  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
 || Free Version  || free  || boolean  || no  || true  || Renders the chart for free (true) or not free version (false). || free=true || -  ||
