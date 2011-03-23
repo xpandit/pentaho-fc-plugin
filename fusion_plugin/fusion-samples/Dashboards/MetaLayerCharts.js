@@ -22,5 +22,14 @@
 		height: "150",
 		chartType: "Bar2D",
 		cdaDataAccessId:"2"
+	},
+	drillBarChartDef: {
+		width: "400",
+		height: "150",
+		chartType: "Bar2D",
+		seriesParam:"SeriesParamName",
+		categoriesParam:"categoriesParamName",
+		chartLink:"JavaScript:drillBarChart.drillFunction('{SeriesParamName}','{categoriesParamName}')", 	
+		cdaDataAccessId:"2"
 	}
 };

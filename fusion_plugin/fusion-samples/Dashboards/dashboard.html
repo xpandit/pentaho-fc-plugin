@@ -36,6 +36,15 @@
             </div>
         </div>
     </div>
+    <div id="dashboardRow3" style="position:relative;width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Drill Bar Chart
+            </div>
+            <div id="drillBarChart">
+            </div>
+        </div>
+    </div>
 </div>
 <script language="javascript" type="text/javascript">
     
@@ -94,10 +103,32 @@
             postExecution: function(){
             }
         }
+    var drillBarChart = {
+            name: "drillBarChart",
+            solution: "bi-developers",
+            path: "fusion-samples/Fusion Charts Free",
+            action: "DrillBarChart2D.xfusion",
+            executeAtStart: true,
+            htmlObject: "drillBarChart",
+            chartDefinition: MetaLayerCharts.drillBarChartDef,
+            type: "FusionChartComponent",
+            drillFunction:function(series,categories)
+            {
+
+    			//change parameters
+        		this.chartDefinition.year=categories;
+        		this.chartDefinition.cdaDataAccessId=3;
+        		this.chartDefinition.cdaParameters="year"; 
+        		
+        		this.chartDefinition.chartLink=undefined;
+        		
+    			Dashboards.update(drillBarChart);
+        	}
+        }
     
     function load(){
 
-        var components = [lineChart , pieChart , columnChart , barChart];
+        var components = [lineChart , pieChart , columnChart , barChart,drillBarChart];
         
         Dashboards.init(components);
         
