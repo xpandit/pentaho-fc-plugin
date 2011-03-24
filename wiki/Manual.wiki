@@ -42,13 +42,6 @@ The plugin can easily be used on a CDF dashboard. To allow a seamless integratio
 === How to? ===
 Create a CDF dashboard the same way you used to!! Add the new component to show Fusion Charts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
 
-= Fusion Charts in Dashboard Designer Enterprise Edition =
-
-You can simply drag and drop your xfusion file into the dashboard designer and create simple and effective dashboards. To test this feature you can simply go through the following steps:
- # Create a new dashboard in the PUC.
- # Navigate to the _bi-developers/fusion-samples/Fusion Charts Free_ directory in the solution explorer.
- # Drag and drop the chart samples into the dashboard.
-
 = Not available =
 
 == Xactions ==
