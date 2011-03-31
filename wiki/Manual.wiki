@@ -11,6 +11,10 @@
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: _`<acl-files>...,xfusion</acl-files>`_
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
 
+== Switching to Fusion Charts V3 ==
+ # Acquire the licensed version from Fusion Charts and extract the zip files
+ # Copy the extracted _*.swf_ files to the plugin directory _fusioncharts/charts_
+
 = Usage =
 
 == Render on PUC ==
@@ -26,6 +30,8 @@ The process of rendering a chart using the Fusion Chant Pentaho Plugin starts wi
 On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of a .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
 
 Each chart must have a .cda file with the respective querys.
+
+|| If the licensed version is in use don't forget to set the _free_ paramter to "false". ||
 
 === Dashboard Chart ===
 
