@@ -13,7 +13,7 @@
 
 == Switching to Fusion Charts V3 ==
  # Acquire the licensed version from Fusion Charts and extract the zip files
- # Copy the extracted _*.swf_ files to the plugin directory _fusioncharts/charts_
+ # Copy the extracted _`*`.swf_ files to the plugin directory _fusioncharts/charts_
 
 = Usage =
 
