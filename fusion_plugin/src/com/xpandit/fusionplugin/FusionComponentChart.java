@@ -178,13 +178,11 @@ public class FusionComponentChart extends  FusionComponent {
                 //the fusion charts don't do this
                 int indexDivision=0;
                 int auxI=i;
-                while(true)
-                {
-                    if(auxI<1000)
-                        break;
-                    auxI/=1000;
-                    ++indexDivision;
-                }
+				while(auxI<1000&&indexDivision<numberDivision.length-1)
+				{
+					auxI/=1000;
+					++indexDivision;
+				} 
                 // set then correct value at the label
                 cat.setLable(auxI+numberDivision[indexDivision]);
                 //set the X value
