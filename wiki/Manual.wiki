@@ -30,9 +30,9 @@ The process of rendering a chart using the Fusion Chant Pentaho Plugin starts wi
 
 On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of a .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
 
-Each chart must have a .cda file with the respective querys.
+Each chart must have a .cda file with the respective queries.
 
-|| If the licensed version is in use don't forget to set the _free_ paramter to "false". ||
+|| If the licensed version is in use don't forget to set the _free_ parameter to "false". ||
 
 === Dashboard Chart ===
 
