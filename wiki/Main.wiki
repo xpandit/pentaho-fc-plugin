@@ -14,6 +14,6 @@ FusionCharts library is available in two distinct ways:
     * [http://www.fusioncharts.com/free/ FusionCharts Free] - Open source [http://www.fusioncharts.com/free/license/ GPL license] and free 
     * [http://www.fusioncharts.com/ FusionCharts V3] - Enterprise version which is paid and proprietary.
 
-The plugin is shipped with the free version of FusionCharts, *however it can also be used with Fusion Charts V3*. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team]
+The plugin is shipped with the free version of FusionCharts, *however it can also be used with FusionCharts V3*. For more information about licensing please contact the [http://www.fusioncharts.com/ FusionCharts team]
 
 || *If you really want amazing dashboards you'll need Fusion Chars V3.* ||
