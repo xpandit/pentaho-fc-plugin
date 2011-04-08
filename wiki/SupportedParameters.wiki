@@ -5,7 +5,7 @@
 
 Parameters are used to set the way that plugin works and also to describe and format the chart that will be rendered. The plugin has two types of parameters:
 
- * Special Parameters - This type of parameters requires special treatments like labels, width, heigh, ... They either set the way that the plugin works or are placed on specific places according to Fusion Charts specification.
+ * Special Parameters - This type of parameters requires special treatments like labels, width, heigh, ... They either set the way that the plugin works or are placed on specific places according to FusionCharts specification.
 
  * Regular Parameters - This type of parameters are just added to the FusionGraph object.
 
