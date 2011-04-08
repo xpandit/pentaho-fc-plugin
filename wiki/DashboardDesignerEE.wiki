@@ -1,6 +1,6 @@
-#summary This page contains information about the integration of Fusion Charts with the Pentaho Dashboard Designer Enterprise Edition.
+#summary This page contains information about the integration of FusionCharts with the Pentaho Dashboard Designer Enterprise Edition.
 
-= Fusion Charts in Dashboard Designer Enterprise Edition =
+= FusionCharts in Dashboard Designer Enterprise Edition =
 
 You can simply drag and drop your xfusion file into the dashboard designer and create simple and effective dashboards. To test this feature you can simply go through the following steps:
  # Create a new dashboard in the PUC.
