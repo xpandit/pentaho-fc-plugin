@@ -10,9 +10,9 @@ The left menu contains all the necessary documentation:
 = Licensing =
 This plugin is licensed under [http://www.gnu.org/licenses/lgpl.html LGPL]. 
 
-Fusion charts library is available in two distinct ways:
-    * [http://www.fusioncharts.com/free/ Fusion Charts Free] - Open source [http://www.fusioncharts.com/free/license/ GPL license] and free 
-    * [http://www.fusioncharts.com/ Fusion Charts V3] - Enterprise version which is paid and proprietary.
+FusionCharts library is available in two distinct ways:
+    * [http://www.fusioncharts.com/free/ FusionCharts Free] - Open source [http://www.fusioncharts.com/free/license/ GPL license] and free 
+    * [http://www.fusioncharts.com/ FusionCharts V3] - Enterprise version which is paid and proprietary.
 
 The plugin is shipped with the free version of Fusion Charts, *however it can also be used with Fusion Charts V3*. For more information about licensing please contact the [http://www.fusioncharts.com/ Fusion Charts team]
 
