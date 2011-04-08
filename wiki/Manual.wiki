@@ -11,8 +11,8 @@
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: _`<acl-files>...,xfusion</acl-files>`_
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
 
-== Installing Fusion Charts V3 (licensed) ==
- # Extract the zip files provided by Fusion Charts Team
+== Installing FusionCharts V3 (licensed) ==
+ # Extract the zip files provided by FusionCharts Team
  # Look for the directory where the _`*`.swf_ files are
  # Copy the _`*`.swf_ files to the plugin directory _fusioncharts/charts_
 
@@ -47,10 +47,10 @@ When defining a standalone chart you must create a .xFusion file where the param
 The plugin can easily be used on a CDF dashboard. To allow a seamless integration with, the plugin ships with a new component called [CDFComponent FusionChartComponent]. This component works the exact same way as the existing chart components. The component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_.
 
 === How to? ===
-Create a CDF dashboard the same way you used to!! Add the new component to show Fusion Charts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
+Create a CDF dashboard the same way you used to!! Add the new component to show FusionCharts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
 
 = Not available =
 
 == Xactions ==
 
-The Fusion Charts plugin is not available to use on Xactions. The chart library relies on the Flash technology and requires a browser to render the objects.
+The FusionCharts plugin is not available to use on Xactions. The chart library relies on the Flash technology and requires a browser to render the objects.
