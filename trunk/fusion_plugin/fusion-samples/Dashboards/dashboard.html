@@ -44,6 +44,14 @@
             <div id="drillBarChart">
             </div>
         </div>
+                
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center; font-weight:bold;">
+               MS Column Chart 3D
+            </div>
+            <div id="msColumnChart">
+            </div>
+        </div>
     </div>
 </div>
 <script language="javascript" type="text/javascript">
@@ -91,6 +99,19 @@
         }
     }
 
+    var msColumnChart = {
+            name: "columnChart",
+            solution: "bi-developers",
+            path: "fusion-samples/Fusion Charts Free",
+            action: "MSColumnChart3D.xfusion",
+            executeAtStart: true,
+            htmlObject: "msColumnChart",
+            chartDefinition: MetaLayerCharts.msColumnChartDef,
+            type: "FusionChartComponent",
+            postExecution: function(){
+            }
+        }
+
     var barChart = {
             name: "barChart",
             solution: "bi-developers",
@@ -128,7 +149,7 @@
     
     function load(){
 
-        var components = [lineChart , pieChart , columnChart , barChart,drillBarChart];
+        var components = [lineChart , pieChart , columnChart,msColumnChart , barChart,drillBarChart];
         
         Dashboards.init(components);
         
