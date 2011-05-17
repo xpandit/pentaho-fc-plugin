@@ -16,6 +16,7 @@ public class Category {
 	private String toolText;
 	private Double showVerticalLine=(double) 1;
 	private Double lineDashed;
+	private String color;
 	
 	/**
 	 * @return the xValue
@@ -88,6 +89,18 @@ public class Category {
 	 */
 	public void setLineDashed(Double lineDashed) {
 		this.lineDashed = lineDashed;
+	}
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
+	}
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
 	}
 
 }

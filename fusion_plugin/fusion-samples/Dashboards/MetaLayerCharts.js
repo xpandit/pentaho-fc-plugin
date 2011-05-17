@@ -17,6 +17,14 @@
 		chartType: "Column3D",
 		cdaDataAccessId:"2"
 	},
+	
+	msColumnChartDef: {
+		width: "400",
+		height: "150",
+		chartType: "MSColumn3D",
+		cdaDataAccessId:"2"
+	},
+	
 	barChartDef: {
 		width: "400",
 		height: "150",

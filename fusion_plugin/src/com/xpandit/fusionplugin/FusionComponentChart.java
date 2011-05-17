@@ -3,17 +3,14 @@ package com.xpandit.fusionplugin;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.commons.connection.IPentahoMetaData;
+import org.pentaho.commons.connection.IPentahoResultSet;
 
-import com.fusioncharts.Series;
 import com.fusioncharts.Category;
 import com.fusioncharts.ChartFactoryChart;
 import com.fusioncharts.ChartType;
-import com.fusioncharts.ColorRange;
-
+import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
@@ -104,6 +101,8 @@ public class FusionComponentChart extends  FusionComponent {
                 {   
                     Series series = graph.createSeries(this.data.getValueAt(i,0).toString());
                     setSeriesProperties(series,i);
+                    
+                    setSeriesColor(series,i);
                     
                     Double xValue=Double.parseDouble(this.data.getValueAt(i,1).toString());
                     series.setXValue(0,xValue);
@@ -232,14 +231,9 @@ public class FusionComponentChart extends  FusionComponent {
                 for (int i = 0; i < rowCount; i++) {
                     try
                     { 
-                        //set category label
-                        Category categ=new Category();
-                        categ.setLable(this.data.getValueAt(i,0).toString());
-
-                        //set category in chart
-                        graph.setCategory(i,categ);
                         series.setValue(i,Double.parseDouble((this.data.getValueAt(i,seriesCount).toString())));    
-
+                        
+                        
                         //build a chart link
                         if(chartLink!=null)
                         {
@@ -254,6 +248,8 @@ public class FusionComponentChart extends  FusionComponent {
                                 serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).getLable());
                             series.setEvent(i, serieChartLink);
                         }
+                        
+                        setSeriesColor(series,i);
 
                     }
                     catch(Exception e)
@@ -261,10 +257,24 @@ public class FusionComponentChart extends  FusionComponent {
                         log.error("Problem in result set. Null values found at index:"+i, e);
                     }
                 }
+            }
+            
+            //set the categories
+            
+            int rowCount=this.data.getRowCount();
+            for (int i = 0; i < rowCount; i++) {
+                try
+                { 
+                    //set category label
+                    Category categ=new Category();
+                    categ.setLable(this.data.getValueAt(i,0).toString());
 
-                if(graph.getGraphType()==ChartType.BUBBLE)
+                    //set category in chart
+                    graph.setCategory(i,categ);
+                }
+                catch(Exception e)
                 {
-                    return;
+                    log.error("Problem in result set. Null values found at index:"+i, e);
                 }
             }
         }

@@ -13,7 +13,10 @@
     </copy>
   </target>
 	
-  <target name="install-plugin" depends="assemble.copy-libs">
+   
+  <target name="install" depends="install-plugin,install-samples">	
+  </target>
+  <target name="install-plugin" depends="dist,assemble.copy-libs">
   	<copy todir="${dir.system}/${package.root.dir}" >
   		<fileset dir="${approot.stage.dir}" />
   	</copy>

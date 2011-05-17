@@ -33,6 +33,8 @@ public class FusionComponent {
 	protected static final String PARENTYAXIS		= "parentYAxis";
 	protected static final String COLORRANGE		= "colorRange";
 	protected static final String CHARTXML			= "chartXML";
+	protected static final String SERIESCOLOR		= "seriesColor";
+	protected static final String CATEGORIESCOLOR	= "categoriesColor";
 	
 	
 	
@@ -107,230 +109,10 @@ public class FusionComponent {
 	 * Set data to chart
 	 * 
 	 * @param resultSets Pentaho ResultSet with multi result sets from a query multi queries
-	 * @throws InvalidDataResultSetException when reult set is invalid 
+	 * @throws Exception 
 	 */
-	public void setData(Map<String, ArrayList<IPentahoResultSet>> resultSets) throws InvalidDataResultSetException {
-		if(resultSets==null)
-			throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "Result Set is null");
-  
- 
-		//if is the bubble charts
-		if(graph.getGraphType()==ChartType.BUBBLE)
-		{
-			this.data = resultSets.get("results").get(0); 
-
-			// get Data Set Metadata
-			IPentahoMetaData metadata = this.data.getMetaData();
-			//verify meta data
-			int metadataSize= metadata.getColumnCount();
-			if(metadataSize<3)
-				throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 3");
- 
-			//get link values
-			//the chart link template
-			String chartLink=graph.getChartProperties().get("chartLink");
-			//seriesParam to replace in template link
-			String seriesParam=graph.getChartProperties().get("seriesParam");
-			//categoriesParam to replace in template link
-			String categoriesParam=graph.getChartProperties().get("categoriesParam");
-			//valueParam to replace in template link
-			String valueParam=graph.getChartProperties().get("valueParam");
-
-
-			double maxXvalue=0; 
-			double minXvalue=0;
-			
-			double maxYvalue=0; 
-			double minYvalue=0;
-			
-			//get data 
-			int rowCount=this.data.getRowCount(); 
-			for (int i = 0; i < rowCount; i++) {
-				try
-				{   
-					Series series = graph.createSeries(this.data.getValueAt(i,0).toString());
-					setSeriesProperties(series,i);
-					
-					Double xValue=Double.parseDouble(this.data.getValueAt(i,1).toString());
-					series.setXValue(0,xValue);
-					
-					//calculate the max and min values to XAxis
-					maxXvalue=xValue>maxXvalue?xValue:maxXvalue;
-					minXvalue=xValue<minXvalue?xValue:minXvalue;
-					
-					Double yValue=Double.parseDouble(this.data.getValueAt(i,2).toString());
-					series.setYValue(0, yValue);				
-					
-					//calculate the max and min values to YAxis
-					maxYvalue=yValue>maxYvalue?yValue:maxYvalue;
-					minYvalue=yValue<minYvalue?yValue:minYvalue;
-					
-					if(this.data.getColumnCount()>3)
-						series.setZValue(0, Double.parseDouble((this.data.getValueAt(i,3).toString())));
-
-					//build a chart link
-					if(chartLink!=null)
-					{
-
-						String serieChartLink=chartLink;
-
-						//set seriesValue
-						if(seriesParam!=null)
-						{ 
-							serieChartLink=chartLink.replace("{"+seriesParam+"}", graph.getGraphType().isSingleSeries()?series.getValue(i).toString():series.getLabel());
-						}
-						//set categoriesValue
-						if(categoriesParam!=null)
-							serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).toString());
-						//set the value
-						if(valueParam!=null)
-							serieChartLink=serieChartLink.replace("{"+valueParam+"}", series.getValue(i).toString());
-						series.setEvent(i, serieChartLink);
-					}
-
-				}
-				catch(Exception e)
-				{
-					log.error("Problem in result set. Null values found at index:"+i, e);
-				}
-			}
-			
-			//set max YAxis with more 10% of current yMax Value
-			int maxYvalueAux=(int)(maxYvalue*1.30);
-			//fusion charts tweak 
-			//the automatic scale at y axis don'w work correctly when the value is like-> 100999999
-			// this transform the value to 100999000
-			if(maxYvalueAux>1000)
-			{
-				maxYvalueAux/=1000;
-				maxYvalueAux*=1000;
-			}
-			graph.setChartProperties("yAxisMaxValue",String.valueOf(maxYvalueAux));
-			 
- 
-			// set the categories for bubble chart
-			int index=0;
-			int width=graph.getWidth();
-			
-			//each vline should have 90px between each vline 
-			int numDivLinesXAxis=width/90;
-			
-			// the max value of x Axis is 10% more than real max value
-			int maxValueX=(int) (maxXvalue*1.10);
-			
-			//calculates the number of vertical lines 
-			int stepsValue=maxValueX/numDivLinesXAxis;
-			
-			//build the categories
-			for(int i=(int) minXvalue;i<=maxValueX;i+=stepsValue)
-			{
-				Category cat=new Category();
-				//calculates the K,M for xAxis
-				//the fusion charts don't do this
-				int indexDivision=0;
-				int auxI=i;
-				while(true)
-				{
-					if(auxI<1000)
-						break;
-					auxI/=1000;
-					++indexDivision;
-				}
-				// set then correct value at the label
-				cat.setLable(auxI+numberDivision[indexDivision]);
-				//set the X value
-				cat.setxValue((double) i);
-				//set the category
-				graph.setCategory(index,cat);
-				++index; 
-			}
-			
-		}
-		else
-		{
-			this.data = resultSets.get("results").get(0);
-
-			// get Data Set Metadata
-			IPentahoMetaData metadata = this.data.getMetaData();
-			//verify meta data
-			int metadataSize= metadata.getColumnCount();
-			if(metadataSize<2)
-				throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 2");
-
-			//get link values
-			//the chart link template
-			String chartLink=graph.getChartProperties().get("chartLink");
-			//seriesParam to replace in template link
-			String seriesParam=graph.getChartProperties().get("seriesParam");
-			//categoriesParam to replace in template link
-			String categoriesParam=graph.getChartProperties().get("categoriesParam");
-			//valueParam to replace in template link
-			String valueParam=graph.getChartProperties().get("valueParam");
-
-
-			for(int seriesCount=1;seriesCount<metadataSize;++seriesCount)
-			{
-				// get measure column name to set series title
-				String seriesTitle=metadata.getColumnHeaders()[0][seriesCount].toString();
-
-				//TODO:Improve Code
-				//this code remove the MDX notation and return the member name
-				//[measures].[day] returns -> day
-				String[] seriesTitleArr=seriesTitle.split("/.")[0].split("\\]\\.");
-				seriesTitle=seriesTitleArr[seriesTitleArr.length-1].replace("]","").replace("[","");
-
-				Series series = graph.createSeries(seriesTitle);
-				setSeriesProperties(series,seriesCount-1);
-				//get data 
-				int rowCount=this.data.getRowCount();
-				for (int i = 0; i < rowCount; i++) {
-					try
-					{ 
-						//set category label
-						Category categ=new Category();
-						categ.setLable(this.data.getValueAt(i,0).toString());
-
-						//set category in chart
-						graph.setCategory(i,categ);
-						series.setValue(i,Double.parseDouble((this.data.getValueAt(i,seriesCount).toString())));	
-
-						//build a chart link
-						if(chartLink!=null)
-						{
-
-							String serieChartLink=chartLink;
-
-							//set seriesValue
-							if(seriesParam!=null)
-							{ 
-								serieChartLink=chartLink.replace("{"+seriesParam+"}", graph.getGraphType().isSingleSeries()?series.getValue(i).toString():series.getLabel());
-							}
-							//set categoriesValue
-							if(categoriesParam!=null)
-							{
-								serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).getLable());
-							}
-							//set the value
-							if(valueParam!=null)
-								serieChartLink=serieChartLink.replace("{"+valueParam+"}", series.getValue(i).toString());
-							
-							
-							series.setEvent(i, serieChartLink);
-						}
-
-					}
-					catch(Exception e)
-					{
-						log.error("Problem in result set. Null values found at index:"+i, e);
-					}
-				}
-
-				if(graph.getGraphType()==ChartType.BUBBLE)
-				{
-					return;
-				}
-			}
-		}
+	public void setData(Map<String, ArrayList<IPentahoResultSet>> resultSets) throws Exception {
+			throw new Exception("Method not allowed!!");
 	} 
 
 	/**
@@ -343,6 +125,9 @@ public class FusionComponent {
 	protected void setSeriesProperties(Series series,int seriesIndex) {
 		setSeriesType(series,seriesIndex);
 		setSeriesParentYAxis(series,seriesIndex);
+		setCategoryColor(series,seriesIndex);
+		
+		
 	}
 	
 	/**
@@ -363,6 +148,29 @@ public class FusionComponent {
 			series.setParentYAxis((value.split(";"))[seriesIndex]);
 		}
 	}
+	
+	/**
+	 * Set the series  Color
+	 * 
+	 * if the parameter color was set in this chart, is used the value index X=seriesIndex 
+	 * 
+	 * @param series series to set type
+	 * @param seriesIndex series index
+	 */
+	protected void setSeriesColor(Series series,int seriesIndex) {
+		String value=graph.getChartProperties().get(SERIESCOLOR);
+		
+		//have the property SERIESCOLOR
+		if(value!=null)
+		{
+			//split the values
+			String color= (value.split(";"))[seriesIndex];
+			if(graph.getGraphType().isSingleSeries())
+				series.setColor(seriesIndex,color);
+				
+		}
+	}
+	
 	/**
 	 * Set the series type
 	 * 
@@ -407,6 +215,32 @@ public class FusionComponent {
 			graph.setChartProperties(key,value);
 
 	}
+	
+	
+	
+	/**
+	 * Set the for all elements in the serie
+	 *
+	 * 
+	 * @param series series to set the color
+	 * @param seriesIndex Index of the color
+	 */
+	protected void setCategoryColor(Series series,int seriesIndex) {
+		String value=graph.getChartProperties().get(CATEGORIESCOLOR);
+		
+		//have the property CATEGORIESCOLOR
+		if(value!=null)
+		{
+			//split the values
+			String color= (value.split(";"))[seriesIndex];
+			if(!graph.getGraphType().isSingleSeries())
+				series.setColor(color);
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * 
 	 * Set chart Properties by map
