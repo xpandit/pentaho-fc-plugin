@@ -141,4 +141,23 @@ public class PropertiesManager {
 		
 		return params;
 	}
+	/**
+	 * 
+	 * returns the Solution of the xFusion properties file
+	 * 
+	 * @return
+	 */
+	public String getPropSolution() {
+		return this.propSolution;
+	}
+	
+	/**
+	 * 
+	 * returns the path of the xFusion properties file
+	 * 
+	 * @return
+	 */
+	public String getPropPath() {
+		return this.propPath;
+	}
 }
