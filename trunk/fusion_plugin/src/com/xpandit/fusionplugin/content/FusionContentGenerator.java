@@ -436,9 +436,14 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 	 */
 	private ActionInfo getAction(){
 
-		final String solution = pm.getParams().get(CDASOLUTION); 
-		final String path = pm.getParams().get(CDAPATH); 
-		final String name = pm.getParams().get(CDANAME);
+		String solution = pm.getParams().get(CDASOLUTION); 
+		String path = pm.getParams().get(CDAPATH); 
+		String name = pm.getParams().get(CDANAME);
+		
+		//if no CDASOLUTION or CDAPATH provided set default values
+		solution=(solution!=null?solution:pm.getPropSolution() );
+		path=(path!=null?path:pm.getPropPath());
+		
 		return new ActionInfo(solution, path, name);
 	}
 

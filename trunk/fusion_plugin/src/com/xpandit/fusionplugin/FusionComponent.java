@@ -20,7 +20,7 @@ import com.fusioncharts.Series.SeriesType;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 
 
-public class FusionComponent {
+abstract public  class FusionComponent {
 
 	/**
 	 * 
@@ -111,9 +111,7 @@ public class FusionComponent {
 	 * @param resultSets Pentaho ResultSet with multi result sets from a query multi queries
 	 * @throws Exception 
 	 */
-	public void setData(Map<String, ArrayList<IPentahoResultSet>> resultSets) throws Exception {
-			throw new Exception("Method not allowed!!");
-	} 
+	public abstract void setData(Map<String, ArrayList<IPentahoResultSet>> resultSets) throws Exception; 
 
 	/**
 	 * Set the series properties 
