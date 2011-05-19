@@ -12,8 +12,7 @@
  # Setup _build.properties_ 
   # Specify your Pentaho solutions directory on _dir.solutions_
  # Execute _ant_ default task (dist)
- # Execute _ant install-plugin_ to get the plugin copied to your Pentaho installation
- # Execute _ant install-samples_ to copy the samples to the solution folder
+ # Execute _ant install to get the plugin and the samples copied  to your Pentaho installation
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: {{{ _<acl-files>...,xfusion</acl-files>_}}}
  # Restart Pentaho
  # Open the user console
