@@ -39,10 +39,15 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * StackedColumn3D
   * MSColumnLine3D
   * MSColumn3DLineDY
-  * Marimekko 
+  * Marimekko
+  * ScrollStackedColumn2D
+  * ScrollColumn2D 
 
 == Widgets ==
 
   * Angular Gauge
   * VBullet
+  * HBullet
   * Bubble
+  * Funnel
+  * Pyramid
