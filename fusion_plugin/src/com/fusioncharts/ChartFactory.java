@@ -216,6 +216,15 @@ public class ChartFactory extends Object {
 
 			//set up dataset info
 			xmlwriter.writeEntity("dataset");
+			
+			//Make sure we don't put null attributes
+			if(singleSeries.getAnchorBorderThickness() != null)
+				xmlwriter.writeAttribute("anchorBorderThickness", singleSeries.getAnchorBorderThickness());
+			
+			//Make sure we don't put null attributes
+			if(singleSeries.getAnchorBorderColor() != null)
+				xmlwriter.writeAttribute("anchorBorderColor", singleSeries.getAnchorBorderColor());	
+			
 			xmlwriter.writeAttribute("seriesName", escapeGoofyCharacters(singleSeries.getLabel()));
 			if(singleSeries.getColor(0)!=null)
 				xmlwriter.writeAttribute("color", singleSeries.getColor(0));
@@ -262,7 +271,15 @@ public class ChartFactory extends Object {
 
 				//Make sure we don't put null attributes
 				if(singleSeries.getColor(i) != null)
-					xmlwriter.writeAttribute("color", singleSeries.getColor(i));				
+					xmlwriter.writeAttribute("color", singleSeries.getColor(i));
+				
+				//Make sure we don't put null attributes
+				if(singleSeries.getAnchorBorderThickness() != null)
+					xmlwriter.writeAttribute("anchorBorderThickness", singleSeries.getAnchorBorderThickness());
+				
+				//Make sure we don't put null attributes
+				if(singleSeries.getAnchorBorderColor() != null)
+					xmlwriter.writeAttribute("anchorBorderColor", singleSeries.getAnchorBorderColor());	
 			}
 			//the Bubble chart have a special treatment
 			if(graph.getGraphType()==ChartType.BUBBLE)

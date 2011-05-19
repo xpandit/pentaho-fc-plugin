@@ -67,15 +67,17 @@ public class FusionComponentChart extends  FusionComponent {
 	    if(resultSets==null)
             throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "Result Set is null");
 	    
+        setData( resultSets.get("results").get(0)); 
+
+        // get Data Set Metadata
+        IPentahoMetaData metadata = getData().getMetaData();
+        //verify meta data
+        int metadataSize= metadata.getColumnCount();
+	    
 	    //if is the bubble charts
         if(graph.getGraphType()==ChartType.BUBBLE)
         {
-            this.data = resultSets.get("results").get(0); 
 
-            // get Data Set Metadata
-            IPentahoMetaData metadata = this.data.getMetaData();
-            //verify meta data
-            int metadataSize= metadata.getColumnCount();
             if(metadataSize<3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 3");
  
@@ -95,31 +97,31 @@ public class FusionComponentChart extends  FusionComponent {
             double minYvalue=0;
             
             //get data 
-            int rowCount=this.data.getRowCount(); 
+            int rowCount=getData().getRowCount(); 
             for (int i = 0; i < rowCount; i++) {
                 try
                 {   
-                    Series series = graph.createSeries(this.data.getValueAt(i,0).toString());
+                    Series series = graph.createSeries(getData().getValueAt(i,0).toString());
                     setSeriesProperties(series,i);
                     
                     setSeriesColor(series,i);
                     
-                    Double xValue=Double.parseDouble(this.data.getValueAt(i,1).toString());
+                    Double xValue=Double.parseDouble(getData().getValueAt(i,1).toString());
                     series.setXValue(0,xValue);
                     
                     //calculate the max and min values to XAxis
                     maxXvalue=xValue>maxXvalue?xValue:maxXvalue;
                     minXvalue=xValue<minXvalue?xValue:minXvalue;
                     
-                    Double yValue=Double.parseDouble(this.data.getValueAt(i,2).toString());
+                    Double yValue=Double.parseDouble(getData().getValueAt(i,2).toString());
                     series.setYValue(0, yValue);                
                     
                     //calculate the max and min values to YAxis
                     maxYvalue=yValue>maxYvalue?yValue:maxYvalue;
                     minYvalue=yValue<minYvalue?yValue:minYvalue;
                     
-                    if(this.data.getColumnCount()>3)
-                        series.setZValue(0, Double.parseDouble((this.data.getValueAt(i,3).toString())));
+                    if(getData().getColumnCount()>3)
+                        series.setZValue(0, Double.parseDouble((getData().getValueAt(i,3).toString())));
 
                     //build a chart link
                     if(chartLink!=null)
@@ -194,12 +196,7 @@ public class FusionComponentChart extends  FusionComponent {
         }
         else
         {
-            this.data = resultSets.get("results").get(0);
 
-            // get Data Set Metadata
-            IPentahoMetaData metadata = this.data.getMetaData();
-            //verify meta data
-            int metadataSize= metadata.getColumnCount();
             if(metadataSize<2)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 2");
 
@@ -227,17 +224,16 @@ public class FusionComponentChart extends  FusionComponent {
                 Series series = graph.createSeries(seriesTitle);
                 setSeriesProperties(series,seriesCount-1);
                 //get data 
-                int rowCount=this.data.getRowCount();
+                int rowCount=getData().getRowCount();
                 for (int i = 0; i < rowCount; i++) {
                     try
                     { 
-                        series.setValue(i,Double.parseDouble((this.data.getValueAt(i,seriesCount).toString())));    
+                        series.setValue(i,Double.parseDouble((getData().getValueAt(i,seriesCount).toString())));    
                         
                         
                         //build a chart link
                         if(chartLink!=null)
                         {
-
                             String serieChartLink=chartLink;
 
                             //set seriesValue
@@ -261,13 +257,13 @@ public class FusionComponentChart extends  FusionComponent {
             
             //set the categories
             
-            int rowCount=this.data.getRowCount();
+            int rowCount=getData().getRowCount();
             for (int i = 0; i < rowCount; i++) {
                 try
                 { 
                     //set category label
                     Category categ=new Category();
-                    categ.setLable(this.data.getValueAt(i,0).toString());
+                    categ.setLable(getData().getValueAt(i,0).toString());
 
                     //set category in chart
                     graph.setCategory(i,categ);

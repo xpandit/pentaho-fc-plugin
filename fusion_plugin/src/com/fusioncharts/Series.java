@@ -44,6 +44,8 @@ implements Cloneable
 	private	Double[]		xValue;
 	private	Double[]		yValue;
 	private	Double[]		zValue;
+	private String 			anchorBorderThickness;
+	private String 			anchorBorderColor;
   
   /***************************************************************************
   * Creates a Series object. The series is set to a BAR series by default.
@@ -609,6 +611,48 @@ public void setSeriesType(SeriesType seriesType) {
   {
     return this.value.length;
   }//getNumberOfValues
+  
+  
+  /***************************************************************************
+   * set the anchorBorderThickness value.
+   * 
+   *        
+   ***************************************************************************/   
+  public void setAnchorBorderThickness(String anchorBorderThickness) {
+	  this.anchorBorderThickness= anchorBorderThickness;
+		
+	}
+  /***************************************************************************
+   * get the anchorBorderThickness value.
+   * 
+   *        
+   ***************************************************************************/   
+  public String getAnchorBorderThickness() {
+	  return this.anchorBorderThickness;
+		
+	}
+  
+  /***************************************************************************
+   * set the anchorBorderColor value.
+   * 
+   *        
+   ***************************************************************************/   
+  public void setAnchorBorderColor(String anchorBorderThickness) {
+	  this.anchorBorderColor= anchorBorderThickness;
+		
+	}
+  /***************************************************************************
+   * get the anchorBorderColor with index .
+   * 
+   *        
+   ***************************************************************************/   
+  public String getAnchorBorderColor() throws ArrayIndexOutOfBoundsException
+  {
+	return  this.anchorBorderColor;
+  }
+  
+  
+  
   
   /***************************************************************************
   * Increments the value at a specified index by one.
