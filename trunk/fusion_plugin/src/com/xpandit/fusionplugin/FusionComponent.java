@@ -3,6 +3,7 @@ package com.xpandit.fusionplugin;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -35,6 +36,8 @@ abstract public  class FusionComponent {
 	protected static final String CHARTXML			= "chartXML";
 	protected static final String SERIESCOLOR		= "seriesColor";
 	protected static final String CATEGORIESCOLOR	= "categoriesColor";
+	protected static final String ANCHORBORTHERTHICKNESS	= "anchorBorderThickness";
+	protected static final String ANCHORBORTHERTHICOLOR		= "anchorBorderColor";
 	
 	
 	
@@ -51,7 +54,7 @@ abstract public  class FusionComponent {
 	private OutputStream out;
 
 	// input parameters
-	protected IPentahoResultSet data;
+	private IPentahoResultSet data;
 	private String chartType = "";
 	private String chartTitle = "";
 	private String xAxisName = "";
@@ -123,7 +126,11 @@ abstract public  class FusionComponent {
 	protected void setSeriesProperties(Series series,int seriesIndex) {
 		setSeriesType(series,seriesIndex);
 		setSeriesParentYAxis(series,seriesIndex);
+		setSeriesAnchorBorderThickness(series,seriesIndex);
+		setSeriesAnchorBorderColor(series,seriesIndex);
+		
 		setCategoryColor(series,seriesIndex);
+
 		
 		
 	}
@@ -195,6 +202,42 @@ abstract public  class FusionComponent {
 					series.setSeriesType(stEnum[i]);
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Set the series  anchorBorderThickness
+	 * 
+	 * 
+	 * @param series series to set anchorBorderThickness
+	 * @param seriesIndex series index
+	 */
+	private void setSeriesAnchorBorderThickness(Series series,int seriesIndex) {
+		String value=graph.getChartProperties().get(ANCHORBORTHERTHICKNESS);
+		
+		//have the property ANCHORBORTHERTHICKNESS
+		if(value!=null)
+		{
+			//split the values
+			series.setAnchorBorderThickness((value.split(";"))[seriesIndex]);
+		}
+	}
+	
+	/**
+	 * Set the series  anchorBorderColor
+	 * 
+	 * 
+	 * @param series series to set anchorBorderColor
+	 * @param seriesIndex series index
+	 */
+	private void setSeriesAnchorBorderColor(Series series,int seriesIndex) {
+		String value=graph.getChartProperties().get(ANCHORBORTHERTHICOLOR);
+		
+		//have the property ANCHORBORTHERTHICOLOR
+		if(value!=null)
+		{
+			//split the values
+			series.setAnchorBorderColor((value.split(";"))[seriesIndex]);
 		}
 	}
 
@@ -333,6 +376,39 @@ abstract public  class FusionComponent {
 
 	public void setChartXMLMode(boolean chartXMLMode) {
 		this.chartXMLMode = chartXMLMode;
+	}
+
+	/*
+	 * 
+	 * set the result set that will be used to generate charts  
+	 * 
+	 */
+	protected void setData(IPentahoResultSet data) 
+	{	
+        this.data = data;
+	}
+
+	/*
+	 * 
+	 * get the result set that will be used to generate charts  
+	 * 
+	 */
+	protected IPentahoResultSet getData() 
+	{
+		return data;
+	}
+	
+	/**
+	 * 
+	 * get the result from the result
+	 * 
+	 * @param row row of result
+	 * @param column columns of result
+	 * @return result from the result
+	 */
+	protected Object getDataValue(int row,int column) 
+	{
+		return data.getValueAt(row, column);
 	}
 
 

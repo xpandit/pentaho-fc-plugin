@@ -1,7 +1,7 @@
 <project name="fusion_plugin" basedir="." default="default">
 <!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
   <import file="build-res/subfloor-pkg.xml" />
-  <property name="dir.system" value="${dir.solutions}/system/"/>
+  <property name="dir.system" value="${dir.solutions}/system"/>
   <property name="dir.developers" value="${dir.solutions}/"/>
   <property name="dir.samples" value="fusion-samples/bi-developers"/>
 	
