@@ -22,12 +22,19 @@ public enum ChartType {
 	MSCOLUMN3DLINEDY(SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "MSColumn3DLineDY"),
 	BUBBLE(SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "Bubble"),
 	MARIMEKKO(SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "Marimekko"),	
+	SCROLLSTACKEDCOLUMN2D (SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "ScrollStackedColumn2D"),
+	SCROLLCOLUMN2D (SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "ScrollColumn2D"),
+	
 	
 	VBULLET (SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.WIDGETS,  "VBullet"),
 	HBULLET (SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.WIDGETS,  "HBullet"),
 	ANGULARGAUGE (SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.WIDGETS,  "AngularGauge"),
 	FUNNEL(SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.CHARTS,  "Funnel"),
     PYRAMID(SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.CHARTS,  "Pyramid");
+	
+
+	
+	
 	
 	
 	enum SingleOrMulti {
