@@ -1,6 +1,8 @@
 package com.fusioncharts;
 
 import java.io.Writer;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -201,7 +203,12 @@ public class ChartFactory extends Object {
 			xmlwriter.writeEntity("category");
 			xmlwriter.writeAttribute(isFreeVersion()?"name":"label", escapeGoofyCharacters(graph.getCategory(i).getLable()));
 			if(graph.getCategory(i).getxValue()!=null)
-				xmlwriter.writeAttribute("x", escapeGoofyCharacters(graph.getCategory(i).getxValue().toString()));
+			{
+				//if have xValue Need format to transform numbers like 1E2 to 100
+                NumberFormat formatter = new DecimalFormat("###");
+                String xCategoryValueString=formatter.format(graph.getCategory(i).getxValue());
+				xmlwriter.writeAttribute("x", escapeGoofyCharacters(xCategoryValueString));
+			}
 			xmlwriter.writeAttribute("showVerticalLine", escapeGoofyCharacters(graph.getCategory(i).getShowVerticalLine().toString()));
 			xmlwriter.endEntity();
 		}
@@ -295,7 +302,11 @@ public class ChartFactory extends Object {
 				if(y==null)
 					throw new NullPointerException("The y Value Is null at index:"+i);			
 				// attribute values
-				xmlwriter.writeAttribute("x", x.toString());
+				
+                NumberFormat formatter = new DecimalFormat("###");
+                String xValueString=formatter.format(x);
+				
+				xmlwriter.writeAttribute("x",xValueString);
 				xmlwriter.writeAttribute("y", y.toString());
 				
 				if(z!=null)

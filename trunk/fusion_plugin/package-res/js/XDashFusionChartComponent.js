@@ -29,9 +29,11 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		// calculate width and height of fusion chart
 		var widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);
 		var widgetPanel = document.getElementById("content-area-Panel_" + widgetNum);
-		var rect = getRectangle(widgetPanel);
+		
+		/*var rect = getRectangle(widgetPanel);
 		options.width = rect.width - 25;
-		options.height = rect.height - 20;
+		options.height = rect.height - 20;*/
+		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
 	
@@ -39,6 +41,11 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		// set chart data
 		myChart.setDataXML(resultXml);
 	
+		//set extra configuration for HTML5 charts
+        if (!!myChart._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
+        	myChart._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
+        	}
+		
 		// add the chart
 		myChart.render(myself.htmlObject); 
 	
@@ -124,6 +131,8 @@ XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
 
 // now load the fusion js file
 
+
+/*
   var fileref=document.createElement('script');
   fileref.setAttribute("type","text/javascript");
   fileref.setAttribute("src", '/pentaho/content/fusion/JSClass/FusionCharts.js');
@@ -131,3 +140,4 @@ XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
 
 
 PentahoDashboardController.registerComponentForFileType("xfusion", XDashFusionChartComponent);
+*/

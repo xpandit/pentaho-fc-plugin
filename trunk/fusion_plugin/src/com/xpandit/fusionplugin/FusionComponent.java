@@ -393,14 +393,14 @@ abstract public  class FusionComponent {
 	 * get the result set that will be used to generate charts  
 	 * 
 	 */
-	protected IPentahoResultSet getData() 
+	private IPentahoResultSet getData() 
 	{
 		return data;
 	}
 	
 	/**
 	 * 
-	 * get the result from the result
+	 * get the result set metadata from the result
 	 * 
 	 * @param row row of result
 	 * @param column columns of result
@@ -408,8 +408,42 @@ abstract public  class FusionComponent {
 	 */
 	protected Object getDataValue(int row,int column) 
 	{
-		return data.getValueAt(row, column);
+		Object value=data.getValueAt(row, column);
+		// TODO : add a parameter to determine if the value will be replaced or not
+		return value==null?0:value;
 	}
+	
+	/**
+	 * 
+	 * get the result set metadata from the result
+	 * 
+	 * @return result result set metadata
+	 */
+	protected  IPentahoMetaData getMetaData() 
+	{
+		return data.getMetaData();
+	}
+	
+	/**
+	 * 
+	 * get the result set row count
+	 * 
+	 * @return 
+	 */
+	protected int getRowCount() {
+		return data.getRowCount();
+	}
+	
+	/**
+	 * 
+	 * get the result set column count
+	 * 
+	 * @return 
+	 */
+	protected int getColumnCount() {
+		return data.getColumnCount();
+	}
+	
 
 
 

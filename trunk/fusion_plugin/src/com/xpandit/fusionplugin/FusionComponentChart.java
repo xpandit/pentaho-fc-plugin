@@ -1,5 +1,7 @@
 package com.xpandit.fusionplugin;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -70,10 +72,34 @@ public class FusionComponentChart extends  FusionComponent {
         setData( resultSets.get("results").get(0)); 
 
         // get Data Set Metadata
-        IPentahoMetaData metadata = getData().getMetaData();
+        IPentahoMetaData metadata = getMetaData();
         //verify meta data
         int metadataSize= metadata.getColumnCount();
 	    
+        
+        
+        //set the categories
+        
+        int rowCount=getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            try
+            { 
+                //set category label
+                Category categ=new Category();
+                categ.setLable(getDataValue(i,0).toString());
+
+                //set category in chart
+                graph.setCategory(i,categ);
+            }
+            catch(Exception e)
+            {
+                log.error("Problem in result set. Null values found at index:"+i, e);
+            }
+        }
+        
+        
+        
+        
 	    //if is the bubble charts
         if(graph.getGraphType()==ChartType.BUBBLE)
         {
@@ -81,13 +107,15 @@ public class FusionComponentChart extends  FusionComponent {
             if(metadataSize<3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 3");
  
-            //get link values
-            //the chart link template
-            String chartLink=graph.getChartProperties().get("chartLink");
-            //seriesParam to replace in template link
-            String seriesParam=graph.getChartProperties().get("seriesParam");
-            //categoriesParam to replace in template link
-            String categoriesParam=graph.getChartProperties().get("categoriesParam");
+			//get link values
+			//the chart link template
+			String chartLink=graph.getChartProperties().get("chartLink");
+			//seriesParam to replace in template link
+			String seriesParam=graph.getChartProperties().get("seriesParam");
+			//categoriesParam to replace in template link
+			String categoriesParam=graph.getChartProperties().get("categoriesParam");
+			//valueParam to replace in template link
+			String valueParam=graph.getChartProperties().get("valueParam");
 
 
             double maxXvalue=0; 
@@ -97,46 +125,54 @@ public class FusionComponentChart extends  FusionComponent {
             double minYvalue=0;
             
             //get data 
-            int rowCount=getData().getRowCount(); 
             for (int i = 0; i < rowCount; i++) {
                 try
                 {   
-                    Series series = graph.createSeries(getData().getValueAt(i,0).toString());
+                    Series series = graph.createSeries(getDataValue(i,0).toString());
                     setSeriesProperties(series,i);
                     
                     setSeriesColor(series,i);
                     
-                    Double xValue=Double.parseDouble(getData().getValueAt(i,1).toString());
+                    Double xValue=Double.parseDouble(getDataValue(i,1).toString());
                     series.setXValue(0,xValue);
                     
                     //calculate the max and min values to XAxis
                     maxXvalue=xValue>maxXvalue?xValue:maxXvalue;
                     minXvalue=xValue<minXvalue?xValue:minXvalue;
                     
-                    Double yValue=Double.parseDouble(getData().getValueAt(i,2).toString());
+                    Double yValue=Double.parseDouble(getDataValue(i,2).toString());
                     series.setYValue(0, yValue);                
                     
                     //calculate the max and min values to YAxis
                     maxYvalue=yValue>maxYvalue?yValue:maxYvalue;
                     minYvalue=yValue<minYvalue?yValue:minYvalue;
                     
-                    if(getData().getColumnCount()>3)
-                        series.setZValue(0, Double.parseDouble((getData().getValueAt(i,3).toString())));
+                    if(getColumnCount()>3)
+                        series.setZValue(0, Double.parseDouble((getDataValue(i,3).toString())));
 
-                    //build a chart link
-                    if(chartLink!=null)
-                    {
+					//build a chart link
+					if(chartLink!=null)
+					{
 
-                        String serieChartLink=chartLink;
+						String serieChartLink=chartLink;
 
-                        //set seriesValue
-                        if(seriesParam!=null)
-                            serieChartLink=chartLink.replace("{"+seriesParam+"}", series.getValue(i).toString());
-                        //set categoriesValue
-                        if(categoriesParam!=null)
-                            serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).toString());
-                        series.setEvent(i, serieChartLink);
-                    }
+						//set seriesValue
+						if(seriesParam!=null)
+						{ 
+							serieChartLink=chartLink.replace("{"+seriesParam+"}", graph.getGraphType().isSingleSeries()?series.getValue(i).toString():series.getLabel());
+						}
+						//set categoriesValue
+						if(categoriesParam!=null)
+						{
+							serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).getLable());
+						}
+						//set the value
+						if(valueParam!=null)
+							serieChartLink=serieChartLink.replace("{"+valueParam+"}", series.getValue(i).toString());
+						
+						
+						series.setEvent(i, serieChartLink);
+					}
 
                 }
                 catch(Exception e)
@@ -166,28 +202,28 @@ public class FusionComponentChart extends  FusionComponent {
             int numDivLinesXAxis=width/90;
             
             // the max value of x Axis is 10% more than real max value
-            int maxValueX=(int) (maxXvalue*1.10);
+            double maxValueX=maxXvalue*1.10;
             
             //calculates the number of vertical lines 
-            int stepsValue=maxValueX/numDivLinesXAxis;
+            double stepsValue=maxValueX/numDivLinesXAxis;
             
             //build the categories
-            for(int i=(int) minXvalue;i<=maxValueX;i+=stepsValue)
+            for(double i= minXvalue;i<=maxValueX;i+=stepsValue)
             {
                 Category cat=new Category();
                 //calculates the K,M for xAxis
                 //the fusion charts don't do this
                 int indexDivision=0;
-                int auxI=i;
-				while(auxI<1000&&indexDivision<numberDivision.length-1)
+                double auxI=i;
+				while(auxI>1000&&indexDivision<numberDivision.length-1)
 				{
 					auxI/=1000;
 					++indexDivision;
 				} 
                 // set then correct value at the label
-                cat.setLable(auxI+numberDivision[indexDivision]);
+                cat.setLable(Double.valueOf(auxI).longValue()+numberDivision[indexDivision]);
                 //set the X value
-                cat.setxValue((double) i);
+                cat.setxValue(i);
                 //set the category
                 graph.setCategory(index,cat);
                 ++index; 
@@ -200,13 +236,15 @@ public class FusionComponentChart extends  FusionComponent {
             if(metadataSize<2)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001 , "less than 2");
 
-            //get link values
-            //the chart link template
-            String chartLink=graph.getChartProperties().get("chartLink");
-            //seriesParam to replace in template link
-            String seriesParam=graph.getChartProperties().get("seriesParam");
-            //categoriesParam to replace in template link
-            String categoriesParam=graph.getChartProperties().get("categoriesParam");
+			//get link values
+			//the chart link template
+			String chartLink=graph.getChartProperties().get("chartLink");
+			//seriesParam to replace in template link
+			String seriesParam=graph.getChartProperties().get("seriesParam");
+			//categoriesParam to replace in template link
+			String categoriesParam=graph.getChartProperties().get("categoriesParam");
+			//valueParam to replace in template link
+			String valueParam=graph.getChartProperties().get("valueParam");
 
 
 
@@ -223,27 +261,37 @@ public class FusionComponentChart extends  FusionComponent {
 
                 Series series = graph.createSeries(seriesTitle);
                 setSeriesProperties(series,seriesCount-1);
+                
                 //get data 
-                int rowCount=getData().getRowCount();
                 for (int i = 0; i < rowCount; i++) {
                     try
                     { 
-                        series.setValue(i,Double.parseDouble((getData().getValueAt(i,seriesCount).toString())));    
+                        series.setValue(i,Double.parseDouble((getDataValue(i,seriesCount).toString())));    
                         
                         
-                        //build a chart link
-                        if(chartLink!=null)
-                        {
-                            String serieChartLink=chartLink;
+                      //build a chart link
+    					if(chartLink!=null)
+    					{
 
-                            //set seriesValue
-                            if(seriesParam!=null) 
-                                serieChartLink=chartLink.replace("{"+seriesParam+"}", series.getValue(i).toString());
-                            //set categoriesValue
-                            if(categoriesParam!=null)
-                                serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).getLable());
-                            series.setEvent(i, serieChartLink);
-                        }
+    						String serieChartLink=chartLink;
+
+    						//set seriesValue
+    						if(seriesParam!=null)
+    						{ 
+    							serieChartLink=chartLink.replace("{"+seriesParam+"}", graph.getGraphType().isSingleSeries()?series.getValue(i).toString():series.getLabel());
+    						}
+    						//set categoriesValue
+    						if(categoriesParam!=null)
+    						{
+    							serieChartLink=serieChartLink.replace("{"+categoriesParam+"}", graph.getCategory(i).getLable());
+    						}
+    						//set the value
+    						if(valueParam!=null)
+    							serieChartLink=serieChartLink.replace("{"+valueParam+"}", series.getValue(i).toString());
+    						
+    						
+    						series.setEvent(i, serieChartLink);
+    					}
                         
                         setSeriesColor(series,i);
 
@@ -254,25 +302,7 @@ public class FusionComponentChart extends  FusionComponent {
                     }
                 }
             }
-            
-            //set the categories
-            
-            int rowCount=getData().getRowCount();
-            for (int i = 0; i < rowCount; i++) {
-                try
-                { 
-                    //set category label
-                    Category categ=new Category();
-                    categ.setLable(getData().getValueAt(i,0).toString());
-
-                    //set category in chart
-                    graph.setCategory(i,categ);
-                }
-                catch(Exception e)
-                {
-                    log.error("Problem in result set. Null values found at index:"+i, e);
-                }
-            }
         }
     }
+
 }
