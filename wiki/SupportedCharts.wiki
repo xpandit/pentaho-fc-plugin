@@ -42,6 +42,7 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * Marimekko
   * ScrollStackedColumn2D
   * ScrollColumn2D 
+  * ZoomLine
 
 == Widgets ==
 
