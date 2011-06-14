@@ -24,6 +24,8 @@ public enum ChartType {
 	MARIMEKKO(SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "Marimekko"),	
 	SCROLLSTACKEDCOLUMN2D (SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "ScrollStackedColumn2D"),
 	SCROLLCOLUMN2D (SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "ScrollColumn2D"),
+	ZOOMLINE (SingleOrMulti.MULTI,ChartOrWidgetOrMapsOrPower.CHARTS,  "ZoomLine"),
+	
 	
 	
 	VBULLET (SingleOrMulti.SINGLE,ChartOrWidgetOrMapsOrPower.WIDGETS,  "VBullet"),
