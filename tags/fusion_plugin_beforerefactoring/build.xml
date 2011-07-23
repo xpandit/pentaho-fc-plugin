@@ -1,0 +1,35 @@
+<project name="fusion_plugin" basedir="." default="default">
+<!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
+  <import file="build-res/subfloor-pkg.xml" />
+  <property name="dir.system" value="${dir.solutions}/system"/>
+  <property name="dir.developers" value="${dir.solutions}/"/>
+  <property name="dir.samples" value="fusion-samples/bi-developers"/>
+	
+  <target name="assemble.copy-libs">
+    <copy todir="${approot.stage.dir}/lib">
+    	<!-- Add CDA jar file -->
+    	<fileset file="${devlib.dir}/cda-*.jar" />
+		<fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
+    </copy>
+  </target>
+	
+   
+  <target name="install" depends="install-plugin,install-samples">	
+  </target>
+  <target name="install-plugin" depends="dist,assemble.copy-libs">
+  	<copy todir="${dir.system}/${package.root.dir}" >
+  		<fileset dir="${approot.stage.dir}" />
+  	</copy>
+  	<echo message="${approot.stage.dir}"></echo>
+  	<echo message="${dir.system}/${package.root.dir}"></echo>
+  </target>
+	
+  <target name="install-samples">
+	<copy todir="${dir.developers}" >
+		<fileset dir="${dir.samples}" />
+	</copy>
+	<echo message="${approot.stage.dir}"></echo>
+	<echo message="${dir.system}/${package.root.dir}"></echo>
+  </target>
+
+</project>
