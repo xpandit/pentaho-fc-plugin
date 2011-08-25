@@ -6,7 +6,7 @@ import org.pentaho.platform.api.engine.PluginLifecycleException;
 import com.xpandit.fusionplugin.GlobalPropertiesManager;
 
 /**
- * This class inits fc plugin within the bi-platform
+ * This class initializes fc plugin within the bi-platform
  * 
  * @author gorman
  * 

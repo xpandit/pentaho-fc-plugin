@@ -11,13 +11,13 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
- * This factory returns a instance of Fusion Component depending on the chart type required
+ * This factory returns a instance of Fusion Charts depending on the chart type required
  * 
  * 
  * @author dduque
  * 
  */
-// class should probably be removed, method could go to FCItem.
+//TODO class should probably be removed, method could go to FCItem.
 public class FCFactory {
 
     /**
@@ -37,7 +37,7 @@ public class FCFactory {
         if (chartTypeParam == null)
             throw new InvalidParameterException(InvalidParameterException.ERROR_001);
 
-        // find the right chart type
+        // find the right chart characteristics
         ChartType[] values = ChartType.values();
         ChartType cType = null;
         for (int v = 0; v < values.length; ++v) {
@@ -45,26 +45,21 @@ public class FCFactory {
                 cType = values[v];
             }
         }
+        
+        //check if chart type is supported
         if (cType == null)
             throw new InvalidParameterException(InvalidParameterException.ERROR_002);
 
-        /*
-         * int length = 0;
-         * 
-         * if (cType.getChartLibrary() == ChartType.ChartOrWidgetOrMapsOrPower.CHARTS) length =
-         * resultSets.get(0).getRowCount(); if (cType == ChartType.ANGULARGAUGE) length = resultSets.size(); if (cType
-         * == ChartType.HBULLET || cType == ChartType.VBULLET || cType == ChartType.BUBBLE) length = 1;
-         */
-
-        if (cType.getChartLibrary() == ChartType.ChartOrWidgetOrMapsOrPower.CHARTS) {
+        //based on the chart characteristics choose the correct implementation
+        if (cType.getChartLibrary() == ChartType.ChartLibrary.CHARTS) {
             try {
-                return new FCChart(cType, resultSets);// length);
+                return new FCChart(cType, resultSets,pm.getParams());
             } catch (InvalidDataResultSetException e) {
                 throw new InvalidParameterException("Result sets not pproperly setup!");
             }
-        } else if (cType.getChartLibrary() == ChartType.ChartOrWidgetOrMapsOrPower.WIDGETS) {
+        } else if (cType.getChartLibrary() == ChartType.ChartLibrary.WIDGETS) {
             try {
-                return new FCWidget(cType, resultSets);// length);
+                return new FCWidget(cType, resultSets, pm.getParams());
             } catch (InvalidDataResultSetException e) {
                 throw new InvalidParameterException("Result sets not pproperly setup!");
             }

@@ -119,20 +119,6 @@ public class PropertiesManager {
 
     }
 
-    // TODO Remove!!!
-    /**
-     * fill all instance parameters based on url params
-     */
-    /*
-     * private void fillInstancePrameters() { instanceProperties=new TreeMap<String, String>();
-     * 
-     * Iterator parameterNames = parameters.getParameterNames(); for (Iterator<Object> parameterIterator =
-     * parameterNames; parameterIterator.hasNext();) { String parameterKey = (String) parameterIterator.next(); String
-     * parameterValue=parameters.getParameter(parameterKey).toString();
-     * instanceProperties.put(parameterKey.trim(),parameterValue.trim()); }
-     * 
-     * }
-     */
     /**
      * Join all parameter types and returns the object
      * 

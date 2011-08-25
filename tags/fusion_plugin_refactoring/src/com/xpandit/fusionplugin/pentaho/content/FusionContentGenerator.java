@@ -48,7 +48,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private static final String TARGETVALUECDAID = "targetValueCdaId";
     private static final String RANGEVALUECDAID = "rangeValueCdaId";
 
-    // TODO is being used on different methods should be placed inside a methos when next refactoring is done.
+    // TODO is being used on different methods should be placed inside a method on the next refactoring.
     CdaQueryComponent cdaQueryComponent = null;
 
     // Request parser
@@ -68,35 +68,11 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     }
 
     /**
-     * 
-     * Method that parses the URL call in order to identify the correspoding operation
-     * 
-     * @param pathString Url call that was made to the content generator.
-     * @return method The corresponding operation.
-     */
-    /*
-     * private String extractMethod(final String pathString) { if (StringUtils.isEmpty(pathString)) { return null; }
-     * final String pathWithoutSlash = pathString.substring(1); if (pathWithoutSlash.indexOf('/') > -1) { return null; }
-     * final int queryStart = pathWithoutSlash.indexOf('?'); if (queryStart < 0) { return pathWithoutSlash; } return
-     * pathWithoutSlash.substring(0, queryStart); }
-     */
-
-    /**
      * Main method call by the Pentaho platform.
      */
     public void createContent(OutputStream out) throws Exception {
 
         parameterParser = new ParameterParser(parameterProviders);
-
-        //TODO remove!!!
-        // Identify operation based on URL call
-        /*IParameterProvider requestParams = null;
-        requestParams = parameterProviders.get(IParameterProvider.SCOPE_REQUEST);
-        */
-        /*
-         * IParameterProvider pathParams = parameterProviders.get("path"); String pathString =
-         * pathParams.getStringParameter("path", null); String method = extractMethod(pathString);
-         */
 
         // Identify operation based on URL call
         String method = parameterParser.extractMethod();
@@ -125,16 +101,6 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private void processChart(OutputStream out) throws UnsupportedEncodingException, Exception,
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
-        //TODO remove!!!
-        // set properties based on the URL input
-        // setProperties(requestParams);
-
-        // get properties file name path and solution
-       /* String fileName = URLDecoder.decode(requestParams.getStringParameter(NAME, ""), ENCODING);
-        String path = URLDecoder.decode(requestParams.getStringParameter(PATH, ""), ENCODING);
-        String solutionName = URLDecoder.decode(requestParams.getStringParameter(SOLUTION, ""), ENCODING);
-        */
-        
         // creates a properties manager
         pm = new PropertiesManager(parameterParser.getParameters());
 
@@ -142,15 +108,10 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         if (resultSets == null)
             getLogger().error("Error : resultset is null -> see previous error");
 
-        // init chart
+        // create the chart
         FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
 
-        // fill the properties of chart
-        fcItem.setChartProperties(pm.getParams());
-
-        // set data
-        //fcItem.setData(resultSets);
-
+        // render the chart
         TreeMap<String, String> params = pm.getParams();
         if (params.containsKey(CHARTXML) && Boolean.parseBoolean(params.get(CHARTXML))) {
             // Generate the chart XML
@@ -163,65 +124,6 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             out.write(fcItem.generateXML().getBytes());
         }
     }
-
-    /**
-     * 
-     * Generate the output html
-     * 
-     * if CHARTXML is set renders only the chart xml if not, try to find dashboard mode
-     * 
-     * If ISDASHBOARDMODE is set to false does't render the all html page If ISDASHBOARDMODE not defined or is true
-     * does't render the all html page
-     * 
-     * @param out Out Stremam
-     * @param fusionComponent Fusion Component to render
-     * @throws Exception
-     * @throws IOException
-     */
-    //TODO remove!!!
-    /*
-     * private void gererateOutput(OutputStream out, FCItem fusionComponent) throws Exception, IOException {
-     * TreeMap<String, String> params = pm.getParams(); if (params.containsKey(CHARTXML)) { if
-     * (Boolean.parseBoolean(params.get(CHARTXML))) { out.write(fusionComponent.execute().getBytes()); return; } } if
-     * (params.containsKey(ISDASHBOARDMODE)) { if (!Boolean.parseBoolean(params.get(ISDASHBOARDMODE))) { String
-     * chartType = fusionComponent.getChartType(); chartType = (fusionComponent.isFreeVersion() ? "FCF_" : "") +
-     * chartType;
-     * 
-     * String output = "<html><head>" + "  <title>Example Graph</title>  " + " <SCRIPT LANGUAGE='Javascript' SRC='" +
-     * PentahoSystem.getApplicationContext().getFullyQualifiedServerURL() +
-     * "content/fusion/JSClass/FusionCharts.js'></SCRIPT>" + "<script type='text/javascript' src='" +
-     * PentahoSystem.getApplicationContext().getFullyQualifiedServerURL() +
-     * "content/fusion/js/standaloneChartRender.js'></script></head>" + "<script type='text/javascript'>" +
-     * "var chartData=" + "	{" + "xmlData:'" + fusionComponent.execute() + "'," + "chartType:'" + chartType + "'," +
-     * "width:" + fusionComponent.getWidth() + "," + "height:" + fusionComponent.getHeight() + "," + "WMode:'" +
-     * fusionComponent.getWMode() + "'" + "	}" + "</script>" + "<body onload=\"renderChart()\">" +
-     * "<div id='chartPlaceHolder'></div>" + "</body></html>"; out.write(output.getBytes()); return; } }
-     * out.write(fusionComponent.execute().getBytes()); return; }
-     */
-
-    /**
-     * 
-     * Fill the properties of the chart in Fusion Component Get properties file( name, path and solution) to be used as
-     * parameters and Use Request Parameters
-     * 
-     * @param requestParams parameters to be used in all processing of the charts, this request parameters should have
-     *            parameters propPath, propSolution and propPath if you want to use a Properties File
-     * @throws UnsupportedEncodingException thrown where encoding is not supported
-     * @throws InvalidParameterException
-     */
-    //TODO Remove!!!!
-    /*
-     * private void setProperties(IParameterProvider requestParams) throws UnsupportedEncodingException,
-     * InvalidParameterException { // get properties file name path and solution String fileName =
-     * URLDecoder.decode(requestParams.getStringParameter(NAME, ""), ENCODING); String path =
-     * URLDecoder.decode(requestParams.getStringParameter(PATH, ""), ENCODING); String solutionName =
-     * URLDecoder.decode(requestParams.getStringParameter(SOLUTION, ""), ENCODING);
-     * 
-     * // creates a properties manager pm = new PropertiesManager(fileName, path, solutionName, requestParams,
-     * ENCODING);
-     * 
-     * }
-     */
 
     /**
      * 
@@ -306,7 +208,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      * @return
      * @throws Exception
      */
-    // TODO requires refactoring -> CDA code is being called to many times.
+    // TODO requires refactoring -> CDA code is being called too many times.
     private ArrayList<IPentahoResultSet> getTargetValueCDA(Map<String, Object> cdaInputs, IPentahoResultSet resultset)
             throws Exception {
         ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();

@@ -2,11 +2,13 @@ package com.xpandit.fusionplugin;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.fusioncharts.Category;
+import com.fusioncharts.ChartFactoryChart;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
@@ -25,13 +27,13 @@ public class FCChart extends FCItem {
 
     // get link values
     // the chart link template
-    String chartLink = "";
+    String chartLink = null;
     // seriesParam to replace in template link
-    String seriesParam = "";
+    String seriesParam = null;
     // categoriesParam to replace in template link
-    String categoriesParam = "";
+    String categoriesParam = null;
     // valueParam to replace in template link
-    String valueParam = "";
+    String valueParam = null;
 
     /**
      * Constructor for Charts
@@ -40,7 +42,7 @@ public class FCChart extends FCItem {
      * @param resultSets Results sets containig data to display.
      * @throws InvalidDataResultSetException
      */
-    public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets)
+    public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,TreeMap<String, String> params)
             throws InvalidDataResultSetException {
 
         // set category length
@@ -54,18 +56,23 @@ public class FCChart extends FCItem {
 
         // initialize chart
         graph = new FusionGraph("chart", chartType, categoryLength);
-        setData(resultSets);
-
+        
+        //set chart properties
+        setChartProperties(params);
+        
         // get nodes
         chartLink = graph.getChartProperties().get("chartLink");
         seriesParam = graph.getChartProperties().get("seriesParam");
         categoriesParam = graph.getChartProperties().get("categoriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
+        
+        //set the Data on the chart
+        setData(resultSets);
     }
 
     /**
      * 
-     * Set data to chart
+     * Set data on chart
      * 
      * @param resultSets Pentaho ResultSet with multi result sets from a query multi queries
      * @throws InvalidDataResultSetException when reult set is invalid
@@ -98,19 +105,11 @@ public class FCChart extends FCItem {
         }
 
         // if is the bubble charts
+        //TODO create subclass of FCChart with detailed implementation for Buble charts.
         if (graph.getGraphType() == ChartType.BUBBLE) {
 
             if (metadataSize < 3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 3");
-
-            // get link values
-            // the chart link template
-            /*
-             * String chartLink = graph.getChartProperties().get("chartLink"); // seriesParam to replace in template
-             * link String seriesParam = graph.getChartProperties().get("seriesParam"); // categoriesParam to replace in
-             * template link String categoriesParam = graph.getChartProperties().get("categoriesParam"); // valueParam
-             * to replace in template link String valueParam = graph.getChartProperties().get("valueParam");
-             */
 
             double maxXvalue = 0;
             double minXvalue = 0;
@@ -146,24 +145,6 @@ public class FCChart extends FCItem {
                     // build a chart link
                     if (chartLink != null) {
                         setChartLink(series,i);
-                        /*String serieChartLink = chartLink;
-
-                        // set seriesValue
-                        if (seriesParam != null) {
-                            serieChartLink = chartLink.replace("{" + seriesParam + "}", graph.getGraphType()
-                                    .isSingleSeries() ? series.getValue(i).toString() : series.getLabel());
-                        }
-                        // set categoriesValue
-                        if (categoriesParam != null) {
-                            serieChartLink = serieChartLink.replace("{" + categoriesParam + "}", graph.getCategory(i)
-                                    .getLable());
-                        }
-                        // set the value
-                        if (valueParam != null)
-                            serieChartLink = serieChartLink.replace("{" + valueParam + "}", series.getValue(i)
-                                    .toString());
-
-                        series.setEvent(i, serieChartLink);*/
                     }
 
                 } catch (Exception e) {
@@ -198,19 +179,8 @@ public class FCChart extends FCItem {
             // build the categories
             for (double i = minXvalue; i <= maxValueX; i += stepsValue) {
                 Category cat = new Category();
-                
-                //TODO Remove !!!
-                // calculates the K,M for xAxis
-                // the fusion charts don't do this
-                /*int indexDivision = 0;
-                double auxI = i;
-                while (auxI > 1000 && indexDivision < numberDivision.length - 1) {
-                    auxI /= 1000;
-                    ++indexDivision;
-                }*/
-                
                 // set then correct value at the label
-                cat.setLable(ScaleConverter.scaleNumber(i));//Double.valueOf(auxI).longValue() + numberDivision[indexDivision]);
+                cat.setLable(ScaleConverter.scaleNumber(i));
                 // set the X value
                 cat.setxValue(i);
                 // set the category
@@ -223,20 +193,11 @@ public class FCChart extends FCItem {
             if (metadataSize < 2)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 2");
 
-            /*
-             * // get link values // the chart link template String chartLink =
-             * graph.getChartProperties().get("chartLink"); // seriesParam to replace in template link String
-             * seriesParam = graph.getChartProperties().get("seriesParam"); // categoriesParam to replace in template
-             * link String categoriesParam = graph.getChartProperties().get("categoriesParam"); // valueParam to replace
-             * in template link String valueParam = graph.getChartProperties().get("valueParam");
-             */
-
             for (int seriesCount = 1; seriesCount < metadataSize; ++seriesCount) {
                 // get measure column name to set series title
                 String seriesTitle = metadata.getColumnHeaders()[0][seriesCount].toString();
 
-                // TODO:Improve Code
-                // this code remove the MDX notation and return the member name
+                // TODO:Improve Code this code remove the MDX notation and return the member name
                 // [measures].[day] returns -> day
                 String[] seriesTitleArr = seriesTitle.split("/.")[0].split("\\]\\.");
                 seriesTitle = seriesTitleArr[seriesTitleArr.length - 1].replace("]", "").replace("[", "");
@@ -252,27 +213,7 @@ public class FCChart extends FCItem {
                         // build a chart link
                         if (chartLink != null) {
                             setChartLink(series,i);
-
-                            /*String serieChartLink = chartLink;
-
-                            // set seriesValue
-                            if (seriesParam != null) {
-                                serieChartLink = chartLink.replace("{" + seriesParam + "}", graph.getGraphType()
-                                        .isSingleSeries() ? series.getValue(i).toString() : series.getLabel());
-                            }
-                            // set categoriesValue
-                            if (categoriesParam != null) {
-                                serieChartLink = serieChartLink.replace("{" + categoriesParam + "}",
-                                        graph.getCategory(i).getLable());
-                            }
-                            // set the value
-                            if (valueParam != null)
-                                serieChartLink = serieChartLink.replace("{" + valueParam + "}", series.getValue(i)
-                                        .toString());
-
-                            series.setEvent(i, serieChartLink);*/
                         }
-
                         setSeriesColor(series, i);
 
                     } catch (Exception e) {
@@ -290,7 +231,6 @@ public class FCChart extends FCItem {
      */
     private void setChartLink(Series series, Integer seriesIndex) {
 
-        String chartLink = graph.getChartProperties().get("chartLink");
         String serieChartLink = chartLink;
 
         // set seriesValue
@@ -308,6 +248,18 @@ public class FCChart extends FCItem {
         }
         
         series.setEvent(seriesIndex, serieChartLink);
+    }
+    
+    /**
+     * Render the chart XML.
+     * @return XML for the chart.
+     * @throws Exception
+     */
+    public String generateChart() throws Exception {
+    	ChartFactoryChart chart	= new ChartFactoryChart(isFreeVersion());   
+		//attach graph to chart factory
+		chart.insertGraph(graph);
+		return chart.buildDOMFusionChart(graph.getGraphId()); 
     }
 
 }

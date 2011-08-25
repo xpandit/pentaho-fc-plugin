@@ -10,7 +10,6 @@ import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
-import com.fusioncharts.ChartFactory;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.fusioncharts.Series.SeriesType;
@@ -49,7 +48,7 @@ abstract public class FCItem {
     /**
      * Parameters that require specific procedure to be properly rendered
      */
-    private static final String[] specialParameters = { WIDTH, HEIGHT, FREE, WMODE, CHARTXML };
+    private static final String[] SPECIAL_PARAMETERS = { WIDTH, HEIGHT, FREE, WMODE, CHARTXML };
 
     //input data
     private IPentahoResultSet data = null;
@@ -64,33 +63,9 @@ abstract public class FCItem {
     private boolean isChartXMLMode = false;
 
     /**
-     * Constructor for the class FCItem
-     * 
-     * @param graphId The graph name.
-     * @param graphType The graph type ie:(pie graph, column chart)
-     * @param categoryLength The length of the categories.
-     * @throws Exception 
+     * Generate the XML for the chart. Depends on the chart type.
      */
-    /*public FCItem(String graphId, ChartType graphType, int categoryLength, Map<String,ArrayList<IPentahoResultSet>> resultSets) throws Exception {
-        graph = new FusionGraph(graphId, graphType, categoryLength);
-        setData(resultSets);
-    }*/
-
-    /**
-     * 
-     * @param isFreeVersion renders the chart to be used with free version or not
-     * @return
-     * @throws Exception
-     */
-    public String generateChart() throws Exception {
-
-        ChartFactory chart = new ChartFactory(isFreeVersion());
-        chart.setChartXMLMode(isChartXMLMode());
-        // attach graph to chart factory
-        chart.insertGraph(graph);
-        return chart.buildDOMFusionChart(graph.getGraphId());
-
-    }
+    public abstract String generateChart() throws Exception;
 
     /**
      * 
@@ -218,7 +193,21 @@ abstract public class FCItem {
 
     /**
      * 
-     * Set chart Properties by name and value The properties set with the same key will be replaced
+     * Set chart Properties by map The properties set with the same key will be replaced
+     * 
+     * @param params map with all parameters
+     */
+    public void setChartProperties(TreeMap<String, String> params) {
+        Set<String> keys = params.keySet();
+        for (String mapKey : keys) {
+            setChartProperties(mapKey, params.get(mapKey));
+        }
+    }
+    
+    /**
+     * 
+     * Set chart Properties by name and value The properties set with the same key will be replaced.
+     * Properties are either set as a special paramter or as a chart attribute.
      * 
      * @param key key of property
      * @param value value of property
@@ -227,8 +216,7 @@ abstract public class FCItem {
         if (isSpecialParam(key))
             processSpecialParameters(key, value);
         else
-            graph.setChartProperties(key, value);
-
+        	graph.setChartProperties(key, value);
     }
 
     /**
@@ -241,7 +229,6 @@ abstract public class FCItem {
     protected void setCategoryColor(Series series, int seriesIndex) {
         String value = graph.getChartProperties().get(CATEGORIESCOLOR);
 
-        // have the property CATEGORIESCOLOR
         if (value != null) {
             // split the values
             String color = (value.split(";"))[seriesIndex];
@@ -252,25 +239,12 @@ abstract public class FCItem {
 
     /**
      * 
-     * Set chart Properties by map The properties set with the same key will be replaced
-     * 
-     * @param params map with all parameters
-     */
-    public void setChartProperties(TreeMap<String, String> params) {
-        Set<String> keys = params.keySet();
-        for (String mapKey : keys) {
-            setChartProperties(mapKey, params.get(mapKey));
-        }
-    }
-
-    /**
-     * 
      * @param parameter
      * @return
      */
     private boolean isSpecialParam(String parameter) {
-        for (int i = 0; i < specialParameters.length; ++i) {
-            if (specialParameters[i].equals(parameter)) {
+        for (int i = 0; i < SPECIAL_PARAMETERS.length; ++i) {
+            if (SPECIAL_PARAMETERS[i].equals(parameter)) {
                 return true;
             }
         }

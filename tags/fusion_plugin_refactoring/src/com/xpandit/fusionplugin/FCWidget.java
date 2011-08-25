@@ -2,9 +2,11 @@ package com.xpandit.fusionplugin;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
 
+import com.fusioncharts.ChartFactoryWidget;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.ColorRange;
 import com.fusioncharts.FusionGraph;
@@ -13,7 +15,7 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
- * This class is responsible for managing logic specific to Widgets. Generic behavior could should be kept on the
+ * This class is responsible for managing logic specific to Widgets. Generic behavior should be kept on the
  * abstract class FCItem.
  * 
  * @author dduque
@@ -28,7 +30,7 @@ public class FCWidget extends FCItem {
      * @param resultSets Results sets containing data to display.
      * @throws InvalidDataResultSetException
      */
-    public FCWidget(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets)
+    public FCWidget(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets, TreeMap<String, String> params)
             throws InvalidDataResultSetException {
 
         // set category length
@@ -45,6 +47,11 @@ public class FCWidget extends FCItem {
 
         // initialize widget
         graph = new FusionGraph("widget", chartType, categoryLength);
+        
+        //set chart properties
+        setChartProperties(params);
+        
+        //set data on chart
         setData(resultSets);
     }
 
@@ -114,7 +121,7 @@ public class FCWidget extends FCItem {
             log.debug("No data founded in range values were founded");
             return;
         }
-        // have the COLORRANGE propertie set?
+        // has the COLORRANGE property?
         String colorRange = graph.getChartProperties().get(COLORRANGE);
         if (colorRange == null)
             throw new InvalidParameterException(InvalidParameterException.ERROR_003 + "-->" + COLORRANGE);
@@ -171,4 +178,17 @@ public class FCWidget extends FCItem {
         }
 
     }
+    
+    /**
+     * Renders the widget.
+     * @return XML that represents the widget.
+     * @throws Exception
+     */
+    public String generateChart() throws Exception {
+		ChartFactoryWidget chart	= new ChartFactoryWidget(isFreeVersion());   
+		//attach graph to chart factory
+		chart.insertGraph(graph);
+		return chart.buildDOMFusionChart(graph.getGraphId()); 
+
+	}
 }
