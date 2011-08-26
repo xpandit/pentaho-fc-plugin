@@ -2,6 +2,9 @@
 #labels Phase-Deploy,Manual
 #sidebar TocMain
 
+= Tutorial = 
+[http://www.youtube.com/watch?v=VPSaPm5-rgs Video with tutorial]
+
 = Installation =
 
  # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
