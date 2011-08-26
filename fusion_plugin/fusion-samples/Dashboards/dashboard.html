@@ -1,0 +1,106 @@
+<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-samples/Dashboards/FCPluginCDFComponent.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-samples/Dashboards/MetaLayerCharts.js"></script>
+
+<script type='text/javascript' src='GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js'></script>
+
+<div class="dashboardContent">
+    <div id="dashboardRow1" style="position:relative; width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Line Chart
+            </div>
+            <div id="lineChart">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Pie Chart
+            </div>
+            <div id="pieChart">
+            </div>
+        </div>
+    </div>
+    <div id="dashboardRow2" style="position:relative;width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Column Chart
+            </div>
+            <div id="columnChart">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center; font-weight:bold;">
+                Bar Chart
+            </div>
+            <div id="barChart">
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+
+    var lineChart = {
+        name: "lineChart",
+        solution: "bi-developers",
+        path: "fusion-samples/Fusion Charts Free",
+        action: "LineChart.xfusion",
+        executeAtStart: true,
+        htmlObject: "lineChart",
+        chartDefinition: MetaLayerCharts.lineChartDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+
+    var pieChart = {
+        name: "pieChart",
+        solution: "bi-developers",
+        path: "fusion-samples/Fusion Charts Free",
+        action: "PieChart3D.xfusion",
+        executeAtStart: true,
+        htmlObject: "pieChart",
+        chartDefinition: MetaLayerCharts.pieChartDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+    
+
+    var columnChart = {
+        name: "columnChart",
+        solution: "bi-developers",
+        path: "fusion-samples/Fusion Charts Free",
+        action: "ColumnChart3D.xfusion",
+        executeAtStart: true,
+        htmlObject: "columnChart",
+        chartDefinition: MetaLayerCharts.columnChartDef,
+        type: "FusionChartComponent",
+        postExecution: function(){
+        }
+    }
+
+    var barChart = {
+            name: "barChart",
+            solution: "bi-developers",
+            path: "fusion-samples/Fusion Charts Free",
+            action: "BarChart2D.xfusion",
+            executeAtStart: true,
+            htmlObject: "barChart",
+            chartDefinition: MetaLayerCharts.barChartDef,
+            type: "FusionChartComponent",
+            postExecution: function(){
+            }
+        }
+    
+    function load(){
+
+        var components = [lineChart , pieChart , columnChart , barChart];
+        
+        Dashboards.init(components);
+        
+    }
+    load();
+</script>
