@@ -1,4 +1,4 @@
-package com.xpandit.fusionplugin.pentaho.content;
+package com.xpandit.fusionplugin.content;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,12 +9,6 @@ import org.pentaho.platform.api.engine.ISolutionFile;
 import org.pentaho.platform.api.engine.SolutionFileMetaAdapter;
 import org.pentaho.platform.engine.core.solution.FileInfo;
 
-/**
- * Class that make metadata available on the PUC.
- * 
- * @author xpandit
- *
- */
 public class FusionContentTypeMetaProvider extends SolutionFileMetaAdapter {
   
   private static final String AUTHOR        = "meta.author";

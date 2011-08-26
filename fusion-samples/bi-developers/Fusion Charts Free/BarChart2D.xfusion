@@ -1,4 +1,5 @@
-cdaName=DrillBarChart2D.cda
+cdaName=BarChart2D.cda
+cdaPath=fusion-samples/Fusion Charts Free
 cdaDataAccessId=2
 cdaSolution=bi-developers
 chartTitle=Sales Per year

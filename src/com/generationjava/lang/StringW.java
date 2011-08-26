@@ -13,6 +13,10 @@ import com.generationjava.collections.CollectionsW;
 import com.generationjava.collections.EnumerationIterator;
 import com.generationjava.util.Soundex;
 
+// TODO: isSimilarText
+
+// NODO: pack, unpack, sprintf, sscanf - too C like. Not enough need in Java.
+
 /**
  * A set of String library static methods. While extending String or 
  * StringBuffer would have been the nicest solution, that is not 
