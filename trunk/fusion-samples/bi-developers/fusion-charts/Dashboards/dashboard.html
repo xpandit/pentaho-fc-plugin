@@ -1,7 +1,6 @@
-<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-charts/Dashboards/FCPluginCDFComponent.js"></script>
-<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-charts/Dashboards/MetaLayerCharts.js"></script>
-
 <script type='text/javascript' src='GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js'></script>
+<script type="text/javascript" src="GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-charts/Dashboards/MetaLayerCharts.js"></script>
 
 <div class="dashboardContent">
     <div id="dashboardRow1" style="position:relative; width:900px;">
@@ -58,7 +57,7 @@
     
     // Dashboard Parameters
     Dashboards.globalContext = false;
-
+    
     var lineChart = {
         name: "lineChart",
         solution: "bi-developers",
@@ -67,7 +66,7 @@
         executeAtStart: true,
         htmlObject: "lineChart",
         chartDefinition: MetaLayerCharts.lineChartDef,
-        type: "FusionChartComponent",
+        type: "XDashFusionChartComponent",
         postExecution: function(){
         }
     }
@@ -80,7 +79,7 @@
         executeAtStart: true,
         htmlObject: "pieChart",
         chartDefinition: MetaLayerCharts.pieChartDef,
-        type: "FusionChartComponent",
+        type: "XDashFusionChartComponent",
         postExecution: function(){
         }
     }
@@ -94,7 +93,7 @@
         executeAtStart: true,
         htmlObject: "columnChart",
         chartDefinition: MetaLayerCharts.columnChartDef,
-        type: "FusionChartComponent",
+        type: "XDashFusionChartComponent",
         postExecution: function(){
         }
     }
@@ -107,7 +106,7 @@
             executeAtStart: true,
             htmlObject: "msColumnChart",
             chartDefinition: MetaLayerCharts.msColumnChartDef,
-            type: "FusionChartComponent",
+            type: "XDashFusionChartComponent",
             postExecution: function(){
             }
         }
@@ -120,7 +119,7 @@
             executeAtStart: true,
             htmlObject: "barChart",
             chartDefinition: MetaLayerCharts.barChartDef,
-            type: "FusionChartComponent",
+            type: "XDashFusionChartComponent",
             postExecution: function(){
             }
         }
@@ -131,25 +130,21 @@
             action: "DrillBarChart2D.xfusion",
             executeAtStart: true,
             htmlObject: "drillBarChart",
+            parameters: [["year","year"]],
+            listeners: ["year"],
             chartDefinition: MetaLayerCharts.drillBarChartDef,
-            type: "FusionChartComponent",
+            type: "XDashFusionChartComponent",
             drillFunction:function(series,categories)
             {
-
-    			//change parameters
-        		this.chartDefinition.year=categories;
-        		this.chartDefinition.cdaDataAccessId=3;
-        		this.chartDefinition.cdaParameters="year"; 
-        		
+        		this.chartDefinition.cdaDataAccessId=3;		
         		this.chartDefinition.chartLink=undefined;
-        		
-    			Dashboards.update(drillBarChart);
+        		Dashboards.fireChange("year", categories);
         	}
         }
     
     function load(){
 
-        var components = [lineChart , pieChart , columnChart,msColumnChart , barChart,drillBarChart];
+        var components = [lineChart , pieChart, columnChart, msColumnChart, barChart, drillBarChart];
         
         Dashboards.init(components);
         
