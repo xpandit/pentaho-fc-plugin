@@ -44,27 +44,20 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		//set extra configuration for HTML5 charts
         if (!!myChart._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
         	myChart._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
-        	}
+        }
 		
 		// add the chart
-		myChart.render(myself.htmlObject); 
-	
-	
+		myChart.render(myself.htmlObject); 	
 		$("#"+options.htmlObject).find("embed").attr("wmode","transparent"); 
-	
-	
+		
 		// set the chart object to this cdf component
 		myself.chartObject=myChart; 
 	
 		// set the back button
-		if(myself.backButton)
-		{
-			var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');
-	
-			div.css("left",Number(myself.chartDefinition.width));
-	
-			$("#"+myself.htmlObject).prepend(div);
-	
+		if(myself.backButton) {
+			var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
+			div.css("left",Number(myself.chartDefinition.width));	
+			$("#"+myself.htmlObject).prepend(div);	
 			div.click(myself.backButtonCallBack);
 		}
 	},
@@ -73,16 +66,24 @@ var XDashFusionChartComponent = BaseComponent.extend({
 
 		// map options
 		var options = {
-				solution : this.solution,
-				path: this.path,
-				name: this.action
+			solution : this.solution,
+			path: this.path,
+			name: this.action
 		};
 
 		// process params and update options
-		if(this.parameters!=undefined)
+		if(typeof(this.parameters) !== "undefined") {
+			options["cdaParameters"] = "";
+			var isFirst = true;
+			
 			$.map(this.parameters,function(k){
 				options[k[0]] = k.length==3?k[2]: Dashboards.getParameterValue(k[1]);
+				
+				//update the cdaParameters string
+				isFirst? isFirst=false: options["cdaParameters"] += ",";				
+				options["cdaParameters"] += k[0]; 
 			});
+		}
 
 		// get all chartproperties Definition
 		for (var name in this.chartDefinition) {
