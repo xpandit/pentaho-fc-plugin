@@ -60,94 +60,62 @@
     
     var lineChart = {
         name: "lineChart",
-        solution: "bi-developers",
-        path: "fusion-charts/Fusion Charts Free",
-        action: "LineChart.xfusion",
         executeAtStart: true,
         htmlObject: "lineChart",
         chartDefinition: MetaLayerCharts.lineChartDef,
-        type: "XDashFusionChartComponent",
-        postExecution: function(){
-        }
+        type: "XDashFusionChartComponent"
     }
 
     var pieChart = {
         name: "pieChart",
-        solution: "bi-developers",
-        path: "fusion-charts/Fusion Charts Free",
-        action: "PieChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "pieChart",
         chartDefinition: MetaLayerCharts.pieChartDef,
-        type: "XDashFusionChartComponent",
-        postExecution: function(){
-        }
+        type: "XDashFusionChartComponent"
     }
     
-
     var columnChart = {
         name: "columnChart",
-        solution: "bi-developers",
-        path: "fusion-charts/Fusion Charts Free",
-        action: "ColumnChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "columnChart",
         chartDefinition: MetaLayerCharts.columnChartDef,
-        type: "XDashFusionChartComponent",
-        postExecution: function(){
-        }
+        type: "XDashFusionChartComponent"
     }
 
     var msColumnChart = {
-            name: "columnChart",
-            solution: "bi-developers",
-            path: "fusion-charts/Fusion Charts Free",
-            action: "MSColumnChart3D.xfusion",
-            executeAtStart: true,
-            htmlObject: "msColumnChart",
-            chartDefinition: MetaLayerCharts.msColumnChartDef,
-            type: "XDashFusionChartComponent",
-            postExecution: function(){
-            }
-        }
+        name: "columnChart",
+        executeAtStart: true,
+        htmlObject: "msColumnChart",
+        chartDefinition: MetaLayerCharts.msColumnChartDef,
+        type: "XDashFusionChartComponent"
+    }
 
     var barChart = {
-            name: "barChart",
-            solution: "bi-developers",
-            path: "fusion-charts/Fusion Charts Free",
-            action: "BarChart2D.xfusion",
-            executeAtStart: true,
-            htmlObject: "barChart",
-            chartDefinition: MetaLayerCharts.barChartDef,
-            type: "XDashFusionChartComponent",
-            postExecution: function(){
-            }
-        }
-    var drillBarChart = {
-            name: "drillBarChart",
-            solution: "bi-developers",
-            path: "fusion-charts/Fusion Charts Free",
-            action: "DrillBarChart2D.xfusion",
-            executeAtStart: true,
-            htmlObject: "drillBarChart",
-            parameters: [["year","year"]],
-            listeners: ["year"],
-            chartDefinition: MetaLayerCharts.drillBarChartDef,
-            type: "XDashFusionChartComponent",
-            drillFunction:function(series,categories)
-            {
-        		this.chartDefinition.cdaDataAccessId=3;		
-        		this.chartDefinition.chartLink=undefined;
-        		Dashboards.fireChange("year", categories);
-        	}
-        }
-    
-    function load(){
-
-        var components = [lineChart , pieChart, columnChart, msColumnChart, barChart, drillBarChart];
-        
-        Dashboards.init(components);
-        
+        name: "barChart",
+        executeAtStart: true,
+        htmlObject: "barChart",
+        chartDefinition: MetaLayerCharts.barChartDef,
+        type: "XDashFusionChartComponent"
     }
-    load();
+    
+    var drillBarChart = {
+        name: "drillBarChart",
+        executeAtStart: true,
+        htmlObject: "drillBarChart",
+        parameters: [["year","year"]],
+        listeners: ["year"],
+        chartDefinition: MetaLayerCharts.drillBarChartDef,
+        type: "XDashFusionChartComponent",
+        drillFunction:function(series,categories) {
+       		this.chartDefinition.cdaDataAccessId=3;		
+        	this.chartDefinition.chartLink=undefined;
+        	Dashboards.fireChange("year", categories);
+        }
+    }
+    
+    var components = [lineChart , pieChart, columnChart, msColumnChart, barChart, drillBarChart];
+
+    $(document).ready(function() { 
+		Dashboards.init(components);
+    });
 </script>
