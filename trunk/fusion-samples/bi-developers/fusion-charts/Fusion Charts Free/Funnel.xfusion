@@ -1,6 +1,5 @@
-cdaName=Funnel.cda
+cdaPath=bi-developers/fusion-charts/Fusion Charts Free/Funnel.cda
 cdaDataAccessId=2
-cdaSolution=bi-developers
 chartTitle=Sales Per year
 xAxisName=Years
 yAxisName=Sales

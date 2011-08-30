@@ -8,7 +8,6 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.pentaho.platform.api.engine.ISolutionFile;
 import org.pentaho.platform.api.repository.ISolutionRepository;
-import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
@@ -29,13 +28,11 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
  * 
  */
 public class PropertiesManager {
-    
+	
+	private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
+	
     //Well known parameter types.
-    private static final String NAME = "name";
-    private static final String SOLUTION = "solution";
-    private static final String PATH = "path";
-   
-    private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
+    private static final String XFUSIONPATH = "xFusionPath";
     
     // Manager for properties obtained from the .xfusion file
     private TreeMap<String, String> localProperties = null;
@@ -44,13 +41,7 @@ public class PropertiesManager {
     private TreeMap<String, String> instanceProperties = null;
 
     // name of properties file
-    private String propFile = "";
-    
-    // path of properties file
-    private String propPath;
-    
-    // Solution name of properties file
-    private String propSolution;
+    private String xFusionFile = "";
 
     /**
      * 
@@ -64,12 +55,11 @@ public class PropertiesManager {
      * @throws InvalidParameterException
      */
     public PropertiesManager(TreeMap<String, String> instanceProperties) throws InvalidParameterException {
-        this.propFile = instanceProperties.get(NAME);
-        this.propPath = instanceProperties.get(PATH);
-        this.propSolution = instanceProperties.get(SOLUTION);
-        fillLocalParameters();
-        // fillInstancePrameters();
+        this.xFusionFile = instanceProperties.get(XFUSIONPATH);
         this.instanceProperties = instanceProperties;
+        localProperties = new TreeMap<String, String>();
+
+        fillLocalParameters();
     }
 
     /**
@@ -78,27 +68,26 @@ public class PropertiesManager {
      * @throws InvalidParameterException
      */
     private void fillLocalParameters() throws InvalidParameterException {
-        localProperties = new TreeMap<String, String>();
+    	if(this.xFusionFile == null) {
+    		return;
+    	}
 
         // get file
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
-        final ISolutionFile file = repository.getSolutionFile(
-                new ActionInfo(propSolution, propPath, propFile).toString(), ISolutionRepository.ACTION_EXECUTE);
+        final ISolutionFile file = repository.getSolutionFile(xFusionFile, ISolutionRepository.ACTION_EXECUTE);
 
         // if is no file and propFile is set log a warning
         if (file != null) {
             if (file.getData() == null) {
-                if (!propFile.equals(""))
+                if (!xFusionFile.equals(""))
                     throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                            + "No solution file found to set properties:" + "propSolution->" + propSolution
-                            + ";propPath-->" + propPath + ";propFile-->" + propFile);
+                            + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
                 return;
             }
         } else {
-            if (!propFile.equals(""))
+            if (!xFusionFile.equals(""))
                 throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                        + "No solution file found to set properties:" + "propSolution->" + propSolution
-                        + ";propPath-->" + propPath + ";propFile-->" + propFile);
+                        + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
         }
 
         // load properties
@@ -106,8 +95,8 @@ public class PropertiesManager {
         try {
             properties.load(new ByteArrayInputStream(file.getData()));
         } catch (IOException e) {
-            log.error("Unable to Load properties file. Continue without properties file:" + "propSolution->"
-                    + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile, e);
+            log.error("Unable to Load properties file. Continue without properties file:" + "xFusionFile->"
+                    + xFusionFile, e);
             return;
         }
 
@@ -116,7 +105,6 @@ public class PropertiesManager {
             String stringKey = (String) key;
             localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
         }
-
     }
 
     /**
@@ -141,17 +129,7 @@ public class PropertiesManager {
      * 
      * @return
      */
-    public String getPropSolution() {
-        return this.propSolution;
-    }
-
-    /**
-     * 
-     * returns the path of the xFusion properties file
-     * 
-     * @return
-     */
-    public String getPropPath() {
-        return this.propPath;
+    public String getXFusionFile() {
+        return this.xFusionFile;
     }
 }

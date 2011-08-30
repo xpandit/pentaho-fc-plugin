@@ -10,10 +10,7 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		this.clear();
 	
 		var options = this.getOptions();
-		
-		options["chartXML"]=true;
-		options["dashboard-mode"]=false;
-		
+				
 		var url = webAppPath + '/content/fusion';
 		var myself=this;
 	
@@ -36,8 +33,7 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
-	
-		
+			
 		// set chart data
 		myChart.setDataXML(resultXml);
 	
@@ -64,15 +60,10 @@ var XDashFusionChartComponent = BaseComponent.extend({
 
 	getOptions: function(){
 
-		// map options
-		var options = {
-			solution : this.solution,
-			path: this.path,
-			name: this.action
-		};
+		var options = {};
 
-		// process params and update options
-		if(typeof(this.parameters) !== "undefined") {
+		// process parameters and build the cdaParameters string
+		if(typeof this.parameters !== "undefined") {
 			options["cdaParameters"] = "";
 			var isFirst = true;
 			
@@ -85,25 +76,27 @@ var XDashFusionChartComponent = BaseComponent.extend({
 			});
 		}
 
-		// get all chartproperties Definition
-		for (var name in this.chartDefinition) {
-			var chartDefinitonValue=this.chartDefinition[name];
-			if(typeof(chartDefinitonValue)=="function")
-				chartDefinitonValue=chartDefinitonValue();
-			options[name]=chartDefinitonValue;
+		// get all chart properties definition
+		var cd = this.chartDefinition;
+		for(key in cd){
+			var value = typeof cd[key]=='function'?cd[key](): cd[key];
+			options[key] = value;
 		}
-
+		
+		// TODO colocar aqui logica para permitir alterar entre os varios
+		// tipos de operacoes
+		// sem ter que saber parametros (edit, command)
+		if(typeof options["command"] == "undefined") {
+			options["command"] = "open";  
+		}		
 
 		// default options
-		if(typeof options.command == "undefined")
-			options.command="open";       	
-
-		// TODO colocar aqui lógica para permitir alterar entre os vários
-		// tipos de operações
-		// sem ter que saber parametros (edit, command)
-
+		options["chartXML"] = true;
+		options["dashboard-mode"] = false;
+		
 		return options;
 	},
+	
 	getGUID : function(){
 		if(this.GUID == null){
 		  this.GUID = WidgetHelper.generateGUID();
@@ -111,6 +104,7 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		return this.GUID;
 	}
 });
+
 XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
   var widget = new XDashFusionChartComponent();
   widget.localizedName = localizedFileName;
