@@ -71,7 +71,7 @@ var XDashFusionChartComponent = BaseComponent.extend({
 				options[k[0]] = k.length==3?k[2]: Dashboards.getParameterValue(k[1]);
 				
 				//update the cdaParameters string
-				isFirst? isFirst=false: options["cdaParameters"] += ",";				
+				isFirst? isFirst=false: options["cdaParameters"] += ";";				
 				options["cdaParameters"] += k[0]; 
 			});
 		}
