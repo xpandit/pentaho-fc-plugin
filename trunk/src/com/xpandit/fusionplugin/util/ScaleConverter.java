@@ -24,10 +24,49 @@ public class ScaleConverter {
     public static String scaleNumber(double number) {
         int indexDivision = 0;
         double auxI = number;
+        boolean negative=false;
+        if(number<0)
+        {
+        	negative=true;
+        	auxI*=-1;
+        	
+        }
         while (auxI > 1000 && indexDivision < NUMBER_SCALE.length - 1) {
             auxI /= 1000;
             ++indexDivision;
         }
+        if(negative)
+        	auxI*=-1;
         return Double.valueOf(auxI).longValue() + NUMBER_SCALE[indexDivision];
+    }
+    
+    /**
+     * Reduce the number size by dividing by 1000 and round the number .
+     * @param number The number to convert.
+     * @return String with the number divided and the with letter appended.
+     */
+    public static String scaleNumberWithRound(double number) {
+        int indexDivision = 0;
+        double auxI = number;
+        boolean negative=false;
+        if(number<0)
+        {
+        	negative=true;
+        	auxI*=-1;
+        	
+        }
+        while (auxI > 1000 && indexDivision < NUMBER_SCALE.length - 1) {
+            auxI /= 1000; 
+            ++indexDivision;
+        }
+        long auxValue=Double.valueOf(auxI).longValue();
+        if(auxValue>1000)
+        {
+        	auxValue/=10;
+        	auxValue*=10;
+        }
+        if(negative)
+        	auxI*=-1;
+        return auxValue + NUMBER_SCALE[indexDivision];
     }
 }
