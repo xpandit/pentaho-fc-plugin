@@ -150,18 +150,24 @@ public class FCChart extends FCItem {
                 } catch (Exception e) {
                     log.error("Problem in result set. Null values found at index:" + i, e);
                 }
-            }
-
+            } 
+    
             // set max YAxis with more 10% of current yMax Value
-            int maxYvalueAux = (int) (maxYvalue * 1.30);
+            long maxYvalueAux = (long) (maxYvalue+((maxYvalue-minYvalue) * 0.30));
+            long minYvalueAux = (long) (minYvalue-((maxYvalue-minYvalue) * 0.30));
             // fusion charts tweak
             // the automatic scale at y axis don'w work correctly when the value is like-> 100999999
             // this transform the value to 100999000
-            if (maxYvalueAux > 1000) {
+            if (maxYvalueAux > 1000 || maxYvalueAux < -1000) {
                 maxYvalueAux /= 1000;
                 maxYvalueAux *= 1000;
             }
+            if (minYvalueAux > 1000||minYvalueAux < -1000) {
+            	minYvalueAux /= 1000; 
+            	minYvalueAux *= 1000;
+            }
             graph.setChartProperties("yAxisMaxValue", String.valueOf(maxYvalueAux));
+            graph.setChartProperties("yAxisMinValue", String.valueOf(minYvalueAux));
 
             // set the categories for bubble chart
             int index = 0;
@@ -171,16 +177,15 @@ public class FCChart extends FCItem {
             int numDivLinesXAxis = width / 90;
 
             // the max value of x Axis is 10% more than real max value
-            double maxValueX = maxXvalue * 1.10;
-
+            long maxValueX = (long) (maxXvalue+((maxXvalue-minXvalue) * 0.10));
+            long minValueX = (long) (minXvalue-((maxXvalue-minXvalue) * 0.10));
             // calculates the number of vertical lines
-            double stepsValue = maxValueX / numDivLinesXAxis;
-
+            long stepsValue = (maxValueX-minValueX) / numDivLinesXAxis;
             // build the categories
-            for (double i = minXvalue; i <= maxValueX; i += stepsValue) {
+            for (double i = minValueX; i <= maxValueX; i += stepsValue) {
                 Category cat = new Category();
                 // set then correct value at the label
-                cat.setLable(ScaleConverter.scaleNumber(i));
+                cat.setLable(ScaleConverter.scaleNumberWithRound(i));
                 // set the X value
                 cat.setxValue(i);
                 // set the category

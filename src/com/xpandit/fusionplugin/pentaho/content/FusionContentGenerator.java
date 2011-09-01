@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.platform.api.engine.ISolutionFile;
 import org.pentaho.platform.api.repository.ISolutionRepository;
+import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.platform.engine.services.solution.SimpleContentGenerator;
 
@@ -28,8 +29,7 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
- * This is the Plugin content Generator. Class that based on the .xfusion file
- * renders the chart as HTML or plain XML.
+ * This is the Plugin content Generator. Class that based on the .xfusion file renders the chart as HTML or plain XML.
  * 
  * @author dduque
  * 
@@ -37,8 +37,10 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
 public class FusionContentGenerator extends SimpleContentGenerator {
     private static final long serialVersionUID = 997953797244958291L;
 
+    private static final String CDANAME = "cdaName";
     private static final String CDAID = "cdaDataAccessId";
     private static final String CDAPATH = "cdaPath";
+    private static final String CDASOLUTION = "cdaSolution";
     private static final String CDAPARAMETERS = "cdaParameters";
     private static final String MIMETYPE = "text/html";
     private static final String ISDASHBOARDMODE = "dashboard-mode";
@@ -46,8 +48,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private static final String TARGETVALUECDAID = "targetValueCdaId";
     private static final String RANGEVALUECDAID = "rangeValueCdaId";
 
-    // TODO is being used on different methods should be placed inside a method
-    // on the next refactoring.
+    // TODO is being used on different methods should be placed inside a method on the next refactoring.
     CdaQueryComponent cdaQueryComponent = null;
 
     // Request parser
@@ -108,7 +109,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             getLogger().error("Error : resultset is null -> see previous error");
 
         // create the chart
-        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);// resultSets.get("results"));
+        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
 
         // render the chart
         TreeMap<String, String> params = pm.getParams();
@@ -126,29 +127,23 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 
     /**
      * 
-     * Get the based on CDA. CDA parameters are used to obtain the file on the
-     * repository. All parameters should be set on the properties Manager
+     * Get the based on CDA. CDA parameters are used to obtain the file on the repository. All parameters should be set
+     * on the properties Manager
      * 
-     * @return An array containing all the result sets, including additional
-     *         ones for target values or access ids if applicable.
+     * @return An array containing all the result sets, including additional ones for target values or access ids if
+     *         applicable.
      * @throws Exception
      */
     private Map<String, ArrayList<IPentahoResultSet>> getDataUsingCDA() throws Exception {
-        String cdaPath = pm.getParams().get(CDAPATH);
-
-        if (cdaPath == null) {
-            throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAPATH
-                    + " parameter not supplied.");
-        }
-
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
-        final ISolutionFile file = repository.getSolutionFile(cdaPath, ISolutionRepository.ACTION_EXECUTE);
+        final ISolutionFile file = repository.getSolutionFile(getAction().toString(),
+                ISolutionRepository.ACTION_EXECUTE);
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
 
         if (file == null) {
             throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
-                    + cdaPath);
+                    + getAction().getSolutionName() + "/" + getAction().getPath() + "/" + getAction().getActionName());
         }
 
         cdaQueryComponent = new CdaQueryComponent();
@@ -178,11 +173,11 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                     aux.add(resultset);
 
                     if (resultset == null) {
-                        throw new Exception("resultset==null Query ID:" + queryID);
+                        throw new Exception("resultset==null Querie ID:" + queryID);
                     }
                 }
             } catch (Exception e) {
-                throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Query ID:"
+                throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Querie ID:"
                         + queryID, e);
             }
         }
@@ -194,7 +189,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                 resultSets.put("targetValue", getTargetValueCDA(cdaInputs, resultset));
         } catch (Exception e) {
             getLogger().error(
-                    "Error retrieving data: cdaQueryComponent failed to return data. Query ID" + TARGETVALUECDAID, e);
+                    "Error retrieving data: cdaQueryComponent failed to return data. Querie ID" + TARGETVALUECDAID, e);
         }
 
         // get the targetValue result set if rangeValueCdaId property exists
@@ -233,8 +228,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 
     /**
      * 
-     * Invoke the CDA to get the list of range colors and the base value to
-     * calculate the range values
+     * Invoke the CDA to get the list of range colors and the base value to calculate the range values
      * 
      * @param cdaInputs
      * @param resultset
@@ -260,9 +254,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                     aux.add(resultset);
                 }
             } catch (Exception e) {
-                getLogger()
-                        .error("Error retrieving data: cdaQueryComponent failed to return data. Query ID"
-                                + RANGEVALUECDAID, e);
+                getLogger().error(
+                        "Error retrieving data: cdaQueryComponent failed to return data. Querie ID" + RANGEVALUECDAID,
+                        e);
             }
         }
 
@@ -270,9 +264,8 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     }
 
     /**
-     * Get all parameter Values and return the String as requested by CDA
-     * process parameter string "name1=value1;name2=value2" The requested
-     * parameter names are in cdaParameters Ex.
+     * Get all parameter Values and return the String as requested by CDA process parameter string
+     * "name1=value1;name2=value2" The requested parameter names are in cdaParameters Ex.
      * cdaParameters=name1;name2;name3......
      * 
      * @return return parameters as requested by CDA
@@ -282,7 +275,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         TreeMap<String, String> params = pm.getParams();
         String parameterKeys = params.get(CDAPARAMETERS);
         if (parameterKeys == null) {
-            getLogger().debug("No parameters will be passed: " + CDAPARAMETERS + " is not supplied.");
+            getLogger().debug("No parameters will be passed: " + CDAPARAMETERS + " don't exist");
             return "";
         }
         String[] parametersKeysArray = parameterKeys.split(";");
@@ -299,9 +292,26 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     }
 
     /**
+     * Create an ActionInfo with parameters CDASOLUTION,CDAPATH and CDANAME
      * 
-     * Call CDA clear cache. This is necessary due to the fact that a CDA
-     * instance is running on the FCplugin.
+     * @return The action info.
+     */
+    private ActionInfo getAction() {
+
+        String solution = pm.getParams().get(CDASOLUTION);
+        String path = pm.getParams().get(CDAPATH);
+        String name = pm.getParams().get(CDANAME);
+
+        // if no CDASOLUTION or CDAPATH provided set default values
+        solution = (solution != null ? solution : pm.getPropSolution());
+        path = (path != null ? path : pm.getPropPath());
+
+        return new ActionInfo(solution, path, name);
+    }
+
+    /**
+     * 
+     * Call CDA clear cache. This is necessary due to the fact that a CDA instance is running on the FCplugin.
      * 
      */
     public void clearCache() {
