@@ -1,0 +1,9 @@
+cdaPath=bi-developers/fusion-charts/Fusion Charts Free/PieChart3D.cda
+cdaDataAccessId=2
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=Pie3D
+height=200
+width=500
+free=true

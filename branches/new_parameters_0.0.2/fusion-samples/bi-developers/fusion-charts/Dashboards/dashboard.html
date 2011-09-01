@@ -1,0 +1,121 @@
+<script type='text/javascript' src='GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js'></script>
+<script type="text/javascript" src="GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-charts/Dashboards/MetaLayerCharts.js"></script>
+
+<div class="dashboardContent">
+    <div id="dashboardRow1" style="position:relative; width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Line Chart
+            </div>
+            <div id="lineChart">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Pie Chart
+            </div>
+            <div id="pieChart">
+            </div>
+        </div>
+    </div>
+    <div id="dashboardRow2" style="position:relative;width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Column Chart
+            </div>
+            <div id="columnChart">
+            </div>
+        </div>
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center; font-weight:bold;">
+                Bar Chart
+            </div>
+            <div id="barChart">
+            </div>
+        </div>
+    </div>
+    <div id="dashboardRow3" style="position:relative;width:900px;">
+        <div style="float:left; padding:10px;">
+            <div style="text-align:center;font-weight:bold;">
+                Drill Bar Chart
+            </div>
+            <div id="drillBarChart">
+            </div>
+        </div>
+                
+        <div style="float:right; padding:10px;">
+            <div style="text-align:center; font-weight:bold;">
+               MS Column Chart 3D
+            </div>
+            <div id="msColumnChart">
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+    
+    var lineChart = {
+        name: "lineChart",
+        executeAtStart: true,
+        htmlObject: "lineChart",
+        chartDefinition: MetaLayerCharts.lineChartDef,
+        type: "XDashFusionChartComponent"
+    }
+
+    var pieChart = {
+        name: "pieChart",
+        executeAtStart: true,
+        htmlObject: "pieChart",
+        chartDefinition: MetaLayerCharts.pieChartDef,
+        type: "XDashFusionChartComponent"
+    }
+    
+    var columnChart = {
+        name: "columnChart",
+        executeAtStart: true,
+        htmlObject: "columnChart",
+        chartDefinition: MetaLayerCharts.columnChartDef,
+        type: "XDashFusionChartComponent"
+    }
+
+    var msColumnChart = {
+        name: "columnChart",
+        executeAtStart: true,
+        htmlObject: "msColumnChart",
+        chartDefinition: MetaLayerCharts.msColumnChartDef,
+        type: "XDashFusionChartComponent"
+    }
+
+    var barChart = {
+        name: "barChart",
+        executeAtStart: true,
+        htmlObject: "barChart",
+        chartDefinition: MetaLayerCharts.barChartDef,
+        type: "XDashFusionChartComponent"
+    }
+    
+    var drillBarChart = {
+        name: "drillBarChart",
+        executeAtStart: true,
+        htmlObject: "drillBarChart",
+        parameters: [["year","year"]],
+        listeners: ["year"],
+        chartDefinition: MetaLayerCharts.drillBarChartDef,
+        type: "XDashFusionChartComponent",
+        drillFunction:function(series,categories) {
+       		this.chartDefinition.cdaDataAccessId=3;		
+        	this.chartDefinition.chartLink=undefined;
+        	Dashboards.fireChange("year", categories);
+        }
+    }
+    
+    var components = [lineChart , pieChart, columnChart, msColumnChart, barChart, drillBarChart];
+
+    $(document).ready(function() { 
+		Dashboards.init(components);
+    });
+</script>
