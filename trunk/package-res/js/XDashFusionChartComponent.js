@@ -10,7 +10,10 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		this.clear();
 	
 		var options = this.getOptions();
-				
+		
+		options["chartXML"]=true;
+		options["dashboard-mode"]=false;
+		
 		var url = webAppPath + '/content/fusion';
 		var myself=this;
 	
@@ -33,70 +36,73 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
-			
+	
+		
 		// set chart data
 		myChart.setDataXML(resultXml);
 	
 		//set extra configuration for HTML5 charts
         if (!!myChart._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
         	myChart._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
-        }
+        	}
 		
 		// add the chart
-		myChart.render(myself.htmlObject); 	
+		myChart.render(myself.htmlObject); 
+	
+	
 		$("#"+options.htmlObject).find("embed").attr("wmode","transparent"); 
-		
+	
+	
 		// set the chart object to this cdf component
 		myself.chartObject=myChart; 
 	
 		// set the back button
-		if(myself.backButton) {
-			var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
-			div.css("left",Number(myself.chartDefinition.width));	
-			$("#"+myself.htmlObject).prepend(div);	
+		if(myself.backButton)
+		{
+			var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');
+	
+			div.css("left",Number(myself.chartDefinition.width));
+	
+			$("#"+myself.htmlObject).prepend(div);
+	
 			div.click(myself.backButtonCallBack);
 		}
 	},
 
 	getOptions: function(){
 
-		var options = {};
+		// map options
+		var options = {
+				solution : this.solution,
+				path: this.path,
+				name: this.action
+		};
 
-		// process parameters and build the cdaParameters string
-		if(typeof this.parameters !== "undefined") {
-			options["cdaParameters"] = "";
-			var isFirst = true;
-			
+		// process params and update options
+		if(this.parameters!=undefined)
 			$.map(this.parameters,function(k){
 				options[k[0]] = k.length==3?k[2]: Dashboards.getParameterValue(k[1]);
-				
-				//update the cdaParameters string
-				isFirst? isFirst=false: options["cdaParameters"] += ";";				
-				options["cdaParameters"] += k[0]; 
 			});
+
+		// get all chartproperties Definition
+		for (var name in this.chartDefinition) {
+			var chartDefinitonValue=this.chartDefinition[name];
+			if(typeof(chartDefinitonValue)=="function")
+				chartDefinitonValue=chartDefinitonValue();
+			options[name]=chartDefinitonValue;
 		}
 
-		// get all chart properties definition
-		var cd = this.chartDefinition;
-		for(key in cd){
-			var value = typeof cd[key]=='function'?cd[key](): cd[key];
-			options[key] = value;
-		}
-		
-		// TODO colocar aqui logica para permitir alterar entre os varios
-		// tipos de operacoes
-		// sem ter que saber parametros (edit, command)
-		if(typeof options["command"] == "undefined") {
-			options["command"] = "open";  
-		}		
 
 		// default options
-		options["chartXML"] = true;
-		options["dashboard-mode"] = false;
-		
+		if(typeof options.command == "undefined")
+			options.command="open";       	
+
+		// TODO colocar aqui lógica para permitir alterar entre os vários
+		// tipos de operações
+		// sem ter que saber parametros (edit, command)
+
 		return options;
 	},
-	
 	getGUID : function(){
 		if(this.GUID == null){
 		  this.GUID = WidgetHelper.generateGUID();
@@ -104,7 +110,6 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		return this.GUID;
 	}
 });
-
 XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
   var widget = new XDashFusionChartComponent();
   widget.localizedName = localizedFileName;
