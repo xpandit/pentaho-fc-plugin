@@ -34,7 +34,8 @@ public class PropertiesManager {
     private static final String NAME = "name";
     private static final String SOLUTION = "solution";
     private static final String PATH = "path";
-   
+    private static final String XFUSIONPATH = "xFusionPath";
+    
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
     
     // Manager for properties obtained from the .xfusion file
@@ -51,6 +52,9 @@ public class PropertiesManager {
     
     // Solution name of properties file
     private String propSolution;
+    
+    // Single property for non-legacy mode
+    private String xFusionFile = "";
 
     /**
      * 
@@ -63,23 +67,27 @@ public class PropertiesManager {
      * @param encoding Encoding of URL params
      * @throws InvalidParameterException
      */
-    public PropertiesManager(TreeMap<String, String> instanceProperties) throws InvalidParameterException {
+    public PropertiesManager(TreeMap<String, String> instanceProperties, String pathMode) throws InvalidParameterException {
         this.propFile = instanceProperties.get(NAME);
         this.propPath = instanceProperties.get(PATH);
         this.propSolution = instanceProperties.get(SOLUTION);
-        fillLocalParameters();
-        // fillInstancePrameters();
+        this.xFusionFile = instanceProperties.get(XFUSIONPATH);
         this.instanceProperties = instanceProperties;
+        this.localProperties = new TreeMap<String, String>();
+        
+        if(pathMode.equals("legacy")) {
+            fillLocalParametersWithActionInfo();
+        } else {
+            fillLocalParameters();
+        }
     }
 
     /**
-     * fill all instance parameters based on solution file
+     * fill all instance parameters based on solution file with an ActionInfo object
      * 
      * @throws InvalidParameterException
      */
-    private void fillLocalParameters() throws InvalidParameterException {
-        localProperties = new TreeMap<String, String>();
-
+    private void fillLocalParametersWithActionInfo() throws InvalidParameterException {
         // get file
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
         final ISolutionFile file = repository.getSolutionFile(
@@ -119,6 +127,51 @@ public class PropertiesManager {
 
     }
 
+    /**
+     * fill all instance parameters based on solution file
+     * 
+     * @throws InvalidParameterException
+     */
+    private void fillLocalParameters() throws InvalidParameterException {
+        if(this.xFusionFile == null) {
+            return;
+        }
+
+        // get file
+        final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
+        final ISolutionFile file = repository.getSolutionFile(xFusionFile, ISolutionRepository.ACTION_EXECUTE);
+
+        // if is no file and propFile is set log a warning
+        if (file != null) {
+            if (file.getData() == null) {
+                if (!xFusionFile.equals(""))
+                    throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+                            + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
+                return;
+            }
+        } else {
+            if (!xFusionFile.equals(""))
+                throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+                        + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
+        }
+
+        // load properties
+        Properties properties = new Properties();
+        try {
+            properties.load(new ByteArrayInputStream(file.getData()));
+        } catch (IOException e) {
+            log.error("Unable to Load properties file. Continue without properties file:" + "xFusionFile->"
+                    + xFusionFile, e);
+            return;
+        }
+
+        // fill properties
+        for (Object key : properties.keySet()) {
+            String stringKey = (String) key;
+            localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
+        }
+    }
+    
     /**
      * Join all parameter types and returns the object
      * 

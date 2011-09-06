@@ -37,6 +37,7 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
 public class FusionContentGenerator extends SimpleContentGenerator {
     private static final long serialVersionUID = 997953797244958291L;
 
+    private static final String PATHMODE = "pathMode";
     private static final String CDANAME = "cdaName";
     private static final String CDAID = "cdaDataAccessId";
     private static final String CDAPATH = "cdaPath";
@@ -57,6 +58,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     // Properties Manager
     PropertiesManager pm = null;
 
+    // pathMode for obtaining repository objects
+    String pathMode;
+    
     @Override
     public String getMimeType() {
         return MIMETYPE;
@@ -73,7 +77,8 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     public void createContent(OutputStream out) throws Exception {
 
         parameterParser = new ParameterParser(parameterProviders);
-
+        pathMode = parameterParser.getParameters(PATHMODE);
+        
         // Identify operation based on URL call
         String method = parameterParser.extractMethod();
 
@@ -102,7 +107,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
         // creates a properties manager
-        pm = new PropertiesManager(parameterParser.getParameters());
+        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getDataUsingCDA();
         if (resultSets == null)
@@ -136,16 +141,16 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      */
     private Map<String, ArrayList<IPentahoResultSet>> getDataUsingCDA() throws Exception {
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
-        final ISolutionFile file = repository.getSolutionFile(getAction().toString(),
-                ISolutionRepository.ACTION_EXECUTE);
-
-        Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
-
-        if (file == null) {
-            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
-                    + getAction().getSolutionName() + "/" + getAction().getPath() + "/" + getAction().getActionName());
+        final ISolutionFile file;
+        
+        if(pathMode.equals("legacy")) {
+            file = getCDAFileWithActionInfo(repository);
+        } else {
+            file = getCDAFile(repository);
         }
-
+        
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
+        
         cdaQueryComponent = new CdaQueryComponent();
         cdaQueryComponent.setFile(file.getFullPath());
 
@@ -173,11 +178,11 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                     aux.add(resultset);
 
                     if (resultset == null) {
-                        throw new Exception("resultset==null Querie ID:" + queryID);
+                        throw new Exception("resultset==null Query ID:" + queryID);
                     }
                 }
             } catch (Exception e) {
-                throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Querie ID:"
+                throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Query ID:"
                         + queryID, e);
             }
         }
@@ -189,7 +194,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                 resultSets.put("targetValue", getTargetValueCDA(cdaInputs, resultset));
         } catch (Exception e) {
             getLogger().error(
-                    "Error retrieving data: cdaQueryComponent failed to return data. Querie ID" + TARGETVALUECDAID, e);
+                    "Error retrieving data: cdaQueryComponent failed to return data. Query ID" + TARGETVALUECDAID, e);
         }
 
         // get the targetValue result set if rangeValueCdaId property exists
@@ -199,6 +204,50 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         return resultSets;
     }
 
+    /**
+     * Gets a CDA file using an ActionInfo object
+     * 
+     * @param repository
+     * @return
+     * @throws InvalidParameterException
+     */
+    private ISolutionFile getCDAFileWithActionInfo(final ISolutionRepository repository) throws InvalidParameterException {
+        final ISolutionFile file = repository.getSolutionFile(getAction().toString(),
+                ISolutionRepository.ACTION_EXECUTE);
+
+        if (file == null) {
+            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
+                    + getAction().getSolutionName() + "/" + getAction().getPath() + "/" + getAction().getActionName());
+        }
+        
+        return file;
+    }
+    
+    /**
+     * Gets CDA file using the cdaPath parameter
+     * 
+     * @param repository
+     * @return
+     * @throws InvalidParameterException
+     */
+    private ISolutionFile getCDAFile(final ISolutionRepository repository) throws InvalidParameterException {
+        String cdaPath = pm.getParams().get(CDAPATH);
+
+        if (cdaPath == null) {
+            throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAPATH
+                    + " parameter not supplied.");
+        }
+
+        final ISolutionFile file = repository.getSolutionFile(cdaPath, ISolutionRepository.ACTION_EXECUTE);
+
+        if (file == null) {
+            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
+                    + cdaPath);
+        }
+        
+        return file;
+    }
+    
     /**
      * 
      * Invoke the CDA to get the Target Value of a chart

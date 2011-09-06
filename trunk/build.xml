@@ -26,7 +26,7 @@
     <echo message="${dir.system}/${package.root.dir}"></echo>
   </target>
 
-  <target name="reinstall-plugin" depends="dist,assemble.copy-libs">
+  <target name="reinstall-plugin">
     <echo message="Cleaning plugin folder..."></echo>
     <delete dir="${dir.system}/${package.root.dir}"/>
     <antcall target="install-plugin"/>
