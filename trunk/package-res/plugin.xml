@@ -18,6 +18,10 @@
   </content-type>
   
   
+  <external-resources>
+    <file context="dashboards">content/fusion/js/XDashFusionChartComponent.js</file>
+  </external-resources>
+  
     <content-generator
     	id="fusion"
     	title="Fusion Component"

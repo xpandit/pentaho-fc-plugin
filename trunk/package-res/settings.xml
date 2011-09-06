@@ -2,7 +2,4 @@
 <settings>
 	<cache>false</cache>
 	<max-age>2628001</max-age>
-	<dashboard-widgets>
-      <xfusion>js/XDashFusionChartComponent.js</xfusion>
-    </dashboard-widgets>
 </settings>
