@@ -3,8 +3,11 @@
  * This CDF component renders Fusion Charts Graph
  * 
  */
-var XDashFusionChartComponent = BaseComponent.extend({
+
+var xLoadFunct= function(){
+window.XDashFusionChartComponent = BaseComponent.extend({
 	type: "XDashFusionChartComponent",
+	executeAtStart: true,
 	update: function(){
 
 		this.clear();
@@ -27,9 +30,9 @@ var XDashFusionChartComponent = BaseComponent.extend({
 		var widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);
 		var widgetPanel = document.getElementById("content-area-Panel_" + widgetNum);
 		
-		/*var rect = getRectangle(widgetPanel);
+		var rect = getRectangle(widgetPanel);
 		options.width = rect.width - 25;
-		options.height = rect.height - 20;*/
+		options.height = rect.height - 20;
 		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
@@ -108,9 +111,16 @@ var XDashFusionChartComponent = BaseComponent.extend({
 	}
 });
 
+/**
+ * 
+ * This CDF component renders Fusion Charts Widget in Pentaho Dashboard E E
+ * 
+ */
+
 XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
   var widget = new XDashFusionChartComponent();
   widget.localizedName = localizedFileName;
+  widget.GUID = WidgetHelper.generateGUID();
   widget.parameters = [];
   widget.outputParameters = [];
   var selectedWidgetIndex = pentahoDashboardController.getSelectedWidget() + 1; // add one to convert to 1-based
@@ -129,8 +139,6 @@ XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
 
 // now load the fusion js file
 
-
-/*
   var fileref=document.createElement('script');
   fileref.setAttribute("type","text/javascript");
   fileref.setAttribute("src", '/pentaho/content/fusion/JSClass/FusionCharts.js');
@@ -138,4 +146,16 @@ XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
 
 
 PentahoDashboardController.registerComponentForFileType("xfusion", XDashFusionChartComponent);
-*/
+
+};
+
+// try the delay way to be used inside pentaho dashboards EE
+// if not inside PDEE run the function
+try
+{
+	delayedFunctions.push(xLoadFunct);
+}
+catch(error)
+{
+	xLoadFunct();
+}
