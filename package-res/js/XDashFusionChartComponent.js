@@ -30,9 +30,11 @@ window.XDashFusionChartComponent = BaseComponent.extend({
 		var widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);
 		var widgetPanel = document.getElementById("content-area-Panel_" + widgetNum);
 		
-		var rect = getRectangle(widgetPanel);
-		options.width = rect.width - 25;
-		options.height = rect.height - 20;
+		if(widgetPanel != undefined) { //we are in an EE dashboard 
+			var rect = getRectangle(widgetPanel);
+			options.width = rect.width - 25;
+			options.height = rect.height - 20;
+		}
 		
 		//create chart Object
 		var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
