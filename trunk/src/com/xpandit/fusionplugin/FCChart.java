@@ -107,7 +107,7 @@ public class FCChart extends FCItem {
         // if is the bubble charts
         //TODO create subclass of FCChart with detailed implementation for Buble charts.
         if (graph.getGraphType() == ChartType.BUBBLE) {
-
+ 
             if (metadataSize < 3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 3");
 
@@ -153,8 +153,8 @@ public class FCChart extends FCItem {
             } 
     
             // set max YAxis with more 10% of current yMax Value
-            long maxYvalueAux = (long) (maxYvalue+((maxYvalue-minYvalue) * 0.30));
-            long minYvalueAux = (long) (minYvalue-((maxYvalue-minYvalue) * 0.30));
+            double maxYvalueAux = (double) (maxYvalue+((maxYvalue-minYvalue) * 0.30));
+            double minYvalueAux = (double) (minYvalue-((maxYvalue-minYvalue) * 0.30));
             // fusion charts tweak
             // the automatic scale at y axis don'w work correctly when the value is like-> 100999999
             // this transform the value to 100999000
@@ -177,12 +177,12 @@ public class FCChart extends FCItem {
             int numDivLinesXAxis = width / 90;
 
             // the max value of x Axis is 10% more than real max value
-            long maxValueX = (long) (maxXvalue+((maxXvalue-minXvalue) * 0.10));
-            long minValueX = (long) (minXvalue-((maxXvalue-minXvalue) * 0.10));
+            double maxValueX = (double) (maxXvalue+((maxXvalue-minXvalue) * 0.10));
+            double minValueX = (double) (minXvalue-((maxXvalue-minXvalue) * 0.10));
             // calculates the number of vertical lines
-            long stepsValue = (maxValueX-minValueX) / numDivLinesXAxis;
-            // build the categories
-            for (double i = minValueX; i <= maxValueX; i += stepsValue) {
+            double stepsValue = (maxValueX-minValueX) / numDivLinesXAxis;
+            // build the categories 
+            for (double i = minValueX; i < maxValueX; i += stepsValue) { 
                 Category cat = new Category();
                 // set then correct value at the label
                 cat.setLable(ScaleConverter.scaleNumberWithRound(i));
