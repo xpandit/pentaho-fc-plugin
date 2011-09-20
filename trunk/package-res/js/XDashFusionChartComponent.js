@@ -143,21 +143,23 @@ XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
 
   var fileref=document.createElement('script');
   fileref.setAttribute("type","text/javascript");
-  fileref.setAttribute("src", '/pentaho/content/fusion/JSClass/FusionCharts.js');
+  fileref.setAttribute("src", webAppPath+'/content/fusion/JSClass/FusionCharts.js');
   if (typeof fileref!="undefined") document.getElementsByTagName("head")[0].appendChild(fileref);
 
-
-PentahoDashboardController.registerComponentForFileType("xfusion", XDashFusionChartComponent);
-
+if(typeof(PentahoDashboardController) != "undefined")
+{
+	PentahoDashboardController.registerComponentForFileType("xfusion", XDashFusionChartComponent);
+}
 };
 
 // try the delay way to be used inside pentaho dashboards EE
 // if not inside PDEE run the function
-try
+
+if(typeof(delayedFunctions)!= "undefined")
 {
 	delayedFunctions.push(xLoadFunct);
 }
-catch(error)
+else
 {
 	xLoadFunct();
 }
