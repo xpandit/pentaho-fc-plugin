@@ -40,6 +40,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private static final String PATHMODE = "pathMode";
     private static final String CDANAME = "cdaName";
     private static final String CDAID = "cdaDataAccessId";
+	private static final String CDAOUTPUTID	= "outputIndexId";
     private static final String CDAPATH = "cdaPath";
     private static final String CDASOLUTION = "cdaSolution";
     private static final String CDAPARAMETERS = "cdaParameters";
@@ -149,6 +150,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             file = getCDAFile(repository);
         }
         
+        boolean outputIndexIdDefined = false;
         Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
         
         cdaQueryComponent = new CdaQueryComponent();
@@ -162,14 +164,36 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         if (pm.getParams().get(CDAID) == null) {
             throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAID);
         }
+        
+        if(pm.getParams().get(CDAOUTPUTID)!=null)
+		{
+			outputIndexIdDefined = true;
+		}
 
         // get dataAccessIDs using properties manager
         String[] queryIDs = pm.getParams().get(CDAID).split(";");
+        String[] outputIndexIds = null;
+		
+		if(outputIndexIdDefined){
+			// get outputIndexIds from request
+			outputIndexIds = pm.getParams().get(CDAOUTPUTID).split(";");
+			// if there is an indexDefined than we must make sure they have the same size
+			if(outputIndexIds.length != queryIDs.length){
+				throw new InvalidParameterException(InvalidParameterException.ERROR_007+ "\n Number of accessIds -> " + outputIndexIds.length + "\n Number of outputIndexIds -> " + outputIndexIds.length);
+			}
+		}		
+         
         ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();
+		int iteration = 0;
         for (String queryID : queryIDs) {
-            // set data access id
-            cdaInputs.put("dataAccessId", queryID);
-            cdaQueryComponent.setInputs(cdaInputs);
+            
+        	// set data access id
+			cdaInputs.put("dataAccessId", queryID);
+			if(outputIndexIdDefined){
+				cdaInputs.put("outputIndexId", outputIndexIds[iteration]);
+			}			
+			cdaQueryComponent.setInputs(cdaInputs);
+
 
             try {
                 // execute query
@@ -185,6 +209,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
                 throw new Exception("Error retrieving data: cdaQueryComponent failed to return data. Query ID:"
                         + queryID, e);
             }
+            ++iteration;
         }
         resultSets.put("results", aux);
 

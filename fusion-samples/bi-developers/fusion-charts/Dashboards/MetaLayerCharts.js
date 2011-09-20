@@ -29,7 +29,8 @@
 		width: "400",
 		height: "150",
 		chartType: "Bar2D",
-		cdaDataAccessId:"2"
+		cdaDataAccessId:"2",
+		outputIndexId:"2"
 	},
 	drillBarChartDef: {
 		width: "400",

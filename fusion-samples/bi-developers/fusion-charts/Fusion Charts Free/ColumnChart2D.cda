@@ -67,7 +67,8 @@
 			NON EMPTY  [Time].[Years].Members ON ROWS
 			from [SteelWheelsSales]
 		</Query>
-		<Output indexes="1,2"/>
+		<Output id="2" indexes="1,2"/>
+		<Output id="3" indexes="0,2"/>
     </DataAccess>
     <!-- CompoundDataAccess can be used to join queries. Some types are
 	supported, and the user is responsible for assuring the different dataaccess
