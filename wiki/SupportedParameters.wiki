@@ -27,6 +27,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || CDA Parameters  || cdaParameters || String  || no  || ""  || Parameters to be passed to CDA  || cdaParameters=year;day || -  ||
 || CDA ID Range Value || rangeValueCdaId || int ()  || no  || -  || Cda ID for the query that will get the color range values. When only one value is set the the range value will multiply with the value of targetValueCdaId query. If is set two values the first value will multiply with the second one.  || rangeValueCdaId=3;5 || -  ||
 || CDA ID Target Value || targetValueCdaId || int  || no  || -  || Cda ID for the query that will get the target value  || targetValueCdaId=4 || -  ||
+|| CDA output index || outputIndexId|| int[]  || no  || -  || Cda output indexs   || outputIndexId=4 || -  ||
 || Color Range  || colorRange || string()  || no  || -  || Array of color codes to use in color range. Used in charts with colorRange XML element (Ex. Gauge)   || colorRange=FF654F;FF654F;F6BD0F;8BBA00 || -  ||
 || Dashboard Mode  || dashboard-mode || Boolean  || no  || true  || it's to render the chart into a dashboard  || dashboard-mode=true || - ||
 || parentYAxis || parentYAxis || string()  || no  || -  || parentYAxis to each serie  || parentYAxis=P;P;S || ||
