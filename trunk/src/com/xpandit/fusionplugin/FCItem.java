@@ -44,6 +44,8 @@ abstract public class FCItem {
     protected static final String CATEGORIESCOLOR = "categoriesColor";
     protected static final String ANCHORBORTHERTHICKNESS = "anchorBorderThickness";
     protected static final String ANCHORBORTHERTHICOLOR = "anchorBorderColor";
+    protected static final String ENTITYCOLOR = "entityColor";
+    
 
     /**
      * Parameters that require specific procedure to be properly rendered
@@ -130,6 +132,9 @@ abstract public class FCItem {
 
         }
     }
+    
+    
+    
 
     /**
      * Set the series type
