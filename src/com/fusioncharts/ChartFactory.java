@@ -31,7 +31,7 @@ public class ChartFactory extends Object {
 	//****************************************************************************
 	// MEMBERS
 	//****************************************************************************	
-	private Map<String,Graph> graph;
+	protected Map<String,Graph> graph;
 
 	private boolean isFreeVersion;//render to free version of fusion charts?
 	
@@ -390,7 +390,7 @@ public class ChartFactory extends Object {
 	 *         If the xml string that we are building is invalid. Ie: Unclosed Entities
 	 *         
 	 ***************************************************************************/	
-	private void attachFusionStyles(XmlWriter xmlwriter, FusionGraph graph)
+	protected void attachFusionStyles(XmlWriter xmlwriter, FusionGraph graph)
 	throws WritingException {
 		FusionGraph.FusionStyle fusionStyle;
 

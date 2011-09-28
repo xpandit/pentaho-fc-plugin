@@ -27,6 +27,7 @@ implements Cloneable, Comparable<Graph>
 	private String				graphId;
 	private ChartType				graphType;
 	private LinkedList<Category>  categories;
+	private LinkedList<Entity> entities;
 	private LinkedList<Series> 	series;
 	private String[]          	dials;
 	private ArrayList<ColorRange>	dialRangeValues;
@@ -76,6 +77,7 @@ implements Cloneable, Comparable<Graph>
 		this.graphId = graphId;
 		this.graphType  = graphType;    
 		this.categories = new LinkedList<Category>();
+		this.entities = new LinkedList<Entity>();
 		this.series     = new LinkedList<Series>();
 		this.dials		= new String[length];
 		this.dialRangeValues = new ArrayList<ColorRange>();
@@ -158,6 +160,58 @@ implements Cloneable, Comparable<Graph>
 	{
 		return this.categories.get(index);
 	}//getCategory
+	
+	
+	
+	/***************************************************************************
+	 * Manipulator method to set the graph entities.  The entities will be
+	 * set starting at index 0 until the min between the number of entities
+	 * specified and the number of categories passed as arguments.
+	 * 
+	 * @param  categories
+	 *         The list of category labels.
+	 ***************************************************************************/
+	public void setEntity(Entity ... entity)
+	{
+		for (int i = 0, its = Math.min(this.entities.size(),entity.length); i < its; i++)
+			setEntity(i, entity[i]);
+	}//setCategory
+
+	/***************************************************************************
+	 * Manipulator method to set a graph entity.
+	 * 
+	 * @param  index
+	 *         The index.
+	 * @param  entity
+	 *         The entity label.
+	 ***************************************************************************/
+	public void setEntity(int index, Entity entity)
+	{ 
+		if(this.entities.size()<=index)
+			this.entities.add(index, entity);
+		else
+			this.entities.set(index, entity);
+	}//setCategory
+
+	/***************************************************************************
+	 * Accessor method to get a graph entity.
+	 * 
+	 * @param  index
+	 *         The index.
+	 * 
+	 * @return entities
+	 *         The entity.
+	 ***************************************************************************/
+	public Entity getEntity(int index)
+	{
+		return this.entities.get(index);
+	}//getCategory
+
+	
+	
+	
+	
+	
 
 	/**
 	 * 
@@ -267,6 +321,17 @@ implements Cloneable, Comparable<Graph>
 	}//getNumberOfSeries
 
 
+	/***************************************************************************
+	 * Returns the current number of entities.
+	 *  
+	 * @return size
+	 *         The number of entities.
+	 ***************************************************************************/
+	public int getNumberOfEntities()
+	{
+		return this.entities.size(); 
+	}//getNumberOfEntities
+	
 	/***************************************************************************
 	 * Creates a Series for this graph.  The series will be inserted at the
 	 * index specified. The length of the series will equal the length of the categories

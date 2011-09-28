@@ -40,9 +40,16 @@ public class FCFactory {
         // find the right chart characteristics
         ChartType[] values = ChartType.values();
         ChartType cType = null;
+         
+        //in maps the name is FCMaps_<map> 
+        //we split the value to get the correct value and to not put all charts in charts types
+        chartTypeParam=chartTypeParam.split("_")[0];
+        
+        
         for (int v = 0; v < values.length; ++v) {
             if (values[v].name().equals(chartTypeParam.toUpperCase())) {
                 cType = values[v];
+                break;
             }
         }
         
@@ -55,13 +62,19 @@ public class FCFactory {
             try {
                 return new FCChart(cType, resultSets,pm.getParams());
             } catch (InvalidDataResultSetException e) {
-                throw new InvalidParameterException("Result sets not pproperly setup!");
+                throw new InvalidParameterException("Result sets not properly setup!");
             }
         } else if (cType.getChartLibrary() == ChartType.ChartLibrary.WIDGETS) {
             try {
                 return new FCWidget(cType, resultSets, pm.getParams());
             } catch (InvalidDataResultSetException e) {
-                throw new InvalidParameterException("Result sets not pproperly setup!");
+                throw new InvalidParameterException("Result sets not properly setup!");
+            }
+        }else if(cType.getChartLibrary() == ChartType.ChartLibrary.MAPS){
+        	try {
+                return new FCMaps(cType, resultSets,pm.getParams());
+            } catch (InvalidDataResultSetException e) {
+                throw new InvalidParameterException("Result sets not properly setup!");
             }
         }
 
