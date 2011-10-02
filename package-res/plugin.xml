@@ -12,7 +12,7 @@
     <operations>
       <operation>
         <id>RUN</id>
-        <command>content/fusion?solution={solution}&amp;path={path}&amp;name={name}&amp;dashboard-mode=false</command>
+        <command>content/fusion?solution={solution}&amp;path={path}&amp;name={name}&amp;dashboard-mode=false&amp;pathMode=legacy</command>
       </operation>
     </operations>
   </content-type>

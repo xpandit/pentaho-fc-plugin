@@ -15,6 +15,7 @@ import com.fusioncharts.Entity;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.util.ScaleConverter;
 
 /**
@@ -107,6 +108,14 @@ public class FCMaps extends FCItem {
                 log.error("Problem in result set. Null values found at index:" + i, e);
             }
         }
+        
+        // process the dial range values
+        try {
+			setRangeValues(resultSets);
+		} catch (InvalidParameterException e) {
+			 log.error("Problem in result set of setRangeValues.", e);
+		}
+        
     }
     
     

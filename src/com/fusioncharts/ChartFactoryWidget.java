@@ -96,27 +96,7 @@ public class ChartFactoryWidget extends ChartFactory {
 	private void attachFusionDial(XmlWriter xmlwriter, FusionGraph graph)
 	throws WritingException {
 		
-		// range values
-		//
-		// Os valores dos ranges podem ser obtidos através da seguinte linha :
-		// 
-		// ArrayList<String> rangeValues = graph.getDialRangeValues();
-		//
-		// Problema: Quando existe mais do que um dial qual o que serve de referencia 
-		//           para se fixarem os ranges.
-				
-		xmlwriter.writeEntity("colorRange");
-		
-		for (ColorRange cRange : graph.getColorRangeValues()) 
-		{
-
-			xmlwriter.writeEntity("color");
-			xmlwriter.writeAttribute("minValue", cRange.minValue.toString());
-			xmlwriter.writeAttribute("maxValue", cRange.maxValue.toString());
-			xmlwriter.writeAttribute("code", cRange.colorCode);
-			xmlwriter.endEntity(); //end of color entity	
-		}
-		xmlwriter.endEntity(); //end of colorRange entity
+		attachColorRange(xmlwriter,graph);
 		
 		xmlwriter.writeEntity("dials");
 		
@@ -151,27 +131,7 @@ public class ChartFactoryWidget extends ChartFactory {
 	private void attachFusionBullet(XmlWriter xmlwriter, FusionGraph graph)
 	throws WritingException {
 		
-		// range values
-		//
-		// Os valores dos ranges podem ser obtidos através da seguinte linha :
-		// 
-		// ArrayList<String> rangeValues = graph.getDialRangeValues();
-		//
-		// Problema: Quando existe mais do que um dial qual o que serve de referencia 
-		//           para se fixarem os ranges.
-				
-		xmlwriter.writeEntity("colorRange");
-		
-		for (ColorRange cRange : graph.getColorRangeValues()) 
-		{
-
-			xmlwriter.writeEntity("color");
-			xmlwriter.writeAttribute("minValue", cRange.minValue.toString());
-			xmlwriter.writeAttribute("maxValue", cRange.maxValue.toString());
-			xmlwriter.writeAttribute("code", cRange.colorCode);
-			xmlwriter.endEntity(); //end of color entity	
-		}
-		xmlwriter.endEntity(); //end of colorRange entity
+		attachColorRange(xmlwriter,graph);
 		
 		xmlwriter.writeEntity("value");
 		xmlwriter.writeText(String.valueOf(graph.getValue()));

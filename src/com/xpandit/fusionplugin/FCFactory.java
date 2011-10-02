@@ -43,11 +43,11 @@ public class FCFactory {
          
         //in maps the name is FCMaps_<map> 
         //we split the value to get the correct value and to not put all charts in charts types
-        chartTypeParam=chartTypeParam.split("_")[0];
+        String chartTypeAxu=chartTypeParam.split("_")[0];
         
         
         for (int v = 0; v < values.length; ++v) {
-            if (values[v].name().equals(chartTypeParam.toUpperCase())) {
+            if (values[v].name().equals(chartTypeAxu.toUpperCase())) {
                 cType = values[v];
                 break;
             }

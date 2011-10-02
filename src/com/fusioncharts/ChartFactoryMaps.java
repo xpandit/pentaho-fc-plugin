@@ -47,6 +47,9 @@ public class ChartFactoryMaps extends ChartFactory {
 	private void attachFusionEntities(XmlWriter xmlwriter, FusionGraph graph)
 	throws WritingException
 	{
+		
+		attachColorRange(xmlwriter,graph);
+		
 		xmlwriter.writeEntity("data");
 		//loop through and insert all values from the series
 		for (int i = 0; i < graph.getNumberOfEntities(); i++) {
