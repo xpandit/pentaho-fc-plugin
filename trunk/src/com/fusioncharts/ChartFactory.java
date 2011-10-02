@@ -430,6 +430,29 @@ public class ChartFactory extends Object {
 		xmlwriter.endEntity(); //end of styles
 	}
 	
+	protected void attachColorRange(XmlWriter xmlwriter, FusionGraph graph) throws WritingException{
+		// range values
+		//
+		// Os valores dos ranges podem ser obtidos através da seguinte linha :
+		// 
+		// ArrayList<String> rangeValues = graph.getDialRangeValues();
+		//
+		// Problema: Quando existe mais do que um dial qual o que serve de referencia 
+		//           para se fixarem os ranges.
+
+		xmlwriter.writeEntity("colorRange");
+
+		for (ColorRange cRange : graph.getColorRangeValues()) 
+		{
+
+			xmlwriter.writeEntity("color");
+			xmlwriter.writeAttribute("minValue", cRange.minValue.toString());
+			xmlwriter.writeAttribute("maxValue", cRange.maxValue.toString());
+			xmlwriter.writeAttribute( graph.getGraphType().getChartLibrary().toString()=="MAPS"?"color":"code", cRange.colorCode);
+			xmlwriter.endEntity(); //end of color entity	
+		}
+		xmlwriter.endEntity(); //end of colorRange entity
+	}
 	/***************************************************************************
 	 * Method that wraps the dataxml string so that we can use it with FusionChartsDOM.js
 	 * This allows us to customize when the chart is rendered and using the DOM gives the advantage
