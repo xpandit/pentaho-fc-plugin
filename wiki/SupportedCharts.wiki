@@ -4,20 +4,6 @@
 This page contains the list of supported charts. However the plugin is built on a flexible way where most of the parameters received as input are just sent to the XML. *This means that other charts or widgets with a similar structure might already be supported.*
 
 
-= Free Version =
-
-The following charts are supported.
-
-== Charts ==
-  * Bar2D
-  * Pie2D
-  * Pie3D
-  * Column3D
-  * Column2D
-  * Line
-
-= Licensed Version =
-
 The following charts and widgets are supported when using the Licensed FusionCharts version. For more information about licensing check the [Main main] page.
 
 == Charts ==
@@ -52,3 +38,7 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * Bubble
   * Funnel
   * Pyramid
+
+== Maps ==
+
+All maps are supported 
