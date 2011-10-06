@@ -1,10 +1,12 @@
 #summary This page contains information about the CDF FusionChartComponent.
 
 = Summary =
-The Fusion Chart Plugin provides CDF component that can be used like another CDF component. 
+The Fusion Chart Plugin provides CDF component that can be used like any other CDF component. 
 
 = How to use =
-To use this component you have to create a CDF component with the following type: "FusionChartComponent".
+To use this component you have to create a CDF component with the following type: "FusionChartComponent". Parameters can be provided in two different ways:
+ - `parameter: value` - Initial version. To use it create a parameter `pathMode: legacy`
+ - `parameters: [[parameter, value],...]` - Standard CDF way where parameters are placed on an array of arrays.
 
 Example:
 {{{
