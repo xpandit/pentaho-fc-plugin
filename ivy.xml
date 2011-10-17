@@ -18,6 +18,6 @@
     <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core-platform-plugin" rev="${dependency.bi-platform.revision}" changing="true"></dependency>
 	<dependency org="pentaho" name="pentaho-bi-platform-plugin-actions" rev="${dependency.bi-platform.revision}" changing="true"/>
     <dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='false' />
-    <!--<dependency org='pentaho' name='cda' rev='TRUNK-SNAPSHOT'  transitive='false'/>-->
+    <exclude module="olap4j"/>
   </dependencies>
 </ivy-module>
