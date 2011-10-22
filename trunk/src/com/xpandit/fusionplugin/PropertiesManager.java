@@ -88,25 +88,24 @@ public class PropertiesManager {
      * @throws InvalidParameterException
      */
     private void fillLocalParametersWithActionInfo() throws InvalidParameterException {
-        // get file
+        // get file 
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
         final ISolutionFile file = repository.getSolutionFile(
                 new ActionInfo(propSolution, propPath, propFile).toString(), ISolutionRepository.ACTION_EXECUTE);
 
+        if(propSolution==null)
+        	propSolution="<null>";
+        if(propPath==null)
+        	propPath="<null>";
+        if(propFile==null)
+        	propFile="<null>";
+
         // if is no file and propFile is set log a warning
-        if (file != null) {
-            if (file.getData() == null) {
-                if (!propFile.equals(""))
-                    throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                            + "No solution file found to set properties:" + "propSolution->" + propSolution
-                            + ";propPath-->" + propPath + ";propFile-->" + propFile);
-                return;
-            }
-        } else {
-            if (!propFile.equals(""))
-                throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                        + "No solution file found to set properties:" + "propSolution->" + propSolution
-                        + ";propPath-->" + propPath + ";propFile-->" + propFile);
+        if (file == null) {
+        	log.warn(InvalidParameterException.ERROR_005 + ":"
+        					+ "No solution file found to set properties:" + "propSolution->" + propSolution
+        					+ ";propPath-->" + propPath + ";propFile-->" + propFile);
+        	return;
         }
 
         // load properties
@@ -114,7 +113,7 @@ public class PropertiesManager {
         try {
             properties.load(new ByteArrayInputStream(file.getData()));
         } catch (IOException e) {
-            log.error("Unable to Load properties file. Continue without properties file:" + "propSolution->"
+            log.warn(InvalidParameterException.ERROR_005 + ": Unable to Load properties file. Continue without properties file:" + "propSolution->"
                     + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile, e);
             return;
         }
