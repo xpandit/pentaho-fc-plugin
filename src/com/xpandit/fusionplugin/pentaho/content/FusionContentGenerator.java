@@ -237,10 +237,15 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      * @throws InvalidParameterException
      */
     private ISolutionFile getCDAFileWithActionInfo(final ISolutionRepository repository) throws InvalidParameterException {
-        final ISolutionFile file = repository.getSolutionFile(getAction().toString(),
+        ISolutionFile file = repository.getSolutionFile(getAction().toString(),
                 ISolutionRepository.ACTION_EXECUTE);
-
-        if (file == null) {
+        
+        if(file==null) 
+        {
+        	org.jfree.util.Log.warn("Cda file is null, Try path way");
+        	file = repository.getSolutionFile(pm.getParams().get(CDAPATH),ISolutionRepository.ACTION_EXECUTE);
+        }
+        if (file == null) { 
             throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
                     + getAction().getSolutionName() + "/" + getAction().getPath() + "/" + getAction().getActionName());
         }
