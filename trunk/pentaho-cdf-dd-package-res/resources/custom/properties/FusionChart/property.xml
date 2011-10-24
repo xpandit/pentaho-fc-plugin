@@ -1,0 +1,30 @@
+<DesignerProperties>
+  <DesignerProperty>
+    <Header>
+      <Name>fusionChartType</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>Column2D</DefaultValue>
+      <Description>Fusion Charts Type</Description>
+      <Tooltip>Fusion Charts Type </Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>87</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+  </DesignerProperty> 
+  <DesignerProperty>
+	  <Header>
+		<Name>fusionCdaPath</Name>
+		<OutputName>cdaPath</OutputName>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue></DefaultValue>
+		<Description>Path</Description>
+		<Tooltip>CDA Path</Tooltip>
+		<InputType>CdaPath</InputType>
+		<OutputType>String</OutputType>
+		<Order>27</Order>
+		<Version>1.0</Version>
+	  </Header>	
+	</DesignerProperty>
+</DesignerProperties>
