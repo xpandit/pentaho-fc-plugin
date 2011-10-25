@@ -242,7 +242,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         
         if(file==null) 
         {
-        	org.jfree.util.Log.warn("Cda file is null, Try path way");
+        	getLogger().warn("Cda file is null, Try path way");
         	file = repository.getSolutionFile(pm.getParams().get(CDAPATH),ISolutionRepository.ACTION_EXECUTE);
         }
         if (file == null) { 
