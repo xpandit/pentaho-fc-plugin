@@ -16,8 +16,11 @@
 
 == Installing FusionCharts V3 (licensed) ==
  # Extract the zip files provided by FusionCharts Team
+ ## If your are installing a package you need to these steps for every file provided (charts, widgets, maps, ...)
  # Look for the directory where the _`*`.swf_ files are
  # Copy the _`*`.swf_ files to the plugin directory _fusioncharts/charts_
+ # Look for the directory JSClass where the _`*`.js_ files are
+ # Copy the directory contents to the plugin directory _fusioncharts/JSClass_
 
 = Usage =
 
