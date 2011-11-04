@@ -53,6 +53,9 @@ window.XDashFusionChartComponent = BaseComponent.extend({
 		
 		// set the chart object to this cdf component
 		myself.chartObject=myChart; 
+		
+		// set the chart data into xml
+		myself.xmlResultData=resultXml;
 	
 		// set the back button
 		if(myself.backButton) {
