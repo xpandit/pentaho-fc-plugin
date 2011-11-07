@@ -8,16 +8,18 @@ To use this component you have to create a CDF component with the following type
 
 Example:
 {{{
-var fusionChartsCDFComponent = {
-                name: "fusionChartsComponent",
-		action: "xFusionFile.xfusion",
-		solution: "xFusionFileSolution",
-		path: "xFileSolutionFilePath",
-		type: "FusionChartComponent",
-                chartDefinition: MetaLayerFusionCharts.numClientesLineChartDef,
-		htmlObject: "numContratosLineChartId",
-		executeAtStart: true
-}
+    var msColumnChart = {
+            name: "columnChart",
+            solution: "bi-developers",
+            path: "fusion-charts/Fusion Charts Free",
+            action: "MSColumnChart3D.xfusion",
+            executeAtStart: true,
+            htmlObject: "msColumnChart",
+            chartDefinition: MetaLayerCharts.msColumnChartDef,
+            type: "XDashFusionChartComponent",
+            postExecution: function(){
+            }
+        }
 
 var MetaLayerFusionCharts={
            numClientesLineChartDef: {
