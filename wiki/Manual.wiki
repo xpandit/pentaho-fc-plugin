@@ -55,6 +55,11 @@ The plugin can easily be used on a CDF dashboard. To allow a seamless integratio
 === How to? ===
 Create a CDF dashboard the same way you used to!! Add the new component to show FusionCharts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
 
+= Free Vs. Licensed Version  =
+In the Free version the flash object use the <embed> tag and the element is  displayed above all other elements
+
+In the Licensed Version the flash object use the <object> tag and you can define the displayed order
+
 = Not available =
 
 == Xactions ==
