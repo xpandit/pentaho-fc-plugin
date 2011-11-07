@@ -22,13 +22,11 @@ Example:
         }
 
 var MetaLayerFusionCharts={
-           numClientesLineChartDef: {
-		width: "460",
-		height: "210",
-                cdaDataAccessId:"1",
-		chartType: "MSColumn3D",
-		cdaParameters:"data",
-		data:function(){ return data;}
+        msColumnChartDef: {
+                width: "400",
+                height: "150",
+                chartType: "MSColumn3D",
+                cdaDataAccessId:"2"
 	}
 }
 }}}
