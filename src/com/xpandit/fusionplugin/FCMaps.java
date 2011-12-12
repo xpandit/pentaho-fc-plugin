@@ -46,7 +46,7 @@ public class FCMaps extends FCItem {
     public FCMaps(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,TreeMap<String, String> params)
             throws InvalidDataResultSetException {
 
-        // set category length
+        // set category length 
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");
         categoryLength = results.get(0).getRowCount();
@@ -60,6 +60,9 @@ public class FCMaps extends FCItem {
         // get nodes
         chartLink = graph.getChartProperties().get("chartLink");
         entityParam = graph.getChartProperties().get("entityParam");
+        //if entityParam is null try series param 
+        if(entityParam==null)
+        	entityParam = graph.getChartProperties().get("seriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
         
         //set the Data on the chart
