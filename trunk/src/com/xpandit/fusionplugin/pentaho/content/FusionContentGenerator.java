@@ -107,6 +107,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private void processChart(OutputStream out) throws UnsupportedEncodingException, Exception,
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
+        if(pathMode==null)
+        	pathMode="legacy";
+    	
         // creates a properties manager
         pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
 
@@ -143,7 +146,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private Map<String, ArrayList<IPentahoResultSet>> getDataUsingCDA() throws Exception {
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
         final ISolutionFile file;
-        
+             
         if(pathMode.equals("legacy")) {
             file = getCDAFileWithActionInfo(repository);
         } else {
