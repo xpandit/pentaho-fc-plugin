@@ -39,4 +39,3 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Value Param Name  || valueParam || string  || no  || -  || This attribute sets the name of the parameter with value in&nbsp; Chart Link Template || valueParam=value || ||
 || Chart Link Template  || chartLink || string  || no  || -  || The chart link parameter to be called when the user clicks on the chart. || chartLink=JavaScript: drillFunction('{series}','{categories}','{value}') || ||
 || Chart XML Mode  || chartXML || boolean  || no  || false  || Defines when should be rendered only the chart xml &nbsp;  || chartXML=true || ||
-|| ZValue in Result  || zValueInResult|| boolean  || no  || false  || Defines when the result set have the the Z-index Value or not. Example of 2 resultsets:  zValueInResult==true -->  |name|X|Y|Z|X1|Y2|Z3|  zValueInResult==false  |name|X|Y|X1|Y2| || zValueInResult=true || ||
