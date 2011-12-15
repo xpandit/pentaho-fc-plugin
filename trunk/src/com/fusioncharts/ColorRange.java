@@ -12,6 +12,7 @@ public class ColorRange {
 	Double minValue;//min value
 	Double maxValue;//max value 
 	String colorCode;//color code
+	String displayValue;//Display Value
 	
 	/**
 	 * 
@@ -20,12 +21,14 @@ public class ColorRange {
 	 * @param minValue min value of this color range
 	 * @param maxValue max value of this color range
 	 * @param colorCode color code of this color range
+	 * @param displayValue name of this color range
 	 */
-	public ColorRange(Double minValue, Double maxValue, String colorCode)
+	public ColorRange(Double minValue, Double maxValue, String colorCode,String displayValue)
 	{
 		this.minValue=minValue;
 		this.maxValue=maxValue;
 		this.colorCode=colorCode;
+		this.displayValue=displayValue;
 	}
 
 	/**
@@ -80,6 +83,19 @@ public class ColorRange {
 	 */
 	public void setColorCode(String colorCode) {
 		this.colorCode = colorCode;
+	}
+	/**
+	 * @return the displayValue
+	 */
+	public String getDisplayValue() {
+		return displayValue;
+	}
+
+	/**
+	 * @param displayValue the displayValue to set
+	 */
+	public void setDisplayValue(String displayValue) {
+		this.displayValue = displayValue;
 	}
 
 }
