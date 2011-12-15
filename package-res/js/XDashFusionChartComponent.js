@@ -7,7 +7,6 @@
 var xLoadFunct= function(){
 window.XDashFusionChartComponent = BaseComponent.extend({
 	type: "XDashFusionChartComponent",
-	executeAtStart: true,
 	update: function(){
 
 		this.clear();
@@ -124,6 +123,7 @@ window.XDashFusionChartComponent = BaseComponent.extend({
 
 XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
   var widget = new XDashFusionChartComponent();
+  widget.executeAtStart= true;
   widget.localizedName = localizedFileName;
   widget.GUID = WidgetHelper.generateGUID();
   widget.parameters = [];
