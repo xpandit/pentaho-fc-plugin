@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+		
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Sample query on SteelWheelsSales</Name>
+        <Query>
+import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+String[] columnNames = new String[5];
+columnNames[0] = &quot;Region&quot;;
+columnNames[1] = &quot;x&quot;;
+columnNames[2] = &quot;y&quot;;
+columnNames[3] = &quot;x2&quot;;
+columnNames[4] = &quot;y2&quot;;
+
+Class[] columnTypes = new Class[5];
+columnTypes[0] = String.class;
+columnTypes[1] = Integer.class;
+columnTypes[2] = Integer.class;
+columnTypes[3] = Integer.class;
+columnTypes[4] = Integer.class;
+ 
+TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+model.addRow(new Object[]{ new String(&quot;NA&quot;),new Integer(10),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;SA&quot;),new Integer(100),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;AS&quot;),new Integer(1000),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;EU&quot;),new Integer(10000),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;AF&quot;),new Integer(10),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;AU&quot;),new Integer(100000),new Integer(10),new Integer(10)});
+model.addRow(new Object[]{ new String(&quot;AU&quot;),new Integer(4000),new Integer(10),new Integer(30)});
+model.addRow(new Object[]{ new String(&quot;AU&quot;),new Integer(20000),new Integer(10),new Integer(80)});
+model.addRow(new Object[]{ new String(&quot;AU&quot;),new Integer(100),new Integer(10),new Integer(10)});
+return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>
