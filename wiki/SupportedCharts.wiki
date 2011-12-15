@@ -26,8 +26,12 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * MSColumnLine3D
   * MSColumn3DLineDY
   * Marimekko
+  * ScrollColumn2D
+  * ScrollLine2D
+  * ScrollArea2D
   * ScrollStackedColumn2D
-  * ScrollColumn2D 
+  * ScrollCombi2D 
+  * ScrollCombiDY2D
   * ZoomLine
 
 == Widgets ==
