@@ -29,6 +29,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || CDA ID Target Value || targetValueCdaId || int  || no  || -  || Cda ID for the query that will get the target value  || targetValueCdaId=4 || -  ||
 || CDA output index || outputIndexId|| int[]  || no  || -  || Cda output indexs   || outputIndexId=4 || -  ||
 || Color Range  || colorRange || string()  || no  || -  || Array of color codes to use in color range. Used in charts with colorRange XML element (Ex. Gauge)   || colorRange=FF654F;FF654F;F6BD0F;8BBA00 || -  ||
+|| Display Value  || displayValue || string()  || no  || -  || Array of labels to use in color range. Used in charts with colorRange XML element (Ex. Gauge)   || displayValue=Poor;Good;Very Good || -  ||
 || Dashboard Mode  || dashboard-mode || Boolean  || no  || true  || it's to render the chart into a dashboard  || dashboard-mode=true || - ||
 || parentYAxis || parentYAxis || string()  || no  || -  || parentYAxis to each serie  || parentYAxis=P;P;S || ||
 || seriesTypes || seriesTypes || string() || no  || -  || This attribute defines what the particular data-set will be plotted as || seriesTypes=BAR;AREA || COLUMN, AREA or LINE ||
