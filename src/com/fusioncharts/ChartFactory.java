@@ -448,7 +448,12 @@ public class ChartFactory extends Object {
 			xmlwriter.writeEntity("color");
 			xmlwriter.writeAttribute("minValue", cRange.minValue.toString());
 			xmlwriter.writeAttribute("maxValue", cRange.maxValue.toString());
+			
+			if(cRange.displayValue!=null)
+				xmlwriter.writeAttribute("displayValue", cRange.displayValue.toString());
+			
 			xmlwriter.writeAttribute( graph.getGraphType().getChartLibrary().toString()=="MAPS"?"color":"code", cRange.colorCode);
+			
 			xmlwriter.endEntity(); //end of color entity	
 		}
 		xmlwriter.endEntity(); //end of colorRange entity
