@@ -24,7 +24,7 @@ public enum ChartType {
 	BUBBLE(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "Bubble"), 
 	MARIMEKKO(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "Marimekko"), 
 	SCROLLCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollColumn2D"), 
-	SCROLLSTACKEDCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollLine2D"), 
+	SCROLLLINE2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollLine2D"), 
 	SCROLLAREA2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollArea2D"), 
 	SCROLLSTAKEDCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollStackedColumn2D"), 
 	SCROLLCOMBI2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollCombi2D"), 
