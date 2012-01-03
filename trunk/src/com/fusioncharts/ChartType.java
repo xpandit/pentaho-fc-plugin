@@ -17,6 +17,7 @@ public enum ChartType {
 	MSBAR3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSBar3D"), 
 	MSCOMBI2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSCombi2D"), 
 	MSCOMBI3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSCombi3D"), 
+	MSAREA(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSArea"),
 	STACKEDCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "StackedColumn2D"), 
 	STACKEDCOLUMN3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "StackedColumn3D"), 
 	MSCOLUMNLINE3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSColumnLine3D"), 
