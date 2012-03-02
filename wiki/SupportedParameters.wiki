@@ -15,8 +15,8 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || *Name*  || *Key*  || *Data Type*  || *Is Mandatory*  || *Default*  || *Description*  || *Example*  || *Available Values*  ||
 || Data Access ID  || cdaDataAccessId || int()  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
 || Name  || name  || string  || yes  || ""  || file of fusion plugin properties to use  || name=usa-quantity-ordered.cda || -  ||
-|| Solution  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
-|| Path  || path  || string  || no  || ""  || path where fusion plugin properties is || path=path  || -  ||
+|| Solution [deprecated]  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
+|| Path [deprecated]  || path  || string  || no  || ""  || path where fusion plugin properties is || path=path  || -  ||
 || Chart Type || chartType || string  || yes  || -  || chart type  || || see supported charts  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
