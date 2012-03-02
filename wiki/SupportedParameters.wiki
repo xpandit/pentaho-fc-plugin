@@ -16,7 +16,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Data Access ID  || cdaDataAccessId || int()  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
 || Action (deprecated)  || action  || string  || no  || ""  || file of fusion plugin properties to use  || action: "PieChart3D.xfusion" || -  ||
 || Solution (deprecated)  || solution  || string  || no  || ""  || solution where fusion plugin properties is  || solution: "bi-developers" || -  ||
-|| Path [deprecated]  || path  || string  || no  || ""  || path where fusion plugin properties is ||  path: "fusion-charts/Fusion Charts Free"  || -  ||
+|| Path (deprecated)  || path  || string  || no  || ""  || path where fusion plugin properties is ||  path: "fusion-charts/Fusion Charts Free"  || -  ||
 || Chart Type || chartType || string  || yes  || -  || chart type  || || see supported charts  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
