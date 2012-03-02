@@ -14,9 +14,9 @@ Parameters are used to set the way that plugin works and also to describe and fo
 
 || *Name*  || *Key*  || *Data Type*  || *Is Mandatory*  || *Default*  || *Description*  || *Example*  || *Available Values*  ||
 || Data Access ID  || cdaDataAccessId || int()  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
-|| Name  || name  || string  || yes  || ""  || file of fusion plugin properties to use  || name=usa-quantity-ordered.cda || -  ||
-|| Solution [deprecated]  || solution  || string  || yes  || ""  || solution where fusion plugin properties is  || solution=fusionSolution || -  ||
-|| Path [deprecated]  || path  || string  || no  || ""  || path where fusion plugin properties is || path=path  || -  ||
+|| Action (deprecated)  || action  || string  || no  || ""  || file of fusion plugin properties to use  || action: "PieChart3D.xfusion" || -  ||
+|| Solution (deprecated)  || solution  || string  || no  || ""  || solution where fusion plugin properties is  || solution: "bi-developers" || -  ||
+|| Path [deprecated]  || path  || string  || no  || ""  || path where fusion plugin properties is ||  path: "fusion-charts/Fusion Charts Free"  || -  ||
 || Chart Type || chartType || string  || yes  || -  || chart type  || || see supported charts  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
