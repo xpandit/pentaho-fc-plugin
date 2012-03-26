@@ -22,7 +22,8 @@
 		width: "400",
 		height: "150",
 		chartType: "MSColumn3D",
-		cdaDataAccessId:"2"
+		cdaDataAccessId:"2",
+		seriesName:"Sales 1;Sales 2"
 	},
 	
 	barChartDef: {
