@@ -33,6 +33,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Dashboard Mode  || dashboard-mode || Boolean  || no  || true  || it's to render the chart into a dashboard  || dashboard-mode=true || - ||
 || parentYAxis || parentYAxis || string()  || no  || -  || parentYAxis to each serie  || parentYAxis=P;P;S || ||
 || seriesTypes || seriesTypes || string() || no  || -  || This attribute defines what the particular data-set will be plotted as || seriesTypes=BAR;AREA || COLUMN, AREA or LINE ||
+|| SeriesName Name  || seriesName || string  || no  || -  || This attribute sets the name of the series if not defined use the name of the column of the meeasures || seriesName=Series1;Series2 || ||
 || Series Param Name  || seriesParam || string  || no  || -  || This attribute sets the name of the series parameter in&nbsp; Chart Link Template || seriesParam=series || ||
 || Color List for Series|| seriesColor || string  || no  || -  || This attribute sets the color for each category acording to the serie index  ONLY on Single Series Charts || seriesColor = FF654F;FF654F;F6BD0F || ||
 || Categories Param Name  || categoriesParam || string  || no  || -  || This attribute sets the name of the category parameter in&nbsp; Chart Link Template || categoriesParam=categories || ||
