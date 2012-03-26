@@ -25,6 +25,10 @@ import com.xpandit.fusionplugin.util.ScaleConverter;
  */
 public class FCChart extends FCItem {
 
+	
+	protected static final String SERIESNAME = "seriesName";
+	
+	
     // get link values
     // the chart link template
     String chartLink = null;
@@ -157,10 +161,7 @@ public class FCChart extends FCItem {
                 // get measure column name to set series title
                 String seriesTitle = metadata.getColumnHeaders()[0][seriesCount].toString();
 
-                // TODO:Improve Code this code remove the MDX notation and return the member name
-                // [measures].[day] returns -> day
-                String[] seriesTitleArr = seriesTitle.split("/.")[0].split("\\]\\.");
-                seriesTitle = seriesTitleArr[seriesTitleArr.length - 1].replace("]", "").replace("[", "");
+                seriesTitle = getSeriesName(seriesTitle,seriesCount -1);
 
                 Series series = graph.createSeries(seriesTitle);
                 setSeriesProperties(series, seriesCount - 1);
@@ -183,6 +184,48 @@ public class FCChart extends FCItem {
             }
         }
     }
+
+    /**
+     * 
+     * Get the series title from the  seriesTitle or if defined, the SERIESNAME parameter 
+     * 
+     * @param seriesTitle Header from the queries column  
+     * @param seriesCount index of the measure 
+     * @return
+     */
+	private String getSeriesName(String seriesTitle,Integer seriesCount) {
+		
+		String seriesName = graph.getChartProperties().get(SERIESNAME);
+		if (seriesName != null) {
+			String[] seriesNames=seriesName.split(";");
+			if (seriesCount<seriesNames.length)
+			{
+				return seriesNames[seriesCount];
+			}
+			else
+			{
+				 log.error("seriesName is provided but not with all values nedded try name from the measure: Error in collumn number:" + seriesCount);
+				return getSeriesNameFromMeasure(seriesTitle);
+			}
+		}
+		
+		return getSeriesNameFromMeasure(seriesTitle);
+	}
+
+	/**
+	 * 
+	 * Get the series name from the measure name ( seriesTitle  )
+	 * 
+	 * @param seriesTitle Header from the queries column  
+	 * @return
+	 */
+	private String getSeriesNameFromMeasure(String seriesTitle) {
+		// TODO:Improve Code this code remove the MDX notation and return the member name
+		// [measures].[day] returns -> day
+		String[] seriesTitleArr = seriesTitle.split("/.")[0].split("\\]\\.");
+		seriesTitle = seriesTitleArr[seriesTitleArr.length - 1].replace("]", "").replace("[", "");
+		return seriesTitle;
+	}
 
     /**
      * Allows setting chart links.
