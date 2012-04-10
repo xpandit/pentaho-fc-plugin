@@ -91,6 +91,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             clearCache();
             out.write("Cache cleared".getBytes());
         }
+        else if ("dataStream".equals(method)) {
+        	dataStream(out);
+        }
     }
 
     /**
@@ -107,15 +110,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private void processChart(OutputStream out) throws UnsupportedEncodingException, Exception,
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
-        if(pathMode==null)
-        	pathMode="legacy";
-    	
-        // creates a properties manager
-        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
-
-        Map<String, ArrayList<IPentahoResultSet>> resultSets = getDataUsingCDA();
-        if (resultSets == null)
-            getLogger().error("Error : resultset is null -> see previous error");
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
         // create the chart
         FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
@@ -133,6 +128,77 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             out.write(fcItem.generateXML().getBytes());
         }
     }
+    
+    /**
+     * 
+     * This method process the chart
+     * 
+     * @param out
+     * @throws UnsupportedEncodingException
+     * @throws Exception
+     * @throws InvalidParameterException
+     * @throws InvalidDataResultSetException
+     * @throws IOException
+     */
+    private void dataStream(OutputStream out) throws UnsupportedEncodingException, Exception,
+            InvalidParameterException, InvalidDataResultSetException, IOException {
+
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
+
+        IPentahoResultSet result= resultSets.get("results").get(0);
+        int columnCount=result.getColumnCount();
+        int rowCount=result.getRowCount();
+
+        StringBuffer buffer=new StringBuffer();
+        buffer.append("&label=");
+        for (int i=0;i<rowCount;++i)
+        {	
+        	buffer.append(result.getValueAt(i,0));
+        	if(i<rowCount-1)
+        	{
+        		buffer.append(',');
+        	}
+        }
+        buffer.append("&value=");
+        
+        for (int j=1;j<columnCount;++j)
+        {
+
+        	for (int i=0;i<rowCount;++i)
+        	{	
+        		buffer.append(result.getValueAt(i,j));
+        		if(i<rowCount-1)
+            	{
+            		buffer.append(',');
+            	}
+        	}
+    		if(j<columnCount-1)
+        	{
+        		buffer.append('|');
+        	}
+        }
+        
+       out.write(buffer.toString().getBytes());
+    }
+
+	/**
+	 * @return
+	 * @throws InvalidParameterException
+	 * @throws Exception
+	 */
+	private Map<String, ArrayList<IPentahoResultSet>> getData()
+			throws InvalidParameterException, Exception {
+		if(pathMode==null)
+        	pathMode="legacy";
+    	
+        // creates a properties manager
+        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
+
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = getDataUsingCDA();
+        if (resultSets == null)
+            getLogger().error("Error : resultset is null -> see previous error");
+		return resultSets;
+	}
 
     /**
      * 

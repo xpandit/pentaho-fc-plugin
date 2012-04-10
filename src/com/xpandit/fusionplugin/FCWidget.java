@@ -10,6 +10,8 @@ import com.fusioncharts.ChartFactoryWidget;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.ColorRange;
 import com.fusioncharts.FusionGraph;
+import com.fusioncharts.ChartType.ChartLibrary;
+import com.fusioncharts.ChartType.SingleOrMulti;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
@@ -30,9 +32,10 @@ public class FCWidget extends FCItem {
      * @param resultSets Results sets containing data to display.
      * @throws InvalidDataResultSetException
      */
-    public FCWidget(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets, TreeMap<String, String> params)
+    public FCWidget(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
             throws InvalidDataResultSetException {
 
+    	TreeMap<String, String> params=pm.getParams();
         // set category length
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");
@@ -91,12 +94,12 @@ public class FCWidget extends FCItem {
                 // process the dial range values
                 setRangeValues(resultSets);
             }
+                       
         } catch (Exception e) {
             log.error("Problem in result set. Null values found", e);
         }
 
     }
-
 
     
     /**
