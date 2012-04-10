@@ -6,6 +6,7 @@ import java.util.Map;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.fusioncharts.ChartType;
+import com.fusioncharts.FusionGraph;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
@@ -60,19 +61,25 @@ public class FCFactory {
         //based on the chart characteristics choose the correct implementation
         if (cType.getChartLibrary() == ChartType.ChartLibrary.CHARTS) {
             try {
-                return new FCChart(cType, resultSets,pm.getParams());
+                return new FCChart(cType, resultSets,pm);
             } catch (InvalidDataResultSetException e) {
                 throw new InvalidParameterException("Result sets not properly setup!");
             }
         } else if (cType.getChartLibrary() == ChartType.ChartLibrary.WIDGETS) {
             try {
-                return new FCWidget(cType, resultSets, pm.getParams());
+            
+            	//if is a realtime chart the behavior is the same of the charts
+            	if(isRealTimeChart(chartTypeParam)){
+            		return new FCChart(cType, resultSets,pm);
+            	}
+            	
+                return new FCWidget(cType, resultSets, pm);
             } catch (InvalidDataResultSetException e) {
                 throw new InvalidParameterException("Result sets not properly setup!");
             }
         }else if(cType.getChartLibrary() == ChartType.ChartLibrary.MAPS){
         	try {
-                return new FCMaps(cType, resultSets,pm.getParams());
+                return new FCMaps(cType, resultSets,pm);
             } catch (InvalidDataResultSetException e) {
                 throw new InvalidParameterException("Result sets not properly setup!");
             }
@@ -81,4 +88,14 @@ public class FCFactory {
         throw new InvalidParameterException(InvalidParameterException.ERROR_004 + ":" + chartTypeParam);
 
     }
+    
+    public static boolean isRealTimeChart(String chartTypeParam) {
+    	   	
+    	if(chartTypeParam.toUpperCase().equals( ChartType.REALTIMELINE.name())){return true;}
+    	if(chartTypeParam.toUpperCase().equals( ChartType.REALTIMESTACKEDAREA.name())){return true;}
+    	if(chartTypeParam.toUpperCase().equals( ChartType.REALTIMELINEDY.name())){return true;}
+    	if(chartTypeParam.toUpperCase().equals( ChartType.REALTIMECOLUMN.name())){return true;}
+    	
+    	return false;
+	}
 }

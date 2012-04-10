@@ -206,4 +206,15 @@ public class PropertiesManager {
     public String getPropPath() {
         return this.propPath;
     }
+    
+    
+    /**
+     * 
+     * returns list of instance parameters
+     * 
+     * @return
+     */
+    public TreeMap<String, String> getInstanceParameters() {
+        return instanceProperties;
+    }
 }

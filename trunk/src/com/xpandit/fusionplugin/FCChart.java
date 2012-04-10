@@ -46,9 +46,10 @@ public class FCChart extends FCItem {
      * @param resultSets Results sets containig data to display.
      * @throws InvalidDataResultSetException
      */
-    public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,TreeMap<String, String> params)
+    public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
             throws InvalidDataResultSetException {
 
+    	TreeMap<String, String> params=pm.getParams();
         // set category length
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");
@@ -61,8 +62,24 @@ public class FCChart extends FCItem {
         // initialize chart
         graph = new FusionGraph("chart", chartType, categoryLength);
         
+        
+        if(FCFactory.isRealTimeChart(chartType.name()))
+        {
+        	StringBuffer stringBuffer= new StringBuffer();
+        	TreeMap<String, String> instanceParams =pm.getInstanceParameters();
+        	
+        	stringBuffer.append("fusion/dataStream?");
+        	for (String key : instanceParams.keySet()) {
+        		stringBuffer.append(key).append("=").append(instanceParams.get(key)).append("&");
+			}
+        	params.put("dataStreamURL", stringBuffer.toString());
+        }
+        
+        
         //set chart properties
         setChartProperties(params);
+        
+
         
         // get nodes
         chartLink = graph.getChartProperties().get("chartLink");

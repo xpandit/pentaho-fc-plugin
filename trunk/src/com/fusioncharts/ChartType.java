@@ -37,9 +37,14 @@ public enum ChartType {
 	ANGULARGAUGE(SingleOrMulti.SINGLE,ChartLibrary.WIDGETS, "AngularGauge"), 
 	FUNNEL(SingleOrMulti.SINGLE,	ChartLibrary.CHARTS, "Funnel"), 
 	PYRAMID(SingleOrMulti.SINGLE,ChartLibrary.CHARTS, "Pyramid"),
-	FCMAP(SingleOrMulti.SINGLE,ChartLibrary.MAPS, "FCMap");
+	FCMAP(SingleOrMulti.SINGLE,ChartLibrary.MAPS, "FCMap"),
+	REALTIMELINE(SingleOrMulti.MULTI,ChartLibrary.WIDGETS,"RealTimeLine"),
+	REALTIMESTACKEDAREA(SingleOrMulti.MULTI,ChartLibrary.WIDGETS,"RealTimeStackedArea"),
+	REALTIMELINEDY(SingleOrMulti.MULTI,ChartLibrary.WIDGETS,"RealTimeLineDY"),
+	REALTIMECOLUMN(SingleOrMulti.MULTI,ChartLibrary.WIDGETS,"RealTimeColumn");
+	
 
-	enum SingleOrMulti {
+	public enum SingleOrMulti {
 		SINGLE, MULTI;
 	}
 
