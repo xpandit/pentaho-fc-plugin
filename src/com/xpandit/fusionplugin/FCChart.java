@@ -63,14 +63,22 @@ public class FCChart extends FCItem {
         graph = new FusionGraph("chart", chartType, categoryLength);
         
         
+        //generate the dataStreamURL parameter if is a real time charts
         if(FCFactory.isRealTimeChart(chartType.name()))
         {
         	StringBuffer stringBuffer= new StringBuffer();
         	TreeMap<String, String> instanceParams =pm.getInstanceParameters();
         	
         	stringBuffer.append("fusion/dataStream?");
-        	for (String key : instanceParams.keySet()) {
-        		stringBuffer.append(key).append("=").append(instanceParams.get(key)).append("&");
+        	
+        	String lastKey=instanceParams.lastKey();
+        	
+        	for (String key: instanceParams.keySet()) {
+        		stringBuffer.append(key).append("=").append(instanceParams.get(key));
+        		if(!lastKey.equals(key))
+        		{
+        			stringBuffer.append("&");
+        		}
 			}
         	params.put("dataStreamURL", stringBuffer.toString());
         }
