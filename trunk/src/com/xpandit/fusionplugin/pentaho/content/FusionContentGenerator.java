@@ -131,7 +131,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     
     /**
      * 
-     * This method process the chart
+     * This method process the chart for the URLDataStream on the RealTime Charts
      * 
      * @param out
      * @throws UnsupportedEncodingException
@@ -144,41 +144,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
-
-        IPentahoResultSet result= resultSets.get("results").get(0);
-        int columnCount=result.getColumnCount();
-        int rowCount=result.getRowCount();
-
-        StringBuffer buffer=new StringBuffer();
-        buffer.append("&label=");
-        for (int i=0;i<rowCount;++i)
-        {	
-        	buffer.append(result.getValueAt(i,0));
-        	if(i<rowCount-1)
-        	{
-        		buffer.append(',');
-        	}
-        }
-        buffer.append("&value=");
         
-        for (int j=1;j<columnCount;++j)
-        {
-
-        	for (int i=0;i<rowCount;++i)
-        	{	
-        		buffer.append(result.getValueAt(i,j));
-        		if(i<rowCount-1)
-            	{
-            		buffer.append(',');
-            	}
-        	}
-    		if(j<columnCount-1)
-        	{
-        		buffer.append('|');
-        	}
-        }
-        
-       out.write(buffer.toString().getBytes());
+        //generate the output
+        FusionDataStream.dataStream(out, resultSets);
     }
 
 	/**
