@@ -8,3 +8,7 @@
  ## Configure the CDA file and querie id
  ## Configure the Width ,Height and HtmlObject 
  # Save and run
+
+===Examples===
+We've created an example of FusionCharts+CDE in:
+bi-developers\fusion-charts\Dashboards\FusionCharts_CDE
