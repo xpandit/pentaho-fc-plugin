@@ -1,7 +1,7 @@
 #labels CDE
 ==Integrate Fusioncharts with CDE==
 
- # ant install-cdf-dd-res
+ # run: ant install-cdf-dd-res
  # Restart Pentaho
  # Create a new dashboard using CDE.
  # Select add a new FusionCharts Component
