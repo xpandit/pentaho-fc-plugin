@@ -1,11 +1,10 @@
 #labels CDE
+==Integrate Fusioncharts with CDE==
 
-Integrate the Fusioncharts with CDE 
-
-*ant install-cdf-dd-res
-*Restart Pentaho
-*Create a new dashboard using CDE.
-*Select add a new FusionCharts Component
-**Configure the CDA file and querie id
-**Configure the Width ,Height and HtmlObject 
-*Save and run
+ # ant install-cdf-dd-res
+ # Restart Pentaho
+ # Create a new dashboard using CDE.
+ # Select add a new FusionCharts Component
+ ## Configure the CDA file and querie id
+ ## Configure the Width ,Height and HtmlObject 
+ # Save and run
