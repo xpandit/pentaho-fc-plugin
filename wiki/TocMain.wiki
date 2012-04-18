@@ -7,7 +7,7 @@
   * [CDFComponent CDF FusionChartComponent]
   * [MobileSupport iPhone & iPad support]
   * [DashboardDesignerEE Integration with Dashboard Designer EE]
-  * [Integration with CDE]
+  * [IntegrationCDE Integration with CDE]
  * [TechnicalDocumentation Technical Documentation]
   * [DeveloperGuide Developer's Guide]
   * [Workflow Workflow]
