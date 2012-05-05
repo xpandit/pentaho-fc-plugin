@@ -71,6 +71,9 @@ public class FCWidget extends FCItem {
         if (resultSets == null)
             throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "data is null");
 
+        int rowCount = resultSets.get("results").get(0).getRowCount();
+        if(rowCount==0)
+        	return;
         try {
             // if the chart is a gauge
             if (graph.getGraphType().name().equals(ChartType.ANGULARGAUGE.name())) {

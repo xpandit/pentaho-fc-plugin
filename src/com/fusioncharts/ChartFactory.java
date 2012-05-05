@@ -105,15 +105,18 @@ public class ChartFactory extends Object {
 
 		FusionGraph graph = startChartBuild(graphName, xmlwriter);
 
-		// declare the holder for the series in the graph
-		Series singleSeries = graph.getSeries(0);
-
-		// setup either single series or multi series
-		if(graph.getGraphType().isSingleSeries())			
-			attachFusionSeries(xmlwriter, singleSeries, graph);
-		else
-			buildFusionMultiSeries(xmlwriter, graph);
-
+		//has data?
+		if( graph.getNumberOfSeries()>0)
+		{
+			// declare the holder for the series in the graph
+			Series singleSeries = graph.getSeries(0);
+	
+			// setup either single series or multi series
+			if(graph.getGraphType().isSingleSeries())			
+				attachFusionSeries(xmlwriter, singleSeries, graph);
+			else
+				buildFusionMultiSeries(xmlwriter, graph);
+		}
 		//set up trend lines		
 		attachFusionTrendLines(xmlwriter, graph.getTrendLineSeries());
 
