@@ -66,6 +66,7 @@ public class FCMaps extends FCItem {
         	entityParam = graph.getChartProperties().get("seriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
         
+       
         //set the Data on the chart
         setData(resultSets);
     }
@@ -84,6 +85,10 @@ public class FCMaps extends FCItem {
 
         setData(resultSets.get("results").get(0));
 
+        int rowCount = getRowCount();
+        if(rowCount==0)
+        	return;
+        
         // get Data Set Metadata
         IPentahoMetaData metadata = getMetaData();
         // verify meta data
@@ -94,7 +99,6 @@ public class FCMaps extends FCItem {
 
         
         // set the categories
-        int rowCount = getRowCount();
         for (int i = 0; i < rowCount; i++) {
             try {
                 // set category label

@@ -71,7 +71,7 @@ implements Cloneable, Comparable<Graph>
 			throw new IllegalArgumentException("graphType can not be blank");
 		if (graphId == null || graphId.length() == 0)
 			throw new IllegalArgumentException("graphId name can not be blank");
-		if (length <= 0)
+		if (length < 0)
 			throw new IllegalArgumentException("graph length must be greater than zero");
 
 		this.graphId = graphId;

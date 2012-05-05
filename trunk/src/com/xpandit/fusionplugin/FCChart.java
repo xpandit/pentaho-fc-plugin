@@ -94,7 +94,7 @@ public class FCChart extends FCItem {
         seriesParam = graph.getChartProperties().get("seriesParam");
         categoriesParam = graph.getChartProperties().get("categoriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
-        
+                
         //set the Data on the chart
         setData(resultSets);
     }
@@ -112,6 +112,10 @@ public class FCChart extends FCItem {
             throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "Result Set is null");
 
         setData(resultSets.get("results").get(0));
+        
+        int rowCount = getRowCount();
+        if(rowCount==0)
+        	return;
 
         // get Data Set Metadata
         IPentahoMetaData metadata = getMetaData();
@@ -119,7 +123,6 @@ public class FCChart extends FCItem {
         int metadataSize = metadata.getColumnCount();
 
         // set the categories
-        int rowCount = getRowCount();
         for (int i = 0; i < rowCount; i++) {
             try {
                 // set category label
@@ -132,7 +135,7 @@ public class FCChart extends FCItem {
                 log.error("Problem in result set. Null values found at index:" + i, e);
             }
         }
-
+        
         // if is the bubble charts
         //TODO create subclass of FCChart with detailed implementation for Buble charts.
         if (graph.getGraphType() == ChartType.BUBBLE) {
