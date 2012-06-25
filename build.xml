@@ -53,7 +53,7 @@
       <fileset dir="${dir.cdf-dd-res}" />
     </copy>
     <echo message="${dir.cdf-dd-res}"></echo>
-    <echo message="${dir.solutions}"></echo>
+    <echo message="${dir.solutions}"></echo> 
   </target>
   
 </project>
