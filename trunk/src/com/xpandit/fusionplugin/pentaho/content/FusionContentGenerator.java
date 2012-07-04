@@ -26,6 +26,7 @@ import com.xpandit.fusionplugin.FCItem;
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.util.VersionChecker;
 
 /**
  * 
@@ -93,6 +94,9 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         }
         else if ("dataStream".equals(method)) {
         	dataStream(out);
+        }
+        else if ("checkVersions".equals(method)) {
+        	VersionChecker.getVersions(out);
         }
     }
 
