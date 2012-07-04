@@ -18,9 +18,12 @@
 	<dependency org="pentaho" name="pentaho-bi-platform-api" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
 	<dependency org="pentaho" name="pentaho-bi-platform-engine-services" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>	
 	
+	
 	<!--pentaho com-->
 	<dependency org="pentaho" name="pentaho-connections" rev="2.2.2" changing="true" transitive='false'/>
 	<dependency org="pentaho-library" name="libbase" rev="1.2.2" changing="true" transitive='false'/>
+	<dependency org="pentaho" name="pentaho-versionchecker" rev="2.0.1" changing="true" transitive='false'/>	
+	
 	
 	<!-- other -->
 	<dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" changing="true" transitive='false'/>	
