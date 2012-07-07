@@ -9,18 +9,18 @@ var xLoadFunct= function(){
 		type: "XDashFusionChartComponent",
 		update: function(){
 
-			this.clear();
-
 			var options = this.getOptions();
 
 			var url = webAppPath + '/content/fusion';
-			var myself=this;
+			var myself = this;
 
 			// get the xml chart
-			var resultXml=$.ajax({url: url, data: options, async: false}).responseText;
+			var resultXml = $.ajax({url: url, data: options, async: false}).responseText;
+			myself.xmlResultData = resultXml;
 
 			// get chart type from xml
 			options.chartType = $(resultXml).attr("chartType")
+
 			//test if is for free version
 			var isFree=eval($(resultXml).attr("free"));
 			options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
@@ -35,33 +35,34 @@ var xLoadFunct= function(){
 				options.height = rect.height - 20;
 			}
 
-			//create chart Object
-			var myChart = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"myChartId", options.width, options.height, "0","1" );
+			//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded
+			if(myself.chartObject == undefined || options.reloadOnRefresh) {
+				this.clear();
 
-			// set chart data
-			myChart.setDataXML(resultXml);
+				//create chart Object
+				myself.chartObject = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"-generated", options.width, options.height, "0","1" );
 
-			//set extra configuration for HTML5 charts
-			if (!!myChart._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
-				myChart._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
-			}
+				myself.chartObject.setDataXML(resultXml);
 
-			// add the chart
-			myChart.render(myself.htmlObject); 	
-			$("#"+options.htmlObject).find("embed").attr("wmode","transparent"); 
+				//set extra configuration for HTML5 charts
+				if (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
+					myself.chartObject.chartObject._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
+				} 
 
-			// set the chart object to this cdf component
-			myself.chartObject=myChart; 
+				// add the chart
+				myself.chartObject.render(myself.htmlObject); 	
+				$("#"+options.htmlObject).find("embed").attr("wmode","transparent");
 
-			// set the chart data into xml
-			myself.xmlResultData=resultXml;
-
-			// set the back button
-			if(myself.backButton) {
-				var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
-				div.css("left",Number(myself.chartDefinition.width));	
-				$("#"+myself.htmlObject).prepend(div);	
-				div.click(myself.backButtonCallBack);
+				// set the back button
+				if(myself.backButton) {
+					var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
+					div.css("left",Number(myself.chartDefinition.width));	
+					$("#"+myself.htmlObject).prepend(div);	
+					div.click(myself.backButtonCallBack);
+				}
+			} else {
+				// just a quick update
+				myself.chartObject.setDataXML(resultXml);
 			}
 		},
 
@@ -122,15 +123,15 @@ var xLoadFunct= function(){
 	 */
 
 	XDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {
-		
+
 		var widget = new XDashFusionChartComponent();
 		widget.executeAtStart= true;
 		widget.localizedName = localizedFileName;
 		widget.GUID = WidgetHelper.generateGUID();
 		widget.parameters = [];
 		widget.outputParameters = [];
-		
-		
+
+
 		//check platform version
 		if(XDashFusionChartComponent.pentahoVersion==undefined)
 		{
@@ -146,7 +147,7 @@ var xLoadFunct= function(){
 		{
 			indexCorrection=0;
 		}
-		
+
 		var selectedWidgetIndex = pentahoDashboardController.getSelectedWidget() + indexCorrection; // add one to convert to 1-based
 		widget.name = 'widget' + selectedWidgetIndex;
 		widget.htmlObject = 'content-area-Panel_' + selectedWidgetIndex;
