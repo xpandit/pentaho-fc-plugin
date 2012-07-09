@@ -14,7 +14,7 @@
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: _`<acl-files>...,xfusion</acl-files>`_
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
 
-== Installing FusionCharts V3 (licensed) ==
+== Installing FusionCharts XT (licensed) ==
  # Extract the zip files provided by FusionCharts Team
  ## If your are installing a package you need to these steps for every file provided (charts, widgets, maps, ...)
  # Look for the directory where the _`*`.swf_ files are
