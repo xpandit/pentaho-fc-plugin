@@ -26,6 +26,7 @@
 	
 	
 	<!-- other -->
+	<dependency org="dom4j" name="dom4j" rev="1.6.1" changing="true" transitive='false'/>
 	<dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" changing="true" transitive='false'/>	
 	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />
 	<dependency org="log4j" name="log4j" rev="1.2.9"/>
