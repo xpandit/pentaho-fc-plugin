@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="sql.jndi">
+            <Jndi>SampleData</Jndi>
+        </Connection>
+        <Connection id="2" type="mondrian.jndi">
+            <Jndi>SampleData</Jndi>
+            <Catalog>./steelwheels.mondrian.xml</Catalog>
+			<Cube>SteelWheelsSales</Cube>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="2" connection="2" type="mdx" access="public">
+        <Query>
+			select {[Measures].[Sales]} ON COLUMNS,
+			NON EMPTY  [Time].[Years].Members ON ROWS
+			from [SteelWheelsSales]
+		</Query>
+		<Output indexes="1,2"/>
+    </DataAccess>
+    <DataAccess id="3" connection="2" type="mdx" access="public">
+        <Query>
+			select {[Measures].[Sales]} ON COLUMNS,
+			NON EMPTY  [Time].[${year}].children ON ROWS
+			from [SteelWheelsSales]
+		</Query>
+		<Parameters>
+            <Parameter name="year" type="String"/>
+        </Parameters>
+		<Output indexes="2,3"/>
+    </DataAccess>
+</CDADescriptor>

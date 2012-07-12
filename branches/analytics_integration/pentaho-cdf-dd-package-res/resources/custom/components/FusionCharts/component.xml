@@ -1,0 +1,67 @@
+
+<DesignerComponents>
+  <DesignerComponent>
+    <Header>
+      <Name>FusionCharts Component</Name>
+      <IName>XDashFusionChartComponent</IName>
+      <Description>FusionCharts Component</Description>
+      <Category>CHARTS</Category>
+      <CatDescription>Charts</CatDescription>
+      <Type>PalleteEntry</Type>
+      <Version>1.0</Version>
+    </Header>
+    <Metadata>
+      <meta name='cdwSupport'>true</meta>
+    </Metadata>
+    <Contents>
+      <Model>
+        <Definition name="chartDefinition">
+			<Property name="cdaPath">fusionCdaPath</Property>
+			<Property name="cdaDataAccessId">dataAccessId</Property>
+			<Property type="string" name="chartType">fusionChartType</Property>
+			<Property type="string" name="chartLink">chartLink</Property>
+			<Property type="string" name="seriesParam">seriesParam</Property>
+			<Property type="string" name="categoriesParam">categoriesParam</Property>
+			<Property type="string" name="valueParam">valueParam</Property>
+			<Property name="width" type="number">width</Property>
+			<Property name="height" type="number">height</Property>
+        </Definition>
+        <Property name="parameters">xActionArrayParameter</Property>
+        <Property type="boolean">executeAtStart</Property>
+        <Property type="function">preChange</Property>
+        <Property type="function">postChange</Property>
+        <Property type="function">postFetch</Property>
+        <Property type="function">customfunction</Property>
+        <Property type="string">htmlObject</Property>
+        <Property type="function">preExecution</Property>
+        <Property type="function">postExecution</Property>
+        <Property type="number">tooltip</Property>
+        <Property type="number">listeners</Property>
+      </Model>
+      <Implementation>
+        <Raw>
+			<Fragment name='fusinCharts' version='1.0'><![CDATA[
+					<script type='text/javascript' src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+					<script type="text/javascript" src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+					]]>
+          </Fragment>
+        </Raw>
+        <CustomProperties>
+          <DesignerProperty>
+            <Header>
+              <Name>customfunction</Name>
+              <Parent>BaseProperty</Parent>
+              <DefaultValue></DefaultValue>
+              <Description>Custom Chart Script</Description>
+              <Tooltip>Custom Chart Script</Tooltip>
+              <InputType>JavaScript</InputType>
+              <OutputType>Function</OutputType>
+              <Order>40</Order>
+              <Version>1.0</Version>
+            </Header>
+          </DesignerProperty>
+        </CustomProperties>
+      </Implementation>
+    </Contents>
+  </DesignerComponent>
+</DesignerComponents>

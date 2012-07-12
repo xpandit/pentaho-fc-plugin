@@ -1,0 +1,86 @@
+<DesignerProperties>
+  <DesignerProperty>
+    <Header>
+      <Name>fusionChartType</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>Column2D</DefaultValue>
+      <Description>Fusion Charts Type</Description>
+      <Tooltip>Fusion Charts Type </Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>87</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+  </DesignerProperty> 
+  <DesignerProperty>
+	  <Header>
+		<Name>fusionCdaPath</Name>
+		<OutputName>cdaPath</OutputName>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue></DefaultValue>
+		<Description>Path</Description>
+		<Tooltip>CDA Path</Tooltip>
+		<InputType>CdaPath</InputType>
+		<OutputType>String</OutputType>
+		<Order>27</Order>
+		<Version>1.0</Version>
+	  </Header>	
+	</DesignerProperty>
+	<DesignerProperty>
+    <Header>
+      <Name>chartLink</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>JavaScript: alert('{series}','{categories}','{value}')</DefaultValue>
+      <Description>Fusion Chart Link</Description>
+      <Tooltip>Fusion Chart Link</Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>87</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+	 </DesignerProperty> 
+	 <DesignerProperty>
+	<Header>
+      <Name>categoriesParam</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>categories</DefaultValue>
+      <Description>Fusion Chart categoriesParam name</Description>
+      <Tooltip>Fusion Chart categoriesParam name</Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>88</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+	 </DesignerProperty> 
+	 <DesignerProperty>
+	<Header>
+      <Name>seriesParam</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>series</DefaultValue>
+      <Description>Fusion Chart seriesParam name</Description>
+      <Tooltip>Fusion Chart seriesParam name</Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>89</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+	 </DesignerProperty> 
+	 <DesignerProperty>
+	<Header>
+      <Name>valueParam</Name>
+      <Parent>BaseProperty</Parent>
+      <DefaultValue>value</DefaultValue>
+      <Description>Fusion Chart valueParam name</Description>
+      <Tooltip>Fusion Chart valueParam name</Tooltip>
+      <InputType>String</InputType>
+      <OutputType>String</OutputType>
+      <Order>90</Order>
+      <Advanced>false</Advanced>
+      <Version>1.0</Version>
+    </Header>
+  </DesignerProperty> 
+</DesignerProperties>
