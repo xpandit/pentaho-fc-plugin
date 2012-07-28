@@ -6,7 +6,6 @@ import java.util.Map;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.fusioncharts.ChartType;
-import com.fusioncharts.FusionGraph;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
@@ -34,29 +33,22 @@ public class FCFactory {
             throws InvalidParameterException {
 
         // get the requested chartType
-        String chartTypeParam = pm.getParams().get("chartType").toString();
+        String chartTypeParam = pm.getParams().get("chartType");
         if (chartTypeParam == null)
             throw new InvalidParameterException(InvalidParameterException.ERROR_001);
-
-        // find the right chart characteristics
-        ChartType[] values = ChartType.values();
-        ChartType cType = null;
          
         //in maps the name is FCMaps_<map> 
         //we split the value to get the correct value and to not put all charts in charts types
         String chartTypeAxu=chartTypeParam.split("_")[0];
         
         
-        for (int v = 0; v < values.length; ++v) {
-            if (values[v].name().equals(chartTypeAxu.toUpperCase())) {
-                cType = values[v];
-                break;
-            }
-        }
-        
-        //check if chart type is supported
-        if (cType == null)
+        //identify chart type
+        ChartType cType = null;
+        try{
+            cType = ChartType.valueOf(ChartType.class,chartTypeAxu.toUpperCase());
+        } catch (Exception ex){ //chart type not supported 
             throw new InvalidParameterException(InvalidParameterException.ERROR_002);
+        }   
 
         //based on the chart characteristics choose the correct implementation
         if (cType.getChartLibrary() == ChartType.ChartLibrary.CHARTS) {

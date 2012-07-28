@@ -7,16 +7,12 @@ import java.util.TreeMap;
 import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
-import com.fusioncharts.Category;
-import com.fusioncharts.ChartFactoryChart;
 import com.fusioncharts.ChartFactoryMaps;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.Entity;
 import com.fusioncharts.FusionGraph;
-import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
-import com.xpandit.fusionplugin.util.ScaleConverter;
 
 /**
  * 

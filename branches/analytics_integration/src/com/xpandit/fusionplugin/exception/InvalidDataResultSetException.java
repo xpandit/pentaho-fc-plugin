@@ -17,10 +17,9 @@ public class InvalidDataResultSetException extends Exception {
 	 * All Error Codes For this Exception
 	 */
 	public static String ERROR_001="INVALID DATA - MetaData Verification Size";
+	public static String ERROR_002="INVALID DATA - JSON Format is incorrect";
 	
 	private String extendedMessage;
-
-
 
 	public InvalidDataResultSetException(String message,String extended) {
 		super(message);

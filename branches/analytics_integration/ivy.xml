@@ -26,6 +26,8 @@
 	
 	
 	<!-- other -->
+	<dependency org="javax.servlet" name="servlet-api" rev="2.4" changing="true" transitive='false'/>
+	<dependency org="org.json" name="json" rev="3.1" transitive="false"/>        	
 	<dependency org="dom4j" name="dom4j" rev="1.6.1" changing="true" transitive='false'/>
 	<dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" changing="true" transitive='false'/>	
 	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />

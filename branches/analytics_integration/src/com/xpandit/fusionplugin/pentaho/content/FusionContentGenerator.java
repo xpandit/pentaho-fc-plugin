@@ -26,6 +26,8 @@ import com.xpandit.fusionplugin.FCItem;
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import com.xpandit.fusionplugin.pentaho.input.JSONDataProvider;
+import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
 import com.xpandit.fusionplugin.util.VersionChecker;
 
 /**
@@ -41,7 +43,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private static final String PATHMODE = "pathMode";
     private static final String CDANAME = "cdaName";
     private static final String CDAID = "cdaDataAccessId";
-	private static final String CDAOUTPUTID	= "outputIndexId";
+    private static final String CDAOUTPUTID = "outputIndexId";
     private static final String CDAPATH = "cdaPath";
     private static final String CDASOLUTION = "cdaSolution";
     private static final String CDAPARAMETERS = "cdaParameters";
@@ -62,7 +64,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 
     // pathMode for obtaining repository objects
     String pathMode;
-    
+
     @Override
     public String getMimeType() {
         return MIMETYPE;
@@ -74,50 +76,68 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     }
 
     /**
-     * Main method call by the Pentaho platform.
+     * Main method called by the Pentaho platform.
      */
     public void createContent(OutputStream out) throws Exception {
 
+        //TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
         parameterParser = new ParameterParser(parameterProviders);
         pathMode = parameterParser.getParameters(PATHMODE);
-        
+
         // Identify operation based on URL call
         String method = parameterParser.extractMethod();
 
-        // Generate chart
-        if (method == null) {
-            processChart(out);
-        } else if ("clearCache".equals(method)) {
-            // Clear cache
+        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
+        
+        if (method == null) { // Generate chart
+            renderChartGetData(out);
+        } else if ("clearCache".equals(method)) { // clear component cache
             clearCache();
-            out.write("Cache cleared".getBytes());
-        }
-        else if ("dataStream".equals(method)) {
-        	dataStream(out);
-        }
-        else if ("checkVersions".equals(method)) {
-        	VersionChecker.getVersions(out);
+        } else if ("dataStream".equals(method)) { // called by real time charts to update data
+            dataStream(out);
+        } else if ("checkVersions".equals(method)) { // check the Pentaho version
+            VersionChecker.getVersions(out);
+        } else if ("renderChartExternalData".equals(method)) { // render chart using external data
+            renderChartGetData(out);
         }
     }
-
+    
     /**
      * 
-     * This method process the chart
+     * Retrieves the data and renders the chart
      * 
-     * @param out
+     * @param out Stream output where to write the chart data and settings 
      * @throws UnsupportedEncodingException
      * @throws Exception
      * @throws InvalidParameterException
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    private void processChart(OutputStream out) throws UnsupportedEncodingException, Exception,
+    private void renderChartGetData(OutputStream out) throws UnsupportedEncodingException, Exception,
+            InvalidParameterException, InvalidDataResultSetException, IOException {
+        
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
+        
+        renderChart(out,resultSets);
+    }
+    
+    
+    /**
+     * 
+     * Retrieves the chart
+     * 
+     * @param out Stream output where to write the chart data and settings 
+     * @throws UnsupportedEncodingException
+     * @throws Exception
+     * @throws InvalidParameterException
+     * @throws InvalidDataResultSetException
+     * @throws IOException
+     */
+    private void renderChart(OutputStream out, Map<String, ArrayList<IPentahoResultSet>> resultSets) throws UnsupportedEncodingException, Exception,
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
-        Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
-
         // create the chart
-        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
+        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);// resultSets.get("results"));
 
         // render the chart
         TreeMap<String, String> params = pm.getParams();
@@ -132,7 +152,8 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             out.write(fcItem.generateXML().getBytes());
         }
     }
-    
+
+
     /**
      * 
      * This method process the chart for the URLDataStream on the RealTime Charts
@@ -148,29 +169,36 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
-        
-        //generate the output
+
+        // generate the output
         FusionDataStream.dataStream(out, resultSets);
     }
 
-	/**
-	 * @return
-	 * @throws InvalidParameterException
-	 * @throws Exception
-	 */
-	private Map<String, ArrayList<IPentahoResultSet>> getData()
-			throws InvalidParameterException, Exception {
-		if(pathMode==null)
-        	pathMode="legacy";
-    	
-        // creates a properties manager
-        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
+    /**
+     * @return
+     * @throws InvalidParameterException
+     * @throws Exception
+     */
+    private Map<String, ArrayList<IPentahoResultSet>> getData() throws InvalidParameterException, Exception {
+        if (pathMode == null)
+            pathMode = "legacy";
 
-        Map<String, ArrayList<IPentahoResultSet>> resultSets = getDataUsingCDA();
+        Map<String, ArrayList<IPentahoResultSet>> resultSets = null;
+        
+        //retrieve the data from the correct data source
+        if(pm.getParams().get(CDAID) != null)
+            resultSets = getDataUsingCDA();
+        else{
+            JSONDataProvider dp = new JSONDataProvider();
+            resultSets = dp.getResultSets(pm);
+        }
+        
+        //abort if no data is found
         if (resultSets == null)
             getLogger().error("Error : resultset is null -> see previous error");
-		return resultSets;
-	}
+        
+        return resultSets;
+    }
 
     /**
      * 
@@ -184,16 +212,16 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private Map<String, ArrayList<IPentahoResultSet>> getDataUsingCDA() throws Exception {
         final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
         final ISolutionFile file;
-             
-        if(pathMode.equals("legacy")) {
+
+        if (pathMode.equals("legacy")) {
             file = getCDAFileWithActionInfo(repository);
         } else {
             file = getCDAFile(repository);
         }
-        
+
         boolean outputIndexIdDefined = false;
         Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
-        
+
         cdaQueryComponent = new CdaQueryComponent();
         cdaQueryComponent.setFile(file.getFullPath());
 
@@ -205,36 +233,35 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         if (pm.getParams().get(CDAID) == null) {
             throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAID);
         }
-        
-        if(pm.getParams().get(CDAOUTPUTID)!=null)
-		{
-			outputIndexIdDefined = true;
-		}
+
+        if (pm.getParams().get(CDAOUTPUTID) != null) {
+            outputIndexIdDefined = true;
+        }
 
         // get dataAccessIDs using properties manager
         String[] queryIDs = pm.getParams().get(CDAID).split(";");
         String[] outputIndexIds = null;
-		
-		if(outputIndexIdDefined){
-			// get outputIndexIds from request
-			outputIndexIds = pm.getParams().get(CDAOUTPUTID).split(";");
-			// if there is an indexDefined than we must make sure they have the same size
-			if(outputIndexIds.length != queryIDs.length){
-				throw new InvalidParameterException(InvalidParameterException.ERROR_007+ "\n Number of accessIds -> " + outputIndexIds.length + "\n Number of outputIndexIds -> " + outputIndexIds.length);
-			}
-		}		
-         
-        ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();
-		int iteration = 0;
-        for (String queryID : queryIDs) {
-            
-        	// set data access id
-			cdaInputs.put("dataAccessId", queryID);
-			if(outputIndexIdDefined){
-				cdaInputs.put("outputIndexId", outputIndexIds[iteration]);
-			}			
-			cdaQueryComponent.setInputs(cdaInputs);
 
+        if (outputIndexIdDefined) {
+            // get outputIndexIds from request
+            outputIndexIds = pm.getParams().get(CDAOUTPUTID).split(";");
+            // if there is an indexDefined than we must make sure they have the same size
+            if (outputIndexIds.length != queryIDs.length) {
+                throw new InvalidParameterException(InvalidParameterException.ERROR_007 + "\n Number of accessIds -> "
+                        + outputIndexIds.length + "\n Number of outputIndexIds -> " + outputIndexIds.length);
+            }
+        }
+
+        ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();
+        int iteration = 0;
+        for (String queryID : queryIDs) {
+
+            // set data access id
+            cdaInputs.put("dataAccessId", queryID);
+            if (outputIndexIdDefined) {
+                cdaInputs.put("outputIndexId", outputIndexIds[iteration]);
+            }
+            cdaQueryComponent.setInputs(cdaInputs);
 
             try {
                 // execute query
@@ -277,23 +304,22 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      * @return
      * @throws InvalidParameterException
      */
-    private ISolutionFile getCDAFileWithActionInfo(final ISolutionRepository repository) throws InvalidParameterException {
-        ISolutionFile file = repository.getSolutionFile(getAction().toString(),
-                ISolutionRepository.ACTION_EXECUTE);
-        
-        if(file==null) 
-        {
-        	getLogger().warn("Cda file is null, Try path way");
-        	file = repository.getSolutionFile(pm.getParams().get(CDAPATH),ISolutionRepository.ACTION_EXECUTE);
+    private ISolutionFile getCDAFileWithActionInfo(final ISolutionRepository repository)
+            throws InvalidParameterException {
+        ISolutionFile file = repository.getSolutionFile(getAction().toString(), ISolutionRepository.ACTION_EXECUTE);
+
+        if (file == null) {
+            getLogger().warn("Cda file is null, Try path way");
+            file = repository.getSolutionFile(pm.getParams().get(CDAPATH), ISolutionRepository.ACTION_EXECUTE);
         }
-        if (file == null) { 
+        if (file == null) {
             throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
                     + getAction().getSolutionName() + "/" + getAction().getPath() + "/" + getAction().getActionName());
         }
-        
+
         return file;
     }
-    
+
     /**
      * Gets CDA file using the cdaPath parameter
      * 
@@ -315,10 +341,10 @@ public class FusionContentGenerator extends SimpleContentGenerator {
             throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
                     + cdaPath);
         }
-        
+
         return file;
     }
-    
+
     /**
      * 
      * Invoke the CDA to get the Target Value of a chart
