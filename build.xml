@@ -1,4 +1,4 @@
-<project name="fusion_plugin" basedir="." default="default">
+<project name="Pentaho FusionCharts Plugin" basedir="." default="default">
 <!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
   <import file="build-res/subfloor-pkg.xml" />
   <property name="dir.system" value="${dir.solutions}/system"/>

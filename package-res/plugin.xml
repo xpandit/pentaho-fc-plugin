@@ -19,7 +19,16 @@
   
   
   <external-resources>
+  	<!-- Integration with EE Dashboards-->
     <file context="dashboards">content/fusion/js/XDashFusionChartComponent.js</file>
+    <!-- Integration with Analyzer -->
+  	<file context="analyzer">content/fusion/js/vizapi/fusioncharts_wrapper.js</file>    
+    <file context="analyzer">content/fusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
+    <!-- Required dependencies -->
+    <file context="analyzer">content/fusion/js/vizapi/chart_settings.js</file>
+    <file context="analyzer">content/fusion/JSClass/FusionCharts.js</file>
+    <file context="analyzer">content/fusion/js/XDashFusionChartComponent.js</file> 
+    
   </external-resources>
   
     <content-generator
