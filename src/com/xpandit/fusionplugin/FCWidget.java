@@ -8,12 +8,8 @@ import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.fusioncharts.ChartFactoryWidget;
 import com.fusioncharts.ChartType;
-import com.fusioncharts.ColorRange;
 import com.fusioncharts.FusionGraph;
-import com.fusioncharts.ChartType.ChartLibrary;
-import com.fusioncharts.ChartType.SingleOrMulti;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
