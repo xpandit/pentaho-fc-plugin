@@ -13,7 +13,6 @@ import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
-import com.xpandit.fusionplugin.util.ScaleConverter;
 
 /**
  * 
