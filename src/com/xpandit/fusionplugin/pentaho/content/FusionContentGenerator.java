@@ -225,8 +225,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         cdaQueryComponent = new CdaQueryComponent();
         cdaQueryComponent.setFile(file.getFullPath());
 
-        Map<String, Object> cdaInputs = new HashMap<String, Object>();
-        cdaInputs.put("cdaParameterString", cdaParameters());
+        Map<String, Object> cdaInputs = cdaParameters();
 
         IPentahoResultSet resultset = null;
 
@@ -410,31 +409,27 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     }
 
     /**
-     * Get all parameter Values and return the String as requested by CDA process parameter string
-     * "name1=value1;name2=value2" The requested parameter names are in cdaParameters Ex.
-     * cdaParameters=name1;name2;name3......
+     * Get all parameter Values and return a map that can be used as CDA parameters
      * 
      * @return return parameters as requested by CDA
      */
-    private String cdaParameters() {
-        StringBuffer cdaParametersInput = new StringBuffer();
+    private HashMap<String, Object> cdaParameters() {
+        HashMap<String, Object> cdaParameters = new  HashMap<String, Object>();
         TreeMap<String, String> params = pm.getParams();
         String parameterKeys = params.get(CDAPARAMETERS);
         if (parameterKeys == null) {
             getLogger().debug("No parameters will be passed: " + CDAPARAMETERS + " don't exist");
-            return "";
+            return cdaParameters;
         }
         String[] parametersKeysArray = parameterKeys.split(";");
         for (int i = 0; i < parametersKeysArray.length; i++) {
-            if (cdaParametersInput.length() != 0)
-                cdaParametersInput.append(";");
             String value = params.get(parametersKeysArray[i]);
             if (value == null)
                 new InvalidParameterException(InvalidParameterException.ERROR_003 + " with key:"
                         + parametersKeysArray[i]);
-            cdaParametersInput.append(parametersKeysArray[i]).append("=").append(value);
+            cdaParameters.put("param"+parametersKeysArray[i],value);
         }
-        return cdaParametersInput.toString();
+        return cdaParameters;
     }
 
     /**
