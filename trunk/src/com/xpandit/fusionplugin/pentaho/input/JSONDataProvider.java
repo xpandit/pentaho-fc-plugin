@@ -30,13 +30,23 @@ public class JSONDataProvider extends DataProvider{
      */
     @Override
     public Map<String, ArrayList<IPentahoResultSet>> getResultSets(PropertiesManager pm) throws InvalidDataResultSetException{
-        
-        Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
-     
+             
         String data = pm.getPropData();
-        ArrayList<IPentahoResultSet> array = new ArrayList<IPentahoResultSet>();
-        array.add(new JSONResultSet(data));
-        resultSets.put(DataProvider.RESULTSET_TYPE_DATA,array);        
+
+        JSONResultSet resultSet = new JSONResultSet(data); 
+        
+        if (pm.getParams().containsKey(PropertiesManager.RANGE_VALUES)){
+            JSONResultSet rangeResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.RANGE_VALUES));
+            addResultSet(DataProvider.RESULTSET_TYPE_RANGE,rangeResultSet); 
+        }
+        
+        if (pm.getParams().containsKey(PropertiesManager.TARGET_VALUES)){
+            JSONResultSet targetResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.TARGET_VALUES));
+            addResultSet(DataProvider.RESULTSET_TYPE_TARGET,targetResultSet);
+        }
+        
+        addResultSet(DataProvider.RESULTSET_TYPE_DATA,resultSet);
+        
         return resultSets; 
-    }
+    }    
 }
