@@ -14,6 +14,7 @@ import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.pentaho.input.JSONPentahoMetaData.DataType;
 
 /**
  * Implements IPentahoResultSet based on a JSON input.
@@ -67,15 +68,11 @@ public class JSONResultSet implements IPentahoResultSet {
     private void initResultSet(JSONArray columns, JSONArray rows) throws InvalidDataResultSetException {
         resultSet = new Object[nRows][nColumns];
 
-        // populate headers
-        /*
-         * for (int c = 0; c < nColumns; c++) { resultSet[0][c] = metaData.getColumnHeaders()[0][c]; }
-         */
         try {
             for (int r = 0; r < nRows; r++) {
                 JSONArray row = rows.getJSONObject(r).getJSONArray(KEY_ROW);
                 for (int c = 0; c < nColumns; c++) {
-                    if (c == 0) // TODO must be smarter than this -> based on the column type
+                    if (metaData.getColumnType(c).equals(DataType.STRING))
                         resultSet[r][c] = row.getJSONObject(c).getString(KEY_VALUE_STR);
                     else
                         resultSet[r][c] = row.getJSONObject(c).getDouble(KEY_VALUE_NUM);

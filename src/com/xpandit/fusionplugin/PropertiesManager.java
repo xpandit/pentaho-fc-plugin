@@ -36,6 +36,10 @@ public class PropertiesManager {
     private static final String XFUSIONPATH = "xFusionPath";
     private static final String KEY_DATA = "data";
     
+    //Types of result sets
+    public static final String TARGET_VALUES = "target";
+    public static final String RANGE_VALUES = "range";
+    
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
     
     // Manager for properties obtained from the .xfusion file

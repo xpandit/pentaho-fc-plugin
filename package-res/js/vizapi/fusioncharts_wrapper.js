@@ -89,7 +89,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column',
                 caption : 'Measure',
                 required : true,
-                allowMultiple : false,
+                allowMultiple : true,
                 ui : {
                     group : "data"
                 }
@@ -103,7 +103,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         name : 'FusionCharts Gauge', // visible name, this will come from a properties file eventually
         'class' : 'pentaho.fcplugin', 
         args : {
-            chartType: "AngularGauge"
+            chartType: "AngularGauge",
+            range: '{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
+                   '"rows":[{"c":[{"f":"0","v":0},{"f":"20","v":20},{"f":"80","v":80},{"f":"100","v":100}]}]}',
+            colorRange: 'FF654F;FF654F;F6BD0F;8BBA00'
         },
         propMap : [],
         dataReqs : [ //data requirements of this visualization
@@ -144,8 +147,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * height width
      */
     pentaho.fcplugin.prototype.resize = function(width, height) {
-        //this.containerDiv.style.left = this.canvasElement.offsetWidth;
-        //this.containerDiv.style.top = this.canvasElement.offsetHeight;
+        $("#"+this.containerDiv.id).find("embed").attr("height",height);
+        $("#"+this.containerDiv.id).find("embed").attr("width",width);
     };
 
     /**
@@ -155,7 +158,6 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * the options for the visualization
      */
     pentaho.fcplugin.prototype.draw = function(datView, vizOptions) {
-        //TODO options object must be built based on Analyzer settings. BarChart2DAnalyzer.xfusion must be removed.
         var options = {
                 height: this.canvasElement.offsetHeight,
                 width: this.canvasElement.offsetWidth,
@@ -185,7 +187,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         var chartObject = new FusionCharts( webAppPath+"/content/fusion/swf/"+options.chartType+".swf", this.containerDiv.id+"-generated", options.width, options.height, "0","1" );
         chartObject.setDataXML(resultXml);
         chartObject.render(this.containerDiv.id);
-        //$("#"+"chartContainer").find("embed").attr("wmode","transparent"); 
+        $("#"+this.containerDiv.id).find("embed").attr("wmode","transparent"); 
         //TODO end of reuse XDashFusionChartComp and replace logic bellow. 
     }
 });
