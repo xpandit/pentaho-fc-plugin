@@ -190,8 +190,17 @@ infosoftglobal.FusionCharts.prototype = {
 		}else{
 			//Else, we update the chart data using External Interface
 			//Get reference to chart object
+
+			
+			//Changed 28-09-2012 by Xpand IT
+			//BUG Issue 69:	Doesn't refresh although Listeners are ticked (CDE)
+			//Petaho Fusion Charts Plugin
+			
+			//old code
 			//var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
 			//chartObj.setDataXML(strDataXML);
+			
+			//new code
 			this.addVariable('dataXML',this.encodeDataXML(strDataXML));
 			this.render(document.getElementById(this.getAttribute('id')).parentElement);
 		}
