@@ -2,14 +2,12 @@ package com.xpandit.fusionplugin.pentaho.input;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.reporting.libraries.base.util.StringUtils;
 
@@ -38,11 +36,6 @@ public class ParameterParser {
      * Parameters values after parsing.
      */
     private TreeMap<String, String> parameters = null;
-
-    /**
-     * Results sets obtained from the different sources
-     */
-    private Map<String, ArrayList<IPentahoResultSet>> resultSets = null;
 
     /**
      * Constructor for the class.

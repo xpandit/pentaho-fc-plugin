@@ -4,6 +4,8 @@ import com.generationjava.io.WritingException;
 
 public class XmlWritingException extends WritingException {
 
+    private static final long serialVersionUID = 1L;
+
     public XmlWritingException() {
         super();
     }

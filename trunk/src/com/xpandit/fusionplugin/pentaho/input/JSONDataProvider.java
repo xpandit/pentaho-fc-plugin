@@ -9,7 +9,6 @@ package com.xpandit.fusionplugin.pentaho.input;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
 

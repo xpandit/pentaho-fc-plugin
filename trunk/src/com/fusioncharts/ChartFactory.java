@@ -8,9 +8,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.pentaho.platform.engine.core.system.PentahoSystem;
-
-
 import com.generationjava.io.WritingException;
 import com.generationjava.io.xml.XmlWriter;
 

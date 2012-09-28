@@ -25,8 +25,6 @@ package com.bga.wbrogden.metaphone;
  *
  */
 
-import java.util.* ;
-import java.io.* ;
 
 public class Metaphone extends Object {
 
