@@ -23,6 +23,7 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * MSCombi3D
   * StackedColumn2D
   * StackedColumn3D
+  * StackedColumn3DLineDY
   * MSColumnLine3D
   * MSColumn3DLineDY
   * Marimekko
@@ -33,6 +34,7 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * ScrollCombi2D 
   * ScrollCombiDY2D
   * ZoomLine
+ 
 
 == Widgets ==
 
