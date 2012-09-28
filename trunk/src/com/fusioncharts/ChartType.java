@@ -22,6 +22,7 @@ public enum ChartType {
 	STACKEDCOLUMN3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "StackedColumn3D"), 
 	MSCOLUMNLINE3D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSColumnLine3D"), 
 	MSCOLUMN3DLINEDY(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSColumn3DLineDY"),
+	STACKEDCOLUMN3DLINEDY(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "StackedColumn3DLineDY"),
 	MSCOMBIDY2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "MSCombiDY2D"),
 	BUBBLE(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "Bubble"), 
 	MARIMEKKO(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "Marimekko"), 
