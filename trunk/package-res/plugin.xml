@@ -27,7 +27,7 @@
     <!-- Required dependencies -->
     <file context="analyzer">content/fusion/js/vizapi/chart_settings.js</file>
     <file context="analyzer">content/fusion/JSClass/FusionCharts.js</file>
-    <file context="analyzer">content/fusion/js/XDashFusionChartComponent.js</file> 
+   <!-- <file context="analyzer">content/fusion/js/XDashFusionChartComponent.js</file> --> 
     
   </external-resources>
   
