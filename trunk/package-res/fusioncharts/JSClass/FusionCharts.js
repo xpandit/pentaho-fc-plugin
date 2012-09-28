@@ -190,8 +190,10 @@ infosoftglobal.FusionCharts.prototype = {
 		}else{
 			//Else, we update the chart data using External Interface
 			//Get reference to chart object
-			var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
-			chartObj.setDataXML(strDataXML);
+			//var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
+			//chartObj.setDataXML(strDataXML);
+			this.addVariable('dataXML',this.encodeDataXML(strDataXML));
+			this.render(document.getElementById(this.getAttribute('id')).parentElement);
 		}
 	},
 	setTransparent: function(isTransparent){
