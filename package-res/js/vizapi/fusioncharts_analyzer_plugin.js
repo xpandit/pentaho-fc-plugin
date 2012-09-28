@@ -60,10 +60,9 @@ analyzerPlugins.push(
                 function that's required "generateOptionsFromAnalyzerState" is called so the 
                 visualization can set its own options based on Analyzer's current report. 
                 */ 
-               cv.pentahoVisualizationHelpers[value.id] = { 
-                 // use one of Analyzer's stock placeholder images 
+               cv.pentahoVisualizationHelpers[value.id] = {  
                  placeholderImageSrc: CONTEXT_PATH 
-                                      + 'content/analyzer/images/viz/VERTICAL_BAR.png', 
+                                      + 'content/fusion/res/background_logo.jpg', 
 
                  /**
                   * This method is used to set visualization options based on the Analyzer 

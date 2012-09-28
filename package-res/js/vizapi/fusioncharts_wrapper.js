@@ -61,24 +61,24 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
-        id : 'fcplugin_line', // unique identifier
-        type : 'chart', // generic type id
-        source : 'FusionCharts', // id of the source library
-        name : 'FusionCharts Line', // visible name, this will come from a properties file eventually
+        id : 'fcplugin_line', 
+        type : 'chart', 
+        source : 'FusionCharts', 
+        name : 'FusionCharts Line', 
         'class' : 'pentaho.fcplugin', 
         args : {
             chartType: "Line"
         },
         propMap : [],
-        dataReqs : [ //data requirements of this visualization
+        dataReqs : [
         {
             name : 'Default',
             reqs : [ {
                 id : 'rows',
                 dataType : 'string',
                 dataStructure : 'column',
-                caption : 'Series', // visible name
-                required : true, // true or false
+                caption : 'Series', 
+                required : true, 
                 allowMultiple : false,
                 ui : {
                     group : 'data'
@@ -89,7 +89,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column',
                 caption : 'Measure',
                 required : true,
-                allowMultiple : true,
+                allowMultiple : false,
                 ui : {
                     group : "data"
                 }
@@ -97,19 +97,18 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
-        id : 'fcplugin_angulargauge', // unique identifier
-        type : 'chart', // generic type id
-        source : 'FusionCharts', // id of the source library
-        name : 'FusionCharts Gauge', // visible name, this will come from a properties file eventually
+        id : 'fcplugin_angulargauge',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Gauge',
         'class' : 'pentaho.fcplugin', 
         args : {
             chartType: "AngularGauge",
             range: '{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
-                   '"rows":[{"c":[{"f":"0","v":0},{"f":"20","v":20},{"f":"80","v":80},{"f":"100","v":100}]}]}',
-            colorRange: 'FF654F;FF654F;F6BD0F;8BBA00'
+                   '"rows":[{"c":[{"f":"0","v":0},{"f":"20000","v":20000},{"f":"40000","v":40000},{"f":"100000","v":100000}]}]}'
         },
         propMap : [],
-        dataReqs : [ //data requirements of this visualization
+        dataReqs : [
         {
             name : 'Default',
             reqs : [  {
@@ -147,8 +146,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * height width
      */
     pentaho.fcplugin.prototype.resize = function(width, height) {
-        $("#"+this.containerDiv.id).find("embed").attr("height",height);
-        $("#"+this.containerDiv.id).find("embed").attr("width",width);
+        this.chart.attr("height",height);
+        this.chart.attr("width",width);
     };
 
     /**
@@ -161,15 +160,29 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         var options = {
                 height: this.canvasElement.offsetHeight,
                 width: this.canvasElement.offsetWidth,
-                isFree: false,
                 data: datView.toDataTable().jsonTable
                 //TODO convert to Google datatable to be more generic convertCdaToDataTable see pentaho-solutions\system\common-ui\resources\web\vizapi\DataTable.js
         }
         
+        //Set options
         //Set arguments of visualization as options.
         $.each(this.controller.currentViz.args, function(key, value) { 
             options[key] = value;
-          });
+        });
+        
+        //Get overall look & feel options
+        $.each(chartSettingsManager.getOverallSettings(), function(key, value) { 
+            options[key] = value;
+        });
+        
+        //Override with any specific look & feel options if function is defined on chartSettingsManager
+        var chartFn = chartSettingsManager[this.controller.currentViz.id];
+        if(typeof chartFn === 'function') {
+            $.each(chartFn(), function(key, value) { 
+                options[key] = value;
+            });
+        }
+        // finish set options
         
         //TODO try to reuse XDashFusionChartComp and replace logic bellow. 
         //Requires taking XDashFusionChartComp out of the object
@@ -187,7 +200,12 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         var chartObject = new FusionCharts( webAppPath+"/content/fusion/swf/"+options.chartType+".swf", this.containerDiv.id+"-generated", options.width, options.height, "0","1" );
         chartObject.setDataXML(resultXml);
         chartObject.render(this.containerDiv.id);
-        $("#"+this.containerDiv.id).find("embed").attr("wmode","transparent"); 
+        
+        //place chart object available
+        this.chart = $("#"+this.containerDiv.id).find("object");
+        
+        this.chart.attr("wmode","transparent"); 
         //TODO end of reuse XDashFusionChartComp and replace logic bellow. 
     }
+    
 });
