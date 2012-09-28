@@ -13,6 +13,8 @@ import java.io.PrintWriter;
  */
 public class CascadedException extends Exception {
 
+    private static final long serialVersionUID = 1L;
+
     private Throwable wrappedThrowable;
 
     public CascadedException(String s) {

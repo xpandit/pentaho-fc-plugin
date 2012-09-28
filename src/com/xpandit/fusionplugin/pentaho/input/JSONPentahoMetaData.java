@@ -12,8 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.commons.connection.AbstractPentahoMetaData;
 
-import com.fusioncharts.ChartType.ChartLibrary;
-import com.fusioncharts.ChartType.SingleOrMulti;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 
 /**

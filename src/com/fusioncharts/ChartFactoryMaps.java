@@ -1,9 +1,6 @@
 package com.fusioncharts;
 
 import java.io.Writer;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Map;
 
 import com.generationjava.io.WritingException;
 import com.generationjava.io.xml.XmlWriter;
