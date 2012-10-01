@@ -24,10 +24,43 @@ analyzerPlugins.push(
             *                  newVal, etc) 
             */ 
            onModelEvent: function(config, item, eventName, args) {
-             // This component has a single argument, so we assume if this event is 
-             // fired it is for the aggregate
-             //this.report.visualization.args['aggregate'] = config.byId('aggregate').value; 
-             this.inherited(arguments); // Let super class handle the insertAt and 
+            var report=this.report;
+			
+			//set the items with the locations to be used when chart is generated
+			if(config.byId('measures_column')!=undefined)
+			{
+				this.report.visualization.args['measures_column']=[];
+				$(config.byId("measures_column").gems).each(
+					function(){
+								report.visualization.args['measures_column'].push(this.value);
+							});
+			}
+			
+			if(config.byId('measures_line')!=undefined)	
+			{			
+				this.report.visualization.args['measures_line']=[];
+				$(config.byId("measures_line").gems).each(
+					function(){
+								report.visualization.args['measures_line'].push(this.value);
+							});
+			}
+			
+			if(config.byId('measures_area')!=undefined)
+			{
+				this.report.visualization.args['measures_area']=[];
+				$(config.byId("measures_area").gems).each(
+					function(){
+								report.visualization.args['measures_area'].push(this.value);
+							});
+			}
+			// fired it is for the orientation
+			if(config.byId('orientation')!=undefined)
+				this.report.visualization.args['orientation'] = config.byId('orientation').value; 
+			// fired it is for the 2d_3d
+			if(config.byId('2d_3d')!=undefined)
+				this.report.visualization.args['2d_3d'] = config.byId('2d_3d').value; 
+				
+            this.inherited(arguments); // Let super class handle the insertAt and 
                                         // removedGem events 
            }, 
 
