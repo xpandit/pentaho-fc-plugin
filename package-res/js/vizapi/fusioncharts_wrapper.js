@@ -54,7 +54,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 				ui: {
 					labels: ["Vertical", "Horizontal"], 
 					group: "options", 
-					type: "combo", 
+					type: "combo", // combo, checkbox, slider, textbox, gem, gemBar, and button are valid ui types
 					caption: "Orientation"
 					}
 			},{
