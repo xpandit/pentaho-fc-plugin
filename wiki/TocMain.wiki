@@ -6,7 +6,7 @@
   * [SupportedParameters Supported Parameters ]
   * [CDFComponent CDF FusionChartComponent]
   * [MobileSupport iPhone & iPad support]
-  * [DashboardDesignerEE Integration with Dashboard Designer EE]
+  * [DashboardDesignerEE Dashboard Designer EE Integration]
   * [IntegrationCDE Integration with CDE]
  * [TechnicalDocumentation Technical Documentation]
   * [DeveloperGuide Developer's Guide]
