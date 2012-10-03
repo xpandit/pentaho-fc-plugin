@@ -1,0 +1,29 @@
+#summary Information about the plugin integration with Analyzer.
+
+= Introduction =
+
+Since version 4.5 of Pentaho Business Analytics it is possible to add external chart libraries to Analyzer (Only available on Enterprise Version). By leveraging this functionality the FusionCharts plugin can now be integrated with Analyzer.
+
+== What you get! ==
+
+Any user without any technical knowledge can simply drag and drop dimensions and measures creating and analysis and then switch to chart mode and visualize it on FusionCharts.
+
+== How to use it ==
+
+# Model cubes and publish on Analyzer
+# Install the plugin as explained on [Manual]
+# Start using it
+#* On Analyzer click on "Switch to Chart Format" and select one of the FusionCharts... entries
+#* The field layout will change according to the selected type of chart and should be self explanatory
+
+=== Available Chart Types ===
+
+= Settings =
+
+== Change Look & Feel ==
+
+== Select Chart Types ==
+
+== Disable Analyzer Integration ==
+# Open file plugin.xml on the plugin root folder
+# Comment entries with {{{ context="analyzer" }}}
