@@ -3,8 +3,7 @@
 = Overview =
 
 The following image shows an overview of the workflow executed by the component to render a chart:
-
-<a target='_blank' title='ImageShack - Image And Video Hosting' href='http://imageshack.us/photo/my-images/585/pchpworkflow.png'><img src='http://imageshack.us/photo/my-images/585/pchpworkflow.png' border='0'/></a>
+<a href="http://imageshack.us/photo/my-images/585/pchpworkflow.png/" target="_blank"><img src="http://imageshack.us/a/img585/5093/pchpworkflow.th.png" border="0"/></a>
 
 = Workflow details = 
 
@@ -21,6 +20,10 @@ All properties have an override order:
 
 == Obtain Data (CDA) ==
 After all properties are loaded, it's time to invoke the CDA to get data. CDA is used to get data to all types of charts and widgets. Some times the plugin has to execute more than one query depending on the type of the chart. All the results from the different queries are stored on a map for next steps. 
+
+== Obtain Data From Request (JSON) ==
+If the data is already available on the initial request no need to use to CDA. This step converts the JSON data into Pentaho Result sets that are used from now on to build the chart. 
+
 
 == Fusion Component Factory ==
 Different types of charts require generating specific XML nodes. To make the design more modular a factory is used to obtain the correct Fusion Component class based on the chart type.
