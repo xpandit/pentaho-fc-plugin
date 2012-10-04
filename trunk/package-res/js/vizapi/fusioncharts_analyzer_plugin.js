@@ -26,7 +26,17 @@ analyzerPlugins.push(
            onModelEvent: function(config, item, eventName, args) {
             var report=this.report;
 			
+			
+			
 			//set the items with the locations to be used when chart is generated
+			
+			
+			/**********************************************************************
+								
+									Combi Options
+			
+			**********************************************************************/
+			
 			if(config.byId('measures_column')!=undefined)
 			{
 				this.report.visualization.args['measures_column']=[];
@@ -53,6 +63,29 @@ analyzerPlugins.push(
 								report.visualization.args['measures_area'].push(this.value);
 							});
 			}
+			
+			
+			/**********************************************************************
+								
+									Gauge and Bullet Chart Options
+			
+			**********************************************************************/
+			
+			if(config.byId('redLimit')!=undefined)
+				this.report.visualization.args['redLimit']=config.byId('redLimit').value;
+			
+			if(config.byId('yellowLimit')!=undefined)
+				this.report.visualization.args['yellowLimit']=config.byId('yellowLimit').value;
+			
+			if(config.byId('greenLimit')!=undefined)
+				this.report.visualization.args['greenLimit']=config.byId('greenLimit').value;
+			
+			/**********************************************************************
+								
+									General Options
+			
+			**********************************************************************/
+			
 			// fired it is for the orientation
 			if(config.byId('orientation')!=undefined)
 				this.report.visualization.args['orientation'] = config.byId('orientation').value; 
