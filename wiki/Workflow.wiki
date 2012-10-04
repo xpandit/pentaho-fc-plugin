@@ -3,7 +3,7 @@
 = Overview =
 
 The following image shows an overview of the workflow executed by the component to render a chart:
-<a href="http://imageshack.us/photo/my-images/585/pchpworkflow.png/" target="_blank"><img src="http://imageshack.us/a/img585/5093/pchpworkflow.th.png" border="0"/></a>
+<img src="http://imageshack.us/a/img585/5093/pchpworkflow.png" alt="Image Hosted by ImageShack.us"/><br/>
 
 = Workflow details = 
 
