@@ -8,25 +8,25 @@ The following charts and widgets are supported when using the Licensed FusionCha
 
 == Charts ==
 
-  * Column2D
-  * Column3D
+  * Column2D 
+  * Column3D 
   * Pie3D
   * Pie2D
-  * Line
-  * Bar2D
-  * MSColumn2D
-  * MSColumn3D 
-  * MSLine
-  * MSBar2D
-  * MSBar3D
-  * MSCombi2D
-  * MSCombi3D
+  * Line (Analyzer)
+  * Bar2D (Analyzer)
+  * MSColumn2D (Analyzer)
+  * MSColumn3D (Analyzer) 
+  * MSLine (Analyzer)
+  * MSBar2D (Analyzer)
+  * MSBar3D (Analyzer)
+  * MSCombi2D (Analyzer)
+  * MSCombi3D (Analyzer)
   * StackedColumn2D
   * StackedColumn3D
   * StackedColumn3DLineDY
   * MSColumnLine3D
   * MSColumn3DLineDY
-  * Marimekko
+  * Marimekko (Analyzer)
   * ScrollColumn2D
   * ScrollLine2D
   * ScrollArea2D
@@ -38,7 +38,7 @@ The following charts and widgets are supported when using the Licensed FusionCha
 
 == Widgets ==
 
-  * Angular Gauge
+  * Angular Gauge (Analyzer)
   * VBullet
   * HBullet
   * Bubble
