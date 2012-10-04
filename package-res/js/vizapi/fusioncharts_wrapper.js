@@ -210,7 +210,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 				ui: {
 					labels: ["2D", "3D"], 
 					group: "options", 
-					type: "combo", 
+					type: "combo",   // combo, checkbox, slider, textbox, gem, gemBar, and button are valid ui types
 					caption: "2D/3D"
 					}
 				}]
@@ -267,7 +267,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         {
             name : 'Default',
             reqs : [  {
-                id : 'measures',
+                id : '_measures',//leave this with "_" at the beggingin  DON'T REMOVE
                 dataType : 'number',
                 dataStructure : 'column',
                 caption : 'KPI',
@@ -276,12 +276,101 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 ui : {
                     group : "data"
                 }
+            },
+			 {
+                id : 'lower_limit',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Lower Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            },
+			 {
+                id : 'middle_limit',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Middle Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            },
+			 {
+                  dataType : 'number',
+                dataStructure : 'column',
+              id : 'top_limit',
+                caption : 'Top Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            }]
+        }]
+	},
+	{
+        id : 'fcplugin_bullet',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts VBullet',
+        'class' : 'pentaho.fcplugin', 
+		 chartType: "VBullet",
+        args : {
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [  {
+                id : '_measures',//leave this with "_" at the beggingin  DON'T REMOVE
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'KPI',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            },
+			 {
+                id : 'lower_limit',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Lower Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            },
+			 {
+                id : 'middle_limit',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Middle Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            },
+			 {
+                  dataType : 'number',
+                dataStructure : 'column',
+              id : 'top_limit',
+                caption : 'Top Threshold',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
             }]
         } ]
     }
-	
-	
-	
     );
 
     /**
@@ -357,10 +446,12 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						chartType=options.data.cols.length>2?"MSArea":"Area2D";
 						break;
 					case "AngularGauge":
+					case "VBullet":
 						//TODO Set this range values from parameters in the UI
-						var val=this._dataTable.dataTable.jsonTable.rows[0].c[0].v;
+						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
-						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+val*0.2+'","v":'+val*0.2+'},{"f":"'+val*0.4+'","v":'+val*0.4+'},{"f":"'+val*0.7+'","v":'+val*0.7+'}]}]}';
+						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
+						this._dataTable.dataTable.jsonTable.rows[0].c=[this._dataTable.dataTable.jsonTable.rows[0].c[0]];						
 						
 					default:
 						chartType=this.controller.currentViz.chartType;
