@@ -3,6 +3,7 @@
 = Pre-Requirements =
 
  * [http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/ Pentaho BI Platform] 3.7 or above should be installed.
+ * The Pentaho CDF plugin must be installed.
  * [http://ant.apache.org/bindownload.cgi Ant] is installed
  * Have an SVN client or plugin for you favourite IDE
 
