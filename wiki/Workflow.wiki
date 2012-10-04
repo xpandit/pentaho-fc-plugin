@@ -4,7 +4,7 @@
 
 The following image shows an overview of the workflow executed by the component to render a chart:
 
-<a target='_blank' title='ImageShack - Image And Video Hosting' href='http://img854.imageshack.us/i/pchpworkflow.jpg/'><img src='http://img854.imageshack.us/img854/5008/pchpworkflow.jpg' border='0'/></a>
+<a target='_blank' title='ImageShack - Image And Video Hosting' href='http://imageshack.us/photo/my-images/585/pchpworkflow.png'><img src='http://imageshack.us/photo/my-images/585/pchpworkflow.png' border='0'/></a>
 
 = Workflow details = 
 
