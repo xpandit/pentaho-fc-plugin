@@ -22,12 +22,10 @@ For a list of supported charts check on the page [SupportedCharts] those that ha
 == Settings ==
 
 === Change Look & Feel ===
-It is possible to change chart settings the same way as if you were using it on CDF, for more information about available settings check [SupportedParameters].
-
-How to:
+It is possible to change chart settings the same way as if you were using it on CDF, for more information about available settings check [SupportedParameters].How to:
   # Open file _\fusion_plugin\js\vizapi\chart_settings.js_
   # Edit the returned properties on 2 levels:
-    # Overall, applies to every chart and are set by cjanging the function _getOverallSettings()_
+    # Overall, applies to every chart and are set by changing the function _getOverallSettings()_
     # For each chart type you can create a specific function that contains specific properties and can override overall settings. The function name must be the same as the chart id (id can be found on _\fusion_plugin\js\vizapi\fusioncharts_wrapper.js_). The plugin ships with an example _fcplugin_angulargauge()_
 
 === Disable Analyzer Integration ===
