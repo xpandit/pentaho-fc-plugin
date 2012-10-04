@@ -12,25 +12,25 @@ Any user without any technical knowledge can simply drag and drop dimensions and
 
   # Model cubes and publish on Analyzer
   # Install the plugin as explained on [Manual]
-  # Start using it
+  # Start using it!
     # On Analyzer click on "Switch to Chart Format" and select one of the FusionCharts... entries
     # The field layout will change according to the selected type of chart and should be self explanatory
 
 === Available Chart Types ===
+For a list of supported charts check on the page [SupportedCharts] those that have _(Analyzer)_
 
-= Settings =
+== Settings ==
 
-== Change Look & Feel ==
+=== Change Look & Feel ===
 It is possible to change chart settings the same way as if you were using it on CDF, for more information about available settings check [SupportedParameters].
 
 How to:
   # Open file _\fusion_plugin\js\vizapi\chart_settings.js_
   # Edit the returned properties on 2 levels:
-    # 
+    # Overall, applies to every chart and are set by cjanging the function _getOverallSettings()_
+    # For each chart type you can create a specific function that contains specific properties and can override overall settings. The function name must be the same as the chart id (id can be found on _\fusion_plugin\js\vizapi\fusioncharts_wrapper.js_). The plugin ships with an example _fcplugin_angulargauge()_
 
-== Select Chart Types ==
-
-== Disable Analyzer Integration ==
+=== Disable Analyzer Integration ===
 If you are using Pentaho CE version or if you don't need Analyzer integration you can disable it.
   # Open file plugin.xml on the plugin root folder
   # Comment all entries with {{{ context="analyzer" }}} by using {{{ <!-- -->}}}
