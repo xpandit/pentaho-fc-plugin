@@ -45,6 +45,12 @@ The following charts and widgets are supported when using the Licensed FusionCha
   * Funnel
   * Pyramid
 
+=== Real Time ===
+ * RealTimeLine
+ * RealTimeArea
+ * RealTimeColumn
+ * RealTimeLineDY (Dual Y)
+
 == Maps ==
 
 All maps are supported 
