@@ -27,7 +27,8 @@ var chartSettingsManager = {
             canvasBaseDepth : 3,
             bgAngle : 0,
             plotGradientColor : '',
-            canvasBorderalpha : 0
+            canvasBorderalpha : 0,
+            paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47"
         }
         return options;
     }, 
