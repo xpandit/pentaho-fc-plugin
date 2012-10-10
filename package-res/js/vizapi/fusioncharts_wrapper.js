@@ -31,7 +31,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column', // 'column' or 'row' - only 'column'
                 // supported
                 // so far
-                caption : 'Y-Axis', // visible name
+                caption : 'Series', // visible name
                 required : true, // true or false
                 allowMultiple : false,
                 ui : {
@@ -41,7 +41,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure',
+                caption : 'Measures',
                 required : true,
                 allowMultiple : true,
                 ui : {
@@ -98,7 +98,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure',
+                caption : 'Measures',
                 required : true,
                 allowMultiple : true,
                 ui : {
@@ -135,7 +135,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure',
+                caption : 'Measures',
                 required : true,
                 allowMultiple : true,
                 ui : {
@@ -145,30 +145,25 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
 	{
-        id : 'fcplugin_combi', // unique identifier -> cannot have numbers
-        type : 'chart', // generic type id
-        source : 'FusionCharts', // id of the source library
-        name : 'FusionCharts Combi', // visible name, this will come from a properties file eventually
+        id : 'fcplugin_combi',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Combi',
         'class' : 'pentaho.fcplugin', 
 		 chartType: "MSCombi",
         args : {
            
         },
         propMap : [],
-        dataReqs : [ //data requirements of this visualization
+        dataReqs : [ 
         {
             name : 'Default',
             reqs : [ {
-                id : 'rows', // id of the data element
-                dataType : 'string', // data type - 'string', 'number',
-                // 'date',
-                // 'boolean', 'any' or a comma separated
-                // list
-                dataStructure : 'column', // 'column' or 'row' - only 'column'
-                // supported
-                // so far
-                caption : 'Y-Axis', // visible name
-                required : true, // true or false
+                id : 'rows', 
+                dataType : 'string', 
+                dataStructure : 'column', 
+                caption : 'Y-Axis',
+                required : true, 
                 allowMultiple : false,
                 ui : {
                     group : 'data'
@@ -177,7 +172,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures_line',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure Line',
+                caption : 'Line Measures',
                 required : false,
                 allowMultiple : true,
                 ui : {
@@ -187,7 +182,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures_column',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure Column',
+                caption : 'Column Measures',
                 required : false,
                 allowMultiple : true,
                 ui : {
@@ -197,7 +192,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'measures_area',
                 dataType : 'number',
                 dataStructure : 'column',
-                caption : 'Measure Area',
+                caption : 'Area Measures',
                 required : false,
                 allowMultiple : true,
                 ui : {
@@ -210,13 +205,14 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 				ui: {
 					labels: ["2D", "3D"], 
 					group: "options", 
-					type: "combo",   // combo, checkbox, slider, textbox, gem, gemBar, and button are valid ui types
+					type: "combo",   
 					caption: "2D/3D"
 					}
 				}]
         } ]
     },
-	{
+/*	{
+//TODO waiting for categories support
         id : 'fcplugin_marimekko', 
         type : 'chart', 
         source : 'FusionCharts', 
@@ -252,7 +248,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 }
             }]
         } ]
-    },
+    },*/
     {
         id : 'fcplugin_angulargauge',
         type : 'chart',
@@ -316,7 +312,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         id : 'fcplugin_bullet',
         type : 'chart',
         source : 'FusionCharts',
-        name : 'FusionCharts VBullet',
+        name : 'FusionCharts Bullet',
         'class' : 'pentaho.fcplugin', 
 		 chartType: "VBullet",
         args : {
@@ -395,6 +391,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		switch (this.controller.currentViz.chartType)
 		{
 			// only for column ou Bar charts
+		    //TODO move a separate funtions on each of the charts above 
 			case "Bar2D":
 						if(options.orientation=="vertical")
 							chartType=options.data.cols.length>2?"MSColumn":"Column";
@@ -402,7 +399,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 							chartType=options.data.cols.length>2?"MSBar":"Bar";
 
 						//Chart not supported by Fusion charts
-						if(options["2d_3d"]=="3D"&&options.data.cols.length==2&&vizOptions.orientation=="horizontal")
+						if(options["2d_3d"]=="3D"&&options.data.cols.length==2&&options.orientation=="horizontal")
 						{
 							alert("Chart 3D Not Supported");
 							chartType+="2D";
@@ -447,7 +444,6 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						break;
 					case "AngularGauge":
 					case "VBullet":
-						//TODO Set this range values from parameters in the UI
 						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
 						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
@@ -535,8 +531,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		
         // finish set options
         
-        //TODO try to reuse XDashFusionChartComp and replace logic bellow. 
-        //Requires taking XDashFusionChartComp out of the object
+        //TODO reuse XDashFusionChartComp and replace logic bellow. 
         var url = webAppPath + '/content/fusion/renderChartExternalData';
         // get the xml chart
         var resultXml = $.ajax({type: 'post', 
