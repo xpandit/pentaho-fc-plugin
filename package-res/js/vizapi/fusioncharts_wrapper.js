@@ -162,7 +162,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'rows', 
                 dataType : 'string', 
                 dataStructure : 'column', 
-                caption : 'Y-Axis',
+                caption : 'X-Axis',
                 required : true, 
                 allowMultiple : false,
                 ui : {
