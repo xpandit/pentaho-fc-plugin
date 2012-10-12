@@ -1,5 +1,7 @@
 #summary Information about the plugin integration with Analyzer.
 
+|| Only Available with FusionCharts XT ||
+
 = Introduction =
 
 Since version 4.5 of Pentaho Business Analytics it is possible to add external chart libraries to Analyzer (Only available on Enterprise Version). By leveraging this functionality the FusionCharts plugin can now be integrated with Analyzer.
