@@ -28,12 +28,21 @@ var chartSettingsManager = {
             bgAngle : 0,
             plotGradientColor : '',
             canvasBorderalpha : 0,
-            paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47"
+            paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47",
+            placeValuesInside: 1,
+            valuePosition: "ABOVE"
         }
         return options;
     }, 
     
     fcplugin_angulargauge :  function(){
+        var options = {
+                colorRange : 'FF654F;FF654F;F6BD0F;8BBA00'
+        }
+        return options;
+    },
+    
+    fcplugin_bullet :  function(){
         var options = {
                 colorRange : 'FF654F;FF654F;F6BD0F;8BBA00'
         }
