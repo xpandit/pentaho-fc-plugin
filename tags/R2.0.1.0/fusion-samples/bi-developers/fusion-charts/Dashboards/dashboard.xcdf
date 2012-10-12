@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+	<title>Sample Dashboard</title>
+	<author>Xpand IT</author>
+	<description></description>
+	<icon></icon>
+	<template>dashboard.html</template>
+	<style>clean</style>
+</cdf>

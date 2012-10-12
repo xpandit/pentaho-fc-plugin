@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+		
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Sample query on SteelWheelsSales</Name>
+        <Query>
+import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+String[] columnNames = new String[3];
+columnNames[0] = &quot;Region&quot;;
+columnNames[1] = &quot;x&quot;;
+columnNames[2] = &quot;y&quot;;
+
+Class[] columnTypes = new Class[3];
+columnTypes[0] = String.class;
+columnTypes[1] = Integer.class;
+columnTypes[2] = Integer.class;
+ 
+TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+model.addRow(new Object[]{ new String(&quot;NA&quot;),new Integer(10),new Integer(10)});
+return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>
