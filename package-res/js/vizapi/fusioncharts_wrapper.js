@@ -22,22 +22,24 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         dataReqs : [ //data requirements of this visualization
         {
             name : 'Default',
-            reqs : [ {
-                id : 'rows', // id of the data element
-                dataType : 'string', // data type - 'string', 'number',
-                // 'date',
-                // 'boolean', 'any' or a comma separated
-                // list
-                dataStructure : 'column', // 'column' or 'row' - only 'column'
-                // supported
-                // so far
-                caption : 'Series', // visible name
-                required : true, // true or false
-                allowMultiple : false,
-                ui : {
-                    group : 'data'
-                }
-            }, {
+            reqs : [ 	
+			{
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'x_axis',
+              required: true,
+              allowMultiple: true
+            },
+            {
+              id: 'columns',
+              dataType: 'string',
+              dataStructure: 'column',
+              caption: 'y_axis',
+              required: false,
+              allowMultiple: true
+            },
+			{
                 id : 'measures',
                 dataType : 'number',
                 dataStructure : 'column',
@@ -57,7 +59,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 					type: "combo", // combo, checkbox, slider, textbox, gem, gemBar, and button are valid ui types
 					caption: "Orientation"
 					}
-			},{
+			},
+			{
 				id: "2d_3d", 
 				dataType: "string", 
 				values: ["2D", "3D"], 
@@ -67,7 +70,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 					type: "combo", 
 					caption: "2D/3D"
 					}
-				}]
+			}]
         } ]
     },
     {
@@ -84,17 +87,23 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         dataReqs : [
         {
             name : 'Default',
-            reqs : [ {
-                id : 'rows',
-                dataType : 'string',
-                dataStructure : 'column',
-                caption : 'Series', 
-                required : true, 
-                allowMultiple : false,
-                ui : {
-                    group : 'data'
-                }
-            }, {
+            reqs : [  {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'x_axis',
+              required: true,
+              allowMultiple: true
+            },
+            {
+              id: 'columns',
+              dataType: 'string',
+              dataStructure: 'column',
+              caption: 'y_axis',
+              required: false,
+              allowMultiple: true
+            },
+			{
                 id : 'measures',
                 dataType : 'number',
                 dataStructure : 'column',
@@ -212,7 +221,6 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
 	{
-//TODO waiting for categories support
         id : 'fcplugin_marimekko', 
         type : 'chart', 
         source : 'FusionCharts', 
@@ -241,7 +249,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
               caption: 'y_axis',
               required: false,
               allowMultiple: true
-            },{   id: 'measures',
+            },{   
+				id: 'measures',
               dataType: 'number',
               dataStructure: 'column',
               caption: 'Values',
@@ -444,10 +453,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						break;
 					case "AngularGauge":
 					case "VBullet":
-						var valRow=this._dataTable.jsonTable.rows[0];
+						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
 						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
-						this._dataTable.jsonTable.rows[0].c=[this._dataTable.jsonTable.rows[0].c[0]];						
+						//this._dataTable.dataTable.jsonTable.rows[0].c=[this._dataTable.dataTable.jsonTable.rows[0].c[0]];						
 						
 					default:
 						chartType=this.controller.currentViz.chartType;
@@ -506,7 +515,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * the options for the visualization
      */
     pentaho.fcplugin.prototype.draw = function(datView, vizOptions) {
-		this._dataTable=this.cleanJsonTable(datView.dataTable.jsonTable);
+		datView.dataTable.jsonTable=this.cleanJsonTable(datView.dataTable.jsonTable);
+		this._dataTable=datView;
 		this._originalVizOptions = $.extend({}, vizOptions);
 		var args=this.controller.currentViz.args;
 		
