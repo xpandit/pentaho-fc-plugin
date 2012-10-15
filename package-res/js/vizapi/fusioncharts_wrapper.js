@@ -456,7 +456,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
 						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
-						//this._dataTable.dataTable.jsonTable.rows[0].c=[this._dataTable.dataTable.jsonTable.rows[0].c[0]];						
+					
 						
 					default:
 						chartType=this.controller.currentViz.chartType;
