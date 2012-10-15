@@ -211,7 +211,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 				}]
         } ]
     },
-/*	{
+	{
 //TODO waiting for categories support
         id : 'fcplugin_marimekko', 
         type : 'chart', 
@@ -227,28 +227,28 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         {
             name : 'Default',
             reqs : [ {
-                id : 'rows',
-                dataType : 'string',
-                dataStructure : 'column',
-                caption : 'Series', 
-                required : true, 
-                allowMultiple : false,
-                ui : {
-                    group : 'data'
-                }
-            }, {
-                id : 'measures',
-                dataType : 'number',
-                dataStructure : 'column',
-                caption : 'Measure',
-                required : true,
-                allowMultiple : true,
-                ui : {
-                    group : "data"
-                }
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'x_axis',
+              required: true,
+              allowMultiple: true
+            },
+            {
+              id: 'columns',
+              dataType: 'string',
+              dataStructure: 'column',
+              caption: 'y_axis',
+              required: false,
+              allowMultiple: true
+            },{   id: 'measures',
+              dataType: 'number',
+              dataStructure: 'column',
+              caption: 'Values',
+              required: true
             }]
         } ]
-    },*/
+    },
     {
         id : 'fcplugin_angulargauge',
         type : 'chart',
@@ -444,10 +444,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						break;
 					case "AngularGauge":
 					case "VBullet":
-						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
+						var valRow=this._dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
 						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
-						this._dataTable.dataTable.jsonTable.rows[0].c=[this._dataTable.dataTable.jsonTable.rows[0].c[0]];						
+						this._dataTable.jsonTable.rows[0].c=[this._dataTable.jsonTable.rows[0].c[0]];						
 						
 					default:
 						chartType=this.controller.currentViz.chartType;
@@ -477,6 +477,28 @@ pen.require(["common-ui/vizapi/VizController"], function(){
       this.draw(this._dataTable, vizOptions);
     };
 
+	
+	/**
+	Function that cleans the Json table and check th correctFormat of the table
+	*/
+	pentaho.fcplugin.prototype.cleanJsonTable = function(dataTable) 
+	{
+	
+		for (var row=0;row<dataTable.rows.length;++row)
+		{
+			for (var col=0;col<dataTable.rows[row].c.length;++col)
+			{
+				//if null replace by the object of null		
+				if(dataTable.rows[row].c[col]==null)
+				{
+					dataTable.rows[row].c[col]={"f":"0","v":0};
+				}
+			}
+		}
+	
+		return dataTable;
+	}
+	
     /**
      * Function that renders the visualizations
      * 
@@ -484,17 +506,19 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * the options for the visualization
      */
     pentaho.fcplugin.prototype.draw = function(datView, vizOptions) {
-		this._dataTable=datView;
+		this._dataTable=this.cleanJsonTable(datView.dataTable.jsonTable);
 		this._originalVizOptions = $.extend({}, vizOptions);
 		var args=this.controller.currentViz.args;
 		
         var options = {
                 height: this.canvasElement.offsetHeight,
                 width: this.canvasElement.offsetWidth,
-                data: datView.toDataTable().jsonTable
+                data: this.cleanJsonTable(datView.dataTable.jsonTable)
                 //TODO convert to Google datatable to be more generic convertCdaToDataTable see pentaho-solutions\system\common-ui\resources\web\vizapi\DataTable.js
         }
         
+		
+		
 		if(vizOptions.isResize)
 		{
 			    options.height= vizOptions.height;
