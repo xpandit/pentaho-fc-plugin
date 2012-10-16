@@ -1,6 +1,6 @@
 #summary Information about the plugin integration with Analyzer.
 
-|| Only Available with FusionCharts XT ||
+|| Only Available with FusionCharts XT and Pentaho Business Analytics 4.5 ||
 
 = Introduction =
 
