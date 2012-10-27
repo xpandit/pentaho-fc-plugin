@@ -22,46 +22,43 @@
  # Look for the directory JSClass where the _`*`.js_ files are
  # Copy the directory contents to the plugin directory _fusioncharts/JSClass_
 
-= Usage =
-
-== Render on PUC ==
+= Samples =
 
 To test the samples on the Pentaho User Console all you need to do is:
  # Open Pentaho User Console (PUC)
- # Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the Fusion Plugin icon.
+ # Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the differnt items.
 
-== Chart Configuration ==
+= Usage =
 
-The process of rendering a chart using the Fusion Chant Pentaho Plugin starts with the load of two properties files and the load of request [SupportedParameters parameters].
+== Standalone Chart ==
 
-On the first request, the global properties are loaded, this properties are defined in the _fusionCharts.properties_ file in the plugin's root folder. For each request, if the request has configured the location of a .xFusion file all the properties included in the file are loaded, this properties are called local properties. Finally the properties sent in the request are loaded (instance properties). 
+When defining a standalone chart you must create a .xFusion file where the parameters can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_. For more information check [StandAloneCharts].
 
-Each chart must have a .cda file with the respective queries.
+|| If the licensed version is being used don't forget to set the _free_ parameter to "false". ||
 
-|| If the licensed version is in use don't forget to set the _free_ parameter to "false". ||
+== Building CDF Dashboards ==
 
-=== Dashboard Chart ===
+The plugin can easily be used on a CDF dashboard. To allow a seamless integration with, the plugin ships with a new CDF component called FusionChartComponent. This component works the exact same way as the existing chart components. The component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_. For more information go to [CDFComponent FusionChartComponent here].
 
-When defining a chart in the context of a dashboard you can define the chart parameters in a .xFusion file (local properties) or define them in the metalayer (instance properties). This two ways of defining the chart parameters can be associated to the FusionChartComponent's by setting the _path_ property with the .xFusion file path and by setting the _chartDefinition_ property with the metalayer, respectively. You can see a chart definition [CDFComponent here] and find some examples in the following path _bi-developers/fusion-samples/Dashboards_.
 
-=== Standalone Chart ===
+== Enterprise Dashboards ==
 
-When defining a standalone chart you must create a .xFusion file where the parameters can be configured. You can find some examples in the following path _bi-developers/fusion-samples/Fusion Charts Free_.
+You can simply drag and drop your xfusion file into the dashboard designer and create simple and effective dashboards. To test this feature you can simply go through the following steps:
 
-== Build Dashboards ==
+Create a new dashboard in the PUC.
+Navigate to the bi-developers/fusion-samples/Fusion Charts Free directory in the solution explorer.
+Drag and drop the chart samples into the dashboard.
 
-The plugin can easily be used on a CDF dashboard. To allow a seamless integration with, the plugin ships with a new component called [CDFComponent FusionChartComponent]. This component works the exact same way as the existing chart components. The component can be found on the samples directory: _fusion-samples/Dashboards/FCPluginCDFComponent.js_.
+== Pentaho Analysis Visualizations ==
+The plugin can be used to extend visualization types on Analyzer. For more information check this [IntegrationAnalyzer page]
 
-=== How to? ===
-Create a CDF dashboard the same way you used to!! Add the new component to show FusionCharts. A sample dashboard can be found at the samples directory _bi-developers/fusion-samples/Dashboards_.
 
-= Free Vs. Licensed Version  =
+= Additional Information =
+== Free Vs. Licensed Version  ==
 In the Free version the flash object use the <embed> tag and the element is  displayed above all other elements
 
 In the Licensed Version the flash object use the <object> tag and you can define the displayed order
 
-= Not available =
+== XActions (Not Available)==
 
-== Xactions ==
-
-The FusionCharts plugin is not available to use on Xactions. The chart library relies on the Flash technology and requires a browser to render the objects.
+The FusionCharts plugin is not available on Xactions. The chart library relies on Flash\html5 technologies requiring a browser for rendering.
