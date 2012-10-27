@@ -30,3 +30,7 @@ var MetaLayerFusionCharts={
 	}
 }
 }}}
+
+= Chart Configuration =
+When defining a chart in the context of a dashboard you can define the chart parameters in a .xFusion file (local properties) or define them in the metalayer (instance properties). This two ways of defining the chart parameters can be associated to the FusionChart component's by setting the _path_ property with the .xFusion file path and by setting the _chartDefinition_ property with the metalayer, respectively. You can see a chart definition [CDFComponent here] and find some examples in the following path _bi-developers/fusion-samples/Dashboards_. 
+The global file with configurations is still loaded at the beginning as in a standalone chart.
