@@ -55,9 +55,7 @@ The plugin can be used to extend visualization types on Analyzer. For more infor
 
 = Additional Information =
 == Free Vs. Licensed Version  ==
-In the Free version the flash object use the <embed> tag and the element is  displayed above all other elements
-
-In the Licensed Version the flash object use the <object> tag and you can define the displayed order
+In the Free version the flash object use the `<embed>` tag and the element is  displayed above all other elements. In the Licensed Version the flash object use the `<object>` tag and you can define the displayed order
 
 == XActions (Not Available)==
 
