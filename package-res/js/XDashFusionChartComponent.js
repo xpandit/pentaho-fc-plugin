@@ -10,6 +10,10 @@ var xLoadFunct= function(){
 		update: function(){
 
 			var options = this.getOptions();
+			
+			//send the webAppPath to the plugin
+			//need in realtimecharts
+			options.webAppPath=webAppPath;
 
 			var url = webAppPath + '/content/fusion';
 			var myself = this;
@@ -19,7 +23,10 @@ var xLoadFunct= function(){
 			myself.xmlResultData = resultXml;
 
 			// get chart type from xml
-			options.chartType = $(resultXml).attr("chartType")
+			options.chartType = $(resultXml).attr("chartType");
+			
+			// get HTML5 from xml
+			options.isHTML5 = eval($(resultXml).attr("isHTML5"));
 
 			//test if is for free version
 			var isFree=eval($(resultXml).attr("free"));
@@ -38,9 +45,14 @@ var xLoadFunct= function(){
 			//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded
 			if(myself.chartObject == undefined || options.reloadOnRefresh) {
 				this.clear();
-
+				
+				//is to render in HTML5?
+				if(options.isHTML5==undefined)
+					options.isHTML5=false;
+				var chartTypeFull=options.isHTML5?options.chartType:url+"/swf/"+options.chartType+".swf";
+							
 				//create chart Object
-				myself.chartObject = new FusionCharts( url+"/swf/"+options.chartType+".swf", myself.htmlObject+"-generated", options.width, options.height, "0","1" );
+				myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
 
 				myself.chartObject.setDataXML(resultXml);
 

@@ -1,86 +1,566 @@
 <DesignerProperties>
-  <DesignerProperty>
-    <Header>
-      <Name>fusionChartType</Name>
-      <Parent>BaseProperty</Parent>
-      <DefaultValue>Column2D</DefaultValue>
-      <Description>Fusion Charts Type</Description>
-      <Tooltip>Fusion Charts Type </Tooltip>
-      <InputType>String</InputType>
-      <OutputType>String</OutputType>
-      <Order>87</Order>
-      <Advanced>false</Advanced>
-      <Version>1.0</Version>
-    </Header>
-  </DesignerProperty> 
-  <DesignerProperty>
-	  <Header>
-		<Name>fusionCdaPath</Name>
-		<OutputName>cdaPath</OutputName>
-		<Parent>BaseProperty</Parent>
-		<DefaultValue></DefaultValue>
-		<Description>Path</Description>
-		<Tooltip>CDA Path</Tooltip>
-		<InputType>CdaPath</InputType>
-		<OutputType>String</OutputType>
-		<Order>27</Order>
-		<Version>1.0</Version>
-	  </Header>	
+	<DesignerProperty>
+		<Header>
+			<Name>fusionChartType</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>Column2D</DefaultValue>
+			<Description>Fusion Charts Type</Description>
+			<Tooltip>Fusion Charts Type </Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>87</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+	</DesignerProperty> 
+	<DesignerProperty>
+		<Header>
+			<Name>fusionCdaPath</Name>
+			<OutputName>cdaPath</OutputName>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Path</Description>
+			<Tooltip>CDA Path</Tooltip>
+			<InputType>CdaPath</InputType>
+			<OutputType>String</OutputType>
+			<Order>27</Order>
+			<Version>1.0</Version>
+		</Header>	
 	</DesignerProperty>
 	<DesignerProperty>
-    <Header>
-      <Name>chartLink</Name>
-      <Parent>BaseProperty</Parent>
-      <DefaultValue>JavaScript: alert('{series}','{categories}','{value}')</DefaultValue>
-      <Description>Fusion Chart Link</Description>
-      <Tooltip>Fusion Chart Link</Tooltip>
-      <InputType>String</InputType>
-      <OutputType>String</OutputType>
-      <Order>87</Order>
-      <Advanced>false</Advanced>
-      <Version>1.0</Version>
-    </Header>
-	 </DesignerProperty> 
-	 <DesignerProperty>
+		<Header>
+			<Name>chartLink</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>JavaScript: alert('{series}','{categories}','{value}')</DefaultValue>
+			<Description>Fusion Chart Link</Description>
+			<Tooltip>Fusion Chart Link</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>87</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+	</DesignerProperty> 
+	<DesignerProperty>
+		<Header>
+			<Name>categoriesParam</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>categories</DefaultValue>
+			<Description>Fusion Chart categoriesParam name</Description>
+			<Tooltip>Fusion Chart categoriesParam name</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>88</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+	</DesignerProperty> 
+	<DesignerProperty>
+		<Header>
+			<Name>seriesParam</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>series</DefaultValue>
+			<Description>Fusion Chart seriesParam name</Description>
+			<Tooltip>Fusion Chart seriesParam name</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>89</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+	</DesignerProperty> 
+	<DesignerProperty>
+		<Header>
+			<Name>valueParam</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>value</DefaultValue>
+			<Description>Fusion Chart valueParam name</Description>
+			<Tooltip>Fusion Chart valueParam name</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>90</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+	</DesignerProperty>
+
+	<!-- Add-on -->
+
+
+	<DesignerProperty>
+		<Header>
+			<Name>realTimeChartTypeLine</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>RealTimeLine</DefaultValue>
+			<Description>Chart Type</Description>
+			<Tooltip>Real Time Charts Type</Tooltip>
+			<InputType type="valuelist" />
+			<OutputType>String</OutputType>
+			<Order>89</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+		<Values>
+			<Value display="Real Time Column">RealTimeColumn</Value>
+			<Value display="Real Time Line">RealTimeLine</Value>
+		</Values>
+	</DesignerProperty>
+
+	<DesignerProperty>
+		<Header>
+			<Name>realTimeChartTypeColumn</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>RealTimeColumn</DefaultValue>
+			<Description>Chart Type</Description>
+			<Tooltip>Real Time Charts Type</Tooltip>
+			<InputType type="valuelist" />
+			<OutputType>String</OutputType>
+			<Order>89</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+		<Values>
+			<Value display="Real Time Column">RealTimeColumn</Value>
+			<Value display="Real Time Line">RealTimeLine</Value>
+		</Values>
+	</DesignerProperty>
+
+
+
+
+
+	<DesignerProperty>
+		<Header>
+			<Name>canvasBgColor</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Canvas Background Color</Description>
+			<Tooltip>Sets Canvas background color. For Gradient effect, enter colors separated by comma.</Tooltip>
+			<InputType>Color</InputType>
+			<OutputType>String</OutputType>
+			<Order>120</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>canvasBorderThickness</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Canvas Border Thickness</Description>
+			<Tooltip>Lets you specify canvas border thickness.</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>121</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>bgColor</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Chart Background Color</Description>
+			<Tooltip>This attribute sets the background color for the chart. You can set any hex color code as the value of this attribute</Tooltip>
+			<InputType>Color</InputType>
+			<OutputType>String</OutputType>
+			<Order>122</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>showBorder</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Chart Border</Description>
+			<Tooltip>Whether to show a border around the chart or not?</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>123</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>borderColor</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Chart Border Color</Description>
+			<Tooltip>Border color of the chart.</Tooltip>
+			<InputType>Color</InputType>
+			<OutputType>String</OutputType>
+			<Order>124</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>caption</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Chart Caption</Description>
+			<Tooltip>Caption of the chart.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>60</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>subCaption</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Chart Sub Caption</Description>
+			<Tooltip>Sub-caption of the chart.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>61</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>xAxisName</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X Axis Name</Description>
+			<Tooltip>X-Axis Title of the Chart.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>62</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>yAxisName</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Y Axis Name</Description>
+			<Tooltip>Y-Axis Title of the chart.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>63</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>refreshInterval</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Data Refresh Interval</Description>
+			<Tooltip>For this parameter, you can specify the number of seconds after which the chart will look for new data</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>64</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>clearChartInterval</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Clear Chart Interval</Description>
+			<Tooltip>The time after which the chart will keep clearing its contents.</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>125</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>numDisplaySets</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>15</DefaultValue>
+			<Description>Max number of data points to plot</Description>
+			<Tooltip>This value helps you specify the number of data items that you want as history on the chart. For example, when you set it as 50, only 50 data items (per dataset) will be displayed on the chart. As soon as the 51st data comes in, the first data will be deleted and the rest of the data will be shifted by 1 position left - the new data will come and take the last position.</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>126</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>showYAxisValues</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Show Y Axis Values</Description>
+			<Tooltip>The y-axis of charts is divided into vertical sections using div (divisional) lines. Each div line assumes a value based on its position. Using this attribute you can set whether to show those div line (y-axis) values or not</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>127</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>yAxisValueDecimals</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Y axis decimal places</Description>
+			<Tooltip>Decimal places for y-axis values.</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>128</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>showLabels</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis show labels</Description>
+			<Tooltip>It sets the configuration whether the x-axis labels will be displayed or not.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>129</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>labelDisplay</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis label display</Description>
+			<Tooltip>Using this attribute, you can control how your data labels (x-axis labels) will appear on the chart. There are 4 options: WRAP, STAGGER, ROTATE or NONE. WRAP wraps the label text if it's longer than the allotted area. ROTATE rotates the label in vertical or slanted position. STAGGER divides the labels into multiple lines.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>130</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>slantLabels</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis slant labels (for ROTATE)</Description>
+			<Tooltip>If you've opted to show rotated labels on chart, this attribute lets you set the configuration whether the labels will show as slanted labels or fully vertical ones.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>131</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>labelStep</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis label step</Description>
+			<Tooltip>By default, all the labels are displayed on the chart. However, if you've a set of streaming data (like name of months or days of week), you can opt to show every n-th label for better clarity. This attributes just lets you do so. It allows you to display every n(th) X-axis label.</Tooltip>
+			<InputType>Integer</InputType>
+			<OutputType>Number</OutputType>
+			<Order>132</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>showValues</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis show values</Description>
+			<Tooltip>Sets the configuration whether data values will be displayed along with the data plot on chart.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>133</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>placeValuesInside</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis place values inside</Description>
+			<Tooltip>If you've opted to show data values, you can show them inside the columns using this attribute. By default, the data values show outside the column.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>134</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>rotateValues</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>X axis rotate values</Description>
+			<Tooltip>If you've opted to show data values, you can rotate them using this attribute.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>135</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>showLegend</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Show legend</Description>
+			<Tooltip>Whether to show legend for the chart (only multi-series and combination charts)?</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>65</Order>
+			<Advanced>FALSE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>legendPosition</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Legend Position</Description>
+			<Tooltip>The legend can be plotted at two positions on the chart - below the chart (BOTTOM) and on the RIGHT side of the chart.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>136</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>formatNumber</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Number format</Description>
+			<Tooltip>This configuration determines whether the numbers displayed on the chart will be formatted using commas, e.g., 40,000 if formatNumber='1' and 40000 ifformatNumber='0'.</Tooltip>
+			<InputType>Boolean</InputType>
+			<OutputType>Boolean</OutputType>
+			<Order>137</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>numberPrefix</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Number Prefix</Description>
+			<Tooltip>Using this attribute, you could add prefix to all the numbers visible on the graph. For example, to represent all dollars figure on the chart, you could specify this attribute to ' $' to show like $40000, $50000.</Tooltip>
+			<InputType>String</InputType>
+			<OutputType>String</OutputType>
+			<Order>138</Order>
+			<Advanced>TRUE</Advanced>
+			<Version>1</Version>
+		</Header>
+	</DesignerProperty>
+	<DesignerProperty>
+		<Header>
+			<Name>numberSuffix</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue/>
+			<Description>Number Suffix</Description>
+			<Tooltip>Using this attribute, you could add suffix to all the numbers visible on the graph. For example, to represent all figure quantified as per annum on the chart, you could specify this attribute to ' /a' to show like 40000/a, 50000/a. For more details, please seeAdvanced Charting > Number Formatting section.</Tooltip>
+		<InputType>String</InputType>
+		<OutputType>String</OutputType>
+		<Order>139</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
 	<Header>
-      <Name>categoriesParam</Name>
-      <Parent>BaseProperty</Parent>
-      <DefaultValue>categories</DefaultValue>
-      <Description>Fusion Chart categoriesParam name</Description>
-      <Tooltip>Fusion Chart categoriesParam name</Tooltip>
-      <InputType>String</InputType>
-      <OutputType>String</OutputType>
-      <Order>88</Order>
-      <Advanced>false</Advanced>
-      <Version>1.0</Version>
-    </Header>
-	 </DesignerProperty> 
-	 <DesignerProperty>
+		<Name>decimals</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Number of Decimal points</Description>
+		<Tooltip>Number of decimal places to which all numbers on the chart will be rounded to. For more details, please see Advanced Charting > Number Formatting section.</Tooltip>
+	<InputType>Integer</InputType>
+	<OutputType>Number</OutputType>
+	<Order>140</Order>
+	<Advanced>TRUE</Advanced>
+	<Version>1</Version>
+</Header>
+</DesignerProperty>
+<DesignerProperty>
 	<Header>
-      <Name>seriesParam</Name>
-      <Parent>BaseProperty</Parent>
-      <DefaultValue>series</DefaultValue>
-      <Description>Fusion Chart seriesParam name</Description>
-      <Tooltip>Fusion Chart seriesParam name</Tooltip>
-      <InputType>String</InputType>
-      <OutputType>String</OutputType>
-      <Order>89</Order>
-      <Advanced>false</Advanced>
-      <Version>1.0</Version>
-    </Header>
-	 </DesignerProperty> 
-	 <DesignerProperty>
+		<Name>formatNumberScale</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Format number scale (K,M)</Description>
+		<Tooltip>Configuration whether to add K (thousands) and M (millions) to a number after truncating and rounding it - e.g., if formatNumberScale is set to 1, 1043 will become 1.04K (with decimals set to 2 places). Same with numbers in millions - an M will be added at the end</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>141</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
 	<Header>
-      <Name>valueParam</Name>
-      <Parent>BaseProperty</Parent>
-      <DefaultValue>value</DefaultValue>
-      <Description>Fusion Chart valueParam name</Description>
-      <Tooltip>Fusion Chart valueParam name</Tooltip>
-      <InputType>String</InputType>
-      <OutputType>String</OutputType>
-      <Order>90</Order>
-      <Advanced>false</Advanced>
-      <Version>1.0</Version>
-    </Header>
-  </DesignerProperty> 
+		<Name>baseFont</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Base Font</Description>
+		<Tooltip>This attribute lets you set the font face (family) of all the text (data labels, values etc.) on chart. If you specify outCnvBaseFont attribute also, then this attribute controls only the font face of text within the chart canvas bounds.</Tooltip>
+		<InputType>String</InputType>
+		<OutputType>String</OutputType>
+		<Order>142</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>baseFontSize</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Base Font Size</Description>
+		<Tooltip>This attribute sets the base font size of the chart i.e., all the values and the names in the chart which lie on the canvas will be displayed using the font size provided here.</Tooltip>
+		<InputType>Integer</InputType>
+		<OutputType>Number</OutputType>
+		<Order>143</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>baseFontColor</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Base Font Color</Description>
+		<Tooltip>This attribute sets the base font color of the chart i.e., all the values and the names in the chart which lie on the canvas will be displayed using the font color provided here.</Tooltip>
+		<InputType>Color</InputType>
+		<OutputType>String</OutputType>
+		<Order>144</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
 </DesignerProperties>

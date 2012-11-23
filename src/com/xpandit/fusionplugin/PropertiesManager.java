@@ -28,35 +28,35 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
  * 
  */
 public class PropertiesManager {
-    
+
     //Well known parameter types.
     private static final String NAME = "name";
     private static final String SOLUTION = "solution";
     private static final String PATH = "path";
     private static final String XFUSIONPATH = "xFusionPath";
     private static final String KEY_DATA = "data";
-    
+
     //Types of result sets
     public static final String TARGET_VALUES = "target";
     public static final String RANGE_VALUES = "range";
-    
+
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
-    
+
     // Manager for properties obtained from the .xfusion file
     private TreeMap<String, String> localProperties = null;
-    
+
     // Properties obtained from the instance.
     private TreeMap<String, String> instanceProperties = null;
 
     // name of properties file
     private String propFile = "";
-    
+
     // path of properties file
     private String propPath;
-    
+
     // Solution name of properties file
     private String propSolution;
-    
+
     // Single property for non-legacy mode
     private String xFusionFile = "";
 
@@ -79,7 +79,7 @@ public class PropertiesManager {
         this.xFusionFile = instanceProperties.get(XFUSIONPATH);
         this.instanceProperties = instanceProperties;
         this.localProperties = new TreeMap<String, String>();
-        
+
         if (pathMode != null && pathMode.equals("legacy")) {
             fillLocalParametersWithActionInfo();
         } else {
@@ -99,36 +99,41 @@ public class PropertiesManager {
                 new ActionInfo(propSolution, propPath, propFile).toString(), ISolutionRepository.ACTION_EXECUTE);
 
         if(propSolution==null)
-        	propSolution="<null>";
+            propSolution="<null>";
         if(propPath==null)
-        	propPath="<null>";
+            propPath="<null>";
         if(propFile==null)
-        	propFile="<null>";
+            propFile="<null>";
 
         // if is no file and propFile is set log a warning
-        if (file == null) {
-            log.warn(InvalidParameterException.ERROR_005 + ":" + "No solution file found to set properties:"
-                    + "propSolution->" + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile);
-        	return;
-        }
+        if (file == null){
+            if((!propSolution.equals("<null>"))||(!propPath.equals("<null>"))||(!propFile.equals("<null>"))) {
+                log.warn(InvalidParameterException.ERROR_005 + ":" + "No solution file found to set properties:"
+                        + "propSolution->" + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile);
 
-        // load properties
-        Properties properties = new Properties();
-        try {
-            properties.load(new ByteArrayInputStream(file.getData()));
-        } catch (IOException e) {
-            log.warn(InvalidParameterException.ERROR_005
-                    + ": Unable to Load properties file. Continue without properties file:" + "propSolution->"
-                    + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile, e);
-            return;
+            }
         }
+        else
+        {
 
-        // fill properties
-        for (Object key : properties.keySet()) {
-            String stringKey = (String) key;
-            localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
+            // load properties
+            Properties properties = new Properties();
+            try {
+                properties.load(new ByteArrayInputStream(file.getData()));
+            } catch (IOException e) {
+                log.warn(InvalidParameterException.ERROR_005
+                        + ": Unable to Load properties file. Continue without properties file:" + "propSolution->"
+                        + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile, e);
+                return;
+            }
+
+
+            // fill properties
+            for (Object key : properties.keySet()) {
+                String stringKey = (String) key;
+                localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
+            }
         }
-
     }
 
     /**
@@ -175,7 +180,7 @@ public class PropertiesManager {
             localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
         }
     }
-    
+
     /**
      * Join all parameter types and returns the object
      * 
@@ -211,7 +216,7 @@ public class PropertiesManager {
     public String getPropPath() {
         return this.propPath;
     }
-    
+
     /**
      * 
      * returns the data property
@@ -221,7 +226,7 @@ public class PropertiesManager {
     public String getPropData() {
         return getParams().get(KEY_DATA);
     }
-    
+
     /**
      * 
      * returns list of instance parameters
