@@ -1,5 +1,7 @@
 package com.xpandit.fusionplugin;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -68,7 +70,7 @@ public class FCChart extends FCItem {
         	StringBuffer stringBuffer= new StringBuffer();
         	TreeMap<String, String> instanceParams =pm.getInstanceParameters();
         	
-        	stringBuffer.append("fusion/dataStream?");
+        	stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
         	
         	String lastKey=instanceParams.lastKey();
         	
@@ -78,8 +80,12 @@ public class FCChart extends FCItem {
         		{
         			stringBuffer.append("&");
         		}
-			}
-        	params.put("dataStreamURL", stringBuffer.toString());
+		}
+        	try {
+                params.put("dataStreamURL", URLDecoder.decode(stringBuffer.toString(), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
+            }
         }
         
         

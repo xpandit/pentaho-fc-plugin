@@ -171,7 +171,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
         
         //generate the output
-        FusionDataStream.dataStream(out, resultSets);
+        FusionDataStream.dataStream(out, resultSets,pm);
     }
 
 	/**

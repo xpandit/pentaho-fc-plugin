@@ -1,0 +1,1 @@
+var XDashFusionChartComponentRealTimeColumn = XDashFusionChartComponent.extend({type: "XDashFusionChartComponentRealTimeColumn"});
