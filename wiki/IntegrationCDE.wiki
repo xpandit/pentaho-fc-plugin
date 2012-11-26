@@ -2,6 +2,22 @@
 ==Integrate Fusioncharts with CDE==
 
  # install the plugin [DeveloperGuide]
+ # unzip the content of fusion_pentaho-CDE-XXXX.zip to system/pentaho-cdf-dd
+ # Restart Pentaho
+ # Create a new dashboard using CDE.
+ # Select add a new FusionCharts Component
+ ## Configure the CDA file and querie id
+ ## Configure the Width ,Height and HtmlObject 
+ # Save and run
+
+
+
+
+
+Until Version 2.0.0 
+==Integrate Fusioncharts with CDE==
+
+ # install the plugin [DeveloperGuide]
  # run: ant install-cdf-dd-res
  # Restart Pentaho
  # Create a new dashboard using CDE.
