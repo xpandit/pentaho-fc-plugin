@@ -1,5 +1,5 @@
 #labels CDE
-==Integrate Fusioncharts(earlier than version 2.0) with CDE==
+==Integrate Fusioncharts(above than version 2.0) with CDE==
 
  # install the plugin [DeveloperGuide]
  # unzip the content of fusion_pentaho-CDE-XXXX.zip to system/pentaho-cdf-dd
