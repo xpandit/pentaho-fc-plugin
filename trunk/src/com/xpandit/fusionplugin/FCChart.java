@@ -2,6 +2,7 @@ package com.xpandit.fusionplugin;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -26,10 +27,10 @@ import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
  */
 public class FCChart extends FCItem {
 
-	
-	protected static final String SERIESNAME = "seriesName";
-	
-	
+
+    protected static final String SERIESNAME = "seriesName";
+
+
     // get link values
     // the chart link template
     String chartLink = null;
@@ -50,7 +51,7 @@ public class FCChart extends FCItem {
     public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
             throws InvalidDataResultSetException {
 
-    	TreeMap<String, String> params=pm.getParams();
+        TreeMap<String, String> params=pm.getParams();
         // set category length
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");
@@ -62,44 +63,44 @@ public class FCChart extends FCItem {
 
         // initialize chart
         graph = new FusionGraph("chart", chartType, categoryLength);
-        
-        
+
+
         //generate the dataStreamURL parameter if is a real time charts
         if(FCFactory.isRealTimeChart(chartType.name()))
         {
-        	StringBuffer stringBuffer= new StringBuffer();
-        	TreeMap<String, String> instanceParams =pm.getInstanceParameters();
-        	
-        	stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
-        	
-        	String lastKey=instanceParams.lastKey();
-        	
-        	for (String key: instanceParams.keySet()) {
-        		stringBuffer.append(key).append("=").append(instanceParams.get(key));
-        		if(!lastKey.equals(key))
-        		{
-        			stringBuffer.append("&");
-        		}
-		}
-        	try {
-                params.put("dataStreamURL", URLDecoder.decode(stringBuffer.toString(), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
+            StringBuffer stringBuffer= new StringBuffer();
+            TreeMap<String, String> instanceParams =pm.getInstanceParameters();
+
+            stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
+
+            String lastKey=instanceParams.lastKey();
+
+            for (String key: instanceParams.keySet()) {
+                try {    
+                    stringBuffer.append(key).append("=").append(URLEncoder.encode(URLEncoder.encode( instanceParams.get(key), "UTF-8"), "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
+                }
+                if(!lastKey.equals(key))
+                {
+                    stringBuffer.append("&");
+                }
             }
+            params.put("dataStreamURL",stringBuffer.toString());
         }
-        
-        
+
+
         //set chart properties
         setChartProperties(params);
-        
 
-        
+
+
         // get nodes
         chartLink = graph.getChartProperties().get("chartLink");
         seriesParam = graph.getChartProperties().get("seriesParam");
         categoriesParam = graph.getChartProperties().get("categoriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
-                
+
         //set the Data on the chart
         setData(resultSets);
     }
@@ -117,10 +118,10 @@ public class FCChart extends FCItem {
             throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "Result Set is null");
 
         setData(resultSets.get("results").get(0));
-        
+
         int rowCount = getRowCount();
         if(rowCount==0)
-        	return;
+            return;
 
         // get Data Set Metadata
         IPentahoMetaData metadata = getMetaData();
@@ -140,30 +141,30 @@ public class FCChart extends FCItem {
                 log.error("Problem in result set. Null values found at index:" + i, e);
             }
         }
-        
+
         // if is the bubble charts
         //TODO create subclass of FCChart with detailed implementation for Buble charts.
         if (graph.getGraphType() == ChartType.BUBBLE) {
- 
-        	
+
+
             if (metadataSize < 3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 3");
 
             TreeMap<String,Series> relationNamePosition=new TreeMap<String,Series>();        
-                      
+
             // get data
             for (int i = 0; i < rowCount; i++) {
                 try {
 
                     Series  series = relationNamePosition.get(getDataValue(i, 0).toString());
-                    
+
                     if(series==null)
                     {
-                    	series =graph.createSeries(getDataValue(i, 0).toString());
-                    	relationNamePosition.put(getDataValue(i, 0).toString(), series);
-                    	
+                        series =graph.createSeries(getDataValue(i, 0).toString());
+                        relationNamePosition.put(getDataValue(i, 0).toString(), series);
+
                         //setSeriesProperties(series, i);
-                    	setCategoryColor(series, i);
+                        setCategoryColor(series, i);
                     }
 
                     Double xValue = Double.parseDouble(getDataValue(i, 1).toString());
@@ -171,7 +172,7 @@ public class FCChart extends FCItem {
 
                     Double yValue = Double.parseDouble(getDataValue(i, 2).toString());
                     series.setYValuePushValue(yValue);
-                    
+
                     if (getColumnCount() > 3)
                         series.setZValuePushValue(Double.parseDouble((getDataValue(i, 3).toString())));
 
@@ -226,39 +227,39 @@ public class FCChart extends FCItem {
      * @param seriesCount index of the measure 
      * @return
      */
-	private String getSeriesName(String seriesTitle,Integer seriesCount) {
-		
-		String seriesName = graph.getChartProperties().get(SERIESNAME);
-		if (seriesName != null) {
-			String[] seriesNames=seriesName.split(";");
-			if (seriesCount<seriesNames.length)
-			{
-				return seriesNames[seriesCount];
-			}
-			else
-			{
-				 log.error("seriesName is provided but not with all values nedded try name from the measure: Error in collumn number:" + seriesCount);
-				return getSeriesNameFromMeasure(seriesTitle);
-			}
-		}
-		
-		return getSeriesNameFromMeasure(seriesTitle);
-	}
+    private String getSeriesName(String seriesTitle,Integer seriesCount) {
 
-	/**
-	 * 
-	 * Get the series name from the measure name ( seriesTitle  )
-	 * 
-	 * @param seriesTitle Header from the queries column  
-	 * @return
-	 */
-	private String getSeriesNameFromMeasure(String seriesTitle) {
-		// TODO:Improve Code this code remove the MDX notation and return the member name
-		// [measures].[day] returns -> day
-		String[] seriesTitleArr = seriesTitle.split("/.")[0].split("\\]\\.");
-		seriesTitle = seriesTitleArr[seriesTitleArr.length - 1].replace("]", "").replace("[", "");
-		return seriesTitle;
-	}
+        String seriesName = graph.getChartProperties().get(SERIESNAME);
+        if (seriesName != null) {
+            String[] seriesNames=seriesName.split(";");
+            if (seriesCount<seriesNames.length)
+            {
+                return seriesNames[seriesCount];
+            }
+            else
+            {
+                log.error("seriesName is provided but not with all values nedded try name from the measure: Error in collumn number:" + seriesCount);
+                return getSeriesNameFromMeasure(seriesTitle);
+            }
+        }
+
+        return getSeriesNameFromMeasure(seriesTitle);
+    }
+
+    /**
+     * 
+     * Get the series name from the measure name ( seriesTitle  )
+     * 
+     * @param seriesTitle Header from the queries column  
+     * @return
+     */
+    private String getSeriesNameFromMeasure(String seriesTitle) {
+        // TODO:Improve Code this code remove the MDX notation and return the member name
+        // [measures].[day] returns -> day
+        String[] seriesTitleArr = seriesTitle.split("/.")[0].split("\\]\\.");
+        seriesTitle = seriesTitleArr[seriesTitleArr.length - 1].replace("]", "").replace("[", "");
+        return seriesTitle;
+    }
 
     /**
      * Allows setting chart links.
@@ -282,20 +283,20 @@ public class FCChart extends FCItem {
         if (valueParam != null) {
             serieChartLink = serieChartLink.replace("{" + valueParam + "}", series.getValue(seriesIndex).toString());
         }
-        
+
         series.setEvent(seriesIndex, serieChartLink);
     }
-    
+
     /**
      * Render the chart XML.
      * @return XML for the chart.
      * @throws Exception
      */
     public String generateChart() throws Exception {
-    	ChartFactoryChart chart	= new ChartFactoryChart(isFreeVersion());   
-		//attach graph to chart factory
-		chart.insertGraph(graph);
-		return chart.buildDOMFusionChart(graph.getGraphId()); 
+        ChartFactoryChart chart	= new ChartFactoryChart(isFreeVersion());   
+        //attach graph to chart factory
+        chart.insertGraph(graph);
+        return chart.buildDOMFusionChart(graph.getGraphId()); 
     }
 
 }
