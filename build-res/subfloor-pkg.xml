@@ -110,7 +110,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   </target>
 
   <target name="package"
-          depends="assemble,package-zip,package-targz,samples-zip,samples-targz"
+          depends="assemble,package-zip,package-targz,samples-zip,samples-targz,pentaho-CDE-zip,pentaho-CDE-targz"
           description="Creates packaged distributable artifacts" />
 
   <target name="package-zip">
@@ -145,6 +145,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </tarfileset>
     </tar>
   </target>	
+  
+  
+    <target name="pentaho-CDE-zip">
+  	<zip destfile="${dist.dir}/fusion_pentaho-CDE-${project.revision}.zip">
+		<zipfileset dir="${dir.cdf-dd-res}">
+			<include name="**"/>
+		</zipfileset>
+	</zip>
+  </target>
+  
+  <target name="pentaho-CDE-targz">
+    <tar destfile="${dist.dir}/fusion_pentaho-CDE-${project.revision}.tar.gz" longfile="gnu" compression="gzip">
+      <tarfileset dir="${dir.cdf-dd-res}" mode="755">
+      	<include name="**"/>
+      </tarfileset>
+    </tar>
+  </target>	
+  
+  
   <!--=======================================================================
 	    create-pom (override)
 	    

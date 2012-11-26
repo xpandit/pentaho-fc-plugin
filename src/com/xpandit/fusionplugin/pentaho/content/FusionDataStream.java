@@ -2,13 +2,12 @@ package com.xpandit.fusionplugin.pentaho.content;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Properties;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
-import org.pentaho.reporting.libraries.formula.util.URLEncoder;
+
 
 import com.xpandit.fusionplugin.PropertiesManager;
 
@@ -20,6 +19,10 @@ import com.xpandit.fusionplugin.PropertiesManager;
  *
  */
 public class FusionDataStream {
+    
+    
+    //Encoding in use
+    private static final String ENCODING = "UTF-8";
 
 	/**
 	 * 
@@ -64,6 +67,7 @@ public class FusionDataStream {
 			{	
 				buffer.append(result.getValueAt(i,j));
                                 String serieChartLinkAux=chartLink;
+                                //generate the chart link for data stream charts
 				if(!chartLink.equals(""))
                                 {    
 				    serieChartLinkAux=serieChartLinkAux.replace("{series}",result.getValueAt(i,0).toString());
@@ -92,8 +96,10 @@ public class FusionDataStream {
 			}
 		}
 				
+		//append the "click" for each "categories"
 		if(!chartLink.equals(""))
-                {    
+                {   
+		    
 		    buffer.append(serieChartLink.toString());
                 }
 		
