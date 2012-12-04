@@ -49,7 +49,7 @@ var xLoadFunct= function(){
 				//is to render in HTML5?
 				if(options.isHTML5==undefined)
 					options.isHTML5=false;
-				var chartTypeFull=options.isHTML5?options.chartType:url+"/swf/"+options.chartType+".swf";
+				var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
 							
 				//create chart Object
 				myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
@@ -116,6 +116,34 @@ var xLoadFunct= function(){
 			// default options
 			options["chartXML"] = true;
 			options["dashboard-mode"] = false;
+			
+			//colorRange from a array into a string
+			if(options.colorRange!=undefined)
+			{
+				options.colorRange=options.colorRange.toString().replace(/,/gi,';');
+			}
+			
+			//transform the array of range values into a JSON object  
+			var cols='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"}';
+			var rows='"rows":[{"c":[{"f":"0","v":0}';
+			if(options.rangeValues!=undefined)
+			{
+				if( options.rangeValues instanceof Array)
+				{
+
+					for (var i=0;i<options.rangeValues.length;++i)
+					{
+						cols+=',{"id":"[MEASURE:'+i+']","label":"Range'+i+'","type":"number"}';
+						rows+=',{"f":"'+options.rangeValues[i]+'","v":'+options.rangeValues[i]+'}';
+					}
+					cols+='],';
+					rows+=']}]}';
+					
+					options.range=cols+rows;
+				}
+				
+			}
+			
 
 			return options;
 		},

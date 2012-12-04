@@ -37,7 +37,7 @@
 			<InputType>String</InputType>
 			<OutputType>String</OutputType>
 			<Order>87</Order>
-			<Advanced>false</Advanced>
+			<Advanced>true</Advanced>
 			<Version>1.0</Version>
 		</Header>
 	</DesignerProperty>
@@ -51,7 +51,7 @@
 			<InputType>String</InputType>
 			<OutputType>String</OutputType>
 			<Order>88</Order>
-			<Advanced>false</Advanced>
+			<Advanced>true</Advanced>
 			<Version>1.0</Version>
 		</Header>
 	</DesignerProperty>
@@ -65,7 +65,7 @@
 			<InputType>String</InputType>
 			<OutputType>String</OutputType>
 			<Order>89</Order>
-			<Advanced>false</Advanced>
+			<Advanced>true</Advanced>
 			<Version>1.0</Version>
 		</Header>
 	</DesignerProperty>
@@ -79,7 +79,7 @@
 			<InputType>String</InputType>
 			<OutputType>String</OutputType>
 			<Order>90</Order>
-			<Advanced>false</Advanced>
+			<Advanced>true</Advanced>
 			<Version>1.0</Version>
 		</Header>
 	</DesignerProperty>
@@ -121,7 +121,8 @@
 			<Value display="Real Time Column">RealTimeColumn</Value>
 			<Value display="Real Time Line">RealTimeLine</Value>
 			<Value display="Real Time StackedArea">RealTimeStackedArea</Value>
-			<Value display="Real Time Line">RealTimeLineDY</Value>
+			<Value display="Real Time LineDY">RealTimeLineDY</Value>
+			<Value display="Real Time AngularGauge">AngularGauge</Value>
 		</Values>
 	</DesignerProperty>
 	<DesignerProperty>
@@ -141,7 +142,8 @@
 			<Value display="Real Time Column">RealTimeColumn</Value>
 			<Value display="Real Time Line">RealTimeLine</Value>
 			<Value display="Real Time StackedArea">RealTimeStackedArea</Value>
-			<Value display="Real Time Line">RealTimeLineDY</Value>
+			<Value display="Real Time LineDY">RealTimeLineDY</Value>
+			<Value display="Real Time AngularGauge">AngularGauge</Value>
 		</Values>
 	</DesignerProperty>
 	<DesignerProperty>
@@ -162,10 +164,32 @@
 			<Value display="Real Time Line">RealTimeLine</Value>
 			<Value display="Real Time StackedArea">RealTimeStackedArea</Value>
 			<Value display="Real Time LineDY">RealTimeLineDY</Value>
+			<Value display="Real Time AngularGauge">AngularGauge</Value>
 		</Values>
 	</DesignerProperty>
-	
-	
+	<DesignerProperty>
+		<Header>
+			<Name>realTimeChartTypeAngularGauge</Name>
+			<Parent>BaseProperty</Parent>
+			<DefaultValue>AngularGauge</DefaultValue>
+			<Description>Chart Type</Description>
+			<Tooltip>Real Time Charts Type</Tooltip>
+			<InputType type="valuelist" />
+			<OutputType>String</OutputType>
+			<Order>89</Order>
+			<Advanced>false</Advanced>
+			<Version>1.0</Version>
+		</Header>
+		<Values>
+			<Value display="Real Time Column">RealTimeColumn</Value>
+			<Value display="Real Time Line">RealTimeLine</Value>
+			<Value display="Real Time StackedArea">RealTimeStackedArea</Value>
+			<Value display="Real Time LineDY">RealTimeLineDY</Value>
+			<Value display="Real Time AngularGauge">AngularGauge</Value>
+		</Values>
+	</DesignerProperty>
+
+
 	<DesignerProperty>
 		<Header>
 			<Name>canvasBgColor</Name>
@@ -383,12 +407,18 @@
 			<DefaultValue/>
 			<Description>X axis label display</Description>
 			<Tooltip>Using this attribute, you can control how your data labels (x-axis labels) will appear on the chart. There are 4 options: WRAP, STAGGER, ROTATE or NONE. WRAP wraps the label text if it's longer than the allotted area. ROTATE rotates the label in vertical or slanted position. STAGGER divides the labels into multiple lines.</Tooltip>
-			<InputType>String</InputType>
+			<InputType type="valuelist" />
 			<OutputType>String</OutputType>
 			<Order>130</Order>
 			<Advanced>TRUE</Advanced>
 			<Version>1</Version>
 		</Header>
+		<Values>
+			<Value display="NONE">NONE</Value>
+			<Value display="ROTATE">ROTATE</Value>
+			<Value display="STAGGER">STAGGER</Value>
+			<Value display="WRAP">WRAP</Value>
+		</Values>
 	</DesignerProperty>
 	<DesignerProperty>
 		<Header>
@@ -481,12 +511,16 @@
 			<DefaultValue/>
 			<Description>Legend Position</Description>
 			<Tooltip>The legend can be plotted at two positions on the chart - below the chart (BOTTOM) and on the RIGHT side of the chart.</Tooltip>
-			<InputType>String</InputType>
+			<InputType type="valuelist" />
 			<OutputType>String</OutputType>
 			<Order>136</Order>
 			<Advanced>TRUE</Advanced>
 			<Version>1</Version>
 		</Header>
+		<Values>
+			<Value display="RIGHT">RIGHT</Value>
+			<Value display="BOTTOM">BOTTOM</Value>
+		</Values>
 	</DesignerProperty>
 	<DesignerProperty>
 		<Header>
@@ -739,4 +773,267 @@
 		<Version>1</Version>
 	</Header>
 </DesignerProperty>
+
+
+<DesignerProperty>
+	<Header>
+		<Name>isDataStreamAngularGauge</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>true</DefaultValue>
+		<Description>Data Stream Angular Gauge</Description>
+		<Tooltip>Enable the Data Stream Angular Gauge </Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>148</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+
+
+<DesignerProperty>
+	<Header>
+		<Name>showValue</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Show Gauge Value</Description>
+		<Tooltip>Whether to show each dial's value?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>67</Order>
+		<Advanced>FALSE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>valueBelowPivot</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Show Value Below Pivot</Description>
+		<Tooltip>Whether to show dial value below the pivot or above it?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>149</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>lowerLimitDisplay</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Gauge Lower Limit Label</Description>
+		<Tooltip>This attribute allows you to display a label instead of the lower limit. For example, in a chart displaying Literacy Rate on a scale of 0-100%, you may need to show the label Low at the starting point of the chart. Upon using this attribute to specify the label, the value 0 will be replaced by Low. Default value: If you do not specify the lowerLimitDisplay attribute, the lower limit value will be shown.</Tooltip>
+		<InputType>String</InputType>
+		<OutputType>String</OutputType>
+		<Order>68</Order>
+		<Advanced>FALSE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>upperLimitDisplay</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Gauge Upper Limit Label</Description>
+		<Tooltip>This attribute allows you to display a label instead of the upper limit. Upon using this attribute, the upper limit of the chart gets replaced by the label specified. Default value: If you do not specify the upperLimitDisplay attribute, the upper limit value will be shown.</Tooltip>
+		<InputType>String</InputType>
+		<OutputType>String</OutputType>
+		<Order>69</Order>
+		<Advanced>FALSE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>showTickMarks</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Show Tick Marks</Description>
+		<Tooltip>Whether to show tick marks?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>150</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>showTickValues</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Show Tick Values</Description>
+		<Tooltip>Whether to show tick values?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>151</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>showLimits</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Show Tick Limits</Description>
+		<Tooltip>Whether to show the first and last tick value (i.e., chart lower and upper limit)?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>152</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>placeTicksInside</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Place Tick Inside</Description>
+		<Tooltip>Whether to place ticks inside the gauge (on the inner radius) or outside?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>153</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>placeValuesInside</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Place Values Inside</Description>
+		<Tooltip>Whether to place tick values inside the gauge?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>154</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>autoAlignTickValues</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>1</DefaultValue>
+		<Description>Auto Align Tick Values</Description>
+		<Tooltip>Whether to ask the chart to automatically place tick values to reduce overlapping of the tick values with the gauge.</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>155</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+
+<DesignerProperty>
+	<Header>
+		<Name>gaugeStartAngle</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>180</DefaultValue>
+		<Description>Gauge Start Angle</Description>
+		<Tooltip>Angle from where the gauge will start drawing. Default value is 180.</Tooltip>
+		<InputType>Integer</InputType>
+		<OutputType>Number</OutputType>
+		<Order>70</Order>
+		<Advanced>FALSE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>gaugeEndAngle</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>0</DefaultValue>
+		<Description>Gauge End Angle</Description>
+		<Tooltip>Angle where the gauge will end drawing. Default value is 0.</Tooltip>
+		<InputType>Integer</InputType>
+		<OutputType>Number</OutputType>
+		<Order>71</Order>
+		<Advanced>FALSE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>showGaugeBorder</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Show Gauge Border</Description>
+		<Tooltip>Whether to show a border around gauge scale?</Tooltip>
+		<InputType>Boolean</InputType>
+		<OutputType>Boolean</OutputType>
+		<Order>156</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>gaugeBorderColor</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Gauge Border Color</Description>
+		<Tooltip>Color of gauge scale border. You can either specify a hex code here (like 333333), or a single token from gradient fill mix like {dark-20} or {light-30}. The chart will then calculate the border color for each color range individually (based on the color code for each color range).</Tooltip>
+		<InputType>Color</InputType>
+		<OutputType>String</OutputType>
+		<Order>157</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+<DesignerProperty>
+	<Header>
+		<Name>gaugeBorderThickness</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Gauge Border Thickness</Description>
+		<Tooltip>Thickness of gauge scale border.</Tooltip>
+		<InputType>Integer</InputType>
+		<OutputType>Number</OutputType>
+		<Order>158</Order>
+		<Advanced>TRUE</Advanced>
+		<Version>1</Version>
+	</Header>
+</DesignerProperty>
+
+
+<DesignerProperty>
+	<Header>
+		<Name>colorRange</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>"[]"</DefaultValue>
+		<Description>Range Colors Array</Description>
+		<Tooltip>Colors to use in the intervals range.</Tooltip>
+		<InputType>Array</InputType>
+		<OutputType>Array</OutputType>
+		<Advanced>FALSE</Advanced>
+		<Order>9</Order>
+		<Version>1.0</Version>
+	</Header>
+</DesignerProperty>
+
+
+<DesignerProperty>
+	<Header>
+		<Name>rangeValues</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue>"[]"</DefaultValue>
+		<Description>Intervals Array</Description>
+		<Tooltip>Array - Intervals to use on the dial</Tooltip>
+		<InputType>Array</InputType>
+		<OutputType>Array</OutputType>
+		<Advanced>FALSE</Advanced>
+		<Order>9</Order>
+		<Version>1.0</Version>
+	</Header>
+</DesignerProperty>
+
+
 </DesignerProperties>

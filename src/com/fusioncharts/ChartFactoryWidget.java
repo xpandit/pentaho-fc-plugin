@@ -100,8 +100,13 @@ public class ChartFactoryWidget extends ChartFactory {
 		xmlwriter.writeEntity("dials");
 		
 		for(int i=0 ; i < graph.getNumberOfDials() ; ++i) {
+		    Dial d=graph.getDialValue(i);
 			xmlwriter.writeEntity("dial");
-			xmlwriter.writeAttribute("value", graph.getDialValue(i));
+			xmlwriter.writeAttribute("value", d.getValue().toString());
+			if(d.getLabel()!=null)
+			    xmlwriter.writeAttribute("toolText", d.getLabel());
+			if(d.getLink()!=null)
+			    xmlwriter.writeAttribute("link", d.getLink());
 			xmlwriter.endEntity(); //end of dial entity			
 		}
 		

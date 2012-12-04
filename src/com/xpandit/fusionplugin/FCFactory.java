@@ -59,7 +59,7 @@ public class FCFactory {
             }
         } else if (cType.getChartLibrary() == ChartType.ChartLibrary.WIDGETS) {
             try {
-            
+              
             	//if is a realtime chart the behavior is the same of the charts
             	if(isRealTimeChart(chartTypeParam)){
             		return new FCChart(cType, resultSets,pm);
