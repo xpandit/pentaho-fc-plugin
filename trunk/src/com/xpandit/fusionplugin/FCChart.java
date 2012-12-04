@@ -1,8 +1,5 @@
 package com.xpandit.fusionplugin;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -64,28 +61,11 @@ public class FCChart extends FCItem {
         // initialize chart
         graph = new FusionGraph("chart", chartType, categoryLength);
 
-
+ 
         //generate the dataStreamURL parameter if is a real time charts
         if(FCFactory.isRealTimeChart(chartType.name()))
         {
-            StringBuffer stringBuffer= new StringBuffer();
-            TreeMap<String, String> instanceParams =pm.getInstanceParameters();
-
-            stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
-
-            String lastKey=instanceParams.lastKey();
-
-            for (String key: instanceParams.keySet()) {
-                try {    
-                    stringBuffer.append(key).append("=").append(URLEncoder.encode(URLEncoder.encode( instanceParams.get(key), "UTF-8"), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
-                }
-                if(!lastKey.equals(key))
-                {
-                    stringBuffer.append("&");
-                }
-            }
+            StringBuffer stringBuffer = generateDataStreamParameter(pm);
             params.put("dataStreamURL",stringBuffer.toString());
         }
 
@@ -104,6 +84,7 @@ public class FCChart extends FCItem {
         //set the Data on the chart
         setData(resultSets);
     }
+
 
     /**
      * 

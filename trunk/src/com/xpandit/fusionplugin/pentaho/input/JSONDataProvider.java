@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
+import org.pentaho.platform.api.engine.IPentahoSession;
 
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
@@ -28,24 +29,34 @@ public class JSONDataProvider extends DataProvider{
      * @see com.xpandit.fusionplugin.pentaho.input.DataProvider#getResultSets(com.xpandit.fusionplugin.PropertiesManager)
      */
     @Override
-    public Map<String, ArrayList<IPentahoResultSet>> getResultSets(PropertiesManager pm) throws InvalidDataResultSetException{
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm, IPentahoSession userSession) throws InvalidDataResultSetException{
              
         String data = pm.getPropData();
 
         JSONResultSet resultSet = new JSONResultSet(data); 
+                
+        addResultSet(DataProvider.RESULTSET_TYPE_DATA,resultSet);
         
+        return resultSets; 
+    }
+    @Override
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
+             
         if (pm.getParams().containsKey(PropertiesManager.RANGE_VALUES)){
             JSONResultSet rangeResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.RANGE_VALUES));
             addResultSet(DataProvider.RESULTSET_TYPE_RANGE,rangeResultSet); 
         }
-        
+        return resultSets; 
+    }
+    @Override
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
+                     
         if (pm.getParams().containsKey(PropertiesManager.TARGET_VALUES)){
             JSONResultSet targetResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.TARGET_VALUES));
             addResultSet(DataProvider.RESULTSET_TYPE_TARGET,targetResultSet);
         }
-        
-        addResultSet(DataProvider.RESULTSET_TYPE_DATA,resultSet);
-        
         return resultSets; 
-    }    
+    }
+    
+    
 }

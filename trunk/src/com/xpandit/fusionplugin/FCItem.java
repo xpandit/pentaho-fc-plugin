@@ -1,5 +1,7 @@
 package com.xpandit.fusionplugin;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -410,6 +412,34 @@ abstract public class FCItem {
 		+ "</body></html>";
 		return output;
 	}
+	
+	
+
+	    /**
+	     * @param pm
+	     * @return 
+	     */
+	    protected StringBuffer generateDataStreamParameter(PropertiesManager pm) {
+	        StringBuffer stringBuffer= new StringBuffer();
+	        TreeMap<String, String> instanceParams =pm.getInstanceParameters();
+
+	        stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
+
+	        String lastKey=instanceParams.lastKey();
+
+	        for (String key: instanceParams.keySet()) {
+	            try {    
+	                stringBuffer.append(key).append("=").append(URLEncoder.encode(URLEncoder.encode( instanceParams.get(key), "UTF-8"), "UTF-8"));
+	            } catch (UnsupportedEncodingException e) {
+	                log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
+	            }
+	            if(!lastKey.equals(key))
+	            {
+	                stringBuffer.append("&");
+	            }
+	        }
+	        return stringBuffer;
+	    }
 
 	/**
 	 * 

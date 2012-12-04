@@ -1,3 +1,10 @@
+/*
+ * PentahoFCPlugin Project
+ * 
+ * Copyright (C) 2012 Xpand IT.
+ * 
+ * This software is proprietary.
+ */
 package com.xpandit.fusionplugin.pentaho.input;
 
 import java.io.UnsupportedEncodingException;
