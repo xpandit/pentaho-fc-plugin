@@ -165,7 +165,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      */
     private void dataStream(OutputStream out) throws UnsupportedEncodingException, Exception,
     InvalidParameterException, InvalidDataResultSetException, IOException {
- 
+  
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
         //generate the output
@@ -187,7 +187,7 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      */
     private Map<String, ArrayList<IPentahoResultSet>> getData() throws InvalidParameterException, Exception {
         if(pathMode==null)
-            pathMode="legacy";
+            pathMode="legacy";  
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
 
