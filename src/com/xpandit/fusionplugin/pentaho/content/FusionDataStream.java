@@ -68,9 +68,10 @@ public class FusionDataStream {
                 buffer.append(result.getValueAt(i,j));
                 String serieChartLinkAux=chartLink;
                 //generate the chart link for data stream charts
-                if(!chartLink.equals(""))
-                {    
-                    serieChartLinkAux=serieChartLinkAux.replace("{series}",result.getValueAt(i,0).toString());
+                if((!(chartLink==null))&&!chartLink.equals(""))
+                {     
+                    serieChartLinkAux=serieChartLinkAux.replace("{categories}",result.getValueAt(i,0).toString());
+                    serieChartLinkAux=serieChartLinkAux.replace("{series}",result.getMetaData().getColumnHeaders()[0][j].toString());
                     serieChartLink.append( serieChartLinkAux.replace("{value}",result.getValueAt(i,j).toString()));
                 }
 
@@ -90,14 +91,14 @@ public class FusionDataStream {
             {
                 buffer.append('|');
 
-                if(!chartLink.equals(""))
+                if((!(chartLink==null))&&!chartLink.equals(""))
                     serieChartLink.append('|');
 
             }
         }
 
         //append the "click" for each "categories"
-        if(!chartLink.equals(""))
+        if((!(chartLink==null))&&!chartLink.equals(""))
         {   
 
             buffer.append(serieChartLink.toString());
@@ -135,7 +136,7 @@ public class FusionDataStream {
             buffer.append(result.getValueAt(i,1));
             String serieChartLinkAux=chartLink;
             //generate the chart link for data stream charts
-            if(!chartLink.equals(""))
+            if((!(chartLink==null))&&!chartLink.equals(""))
             {    
                 serieChartLinkAux=serieChartLinkAux.replace("{series}",result.getValueAt(i,0).toString());
                 serieChartLink.append( serieChartLinkAux.replace("{value}",result.getValueAt(i,1).toString()));
@@ -145,7 +146,7 @@ public class FusionDataStream {
             {
                 buffer.append('|');
 
-                if(!chartLink.equals(""))
+                if((!(chartLink==null))&&!chartLink.equals(""))
                     serieChartLink.append('|');
 
             }
@@ -153,7 +154,7 @@ public class FusionDataStream {
         }
 
         //append the "click" for each "categories"
-        if(!chartLink.equals(""))
+        if((!(chartLink==null))&&!chartLink.equals(""))
         {   
 
             buffer.append(serieChartLink.toString());
