@@ -81,7 +81,7 @@ public class ParameterParser {
                 // TODO Remove!!!
                 // String parameterValue=requestParams.getParameter(parameterKey).toString();
                 String parameterValue = URLDecoder.decode(requestParams.getStringParameter(parameterKey, ""), ENCODING);
-                parameters.put(parameterKey.trim(), parameterValue.trim());
+                parameters.put(parameterKey.trim(), parameterValue);
             }
         } catch (UnsupportedEncodingException ex) {
             throw new InvalidParameterException("Unsupported Encoding Exception");
