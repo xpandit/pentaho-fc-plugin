@@ -104,7 +104,27 @@ var xLoadFunct= function(){
 			var cd = this.chartDefinition;
 			for(key in cd){
 				var value = typeof cd[key]=='function'?cd[key](): cd[key];
-				options[key] = value;
+				//tranform the boolean values into FCharts  boolean style 1/0
+				if(typeof(value)=="boolean")
+				{
+					options[key] = value?'1':'0';
+				}
+				else
+				if(typeof(value)=="string")
+				{
+					//encode values
+					options[key] = encodeURIComponent(value);
+				}
+				else //tranform all the arrays with the exception of rangeValues element
+				if(value instanceof Array&&key!="rangeValues")
+				{	
+					if(value.length>0)
+						options[key] =  value.toString().replace(/,/gi,';');
+				}
+				else
+				{
+					options[key] = value;
+				}
 			}
 
 			// TODO colocar aqui logica para permitir alterar entre os varios
@@ -117,12 +137,7 @@ var xLoadFunct= function(){
 			options["chartXML"] = true;
 			options["dashboard-mode"] = false;
 			
-			//colorRange from a array into a string
-			if(options.colorRange!=undefined)
-			{
-				options.colorRange=options.colorRange.toString().replace(/,/gi,';');
-			}
-			
+						
 			//transform the array of range values into a JSON object  
 			var cols='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"}';
 			var rows='"rows":[{"c":[{"f":"0","v":0}';

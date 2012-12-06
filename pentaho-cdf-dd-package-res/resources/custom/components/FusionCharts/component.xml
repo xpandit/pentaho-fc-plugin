@@ -109,6 +109,8 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>baseFont</Property>
 					<Property>baseFontSize</Property>
 					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
+					
 				</Definition>
 				<Property name="parameters">xActionArrayParameter</Property>
 				<Property type="boolean">executeAtStart</Property>
@@ -193,6 +195,7 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>baseFont</Property>
 					<Property>baseFontSize</Property>
 					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
 				</Definition>
 				<Property name="parameters">xActionArrayParameter</Property>
 				<Property type="boolean">executeAtStart</Property>
@@ -280,7 +283,7 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>baseFont</Property>
 					<Property>baseFontSize</Property>
 					<Property>baseFontColor</Property>
-
+					<Property>categoriesColor</Property>
 
 				</Definition>
 				<Property name="parameters">xActionArrayParameter</Property>
@@ -368,7 +371,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>baseFont</Property>
 					<Property>baseFontSize</Property>
 					<Property>baseFontColor</Property>
-
+					<Property>categoriesColor</Property>
+					<Property>parentYAxis</Property>
+					
 
 				</Definition>
 				<Property name="parameters">xActionArrayParameter</Property>

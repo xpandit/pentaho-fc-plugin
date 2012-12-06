@@ -638,7 +638,7 @@
 	<Header>
 		<Name>stack100Percent</Name>
 		<Parent>BaseProperty</Parent>
-		<DefaultValue/>
+		<DefaultValue>false</DefaultValue>
 		<Description>Stack 100 Percent</Description>
 		<Tooltip>Setting this attribute to 1 helps in depicting the values in percentage figures. When this attribute is set to 1 the chart considers the 	total of the stacked dataplot as 100% and the Y-Axis shows a scale from 0% to 100%.</Tooltip>
 		<InputType>Boolean</InputType>
@@ -1031,6 +1031,37 @@
 		<OutputType>Array</OutputType>
 		<Advanced>FALSE</Advanced>
 		<Order>9</Order>
+		<Version>1.0</Version>
+	</Header>
+</DesignerProperty>
+
+
+<DesignerProperty>
+	<Header>
+		<Name>categoriesColor</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Color List for Categories</Description>
+		<Tooltip>Sets the color for each categorie acording to de category index. ONLY on Multi Series Charts and Real Time Charts</Tooltip>
+		<InputType>Array</InputType>
+		<OutputType>Array</OutputType>
+		<Advanced>TRUE</Advanced>
+		<Order>9</Order>
+		<Version>1.0</Version>
+	</Header>
+</DesignerProperty>
+
+<DesignerProperty>
+	<Header>
+		<Name>parentYAxis</Name>
+		<Parent>BaseProperty</Parent>
+		<DefaultValue/>
+		<Description>Parent Y Axis</Description>
+		<Tooltip>parentYAxis to each serie</Tooltip>
+		<InputType>Array</InputType>
+		<OutputType>Array</OutputType>
+		<Advanced>TRUE</Advanced>
+		<Order>10</Order>
 		<Version>1.0</Version>
 	</Header>
 </DesignerProperty>
