@@ -21,10 +21,11 @@ implements Cloneable
 	/****************************************************************
 	 * 
 	 * Series Enum that determines the series type
-	 * Can either be: Bar, Line, Area, Trendline
+	 * Can either be: Column,Bar, Line, Area, Trendline
 	 *
 	 ***************************************************************/
 	public enum SeriesType {
+	        COLUMN,
 		BAR,
 		LINE,
 		AREA,
