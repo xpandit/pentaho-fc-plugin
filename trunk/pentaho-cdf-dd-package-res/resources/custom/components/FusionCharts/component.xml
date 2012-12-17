@@ -97,7 +97,6 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>slantLabels</Property>
 					<Property>labelStep</Property>
 					<Property>showValues</Property>
-					<Property>placeValuesInside</Property>
 					<Property>rotateValues</Property>
 					<Property>showLegend</Property>
 					<Property>legendPosition</Property>
@@ -184,6 +183,7 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Property>slantLabels</Property>
 					<Property>labelStep</Property>
 					<Property>showValues</Property>
+					<Property>placeValuesInside</Property>
 					<Property>rotateValues</Property>
 					<Property>showLegend</Property>
 					<Property>legendPosition</Property>
