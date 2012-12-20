@@ -132,7 +132,11 @@ abstract public class FCItem {
 		// have the property SERIESCOLOR
 		if (value != null) {
 			// split the values
-			String color = (value.split(";"))[seriesIndex];
+		        String[] values=value.split(";");
+		        
+		        //check if have enough values
+		        String color= values.length-1<seriesIndex?"": values[seriesIndex];
+		        
 			if (graph.getGraphType().isSingleSeries())
 				series.setColor(seriesIndex, color);
 
@@ -241,8 +245,12 @@ abstract public class FCItem {
 		String value = graph.getChartProperties().get(CATEGORIESCOLOR);
 
 		if (value != null) {
-			// split the values
-			String color = (value.split(";"))[seriesIndex];
+                        // split the values
+                        String[] values=value.split(";");
+			
+	                     //check if have enough values
+                        String color= values.length-1<seriesIndex?"": values[seriesIndex];
+			
 			if (!graph.getGraphType().isSingleSeries())
 				series.setColor(color);
 		}

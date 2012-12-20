@@ -104,7 +104,18 @@ public class FusionDataStream {
             buffer.append(serieChartLink.toString());
         }
 
+      //avoid the chart to be moved ahead when no data    
+        if (result.getValueAt(0,0).toString().trim().equalsIgnoreCase(""))
+        {
+       
+            buffer=new StringBuffer(); // return an empty string buffer instead of &label=&value=|. This will cause the chart to freeze and not move ahead...
+            out.write(buffer.toString().getBytes());
+        }
+        else
+        {
         out.write(buffer.toString().getBytes());
+       
+        }
     }
 
     /**
@@ -160,7 +171,17 @@ public class FusionDataStream {
             buffer.append(serieChartLink.toString());
         }
 
-        out.write(buffer.toString().getBytes());
+        //avoid the chart to be moved ahead when no data
+        if (result.getValueAt(0,0).toString().trim().equalsIgnoreCase(""))
+        {
+       
+            buffer=new StringBuffer(); // return an empty string buffer instead of &label=&value=|. This will cause the chart to freeze and not move ahead...
+            out.write(buffer.toString().getBytes());
+        }
+        else
+        {
+            out.write(buffer.toString().getBytes());
+        }
     }
 
 
