@@ -85,13 +85,20 @@ public class FCWidget extends FCItem {
                 for (int i = 0; i < rowsNumber; ++i) {
                     Dial d= new Dial();
                     
-                    //check if is one or two columns
-                    if(result.getColumnCount()==1)
-                        d.setValue(Double.parseDouble(result.getValueAt(i, 0).toString()));
-                    else 
+                    if(result.getValueAt(i, 0).toString().trim().equalsIgnoreCase(""))
                     {
-                        d.setLable(result.getValueAt(i, 0).toString());
-                        d.setValue(Double.parseDouble(result.getValueAt(i, 1).toString()));
+                        continue; // This will atleast add the series name and chart will get painted properly with no data and subsequent calls will populate the data..
+                    }
+                    else
+                    {
+                        //check if is one or two columns
+                        if(result.getColumnCount()==1)
+                            d.setValue(Double.parseDouble(result.getValueAt(i, 0).toString()));
+                        else 
+                        {
+                            d.setLable(result.getValueAt(i, 0).toString());
+                            d.setValue(Double.parseDouble(result.getValueAt(i, 1).toString()));
+                        }
                     }
                     
                     String chartLink = graph.getChartProperties().get("chartLink");

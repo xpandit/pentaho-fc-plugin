@@ -184,8 +184,15 @@ public class FCChart extends FCItem {
                 // get data
                 for (int i = 0; i < rowCount; i++) {
                     try {
-                        series.setValue(i, Double.parseDouble((getDataValue(i, seriesCount).toString())));
-
+                        
+                        
+                        if(getDataValue(i, seriesCount).toString().trim().equalsIgnoreCase(""))
+                        {
+                            continue; // This will atleast add the series name and chart will get painted properly with no data and subsequent calls will populate the data..
+                        }
+                        else
+                            series.setValue(i, Double.parseDouble((getDataValue(i, seriesCount).toString())));
+    
                         // build a chart link
                         if (chartLink != null) {
                             setChartLink(series,i);
