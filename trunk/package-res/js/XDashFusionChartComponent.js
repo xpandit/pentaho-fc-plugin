@@ -43,7 +43,7 @@ var xLoadFunct= function(){
 			}
 
 			//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded
-			if(myself.chartObject == undefined || options.reloadOnRefresh) {
+			if(myself.chartObject == undefined || options.reloadOnRefresh ||isFree) {
 				this.clear();
 				
 				//is to render in HTML5?
@@ -72,6 +72,9 @@ var xLoadFunct= function(){
 					$("#"+myself.htmlObject).prepend(div);	
 					div.click(myself.backButtonCallBack);
 				}
+				if(PentahoDashboardController!=undefined)
+					myself.chartObject=undefined;
+					
 			} else {
 				// just a quick update
 				myself.chartObject.setDataXML(resultXml);
