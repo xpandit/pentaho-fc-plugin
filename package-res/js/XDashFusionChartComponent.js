@@ -72,8 +72,15 @@ var xLoadFunct= function(){
 					$("#"+myself.htmlObject).prepend(div);	
 					div.click(myself.backButtonCallBack);
 				}
-				if(PentahoDashboardController!=undefined)
-					myself.chartObject=undefined;
+				//on Dashboard EE??
+				try{
+					if(PentahoDashboardController!=undefined)
+						myself.chartObject=undefined;
+				}
+				catch(e)
+				{
+						myself.chartObject=undefined;
+				}
 					
 			} else {
 				// just a quick update
