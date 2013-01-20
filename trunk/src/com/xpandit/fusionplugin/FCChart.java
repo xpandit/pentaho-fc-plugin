@@ -48,7 +48,7 @@ public class FCChart extends FCItem {
     public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
             throws InvalidDataResultSetException {
 
-        TreeMap<String, String> params=pm.getParams();
+        TreeMap<String, Object> params=pm.getParams();
         // set category length
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");

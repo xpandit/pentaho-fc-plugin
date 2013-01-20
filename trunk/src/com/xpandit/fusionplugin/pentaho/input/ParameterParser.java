@@ -42,7 +42,7 @@ public class ParameterParser {
     /**
      * Parameters values after parsing.
      */
-    private TreeMap<String, String> parameters = null;
+    private TreeMap<String, Object> parameters = null;
 
     /**
      * Constructor for the class.
@@ -54,7 +54,7 @@ public class ParameterParser {
         this.parameterProviders = parameterProviders;
 
         // inialize object
-        parameters = new TreeMap<String, String>();
+        parameters = new TreeMap<String, Object>();
 
         // get correct IParameterProvider
         IParameterProvider requestParams = parameterProviders.get(IParameterProvider.SCOPE_REQUEST);
@@ -80,8 +80,21 @@ public class ParameterParser {
                 String parameterKey = (String) parameterIterator.next();
                 // TODO Remove!!!
                 // String parameterValue=requestParams.getParameter(parameterKey).toString();
-                String parameterValue = URLDecoder.decode(requestParams.getStringParameter(parameterKey, ""), ENCODING);
-                parameters.put(parameterKey.trim(), parameterValue);
+                
+                
+                //process all the elements for a parameter
+                String[] parameterArray= requestParams.getStringArrayParameter(parameterKey, null);
+                
+                for(int i=0;i<parameterArray.length;++i)
+                {
+                    parameterArray[i]=URLDecoder.decode(parameterArray[i], ENCODING); 
+                }
+                
+                //if only one element set as a string
+                if(parameterArray.length==1)
+                    parameters.put(parameterKey.trim(), parameterArray[0]);
+                else
+                    parameters.put(parameterKey.trim(), parameterArray);
             }
         } catch (UnsupportedEncodingException ex) {
             throw new InvalidParameterException("Unsupported Encoding Exception");
@@ -141,7 +154,7 @@ public class ParameterParser {
      * 
      * @return All parameters.
      */
-    public TreeMap<String, String> getParameters() {
+    public TreeMap<String, Object> getParameters() {
         return parameters;
     }
 
@@ -151,7 +164,7 @@ public class ParameterParser {
      * @param name The parameter name.
      * @return The parameter value.
      */
-    public String getParameters(String name) {
-        return parameters.get(name);
+    public Object getParameters(String name) {
+        return  parameters.get(name);
     }
 }

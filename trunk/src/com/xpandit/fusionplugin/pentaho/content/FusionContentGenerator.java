@@ -80,12 +80,12 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 
         //TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
         parameterParser = new ParameterParser(parameterProviders);
-        pathMode = parameterParser.getParameters(PATHMODE);
+        pathMode = (String)parameterParser.getParameters(PATHMODE);
 
         // Identify operation based on URL call
         String method = parameterParser.extractMethod();
 
-        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
+       pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
 
         if (method == null) { // Generate chart
             renderChartGetData(out);
@@ -138,11 +138,11 @@ public class FusionContentGenerator extends SimpleContentGenerator {
         FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
 
         // render the chart
-        TreeMap<String, String> params = pm.getParams();
-        if (params.containsKey(CHARTXML) && Boolean.parseBoolean(params.get(CHARTXML))) {
+        TreeMap<String, Object> params = pm.getParams();
+        if (params.containsKey(CHARTXML) && Boolean.parseBoolean((String)params.get(CHARTXML))) {
             // Generate the chart XML
             out.write(fcItem.generateXML().getBytes());
-        } else if (params.containsKey(ISDASHBOARDMODE) && !Boolean.parseBoolean(params.get(ISDASHBOARDMODE))) {
+        } else if (params.containsKey(ISDASHBOARDMODE) && !Boolean.parseBoolean((String)params.get(ISDASHBOARDMODE))) {
             // Generate the chart as a full HTML page
             out.write(fcItem.generateHTML().getBytes());
         } else {

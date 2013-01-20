@@ -43,10 +43,10 @@ public class PropertiesManager {
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
 
     // Manager for properties obtained from the .xfusion file
-    private TreeMap<String, String> localProperties = null;
+    private TreeMap<String, Object> localProperties = null;
 
     // Properties obtained from the instance.
-    private TreeMap<String, String> instanceProperties = null;
+    private TreeMap<String, Object> instanceProperties = null;
 
     // name of properties file
     private String propFile = "";
@@ -71,14 +71,14 @@ public class PropertiesManager {
      * @param encoding Encoding of URL params
      * @throws InvalidParameterException
      */
-    public PropertiesManager(TreeMap<String, String> instanceProperties, String pathMode)
+    public PropertiesManager(TreeMap<String, Object> instanceProperties, String pathMode)
             throws InvalidParameterException {
-        this.propFile = instanceProperties.get(NAME);
-        this.propPath = instanceProperties.get(PATH);
-        this.propSolution = instanceProperties.get(SOLUTION);
-        this.xFusionFile = instanceProperties.get(XFUSIONPATH);
+        this.propFile =(String) instanceProperties.get(NAME);
+        this.propPath =(String) instanceProperties.get(PATH);
+        this.propSolution =(String) instanceProperties.get(SOLUTION);
+        this.xFusionFile =(String) instanceProperties.get(XFUSIONPATH);
         this.instanceProperties = instanceProperties;
-        this.localProperties = new TreeMap<String, String>();
+        this.localProperties = new TreeMap<String, Object>();
 
         if (pathMode != null && pathMode.equals("legacy")) {
             fillLocalParametersWithActionInfo();
@@ -186,8 +186,8 @@ public class PropertiesManager {
      * 
      * @return Map with all parameters joined by order
      */
-    public TreeMap<String, String> getParams() {
-        TreeMap<String, String> params = new TreeMap<String, String>();
+    public TreeMap<String, Object> getParams() {
+        TreeMap<String, Object> params = new TreeMap<String, Object>();
 
         // put all properties by order all properties are replaced
         params.putAll(GlobalPropertiesManager.getInstance().getProperties());
@@ -224,7 +224,7 @@ public class PropertiesManager {
      * @return
      */
     public String getPropData() {
-        return getParams().get(KEY_DATA);
+        return (String)getParams().get(KEY_DATA);
     }
 
     /**
@@ -233,7 +233,7 @@ public class PropertiesManager {
      * 
      * @return
      */
-    public TreeMap<String, String> getInstanceParameters() {
+    public TreeMap<String, Object> getInstanceParameters() {
         return instanceProperties;
     }
 }
