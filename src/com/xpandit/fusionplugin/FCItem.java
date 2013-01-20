@@ -212,11 +212,12 @@ abstract public class FCItem {
 	 * 
 	 * @param params map with all parameters
 	 */
-	public void setChartProperties(TreeMap<String, String> params) {
+	public void setChartProperties(TreeMap<String, Object> params) {
 		Set<String> keys = params.keySet();
-		for (String mapKey : keys) {
-			setChartProperties(mapKey, params.get(mapKey));
-		}
+		for (String mapKey : keys) { 
+		    if (params.get(mapKey) instanceof String)
+			setChartProperties(mapKey, (String)params.get(mapKey));
+		   }
 	}
 
 	/**
@@ -429,7 +430,7 @@ abstract public class FCItem {
 	     */
 	    protected StringBuffer generateDataStreamParameter(PropertiesManager pm) {
 	        StringBuffer stringBuffer= new StringBuffer();
-	        TreeMap<String, String> instanceParams =pm.getInstanceParameters();
+	        TreeMap<String, Object> instanceParams =pm.getInstanceParameters();
 
 	        stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
 
@@ -437,7 +438,7 @@ abstract public class FCItem {
 
 	        for (String key: instanceParams.keySet()) {
 	            try {    
-	                stringBuffer.append(key).append("=").append(URLEncoder.encode(URLEncoder.encode( instanceParams.get(key), "UTF-8"), "UTF-8"));
+	                stringBuffer.append(key).append("=").append(URLEncoder.encode(URLEncoder.encode((String) instanceParams.get(key), "UTF-8"), "UTF-8"));
 	            } catch (UnsupportedEncodingException e) {
 	                log.error("dataStreamURL:UnsupportedEncodingException! try to continue....");
 	            }

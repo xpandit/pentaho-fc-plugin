@@ -43,7 +43,7 @@ public class JSONDataProvider extends DataProvider{
     public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
              
         if (pm.getParams().containsKey(PropertiesManager.RANGE_VALUES)){
-            JSONResultSet rangeResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.RANGE_VALUES));
+            JSONResultSet rangeResultSet = new JSONResultSet((String)pm.getParams().get(PropertiesManager.RANGE_VALUES));
             addResultSet(DataProvider.RESULTSET_TYPE_RANGE,rangeResultSet); 
         }
         return resultSets; 
@@ -52,7 +52,7 @@ public class JSONDataProvider extends DataProvider{
     public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
                      
         if (pm.getParams().containsKey(PropertiesManager.TARGET_VALUES)){
-            JSONResultSet targetResultSet = new JSONResultSet(pm.getParams().get(PropertiesManager.TARGET_VALUES));
+            JSONResultSet targetResultSet = new JSONResultSet((String)pm.getParams().get(PropertiesManager.TARGET_VALUES));
             addResultSet(DataProvider.RESULTSET_TYPE_TARGET,targetResultSet);
         }
         return resultSets; 

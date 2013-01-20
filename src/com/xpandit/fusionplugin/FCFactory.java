@@ -33,7 +33,7 @@ public class FCFactory {
             throws InvalidParameterException {
 
         // get the requested chartType
-        String chartTypeParam = pm.getParams().get("chartType");
+        String chartTypeParam = (String)pm.getParams().get("chartType");
         if (chartTypeParam == null)
             throw new InvalidParameterException(InvalidParameterException.ERROR_001);
 

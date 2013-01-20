@@ -53,7 +53,7 @@ public class FusionDataStream {
         }
 
 
-        String chartLink=pm.getParams().get("chartLink");
+        String chartLink=(String)pm.getParams().get("chartLink");
         StringBuffer serieChartLink=new StringBuffer("&link=");
 
         //generate value
@@ -135,7 +135,7 @@ public class FusionDataStream {
 
         StringBuffer buffer=new StringBuffer();
 
-        String chartLink=pm.getParams().get("chartLink");
+        String chartLink=(String)pm.getParams().get("chartLink");
         StringBuffer serieChartLink=new StringBuffer("&link=");
 
         //generate value

@@ -2,6 +2,7 @@ package com.xpandit.fusionplugin.pentaho.input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,7 +20,6 @@ import pt.webdetails.cda.CdaQueryComponent;
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
-import com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator;
 
 /**
  * Class that gathers data based on CDA files.
@@ -54,7 +54,7 @@ public class CDADataProvider extends DataProvider{
             throws InvalidDataResultSetException {
         this.pm=pm;
         try {
-            String pathMode = pm.getParams().get(PATHMODE);
+            String pathMode = (String)pm.getParams().get(PATHMODE);
 
             final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
             final ISolutionFile file;
@@ -86,12 +86,12 @@ public class CDADataProvider extends DataProvider{
             }
 
             // get dataAccessIDs using properties manager
-            String[] queryIDs = pm.getParams().get(CDAID).split(";");
+            String[] queryIDs = ((String)pm.getParams().get(CDAID)).split(";");
             String[] outputIndexIds = null;
 
             if(outputIndexIdDefined){
                 // get outputIndexIds from request
-                outputIndexIds = pm.getParams().get(CDAOUTPUTID).split(";");
+                outputIndexIds =((String) pm.getParams().get(CDAOUTPUTID)).split(";");
                 // if there is an indexDefined than we must make sure they have the same size
                 if(outputIndexIds.length != queryIDs.length){
                     throw new InvalidParameterException(InvalidParameterException.ERROR_007 + "\n Number of accessIds -> "
@@ -163,9 +163,9 @@ public class CDADataProvider extends DataProvider{
          */
         private ActionInfo getAction() {
 
-            String solution = pm.getParams().get(CDASOLUTION);
-            String path = pm.getParams().get(CDAPATH);
-            String name = pm.getParams().get(CDANAME);
+            String solution = (String)pm.getParams().get(CDASOLUTION);
+            String path = (String)pm.getParams().get(CDAPATH);
+            String name = (String)pm.getParams().get(CDANAME);
 
             // if no CDASOLUTION or CDAPATH provided set default values
             solution = (solution != null ? solution : pm.getPropSolution());
@@ -186,7 +186,7 @@ public class CDADataProvider extends DataProvider{
 
             if (file == null) {
                 getLogger().debug("Cda file is null, Try path way");
-                file = repository.getSolutionFile(pm.getParams().get(CDAPATH),ISolutionRepository.ACTION_EXECUTE);
+                file = repository.getSolutionFile((String)pm.getParams().get(CDAPATH),ISolutionRepository.ACTION_EXECUTE);
             }
             if (file == null) { 
                 throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
@@ -207,7 +207,7 @@ public class CDADataProvider extends DataProvider{
          * @throws InvalidParameterException
          */
         private ISolutionFile getCDAFile(final ISolutionRepository repository) throws InvalidParameterException {
-            String cdaPath = pm.getParams().get(CDAPATH);
+            String cdaPath = (String)pm.getParams().get(CDAPATH);
 
             if (cdaPath == null) {
                 throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAPATH
@@ -239,7 +239,7 @@ public class CDADataProvider extends DataProvider{
                 throws Exception {
             ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();
             // invoke to get target value
-            String queryID = pm.getParams().get(TARGETVALUECDAID);
+            String queryID = (String)pm.getParams().get(TARGETVALUECDAID);
             // set data access id
             cdaInputs.put("dataAccessId", queryID);
             cdaQueryComponent.setInputs(cdaInputs);
@@ -264,7 +264,7 @@ public class CDADataProvider extends DataProvider{
         private ArrayList<IPentahoResultSet> getRangeValuesCDA(Map<String, Object> cdaInputs, IPentahoResultSet resultset)
                 throws Exception {
             ArrayList<IPentahoResultSet> aux = new ArrayList<IPentahoResultSet>();
-            String queryID = pm.getParams().get(RANGEVALUECDAID);
+            String queryID = (String)pm.getParams().get(RANGEVALUECDAID);
             // invoke to get ranges values
 
             String[] queryIDArray = queryID.split(";");
@@ -295,22 +295,38 @@ public class CDADataProvider extends DataProvider{
          * 
          * @return return parameters as requested by CDA
          */
-        private HashMap<String, Object> cdaParameters() {
+        private HashMap<String, Object> cdaParameters() { 
             HashMap<String, Object> cdaParameters = new  HashMap<String, Object>();
-            TreeMap<String, String> params = pm.getParams();
-            String parameterKeys = params.get(CDAPARAMETERS);
+            TreeMap<String, Object> params = pm.getParams(); 
+            String parameterKeys =(String) params.get(CDAPARAMETERS);
             if (parameterKeys == null) {
                 getLogger().debug("No parameters will be passed: " + CDAPARAMETERS + " don't exist");
                 return cdaParameters;
             }
+            StringBuffer cdaParameterString= new StringBuffer();
+            
             String[] parametersKeysArray = parameterKeys.split(";");
             for (int i = 0; i < parametersKeysArray.length; i++) {
-                String value = params.get(parametersKeysArray[i]);
+                Object value = params.get(parametersKeysArray[i]);
                 if (value == null)
                     new InvalidParameterException(InvalidParameterException.ERROR_003 + " with key:"
                             + parametersKeysArray[i]);
-                cdaParameters.put("param"+parametersKeysArray[i],value);
+                else
+                {    
+                    //if is string just set the string
+                    if (value instanceof String)
+                        cdaParameterString.append(parametersKeysArray[i]).append("=").append(value).append(";");
+                    else 
+                    {       //if it's a list set all the elements
+                        String[] listValue= (String[]) value;
+                        for (String valueElement : listValue) {
+                            cdaParameterString.append(parametersKeysArray[i]).append("=").append(valueElement).append(";");
+                        }
+                    }
+                }
             }
+            cdaParameters.put("cdaParameterString",cdaParameterString.toString());
+            
             return cdaParameters;
         }
 
