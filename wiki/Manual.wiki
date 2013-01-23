@@ -12,7 +12,9 @@
  # Set _bi-developers_ folder to visible
   # Edit file index.xml and set `<visible>true</visible>`
  # Change the file _system/pentaho.xml_ to include another entry on the acl-files list: _`<acl-files>...,xfusion</acl-files>`_
+ # Restart Pentaho Server 
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
+ # Restart Pentaho Server
 
 == Installing FusionCharts XT (licensed) ==
  # Extract the zip files provided by FusionCharts Team
@@ -21,6 +23,11 @@
  # Copy the _`*`.swf_ files to the plugin directory _fusioncharts/charts_
  # Look for the directory JSClass where the _`*`.js_ files are
  # Copy the directory contents to the plugin directory _fusioncharts/JSClass_
+
+===CDE Compentes===
+
+ # Extract the fusion_pentaho-CDE zip file into the _pentaho-solutions/system/pentaho-cdf-dd_ path.
+ # Restart Pentaho Server
 
 = Samples =
 
