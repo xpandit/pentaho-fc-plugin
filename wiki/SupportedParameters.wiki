@@ -20,7 +20,7 @@ Parameters are used to set the way that plugin works and also to describe and fo
 || Chart Type || chartType || string  || yes  || -  || chart type  || || see supported charts  ||
 || Width || width || int  || no  || ?  || chart width || width=200 || -  ||
 || Height  || height  || int  || no  || ?  || chart height || height=200 || -  ||
-|| Render in Html5 || isHTML5 || string || no  || undefined  || render chart in html5. When is undifined flash is used. || isHTML5=true || true or undefined  ||
+|| Render in Html5 || isHTML5 || string || no  || - || render chart in html5. When is undifined flash is used. || isHTML5=true || true or undefined  ||
 || Free Version  || free  || boolean  || no  || true  || Renders the chart for free (true) or not free version (false). || free=true || -  ||
 || CDA File Name  || cdaName  || String  || no  || -  || File Name of CDA  || cdaName=usa-quantity-ordered.cda || -  ||
 || CDA File Solution  || cdaSolution  || String || no  || 	solution parameter  || Solution of CDA File  || cdaSolution=fusionSolution || -  ||
