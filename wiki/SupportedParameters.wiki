@@ -7,10 +7,19 @@ Parameters are used to set the way that plugin works and also to describe and fo
 
  * Special Parameters - This type of parameters requires special treatments like labels, width, heigh, ... They either set the way that the plugin works or are placed on specific places according to FusionCharts specification.
 
- * Regular Parameters - This type of parameters are just added to the FusionGraph object.
+ * Regular Parameters - This type of parameters are just added to the chart object and thus only have to be known by FusionCharts. On the example below attributes: showLegend, palette, animation and formatNumberScale can be passed on the plugin even if not referenced on the list:
+
+<code language="xml">
+<chart showLegend="1" palette="2" animation="1" formatNumberScale="0" numberPrefix="$" pieSliceDepth="30" startingAngle="125">
+   <set label="Leverling" value="100524"/>
+</chart>
+</code>
+For more regular parameters check the FusionCharts documentation.
 
 
 = List of parameters =
+
+This list contains special parameters and the main regular parameters. 
 
 || *Name*  || *Key*  || *Data Type*  || *Is Mandatory*  || *Default*  || *Description*  || *Example*  || *Available Values*  ||
 || Data Access ID  || cdaDataAccessId || int()  || yes  || -  || define witch data access to be used in CDA file&nbsp;  || cdaDataAccessId=2;3 || -  ||
