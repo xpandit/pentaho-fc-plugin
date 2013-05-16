@@ -19,6 +19,7 @@
 					<Property name="cdaPath">fusionCdaPath</Property>
 					<Property name="cdaDataAccessId">dataAccessId</Property>
 					<Property type="string" name="chartType">fusionChartType</Property>
+					<Property type="string" name="path">path</Property>
 					<Property type="string" name="chartLink">chartLink</Property>
 					<Property type="string" name="seriesParam">seriesParam</Property>
 					<Property type="string" name="categoriesParam">categoriesParam</Property>

@@ -576,12 +576,24 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         //test if is for free version
         var isFree=options.isFree;
         options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
-        
-        var chartObject = new FusionCharts( webAppPath+"/content/fusion/swf/"+options.chartType+".swf", this.containerDiv.id+"-generated", options.width, options.height, "0","1" );
-        chartObject.setDataXML(resultXml);
-        chartObject.render(this.containerDiv.id);
-		
-		this.chartObject=chartObject;
+	
+	// get HTML5 from xml
+	options.isHTML5 = eval($(resultXml).attr("isHTML5"));
+
+	if(options.isHTML5==undefined)
+		options.isHTML5=false;
+
+	//create the logic to get the correct chart name for the chart based if is HTML 5 or not	
+	var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";        
+	
+	//create chart Object
+	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
+	
+	// fix the bug that avoid the error on analyzer when using HTML5
+	resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
+
+        this.chartObject.setDataXML(resultXml);
+        this.chartObject.render(this.containerDiv.id);
         
         //place chart object available
         this.chart = $("#"+this.containerDiv.id).find("object");
