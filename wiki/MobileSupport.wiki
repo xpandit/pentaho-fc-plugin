@@ -2,7 +2,7 @@
 
 The FusionCharts have the ability to render charts in HTML 5. This features is very useful in web application for desktop and iPhone/iPad at the same time. 
 
-_This feature is only available on the Licensed version of FusionCharts_
+*This feature is only available on the Licensed version of FusionCharts*
 
 In order to enable the HTML5 feature across the all platform on the file pentaho-solutions/system/fusion_plugin/fusionCharts.properties 
 set/change the properties existing properties to :
