@@ -6,6 +6,7 @@ _This feature is only available on the Licensed version of FusionCharts_
 
 In order to enable the HTML5 feature across the all platform on the file pentaho-solutions/system/fusion_plugin/fusionCharts.properties 
 set/change the properties existing properties to :
-
+`
 free=false
 isHTML5=true
+`
