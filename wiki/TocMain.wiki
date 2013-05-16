@@ -9,6 +9,7 @@
   * [DashboardDesignerEE Dashboard Designer EE Integration]
   * [IntegrationCDE CDE Integration]
   * [IntegrationAnalyzer Analyzer Integration]
+  * [HTML 5 Support]
  * [TechnicalDocumentation Technical Documentation]
   * [DeveloperGuide Developer's Guide]
   * [Workflow Workflow]
