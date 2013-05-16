@@ -5,7 +5,7 @@ The FusionCharts have the ability to render charts in HTML 5. This features is v
 *This feature is only available on the Licensed version of FusionCharts*
 
 In order to enable the HTML5 feature across the all the pentaho platform , on the file _pentaho-solutions/system/fusion_plugin/fusionCharts.properties_  
-set/change the properties existing properties to :
+set/change the existing properties to :
 {{{
 free=false
 isHTML5=true
