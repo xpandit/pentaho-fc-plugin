@@ -1,5 +1,11 @@
 #summary This page contains information about chart rendering with HTML 5.
 
-The FusionCharts have the ability to render charts in HTML 5. This features is very useful in web application for desktop and iPhone/iPad at the same time.
+The FusionCharts have the ability to render charts in HTML 5. This features is very useful in web application for desktop and iPhone/iPad at the same time. 
 
-For more information check this page [http://kb.fusioncharts.com/questions/392/How+do+I+render+charts+in+iPhone%7B47%7DiPod%7B47%7DiPad%3F FusionCharts Kb article]
+_This feature is only available on the Licensed version of FusionCharts_
+
+In order to enable the HTML5 feature across the all platform on the file pentaho-solutions/system/fusion_plugin/fusionCharts.properties 
+set/change the properties existing properties to :
+
+free=false
+isHTML5=true
