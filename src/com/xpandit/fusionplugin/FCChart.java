@@ -27,79 +27,120 @@ public class FCChart extends FCItem {
 
     protected static final String SERIESNAME = "seriesName";
 
-
-    // get link values
     // the chart link template
     String chartLink = null;
+
     // seriesParam to replace in template link
     String seriesParam = null;
+
     // categoriesParam to replace in template link
     String categoriesParam = null;
+
     // valueParam to replace in template link
     String valueParam = null;
+
+    // The resultset column that works as a datastamp for RT charts
+    String datastampColumn = null;
 
     /**
      * Constructor for Charts
      * 
      * @param chartType Type of chart to be created.
-     * @param resultSets Results sets containig data to display.
+     * @param resultSets Results sets containing data to display.
      * @throws InvalidDataResultSetException
      */
     public FCChart(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
             throws InvalidDataResultSetException {
 
-        TreeMap<String, Object> params=pm.getParams();
+        if (resultSets == null)
+            throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "Result Set is null");
+
         // set category length
         int categoryLength = 0;
-        ArrayList<IPentahoResultSet> results = resultSets.get("results");
         if (chartType == ChartType.BUBBLE) {
             categoryLength = 1;
         } else {
-            categoryLength = results.get(0).getRowCount();
+            categoryLength = resultSets.get("results").get(0).getRowCount();
         }
 
-        // initialize chart
-        graph = new FusionGraph("chart", chartType, categoryLength);
+        initChart(chartType, categoryLength, resultSets, pm);
 
- 
         //generate the dataStreamURL parameter if is a real time charts
         if(FCFactory.isRealTimeChart(chartType.name()))
         {
             StringBuffer stringBuffer = generateDataStreamParameter(pm);
-            params.put("dataStreamURL",stringBuffer.toString());
+            graph.getChartProperties().put("dataStreamURL", stringBuffer.toString());
+
+            datastampColumn = getChartProperty("datastampColumn");
+
+            if(datastampColumn != null) {
+                final String datastamp = getLastResultOf(getColumnIndex(datastampColumn));
+                graph.getChartProperties().put("dataStamp", datastamp);
+            }
         }
 
-
-        //set chart properties
-        setChartProperties(params);
-
-
-
         // get nodes
-        chartLink = graph.getChartProperties().get("chartLink");
-        seriesParam = graph.getChartProperties().get("seriesParam");
-        categoriesParam = graph.getChartProperties().get("categoriesParam");
-        valueParam = graph.getChartProperties().get("valueParam");
+        chartLink = getChartProperty("chartLink");
+        seriesParam = getChartProperty("seriesParam");
+        categoriesParam = getChartProperty("categoriesParam");
+        valueParam = getChartProperty("valueParam");
 
-        //set the Data on the chart
         setData(resultSets);
     }
 
+    private void initChart(ChartType chartType, int categoryLength, Map<String, ArrayList<IPentahoResultSet>> resultSets, PropertiesManager pm) {
+        // initialize chart
+        graph = new FusionGraph("chart", chartType, categoryLength);
+
+        //set chart properties
+        setChartProperties(pm.getParams());
+
+        //set the Data on the chart
+        setData(resultSets.get("results").get(0));
+    }
+
+    /**
+     * Get a property value given the name
+     *
+     * @param propertyName the property to return
+     * @return the property value
+     */
+    private String getChartProperty(String propertyName) {
+        return graph.getChartProperties().get(propertyName);
+    }
+
+    /**
+     * Get the column index given a column name
+     * @param columnName
+     * @return
+     */
+    private int getColumnIndex(String columnName) {
+        return getMetaData().getColumnIndex(columnName);
+    }
+
+    /**
+     * Get last value of a column index in a resultset
+     * @param index
+     * @return the last result
+     */
+    private String getLastResultOf(int index) {
+
+        if(getRowCount() > 0) {
+            return getDataValue(getRowCount()-1, index).toString();
+        }
+
+        return null;
+    }
 
     /**
      * 
      * Set data on chart
-     * 
-     * @param resultSets Pentaho ResultSet with multi result sets from a query multi queries
+     *
      * @throws InvalidDataResultSetException when reult set is invalid
      */
+
     @Override
     public void setData(Map<String, ArrayList<IPentahoResultSet>> resultSets) throws InvalidDataResultSetException {
-        if (resultSets == null)
-            throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "Result Set is null");
-
-        setData(resultSets.get("results").get(0));
-
         int rowCount = getRowCount();
         if(rowCount==0)
             return;
@@ -173,6 +214,11 @@ public class FCChart extends FCItem {
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 2");
 
             for (int seriesCount = 1; seriesCount < metadataSize; ++seriesCount) {
+
+                //skip the datastampColumn
+                if(datastampColumn != null && seriesCount == getColumnIndex(datastampColumn))
+                    continue;
+
                 // get measure column name to set series title
                 String seriesTitle = metadata.getColumnHeaders()[0][seriesCount].toString();
 
@@ -286,5 +332,4 @@ public class FCChart extends FCItem {
         chart.insertGraph(graph);
         return chart.buildDOMFusionChart(graph.getGraphId()); 
     }
-
 }

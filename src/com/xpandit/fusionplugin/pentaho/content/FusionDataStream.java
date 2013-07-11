@@ -5,7 +5,9 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
+import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
 
@@ -24,6 +26,12 @@ public class FusionDataStream {
     //Encoding in use
     private static final String ENCODING = "UTF-8";
 
+    private static final String LABEL = "&label=";
+
+    private static final String VALUE = "&value=";
+
+    private static final String DATASTAMP = "&dataStamp=";
+
     /**
      * 
      * This method process the chart for the URLDataStream on the RealTime Charts
@@ -36,13 +44,16 @@ public class FusionDataStream {
             Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm) throws IOException {
 
         IPentahoResultSet result= resultSets.get("results").get(0);
+        IPentahoMetaData metaData = result.getMetaData();
+        TreeMap<String,Object> params = pm.getParams();
+
         int columnCount=result.getColumnCount();
         int rowCount=result.getRowCount();
 
         StringBuffer buffer=new StringBuffer();
 
         //generate Label
-        buffer.append("&label=");
+        buffer.append(LABEL);
         for (int i=0;i<rowCount;++i)
         {	
             buffer.append(result.getValueAt(i,0));
@@ -52,15 +63,20 @@ public class FusionDataStream {
             }
         }
 
-
-        String chartLink=(String)pm.getParams().get("chartLink");
-        StringBuffer serieChartLink=new StringBuffer("&link=");
+        String datastampColumn = (String) params.get("datastampColumn");
+        int datastampColumnIdx = result.getMetaData().getColumnIndex(datastampColumn);
+        String lastDatastamp = (String) params.get("dataStamp");
+        String chartLink = (String) params.get("chartLink");
+        StringBuffer serieChartLink = new StringBuffer("&link=");
 
         //generate value
-        buffer.append("&value=");
+        buffer.append(VALUE);
 
         for (int j=1;j<columnCount;++j)
         {
+            // skip the datastamp column if exists
+            if(datastampColumn != null && datastampColumnIdx == j)
+                continue;
 
             //generate more rows 
             for (int i=0;i<rowCount;++i)
@@ -99,23 +115,26 @@ public class FusionDataStream {
 
         //append the "click" for each "categories"
         if((!(chartLink==null))&&!chartLink.equals(""))
-        {   
-
+        {
             buffer.append(serieChartLink.toString());
         }
 
-      //avoid the chart to be moved ahead when no data    
+        //avoid the chart to be moved ahead when no data
         if (result.getValueAt(0,0).toString().trim().equalsIgnoreCase(""))
         {
-       
             buffer=new StringBuffer(); // return an empty string buffer instead of &label=&value=|. This will cause the chart to freeze and not move ahead...
-            out.write(buffer.toString().getBytes());
         }
-        else
-        {
+
+        if(datastampColumn != null) {
+            buffer.append(DATASTAMP);
+            if(rowCount > 0 ) {
+                buffer.append(result.getValueAt(rowCount-1, datastampColumnIdx)); //update the datastamp
+            } else {
+                buffer.append(lastDatastamp);
+            }
+        }
+
         out.write(buffer.toString().getBytes());
-       
-        }
     }
 
     /**
@@ -139,7 +158,7 @@ public class FusionDataStream {
         StringBuffer serieChartLink=new StringBuffer("&link=");
 
         //generate value
-        buffer.append("&value=");
+        buffer.append(VALUE);
 
         //generate more rows 
         for (int i=0;i<rowCount;++i)
@@ -183,6 +202,4 @@ public class FusionDataStream {
             out.write(buffer.toString().getBytes());
         }
     }
-
-
 }
