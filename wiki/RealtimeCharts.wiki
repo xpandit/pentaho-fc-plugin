@@ -52,3 +52,5 @@ realTimeColumnChartDefinition: {
 }}}
 
 Now your charts should be refreshing automatically using the query you defined!
+
+<g:plusone size="medium"></g:plusone>
