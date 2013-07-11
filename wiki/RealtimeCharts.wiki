@@ -25,7 +25,7 @@ realTimeColumnChartDefinition: {
 }
 }}}
 
-  * (Optional) Define a column of your dataset to become an incremental pinpoint value for the chart using the "datastampColumn" parameter, this will make the column value be forwarded by the chart in the subsequent calls to the plugin and CDA using the "dataStamp" parameter. (functionality described in fusion charts realtime [http://docs.fusioncharts.com/widgets/Contents/index.html?RealTime/RealTimeOverview.html documentation]
+  * (Optional) Define a column of your dataset to become an incremental pinpoint value for the chart using the "datastampColumn" parameter, this will make the column value be forwarded by the chart in the subsequent calls to the plugin and CDA using the "dataStamp" parameter. (functionality described in fusion charts realtime [http://docs.fusioncharts.com/widgets/Contents/index.html?RealTime/RealTimeOverview.html documentation])
 
 {{{
 realTimeColumnChartDefinition: {
