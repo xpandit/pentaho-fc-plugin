@@ -39,6 +39,7 @@ public class CDADataProvider extends DataProvider{
     private static final String CDAID = "cdaDataAccessId";
     private static final String CDAOUTPUTID     = "outputIndexId";
     private static final String PATHMODE = "pathMode";
+    private static final String DATASTAMP = "dataStamp";
 
     private PropertiesManager pm=null;
     private CdaQueryComponent cdaQueryComponent;
@@ -303,7 +304,13 @@ public class CDADataProvider extends DataProvider{
                 getLogger().debug("No parameters will be passed: " + CDAPARAMETERS + " don't exist");
                 return cdaParameters;
             }
-            StringBuffer cdaParameterString= new StringBuffer();
+
+            // forward the dataStamp to CDA if it exists in the parameters
+            if(params.get(DATASTAMP) != null){
+                parameterKeys = parameterKeys + ";" + DATASTAMP;
+            }
+
+            StringBuffer cdaParameterString = new StringBuffer();
             
             String[] parametersKeysArray = parameterKeys.split(";");
             for (int i = 0; i < parametersKeysArray.length; i++) {
