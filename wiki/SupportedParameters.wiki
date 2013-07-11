@@ -51,3 +51,4 @@ This list contains special parameters and the main regular parameters.
 || Value Param Name  || valueParam || string  || no  || -  || This attribute sets the name of the parameter with value in&nbsp; Chart Link Template || valueParam=value || ||
 || Chart Link Template  || chartLink || string  || no  || -  || The chart link parameter to be called when the user clicks on the chart. || chartLink=JavaScript: drillFunction('{series}','{categories}','{value}') || ||
 || Chart XML Mode  || chartXML || boolean  || no  || false  || Defines when should be rendered only the chart xml &nbsp;  || chartXML=true || ||
+|| Realtime Datastamp Column  || datastampColumn || string  || no  || -  ||Defines which dataset column will be used to forward incremental update values back to CDA &nbsp;  || datastampColumn=lastMaxId || ||
