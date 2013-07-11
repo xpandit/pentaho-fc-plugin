@@ -1,14 +1,17 @@
-#summary One-sentence summary of this page.
+#summary Information about the Realtime Charts usage
 #labels realtime,Phase-Implementation
 
 = Introduction =
 
-Add your content here.
+This page describes the usage of the real time functionality of the fusion charts realtime charts.
 
+= Supported Charts =
 
-= Details =
+  * RealTimeLine
+  * RealTimeArea
+  * RealTimeColumn
+  * RealTimeLineDY (Dual Y)
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Usage =
+
+# Declare the component like any other fusion chart (refer to [CDFComponent CDF FusionChartComponent])
