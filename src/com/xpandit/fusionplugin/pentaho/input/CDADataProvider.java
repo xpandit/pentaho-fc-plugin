@@ -51,13 +51,14 @@ public class CDADataProvider extends DataProvider{
 
 
     @Override
-    public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm,IPentahoSession userSession)
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm)
             throws InvalidDataResultSetException {
         this.pm=pm;
         try {
             String pathMode = (String)pm.getParams().get(PATHMODE);
 
-            final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, userSession);
+            
+            final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class);
             final ISolutionFile file;
 
             if(pathMode.equals("legacy")) {
@@ -343,20 +344,19 @@ public class CDADataProvider extends DataProvider{
 
 
 
-        @Override
-        public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm,
-                IPentahoSession userSession) throws InvalidDataResultSetException {
-            // TODO Auto-generated method stub
-            return null;
-        }
+		@Override
+		public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(
+				PropertiesManager pm) throws InvalidDataResultSetException {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 
 
-        @Override
-        public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,
-                IPentahoSession userSession) throws InvalidDataResultSetException {
-            // TODO Auto-generated method stub
-            return null;
-        }
+		@Override
+		public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(
+				PropertiesManager pm) throws InvalidDataResultSetException {
+			return null;
+		}
 
     }

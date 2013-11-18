@@ -29,7 +29,7 @@ public class JSONDataProvider extends DataProvider{
      * @see com.xpandit.fusionplugin.pentaho.input.DataProvider#getResultSets(com.xpandit.fusionplugin.PropertiesManager)
      */
     @Override
-    public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm, IPentahoSession userSession) throws InvalidDataResultSetException{
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm) throws InvalidDataResultSetException{
              
         String data = pm.getPropData();
 
@@ -40,7 +40,7 @@ public class JSONDataProvider extends DataProvider{
         return resultSets; 
     }
     @Override
-    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm) throws InvalidDataResultSetException{
              
         if (pm.getParams().containsKey(PropertiesManager.RANGE_VALUES)){
             JSONResultSet rangeResultSet = new JSONResultSet((String)pm.getParams().get(PropertiesManager.RANGE_VALUES));
@@ -49,7 +49,7 @@ public class JSONDataProvider extends DataProvider{
         return resultSets; 
     }
     @Override
-    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException{
+    public Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm) throws InvalidDataResultSetException{
                      
         if (pm.getParams().containsKey(PropertiesManager.TARGET_VALUES)){
             JSONResultSet targetResultSet = new JSONResultSet((String)pm.getParams().get(PropertiesManager.TARGET_VALUES));

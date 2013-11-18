@@ -566,10 +566,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         // finish set options
         
         //TODO reuse XDashFusionChartComp and replace logic bellow. 
-        var url = webAppPath + '/content/fusion/renderChartExternalData';
+        var url = webAppPath + '/content/fusion';
         // get the xml chart
         var resultXml = $.ajax({type: 'post', 
-                                url: url, 
+                                url: url+'/renderChartExternalData', 
                                 data: {json: JSON.stringify(options)},
                                 async: false}).responseText;
         //render the chart
