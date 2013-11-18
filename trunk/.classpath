@@ -2,8 +2,37 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bproject_loc%7D%2Fivysettings.xml&amp;loadSettingsOnDemand=false&amp;propertyFiles=%24%7Bproject_loc%7D%2Fbuild.properties"/>
-	<classpathentry kind="lib" path="dev-lib/cda-TRUNK-05_05_2012.jar"/>
-	<classpathentry kind="lib" path="dev-lib/robochef-0.9.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-versionchecker-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-versionchecker-2.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="dev-lib/jackson-core-asl-1.8.2.jar"/>
+	<classpathentry kind="lib" path="dev-lib/jackson-mapper-asl-1.8.2.jar"/>
+	<classpathentry kind="lib" path="dev-lib/jsr311-api-1.1-ea.jar"/>
+	<classpathentry kind="lib" path="dev-lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="dev-lib/robochef-0.9.5.jar"/>
+	<classpathentry kind="lib" path="dev-lib/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="dev-lib/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="lib/json-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/libbase-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/libbase-1.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-connections-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-connections-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-api-4.8.0-stable.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-api-4.8.0-stable-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-engine-core-4.8.0-stable.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-engine-core-4.8.0-stable-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-engine-services-4.8.0-stable.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-bi-platform-engine-services-4.8.0-stable-sources.jar"/>
+	<classpathentry kind="lib" path="dev-lib/cda-core-TRUNK-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="dev-lib/cda-pentaho-TRUNK-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

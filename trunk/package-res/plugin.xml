@@ -52,5 +52,16 @@
 	<menu-items>
 		<menu-item id="xFusion_refresh" anchor="tools-refresh-submenu" label="xFusion Cache" command="content/fusion/clearCache" type="MENU_ITEM" how="LAST_CHILD"/>
 	</menu-items>
+	
+	
+	<!-- Pentaho 5.0 version menu -->
+	    <overlays>
+		<overlay id="startup.fusion" resourcebundle="api/repos/data-access/resources/messages/messages.properties">
+	      	<menubar id="toolsmenu">
+				<menubarseparator id="openSeparator" insertafter="cdaCacheManager"/>
+	        	<menuitem id="fusionClearCache" label="Xfusion Clear Cache" command="mantleXulHandler.openUrl('Xfusion Clear Cache','Xfusion Clear Cache','plugin/fusion/api/clearCache')"/>
+	      	</menubar>
+	    </overlay>	
+  	</overlays>
 
 </plugin>

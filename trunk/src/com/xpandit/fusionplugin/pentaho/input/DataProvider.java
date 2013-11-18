@@ -53,10 +53,10 @@ public abstract class DataProvider {
      * @return
      * @throws InvalidDataResultSetException
      */
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm) throws InvalidDataResultSetException;
 
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm, IPentahoSession userSession) throws InvalidDataResultSetException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm) throws InvalidDataResultSetException;
 
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm) throws InvalidDataResultSetException;
         
 }

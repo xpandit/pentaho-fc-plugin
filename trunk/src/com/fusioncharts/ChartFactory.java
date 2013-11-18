@@ -433,7 +433,7 @@ public class ChartFactory extends Object {
 	protected void attachColorRange(XmlWriter xmlwriter, FusionGraph graph) throws WritingException{
 		// range values
 		//
-		// Os valores dos ranges podem ser obtidos através da seguinte linha :
+		// Os valores dos ranges podem ser obtidos atravï¿½s da seguinte linha :
 		// 
 		// ArrayList<String> rangeValues = graph.getDialRangeValues();
 		//
@@ -487,7 +487,7 @@ public class ChartFactory extends Object {
 		String result = value;
 		if (result != null)
 		{
-			result = result.replaceAll("\\+", "%2B");
+			//result = result.replaceAll("\\+", "%2B");
 			result = result.replaceAll("\\\\n", "%0A");
 			result = result.replaceAll("\\\\r", "%0D");
 		}

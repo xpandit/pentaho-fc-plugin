@@ -9,9 +9,12 @@ package com.xpandit.fusionplugin.pentaho.input;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +70,39 @@ public class ParameterParser {
 
     }
 
-    /**
+    public ParameterParser(HttpServletRequest requestParams) throws InvalidParameterException 
+    {
+        parameters = new TreeMap<String, Object>();
+    	
+    	 @SuppressWarnings("unchecked")
+         Enumeration<String> parameterNames = requestParams.getParameterNames();
+         try {
+             for (Enumeration<String> parameterIterator = parameterNames; parameterIterator.hasMoreElements();) {
+                 String parameterKey = (String) parameterIterator.nextElement();
+                 // TODO Remove!!!
+                 // String parameterValue=requestParams.getParameter(parameterKey).toString();
+
+                 
+                 //process all the elements for a parameter
+                 String[] parameterArray= requestParams.getParameterValues(parameterKey);
+                 
+                 for(int i=0;i<parameterArray.length;++i) 
+                 {
+                     parameterArray[i]=URLDecoder.decode(parameterArray[i].replaceAll("\\+", "%2B"), ENCODING); 
+                 }
+                 
+                 //if only one element set as a string
+                 if(parameterArray.length==1)
+                     parameters.put(parameterKey.trim(), parameterArray[0]);
+                 else
+                     parameters.put(parameterKey.trim(), parameterArray);
+             }
+         } catch (UnsupportedEncodingException ex) {
+             throw new InvalidParameterException("Unsupported Encoding Exception");
+         }
+	}
+
+	/**
      * Go through all the url request parameters and add them to property manager
      * @param requestParams Parameters obtained.
      * @throws InvalidParameterException When an unsuported encoding is found.
@@ -85,9 +120,9 @@ public class ParameterParser {
                 //process all the elements for a parameter
                 String[] parameterArray= requestParams.getStringArrayParameter(parameterKey, null);
                 
-                for(int i=0;i<parameterArray.length;++i)
+                for(int i=0;i<parameterArray.length;++i) 
                 {
-                    parameterArray[i]=URLDecoder.decode(parameterArray[i], ENCODING); 
+                    parameterArray[i]=URLDecoder.decode(parameterArray[i].replaceAll("\\+", "%2B"), ENCODING); 
                 }
                 
                 //if only one element set as a string
