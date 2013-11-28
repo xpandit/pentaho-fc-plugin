@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
-import org.pentaho.platform.api.engine.IPentahoSession;
 
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
