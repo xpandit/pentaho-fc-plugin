@@ -1,0 +1,545 @@
+{
+ "layout": {
+  "title": "CDF - Sample structure",
+  "rows": [
+   {
+    "id": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "ChartLine",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "932f6bd7-30f9-6232-9939-31982f2b3987",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "63956c44-5276-c50d-9beb-c276fe0fe913",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "932f6bd7-30f9-6232-9939-31982f2b3987",
+    "properties": [
+     {
+      "name": "name",
+      "value": "BarChart",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<span id=\"chart1\"></span> ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "bffd0d4b-a0e4-dff6-3bb3-8874ac4f5c10",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "880faa29-a858-e6f5-e4c7-66fbdd9ac2b2",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "bffd0d4b-a0e4-dff6-3bb3-8874ac4f5c10",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     }
+    ]
+   },
+   {
+    "id": "43e9bed2-6c11-b6ad-c505-8303128d351e",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "880faa29-a858-e6f5-e4c7-66fbdd9ac2b2",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Column2D",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<span id=\"chart2\"></span> ",
+      "type": "Html"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ]
+ },
+ "components": {
+  "rows": [
+   {
+    "id": "CHARTS",
+    "name": "Charts",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Charts",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "a0455421-e25a-94a5-b0f2-563ba179d8fc",
+    "type": "ComponentsXDashFusionChartComponent",
+    "typeDesc": "FusionCharts Component",
+    "meta_cdwSupport": "true",
+    "parent": "CHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "BarChart",
+      "type": "Id"
+     },
+     {
+      "name": "fusionCdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda",
+      "type": "CdaPath"
+     },
+     {
+      "name": "dataAccessId",
+      "value": "2",
+      "type": "String"
+     },
+     {
+      "name": "fusionChartType",
+      "value": "MSColumn2D",
+      "type": "String"
+     },
+     {
+      "name": "chartLink",
+      "value": "JavaScript: alert('{series}','{categories}','{value}')",
+      "type": "String"
+     },
+     {
+      "name": "seriesParam",
+      "value": "series",
+      "type": "String"
+     },
+     {
+      "name": "categoriesParam",
+      "value": "categories",
+      "type": "String"
+     },
+     {
+      "name": "valueParam",
+      "value": "value",
+      "type": "String"
+     },
+     {
+      "name": "width",
+      "value": "500",
+      "type": "Integer"
+     },
+     {
+      "name": "height",
+      "value": "300",
+      "type": "Integer"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "customfunction",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "htmlObject",
+      "value": "chart1",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     }
+    ]
+   },
+   {
+    "id": "edfb20e4-3077-9121-2342-8b19c23c7fd5",
+    "type": "ComponentsXDashFusionChartComponent",
+    "typeDesc": "FusionCharts Component",
+    "meta_cdwSupport": "true",
+    "parent": "CHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Column2D",
+      "type": "Id"
+     },
+     {
+      "name": "fusionCdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
+      "type": "CdaPath"
+     },
+     {
+      "name": "dataAccessId",
+      "value": "2",
+      "type": "String"
+     },
+     {
+      "name": "fusionChartType",
+      "value": "Column3D",
+      "type": "String"
+     },
+     {
+      "name": "chartLink",
+      "value": "JavaScript: alert('{series}','{categories}','{value}')",
+      "type": "String"
+     },
+     {
+      "name": "seriesParam",
+      "value": "series",
+      "type": "String"
+     },
+     {
+      "name": "categoriesParam",
+      "value": "categories",
+      "type": "String"
+     },
+     {
+      "name": "valueParam",
+      "value": "value",
+      "type": "String"
+     },
+     {
+      "name": "width",
+      "value": "500",
+      "type": "Integer"
+     },
+     {
+      "name": "height",
+      "value": "300",
+      "type": "Integer"
+     },
+     {
+      "name": "xActionArrayParameter",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "customfunction",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "htmlObject",
+      "value": "chart2",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     }
+    ]
+   }
+  ]
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE.cdfde"
+}

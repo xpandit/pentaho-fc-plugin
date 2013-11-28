@@ -18,7 +18,9 @@ public class InvalidDataResultSetException extends Exception {
 	 */
 	public static String ERROR_001="INVALID DATA - MetaData Verification Size";
 	public static String ERROR_002="INVALID DATA - JSON Format is incorrect";
-	
+	public static String ERROR_003="INVALID DATA - Empty resultset";
+	public static String ERROR_004="INVALID DATA - CDAQueryComponent failed to return data";
+	       
 	private String extendedMessage;
 
 	public InvalidDataResultSetException(String message,String extended) {

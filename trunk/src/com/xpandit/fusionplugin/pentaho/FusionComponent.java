@@ -21,30 +21,22 @@ import com.xpandit.fusionplugin.FCItem;
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
-import com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator;
 import com.xpandit.fusionplugin.pentaho.content.FusionDataStream;
 import com.xpandit.fusionplugin.pentaho.input.CDADataProvider;
 import com.xpandit.fusionplugin.pentaho.input.JSONDataProvider;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
 
-
 /**
  * Class that implements the FusionCharts plugin component.
- *
+ * 
  * @author rplp
  * @since 1.0
  * @version $Revision: 7787 $
- *
+ * 
  */
 public class FusionComponent {
-    
-    private static final String CDAID = "cdaDataAccessId";
-    private static final String ISDASHBOARDMODE = "dashboard-mode";
-    private static final String CHARTXML = "chartXML";
-    private static final String PATHMODE = "pathMode";
-	
-	
-	// TODO is being used on different methods should be placed inside a method on the next refactoring.
+
+    // TODO is being used on different methods should be placed inside a method on the next refactoring.
     CdaQueryComponent cdaQueryComponent = null;
 
     // Request parser
@@ -53,33 +45,26 @@ public class FusionComponent {
     // Properties Manager
     PropertiesManager pm = null;
 
-    // pathMode for obtaining repository objects
-    String pathMode;
-	
-
-	
-    
-
-
+    /**
+     * FusionComponent constructor
+     * 
+     * @param parameterParser Manages parameters used on execution
+     * @throws InvalidParameterException
+     */
     public FusionComponent(ParameterParser parameterParser) throws InvalidParameterException {
-    	this.parameterParser=parameterParser;
-        pathMode = (String)parameterParser.getParameters(PATHMODE);
-        pm = new PropertiesManager(parameterParser.getParameters(), pathMode);
-	}
+        this.parameterParser = parameterParser;
+        pm = new PropertiesManager(parameterParser.getParameters());
+    }
 
-
-
-	public Log getLogger() {
+    public Log getLogger() {
         return LogFactory.getLog(FusionComponent.class);
     }
-    
-    
-	
-	/**
+
+    /**
      * 
      * Retrieves the data and renders the chart
      * 
-     * @param out Stream output where to write the chart data and settings 
+     * @param out Stream output where to write the chart data and settings
      * @throws UnsupportedEncodingException
      * @throws Exception
      * @throws InvalidParameterException
@@ -87,37 +72,37 @@ public class FusionComponent {
      * @throws IOException
      */
     public void renderChartGetData(OutputStream out) throws UnsupportedEncodingException, Exception,
-    InvalidParameterException, InvalidDataResultSetException, IOException {
+            InvalidParameterException, InvalidDataResultSetException, IOException {
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
-        renderChart(out,resultSets);
+        renderChart(out, resultSets);
     }
-
 
     /**
      * 
      * Retrieves the chart
      * 
-     * @param out Stream output where to write the chart data and settings 
+     * @param out Stream output where to write the chart data and settings
      * @throws UnsupportedEncodingException
      * @throws Exception
      * @throws InvalidParameterException
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    private void renderChart(OutputStream out, Map<String, ArrayList<IPentahoResultSet>> resultSets) throws UnsupportedEncodingException, Exception,
-    InvalidParameterException, InvalidDataResultSetException, IOException {
+    private void renderChart(OutputStream out, Map<String, ArrayList<IPentahoResultSet>> resultSets)
+            throws UnsupportedEncodingException, Exception, InvalidParameterException, InvalidDataResultSetException,
+            IOException {
 
         // create the chart
-        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);//resultSets.get("results"));
+        FCItem fcItem = FCFactory.getFusionComponent(pm, resultSets);// resultSets.get("results"));
 
         // render the chart
         TreeMap<String, Object> params = pm.getParams();
-        if (params.containsKey(CHARTXML) && Boolean.parseBoolean((String)params.get(CHARTXML))) {
+        if (params.containsKey(PropertiesManager.CHARTXML) && Boolean.parseBoolean((String) params.get(PropertiesManager.CHARTXML))) {
             // Generate the chart XML
             out.write(fcItem.generateXML().getBytes());
-        } else if (params.containsKey(ISDASHBOARDMODE) && !Boolean.parseBoolean((String)params.get(ISDASHBOARDMODE))) {
+        } else if (params.containsKey(PropertiesManager.ISDASHBOARDMODE) && !Boolean.parseBoolean((String) params.get(PropertiesManager.ISDASHBOARDMODE))) {
             // Generate the chart as a full HTML page
             out.write(fcItem.generateHTML().getBytes());
         } else {
@@ -125,7 +110,6 @@ public class FusionComponent {
             out.write(fcItem.generateXML().getBytes());
         }
     }
-
 
     /**
      * 
@@ -138,19 +122,16 @@ public class FusionComponent {
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    public void dataStream(OutputStream out) throws UnsupportedEncodingException, Exception,
-    InvalidParameterException, InvalidDataResultSetException, IOException {
-  
+    public void dataStream(OutputStream out) throws UnsupportedEncodingException, Exception, InvalidParameterException,
+            InvalidDataResultSetException, IOException {
+
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
-        //generate the output
-        if(pm.getParams().get("chartType").equals(ChartType.ANGULARGAUGE.toString())){
-
-            FusionDataStream.dataStreamAngular(out, resultSets,pm);
-        }
-        else
-        {
-            FusionDataStream.dataStream(out, resultSets,pm);
+        // generate the output
+        if (pm.getParams().get("chartType").equals(ChartType.ANGULARGAUGE.toString())) {
+            FusionDataStream.dataStreamAngular(out, resultSets, pm);
+        } else {
+            FusionDataStream.dataStream(out, resultSets, pm);
         }
 
     }
@@ -161,39 +142,33 @@ public class FusionComponent {
      * @throws Exception
      */
     private Map<String, ArrayList<IPentahoResultSet>> getData() throws InvalidParameterException, Exception {
-        if(pathMode==null)
-            pathMode="legacy";  
-
         Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
 
-        //retrieve the data from the correct data source
-        CDADataProvider dpCDA= new CDADataProvider();
+        // retrieve the data from the correct data source
+        CDADataProvider dpCDA = new CDADataProvider();
         JSONDataProvider dpJSON = new JSONDataProvider();
-         
-        if(pm.getParams().get(CDAID) != null)
-        {
+
+        if (pm.getParams().get(PropertiesManager.CDAID) != null) {
             resultSets = dpCDA.getResultSet(pm);
-        }
-        else
-        {
+        } else if (pm.getParams().get(PropertiesManager.KEY_DATA) != null) {
             resultSets = dpJSON.getResultSet(pm);
+        } else {
+            throw new InvalidParameterException("Parameters missing, either "+PropertiesManager.CDAID+" or "+PropertiesManager.KEY_DATA+" must be defined.");
         }
 
-        //abort if no data is found
-        if (resultSets == null)
-        {
+        // abort if no data is found
+        if (resultSets == null) {
             getLogger().error("Error : resultset is null -> see previous error");
             return null;
         }
-        
+
         resultSets.putAll(dpJSON.getResultSetsRange(pm));
         resultSets.putAll(dpJSON.getResultSetsTarget(pm));
-      
 
         return resultSets;
     }
 
-     /**
+    /**
      * 
      * Call CDA clear cache. This is necessary due to the fact that a CDA instance is running on the FCplugin.
      * 
@@ -202,5 +177,5 @@ public class FusionComponent {
         SettingsManager.getInstance().clearCache();
         AbstractDataAccess.clearCache();
     }
-	
+
 }

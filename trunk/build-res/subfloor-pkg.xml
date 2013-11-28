@@ -132,16 +132,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <target name="samples-zip">
   	<zip destfile="${dist.dir}/fusion_samples-${project.revision}.zip">
-		<zipfileset dir=".">
-			<include name="${dir.samples}/**"/>
+		<zipfileset dir="${dir.samples}/plugin-samples/">
+			<include name="**"/>
 		</zipfileset>
 	</zip>
   </target>
   
   <target name="samples-targz">
     <tar destfile="${dist.dir}/fusion_samples-${project.revision}.tar.gz" longfile="gnu" compression="gzip">
-      <tarfileset dir="." mode="755">
-      	<include name="${dir.samples}/**"/>
+      <tarfileset dir="${dir.samples}/plugin-samples/" mode="755">
+      	<include name="**"/>
       </tarfileset>
     </tar>
   </target>	

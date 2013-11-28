@@ -412,9 +412,9 @@ abstract public class FCItem {
 
 		String output = "<html><head>" + "  <title>Example Graph</title>  " + " <SCRIPT LANGUAGE='Javascript' SRC='"
 		+ PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()
-		+ "content/fusion/JSClass/FusionCharts.js'></SCRIPT>" + "<script type='text/javascript' src='"
+		+ "content/xfusion/JSClass/FusionCharts.js'></SCRIPT>" + "<script type='text/javascript' src='"
 		+ PentahoSystem.getApplicationContext().getFullyQualifiedServerURL()
-		+ "content/fusion/js/standaloneChartRender.js'></script></head>" + "<script type='text/javascript'>"
+		+ "content/xfusion/js/standaloneChartRender.js'></script></head>" + "<script type='text/javascript'>"
 		+ "var chartData=" + "     {" + "xmlData:'" + generateChart() + "'," + "chartType:'" + chartType + "',"
 		+ "width:" + getWidth() + "," + "height:" + getHeight() + "," + "WMode:'" + getWMode() + "'" + "     }"
 		+ "</script>" + "<body onload=\"renderChart()\">" + "<div id='chartPlaceHolder'></div>"
@@ -432,7 +432,7 @@ abstract public class FCItem {
 	        StringBuffer stringBuffer= new StringBuffer();
 	        TreeMap<String, Object> instanceParams =pm.getInstanceParameters();
 
-	        stringBuffer.append(pm.getParams().get("webAppPath")+"/content/fusion/dataStream?");
+	        stringBuffer.append(pm.getParams().get("webAppPath")+"/content/xfusion/dataStream?");
 
 	        String lastKey=instanceParams.lastKey();
 

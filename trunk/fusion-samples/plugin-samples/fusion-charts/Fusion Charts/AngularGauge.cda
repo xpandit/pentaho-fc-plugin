@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Value for KPI</Name>
+        <Query>
+import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+String[] columnNames = new String[1];
+columnNames[0] = &quot;Value&quot;;
+
+Class[] columnTypes = new Class[1];
+columnTypes[0] = Integer.class;
+ 
+TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+model.addRow(new Object[]{new Integer(80)});
+return model;
+        </Query>
+    </DataAccess>
+	
+ <DataAccess id="2" connection="1" type="scriptable" access="public">
+		<Name>Range values</Name>
+        <Query>
+import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+String[] columnNames = new String[4];
+columnNames[0] = &quot;low&quot;;
+columnNames[1] = &quot;middle&quot;;
+columnNames[2] = &quot;high&quot;;
+columnNames[3] = &quot;high&quot;;
+
+
+Class[] columnTypes = new Class[4];
+columnTypes[0] = Integer.class;
+columnTypes[1] = Integer.class;
+columnTypes[2] = Integer.class;
+columnTypes[3] = Integer.class;
+
+ 
+TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+model.addRow(new Object[]{new Integer(0), new Integer(80),new Integer(80),new Integer(100)});
+return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>
