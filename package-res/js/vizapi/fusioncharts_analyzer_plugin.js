@@ -128,7 +128,7 @@ analyzerPlugins.push(
                 */ 
                cv.pentahoVisualizationHelpers[value.id] = {  
                  placeholderImageSrc: CONTEXT_PATH 
-                                      + 'content/fusion/res/background_logo.jpg', 
+                                      + 'content/xfusion/res/background_logo.jpg', 
 
                  /**
                   * This method is used to set visualization options based on the Analyzer 

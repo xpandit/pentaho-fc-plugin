@@ -15,13 +15,13 @@ var xLoadFunct= function(){
 			//need in realtimecharts
 			options.webAppPath=webAppPath;
 
-			var url = webAppPath + '/content/fusion';
+			var url = webAppPath + '/content/xfusion';
 			var myself = this;
 
 			// get the xml chart
 			var resultXml = $.ajax({url: url, data: options, async: false}).responseText;
 			myself.xmlResultData = resultXml;
-
+			
 			// get chart type from xml
 			options.chartType = $(resultXml).attr("chartType");
 			
@@ -90,11 +90,15 @@ var xLoadFunct= function(){
 
 		getOptions: function(){
 
-			var options = {
-					solution : this.solution,
-					path: this.path,
-					name: this.action
-			};
+			var options = {};
+			
+			if(typeof this.action !== 'undefined'){
+			    options.solution = this.solution;
+			    options.path = this.path;
+			    options.name = this.action;
+			} else if(typeof this.xFusionPath !== "undefined"){
+			    options.xFusionPath = this.xFusionPath;
+			}
 
 			// process parameters and build the cdaParameters string
 			if(typeof this.parameters !== "undefined") {
@@ -145,7 +149,7 @@ var xLoadFunct= function(){
 
 			// default options
 			options["chartXML"] = true;
-			options["dashboard-mode"] = false;
+			options["dashboard-mode"] = true;
 			
 						
 			//transform the array of range values into a JSON object  
@@ -200,7 +204,7 @@ var xLoadFunct= function(){
 		//check platform version
 		if(XDashFusionChartComponent.pentahoVersion==undefined)
 		{
-			var url = webAppPath + '/content/fusion/checkVersions';
+			var url = webAppPath + '/content/xfusion/checkVersions';
 			var myself=this;
 			// get the xml chart
 			var result=$.ajax({url: url, async: false}).responseText;
@@ -231,7 +235,7 @@ var xLoadFunct= function(){
 
 	var fileref=document.createElement('script');
 	fileref.setAttribute("type","text/javascript");
-	fileref.setAttribute("src", webAppPath+'/content/fusion/JSClass/FusionCharts.js');
+	fileref.setAttribute("src", webAppPath+'/content/xfusion/JSClass/FusionCharts.js');
 	if (typeof fileref!="undefined") document.getElementsByTagName("head")[0].appendChild(fileref);
 
 	if(typeof(PentahoDashboardController) != "undefined")

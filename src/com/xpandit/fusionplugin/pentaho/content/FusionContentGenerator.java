@@ -22,9 +22,8 @@ import com.xpandit.fusionplugin.util.VersionChecker;
  */
 public class FusionContentGenerator extends SimpleContentGenerator {
     private static final long serialVersionUID = 997953797244958291L;
-    
-    private static final String MIMETYPE = "text/html";
 
+    private static final String MIMETYPE = "text/html";
 
     // TODO is being used on different methods should be placed inside a method on the next refactoring.
     CdaQueryComponent cdaQueryComponent = null;
@@ -35,13 +34,10 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     // Properties Manager
     PropertiesManager pm = null;
 
-    // pathMode for obtaining repository objects
-    String pathMode;
-
     public String getMimeType() {
         return MIMETYPE;
     }
-    
+
     @Override
     public Log getLogger() {
         return LogFactory.getLog(FusionContentGenerator.class);
@@ -52,27 +48,25 @@ public class FusionContentGenerator extends SimpleContentGenerator {
      */
     public void createContent(OutputStream out) throws Exception {
 
-        //TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
+        // TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
         parameterParser = new ParameterParser(parameterProviders);
-     
 
         // Identify operation based on URL call
         String method = parameterParser.extractMethod();
 
-       FusionComponent fc=new FusionComponent(parameterParser);
-       
+        FusionComponent fc = new FusionComponent(parameterParser);
+
         if (method == null) { // Generate chart
-        	fc.renderChartGetData(out);
+            fc.renderChartGetData(out);
         } else if ("clearCache".equals(method)) { // clear component cache
-        	fc.clearCache();
+            fc.clearCache();
         } else if ("dataStream".equals(method)) { // called by real time charts to update data
-        	fc.dataStream(out);
+            fc.dataStream(out);
         } else if ("checkVersions".equals(method)) { // check the Pentaho version
             VersionChecker.getVersions(out);
         } else if ("renderChartExternalData".equals(method)) { // render chart using external data
-        	fc.renderChartGetData(out);
+            fc.renderChartGetData(out);
         }
     }
-
 
 }

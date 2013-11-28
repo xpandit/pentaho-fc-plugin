@@ -31,7 +31,7 @@ public class JSONDataProvider extends DataProvider{
     @Override
     public Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm) throws InvalidDataResultSetException{
              
-        String data = pm.getPropData();
+        String data = (String) pm.getParams().get(PropertiesManager.KEY_DATA);
 
         JSONResultSet resultSet = new JSONResultSet(data); 
                 
