@@ -5,7 +5,57 @@
 = Tutorial = 
 [http://www.youtube.com/watch?v=VPSaPm5-rgs Video with tutorial]
 
-= Installation =
+= Installation - Since Pentaho 5.0 =
+|| Only available since version 2.2 of the plugin. ||
+
+ # Stop Pentaho Server 
+ # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
+ # Change the file _system/importExport.xml_ to allow xFusion files. The requires adding xfusion in 3 places:
+{{{ 
+<util:map id="convertersMap"> 
+   ... 
+   <entry key="xfusion" value-ref="streamConverter"/> 
+</util:map>
+
+<bean id="NameBaseMimeResolver" class="org.pentaho.platform.plugin.services.importer.NameBaseMimeResolver"> 
+   <constructor-arg>
+      <map> 
+          ... 
+          <entry key="xfusion" value="text/plain"/>
+      </map>
+   </constructor-arg>
+</bean>
+
+<util:list id="approvedExtensionList">
+   ...
+   <value>.xfusion</value>
+</util:list>
+}}}
+ # Start Pentaho Server 
+
+== Installing FusionCharts XT (licensed) ==
+ # Extract the zip files provided by FusionCharts Team
+  # If your are installing a package you need to these steps for every file provided (charts, widgets, maps, ...)
+ # Look for the directory where the _`*`.swf_ files are
+ # Copy the _`*`.swf_ files to the plugin directory _fusioncharts/charts_
+ # Look for the directory JSClass where the _`*`.js_ files are
+ # Copy the directory contents to the plugin directory _fusioncharts/JSClass_
+
+==CDE Components==
+ # Extract the fusion_pentaho-CDE zip file into the _pentaho-solutions/system/pentaho-cdf-dd_ path.
+ # Restart Pentaho Server
+
+== Samples ==
+
+To install the samples on the Pentaho User Console all you need to do is:
+ # Open Pentaho User Console (PUC)
+ # Go to the browse perspective
+ # Inside the public folder create a folder plugin-samples, if it doesn't exist already.
+ # Click on upload and select the fusionsamples zip file.
+ # A folder fusion-charts is created containing all the samples
+
+==== (Deprecated) Installation - Pentaho 4.8 ====
+Only possible until version 2.1 of the plugin.
 
  # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
  # Extract the fusion samples zip file into the _pentaho-solutions/bi-developers_ path.
@@ -15,25 +65,6 @@
  # Restart Pentaho Server 
  # Open the Pentaho User Console (PUC) and refresh the solution repository.
  # Restart Pentaho Server
-
-== Installing FusionCharts XT (licensed) ==
- # Extract the zip files provided by FusionCharts Team
- ## If your are installing a package you need to these steps for every file provided (charts, widgets, maps, ...)
- # Look for the directory where the _`*`.swf_ files are
- # Copy the _`*`.swf_ files to the plugin directory _fusioncharts/charts_
- # Look for the directory JSClass where the _`*`.js_ files are
- # Copy the directory contents to the plugin directory _fusioncharts/JSClass_
-
-===CDE Compentes===
-
- # Extract the fusion_pentaho-CDE zip file into the _pentaho-solutions/system/pentaho-cdf-dd_ path.
- # Restart Pentaho Server
-
-= Samples =
-
-To test the samples on the Pentaho User Console all you need to do is:
- # Open Pentaho User Console (PUC)
- # Navigate to the folder _pentaho-solutions/bi-developers/fusion-samples_ and double click on the differnt items.
 
 = Usage =
 
