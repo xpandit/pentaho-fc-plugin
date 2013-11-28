@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
-import org.pentaho.platform.api.engine.IPentahoSession;
 
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;

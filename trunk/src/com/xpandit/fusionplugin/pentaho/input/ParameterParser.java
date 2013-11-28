@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.api.repository2.unified.RepositoryFile;
-import org.pentaho.reporting.libraries.base.util.StringUtils;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
@@ -141,10 +140,18 @@ public class ParameterParser {
         IParameterProvider pathParams = parameterProviders.get("path");
         String pathString = pathParams.getStringParameter("path", null);
 
-        if (StringUtils.isEmpty(pathString) || !pathString.contains("/")) {
+        if (pathString == null) {
             return null;
-        } else { //get the string after the last slash
-            return pathString.substring(pathString.lastIndexOf("/")+1, pathString.length());
+        } else if (pathString.contains("clearCache")) {
+            return "clearCache";
+        } else if (pathString.contains("dataStream")) {
+            return "dataStream";
+        } else if (pathString.contains("checkVersions")) {
+            return "checkVersions";
+        } else if (pathString.contains("renderChartExternalData")) {
+            return "renderChartExternalData";
+        } else {
+            return null;
         }
     }
 

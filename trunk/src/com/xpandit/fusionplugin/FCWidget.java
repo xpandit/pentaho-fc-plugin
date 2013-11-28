@@ -10,7 +10,6 @@ import com.fusioncharts.ChartFactoryWidget;
 import com.fusioncharts.ChartType;
 import com.fusioncharts.Dial;
 import com.fusioncharts.FusionGraph;
-import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
 
 /**
@@ -140,7 +139,7 @@ public class FCWidget extends FCItem {
     private void setChartLinkAngular(Dial d, int index,String chartLink) {
 
         String seriesParam = graph.getChartProperties().get("seriesParam");
-        String categoriesParam = graph.getChartProperties().get("categoriesParam");
+        //String categoriesParam = graph.getChartProperties().get("categoriesParam");
         String valueParam = graph.getChartProperties().get("valueParam");
         
         String angularChartLink=chartLink;
