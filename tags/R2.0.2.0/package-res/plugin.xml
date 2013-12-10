@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin title="fusion">
+  
+ <lifecycle-listener class="com.xpandit.fusionplugin.pentaho.FcLifecycleListener"/>
+     
+  <content-type type="xfusion" mime-type="text/html">
+    <title>Fusion Config</title>
+    <description>Fusion Config File</description>
+    <icon-url>content/fusion/res/icon.jpg</icon-url>
+    <meta-provider>com.xpandit.fusionplugin.pentaho.content.FusionContentTypeMetaProvider</meta-provider> 
+    <operations>
+      <operation>
+        <id>RUN</id>
+        <command>content/fusion?solution={solution}&amp;path={path}&amp;name={name}&amp;dashboard-mode=false&amp;pathMode=legacy</command>
+      </operation>
+    </operations>
+  </content-type>
+  
+  
+  <external-resources>
+  	<!-- Integration with EE Dashboards-->
+    <file context="dashboards">content/fusion/js/XDashFusionChartComponent.js</file>
+    <!-- Integration with Analyzer -->
+  	<file context="analyzer">content/fusion/js/vizapi/fusioncharts_wrapper.js</file>    
+    <file context="analyzer">content/fusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
+    <!-- Required dependencies -->
+    <file context="analyzer">content/fusion/js/vizapi/chart_settings.js</file>
+    <file context="analyzer">content/fusion/JSClass/FusionCharts.js</file>
+   <!-- <file context="analyzer">content/fusion/js/XDashFusionChartComponent.js</file> --> 
+    
+  </external-resources>
+  
+    <content-generator
+    	id="fusion"
+    	title="Fusion Component"
+    	type="xfusion"
+    	class="com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator"/>
+ 
+    <static-paths>
+      <static-path url="/fusion/res" localFolder="resources"/>
+      <static-path url="/fusion/js" localFolder="js"/>
+      <static-path url="/fusion/JSClass" localFolder="fusioncharts/JSClass"/>
+      <static-path url="/fusion/swf" localFolder="fusioncharts/charts"/>
+      <static-path url="/fusion/widgets" localFolder="widgets"/>
+    </static-paths>  
+    
+    <!-- Activate when the class is properly implemented 
+    	<bean id="fusionComponent" class="com.xpandit.fusionplugin.pentaho.FusionComponent"/>
+    -->
+	
+	<menu-items>
+		<menu-item id="xFusion_refresh" anchor="tools-refresh-submenu" label="xFusion Cache" command="content/fusion/clearCache" type="MENU_ITEM" how="LAST_CHILD"/>
+	</menu-items>
+
+</plugin>
