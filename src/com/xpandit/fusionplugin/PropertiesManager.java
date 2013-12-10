@@ -1,22 +1,23 @@
 package com.xpandit.fusionplugin;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
-import org.pentaho.platform.api.repository2.unified.IUnifiedRepository;
-import org.pentaho.platform.api.repository2.unified.RepositoryFile;
-import org.pentaho.platform.api.repository2.unified.data.simple.SimpleRepositoryFileData;
+import org.pentaho.platform.api.engine.ISolutionFile;
+import org.pentaho.platform.api.repository.ISolutionRepository;
+import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
- * Class thats manages all chart properties.
+ * Class thats manages all chart properties. 
  * 
- * 3 types of properties are supported:
+ * 3 types of properties are supported: 
  * 
  * Global - From FusionCharts.properties file in plugin folder Local - From any file in any solution folder, the file
  * path and solution are set by Url Params(propFile,propPath and propSolution) Instance - From url params.
@@ -28,26 +29,16 @@ import com.xpandit.fusionplugin.exception.InvalidParameterException;
  */
 public class PropertiesManager {
 
-    // Well known parameter types.
-    public static final String NAME = "name";
-    public static final String SOLUTION = "solution";
-    public static final String PATH = "path";
-    public static final String XFUSIONPATH = "xFusionPath";
-    public static final String KEY_DATA = "data";
+    //Well known parameter types.
+    private static final String NAME = "name";
+    private static final String SOLUTION = "solution";
+    private static final String PATH = "path";
+    private static final String XFUSIONPATH = "xFusionPath";
+    private static final String KEY_DATA = "data";
 
-    // CDA Parameters
-    public static final String CDANAME = "cdaName";
-    public static final String CDAPATH = "cdaPath";
-    public static final String CDASOLUTION = "cdaSolution";
-    public static final String CDAID = "cdaDataAccessId";
-
-    // Types of result sets
+    //Types of result sets
     public static final String TARGET_VALUES = "target";
     public static final String RANGE_VALUES = "range";
-
-    // Other
-    public static final String ISDASHBOARDMODE = "dashboard-mode";
-    public static final String CHARTXML = "chartXML";
 
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
 
@@ -57,8 +48,17 @@ public class PropertiesManager {
     // Properties obtained from the instance.
     private TreeMap<String, Object> instanceProperties = null;
 
+    // name of properties file
+    private String propFile = "";
+
+    // path of properties file
+    private String propPath;
+
+    // Solution name of properties file
+    private String propSolution;
+
     // Single property for non-legacy mode
-    private String xFusionFile = null;
+    private String xFusionFile = "";
 
     /**
      * 
@@ -71,51 +71,107 @@ public class PropertiesManager {
      * @param encoding Encoding of URL params
      * @throws InvalidParameterException
      */
-    public PropertiesManager(TreeMap<String, Object> instanceProperties) throws InvalidParameterException {
-        // used to handle legacy mode of referencing files
-        if (instanceProperties.get(XFUSIONPATH) != null && (String) instanceProperties.get(XFUSIONPATH) != "")
-            this.xFusionFile = (String) instanceProperties.get(XFUSIONPATH);
-        else if (instanceProperties.get(NAME) != null || instanceProperties.get(PATH) != null) {
-            String filePath = (String) instanceProperties.get(SOLUTION) + "/" + (String) instanceProperties.get(PATH)
-                    + "/" + (String) instanceProperties.get(NAME);
-            // if any of the fields is empty we don't want double / on the path
-            this.xFusionFile = filePath.replace("//", "/");
-        }
+    public PropertiesManager(TreeMap<String, Object> instanceProperties, String pathMode)
+            throws InvalidParameterException {
+        this.propFile =(String) instanceProperties.get(NAME);
+        this.propPath =(String) instanceProperties.get(PATH);
+        this.propSolution =(String) instanceProperties.get(SOLUTION);
+        this.xFusionFile =(String) instanceProperties.get(XFUSIONPATH);
         this.instanceProperties = instanceProperties;
         this.localProperties = new TreeMap<String, Object>();
 
-        // check if xFusion is being used
-        if (this.xFusionFile == null) {
-            log.debug("No xFusion file is configured");
-            return;
+        if (pathMode != null && pathMode.equals("legacy")) {
+            fillLocalParametersWithActionInfo();
         } else {
             fillLocalParameters();
         }
     }
 
     /**
-     * fill all instance parameters based on xfusion solution file
+     * fill all instance parameters based on solution file with an ActionInfo object
+     * 
+     * @throws InvalidParameterException
+     */
+    private void fillLocalParametersWithActionInfo() throws InvalidParameterException {
+        // get file 
+        final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
+        final ISolutionFile file = repository.getSolutionFile(
+                new ActionInfo(propSolution, propPath, propFile).toString(), ISolutionRepository.ACTION_EXECUTE);
+
+        if(propSolution==null)
+            propSolution="<null>";
+        if(propPath==null)
+            propPath="<null>";
+        if(propFile==null)
+            propFile="<null>";
+
+        // if is no file and propFile is set log a warning
+        if (file == null){
+            if((!propSolution.equals("<null>"))||(!propPath.equals("<null>"))||(!propFile.equals("<null>"))) {
+                log.warn(InvalidParameterException.ERROR_005 + ":" + "No solution file found to set properties:"
+                        + "propSolution->" + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile);
+
+            }
+        }
+        else
+        {
+
+            // load properties
+            Properties properties = new Properties();
+            try {
+                properties.load(new ByteArrayInputStream(file.getData()));
+            } catch (IOException e) {
+                log.warn(InvalidParameterException.ERROR_005
+                        + ": Unable to Load properties file. Continue without properties file:" + "propSolution->"
+                        + propSolution + ";propPath-->" + propPath + ";propFile-->" + propFile, e);
+                return;
+            }
+
+
+            // fill properties
+            for (Object key : properties.keySet()) {
+                String stringKey = (String) key;
+                localProperties.put(stringKey.trim(), properties.getProperty(stringKey).trim());
+            }
+        }
+    }
+
+    /**
+     * fill all instance parameters based on solution file
      * 
      * @throws InvalidParameterException
      */
     private void fillLocalParameters() throws InvalidParameterException {
+        if(this.xFusionFile == null) {
+            return;
+        }
 
         // get file
-        final IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class, null);
-        final RepositoryFile file = repository.getFile(xFusionFile);
+        final ISolutionRepository repository = PentahoSystem.get(ISolutionRepository.class, null);
+        final ISolutionFile file = repository.getSolutionFile(xFusionFile, ISolutionRepository.ACTION_EXECUTE);
 
         // if is no file and propFile is set log a warning
-        if (file == null) {
-            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                    + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
+        if (file != null) {
+            if (file.getData() == null) {
+                if (!xFusionFile.equals(""))
+                    throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+                            + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
+                return;
+            }
+        } else {
+            if (!xFusionFile.equals(""))
+                throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+                        + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
         }
 
         // load properties
         Properties properties = new Properties();
         try {
-            properties.load(repository.getDataForRead(file.getId(), SimpleRepositoryFileData.class).getInputStream());
+            properties.load(new ByteArrayInputStream(file.getData()));
         } catch (IOException e) {
-            throw new InvalidParameterException("Unable to Load properties file: "+ xFusionFile);
+            log.error("Unable to Load properties file. Continue without properties file:" + "xFusionFile->"
+                    + xFusionFile, e);
+            return;
         }
 
         // fill properties
@@ -131,8 +187,6 @@ public class PropertiesManager {
      * @return Map with all parameters joined by order
      */
     public TreeMap<String, Object> getParams() {
-        // TODO place as object property so that it doesn't have to be calculated on every call, requires evaluating
-        // possible side imapct.
         TreeMap<String, Object> params = new TreeMap<String, Object>();
 
         // put all properties by order all properties are replaced
@@ -140,30 +194,37 @@ public class PropertiesManager {
         params.putAll(localProperties);
         params.putAll(instanceProperties);
 
-        // used for legacy mode of referencing files
-        // TODO do we need to handle cda file was specified and it is on the same directory as xfusion?
-        if (params.get(CDASOLUTION) != null) {
-            String solution = (String) params.get(CDASOLUTION);
-            String path = (String) params.get(CDAPATH);
-            String name = (String) params.get(CDANAME);
-
-            if (path != null && path != "")
-                params.put(CDAPATH, "/" + solution + "/" + path + "/" + name);
-            else
-                params.put(CDAPATH, "/" + solution + "/" + name);
-        //CDA name can be set alone if an xfusion file is defined. Same directory is used for both.    
-        } else if (params.get(CDANAME) != null && xFusionFile != null) {
-            params.put(CDAPATH,xFusionFile.substring(0,xFusionFile.lastIndexOf("/")+1) + (String) params.get(CDANAME));
-        }
-
-        // the default for dashboard mode is false because this used to be the default behavior when opening an xfusion
-        // TODO replace this default by having multiple entry points with method annotations and thus set dashboard mode
-        // only when an xfusion is opened.
-        if (params.get(ISDASHBOARDMODE) == null) {
-            params.put(ISDASHBOARDMODE, "false");
-        }
-
         return params;
+    }
+
+    /**
+     * 
+     * returns the Solution of the xFusion properties file
+     * 
+     * @return
+     */
+    public String getPropSolution() {
+        return this.propSolution;
+    }
+
+    /**
+     * 
+     * returns the path of the xFusion properties file
+     * 
+     * @return
+     */
+    public String getPropPath() {
+        return this.propPath;
+    }
+
+    /**
+     * 
+     * returns the data property
+     * 
+     * @return
+     */
+    public String getPropData() {
+        return (String)getParams().get(KEY_DATA);
     }
 
     /**

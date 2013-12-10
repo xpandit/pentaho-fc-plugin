@@ -5,8 +5,9 @@
             <Jndi>SampleData</Jndi>
         </Connection>
         <Connection id="2" type="mondrian.jndi">
-			<Catalog>mondrian:/SteelWheels</Catalog>
-         	<Jndi>SampleData</Jndi>
+            <Jndi>SampleData</Jndi>
+            <Catalog>./steelwheels.mondrian.xml</Catalog>
+			<Cube>SteelWheelsSales</Cube>
         </Connection>
     </DataSources>
 

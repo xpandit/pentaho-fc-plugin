@@ -322,7 +322,7 @@
      },
      {
       "name": "fusionCdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda",
+      "value": "/bi-developers/fusion-charts/Fusion Charts Free/BarChart2D.cda",
       "type": "CdaPath"
      },
      {
@@ -436,7 +436,7 @@
      },
      {
       "name": "fusionCdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
+      "value": "/bi-developers/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
       "type": "CdaPath"
      },
      {
@@ -541,5 +541,5 @@
  "datasources": {
   "rows": []
  },
- "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE.cdfde"
+ "filename": "/bi-developers/fusion-charts/Dashboards/FusionCharts_CDE.cdfde"
 }

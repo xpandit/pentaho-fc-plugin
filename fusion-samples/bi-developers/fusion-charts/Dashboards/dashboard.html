@@ -1,6 +1,6 @@
-<script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
-<script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
-<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts.js"></script>
+<script type='text/javascript' src='GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js'></script>
+<script type="text/javascript" src="GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/bi-developers/fusion-charts/Dashboards/MetaLayerCharts.js"></script>
 
 <div class="dashboardContent">
     <div id="dashboardRow1" style="position:relative; width:900px;">
@@ -60,8 +60,8 @@
 
     var lineChart = {
         name: "lineChart",
-        solution: "/public",
-        path: "plugin-samples/fusion-charts/Fusion Charts Free/",
+        solution: "bi-developers",
+        path: "fusion-charts/Fusion Charts Free",
         action: "LineChart.xfusion",
         executeAtStart: true,
         htmlObject: "lineChart",
@@ -73,9 +73,8 @@
 
     var pieChart = {
         name: "pieChart",
-        solution: "/public",
-        //used for testing old mode of referencing files
-        path: "plugin-samples/fusion-charts/Fusion Charts Free",
+        solution: "bi-developers",
+        path: "fusion-charts/Fusion Charts Free",
         action: "PieChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "pieChart",
@@ -88,7 +87,9 @@
 
     var columnChart = {
         name: "columnChart",
-        xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.xfusion",
+        solution: "bi-developers",
+        path: "fusion-charts/Fusion Charts Free",
+        action: "ColumnChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "columnChart",
         chartDefinition: MetaLayerCharts.columnChartDef,
@@ -99,7 +100,9 @@
 
     var msColumnChart = {
             name: "columnChart",
-            xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/MSColumnChart3D.xfusion",
+            solution: "bi-developers",
+            path: "fusion-charts/Fusion Charts Free",
+            action: "MSColumnChart3D.xfusion",
             executeAtStart: true,
             htmlObject: "msColumnChart",
             chartDefinition: MetaLayerCharts.msColumnChartDef,
@@ -110,7 +113,9 @@
 
     var barChart = {
             name: "barChart",
-            xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.xfusion",
+            solution: "bi-developers",
+            path: "fusion-charts/Fusion Charts Free",
+            action: "BarChart2D.xfusion",
             executeAtStart: true,
             htmlObject: "barChart",
             chartDefinition: MetaLayerCharts.barChartDef,

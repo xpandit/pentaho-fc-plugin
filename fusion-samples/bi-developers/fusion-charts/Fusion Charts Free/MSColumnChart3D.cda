@@ -5,8 +5,9 @@
             <Jndi>SampleData</Jndi>
         </Connection>
         <Connection id="2" type="mondrian.jndi">
-			<Catalog>mondrian:/SteelWheels</Catalog>
-         	<Jndi>SampleData</Jndi>
+            <Jndi>SampleData</Jndi>
+            <Catalog>./steelwheels.mondrian.xml</Catalog>
+			<Cube>SteelWheelsSales</Cube>
         </Connection>
     </DataSources>
 
@@ -57,12 +58,11 @@
     </DataAccess>
     <DataAccess id="2" connection="2" type="mdx" access="public">
         <Query>
-			select {[Measures].[Sales]} ON COLUMNS,
+			select {[Measures].[Sales],[Measures].[Sales]} ON COLUMNS,
 			NON EMPTY  [Time].[Years].Members ON ROWS
 			from [SteelWheelsSales]
 		</Query>
-		<Output id="2" indexes="1,2"/>
-		<Output id="3" indexes="0,2"/>
+		<Output indexes="1,2,3"/>
     </DataAccess>
     <!-- CompoundDataAccess can be used to join queries. Some types are
 	supported, and the user is responsible for assuring the different dataaccess

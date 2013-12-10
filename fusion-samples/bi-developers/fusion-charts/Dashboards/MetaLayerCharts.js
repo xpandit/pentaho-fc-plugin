@@ -38,7 +38,7 @@
 		height: "150",
 		chartType: "Bar2D",
 		pathMode: "new",
-		xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/DrillBarChart2D.xfusion",
+		xFusionPath: "bi-developers/fusion-charts/Fusion Charts Free/DrillBarChart2D.xfusion",
 		seriesParam:"SeriesParamName",
 		categoriesParam:"categoriesParamName",
 		chartLink:"JavaScript:drillBarChart.drillFunction('{SeriesParamName}','{categoriesParamName}')", 	

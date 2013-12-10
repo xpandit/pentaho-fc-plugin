@@ -2,11 +2,14 @@ package com.xpandit.fusionplugin.pentaho.content;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.pentaho.commons.connection.IPentahoMetaData;
 import org.pentaho.commons.connection.IPentahoResultSet;
+
 
 import com.xpandit.fusionplugin.PropertiesManager;
 
@@ -19,10 +22,14 @@ import com.xpandit.fusionplugin.PropertiesManager;
  */
 public class FusionDataStream {
 
+
     //Encoding in use
-    //private static final String ENCODING = "UTF-8";
+    private static final String ENCODING = "UTF-8";
+
     private static final String LABEL = "&label=";
+
     private static final String VALUE = "&value=";
+
     private static final String DATASTAMP = "&dataStamp=";
 
     /**
@@ -37,6 +44,7 @@ public class FusionDataStream {
             Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm) throws IOException {
 
         IPentahoResultSet result= resultSets.get("results").get(0);
+        IPentahoMetaData metaData = result.getMetaData();
         TreeMap<String,Object> params = pm.getParams();
 
         int columnCount=result.getColumnCount();
@@ -86,8 +94,10 @@ public class FusionDataStream {
                 if(i<rowCount-1)
                 {
                     buffer.append(',');
+
                     if(!chartLink.equals(""))
                         serieChartLink.append(',');
+
                 }
             }
 

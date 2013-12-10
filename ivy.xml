@@ -13,25 +13,12 @@
  
   <dependencies>
 	
-	<!-- pentaho cda -->
-	<!-- TODO we need to use cda directly-->
-	<!-- As of now these files are placed directly on dev-lib and copied to lib on the plugin-->
-	<dependency org="pentaho" name="cda" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
-	<dependency org="pentaho" name="cpf" rev="${dependency.bi-platform.revision}" transitive="false" changing="true"/>
-	<dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.8.2"/>
-    <dependency org="com.hazelcast" name="hazelcast" transitive="false" rev="2.0.2"/>
+	<!-- pentaho platform-->
+	<dependency org="pentaho" name="pentaho-bi-platform-engine-core" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
+	<dependency org="pentaho" name="pentaho-bi-platform-api" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
+	<dependency org="pentaho" name="pentaho-bi-platform-engine-services" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>	
 	
-    <!-- pentaho platform -->
-    <!-- 4.8 
-    <dependency org="pentaho" name="pentaho-bi-platform-engine-core" rev="4.8.0-stable" changing="true" transitive='false'/>
-    <dependency org="pentaho" name="pentaho-bi-platform-api" rev="4.8.0-stable" changing="true" transitive='false'/>
-    <dependency org="pentaho" name="pentaho-bi-platform-engine-services" rev="4.8.0-stable" changing="true" transitive='false'/>      
-     -->
-    <!-- 5.0  -->
-    <dependency org="pentaho" name="pentaho-platform-core" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
-    <dependency org="pentaho" name="pentaho-platform-api" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
-    <dependency org="pentaho" name="pentaho-platform-repository" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
-          
+	
 	<!--pentaho com-->
 	<dependency org="pentaho" name="pentaho-connections" rev="2.2.2" changing="true" transitive='false'/>
 	<dependency org="pentaho-library" name="libbase" rev="1.2.2" changing="true" transitive='false'/>
@@ -45,8 +32,6 @@
 	<dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" changing="true" transitive='false'/>	
 	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />
 	<dependency org="log4j" name="log4j" rev="1.2.9"/>
-	
-	<dependency org="javax.ws.rs" name="jsr311-api" rev="1.1-ea" conf='runtime->default'/>
 	
   </dependencies>
 </ivy-module>

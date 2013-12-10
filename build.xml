@@ -7,8 +7,8 @@
 
   <target name="assemble.copy-libs">
     <copy todir="${approot.stage.dir}/lib">
-      <!-- Add jar files from dev lib -->
-      <fileset file="${devlib.dir}/*.jar" />
+      <!-- Add CDA jar file -->
+      <fileset file="${devlib.dir}/cda-*.jar" />
       <fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
     </copy>
   </target>
@@ -33,20 +33,13 @@
     <antcall target="install-plugin"/>
   </target>
 
-  <!-- disabled on 5.0 -->
   <target name="install-samples">
-  	<echo message="Install samples is disabled on 5.0"></echo>
-  </target> 
-	
-  <!-- old version
-    <target name="install-samples">
     <copy todir="${dir.solutions}" >
-      <fileset dir="${dir.samples}/*" />
+      <fileset dir="${dir.samples}" />
     </copy>
     <echo message="${dir.samples}"></echo>
     <echo message="${dir.solutions}"></echo>
-  </target> 
-  -->
+  </target>
   
 
   <target name="reinstall-samples">

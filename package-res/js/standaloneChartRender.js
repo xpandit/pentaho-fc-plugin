@@ -17,7 +17,7 @@ var chartData=
 //renders the chart in the html page
 function renderChart()
 {
-	var myChart = new FusionCharts( "../../../content/xfusion/swf/"+chartData.chartType+".swf", "myChartId", chartData.width, chartData.height, "0","1" );
+	var myChart = new FusionCharts( "../content/fusion/swf/"+chartData.chartType+".swf", "myChartId", chartData.width, chartData.height, "0","1" );
 
 	//set the data
 	myChart.setDataXML(chartData.xmlData);

@@ -3,48 +3,54 @@
 <plugin title="fusion">
   
  <lifecycle-listener class="com.xpandit.fusionplugin.pentaho.FcLifecycleListener"/>
-   
-  <content-types>   
-      <static-paths>
-	      <static-path url="/xfusion/res" localFolder="resources"/>
-	      <static-path url="/xfusion/js" localFolder="js"/>
-	      <static-path url="/xfusion/JSClass" localFolder="fusioncharts/JSClass"/>
-	      <static-path url="/xfusion/swf" localFolder="fusioncharts/charts"/>
-	      <static-path url="/xfusion/widgets" localFolder="widgets"/>
-	  </static-paths> 
+     
+  <content-type type="xfusion" mime-type="text/html">
+    <title>Fusion Config</title>
+    <description>Fusion Config File</description>
+    <icon-url>content/fusion/res/icon.jpg</icon-url>
+    <meta-provider>com.xpandit.fusionplugin.pentaho.content.FusionContentTypeMetaProvider</meta-provider> 
+    <operations>
+      <operation>
+        <id>RUN</id>
+        <command>content/fusion?solution={solution}&amp;path={path}&amp;name={name}&amp;dashboard-mode=false&amp;pathMode=legacy</command>
+      </operation>
+    </operations>
+  </content-type>
   
-	  <content-type type="xfusion" mime-type="text/html">
-	    <title>Fusion Config</title>
-	    <description>Fusion Config File</description>
-	    <icon-url>content/xfusion/res/icon.jpg</icon-url>
-	    <meta-provider>com.xpandit.fusionplugin.pentaho.content.FusionContentTypeMetaProvider</meta-provider> 
-	    <operations>
-	      <operation>
-	        <id>RUN</id>
-	      </operation>
-	    </operations>
-	  </content-type>
-  </content-types>
   
   <external-resources>
   	<!-- Integration with EE Dashboards-->
-    <file context="dashboards">content/xfusion/js/XDashFusionChartComponent.js</file>
+    <file context="dashboards">content/fusion/js/XDashFusionChartComponent.js</file>
     <!-- Integration with Analyzer -->
-  	<file context="analyzer">content/xfusion/js/vizapi/fusioncharts_wrapper.js</file>    
-    <file context="analyzer">content/xfusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
+  	<file context="analyzer">content/fusion/js/vizapi/fusioncharts_wrapper.js</file>    
+    <file context="analyzer">content/fusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
     <!-- Required dependencies -->
-    <file context="analyzer">content/xfusion/js/vizapi/chart_settings.js</file>
-    <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
-   <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file> --> 
+    <file context="analyzer">content/fusion/js/vizapi/chart_settings.js</file>
+    <file context="analyzer">content/fusion/JSClass/FusionCharts.js</file>
+   <!-- <file context="analyzer">content/fusion/js/XDashFusionChartComponent.js</file> --> 
+    
   </external-resources>
+  
+    <content-generator
+    	id="fusion"
+    	title="Fusion Component"
+    	type="xfusion"
+    	class="com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator"/>
+ 
+    <static-paths>
+      <static-path url="/fusion/res" localFolder="resources"/>
+      <static-path url="/fusion/js" localFolder="js"/>
+      <static-path url="/fusion/JSClass" localFolder="fusioncharts/JSClass"/>
+      <static-path url="/fusion/swf" localFolder="fusioncharts/charts"/>
+      <static-path url="/fusion/widgets" localFolder="widgets"/>
+    </static-paths>  
+    
+    <!-- Activate when the class is properly implemented 
+    	<bean id="fusionComponent" class="com.xpandit.fusionplugin.pentaho.FusionComponent"/>
+    -->
 	
-	<!-- Pentaho 5.0 version menu -->
-   <overlays>
-		<overlay id="startup.fusion" resourcebundle="api/repos/data-access/resources/messages/messages.properties">
-	      	<menubar id="refreshmenu">
-	        	<menuitem id="fusionClearCache" label="FusionCharts Cache" command="mantleXulHandler.openUrl('Clear FusionCharts Cache','Clear FusionCharts Cache','content/xfusion/api/clearCache')"/>
-	      	</menubar>
-	    </overlay>	
-  	</overlays>
+	<menu-items>
+		<menu-item id="xFusion_refresh" anchor="tools-refresh-submenu" label="xFusion Cache" command="content/fusion/clearCache" type="MENU_ITEM" how="LAST_CHILD"/>
+	</menu-items>
 
 </plugin>

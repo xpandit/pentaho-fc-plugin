@@ -12,10 +12,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.pentaho.commons.connection.IPentahoResultSet;
+import org.pentaho.platform.api.engine.IPentahoSession;
 
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 
 /**
@@ -53,10 +53,10 @@ public abstract class DataProvider {
      * @return
      * @throws InvalidDataResultSetException
      */
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm) throws InvalidDataResultSetException, InvalidParameterException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSet(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException;
 
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm) throws InvalidDataResultSetException, InvalidParameterException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsRange(PropertiesManager pm, IPentahoSession userSession) throws InvalidDataResultSetException;
 
-    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm) throws InvalidDataResultSetException, InvalidParameterException;
+    public abstract Map<String, ArrayList<IPentahoResultSet>> getResultSetsTarget(PropertiesManager pm,IPentahoSession userSession) throws InvalidDataResultSetException;
         
 }

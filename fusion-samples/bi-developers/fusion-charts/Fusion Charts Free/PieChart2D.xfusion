@@ -1,9 +1,10 @@
-cdaPath=/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart2D.cda
+cdaName=PieChart2D.cda
 cdaDataAccessId=2
+cdaSolution=bi-developers
 chartTitle=Sales Per year
 xAxisName=Years
 yAxisName=Sales
-chartType=Column2D
+chartType=Pie2D
 height=200
 width=500
 free=true

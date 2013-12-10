@@ -1,4 +1,4 @@
-cdaPath=/public/plugin-samples/fusion-charts/Fusion Charts Free/MSColumnChart3D.cda
+cdaName=MSColumnChart3D.cda
 cdaDataAccessId=2
 chartTitle=Sales Per year
 xAxisName=Years
