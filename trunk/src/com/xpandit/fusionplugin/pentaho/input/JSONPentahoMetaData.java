@@ -21,6 +21,7 @@ import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
  * @version $Revision: 666 $
  * 
  */
+//TODO MemoryMetaData could be used to replace this class. This could would be moved to JSONDataProvider
 public class JSONPentahoMetaData extends AbstractPentahoMetaData {
 
     //JSON keys used 
