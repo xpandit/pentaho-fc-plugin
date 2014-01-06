@@ -23,6 +23,7 @@ import com.xpandit.fusionplugin.pentaho.input.JSONPentahoMetaData.DataType;
  * @version $Revision: 666 $
  * 
  */
+//TODO MemoryResultSet could be used to replace this class. This could would be moved to JSONDataProvider
 public class JSONResultSet implements IPentahoResultSet {
 
     private static final String KEY_ROW = "c";
