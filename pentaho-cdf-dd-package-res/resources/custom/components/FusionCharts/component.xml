@@ -44,9 +44,9 @@
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>
@@ -130,9 +130,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>
@@ -216,9 +216,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>
@@ -305,9 +305,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>
@@ -395,9 +395,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>
@@ -483,9 +483,9 @@ src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/
 					<Fragment name='fusinCharts' version='1.0'>
 						<![CDATA[
 					<script type='text/javascript' 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
+src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
 					<script type="text/javascript" 
-src="../../content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
+src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 					]]>
 					</Fragment>
 				</Raw>

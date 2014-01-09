@@ -21,6 +21,10 @@
 	<dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.8.2"/>
     <dependency org="com.hazelcast" name="hazelcast" transitive="false" rev="2.0.2"/>
 	
+	<!-- Required to easily parse CDA results  -->
+	<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-extensions-cda" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
+  	<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
+  
     <!-- pentaho platform -->
     <!-- 4.8 
     <dependency org="pentaho" name="pentaho-bi-platform-engine-core" rev="4.8.0-stable" changing="true" transitive='false'/>
@@ -37,7 +41,6 @@
 	<dependency org="pentaho-library" name="libbase" rev="1.2.2" changing="true" transitive='false'/>
 	<dependency org="pentaho" name="pentaho-versionchecker" rev="2.0.1" changing="true" transitive='false'/>	
 	
-	
 	<!-- other -->
 	<dependency org="javax.servlet" name="servlet-api" rev="2.4" changing="true" transitive='false'/>
 	<dependency org="org.json" name="json" rev="3.1" transitive="false"/>        	
@@ -46,7 +49,7 @@
 	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />
 	<dependency org="log4j" name="log4j" rev="1.2.9"/>
 	
-	<dependency org="javax.ws.rs" name="jsr311-api" rev="1.1-ea" conf='runtime->default'/>
+	<dependency org="javax.ws.rs" name="jsr311-api" rev="0.2"/>
 	
   </dependencies>
 </ivy-module>

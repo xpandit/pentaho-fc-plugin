@@ -58,8 +58,6 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 
         if (method == null) { // Generate chart
             fc.renderChartGetData(out);
-        } else if ("clearCache".equals(method)) { // clear component cache
-            fc.clearCache();
         } else if ("dataStream".equals(method)) { // called by real time charts to update data
             fc.dataStream(out);
         } else if ("checkVersions".equals(method)) { // check the Pentaho version
