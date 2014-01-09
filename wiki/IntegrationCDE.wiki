@@ -1,4 +1,24 @@
 #labels CDE
+==Integrate Fusioncharts(above than version 3.0) with CDE==
+
+ # install the plugin [DeveloperGuide]
+ # unzip the content of fusion_pentaho-CDE-XXXX.zip to system/pentaho-cdf-dd
+ # Restart Pentaho
+ # update file system/pentaho-cdf-dd/resources/styles/Clean.html
+{{{ 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		@HEADER@
+		<script type='text/javascript' src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
+		<script type="text/javascript" src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
+		<script type="text/javascript" src="../../../content/xfusion/js/CDE.js"></script>
+}}}
+ # Create a new dashboard using CDE.
+ # Select add a new FusionCharts Component
+ ## Configure the CDA file and querie id
+ ## Configure the Width ,Height and HtmlObject 
+ # Save and run
+
+
 ==Integrate Fusioncharts(above than version 2.0) with CDE==
 
  # install the plugin [DeveloperGuide]
