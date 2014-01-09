@@ -6,11 +6,11 @@
  # Restart Pentaho
  # update file system/pentaho-cdf-dd/resources/styles/Clean.html
 {{{ 
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		@HEADER@
-		<script type='text/javascript' src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-		<script type="text/javascript" src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-		<script type="text/javascript" src="../../../content/xfusion/js/CDE.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+@HEADER@
+<script type='text/javascript' src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
+<script type="text/javascript" src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
+<script type="text/javascript" src="../../../content/xfusion/js/CDE.js"></script>
 }}}
  # Create a new dashboard using CDE.
  # Select add a new FusionCharts Component
