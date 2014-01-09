@@ -51,6 +51,10 @@ abstract public class FCItem {
 	protected static final String ANCHORBORTHERTHICOLOR = "anchorBorderColor";
 	protected static final String ENTITYCOLOR = "entityColor";
 	protected static final String DISPLAYVALUE = "displayValue";
+	protected static final String TRENDLINE = "trend_line_type";
+	protected static final String TRENDCOLORS = "trendLineColors";
+	protected static final String TRENDSHADINESS = "trendLineShadiness";
+	protected static final String TRENDNRSHADES = "trendLineNrShades";
 
 
 	/**
@@ -142,9 +146,6 @@ abstract public class FCItem {
 
 		}
 	}
-
-
-
 
 	/**
 	 * Set the series type

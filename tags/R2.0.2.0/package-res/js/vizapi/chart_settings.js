@@ -28,9 +28,19 @@ var chartSettingsManager = {
             bgAngle : 0,
             plotGradientColor : '',
             canvasBorderalpha : 0,
-            paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47",
-            placeValuesInside: 1,
-            valuePosition: "ABOVE"
+            paletteColors : "afd8f8;f6bd0e;8cba00;ff8f47",
+            placeValuesInside : 1,
+            valuePosition : "ABOVE",
+            categoriesColor : "afd8f8;f6bd0e;8cba00;ff8f47",
+            seriesColor : "afd8f8;f6bd0e;8cba00;ff8f47",
+            trendLineId : "trend_line_type",
+            trendLineColors : "afd8f8;f6bd0e;8cba00;ff8f47",
+            trendLineShadiness : "true",
+            trendLineNrShades : 6,
+            trendLineMin : "Minimum",
+            trendLineAvg : "Average",
+            trendLineSLR : "Simple Linear Regression",
+            trendLineMax : "Maximum"
         }
         return options;
     }, 

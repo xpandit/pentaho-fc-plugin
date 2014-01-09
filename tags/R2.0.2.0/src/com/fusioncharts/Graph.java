@@ -207,12 +207,6 @@ implements Cloneable, Comparable<Graph>
         return this.entities.get(index);
     }//getCategory
 
-
-
-
-
-
-
     /**
      * 
      * The following methods belong to the Dial component
@@ -500,7 +494,7 @@ implements Cloneable, Comparable<Graph>
         //loop through all series and get the minimum from all of them
         for (Series o : this.series)
         {
-            double m = o.calculateMin();
+            double m = o.calculateMin()[0];
             if (m < result)
                 result = m;
         }//endfor - each series
@@ -521,7 +515,7 @@ implements Cloneable, Comparable<Graph>
         //loop through all the series and get the maximum from all of them
         for (Series o : this.series)
         {
-            double m = o.calculateMax();
+            double m = o.calculateMax()[0];
             if (m > result)
                 result = m;
         }//endfor - each series
