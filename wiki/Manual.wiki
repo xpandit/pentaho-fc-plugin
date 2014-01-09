@@ -15,20 +15,26 @@
 <util:map id="convertersMap"> 
    ... 
    <entry key="xfusion" value-ref="streamConverter"/> 
+   <entry key="wcdf" value="streamConverter"/> 
+   <entry key="cdfde" value="streamConverter"/>     
 </util:map>
 
 <bean id="NameBaseMimeResolver" class="org.pentaho.platform.plugin.services.importer.NameBaseMimeResolver"> 
    <constructor-arg>
       <map> 
           ... 
-          <entry key="xfusion" value="text/plain"/>
+	<entry key="xfusion" value="text/plain"/> 
+	<entry key="wcdf" value="text/plain"/> 
+	<entry key="cdfde" value="text/plain"/> 
       </map>
    </constructor-arg>
 </bean>
 
 <util:list id="approvedExtensionList">
    ...
-   <value>.xfusion</value>
+   <value>.xfusion</value>    
+   <value>.wcdf</value>
+   <value>.cdfde</value> 
 </util:list>
 }}}
  # Start Pentaho Server 
