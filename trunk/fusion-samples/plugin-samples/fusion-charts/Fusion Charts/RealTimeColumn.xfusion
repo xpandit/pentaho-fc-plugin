@@ -40,5 +40,7 @@ free=false
  plotGradientColor= 
  labelStep=2 
  canvasLeftMargin=50
+ 
+ webAppPath=pentaho
 
 

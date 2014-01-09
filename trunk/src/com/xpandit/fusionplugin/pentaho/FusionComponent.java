@@ -168,14 +168,4 @@ public class FusionComponent {
         return resultSets;
     }
 
-    /**
-     * 
-     * Call CDA clear cache. This is necessary due to the fact that a CDA instance is running on the FCplugin.
-     * 
-     */
-    public void clearCache() {
-        SettingsManager.getInstance().clearCache();
-        AbstractDataAccess.clearCache();
-    }
-
 }
