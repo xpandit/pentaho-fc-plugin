@@ -58,6 +58,7 @@ Now your charts should be refreshing automatically using the query you defined!
 = Stand alone version =
 When using fusion charts directly with the .xfusion file 
 Its required to add the property  webAppPath 
+
 Example:
 {{{
  webAppPath=pentaho 
