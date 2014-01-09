@@ -1,1 +1,0 @@
-var XDashFusionChartComponentRealTimeLineDY = XDashFusionChartComponent.extend({type: "XDashFusionChartComponentRealTimeLineDY"});
