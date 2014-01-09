@@ -37,14 +37,4 @@
     <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
    <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file> --> 
   </external-resources>
-	
-	<!-- Pentaho 5.0 version menu -->
-   <overlays>
-		<overlay id="startup.fusion" resourcebundle="api/repos/data-access/resources/messages/messages.properties">
-	      	<menubar id="refreshmenu">
-	        	<menuitem id="fusionClearCache" label="FusionCharts Cache" command="mantleXulHandler.openUrl('Clear FusionCharts Cache','Clear FusionCharts Cache','content/xfusion/api/clearCache')"/>
-	      	</menubar>
-	    </overlay>	
-  	</overlays>
-
 </plugin>
