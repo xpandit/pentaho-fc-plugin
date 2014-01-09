@@ -670,19 +670,19 @@ implements Cloneable
 	 * @param  untilIndex
 	 *         The index to end at (not including).
 	 * 
-	 * @return double
-	 *         The sum of the series segment.
+	 * @return double array
+	 *         The sum of the series segment in the first position of the array.
 	 ***************************************************************************/
-	public double calculateSum(int startIndex, int untilIndex)
+	public double[] calculateSum(int startIndex, int untilIndex)
 	{
-		int result = 0;
+		double[] result = {0};
 
 		startIndex = Math.max(startIndex,0);
 		untilIndex = Math.min(untilIndex,this.value.length);
 
 		while (startIndex < untilIndex)
 		{
-			result += this.value == null ? 0 : this.value[startIndex];
+			result[0] += this.value == null ? 0 : this.value[startIndex];
 			startIndex++;
 		}
 		return result;
@@ -691,10 +691,10 @@ implements Cloneable
 	/***************************************************************************
 	 * Calculates the sum of the series.
 	 * 
-	 * @return double
-	 *         The sum of the series.
+	 * @return double array
+	 *         The sum of the series segment in the first position of the array.
 	 ***************************************************************************/
-	public double calculateSum()
+	public double[] calculateSum()
 	{
 		return calculateSum(0,this.value.length);
 	}//calculateSum
@@ -702,19 +702,19 @@ implements Cloneable
 	/***************************************************************************
 	 * Calculates the average of the series.
 	 * 
-	 * @return double
-	 *         The average of the series.
+	 * @return double array
+	 *         The average of the series in the first position of the array.
 	 ***************************************************************************/
-	public double calculateAvg()
+	public double[] calculateAvg()
 	{
-		int result = 0;
+		double[] result = {0};
 
 		for (Double d : this.value) {
 			//only calculate if the value is not null, otherwise null + double = null
 			if (d != null)
-				result += d;
+				result[0] += d;
 		}
-		result /= this.value.length;
+		result[0] /= this.value.length;
 
 		return result;
 	}//calculateAvg
@@ -722,17 +722,17 @@ implements Cloneable
 	/***************************************************************************
 	 * Calculates the minimum value of the series.
 	 * 
-	 * @return double
-	 *         The minimum of the series.
+	 * @return double array
+	 *         The minimum of the series in the first position of the array.
 	 ***************************************************************************/
-	public double calculateMin()
+	public double[] calculateMin()
 	{
-		double result = +Double.MAX_VALUE;
+		double[] result = {+Double.MAX_VALUE};
 
 		for (Double d : this.value)
 		{
-			if (d != null && d < result)
-				result = d;
+			if (d != null && d < result[0])
+				result[0] = d;
 		}//endfor - each value
 
 		return result;
@@ -741,21 +741,54 @@ implements Cloneable
 	/***************************************************************************
 	 * Calculates the maximum value of the series.
 	 * 
-	 * @return double
-	 *         The maximum of the series.
+	 * @return double array
+	 *         The maximum of the series in the first position of the array.
 	 ***************************************************************************/
-	public double calculateMax()
+	public double[] calculateMax()
 	{
-		double result = -Double.MAX_VALUE;
+		double[] result = {-Double.MAX_VALUE};
 
 		for (Double d : this.value)
 		{
-			if (d != null && d > result)
-				result = d;
+			if (d != null && d > result[0])
+				result[0] = d;
 		}//endfor - each value
 
 		return result;
 	}//calculateMax
+	
+	/***************************************************************************
+	 * Calculates the simple linear regression line of the series.
+	 * 
+	 * @return double array
+	 *         The set of points that define the simple linear regression line 
+	 *         of the series.
+	 ***************************************************************************/
+	public double[] calculateSLR()
+	{
+		double sum_x = 0;
+		double sum_y = 0;
+		double sum_xx = 0;
+		double sum_xy = 0;
+		int count = this.value.length;
+		
+		double result[] = new double[count];
+
+		for (int i = 0; i < count; i++){
+			sum_x += i + 1;
+			sum_y += this.value[i];
+			sum_xx += ((i + 1) * (i + 1));
+			sum_xy += ((i + 1) * this.value[i]);
+		}
+		
+		double m = ((double) (count * sum_xy - sum_x * sum_y)) / ((double) (count * sum_xx - sum_x * sum_x));
+		double b = ((double) (sum_y / count)) - ((double) (m * sum_x)/count);
+		
+		for (int i = 0; i < count; i++)
+			result[i] = (i + 1) * m + b;
+
+		return result;
+	}//calculateSimpleLinearRegression
 
 	/*****************************************************************************
 	 * Clears the data from this Series and resets the values to zero.  Series

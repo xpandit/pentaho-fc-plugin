@@ -13,7 +13,7 @@ analyzerPlugins.push(
           */
 
          // Declare a new class which extends the built-in version from Analyzer 
-         dojo.declare("FCPluginConfig", [analyzer.LayoutConfig], { 
+         dojo.declare("FCPluginConfig", [analyzer.ColorConfiguration], { 
 
            /** 
             * @param config    The parse Configuration object which serves 
@@ -92,6 +92,9 @@ analyzerPlugins.push(
 			// fired it is for the 2d_3d
 			if(config.byId('2d_3d')!=undefined)
 				this.report.visualization.args['2d_3d'] = config.byId('2d_3d').value; 
+			// fired it is for the trend_line_type
+			if(config.byId('trend_line_type')!=undefined)
+				this.report.visualization.args['trend_line_type'] = config.byId('trend_line_type').value; 
 				
             this.inherited(arguments); // Let super class handle the insertAt and 
                                         // removedGem events 
@@ -148,7 +151,7 @@ analyzerPlugins.push(
                // Register the Layout Panel Configuration Manager 
                // Note that the string entry matches 'JSON_' plus the visualization id 
                // defined earlier
-               analyzer.LayoutPanel.configurationManagers['JSON_'+value.id] = FCPluginConfig; 
+               analyzer.LayoutPanel.configurationManagers['JSON_'+value.id] = FCPluginConfig;
             }
         }); 
       }

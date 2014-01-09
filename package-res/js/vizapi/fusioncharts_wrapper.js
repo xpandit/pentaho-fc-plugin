@@ -113,7 +113,19 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 ui : {
                     group : "data"
                 }
-            }]
+			},
+			{
+				id: "trend_line_type", 
+				dataType: "string", 
+				// these values need to match the values on the enumerator TrendType.java
+				values: ["none", "min", "avg", "slr", "max", "all"], 
+				ui: {
+					labels: ["None", "Minimum", "Average", "Simple Linear Regression", "Maximum", "All"], 
+					group: "options", 
+					type: "combo", 
+					caption: "Trending Line"
+					}
+			}]
         } ]
     },
 	{
@@ -217,7 +229,19 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 					type: "combo",   
 					caption: "2D/3D"
 					}
-				}]
+            },
+			{
+				id: "trend_line_type", 
+				dataType: "string", 
+				// these values need to match the values on the enumerator TrendType.java
+				values: ["none", "min", "avg", "slr", "max", "all"], 
+				ui: {
+					labels: ["None", "Minimum", "Average", "Simple Linear Regression", "Maximum", "All"], 
+					group: "options", 
+					type: "combo", 
+					caption: "Trending Line"
+					}
+			}]
         } ]
     },
 	{
@@ -416,7 +440,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 							return true;
 						}	
 						//set 2D or 3D
-						chartType+=options["2d_3d"];	
+						chartType+=options["2d_3d"];
 						break;
 					case "MSCombi":
 						var seriesTypes="";
@@ -446,10 +470,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						chartType+=options["2d_3d"];	
 					break;
 					case "Line":
-						chartType=options.data.cols.length>2?"MSLine":"Line";
+						chartType="MSLine";
 						break;
 					case "Area":
-						chartType=options.data.cols.length>2?"MSArea":"Area2D";
+						chartType="MSArea";
 						break;
 					case "AngularGauge":
 					case "VBullet":
@@ -539,6 +563,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		//set default values
 		args["2d_3d"]=args["2d_3d"]!=undefined?args["2d_3d"]:"2D";
 		args.orientation=args.orientation!=undefined?args.orientation:"vertical";
+		args["trend_line_type"]=args["trend_line_type"]!=undefined?args["trend_line_type"]:"none";
 		
         //Set options
         //Set arguments of visualization as options.
@@ -566,10 +591,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         // finish set options
         
         //TODO reuse XDashFusionChartComp and replace logic bellow. 
-        var url = webAppPath + '/content/fusion/renderChartExternalData';
+        var url = webAppPath + '/content/fusion';
         // get the xml chart
         var resultXml = $.ajax({type: 'post', 
-                                url: url, 
+                                url: url + '/renderChartExternalData', 
                                 data: {json: JSON.stringify(options)},
                                 async: false}).responseText;
         //render the chart
@@ -577,20 +602,20 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         var isFree=options.isFree;
         options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
 	
-	// get HTML5 from xml
-	options.isHTML5 = eval($(resultXml).attr("isHTML5"));
-
-	if(options.isHTML5==undefined)
-		options.isHTML5=false;
-
-	//create the logic to get the correct chart name for the chart based if is HTML 5 or not	
-	var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";        
+		// get HTML5 from xml
+		options.isHTML5 = eval($(resultXml).attr("isHTML5"));
 	
-	//create chart Object
-	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
+		if(options.isHTML5==undefined)
+			options.isHTML5=false;
 	
-	// fix the bug that avoid the error on analyzer when using HTML5
-	resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
+		//create the logic to get the correct chart name for the chart based if is HTML 5 or not	
+		var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";        
+		
+		//create chart Object
+		this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
+		
+		// fix the bug that avoid the error on analyzer when using HTML5
+		resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
 
         this.chartObject.setDataXML(resultXml);
         this.chartObject.render(this.containerDiv.id);

@@ -13,6 +13,7 @@ import com.fusioncharts.ChartType;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
+import com.xpandit.fusionplugin.util.ColorShader;
 
 /**
  * 
@@ -39,9 +40,9 @@ public class FCChart extends FCItem {
     // valueParam to replace in template link
     String valueParam = null;
 
-    // The resultset column that works as a datastamp for RT charts
+    // the resultset column that works as a datastamp for RT charts
     String datastampColumn = null;
-
+    
     /**
      * Constructor for Charts
      * 
@@ -167,8 +168,6 @@ public class FCChart extends FCItem {
         // if is the bubble charts
         //TODO create subclass of FCChart with detailed implementation for Buble charts.
         if (graph.getGraphType() == ChartType.BUBBLE) {
-
-
             if (metadataSize < 3)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 3");
 
@@ -209,7 +208,6 @@ public class FCChart extends FCItem {
             } 
 
         } else {
-
             if (metadataSize < 2)
                 throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 2");
 
@@ -230,10 +228,7 @@ public class FCChart extends FCItem {
                 // get data
                 for (int i = 0; i < rowCount; i++) {
                     try {
-                        
-                        
-                        if(getDataValue(i, seriesCount).toString().trim().equalsIgnoreCase(""))
-                        {
+                        if(getDataValue(i, seriesCount).toString().trim().equalsIgnoreCase("")){
                             continue; // This will atleast add the series name and chart will get painted properly with no data and subsequent calls will populate the data..
                         }
                         else
@@ -249,8 +244,102 @@ public class FCChart extends FCItem {
                         log.error("Problem in result set. Null values found at index:" + i, e);
                     }
                 }
+                
+                setTrendLine(series, seriesCount-1);
             }
         }
+    }
+    
+    /**
+     * Sets the trending lines for a plotted serie on the chart.
+     * 
+     * @param currentSerie Serie on which the trending line will be based on
+     * @param currentSerieNum Number of the serie that will be used
+     */
+    private void setTrendLine(Series currentSerie, int currentSerieNum){
+    	// obtain the value selected on the trend line type drop down list
+    	String trendLineValue = getChartProperty(TRENDLINE);
+    	
+    	// if it requests a trending line to be plotted
+    	if(trendLineValue != null){
+    		// tells the plugin if it should render color shaded trend lines
+        	boolean useTrendLineShadesParam = Boolean.parseBoolean(getChartProperty(TRENDSHADINESS));
+        	
+        	// defines the fraction used to calculate the trend lines shades
+        	int trendLineNrShadesParam = Integer.parseInt(getChartProperty(TRENDNRSHADES));
+    		
+	    	// obtains the the trending line colors and the currentSerieNum color from the colors array
+	    	String trendLineColor = getChartProperty(TRENDCOLORS).split(";")[currentSerieNum];
+	    	
+	    	// obtains the trend line type based on the one selected on the drop down 
+	    	TrendType trendType = TrendType.getEnum(trendLineValue);
+	    	
+	    	// creates a shader with trendLineNrShadesParam shades of the trendLineColor
+	    	ColorShader colorShader = new ColorShader(trendLineNrShadesParam, trendLineColor);
+	    	
+	    	// creates a trending line based on the trending line type.
+	    	// the current trending line types use available Series methods that calculate the required values
+	    	// for the trending lines.
+	    	// if it is of the ALL type, then it sets the runAll variable to true, which disables the breaks
+	    	// and goes through all the cases of the switch, creating all the defined trending lines.
+	    	// otherwise, it only runs the case of the respective trending line type.
+	    	boolean runAll = false;
+	    	switch(trendType){
+	    		case ALL:
+	    			runAll = true;
+	    		case MINIMUM:
+	    			createTrendLine(colorShader.getNextShade(true,useTrendLineShadesParam), TrendType.MINIMUM, 
+	    					currentSerie.calculateMin(), currentSerie.getLabel());
+	    			if(!runAll)
+	    				break;
+				case AVERAGE:
+					createTrendLine(colorShader.getNextShade(false,useTrendLineShadesParam), TrendType.AVERAGE, 
+							currentSerie.calculateAvg(), currentSerie.getLabel());
+					if(!runAll)
+	    				break;
+				case SIMPLE_LINEAR_REGRESSION:
+					createTrendLine(colorShader.getNextShade(false,useTrendLineShadesParam), TrendType.SIMPLE_LINEAR_REGRESSION, 
+							currentSerie.calculateSLR(), currentSerie.getLabel());
+					if(!runAll)
+	    				break;
+				case MAXIMUM:
+					createTrendLine(colorShader.getNextShade(false,useTrendLineShadesParam), TrendType.MAXIMUM, 
+							currentSerie.calculateMax(), currentSerie.getLabel());
+					if(!runAll)
+	    				break;
+				case NONE:
+					break;
+	    	}
+    	}
+    }
+    
+    /**
+     * Creates a trending line with all its respective properties: color and label. If the trending line is defined
+     * by more than one point, then the trend is plotted as a line. Otherwise, it is plotted as a trending line.
+     * 
+     * @param trendColor Color to be applied to the trending line
+     * @param trendProperty Property name that stores the trending line label
+     * @param trendValue Value of the trending line
+     * @param serieLabel Label of the series that the trending line represents
+     */
+    private void createTrendLine(String trendColor, TrendType trendType, double[] trendValue, String serieLabel){
+    	String trendLabel = getChartProperty(trendType.getProperty());
+    	Series serieTrendLine = graph.createSeries(serieLabel + " (" + trendLabel + ")");
+    	serieTrendLine.setColor(trendColor);
+    	
+    	// currently all trending line labels are disabled and are not shown on the chart
+    	serieTrendLine.setLabel(" ");
+    	
+    	if(trendType.isSinglePoint()){
+    		serieTrendLine.setSeriesType(Series.SeriesType.TRENDLINE);
+        	serieTrendLine.setValue(trendValue[0]);
+    	}
+    	else {
+    		serieTrendLine.setSeriesType(Series.SeriesType.LINE);
+    		
+    		for(int i = 0; i < trendValue.length; i++)
+    			serieTrendLine.setValue(i, trendValue[i]);
+    	}
     }
 
     /**
@@ -272,7 +361,7 @@ public class FCChart extends FCItem {
             }
             else
             {
-                log.error("seriesName is provided but not with all values nedded try name from the measure: Error in collumn number:" + seriesCount);
+                log.error("seriesName is provided but not with all values nedded try name from the measure: Error in column number:" + seriesCount);
                 return getSeriesNameFromMeasure(seriesTitle);
             }
         }
