@@ -39,18 +39,6 @@
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 	<DesignerComponent>
@@ -124,19 +112,6 @@ src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="XDashFusionChartComponentRealTimeLine.js" />
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 	<DesignerComponent>
@@ -210,19 +185,6 @@ src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="XDashFusionChartComponentRealTimeColumn.js" />
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 	<DesignerComponent>
@@ -299,19 +261,6 @@ src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="XDashFusionChartComponentRealTimeStackedArea.js" />
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 	<DesignerComponent>
@@ -389,19 +338,6 @@ src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="XDashFusionChartComponentRealTimeLineDY.js" />
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 	<DesignerComponent>
@@ -477,19 +413,6 @@ src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="XDashFusionChartComponentAngularGauge.js" />
-				<Raw>
-					<Fragment name='fusinCharts' version='1.0'>
-						<![CDATA[
-					<script type='text/javascript' 
-src="../../../content/xfusion/JSClass/FusionCharts.js"></script>
-					<script type="text/javascript" 
-src="../../../content/xfusion/js/XDashFusionChartComponent.js"></script>
-					]]>
-					</Fragment>
-				</Raw>
-			</Implementation>
 		</Contents>
 	</DesignerComponent>
 </DesignerComponents>

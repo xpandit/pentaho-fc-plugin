@@ -1,1 +1,0 @@
-var XDashFusionChartComponentRealTimeStackedArea = XDashFusionChartComponent.extend({type: "XDashFusionChartComponentRealTimeStackedArea"});
