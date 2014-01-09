@@ -11,10 +11,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pentaho.commons.connection.IPentahoResultSet;
 
-import pt.webdetails.cda.CdaQueryComponent;
-import pt.webdetails.cda.dataaccess.AbstractDataAccess;
-import pt.webdetails.cda.settings.SettingsManager;
-
 import com.fusioncharts.ChartType;
 import com.xpandit.fusionplugin.FCFactory;
 import com.xpandit.fusionplugin.FCItem;
@@ -35,9 +31,6 @@ import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
  * 
  */
 public class FusionComponent {
-
-    // TODO is being used on different methods should be placed inside a method on the next refactoring.
-    CdaQueryComponent cdaQueryComponent = null;
 
     // Request parser
     ParameterParser parameterParser = null;

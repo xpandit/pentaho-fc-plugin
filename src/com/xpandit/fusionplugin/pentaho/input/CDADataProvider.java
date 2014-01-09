@@ -35,15 +35,11 @@ import org.pentaho.commons.connection.memory.MemoryMetaData;
 import org.pentaho.commons.connection.memory.MemoryResultSet;
 import org.pentaho.platform.api.engine.IPentahoSession;
 import org.pentaho.platform.api.engine.IPluginManager;
-import org.pentaho.platform.api.repository2.unified.IUnifiedRepository;
-import org.pentaho.platform.api.repository2.unified.RepositoryFile;
-import org.pentaho.platform.api.repository2.unified.UnifiedRepositoryException;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.reporting.engine.classic.extensions.datasources.cda.CdaResponseParser;
 
-import pt.webdetails.cda.CdaQueryComponent;
 import pt.webdetails.cpf.web.DelegatingServletOutputStream;
 
 import com.xpandit.fusionplugin.PropertiesManager;
@@ -68,7 +64,6 @@ public class CDADataProvider extends DataProvider {
 	private static final String DATASTAMP = "dataStamp";
 
 	private PropertiesManager pm = null;
-	private CdaQueryComponent cdaQueryComponent;
 
 	/**
 	 * Method that is able to call CDA, this is the only place where CDA is called.
@@ -528,14 +523,8 @@ public class CDADataProvider extends DataProvider {
 		this.pm = pm;
 
 
-		IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class);
-		RepositoryFile file = getCDAFile(repository);
-
 		boolean outputIndexIdDefined = false;
 		Map<String, ArrayList<IPentahoResultSet>> resultSets = new TreeMap<String, ArrayList<IPentahoResultSet>>();
-
-		cdaQueryComponent = new CdaQueryComponent();
-		cdaQueryComponent.setFile(file.getPath());
 
 		Map<String, Object> cdaInputs = cdaParameters();
 
@@ -572,7 +561,6 @@ public class CDADataProvider extends DataProvider {
 			if (outputIndexIdDefined) {
 				cdaInputs.put("outputIndexId", outputIndexIds[iteration]);
 			}
-			cdaQueryComponent.setInputs(cdaInputs);
 
 			String cdaPath= (String) pm.getParams().get(CDAPATH);
 			resultset= callCda(cdaPath,queryID,cdaInputs);
@@ -601,37 +589,6 @@ public class CDADataProvider extends DataProvider {
 			resultSets.put("rangeValues", getRangeValuesCDA(cdaInputs, resultset));
 
 		return resultSets;
-	}
-
-	/**
-	 * Gets CDA file using the cdaPath parameter
-	 * 
-	 * @param repository
-	 * @return
-	 * @throws InvalidParameterException
-	 */
-	private RepositoryFile getCDAFile(final IUnifiedRepository repository) throws InvalidParameterException {
-		String cdaPath = (String) pm.getParams().get(CDAPATH);
-		RepositoryFile file = null;
-
-		if (cdaPath == null) {
-			throw new InvalidParameterException(InvalidParameterException.ERROR_006 + CDAPATH
-					+ " parameter not supplied.");
-		}
-
-		try {
-			file = repository.getFile(cdaPath);
-		} catch (UnifiedRepositoryException e) {
-			throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
-					+ cdaPath);
-		}
-
-		if (file == null) {
-			throw new InvalidParameterException(InvalidParameterException.ERROR_005 + "No solution file found: "
-					+ cdaPath);
-		}
-
-		return file;
 	}
 
 	/**

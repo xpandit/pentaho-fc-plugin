@@ -6,8 +6,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pentaho.platform.engine.services.solution.SimpleContentGenerator;
 
-import pt.webdetails.cda.CdaQueryComponent;
-
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
@@ -24,9 +22,6 @@ public class FusionContentGenerator extends SimpleContentGenerator {
     private static final long serialVersionUID = 997953797244958291L;
 
     private static final String MIMETYPE = "text/html";
-
-    // TODO is being used on different methods should be placed inside a method on the next refactoring.
-    CdaQueryComponent cdaQueryComponent = null;
 
     // Request parser
     ParameterParser parameterParser = null;
