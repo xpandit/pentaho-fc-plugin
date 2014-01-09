@@ -15,8 +15,8 @@
 <util:map id="convertersMap"> 
    ... 
    <entry key="xfusion" value-ref="streamConverter"/> 
-   <entry key="wcdf" value="streamConverter"/> 
-   <entry key="cdfde" value="streamConverter"/>     
+   <entry key="wcdf" value-ref="streamConverter"/> 
+   <entry key="cdfde" value-ref="streamConverter"/>     
 </util:map>
 
 <bean id="NameBaseMimeResolver" class="org.pentaho.platform.plugin.services.importer.NameBaseMimeResolver"> 
