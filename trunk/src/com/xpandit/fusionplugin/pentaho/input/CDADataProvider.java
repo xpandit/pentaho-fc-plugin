@@ -112,12 +112,7 @@ public class CDADataProvider extends DataProvider {
 			paramValues[9] = sortList;//sortList;
 			paramValues[10] = getResponse(outputStream);
 
-			//convert CDA parameters to String, String map
-			Map <String, String> inputs = new HashMap<String, String>();
-			for(String key : cdaInputs.keySet()){
-				inputs.put(key, (String) cdaInputs.get(key));
-			}
-			paramValues[11] = getRequest(inputs);
+			paramValues[11] = getRequest(cdaInputs);
 
 			m.invoke(cdaBean, paramValues);
 
@@ -158,10 +153,10 @@ public class CDADataProvider extends DataProvider {
 
 	/**
 	 * Helper class that implements a dummy HttpServletRequest to use on the CDA call
-	 * @param cdaInputs
+	 * @param (String)cdaInputs
 	 * @return HttpServletRequest
 	 */
-	private static HttpServletRequest getRequest(final Map<String, String> cdaInputs) {
+	private static HttpServletRequest getRequest(final Map<String, Object>cdaInputs) {
 		return new HttpServletRequest() {
 
 			public String getAuthType() {
@@ -295,7 +290,7 @@ public class CDADataProvider extends DataProvider {
 			}
 
 			public String getParameter(String s) {
-				return cdaInputs.get(s);
+				return getParameterValues(s)[0];
 			}
 
 			@SuppressWarnings("rawtypes")
@@ -304,7 +299,7 @@ public class CDADataProvider extends DataProvider {
 			}
 
 			public String[] getParameterValues(String s) {
-				return new String[] {cdaInputs.get(s)};
+				return new String[] {(String) cdaInputs.get(s)};
 			}
 
 			@SuppressWarnings("rawtypes")
@@ -652,8 +647,8 @@ public class CDADataProvider extends DataProvider {
 	 * 
 	 * @return return parameters as requested by CDA
 	 */
-	private HashMap<String, Object> cdaParameters() {
-		HashMap<String, Object> cdaParameters = new HashMap<String, Object>();
+	private TreeMap<String, Object> cdaParameters() {
+		TreeMap<String, Object> cdaParameters = new TreeMap<String, Object>();
 		TreeMap<String, Object> params = pm.getParams();
 		String parameterKeys = (String) params.get(CDAPARAMETERS);
 		if (parameterKeys == null) {
@@ -675,19 +670,10 @@ public class CDADataProvider extends DataProvider {
 				new InvalidParameterException(InvalidParameterException.ERROR_003 + " with key:"
 						+ parametersKeysArray[i]);
 			else {
-				// if is string just set the string
-				if (value instanceof String)
-					cdaParameterString.append(parametersKeysArray[i]).append("=").append(value).append(";");
-				else { // if it's a list set all the elements
-					String[] listValue = (String[]) value;
-					for (String valueElement : listValue) {
-						cdaParameterString.append(parametersKeysArray[i]).append("=").append(valueElement).append(";");
-					}
-				}
+				//copy the values defined as CDA parameter
+				cdaParameters.put("param"+parametersKeysArray[i], value);
 			}
 		}
-		cdaParameters.put("cdaParameterString", cdaParameterString.toString());
-
 		return cdaParameters;
 	}
 
