@@ -615,7 +615,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
 		
 		// fix the bug that avoid the error on analyzer when using HTML5
-		resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
+		resultXml=resultXml.replace(/2d_3d/gi,"_2d_3d");
 
         this.chartObject.setDataXML(resultXml);
         this.chartObject.render(this.containerDiv.id);
