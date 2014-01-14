@@ -563,6 +563,11 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		//generate the ChartType considering the options
 		this._chartTypeByOptions(options);
 		
+		
+		// default options
+		options["chartXML"] = true;
+		options["dashboard-mode"] = true;
+		
         // finish set options
         
         //TODO reuse XDashFusionChartComp and replace logic bellow. 
