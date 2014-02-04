@@ -1,7 +1,6 @@
 package com.xpandit.fusionplugin.pentaho.content;
 
 import java.io.OutputStream;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pentaho.platform.engine.services.solution.SimpleContentGenerator;
@@ -9,6 +8,7 @@ import org.pentaho.platform.engine.services.solution.SimpleContentGenerator;
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
+import com.xpandit.fusionplugin.util.LicenseChecker;
 import com.xpandit.fusionplugin.util.VersionChecker;
 
 /**
@@ -19,47 +19,52 @@ import com.xpandit.fusionplugin.util.VersionChecker;
  * 
  */
 public class FusionContentGenerator extends SimpleContentGenerator {
-    private static final long serialVersionUID = 997953797244958291L;
 
-    private static final String MIMETYPE = "text/html";
+	private static final long serialVersionUID = 997953797244958291L;
 
-    // Request parser
-    ParameterParser parameterParser = null;
+	private static final String MIMETYPE = "text/html";
 
-    // Properties Manager
-    PropertiesManager pm = null;
+	// Request parser
+	ParameterParser parameterParser = null;
 
-    public String getMimeType() {
-        return MIMETYPE;
-    }
+	// Properties Manager
+	PropertiesManager pm = null;
 
-    @Override
-    public Log getLogger() {
-        return LogFactory.getLog(FusionContentGenerator.class);
-    }
+	public String getMimeType() {
+		return MIMETYPE;
+	}
 
-    /**
-     * Main method called by the Pentaho platform.
-     */
-    public void createContent(OutputStream out) throws Exception {
+	@Override
+	public Log getLogger() {
+		return LogFactory.getLog(FusionContentGenerator.class);
+	}
 
-        // TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
-        parameterParser = new ParameterParser(parameterProviders);
+	/**
+	 * Main method called by the Pentaho platform.
+	 */
+	public void createContent(OutputStream out) throws Exception {
 
-        // Identify operation based on URL call
-        String method = parameterParser.extractMethod();
+		// TODO code bellow is too tightly coupled. Parameter manager should have all the necessary methods.
+		parameterParser = new ParameterParser(parameterProviders);
 
-        FusionComponent fc = new FusionComponent(parameterParser);
+		// Identify operation based on URL call
+		String method = parameterParser.extractMethod();
 
-        if (method == null) { // Generate chart
-            fc.renderChartGetData(out);
-        } else if ("dataStream".equals(method)) { // called by real time charts to update data
-            fc.dataStream(out);
-        } else if ("checkVersions".equals(method)) { // check the Pentaho version
-            VersionChecker.getVersions(out);
-        } else if ("renderChartExternalData".equals(method)) { // render chart using external data
-            fc.renderChartGetData(out);
-        }
-    }
+		FusionComponent fc = new FusionComponent(parameterParser);
 
+		// Verify first if license has not expired
+		if(LicenseChecker.verifyKey(out)){
+			if (method == null) { // Generate chart
+				fc.renderChartGetData(out);
+			} else if ("dataStream".equals(method)) { // called by real time charts to update data
+				fc.dataStream(out);
+			} else if ("checkVersions".equals(method)) { // check the Pentaho version
+				VersionChecker.getVersions(out);
+			} else if ("renderChartExternalData".equals(method)) { // render chart using external data
+				fc.renderChartGetData(out);
+			}
+		}
+	}
+
+	
 }
