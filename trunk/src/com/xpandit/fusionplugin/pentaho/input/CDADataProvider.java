@@ -88,9 +88,9 @@ public class CDADataProvider extends DataProvider {
 			final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
 			paramTypes = new Class[] { String.class, String.class, int.class, String.class, Boolean.class,
-					Boolean.class, int.class, int.class, String.class, List.class, HttpServletResponse.class,
+					Boolean.class, int.class, int.class, Boolean.class, List.class, HttpServletResponse.class,
 					HttpServletRequest.class };
-			m = cdaBeanClass.getMethod("doQueryGet", paramTypes);
+			m = cdaBeanClass.getMethod("doQueryPost", paramTypes);
 
 			// Set parameters
 			paramValues = new Object[12];
@@ -102,7 +102,7 @@ public class CDADataProvider extends DataProvider {
 			paramValues[5] = false;             //paginateQuery
 			paramValues[6] = 0;                 //pageSize
 			paramValues[7] = 0;                 //pageStart
-			paramValues[8] = "false";             //wrapItUp
+			paramValues[8] = false;             //wrapItUp
 			/*String[] sortFields = params.getStringArrayParameter("sortBy", new String[0]);
             List<String> sortList = new ArrayList<String>(sortFields.length);
             for (String sortField : sortFields) {

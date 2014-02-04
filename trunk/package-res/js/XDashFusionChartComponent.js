@@ -10,7 +10,7 @@ var xLoadFunct= function(){
 		update: function(){
 
 			var options = this.getOptions();
-			
+
 			//send the webAppPath to the plugin
 			//need in realtimecharts
 			options.webAppPath=webAppPath;
@@ -20,84 +20,131 @@ var xLoadFunct= function(){
 
 			// get the xml chart
 			var resultXml = $.ajax({url: url, data: options, async: false}).responseText;
-			myself.xmlResultData = resultXml;
-			
-			// get chart type from xml
-			options.chartType = $(resultXml).attr("chartType");
-			
-			// get HTML5 from xml
-			options.isHTML5 = eval($(resultXml).attr("isHTML5"));
 
-			//test if is for free version
-			var isFree=eval($(resultXml).attr("free"));
-			options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
-
-			// calculate width and height of fusion chart
-			var widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);
-			var widgetPanel = document.getElementById("content-area-Panel_" + widgetNum);
-
-			if(widgetPanel != undefined) { //we are in an EE dashboard 
-				var rect = getRectangle(widgetPanel);
-				options.width = rect.width - 25;
-				options.height = rect.height - 20;
-			}
-
-			//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded
-			if(myself.chartObject == undefined || options.reloadOnRefresh ||isFree) {
-				this.clear();
-				
-				//is to render in HTML5?
-				if(options.isHTML5==undefined)
-					options.isHTML5=false;
-				var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
-							
-				//create chart Object
-				myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
-
-				myself.chartObject.setDataXML(resultXml);
-
-				//set extra configuration for HTML5 charts
-				if (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
-					myself.chartObject.chartObject._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
-				} 
-
-				// add the chart
-				myself.chartObject.render(myself.htmlObject); 	
-				$("#"+options.htmlObject).find("embed").attr("wmode","transparent");
-
-				// set the back button
-				if(myself.backButton) {
-					var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
-					div.css("left",Number(myself.chartDefinition.width));	
-					$("#"+myself.htmlObject).prepend(div);	
-					div.click(myself.backButtonCallBack);
-				}
-				//on Dashboard EE??
-				try{
-					if(PentahoDashboardController!=undefined)
-						myself.chartObject=undefined;
-				}
-				catch(e)
+			// if not graph or chart,  show error 
+			if((resultXml.toLowerCase().indexOf("<graph") == -1) &&
+					(resultXml.toLowerCase().indexOf("<chart") == -1))
+			{			
+				if (resultXml.toLowerCase().indexOf("error:") >= 0)
 				{
-						myself.chartObject=undefined;
-				}
+					var res = resultXml.replace("Error:","");
 					
-			} else {
-				// just a quick update
-				myself.chartObject.setDataXML(resultXml);
+					$("#"+myself.htmlObject).html(
+							"<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">"+
+							"<p style=\"margin: 0 0 .3em;\">"+
+							"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+
+							"<strong>Error:</strong>"+
+							res+
+							"</p></div>");
+				}
+				else
+					$("#"+myself.htmlObject).html(resultXml);
+			}
+			// graph + warnings
+			else
+			{	
+				var hasWarning = false;
+				if (resultXml.toLowerCase().indexOf("warning") >= 0)
+				{				
+					resultXml = resultXml.replace("Warning:","");
+					var index = resultXml.indexOf("<");	
+					var warning = resultXml.substring(0,index);
+					hasWarning = true;
+					
+					resultXml = resultXml.substring(index,resultXml.lenght);
+				}
+				
+				myself.xmlResultData = resultXml;
+
+				// get chart type from xml
+				options.chartType = $(resultXml).attr("chartType");
+
+				// get HTML5 from xml
+				options.isHTML5 = eval($(resultXml).attr("isHTML5"));
+
+				//test if is for free version
+				var isFree=eval($(resultXml).attr("free"));
+				options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
+
+				// calculate width and height of fusion chart
+				var widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);
+				var widgetPanel = document.getElementById("content-area-Panel_" + widgetNum);
+
+				if(widgetPanel != undefined) { //we are in an EE dashboard 
+					var rect = getRectangle(widgetPanel);
+					options.width = rect.width - 25;
+					options.height = rect.height - 20;
+				}
+
+				//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded
+				if(myself.chartObject == undefined || options.reloadOnRefresh ||isFree) {
+					this.clear();
+
+					//is to render in HTML5?
+					if(options.isHTML5==undefined)
+						options.isHTML5=false;
+					var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
+
+					//create chart Object
+					myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
+
+					myself.chartObject.setDataXML(resultXml);
+
+					//set extra configuration for HTML5 charts
+					if (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
+						myself.chartObject.chartObject._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
+					} 
+
+					// add the chart
+					myself.chartObject.render(myself.htmlObject); 	
+					$("#"+options.htmlObject).find("embed").attr("wmode","transparent");
+
+					// set the back button
+					if(myself.backButton) {
+						var div=$('<div class="ui-state-default ui-corner-all" title="" style="position: absolute;"><span class="ui-icon ui-icon-arrowreturnthick-1-w"></span></div>');	
+						div.css("left",Number(myself.chartDefinition.width));	
+						$("#"+myself.htmlObject).prepend(div);	
+						div.click(myself.backButtonCallBack);
+					}
+					
+					// add div with warning
+					if(hasWarning){
+					$("#"+myself.htmlObject).append(
+							"<div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\">"+
+							"<p style=\"margin: 0 0 .3em;\">"+
+							"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: 3em;\"></span>"+
+							"<strong>Warning:</strong>"+
+							warning+
+							"</p></div>");
+					}
+					
+					//on Dashboard EE??
+					try{
+						if(PentahoDashboardController!=undefined)
+							myself.chartObject=undefined;
+					}
+					catch(e)
+					{
+						myself.chartObject=undefined;
+					}
+
+				} else {
+					// just a quick update
+					myself.chartObject.setDataXML(resultXml);
+				}
 			}
 		},
 
 		getOptions: function(){
 
 			var options = {};
-			
+
 			if(typeof this.action !== 'undefined'){
-			    options.solution = this.solution;
-			    options.path = this.path;
-			    options.name = this.action;
+				options.solution = this.solution;
+				options.path = this.path;
+				options.name = this.action;
 			} else if(typeof this.xFusionPath !== "undefined"){
-			    options.xFusionPath = this.xFusionPath;
+				options.xFusionPath = this.xFusionPath;
 			}
 
 			// process parameters and build the cdaParameters string
@@ -124,21 +171,21 @@ var xLoadFunct= function(){
 					options[key] = value?'1':'0';
 				}
 				else
-				if(typeof(value)=="string")
-				{
-					//encode values
-					options[key] = encodeURIComponent(value);
-				}
-				else //tranform all the arrays with the exception of rangeValues element
-				if(value instanceof Array&&key!="rangeValues")
-				{	
-					if(value.length>0)
-						options[key] =  value.toString().replace(/,/gi,';');
-				}
-				else
-				{
-					options[key] = value;
-				}
+					if(typeof(value)=="string")
+					{
+						//encode values
+						options[key] = encodeURIComponent(value);
+					}
+					else //tranform all the arrays with the exception of rangeValues element
+						if(value instanceof Array&&key!="rangeValues")
+						{	
+							if(value.length>0)
+								options[key] =  value.toString().replace(/,/gi,';');
+						}
+						else
+						{
+							options[key] = value;
+						}
 			}
 
 			// TODO colocar aqui logica para permitir alterar entre os varios
@@ -150,8 +197,8 @@ var xLoadFunct= function(){
 			// default options
 			options["chartXML"] = true;
 			options["dashboard-mode"] = true;
-			
-						
+
+
 			//transform the array of range values into a JSON object  
 			var cols='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"}';
 			var rows='"rows":[{"c":[{"f":"0","v":0}';
@@ -167,12 +214,12 @@ var xLoadFunct= function(){
 					}
 					cols+='],';
 					rows+=']}]}';
-					
+
 					options.range=cols+rows;
 				}
-				
+
 			}
-			
+
 
 			return options;
 		},
