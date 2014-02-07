@@ -13,8 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
-import pt.portoeditora.pebook.serial.SerialData;
-import pt.portoeditora.pebook.serial.SerialGenerator;
+import com.xpandit.keygen.serial.SerialData;
+import com.xpandit.keygen.serial.SerialGenerator;
+
 
 public class LicenseChecker {
 

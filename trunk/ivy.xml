@@ -48,6 +48,5 @@
 	
 	<dependency org="javax.ws.rs" name="jsr311-api" rev="0.2"/>
 
-	<dependency org="key-generator" name="key-generator" rev="0.1"/>
   </dependencies>
 </ivy-module>
