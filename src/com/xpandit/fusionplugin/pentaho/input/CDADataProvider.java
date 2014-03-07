@@ -8,12 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -27,6 +28,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.table.TableModel;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +44,8 @@ import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.reporting.engine.classic.extensions.datasources.cda.CdaResponseParser;
 
+import pt.webdetails.cpf.InterPluginCall;
+import pt.webdetails.cpf.InterPluginCall.Plugin;
 import pt.webdetails.cpf.web.DelegatingServletOutputStream;
 
 import com.xpandit.fusionplugin.PropertiesManager;
@@ -73,60 +79,54 @@ public class CDADataProvider extends DataProvider {
 	 * @return
 	 * @throws InvalidParameterException
 	 */
-	private IPentahoResultSet callCda(String cdaPath, String dataAcessId, Map<String, Object> cdaInputs) throws InvalidParameterException{
+	private IPentahoResultSet callCda(String cdaPath, String dataAccessId, Map<String, Object> cdaInputs) throws InvalidParameterException{
 
 		final IPentahoSession userSession = PentahoSessionHolder.getSession();
 		final IPluginManager pluginManager = PentahoSystem.get(IPluginManager.class, userSession);
 
 		try {
+			//Get Bean
 			Object cdaBean = pluginManager.getBean("cda.api");
 			Class cdaBeanClass = cdaBean.getClass();
 
+			//Set Parameters
 			Class[] paramTypes;
 			Object[] paramValues;
 			Method m;
 			final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-			paramTypes = new Class[] { String.class, String.class, int.class, String.class, Boolean.class,
-					Boolean.class, int.class, int.class, Boolean.class, List.class, HttpServletResponse.class,
-					HttpServletRequest.class };
-			m = cdaBeanClass.getMethod("doQueryPost", paramTypes);
+			//Set Method for InterPlugin Call
+			paramTypes = new Class[] { HttpServletRequest.class };
+			m = cdaBeanClass.getMethod("doQueryInterPlugin", paramTypes);
 
-			// Set parameters
-			paramValues = new Object[12];
-			paramValues[0] = cdaPath;
-			paramValues[1] = "xml";
-			paramValues[2] = 1;              //outputIndexId
-			paramValues[3] = dataAcessId;
-			paramValues[4] = false;             //bypassCache
-			paramValues[5] = false;             //paginateQuery
-			paramValues[6] = 0;                 //pageSize
-			paramValues[7] = 0;                 //pageStart
-			paramValues[8] = false;             //wrapItUp
-			/*String[] sortFields = params.getStringArrayParameter("sortBy", new String[0]);
-            List<String> sortList = new ArrayList<String>(sortFields.length);
-            for (String sortField : sortFields) {
-                sortList.add(sortField);
-            }*/
-			List<String> sortList = new ArrayList<String>(0);
-			paramValues[9] = sortList;//sortList;
-			paramValues[10] = getResponse(outputStream);
+			
+			//set "Basic Parameters"
+			cdaInputs.put("dataAccessId",dataAccessId);
+			cdaInputs.put("path",cdaPath);
+			cdaInputs.put("outputType","XML");
+			
+			
+			
+			// Set parameters for the Bean
+			paramValues = new Object[1];
+			paramValues[0] = getRequest(cdaInputs);
 
-			paramValues[11] = getRequest(cdaInputs);
-
-			m.invoke(cdaBean, paramValues);
-
-			//convert result into IPentahoResultSet
-			String responseBody = outputStream.toString();
-			final InputStream responseBodyIs = new ByteArrayInputStream( responseBody.getBytes( "UTF-8" ) );
+			//invoke
+			Object objectResponse = m.invoke(cdaBean, paramValues);
+			
+			//convert to table
+			final InputStream responseBodyIs = new ByteArrayInputStream( objectResponse.toString().getBytes() );
 			TypedTableModel table = CdaResponseParser.performParse(responseBodyIs);
 			return convertTableToResultSet(table);
 
+
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new InvalidParameterException(e.getMessage());
 		}
 	}
 
+	
 	/**
 	 * Converts tablemodel into IPentahoResultSet to make easier to use.
 	 * @param tableModel
@@ -380,7 +380,8 @@ public class CDADataProvider extends DataProvider {
 		}        
 		;
 	}
-
+	
+	
 	/**
 	 * Helper class that implements a dummy HttpServletResponse to use on the CDA call
 	 * @param stream
@@ -552,7 +553,6 @@ public class CDADataProvider extends DataProvider {
 		for (String queryID : queryIDs) {
 
 			// set data access id
-			cdaInputs.put("dataAccessId", queryID);
 			if (outputIndexIdDefined) {
 				cdaInputs.put("outputIndexId", outputIndexIds[iteration]);
 			}
