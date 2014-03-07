@@ -46,7 +46,7 @@
 	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />
 	<dependency org="log4j" name="log4j" rev="1.2.9"/>
 	
-	<dependency org="javax.ws.rs" name="jsr311-api" rev="0.2"/>
+	<dependency org="javax.ws.rs" name="javax.ws.rs-api" rev="2.0"/>
 
   </dependencies>
 </ivy-module>
