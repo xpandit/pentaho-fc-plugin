@@ -1,5 +1,6 @@
 package com.xpandit.fusionplugin.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
@@ -32,6 +33,14 @@ public class LicenseChecker {
 		Path path = Paths.get(PentahoSystem.getApplicationContext().getSolutionPath(
 				"system/" + PLUGIN_NAME + "/key.txt"));
 
+		File f = new File(path.toString());
+		
+		if(!f.exists()) { 
+			f.createNewFile();
+			out.write(("Error: Fusion Charts Plugin needs a license.").getBytes());
+			return false;
+		}
+		
 		// get key from file
 		List<String> lines = Files.readAllLines(path, ENCODING);
 		String key = lines.get(0);
