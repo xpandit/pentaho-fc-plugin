@@ -30,7 +30,6 @@
 	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-core-5.0.1-stable.jar"/>
 	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-extensions-cda-5.0.1-stable-sources.jar"/>
 	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-extensions-cda-5.0.1-stable.jar"/>
-	<classpathentry kind="lib" path="lib/javax.ws.rs-api-2.0.jar"/>
 	<classpathentry kind="lib" path="dev-lib/key-generator-0.1.jar"/>
 	<classpathentry kind="lib" path="dev-lib/cpf-5.0.1.jar"/>
 	<classpathentry kind="output" path="binaux"/>

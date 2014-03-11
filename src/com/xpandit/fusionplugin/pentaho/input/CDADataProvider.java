@@ -8,13 +8,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -28,9 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.table.TableModel;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,8 +39,6 @@ import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.reporting.engine.classic.extensions.datasources.cda.CdaResponseParser;
 
-import pt.webdetails.cpf.InterPluginCall;
-import pt.webdetails.cpf.InterPluginCall.Plugin;
 import pt.webdetails.cpf.web.DelegatingServletOutputStream;
 
 import com.xpandit.fusionplugin.PropertiesManager;
@@ -99,7 +92,6 @@ public class CDADataProvider extends DataProvider {
 			paramTypes = new Class[] { HttpServletRequest.class };
 			m = cdaBeanClass.getMethod("doQueryInterPlugin", paramTypes);
 
-			
 			//set "Basic Parameters"
 			cdaInputs.put("dataAccessId",dataAccessId);
 			cdaInputs.put("path",cdaPath);
@@ -558,6 +550,11 @@ public class CDADataProvider extends DataProvider {
 			}
 
 			String cdaPath= (String) pm.getParams().get(CDAPATH);
+			
+			//set the output index to CDA is required as a parameter
+			String outputIndexId=pm.getParams().containsKey(CDAOUTPUTID)?(String) pm.getParams().get(CDAOUTPUTID):"1";
+			cdaInputs.put(CDAOUTPUTID, outputIndexId);
+			
 			resultset= callCda(cdaPath,queryID,cdaInputs);
 			aux.add(resultset);
 
