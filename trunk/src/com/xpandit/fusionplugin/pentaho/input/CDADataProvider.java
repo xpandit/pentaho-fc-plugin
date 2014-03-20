@@ -1,30 +1,12 @@
 package com.xpandit.fusionplugin.pentaho.input;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
-import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.swing.table.TableModel;
 
 import org.apache.commons.logging.Log;
@@ -32,15 +14,10 @@ import org.apache.commons.logging.LogFactory;
 import org.pentaho.commons.connection.IPentahoResultSet;
 import org.pentaho.commons.connection.memory.MemoryMetaData;
 import org.pentaho.commons.connection.memory.MemoryResultSet;
-import org.pentaho.platform.api.engine.IPentahoSession;
-import org.pentaho.platform.api.engine.IPluginManager;
-import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
-import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 import org.pentaho.reporting.engine.classic.extensions.datasources.cda.CdaResponseParser;
 
 import pt.webdetails.cpf.InterPluginCall;
-import pt.webdetails.cpf.web.DelegatingServletOutputStream;
 
 import com.xpandit.fusionplugin.PropertiesManager;
 import com.xpandit.fusionplugin.exception.InvalidDataResultSetException;
@@ -280,8 +257,6 @@ public class CDADataProvider extends DataProvider {
         if (params.get(DATASTAMP) != null) {
             parameterKeys = parameterKeys + ";" + DATASTAMP;
         }
-
-        StringBuffer cdaParameterString = new StringBuffer();
 
         String[] parametersKeysArray = parameterKeys.split(";");
         for (int i = 0; i < parametersKeysArray.length; i++) {
