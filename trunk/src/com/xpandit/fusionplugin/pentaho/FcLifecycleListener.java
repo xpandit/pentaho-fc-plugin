@@ -3,6 +3,7 @@ package com.xpandit.fusionplugin.pentaho;
 import org.pentaho.platform.api.engine.IPluginLifecycleListener;
 import org.pentaho.platform.api.engine.PluginLifecycleException;
 import com.xpandit.fusionplugin.GlobalPropertiesManager;
+import pt.webdetails.cpk.CpkLifecycleListener;
 
 /**
  * This class initializes fc plugin within the bi-platform
@@ -10,12 +11,13 @@ import com.xpandit.fusionplugin.GlobalPropertiesManager;
  * @author gorman
  * 
  */
-public class FcLifecycleListener implements IPluginLifecycleListener {
+public class FcLifecycleListener extends CpkLifecycleListener implements IPluginLifecycleListener {
 
 	
 	public void init() throws PluginLifecycleException {
 		// initialize gloab properties manager
 		GlobalPropertiesManager.getInstance();
+		super.init();
 	}
 
 	public void loaded() throws PluginLifecycleException {
@@ -26,9 +28,12 @@ public class FcLifecycleListener implements IPluginLifecycleListener {
 		} finally {
 			Thread.currentThread().setContextClassLoader(contextCL);
 		}
+		super.loaded();
 	}
 
+	@Override
 	public void unLoaded() throws PluginLifecycleException {
+		// TODO Auto-generated method stub
+		super.unLoaded();
 	}
-
 }
