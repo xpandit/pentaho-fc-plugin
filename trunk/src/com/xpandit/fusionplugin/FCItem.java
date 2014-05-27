@@ -343,7 +343,7 @@ abstract public class FCItem {
 				targetValue = Double.parseDouble(resultSets.get("rangeValues").get(1).getValueAt(0, 0).toString());
 				haveTargetValue = true;
 			}
-
+			
 			// set the range values
 			for (int i = 0; i < rangeResultSet.getColumnCount(); ++i) {
 				double value;
@@ -355,7 +355,9 @@ abstract public class FCItem {
 					value = Double.parseDouble(rangeResultSet.getValueAt(0, i).toString());
 				}
 				
-				graph.setColorRangeValues(i, new ColorRange(lastValue, value, colorValues[i],displayValues!=null?displayValues[i]:null));
+				if(i != 0){
+					graph.setColorRangeValues(i-1, new ColorRange(lastValue, value, colorValues[i-1],displayValues!=null?displayValues[i-1]:null));
+				}
 				lastValue = value;
 			}
 		}
