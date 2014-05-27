@@ -17,6 +17,7 @@ public class Entity {
 	private Double value;
 	private String event;
 	private String color;
+	private String toolText;
 	
 	/**
 	 * @return the color
@@ -67,4 +68,16 @@ public class Entity {
 		this.event = event;
 	}
 
+	/**
+         * @return the toolText
+         */
+        public String getTooltext() {
+                return toolText;
+        }
+        /**
+         * @param toolText to set
+         */
+        public void setToolText(String toolText) {
+                this.toolText = toolText;
+        }
 }

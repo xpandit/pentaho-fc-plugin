@@ -61,6 +61,9 @@ public class ChartFactoryMaps extends ChartFactory {
 				xmlwriter.writeAttribute("color", ent.getColor());
 
 			xmlwriter.writeAttribute("value", ent.getValue().toString());
+			
+	                if(ent.getTooltext() != null)
+	                    xmlwriter.writeAttribute("tooltext", ent.getTooltext());
 
 			if(ent.getEvent() != null)
 				xmlwriter.writeAttribute("link", ent.getEvent());

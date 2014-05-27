@@ -39,31 +39,30 @@ public class FCMaps extends FCItem {
      * @param resultSets Results sets containig data to display.
      * @throws InvalidDataResultSetException
      */
-    public FCMaps(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm)
+    public FCMaps(ChartType chartType, Map<String, ArrayList<IPentahoResultSet>> resultSets, PropertiesManager pm)
             throws InvalidDataResultSetException {
 
-    	TreeMap<String, Object> params=pm.getParams();
-        // set category length 
+        TreeMap<String, Object> params = pm.getParams();
+        // set category length
         int categoryLength = 0;
         ArrayList<IPentahoResultSet> results = resultSets.get("results");
         categoryLength = results.get(0).getRowCount();
 
         // initialize chart
         graph = new FusionGraph("chart", chartType, categoryLength);
-        
-        //set chart properties
+
+        // set chart properties
         setChartProperties(params);
-        
+
         // get nodes
         chartLink = graph.getChartProperties().get("chartLink");
         entityParam = graph.getChartProperties().get("entityParam");
-        //if entityParam is null try series param 
-        if(entityParam==null)
-        	entityParam = graph.getChartProperties().get("seriesParam");
+        // if entityParam is null try series param
+        if (entityParam == null)
+            entityParam = graph.getChartProperties().get("seriesParam");
         valueParam = graph.getChartProperties().get("valueParam");
-        
-       
-        //set the Data on the chart
+
+        // set the Data on the chart
         setData(resultSets);
     }
 
@@ -82,9 +81,9 @@ public class FCMaps extends FCItem {
         setData(resultSets.get("results").get(0));
 
         int rowCount = getRowCount();
-        if(rowCount==0)
-        	return;
-        
+        if (rowCount == 0)
+            return;
+
         // get Data Set Metadata
         IPentahoMetaData metadata = getMetaData();
         // verify meta data
@@ -93,7 +92,6 @@ public class FCMaps extends FCItem {
         if (metadataSize < 2)
             throw new InvalidDataResultSetException(InvalidDataResultSetException.ERROR_001, "less than 2");
 
-        
         // set the categories
         for (int i = 0; i < rowCount; i++) {
             try {
@@ -101,29 +99,33 @@ public class FCMaps extends FCItem {
                 Entity ent = new Entity();
                 ent.setID(getDataValue(i, 0).toString());
                 ent.setValue(Double.parseDouble((getDataValue(i, 1).toString())));
-                if (chartLink != null) {
-                    setChartLink(ent,i);
+
+                //if dataset has a 3rd column it is the Tooltext
+                if (metadataSize > 2) {
+                    ent.setToolText((String) getDataValue(i, 2));
                 }
-                setEntityColor(ent,i);
-                
+
+                if (chartLink != null) {
+                    setChartLink(ent, i);
+                }
+                setEntityColor(ent, i);
+
                 // set category in chart
                 graph.setEntity(i, ent);
             } catch (Exception e) {
                 log.error("Problem in result set. Null values found at index:" + i, e);
             }
         }
-        
+
         // process the dial range values
         try {
-			setRangeValues(resultSets);
-		} catch (InvalidParameterException e) {
-			 log.error("Problem in result set of setRangeValues.", e);
-		}
-        
+            setRangeValues(resultSets);
+        } catch (InvalidParameterException e) {
+            log.error("Problem in result set of setRangeValues.", e);
+        }
+
     }
-    
-    
-    
+
     /**
      * Set the Entity Color
      * 
@@ -140,14 +142,14 @@ public class FCMaps extends FCItem {
             // split the values
             String color = (value.split(";"))[entityIndex];
             if (graph.getGraphType().isSingleSeries())
-            	entity.setColor(color);
+                entity.setColor(color);
 
         }
     }
-    
 
     /**
      * Allows setting chart links.
+     * 
      * @param series Series where to set the link.
      * @param seriesIndex Index where to change.
      */
@@ -157,26 +159,27 @@ public class FCMaps extends FCItem {
 
         // set entityParam
         if (entityParam != null) {
-            serieChartLink = chartLink.replace("{" + entityParam + "}",ent.getId());
+            serieChartLink = chartLink.replace("{" + entityParam + "}", ent.getId());
         }
         // set the value
         if (valueParam != null) {
             serieChartLink = serieChartLink.replace("{" + valueParam + "}", ent.getValue().toString());
         }
-        
+
         ent.setEvent(serieChartLink);
     }
-    
+
     /**
      * Render the chart XML.
+     * 
      * @return XML for the chart.
      * @throws Exception
      */
     public String generateChart() throws Exception {
-    	ChartFactoryMaps chart	= new ChartFactoryMaps(false);   
-		//attach graph to chart factory
-		chart.insertGraph(graph);
-		return chart.buildDOMFusionChart(graph.getGraphId()); 
+        ChartFactoryMaps chart = new ChartFactoryMaps(false);
+        // attach graph to chart factory
+        chart.insertGraph(graph);
+        return chart.buildDOMFusionChart(graph.getGraphId());
     }
 
 }
