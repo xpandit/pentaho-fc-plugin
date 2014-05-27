@@ -48,6 +48,11 @@ public class PropertiesManager {
     // Other
     public static final String ISDASHBOARDMODE = "dashboard-mode";
     public static final String CHARTXML = "chartXML";
+    
+    //Security
+    public static final String PREVENTXSS = "preventXSS";
+    public static final String XSS_REGEX = "xssRegex";
+    public static final String XSS_REGEX_ATTRIBUTES = "xssRegexAttributes";
 
     private Logger log = Logger.getLogger(PropertiesManager.class);// class Logger
 
@@ -59,6 +64,9 @@ public class PropertiesManager {
 
     // Single property for non-legacy mode
     private String xFusionFile = null;
+    
+    // Set of all properties populated in the right order to allow overriding
+    TreeMap<String, Object> params = null;
 
     /**
      * 
@@ -91,6 +99,25 @@ public class PropertiesManager {
         } else {
             fillLocalParameters();
         }
+        
+        // put all properties by order all properties are replaced
+        params = new TreeMap<String, Object>();
+        params.putAll(GlobalPropertiesManager.getInstance().getProperties());
+        params.putAll(localProperties);
+        
+        //if cross site scripting security is activated validate all outside parameters for suspicious values.
+        //this parameter can only be activated on global or xfusion file
+        if(params.get(PREVENTXSS)!= null && ((String) params.get(PREVENTXSS)).equalsIgnoreCase("true")){
+            String regex = null;
+            if(params.get(XSS_REGEX)!= null){
+                regex = ((String) params.get(XSS_REGEX));
+            } else { //default pattern if non is defined
+                regex = "[\\w;]*|[\\w,]*|[\\w\\&\\[\\]\\.]*|[\\w_]*|[\\w\\-]*|[\\w/]*";
+            }
+            secureInstanceParameters(instanceProperties,regex);
+        }
+        
+        params.putAll(instanceProperties);
     }
 
     /**
@@ -131,14 +158,6 @@ public class PropertiesManager {
      * @return Map with all parameters joined by order
      */
     public TreeMap<String, Object> getParams() {
-        // TODO place as object property so that it doesn't have to be calculated on every call, requires evaluating
-        // possible side imapct.
-        TreeMap<String, Object> params = new TreeMap<String, Object>();
-
-        // put all properties by order all properties are replaced
-        params.putAll(GlobalPropertiesManager.getInstance().getProperties());
-        params.putAll(localProperties);
-        params.putAll(instanceProperties);
 
         // used for legacy mode of referencing files
         // TODO do we need to handle cda file was specified and it is on the same directory as xfusion?
@@ -174,5 +193,22 @@ public class PropertiesManager {
      */
     public TreeMap<String, Object> getInstanceParameters() {
         return instanceProperties;
+    }
+    
+    /**
+     * Method that verifies if all instance parameters are compliant and don't have any scripting
+     * @param instanceProperties Parameters obtained from the request
+     * @param regex  Regex pattern to apply on validation
+     * @throws InvalidParameterException Throws exception if pattern is not matched
+     */
+    private void secureInstanceParameters(TreeMap<String, Object> instanceProperties, String regex) throws InvalidParameterException{
+        
+        for(String key : instanceProperties.keySet()){
+            if(!key.matches(regex))
+                throw new InvalidParameterException("Cross-site scripting validation is active! Parameter name:\""+key+"\" is not compliant with regex validation");
+            String value = instanceProperties.get(key).toString();
+            if(!value.matches(regex))
+                throw new InvalidParameterException("Cross-site scripting validation is active! Parameter (\""+key+"\") value:\""+value+"\" is not compliant with regex validation");
+        }
     }
 }
