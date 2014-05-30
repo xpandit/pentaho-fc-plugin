@@ -111,7 +111,7 @@ public class PropertiesManager {
             if(params.get(XSS_REGEX)!= null){
                 regex = ((String) params.get(XSS_REGEX));
             } else { //default pattern if non is defined
-                regex = "[\\w;]*|[\\w,]*|[\\w\\&\\[\\]\\.]*|[\\w_]*|[\\w\\-]*|[\\w/]*";
+                regex = "[\\w·¡„√‚¬È…Í ÌÕÛ”ı’Û”˙⁄Á«;]*|[\\w,]*|[\\w\\[\\]\\.&,]*|[\\w_]*|[\\w\\-]*|[\\w/]*|[\\w#;]*";
             }
             secureInstanceParameters(instanceProperties,regex);
         }
@@ -200,12 +200,12 @@ public class PropertiesManager {
      * @param regex  Regex pattern to apply on validation
      * @throws InvalidParameterException Throws exception if pattern is not matched
      */
-    private void secureInstanceParameters(TreeMap<String, Object> instanceProperties, String regex) throws InvalidParameterException{
+    private void secureInstanceParameters(TreeMap<String, Object> properties, String regex) throws InvalidParameterException{
         
-        for(String key : instanceProperties.keySet()){
+        for(String key : properties.keySet()){
             if(!key.matches(regex))
                 throw new InvalidParameterException("Cross-site scripting validation is active! Parameter name:\""+key+"\" is not compliant with regex validation");
-            String value = instanceProperties.get(key).toString();
+            String value = properties.get(key).toString();
             if(!value.matches(regex))
                 throw new InvalidParameterException("Cross-site scripting validation is active! Parameter (\""+key+"\") value:\""+value+"\" is not compliant with regex validation");
         }
