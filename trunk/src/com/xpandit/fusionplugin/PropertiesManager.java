@@ -91,19 +91,18 @@ public class PropertiesManager {
         }
         this.instanceProperties = instanceProperties;
         this.localProperties = new TreeMap<String, Object>();
-
-        // check if xFusion is being used
-        if (this.xFusionFile == null) {
-            log.debug("No xFusion file is configured");
-            return;
-        } else {
-            fillLocalParameters();
-        }
         
         // put all properties by order all properties are replaced
         params = new TreeMap<String, Object>();
         params.putAll(GlobalPropertiesManager.getInstance().getProperties());
-        params.putAll(localProperties);
+
+        // check if xFusion is being used
+        if (this.xFusionFile == null) {
+            log.debug("No xFusion file is configured");
+        } else {
+            fillLocalParameters();
+            params.putAll(localProperties);
+        }
         
         //if cross site scripting security is activated validate all outside parameters for suspicious values.
         //this parameter can only be activated on global or xfusion file
