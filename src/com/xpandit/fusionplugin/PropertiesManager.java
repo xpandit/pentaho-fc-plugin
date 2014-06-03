@@ -114,6 +114,10 @@ public class PropertiesManager {
                 regex = "[\\wáÁãÃâÂéÉêÊíÍóÓõÕóÓúÚçÇ;]*|[\\w,]*|[\\w\\[\\]\\.&,]*|[\\w_]*|[\\w\\-]*|[\\w/]*|[\\w#;]*";
             }
             secureInstanceParameters(instanceProperties,regex);
+            
+            //remover a regex para não ser mostrados aos utilizadores
+            params.remove(PREVENTXSS);
+            params.remove(XSS_REGEX);
         }
         
         params.putAll(instanceProperties);
