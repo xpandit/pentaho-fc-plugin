@@ -29,6 +29,7 @@ It is possible to change chart settings the same way as if you were using it on 
   # Edit the returned properties on 2 levels:
     # Overall, applies to every chart and are set by changing the function _getOverallSettings()_
     # For each chart type you can create a specific function that contains specific properties and can override overall settings. The function name must be the same as the chart id (id can be found on _\fusion_plugin\js\vizapi\fusioncharts_wrapper.js_). The plugin ships with an example _fcplugin_angulargauge()_
+    # You also can change here the property to use free charts (isFree: true)
 
 === Disable Analyzer Integration ===
 If you are using Pentaho CE version or if you don't need Analyzer integration you can disable it.
