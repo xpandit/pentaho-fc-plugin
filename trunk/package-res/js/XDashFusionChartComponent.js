@@ -254,7 +254,7 @@ var xLoadFunct= function(){
 			var url = webAppPath + '/content/xfusion/checkVersions';
 			var myself=this;
 			// get the xml chart
-			var result=$.ajax({url: url, async: false}).responseText;
+			var result=$.ajax({url: url, async: false, type:'GET'}).responseText;
 			eval(result);
 		}
 		// correct the Index for pentaho version greater than 3.10
