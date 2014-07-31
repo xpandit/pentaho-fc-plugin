@@ -11,7 +11,8 @@
 
  # Stop Pentaho Server 
  # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
- # Change the file _system/importExport.xml_ to allow xFusion files. The requires adding xfusion in 3 places:
+ # Depending on the version of Pentaho is necessary to add an import Handler:
+  # Pentaho 5.0: Change the file _system/importExport.xml_ to allow xFusion files. The requires adding xfusion in 3 places:
 {{{ 
 <util:map id="convertersMap"> 
    ... 
@@ -31,6 +32,25 @@
    </constructor-arg>
 </bean>
 
+<util:list id="approvedExtensionList">
+   ...
+   <value>.xfusion</value>    
+   <value>.wcdf</value>
+   <value>.cdfde</value> 
+</util:list>
+}}}
+  # Pentaho 5.1: Change the file _system/ImportHandlerMimeTypeDefinitions.xml_ to allow xFusion files. Add this handler at the bottom of file:
+{{{ 
+<ImportHandler class="org.pentaho.platform.plugin.services.importer.RepositoryFileImportFileHandler">
+	<MimeTypeDefinitions>
+		<MimeTypeDefinition mimeType="text/plain" hidden="false" converter="streamConverter">
+			<extension>xfusion</extension>
+		</MimeTypeDefinition>
+	</MimeTypeDefinitions>
+</ImportHandler>
+}}}
+    Change the file _system/importExport.xml_ adding xfusion in 1 places:
+{{{ 
 <util:list id="approvedExtensionList">
    ...
    <value>.xfusion</value>    
