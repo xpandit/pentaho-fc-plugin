@@ -51,12 +51,15 @@
 }}}
     Change the file _system/importExport.xml_ adding xfusion in 1 places:
 {{{ 
-<util:list id="approvedExtensionList">
-   ...
-   <value>.xfusion</value>    
-   <value>.wcdf</value>
-   <value>.cdfde</value> 
-</util:list>
+<bean id="DefaultExportHandler" class="org.pentaho.platform.plugin.services.importexport.DefaultExportHandler">
+	<property name="repository" ref="unifiedRepository" />
+	<property name="localeExportList">
+		<list>
+			...
+			<value>.xfusion</value>
+		</list>
+	</property>
+</bean>
 }}}
  # Start Pentaho Server 
 
