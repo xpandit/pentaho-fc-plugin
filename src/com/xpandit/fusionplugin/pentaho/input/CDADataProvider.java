@@ -59,9 +59,8 @@ public class CDADataProvider extends DataProvider {
             cdaInputs.put("path", cdaPath);
             cdaInputs.put("outputType", "XML");
 
-            //TODO old version of doQUery is being called because cpf makes it mandatory to have a request and a response
-            InterPluginCall cdaCall = new InterPluginCall(InterPluginCall.CDA, "doQueryInterPluginOld");
-            cdaCall.setRequestParameters(cdaInputs);
+          //new call InterPluginCall
+            InterPluginCall cdaCall = new InterPluginCall(InterPluginCall.CDA, null, "doQueryInterPlugin", cdaInputs);
             String response = cdaCall.callInPluginClassLoader();
 
             final InputStream responseBodyIs = new ByteArrayInputStream(response.toString().getBytes());
