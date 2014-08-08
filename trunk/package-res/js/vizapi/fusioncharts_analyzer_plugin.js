@@ -92,7 +92,10 @@ analyzerPlugins.push(
 			// fired it is for the 2d_3d
 			if(config.byId('2d_3d')!=undefined)
 				this.report.visualization.args['2d_3d'] = config.byId('2d_3d').value; 
-				
+			
+			//update the visualization
+			this.report.visualizationController.updateVisualization(this.report.generateVizOptions);
+			
             this.inherited(arguments); // Let super class handle the insertAt and 
                                         // removedGem events 
            }, 
