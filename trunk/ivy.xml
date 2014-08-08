@@ -14,9 +14,8 @@
   <dependencies>
 	
 	<!-- pentaho cda -->
-	<!-- TODO we need to use cda directly-->
-	<!-- As of now these files are placed directly on dev-lib and copied to lib on the plugin-->
-	<dependency org="pentaho" name="cpf" rev="${dependency.bi-platform.revision}" transitive="false" changing="true"/>
+	<dependency org="pentaho" name="cpf-core" rev="REFACTOR-SNAPSHOT" transitive="false" changing="true"/>
+	<dependency org="pentaho" name="cpf-pentaho5" rev="REFACTOR-SNAPSHOT"  transitive="false" changing="true"/>
 	
 	<!-- Required to easily parse CDA results  -->
 	<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-extensions-cda" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
