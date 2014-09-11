@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bworkspace_loc%3APentahoFCPlugin%2Fivysettings.xml%7D&amp;loadSettingsOnDemand=false&amp;propertyFiles=%24%7Bworkspace_loc%3APentahoFCPlugin%2Fbuild.properties%7D"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/json-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/libbase-1.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/libbase-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-connections-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-connections-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-api-5.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-api-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-core-5.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-core-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-repository-5.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-repository-5.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-versionchecker-2.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-versionchecker-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/cpf-5.0.1.jar" sourcepath="/cpf-pentaho"/>
+	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-core-5.0.1-stable-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-core-5.0.1-stable.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-extensions-cda-5.0.1-stable-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-reporting-engine-classic-extensions-cda-5.0.1-stable.jar"/>
+	<classpathentry kind="lib" path="dev-lib/key-generator-0.1.jar"/>
+	<classpathentry kind="lib" path="dev-lib/cpf-5.0.1.jar"/>
+	<classpathentry kind="output" path="binaux"/>
+</classpath>

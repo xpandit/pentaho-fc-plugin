@@ -1,0 +1,10 @@
+cdaName=BubbleChart.cda
+cdaDataAccessId=1
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=Bubble
+categoriesColor=FF654F;F6BD0F;8BBA00;8Baa00;8BBA12;FFFFFF
+height=200
+width=500
+free=false

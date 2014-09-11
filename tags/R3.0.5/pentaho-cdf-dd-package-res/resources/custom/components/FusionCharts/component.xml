@@ -1,0 +1,418 @@
+
+<DesignerComponents>
+	<DesignerComponent>
+		<Header>
+			<Name>FusionCharts Component</Name>
+			<IName>XDashFusionChartComponent</IName>
+			<Description>FusionCharts Component</Description>
+			<Category>CHARTS</Category>
+			<CatDescription>Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">fusionChartType</Property>
+					<Property type="string" name="path">path</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+	<DesignerComponent>
+		<Header>
+			<Name>Real Time Line</Name>
+			<IName>XDashFusionChartComponentRealTimeLine</IName>
+			<Description>Real Time Line</Description>
+			<Category>REALTIMECHARTS</Category>
+			<CatDescription>Real Time Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">realTimeChartTypeLine</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+
+					<Property>canvasBgColor</Property>
+					<Property>canvasBorderThickness</Property>
+					<Property>bgColor</Property>
+					<Property>showBorder</Property>
+					<Property>borderColor</Property>
+					<Property>caption</Property>
+					<Property>subCaption</Property>
+					<Property>xAxisName</Property>
+					<Property>yAxisName</Property>
+					<Property>refreshInterval</Property>
+					<Property>clearChartInterval</Property>
+					<Property>numDisplaySets</Property>
+					<Property>showYAxisValues</Property>
+					<Property>yAxisValueDecimals</Property>
+					<Property>showLabels</Property>
+					<Property>labelDisplay</Property>
+					<Property>slantLabels</Property>
+					<Property>labelStep</Property>
+					<Property>showValues</Property>
+					<Property>rotateValues</Property>
+					<Property>showLegend</Property>
+					<Property>legendPosition</Property>
+					<Property>formatNumber</Property>
+					<Property>numberPrefix</Property>
+					<Property>numberSuffix</Property>
+					<Property>decimals</Property>
+					<Property>formatNumberScale</Property>
+					<Property>baseFont</Property>
+					<Property>baseFontSize</Property>
+					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
+					
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+	<DesignerComponent>
+		<Header>
+			<Name>Real Time Column</Name>
+			<IName>XDashFusionChartComponentRealTimeColumn</IName>
+			<Description>Real Time Column</Description>
+			<Category>REALTIMECHARTS</Category>
+			<CatDescription>Real Time Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">realTimeChartTypeColumn</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+
+					<Property>canvasBgColor</Property>
+					<Property>canvasBorderThickness</Property>
+					<Property>bgColor</Property>
+					<Property>showBorder</Property>
+					<Property>borderColor</Property>
+					<Property>caption</Property>
+					<Property>subCaption</Property>
+					<Property>xAxisName</Property>
+					<Property>yAxisName</Property>
+					<Property>refreshInterval</Property>
+					<Property>clearChartInterval</Property>
+					<Property>numDisplaySets</Property>
+					<Property>showYAxisValues</Property>
+					<Property>yAxisValueDecimals</Property>
+					<Property>showLabels</Property>
+					<Property>labelDisplay</Property>
+					<Property>slantLabels</Property>
+					<Property>labelStep</Property>
+					<Property>showValues</Property>
+					<Property>placeValuesInside</Property>
+					<Property>rotateValues</Property>
+					<Property>showLegend</Property>
+					<Property>legendPosition</Property>
+					<Property>formatNumber</Property>
+					<Property>numberPrefix</Property>
+					<Property>numberSuffix</Property>
+					<Property>decimals</Property>
+					<Property>formatNumberScale</Property>
+					<Property>baseFont</Property>
+					<Property>baseFontSize</Property>
+					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+	<DesignerComponent>
+		<Header>
+			<Name>Real Time StackedArea</Name>
+			<IName>XDashFusionChartComponentRealTimeStackedArea</IName>
+			<Description>Real Time StackedArea</Description>
+			<Category>REALTIMECHARTS</Category>
+			<CatDescription>Real Time Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">realTimeChartTypeStackedArea</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+
+					<Property>canvasBgColor</Property>
+					<Property>canvasBorderThickness</Property>
+					<Property>bgColor</Property>
+					<Property>showBorder</Property>
+					<Property>borderColor</Property>
+					<Property>stack100Percent</Property>
+					<Property>showPercentValues</Property>
+					<Property>showPercentInToolTip</Property>
+					<Property>caption</Property>
+					<Property>subCaption</Property>
+					<Property>xAxisName</Property>
+					<Property>yAxisName</Property>
+					<Property>refreshInterval</Property>
+					<Property>clearChartInterval</Property>
+					<Property>numDisplaySets</Property>
+					<Property>showYAxisValues</Property>
+					<Property>yAxisValueDecimals</Property>
+					<Property>showLabels</Property>
+					<Property>labelDisplay</Property>
+					<Property>slantLabels</Property>
+					<Property>labelStep</Property>
+					<Property>showValues</Property>
+					<Property>rotateValues</Property>
+					<Property>showLegend</Property>
+					<Property>legendPosition</Property>
+					<Property>formatNumber</Property>
+					<Property>numberPrefix</Property>
+					<Property>numberSuffix</Property>
+					<Property>decimals</Property>
+					<Property>formatNumberScale</Property>
+					<Property>baseFont</Property>
+					<Property>baseFontSize</Property>
+					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
+
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+	<DesignerComponent>
+		<Header>
+			<Name>Real Time Line DY</Name>
+			<IName>XDashFusionChartComponentRealTimeLineDY</IName>
+			<Description>Real Time Line DY</Description>
+			<Category>REALTIMECHARTS</Category>
+			<CatDescription>Real Time Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">realTimeChartTypeLineDY</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+
+					<Property>canvasBgColor</Property>
+					<Property>canvasBorderThickness</Property>
+					<Property>bgColor</Property>
+					<Property>showBorder</Property>
+					<Property>borderColor</Property>
+					<Property>caption</Property>
+					<Property>subCaption</Property>
+					<Property>xAxisName</Property>
+					<Property>pYAxisName</Property>
+					<Property>sYAxisName</Property>
+					<Property>refreshInterval</Property>
+					<Property>clearChartInterval</Property>
+					<Property>numDisplaySets</Property>
+					<Property>showYAxisValues</Property>
+					<Property>yAxisValueDecimals</Property>
+					<Property>sYAxisValueDecimals</Property>
+					<Property>showLabels</Property>
+					<Property>labelDisplay</Property>
+					<Property>slantLabels</Property>
+					<Property>labelStep</Property>
+					<Property>showValues</Property>
+					<Property>rotateValues</Property>
+					<Property>showLegend</Property>
+					<Property>legendPosition</Property>
+					<Property>formatNumber</Property>
+					<Property>numberPrefix</Property>
+					<Property>numberSuffix</Property>
+					<Property>decimals</Property>
+					<Property>formatNumberScale</Property>
+					<Property>baseFont</Property>
+					<Property>baseFontSize</Property>
+					<Property>baseFontColor</Property>
+					<Property>categoriesColor</Property>
+					<Property>parentYAxis</Property>
+					
+
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+	<DesignerComponent>
+		<Header>
+			<Name>Real Time Angular Gauge</Name>
+			<IName>XDashFusionChartComponentAngularGauge</IName>
+			<Description>Real Time Angular Gauge</Description>
+			<Category>REALTIMECHARTS</Category>
+			<CatDescription>Real Time Charts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="cdaPath">fusionCdaPath</Property>
+					<Property name="cdaDataAccessId">dataAccessId</Property>
+					<Property type="string" name="chartType">realTimeChartTypeAngularGauge</Property>
+					<Property type="string" name="chartLink">chartLink</Property>
+					<Property type="string" name="seriesParam">seriesParam</Property>
+					<Property type="string" name="categoriesParam">categoriesParam</Property>
+					<Property type="string" name="valueParam">valueParam</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+
+					<Property>isDataStreamAngularGauge</Property>
+
+					<Property>bgColor</Property>
+					<Property>showBorder</Property>
+					<Property>borderColor</Property>
+					<Property>showValue</Property>
+					<Property>valueBelowPivot</Property>
+					<Property>lowerLimitDisplay</Property>
+					<Property>upperLimitDisplay</Property>
+					<Property>showTickMarks</Property>
+					<Property>showTickValues</Property>
+					<Property>showLimits</Property>
+					<Property>placeTicksInside</Property>
+					<Property>placeValuesInside</Property>
+					<Property>autoAlignTickValues</Property>
+					<Property>refreshInterval</Property>
+					<Property>formatNumber</Property>
+					<Property>numberPrefix</Property>
+					<Property>numberSuffix</Property>
+					<Property>decimals</Property>
+					<Property>formatNumberScale</Property>
+					<Property>baseFont</Property>
+					<Property>baseFontSize</Property>
+					<Property>baseFontColor</Property>
+					<Property>gaugeStartAngle</Property>
+					<Property>gaugeEndAngle</Property>
+					<Property>showGaugeBorder</Property>
+					<Property>gaugeBorderColor</Property>
+					<Property>gaugeBorderThickness</Property>
+					
+					<Property>colorRange</Property>
+					<Property>rangeValues</Property>
+					
+					
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="function">customfunction</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+		</Contents>
+	</DesignerComponent>
+</DesignerComponents>
