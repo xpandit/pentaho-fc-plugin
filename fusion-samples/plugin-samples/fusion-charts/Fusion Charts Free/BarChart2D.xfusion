@@ -1,7 +1,5 @@
-cdaName=BarChart2D.cda
 cdaDataAccessId=2
-cdaSolution=public
-cdaPath=plugin-samples/fusion-charts/Fusion Charts Free
+cdaPath=/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda
 chartTitle=Sales Per year
 xAxisName=Years
 yAxisName=Sales
