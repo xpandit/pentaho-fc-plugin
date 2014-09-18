@@ -1,0 +1,9 @@
+cdaPath=/public/plugin-samples/fusion-charts/Fusion Charts Free/PieChart2D.cda
+cdaDataAccessId=2
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=Pie2D
+height=200
+width=500
+free=true

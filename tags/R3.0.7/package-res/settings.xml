@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<cde-styles>
+		<path>system/fusion_plugin/resources/styles</path>
+	</cde-styles>
+	<cde-datasources/>
+	<cde-components>
+	  <!-- paths from solution with cde component definitions to be loaded-->
+	  <path>system/fusion_plugin/resources/components</path>
+	  <path>fusion_plugin/components</path>
+	</cde-components>
+	<cache>false</cache>
+	<max-age>2628001</max-age>
+</settings>

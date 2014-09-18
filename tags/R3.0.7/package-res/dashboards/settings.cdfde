@@ -1,0 +1,433 @@
+{
+ "layout": {
+  "title": "1 - Empty Sample",
+  "rows": [
+   {
+    "id": "da2390ce-3ce0-5940-a239-5f7b77d6dcb5",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "ManagerJS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "function f(){\n        \n    var keyvalue = Dashboards.getParameterValue('${p:keyValue}'),\n        endpoint = 'updateKeyJob';\n    \n    keyvalue = keyvalue.trim();\n    \n    if(keyvalue !== '' && keyvalue !== 'Insert new key here...')\n    {        \n        var successCallback = function (json)\n        {      \n          document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/done-button.png\";\n          $('textarea').val(\"\");\n          Dashboards.setParameter('${p:keyValue}','');\n          Dashboards.decrementRunningCalls();\n        }\n        \n        var errorCallback = function (json){\n            alert('Something went wrong. Please try again later.');\n            Dashboards.decrementRunningCalls();\n        }\n    \n    \n        Dashboards.incrementRunningCalls();   \n        sparkl.runEndpoint( 'fusion_plugin' , endpoint, {\n            params: { \n                key: keyvalue,\n                key_filename: '../../pentaho-solutions/system/fusion_plugin/key'\n            },\n            success: successCallback,\n            error: errorCallback\n        });\n    }\n    else{\n        return false;\n    }\n} \n\nwindow.onload=function()\n{\n    document.getElementById('render_keyValueForm').onkeyup=function()\n    {\n        if(document.getElementById('render_keyValueForm').value !== '')\n        {\n            document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-enable.png\";\n        }\n        else{\n            document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-disable.png\";\n        }\n    }; \n    \n    document.getElementById('render_keyValueForm').onfocus=function()\n    {\n        if(document.getElementById('render_keyValueForm').value !== '')\n        {\n            document.getElementById('render_keyValueForm').value = '';\n            document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-disable.png\";\n        }\n    };\n    \n    document.getElementById('render_keyValueForm').onkeydown=function()\n    {\n        if(document.getElementById('render_keyValueForm').value === '')\n        {\n            document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-disable.png\";\n        }\n        else{\n             document.getElementById(\"updateimg\").src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-enable.png\";\n        }\n    }; \n}; ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "d86c0274-564c-c77b-caaa-28089b8a4073",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Sparkl",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "/********************************** Project namespace *******************************************/\nvar sparkl = {};\n(function(myself){\n\n  _settings = {\n    expressions: {\n      element: /^[A-Za-z][A-Za-z\\d]*$/,\n      plugin: /^[A-Za-z][A-Za-z\\d]*$/, \n      image: /\\.(png|jpg)$/,\n      zip: /\\.(zip)$/\n    },\n    reservedNames: [\n      'status', 'refresh', 'reload'\n    ]\n  };\n\n  myself.getSettings = function (){\n    var acc = _settings;\n    _.every( arguments, function(el){\n      acc = acc[el] || undefined;\n      return !!acc\n    });\n    return acc;\n  }\n  \n\n  myself.changeLocation = function (newLocation, bookmarks, isNew){\n  if(!newLocation){ return; }\n    var hash = (bookmarks && !_.isEmpty(bookmarks) ) ? '#' + generateHashValue( \"bookmark\" , { impl: \"client\" , params: bookmarks } ) : \"\";\n    if (isNew){\n      window.open( newLocation + hash);\n      } else {\n        window.location = newLocation + hash;\n    }\n  }\n\n  function generateHashValue (key, value) {\n    var obj = Dashboards.getHashValue(),json;\n    if (arguments.length == 1) {\n      obj = key;\n    } else {\n      obj[key] = value;\n    }\n    json = JSON.stringify(obj);\n    return json;\n  }\n\n  myself.isValidName = function (name, type){\n    var reg = _settings.expressions[ type || 'plugin' ] || /.*/;\n    return reg.test(name);\n  }  \n\n\n  myself.isUpdated = function ( srcVersion , pluginVersion ){\n    return ( srcVersion == pluginVersion );\n  }\n\n\n  myself.isJobError = function(json){\n    return (json && json.result === false );\n  }   \n\n  myself.hasUploaderComponent = function (){\n    return !(typeof FileUploaderComponent == 'undefined')\n  }\n\n\n  myself.createElementsTableEmptyRawData = function() {\n    var emptyData = {\n      metadata:[\n        {\n          colIndex: 0,\n          colType: 'String',\n          colName: 'elementName'\n        },\n        {\n          colIndex: 1,\n          colType: 'String',\n          colName: 'elementType'\n        },\n        {\n          colIndex: 2,\n          colType: 'Boolean',\n          colName: 'adminOnly'\n        },\n        {\n          colIndex: 3,\n          colType: 'String',\n          colName: 'fileName'\n        },\n        {\n          colIndex: 4,\n          colType: 'String',\n          colName: 'elementName'\n        }\n      ],\n      queryInfo:{\n        totalRows: 0\n      },\n      resultset: []\n    }\n    return emptyData;\n  }  \n\n\nmyself.addUploadForm = function(ph, opts){\n    var _myself = myself;\n\n    var _opts = {\n      root:'.',\n      success: function (filename) {\n        Dashboards.log('File uploaded');\n      },\n      uploadError: function () {\n        Dashboards.log('Error uploading file');\n      },\n      validationError: function () {\n        Dashboards.log('File type not allowed.');\n      },\n      isValidFilename: function(filename){\n        var reg = _myself.getSettings('expressions','image');\n        return reg.test(filename);\n      }\n    }\n\n    opts = _.extend({}, _opts, opts);\n\n    var $ph = $(ph)\n        myself = this,\n        $uploadForm = $('<form action=\"../cfr/store\" method=\"post\" enctype=\"multipart/form-data\">').addClass('WDhidden'),\n        filename = '';\n\n    var validateForm = function (){\n      if ( opts.isValidFilename(filename) ){\n        return true\n      } else {\n        opts.validationError();\n        return false\n      }\n    }\n\n    var resetUploadForm = function () {\n      $fileInput.val('');\n      filename = '';\n    };\n\n    var fileUploaded = function (response) {\n      if (response.result) {\n        opts.success(filename);\n        resetUploadForm(filename);\n      } else {\n        opts.uploadError(filename);\n      }\n    };\n\n    // configure file upload form\n    $uploadForm.ajaxForm({\n      dataType: 'json',\n      success: fileUploaded,\n      error: opts.uploadError,\n      beforeSubmit: validateForm\n    });\n\n    $ph.append($uploadForm);\n\n    var $fileInput = $('<input type=\"file\" class=\"file\" name=\"file\" required/>').appendTo($uploadForm),\n        $pathInput = $('<input type=\"hidden\" name=\"path\" value=\"' + opts.root + '\"/>').appendTo($uploadForm),\n        $submitInput = $('<button type=\"submit\">').appendTo($uploadForm);\n\n    $fileInput.attr(\"id\", this.htmlObject + \"_file\");\n    $fileInput.change(function () {\n      if ($fileInput.val() !== \"\") {\n        filename = $fileInput.val();\n        if (filename.slice(3, 11) == \"fakepath\") {\n          filename = filename.slice(12, filename.length);\n        }\n        $submitInput.click();\n      }\n    });\n\n    return function (){\n      $fileInput.click();\n    }\n  }\n\n\n  myself.testFile = function (url, successCallback, errorCallback){\n    successCallback = successCallback || function (){ return true };\n    errorCallback = errorCallback || function(){ return true }\n    $.ajax({\n      url: url,\n      type:'HEAD',\n      error: errorCallback,\n      success: successCallback\n    });\n  }\n\n\n\n  myself.runEndpoint = function ( pluginId, endpoint, opts){\n\n    if ( !pluginId && !endpoint){\n      Dashboards.log('PluginId or endpointName not defined.');\n      return false\n    }\n\n    var _opts = {\n      success: function (){\n        Dashboards.log( pluginId + ': ' + endpoint + ' ran successfully.')\n      },\n      error: function (){\n        Dashboards.log( pluginId + ': error running ' + endpoint + '.')\n      },\n      params: {},\n      systemParams: {},\n      type: 'POST',\n      dataType: 'json'\n    }\n    var opts = $.extend( {}, _opts, opts);\n    var url = Dashboards.getWebAppPath() + '/plugin/' + pluginId + '/api/' + endpoint;\n\n    function successHandler  (json){\n      if ( json && json.result == false){\n        opts.error.apply(this, arguments);\n      } else {\n        opts.success.apply( this, arguments );\n      }\n    }\n\n    function errorHandler  (){\n      opts.error.apply(this, arguments);\n    }\n    if ( endpoint != 'renderer/refresh' ) { //XXX - do this better\n      var ajaxOpts = {\n        url: url,\n        async: true,\n        type: opts.type,\n        dataType: opts.dataType,\n        success: successHandler,\n        error: errorHandler,\n        data: {}\n      }\n    } else {\n      var ajaxOpts = {\n        url: url,\n        async: true,\n        type: 'GET',\n        dataType: opts.dataType,\n        success: successHandler,\n        error: errorHandler,\n        data: {}\n      }\n    }\n\n    _.each( opts.params , function ( value , key){\n      ajaxOpts.data['param' + key] = value;\n    });\n    _.each( opts.systemParams , function ( value , key){\n      ajaxOpts.data[key] = value;\n    });\n\n    $.ajax(ajaxOpts)\n  }\n\n  myself.getEndpointCaller = function( pluginId, endpoint, opts ){\n    var myself = this;\n    return function (callback, errorCallback, params){\n      var _opts = $.extend({}, opts);\n      _opts.params = params || _opts.params;\n      _opts.success = callback || _opts.success;\n      _opts.error = errorCallback || _opts.error;\n      myself.runEndpoint(pluginId, endpoint, _opts);\n    }\n  };\n\n  myself.publishToServer = function (callback){\n    $.ajax({\n      url: Dashboards.getWebAppPath() + '/plugin/sparkl/api/reloadPlugins',\n      type:'POST',\n      data: {\n        'publish': 'now',\n        'class': 'org.pentaho.platform.plugin.services.pluginmgr.PluginAdapter'\n      },                \n      success: callback\n    });\n  }\n\n  myself.addCallWrapper = function ( caller , callback){\n    return function (json) { \n      caller( callback ); \n    };\n  };\n  myself.addRefreshWrapper = function (pluginId, callback){\n    if( pluginId != 'pentaho-cdf-dd' ) {//XXX - do this better\n     var caller = this.getEndpointCaller( pluginId, 'refresh' , { dataType:'text'});\n  } else {\n     var caller = this.getEndpointCaller( pluginId, 'renderer/refresh' , { dataType:'text'});\n  }\n    return this.addCallWrapper( caller, callback );\n  }\n  myself.addPublishWrapper = function (callback){\n    // HACK: This call is only here because cpk is acting weird after a publish. Remove when bug \n    // on cpk is found!!!\n    var cb = function (){\n      $.ajax({\n        url: Dashboards.getWebAppPath() + '/plugin/sparkl/api/getpluginmetadata',\n        type: 'GET',\n        async: true,\n        success: callback,\n        error: callback\n      });\n    };\n    return this.addCallWrapper( this.publishToServer, cb );\n  };\n\n\n\n\n\n})(sparkl);\n\n/************************************  AddIns ************************************/\n\n\n;(function (){\n\n  var actionButtonsOpts = {\n    name: \"actionButtons\",\n    label: \"Action Buttons\",\n    defaults: {\n      buttons:[\n        {\n          cssClass: \"viewButton\",\n          title: \"View\",\n          tooltip: \"View\",\n            action: function(v, st) {\n              Dashboards.log(v);\n            }\n        }\n      ]\n    },\n\n    init: function(){\n        $.fn.dataTableExt.oSort[this.name+'-asc'] = $.fn.dataTableExt.oSort['string-asc'];\n        $.fn.dataTableExt.oSort[this.name+'-desc'] = $.fn.dataTableExt.oSort['string-desc'];\n    },\n    \n    implementation: function(tgt, st, opt){\n      var $buttonContainer = $('<div/>').addClass('buttonContainer')\n        .addClass('numButtons-' + opt.buttons.length);\n      _.each(opt.buttons, function(el,idx){\n        var $button = $(\"<button/>\").addClass(el.cssClass||\"\").text(el.title||\"\").attr('title', el.tooltip||\"\");\n        $button.click(function(){\n          if (el.action) {\n            el.action(st.value, st);\n          }\n        });\n        $buttonContainer.append($button);\n      });\n      $(tgt).empty().append($buttonContainer);\n\n    }\n\n    };\n    Dashboards.registerAddIn(\"Table\", \"colType\", new AddIn(actionButtonsOpts));\n  \n  \n/* edit data of table  */\n  var editable = {\n  name: \"editable\",\n  label: \"Editable\",\n  defaults: {\n    action: function (v, st) {\n      Dashboards.log(v);\n    }\n  },\n  init: function(){\n    \n    // Register this for datatables sort\n    var myself = this;\n    $.fn.dataTableExt.oSort[this.name+'-asc'] = function(a,b){\n    return myself.sort(a,b)\n    };\n    $.fn.dataTableExt.oSort[this.name+'-desc'] = function(a,b){\n    return myself.sort(b,a)\n    };   \n  }, \n  sort: function(a,b){\n    return this.sumStrArray(a) - this.sumStrArray(b);\n  }, \n\n  implementation: function (tgt, st, opt) {\n    var t = $(tgt);\n    var value = st.value;\n    var text = $(\"<input/>\").attr({value:value, type:'text', class:'editBox'})\n    .keyup(function(event){\n      if (event.keyCode == 13) {\n        opt.action( $(this).val(), st );\n      }\n      /*var idx = this.parentNode.parentNode.rowIndex;\n      metadataParam[idx-1][1] = $(this).val();*/\n      var obj = this.parentNode.parentNode.children[0].textContent;\n      metadataParam[obj.toString()] = $(this).val();\n    });\n    \n    t.empty();\n    t.append(text);\n  }\n  };\n  Dashboards.registerAddIn(\"Table\", \"colType\", new AddIn(editable));\n  \n})();\n\n$(document).ready(function() {\n  $('.chzn-results li').click(function() {\n    $(this).closest('.chzn-results').find('.result-relected').removeClass('result-selected');\n  });\n}); ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "944da673-1fec-bad5-e69b-91d2bede0cc6",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "ManagerCSS",
+      "type": "Id"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     },
+     {
+      "name": "resourceCode",
+      "value": "h2{font-size:36px;font-family:\"Open Sans\";margin:0px;padding-top: 10px;}\r\nh5{border-bottom: 1px solid #1973bc; font-size:18px; color:#1973bc;font-family:\"Open Sans\";margin-bottom:20px;}\r\ntextarea{margin-bottom:60px;width:463px;height:28px;padding:0;padding-left:10px;padding-top: 10px;border: 1px solid #1973bc;resize: none;font-family:\"Open Sans\";font-size:14px;color:#B4B4B4;} \r\ntextarea:focus{border: 1px solid #1973bc;}\r\nbutton{float:left;width:165px;height:40px;}\r\ndiv,p{font-family:\"Open Sans\";color:#221F1F;} \r\n\r\n#keyValueFormObj{width:475px;} \r\n#submitObj{width:165px;height:auto;float:right;} \r\n\r\n.regular{font-weight:400;}\r\n.light{font-weight:300;} \r\n.first{font-size:16px;margin-bottom:20px;}\r\n.second{font-size:14px;margin-bottom:60px;}\r\n.third{font-size:12px;margin-bottom:20px;} \r\n.header{margin-top:20px;margin-bottom:60px;}\r\n.header img{float: left;margin-right: 42px;} \r\n.second div{margin-bottom:20px;} \r\n\r\ninput[type=\"image\"]{margin-top:6px;width:165px;height:40px;} ",
+      "type": "Resource"
+     }
+    ]
+   },
+   {
+    "id": "725c9bc8-d3f7-d96b-598a-d4e18a46522c",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "20e5cdb6-08bb-6a49-6b59-941cc09d5efc",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "725c9bc8-d3f7-d96b-598a-d4e18a46522c",
+    "properties": [
+     {
+      "name": "name",
+      "value": "title",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>\n\n<div class=\"header\">\n    <img width=\"auto\" height=\"70\" src=\"../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png\">\n    <h2 class=\"light\">Fusion Charts Plugin Settings</h2>\n</div>\n    \n\n ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "a8f8f655-ca77-2742-3ff9-c4c626d96e91",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "95725891-50bc-a419-9f2c-a9b227d448d1",
+    "type": "LayoutColumn",
+    "typeDesc": "Column",
+    "parent": "a8f8f655-ca77-2742-3ff9-c4c626d96e91",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "columnSpan",
+      "value": "17",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrepend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnAppend",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "columnPrependTop",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnAppendBottom",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "columnBigBorder",
+      "value": "false",
+      "type": "Boolean"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "39239ae9-dda4-6e30-3306-b39b0a368e27",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "95725891-50bc-a419-9f2c-a9b227d448d1",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<h5 class=\"light\">REGISTER A LICENSE</h5> \n\n<div class=\"light first\">\n    This page can be used to install the free license you have requested from Xpand IT website.\n    You're just 1 step to start using the best looking graphics library in the industry.\n    <br>\n    <div class=\"regular\">Please insert your key and enjoy!</div>\n</div>\n\n<div id=\"submitObj\">\n    <input id=\"updateimg\" type=\"image\" onclick=\"f();\" src=\"../../../api/repos/fusion_plugin/static/custom/img/update-button-disable.png\" alt=\"update\">    \n</div>\n<div id=\"keyValueFormObj\"></div>\n\n<div class=\"second\">\n    <div class=\"light\">\n        If you still haven't got a key please go to the plugin page and fill the form:\n    </div>\n    <a href=\"http://www.xpand-it.com/en/products/fusioncharts-plugin-for-pentaho\" target=\"_blank\">\n        <img src=\"../../../api/repos/fusion_plugin/static/custom/img/pluginpage-button.png\" alt=\"plugin page\" width=\"165\" height=\"40\">\n    </a> \n</div>\n\n<div class=\"light third\">\n    Xpand IT supports Pentaho FusionCharts Plugin.\n    <br>\n    If you need more information, sharing ideas or discuss plan details, please reach us by email\n    <a href=\"mailto:marketing@xpand-it.com\" target=\"_top\" class=\"regular\">marketing@xpand-it.com</a> or by phone:\n    <span class=\"regular\">+351 218967150</span>\n</div>\n\n<div class=\"logos\">\n    <img width=\"388\" height=\"33\" src=\"../../../api/repos/fusion_plugin/static/custom/img/logos-footer.png\">\n</div> \n ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ]
+ },
+ "components": {
+  "rows": [
+   {
+    "id": "SELECTORS",
+    "name": "Selects",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Selects",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "ef56773a-ef81-9f89-edf1-906d4daaf0b8",
+    "type": "ComponentstextareaInput",
+    "typeDesc": "Textarea input Component",
+    "parent": "SELECTORS",
+    "properties": [
+     {
+      "name": "name",
+      "value": "keyValueForm",
+      "type": "Id"
+     },
+     {
+      "name": "parameter",
+      "value": "${p:keyValue}",
+      "type": "Parameter"
+     },
+     {
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "numRows",
+      "value": "1",
+      "type": "Integer"
+     },
+     {
+      "name": "numColumns",
+      "value": "50",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "refreshPeriod",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "htmlObject",
+      "value": "${p:keyValueFormObj}",
+      "type": "HtmlObject"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
+     },
+     {
+      "name": "preExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postExecution",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "tooltip",
+      "value": "",
+      "type": "Html"
+     }
+    ]
+   },
+   {
+    "id": "GENERIC",
+    "name": "Generic",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Generic",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "23520e59-9f38-0fc1-f44a-494734f52e22",
+    "type": "ComponentsParameter",
+    "typeDesc": "Simple parameter",
+    "parent": "GENERIC",
+    "properties": [
+     {
+      "name": "name",
+      "value": "keyValue",
+      "type": "Id"
+     },
+     {
+      "name": "propertyValue",
+      "value": "Insert new key here...",
+      "type": "String"
+     },
+     {
+      "name": "parameterViewRole",
+      "value": "unused",
+      "type": "parameterViewRoleCustom"
+     },
+     {
+      "name": "bookmarkable",
+      "value": "false",
+      "type": "Boolean"
+     }
+    ]
+   }
+  ]
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/system/fusion_plugin/dashboards/settings.cdfde"
+}

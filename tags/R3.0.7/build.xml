@@ -1,0 +1,66 @@
+<project name="Pentaho FusionCharts Plugin" basedir="." default="default">
+<!-- Import the subfloor-pkg.xml file which contains all the default ant targets -->
+  <import file="build-res/subfloor-pkg.xml" />
+  <property name="dir.system" value="${dir.solutions}/system"/>
+  <property name="dir.samples" value="fusion-samples/"/>
+  <property name="dir.cdf-dd-res" value="pentaho-cdf-dd-package-res/"/>
+
+  <target name="assemble.copy-libs">
+    <copy todir="${approot.stage.dir}/lib">
+      <!-- Add jar files from dev lib -->
+      <fileset file="${devlib.dir}/*.jar" />
+      <fileset file="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
+    </copy>
+  </target>
+
+  <target name="install" depends="install-plugin,install-samples,install-cdf-dd-res">	
+  </target>
+
+  <target name="reinstall" depends="reinstall-plugin,reinstall-samples,install-cdf-dd-res">	
+  </target>
+
+  <target name="install-plugin" depends="dist,assemble.copy-libs"> 	
+    <copy todir="${dir.system}/${package.root.dir}" >
+      <fileset dir="${approot.stage.dir}" />
+    </copy>
+    <echo message="${approot.stage.dir}"></echo>
+    <echo message="${dir.system}/${package.root.dir}"></echo>
+  </target>
+
+  <target name="reinstall-plugin">
+    <echo message="Cleaning plugin folder..."></echo>
+    <delete dir="${dir.system}/${package.root.dir}"/>
+    <antcall target="install-plugin"/>
+  </target>
+
+  <!-- disabled on 5.0 -->
+  <target name="install-samples">
+  	<echo message="Install samples is disabled on 5.0"></echo>
+  </target> 
+	
+  <!-- old version
+    <target name="install-samples">
+    <copy todir="${dir.solutions}" >
+      <fileset dir="${dir.samples}/*" />
+    </copy>
+    <echo message="${dir.samples}"></echo>
+    <echo message="${dir.solutions}"></echo>
+  </target> 
+  -->
+  
+
+  <target name="reinstall-samples">
+    <echo message="Cleaning samples folder..."></echo>
+    <delete dir="${dir.solutions}/bi-developers/fusion-charts"/>
+    <antcall target="install-samples"/>
+  </target>
+  
+    <target name="install-cdf-dd-res">
+    <copy todir="${dir.solutions}/system/pentaho-cdf-dd" >
+      <fileset dir="${dir.cdf-dd-res}" />
+    </copy>
+    <echo message="${dir.cdf-dd-res}"></echo>
+    <echo message="${dir.solutions}"></echo> 
+  </target>
+  
+</project>

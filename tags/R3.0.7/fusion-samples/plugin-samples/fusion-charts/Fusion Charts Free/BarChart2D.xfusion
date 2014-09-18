@@ -1,0 +1,10 @@
+cdaDataAccessId=2
+cdaPath=/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=Bar2D
+height=200
+width=500
+free=true
+dashboard-mode=false

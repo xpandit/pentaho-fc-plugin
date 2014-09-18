@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin title="fusion_plugin" loader="DEFAULT">
+  
+  <overlays>
+		<overlay id="startup.fusion_plugin" resourcebundle="content/fusion_plugin/resources/lang/messages.properties">
+			<menubar id="toolsmenu">
+	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/fusion_plugin/api/default')"/>
+	      	</menubar>
+	    </overlay>
+	</overlays>
+  
+  <lifecycle-listener class="com.xpandit.fusionplugin.pentaho.FcLifecycleListener"/>
+  <!-- <lifecycle-listener class="pt.webdetails.cpk.CpkLifecycleListener"/>-->
+ 
+  <content-types>   
+      <static-paths>
+	      <static-path url="/xfusion/res" localFolder="resources"/>
+	      <static-path url="/xfusion/js" localFolder="js"/>
+	      <static-path url="/xfusion/JSClass" localFolder="fusioncharts/JSClass"/>
+	      <static-path url="/xfusion/swf" localFolder="fusioncharts/charts"/>
+	      <static-path url="/xfusion/widgets" localFolder="widgets"/>
+		  <static-path url="/fusion_plugin/static" localFolder="static"/>
+		  <static-path url="/fusion_plugin/resources" localFolder="resources"/>
+	  </static-paths> 
+  
+  	  <content-type>
+			<title>fusion_plugin</title>
+			<description></description>
+			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
+		</content-type>
+		
+	  <content-type type="xfusion" mime-type="text/html">
+	    <title>Fusion Config</title>
+	    <description>Fusion Config File</description>
+	    <icon-url>content/xfusion/res/icon.jpg</icon-url>
+	    <meta-provider>com.xpandit.fusionplugin.pentaho.content.FusionContentTypeMetaProvider</meta-provider> 
+	    <operations>
+	      <operation>
+	        <id>RUN</id>
+	      </operation>
+	    </operations>
+	  </content-type>
+  </content-types>
+  
+  <external-resources>
+  	<!-- Integration with EE Dashboards-->
+    <file context="dashboards">content/xfusion/js/XDashFusionChartComponent.js</file>
+    <!-- Integration with Analyzer -->
+  	<file context="analyzer">content/xfusion/js/vizapi/fusioncharts_wrapper.js</file>    
+    <file context="analyzer">content/xfusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
+    <!-- Required dependencies -->
+    <file context="analyzer">content/xfusion/js/vizapi/chart_settings.js</file>
+    <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
+   <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file> --> 
+  </external-resources>
+  
+  <content-generator
+		id="fusion_plugin"
+		title="fusion_plugin"
+		type="fusion_plugin"
+		class="pt.webdetails.cpk.CpkContentGenerator"/>
+</plugin>

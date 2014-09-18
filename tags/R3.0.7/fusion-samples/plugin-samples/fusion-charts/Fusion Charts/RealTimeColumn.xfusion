@@ -1,0 +1,46 @@
+cdaName=RealTimeColumn.cda
+cdaDataAccessId=1
+chartTitle=Sales Per year
+xAxisName=Years
+yAxisName=Sales
+chartType=RealTimeColumn
+categoriesColor=FF654F;F6BD0F;8BBA00;8Baa00;8BBA12;FFFFFF
+height=500
+width=500
+free=false
+
+ manageResize=1
+ caption=Concurrent Users 
+ borderColor=899FB6 
+ subcaption=(Refreshes every 3 seconds) 
+ canvasborderColor=DAE1E8 
+ canvasBgColor=FFFFFF
+ bgColor=EEF2FB 
+ numDivLines=6 
+ divLineColor=DAE1E8 
+ divLineAlpha=75 
+ alternateHGridAlpha=30 
+ decimals=0 
+ baseFontColor=899FB6 
+ outCnvBaseFontColor=444C60 
+ toolTipBorderColor=DAE1E8 
+ toolTipBgColor=FFFFFF 
+ toolTipSepChar=  
+ showAlternateHGridColor=1 
+ alternateHGridColor=DAE1E8 
+ refreshInterval=3 
+ numDisplaySets=15 
+ showLegend=1 
+ showLabels=1 
+ showRealTimeValue=1 
+ labelDisplay=none 
+ showShadow=1 
+ showPlotBorder=0 
+ plotBordercolor=FFFFFF 
+ plotGradientColor= 
+ labelStep=2 
+ canvasLeftMargin=50
+ 
+ webAppPath=pentaho
+
+

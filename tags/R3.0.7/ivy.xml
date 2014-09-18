@@ -1,0 +1,49 @@
+<ivy-module version='2.0'>
+  <info organisation='com.pentaho' module='fusion_plugin' revision='${project.revision}' />
+  <configurations>
+  	<conf name='runtime' />
+    <conf name='master' />
+    <conf name='default' />
+    <conf name='codegen' />
+    <conf name='test' visibility='private' />
+  </configurations>
+  <publications>
+    <artifact name='${ivy.artifact.id}' type='jar' conf='default' />
+  </publications>
+ 
+  <dependencies>
+	
+	<!-- pentaho cda -->
+	<dependency org="pentaho" name="cpf-core" rev="REFACTOR-SNAPSHOT" transitive="false" changing="true"/>
+	<dependency org="pentaho" name="cpf-pentaho5" rev="REFACTOR-SNAPSHOT"  transitive="false" changing="true"/>
+	
+	<!-- Required to easily parse CDA results  -->
+	<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-extensions-cda" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
+  	<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
+  
+    <!-- pentaho platform -->
+    <!-- 4.8 
+    <dependency org="pentaho" name="pentaho-bi-platform-engine-core" rev="4.8.0-stable" changing="true" transitive='false'/>
+    <dependency org="pentaho" name="pentaho-bi-platform-api" rev="4.8.0-stable" changing="true" transitive='false'/>
+    <dependency org="pentaho" name="pentaho-bi-platform-engine-services" rev="4.8.0-stable" changing="true" transitive='false'/>      
+     -->
+    <!-- 5.0  -->
+    <dependency org="pentaho" name="pentaho-platform-core" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
+    <dependency org="pentaho" name="pentaho-platform-api" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
+    <dependency org="pentaho" name="pentaho-platform-repository" rev="${dependency.bi-platform.revision}" changing="true" transitive='false'/>
+          
+	<!--pentaho com-->
+	<dependency org="pentaho" name="pentaho-connections" rev="2.2.2" changing="true" transitive='false'/>
+	<dependency org="pentaho-library" name="libbase" rev="1.2.2" changing="true" transitive='false'/>
+	<dependency org="pentaho" name="pentaho-versionchecker" rev="2.0.1" changing="true" transitive='false'/>	
+	
+	<!-- other -->
+	<dependency org="javax.servlet" name="servlet-api" rev="2.4" changing="true" transitive='false'/>
+	<dependency org="org.json" name="json" rev="3.1" transitive="false"/>        	
+	<dependency org="dom4j" name="dom4j" rev="1.6.1" changing="true" transitive='false'/>
+	<dependency org="net.sf.ehcache" name="ehcache" rev="1.4.1" changing="true" transitive='false'/>	
+	<dependency org='commons-logging' name='commons-logging-api' rev='1.1' transitive='true' />
+	<dependency org="log4j" name="log4j" rev="1.2.9"/>
+	
+  </dependencies>
+</ivy-module>
