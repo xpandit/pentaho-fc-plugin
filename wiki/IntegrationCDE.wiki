@@ -2,7 +2,6 @@
 ==Integrate Fusioncharts(above than version 3.0) with CDE==
 
  # Install the plugin [DeveloperGuide]
- # Restart Pentaho
  # Update file system/pentaho-cdf-dd/resources/styles/Clean.html
 {{{ 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -11,6 +10,7 @@
 		<script type="text/javascript" src="/pentaho/content/xfusion/js/XDashFusionChartComponent.js"></script>
 		<script type="text/javascript" src="/pentaho/content/xfusion/js/CDE.js"></script>
 }}}
+ # Restart Pentaho
  # Create a new dashboard using CDE.
  # Select add a new FusionCharts Component
  ## Configure the CDA file and querie id
@@ -22,13 +22,13 @@
 
  # Install the plugin [DeveloperGuide]
  # Unzip the content of fusion_pentaho-CDE-XXXX.zip to system/pentaho-cdf-dd
- # Restart Pentaho
  # Update file system/pentaho-cdf-dd/resources/styles/Clean.html
 {{{ 
 <script type='text/javascript' src="/pentaho/content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/fusioncharts/JSClass/FusionCharts.js"></script>
 		<script type="text/javascript" src="/pentaho/content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/XDashFusionChartComponent.js"></script>
 		<script type="text/javascript" src="/pentaho/content/pentaho-cdf/GetCDFResource?resource=/system/fusion_plugin/js/CDE.js"></script>
 }}}
+ # Restart Pentaho
  # Create a new dashboard using CDE.
  # Select add a new FusionCharts Component
  ## Configure the CDA file and querie id
