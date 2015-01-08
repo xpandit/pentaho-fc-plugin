@@ -10,7 +10,6 @@
 || Version 3.0.0 Requires CDA 5.0.1 or higher to be installed on Pentaho Server ||
 
  # Stop Pentaho Server 
- # Extract the fusion plugin zip file into the _pentaho-solutions/system_ path.
  # Depending on the version of Pentaho is necessary to add an import Handler:
   # Pentaho 5.0: Change the file _system/importExport.xml_ to allow xFusion files. The requires adding xfusion in 3 places:
 {{{ 
@@ -61,6 +60,8 @@
 	</property>
 </bean>
 }}}
+ # Install FusionCharts plugin through Pentaho's marketplace
+ # Install dependencies
  # Start Pentaho Server 
 
 == Installing FusionCharts XT (licensed) ==
