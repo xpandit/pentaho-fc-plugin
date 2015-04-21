@@ -1,0 +1,1 @@
+This section contains all the necessary information from a developer perspective. This includes a detailed guide on how to start [DeveloperGuide](DeveloperGuide.md) and general overview on how the plugin was built and how it works.
