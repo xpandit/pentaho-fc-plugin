@@ -15,7 +15,8 @@ var xLoadFunct= function(){
 			//need in realtimecharts
 			options.webAppPath=webAppPath;
 
-			var url = webAppPath + '/content/xfusion';
+			var url = webAppPath + '/plugin/fusion_plugin/api/chart';
+			// var url = webAppPath + '/content/xfusion';
 			var myself = this;
 
 			// get the xml chart

@@ -3,7 +3,15 @@
 		width: "400",
 		height: "150",
 		chartType: "Line",
-		cdaDataAccessId:"2"
+		cdaPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/LineChart.cda",
+		cdaDataAccessId: "2",
+		chartTitle: "Sales Per year",
+		xAxisName: "Years",
+		yAxisName: "Sales",
+		chartType: "Line",
+		height: "200",
+		width: "500",
+		free: "true",
 	},
 	pieChartDef: {
 		width: "400",

@@ -173,4 +173,8 @@ public class ParameterParser {
     public Object getParameters(String name) {
         return parameters.get(name);
     }
+    
+    public void putParameter(String key, Object value) {
+    	parameters.put(key, value);
+    }
 }
