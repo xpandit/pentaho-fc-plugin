@@ -1,38 +1,50 @@
 package com.xpandit.fusionplugin.pentaho.content;
 
-import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.log4j.Logger;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.solution.SimpleParameterProvider;
-import org.pentaho.platform.web.http.request.HttpRequestParameterProvider;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
+import com.xpandit.fusionplugin.util.VersionChecker;
+
 
 @Path("/{plugin}/api")
 public class FusionApi {
 
 	Logger logger = Logger.getLogger(FusionApi.class);
 
-	public Map<String, IParameterProvider> getParameterProviders(
-			HttpServletRequest request) {
+	private Map<String, IParameterProvider> getParameterProviders(
+			HttpServletRequest request, String jsonStr) {
+
 		Map<String, IParameterProvider> parameterProviders = new HashMap<String, IParameterProvider>();
-		IParameterProvider requestParameters = new HttpRequestParameterProvider(request);
+		// Create request parameters
+		SimpleParameterProvider requestParams = new SimpleParameterProvider();
+		Enumeration paramKeys = request.getParameterNames();
+		while (paramKeys.hasMoreElements()) {
+			String key = (String) paramKeys.nextElement();
+			String value = request.getParameter(key);
+			requestParams.setParameter(key, value);
+		}
+		// If there's a JSON string it should be put together with the request parameters so it can be correctly parsed
+		if (jsonStr != null) {
+			requestParams.setParameter("json", jsonStr);
+		}
+
+		// Create header parameters
 		SimpleParameterProvider headerParams = new SimpleParameterProvider();
 		Enumeration names = request.getHeaderNames();
 		while (names.hasMoreElements()) {
@@ -40,13 +52,15 @@ public class FusionApi {
 			String value = request.getHeader(name);
 			headerParams.setParameter(name, value);
 		}
-		parameterProviders.put(IParameterProvider.SCOPE_REQUEST, requestParameters);
+
+		// Populate IParameterProvider map
+		parameterProviders.put(IParameterProvider.SCOPE_REQUEST, requestParams);
 		parameterProviders.put("headers", headerParams);
 		parameterProviders.put("path", new SimpleParameterProvider());
 		return parameterProviders;
 	}
 
-	public void printParameterParser(ParameterParser pp) {
+	private void printParameterParser(ParameterParser pp) {
 		logger.debug("START");
 		for (Entry<String, Object> entry : pp.getParameters().entrySet()) {
 			logger.debug(entry.getKey() + " :: " + entry.getValue());
@@ -54,50 +68,48 @@ public class FusionApi {
 		logger.debug("END");
 	}
 	
-	public ParameterParser buildParameterParser(HttpServletRequest request)
+	private ParameterParser buildParameterParser(HttpServletRequest request, String jsonStr)
 			throws InvalidParameterException {
-		ParameterParser parameterParser = new ParameterParser(getParameterProviders(request));
+		ParameterParser parameterParser = new ParameterParser(getParameterProviders(request, jsonStr));
 		return parameterParser;
 	}
-
-	public ParameterParser buildParameterParser(HttpServletRequest request,
-			MultivaluedMap<String, String> formParams) throws InvalidParameterException {
-		ParameterParser pp = buildParameterParser(request);
-		for (String key : formParams.keySet()) {
-			Object value = formParams.get(key);
-//			logger.debug(value.getClass());
-			if (value.getClass() == java.util.LinkedList.class) {
-				LinkedList ll = (LinkedList) value;
-				pp.putParameter(key, ll.getFirst());
-			}
-			else {
-				pp.putParameter(key, value);
-			}
-		}
-		return pp;
-	}
-
+	
 	@GET
-	@Path("/chart")
-	public void getChartGET(@Context HttpServletRequest request,
-			@Context HttpServletResponse response) throws Exception {
-		OutputStream out = response.getOutputStream();
-		ParameterParser pp = buildParameterParser(request);
+	@Path("/checkVersions")
+	public String getVersion() throws Exception {
+		return VersionChecker.getVersions();
+	}
+	
+	@GET
+	@Path("/renderChart")
+	public String doGetRenderChart(@Context HttpServletRequest request) throws Exception {
+		logger.debug("\n\nrenderChart START\n----------------");
+		ParameterParser pp = buildParameterParser(request, null);
 		printParameterParser(pp);
 		FusionComponent fc = new FusionComponent(pp);
-		fc.renderChartGetData(out);
+		logger.debug("\n----------------\nrenderChart END\n\n");
+		return fc.renderChartGetData();
 	}
 
 	@POST
-	@Path("/chart")
-	public void getChartPOST(@Context HttpServletRequest request,
-			@Context HttpServletResponse response,
-			MultivaluedMap<String, String> formParams) throws Exception {
-		OutputStream out = response.getOutputStream();
-		ParameterParser pp = buildParameterParser(request, formParams);
+	@Path("/renderChartExternalData")
+	public String doPostRenderChartExternalData(@Context HttpServletRequest request,
+			@FormParam("json") String jsonStr) throws Exception {
+		logger.debug("\n\nrenderChartExternalData START\n----------------");
+		ParameterParser pp = buildParameterParser(request, jsonStr);
 		printParameterParser(pp);
 		FusionComponent fc = new FusionComponent(pp);
-		fc.renderChartGetData(out);
+		logger.debug("\n----------------\nrenderChartExternalData END\n\n");
+		return fc.renderChartGetData();
 	}
+
+	@GET
+	@Path("/dataStream")
+	public String doGetDataStream(@Context HttpServletRequest request) throws Exception {
+		logger.debug("\n\ndataStream START\n----------------");
+		logger.debug("\n----------------\ndataStream END\n\n");
+		return "";
+	}
+
 
 }

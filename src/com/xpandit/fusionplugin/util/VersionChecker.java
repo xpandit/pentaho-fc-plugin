@@ -20,8 +20,8 @@ public class VersionChecker {
 	static VersionInfo versionInfoPentahoSystem = VersionHelper.getVersionInfo(PentahoSystem.class);
 
 	
-	public static void getVersions(OutputStream out) throws IOException {
+	public static String getVersions() throws IOException {
 		//generate a JS variable to be evaluated on client side
-		out.write(("XDashFusionChartComponent.pentahoVersion={MajorVersion:"+versionInfoPentahoSystem.getVersionMajor()+",MinorVersion:"+versionInfoPentahoSystem.getVersionMinor()+"}").getBytes());
+		return "XDashFusionChartComponent.pentahoVersion={MajorVersion:"+versionInfoPentahoSystem.getVersionMajor()+",MinorVersion:"+versionInfoPentahoSystem.getVersionMinor()+"}";
 	}	
 }

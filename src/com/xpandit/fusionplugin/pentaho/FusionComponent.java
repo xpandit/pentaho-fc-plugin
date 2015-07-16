@@ -64,12 +64,12 @@ public class FusionComponent {
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    public void renderChartGetData(OutputStream out) throws UnsupportedEncodingException, Exception,
+    public String renderChartGetData() throws UnsupportedEncodingException, Exception,
             InvalidParameterException, InvalidDataResultSetException, IOException {
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
-        renderChart(out, resultSets);
+        return renderChart(resultSets);
     }
 
     /**
@@ -83,7 +83,7 @@ public class FusionComponent {
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    private void renderChart(OutputStream out, Map<String, ArrayList<IPentahoResultSet>> resultSets)
+    private String renderChart(Map<String, ArrayList<IPentahoResultSet>> resultSets)
             throws UnsupportedEncodingException, Exception, InvalidParameterException, InvalidDataResultSetException,
             IOException {
 
@@ -94,13 +94,13 @@ public class FusionComponent {
         TreeMap<String, Object> params = pm.getParams();
         if (params.containsKey(PropertiesManager.CHARTXML) && Boolean.parseBoolean((String) params.get(PropertiesManager.CHARTXML))) {
             // Generate the chart XML
-            out.write(fcItem.generateXML().getBytes());
+            return fcItem.generateXML();
         } else if (params.containsKey(PropertiesManager.ISDASHBOARDMODE) && !Boolean.parseBoolean((String) params.get(PropertiesManager.ISDASHBOARDMODE))) {
             // Generate the chart as a full HTML page
-            out.write(fcItem.generateHTML().getBytes());
+            return fcItem.generateHTML();
         } else {
             // The default is generating XML
-            out.write(fcItem.generateXML().getBytes());
+            return fcItem.generateXML();
         }
     }
 
@@ -115,16 +115,16 @@ public class FusionComponent {
      * @throws InvalidDataResultSetException
      * @throws IOException
      */
-    public void dataStream(OutputStream out) throws UnsupportedEncodingException, Exception, InvalidParameterException,
+    public String dataStream() throws UnsupportedEncodingException, Exception, InvalidParameterException,
             InvalidDataResultSetException, IOException {
 
         Map<String, ArrayList<IPentahoResultSet>> resultSets = getData();
 
         // generate the output
         if (pm.getParams().get("chartType").equals(ChartType.ANGULARGAUGE.toString())) {
-            FusionDataStream.dataStreamAngular(out, resultSets, pm);
+            return FusionDataStream.dataStreamAngular(resultSets, pm);
         } else {
-            FusionDataStream.dataStream(out, resultSets, pm);
+            return FusionDataStream.dataStream(resultSets, pm);
         }
 
     }

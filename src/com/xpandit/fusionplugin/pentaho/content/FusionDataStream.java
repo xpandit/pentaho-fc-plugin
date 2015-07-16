@@ -33,8 +33,7 @@ public class FusionDataStream {
      * @param resultSets
      * @throws IOException
      */
-    public static void dataStream(OutputStream out,
-            Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm) throws IOException {
+    public static String dataStream(Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm) throws IOException {
 
         IPentahoResultSet result= resultSets.get("results").get(0);
         TreeMap<String,Object> params = pm.getParams();
@@ -124,7 +123,7 @@ public class FusionDataStream {
             }
         }
 
-        out.write(buffer.toString().getBytes());
+        return buffer.toString();
     }
 
     /**
@@ -134,10 +133,10 @@ public class FusionDataStream {
      * @param out
      * @param resultSets
      * @param pm
+     * @return 
      * @throws IOException
      */
-    public static void dataStreamAngular(OutputStream out,
-            Map<String, ArrayList<IPentahoResultSet>> resultSets,PropertiesManager pm) throws IOException {
+    public static String dataStreamAngular(Map<String, ArrayList<IPentahoResultSet>> resultSets, PropertiesManager pm) throws IOException {
 
         IPentahoResultSet result= resultSets.get("results").get(0);
         int rowCount=result.getRowCount();
@@ -185,11 +184,11 @@ public class FusionDataStream {
         {
        
             buffer=new StringBuffer(); // return an empty string buffer instead of &label=&value=|. This will cause the chart to freeze and not move ahead...
-            out.write(buffer.toString().getBytes());
+            return buffer.toString();
         }
         else
         {
-            out.write(buffer.toString().getBytes());
+            return buffer.toString();
         }
     }
 }

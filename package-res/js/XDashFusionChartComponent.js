@@ -15,12 +15,12 @@ var xLoadFunct= function(){
 			//need in realtimecharts
 			options.webAppPath=webAppPath;
 
-			var url = webAppPath + '/plugin/fusion_plugin/api/chart';
-			// var url = webAppPath + '/content/xfusion';
+			var urlApi = webAppPath + '/plugin/fusion_plugin/api/renderChart';
+			var urlResources = webAppPath + '/content/xfusion';
 			var myself = this;
 
 			// get the xml chart
-			var resultXml = $.ajax({url: url, data: options, async: false}).responseText;
+			var resultXml = $.ajax({type: 'GET', url: urlApi, data: options, async: false}).responseText;
 
 			// if not graph or chart,  show error 
 			if((resultXml.toLowerCase().indexOf("<graph") == -1) &&
@@ -84,7 +84,7 @@ var xLoadFunct= function(){
 					//is to render in HTML5?
 					if(options.isHTML5==undefined)
 						options.isHTML5=false;
-					var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
+					var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:urlResources+"/swf/"+options.chartType+".swf";
 
 					//create chart Object
 					myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
@@ -252,10 +252,10 @@ var xLoadFunct= function(){
 		//check platform version
 		if(XDashFusionChartComponent.pentahoVersion==undefined)
 		{
-			var url = webAppPath + '/content/xfusion/checkVersions';
+			var url = webAppPath + '/fusion_plugin/api/checkVersions';
 			var myself=this;
 			// get the xml chart
-			var result=$.ajax({url: url, async: false, type:'GET'}).responseText;
+			var result=$.ajax({url: url, async: false, type: 'GET'}).responseText;
 			eval(result);
 		}
 		// correct the Index for pentaho version greater than 3.10

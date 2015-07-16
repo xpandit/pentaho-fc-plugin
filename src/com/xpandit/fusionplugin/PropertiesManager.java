@@ -1,14 +1,16 @@
 package com.xpandit.fusionplugin;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.pentaho.platform.api.repository2.unified.IUnifiedRepository;
-import org.pentaho.platform.api.repository2.unified.RepositoryFile;
-import org.pentaho.platform.api.repository2.unified.data.simple.SimpleRepositoryFileData;
-import org.pentaho.platform.engine.core.system.PentahoSystem;
+
+import pt.webdetails.cpf.PluginEnvironment;
+import pt.webdetails.cpf.repository.api.IContentAccessFactory;
+import pt.webdetails.cpf.repository.api.IReadAccess;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
@@ -111,11 +113,11 @@ public class PropertiesManager {
             if(params.get(XSS_REGEX)!= null){
                 regex = ((String) params.get(XSS_REGEX));
             } else { //default pattern if non is defined
-                regex = "[\\wáÁãÃâÂéÉêÊíÍóÓõÕóÓúÚçÇ;]*|[\\w,]*|[\\w\\[\\]\\.&,]*|[\\w_]*|[\\w\\-]*|[\\w/]*|[\\w#;]*";
+                regex = "[\\wÃ¡ÃÃ£ÃƒÃ¢Ã‚Ã©Ã‰ÃªÃŠÃ­ÃÃ³Ã“ÃµÃ•Ã³Ã“ÃºÃšÃ§Ã‡;]*|[\\w,]*|[\\w\\[\\]\\.&,]*|[\\w_]*|[\\w\\-]*|[\\w/]*|[\\w#;]*";
             }
             secureInstanceParameters(instanceProperties,regex);
             
-            //remover a regex para não ser mostrados aos utilizadores
+            //remover a regex para nÃ£o ser mostrados aos utilizadores
             params.remove(PREVENTXSS);
             params.remove(XSS_REGEX);
         }
@@ -130,24 +132,46 @@ public class PropertiesManager {
      */
     private void fillLocalParameters() throws InvalidParameterException {
 
-        // get file
-        final IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class, null);
-        final RepositoryFile file = repository.getFile(xFusionFile);
+//        // get file
+//        final IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class, null);
+//        final RepositoryFile file = repository.getFile(xFusionFile);
+//
+//        IPentahoSession session = PentahoSessionHolder.getSession();
+//        
+//        // if is no file and propFile is set log a warning
+//        if (file == null) {
+//            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+//                    + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
+//        }
+//
+//        // load properties
+//        Properties properties = new Properties();
+//        try {
+//            properties.load(repository.getDataForRead(file.getId(), SimpleRepositoryFileData.class).getInputStream());
+//        } catch (IOException e) {
+//            throw new InvalidParameterException("Unable to Load properties file: "+ xFusionFile);
+//        }
 
-        // if is no file and propFile is set log a warning
-        if (file == null) {
-            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-                    + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
-        }
-
-        // load properties
+        String xFusion_dir = xFusionFile.substring(0, xFusionFile.lastIndexOf("/"));
+        String xFusion_name = xFusionFile.substring(xFusionFile.lastIndexOf("/") + 1);
+        
         Properties properties = new Properties();
+        InputStream file = null;
         try {
-            properties.load(repository.getDataForRead(file.getId(), SimpleRepositoryFileData.class).getInputStream());
+        	IContentAccessFactory repo = PluginEnvironment.repository();
+        	IReadAccess sysRead = repo.getPluginRepositoryReader(xFusion_dir);
+        	file = sysRead.getFileInputStream(xFusion_dir);
+        	if (file == null) {
+        		throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
+        				+ "No solution file found to set properties: " + "xFusionFile->" + xFusionFile);
+        	}
+        	properties.load(file);
         } catch (IOException e) {
-            throw new InvalidParameterException("Unable to Load properties file: "+ xFusionFile);
+        	throw new InvalidParameterException("Unable to Load properties file: " + xFusionFile);
+		} finally {
+        	IOUtils.closeQuietly(file);
         }
-
+    	
         // fill properties
         for (Object key : properties.keySet()) {
             String stringKey = (String) key;

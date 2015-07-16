@@ -78,4 +78,52 @@ public class LicenseChecker {
 			return true;
 		}
 	}
+	
+	public static String verifyKey() throws IOException
+	{
+		Path path = Paths.get(PentahoSystem.getApplicationContext().getSolutionPath(
+				"system/" + PLUGIN_NAME + "/key.txt"));
+
+		File f = new File(path.toString());
+		
+		if(!f.exists()) { 
+			f.createNewFile();
+			return "Error: Fusion Charts Plugin needs a license.";
+		}
+		
+		// get key from file
+		List<String> lines = Files.readAllLines(path, ENCODING);
+		String key = lines.get(0);
+		// parse key
+		SerialData key_data = SerialGenerator.parse(key);
+
+		// get current timestamp
+		Date now = new Date();
+		long now_seconds = TimeUnit.MILLISECONDS.toSeconds(now.getTime());
+
+		if(key_data.getTimeStamp() < now_seconds)
+		{
+			//License expired
+			return "Error: Fusion Charts Plugin needs a license.";
+		}
+		else if(key_data.getTimeStamp() - now_seconds <= FIVE_DAY_WARNING)
+		{
+			//Send warning
+			int d = (int)TimeUnit.SECONDS.toDays(key_data.getTimeStamp() - now_seconds);
+			long hours = TimeUnit.SECONDS.toHours(key_data.getTimeStamp() - now_seconds) - (d *24);
+			double aux = d + ((double)hours/24.0);
+			int days = (int)Math.ceil(aux);
+			
+			if(days == 0){
+				return "Warning: FC Plugin license ends today!";
+			}else{
+				return "Warning: FC Plugin license will expire in "+days+
+						((days == 1) ? " day!" : " days!");
+			}
+		}
+		else{
+			//OK
+			return null;
+		}
+	}
 }

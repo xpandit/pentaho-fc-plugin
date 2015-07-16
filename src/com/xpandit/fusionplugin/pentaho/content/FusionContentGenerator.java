@@ -55,13 +55,13 @@ public class FusionContentGenerator extends SimpleContentGenerator {
 		// Verify first if license has not expired
 		if(LicenseChecker.verifyKey(out)){
 			if (method == null) { // Generate chart
-				fc.renderChartGetData(out);
+				out.write(fc.renderChartGetData().getBytes());
 			} else if ("dataStream".equals(method)) { // called by real time charts to update data
-				fc.dataStream(out);
+				out.write(fc.dataStream().getBytes());
 			} else if ("checkVersions".equals(method)) { // check the Pentaho version
-				VersionChecker.getVersions(out);
+				out.write(VersionChecker.getVersions().getBytes());
 			} else if ("renderChartExternalData".equals(method)) { // render chart using external data
-				fc.renderChartGetData(out);
+				out.write(fc.renderChartGetData().getBytes());
 			}
 		}
 	}
