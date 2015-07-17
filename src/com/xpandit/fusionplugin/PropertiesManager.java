@@ -132,7 +132,6 @@ public class PropertiesManager {
         Properties properties = new Properties();
         InputStream file = null;
         try {
-            PluginEnvironment.repository().getUserContentAccess("/");
         	IUserContentAccess userContentAccess = PluginEnvironment.repository().getUserContentAccess("/");
         	if (!userContentAccess.fileExists(xFusionFile)) {
         		throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
