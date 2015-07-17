@@ -1,18 +1,15 @@
 package com.xpandit.fusionplugin;
 
+import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
+import pt.webdetails.cpf.PluginEnvironment;
+import pt.webdetails.cpf.repository.api.IUserContentAccess;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.TreeMap;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
-
-import pt.webdetails.cpf.PluginEnvironment;
-import pt.webdetails.cpf.repository.api.IContentAccessFactory;
-import pt.webdetails.cpf.repository.api.IReadAccess;
-
-import com.xpandit.fusionplugin.exception.InvalidParameterException;
 
 /**
  * 
@@ -132,40 +129,16 @@ public class PropertiesManager {
      */
     private void fillLocalParameters() throws InvalidParameterException {
 
-//        // get file
-//        final IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class, null);
-//        final RepositoryFile file = repository.getFile(xFusionFile);
-//
-//        IPentahoSession session = PentahoSessionHolder.getSession();
-//        
-//        // if is no file and propFile is set log a warning
-//        if (file == null) {
-//            throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
-//                    + "No solution file found to set properties:" + "xFusionFile->" + xFusionFile);
-//        }
-//
-//        // load properties
-//        Properties properties = new Properties();
-//        try {
-//            properties.load(repository.getDataForRead(file.getId(), SimpleRepositoryFileData.class).getInputStream());
-//        } catch (IOException e) {
-//            throw new InvalidParameterException("Unable to Load properties file: "+ xFusionFile);
-//        }
-
-        String xFusion_dir = xFusionFile.substring(0, xFusionFile.lastIndexOf("/"));
-        String xFusion_name = xFusionFile.substring(xFusionFile.lastIndexOf("/") + 1);
-        
         Properties properties = new Properties();
         InputStream file = null;
         try {
-        	IContentAccessFactory repo = PluginEnvironment.repository();
-        	IReadAccess sysRead = repo.getPluginRepositoryReader(xFusion_dir);
-        	file = sysRead.getFileInputStream(xFusion_dir);
-        	if (file == null) {
+            PluginEnvironment.repository().getUserContentAccess("/");
+        	IUserContentAccess userContentAccess = PluginEnvironment.repository().getUserContentAccess("/");
+        	if (!userContentAccess.fileExists(xFusionFile)) {
         		throw new InvalidParameterException(InvalidParameterException.ERROR_005 + ":"
         				+ "No solution file found to set properties: " + "xFusionFile->" + xFusionFile);
         	}
-        	properties.load(file);
+        	properties.load(userContentAccess.getFileInputStream(xFusionFile));
         } catch (IOException e) {
         	throw new InvalidParameterException("Unable to Load properties file: " + xFusionFile);
 		} finally {

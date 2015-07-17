@@ -1,8 +1,10 @@
 package com.xpandit.fusionplugin.pentaho;
 
+import com.xpandit.fusionplugin.GlobalPropertiesManager;
 import org.pentaho.platform.api.engine.IPluginLifecycleListener;
 import org.pentaho.platform.api.engine.PluginLifecycleException;
-import com.xpandit.fusionplugin.GlobalPropertiesManager;
+import pt.webdetails.cpf.PentahoPluginEnvironment;
+import pt.webdetails.cpf.PluginEnvironment;
 import pt.webdetails.cpk.CpkLifecycleListener;
 
 /**
@@ -23,6 +25,8 @@ public class FcLifecycleListener extends CpkLifecycleListener implements IPlugin
 	public void loaded() throws PluginLifecycleException {
 		ClassLoader contextCL = Thread.currentThread().getContextClassLoader();
 		try {
+            super.loaded();
+            FcPluginEnvironment.getInstance().init();
 			Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 		} catch (Exception e) {
 		} finally {
@@ -36,4 +40,9 @@ public class FcLifecycleListener extends CpkLifecycleListener implements IPlugin
 		// TODO Auto-generated method stub
 		super.unLoaded();
 	}
+
+    @Override
+    public PluginEnvironment getEnvironment() {
+        return PentahoPluginEnvironment.getInstance();
+    }
 }

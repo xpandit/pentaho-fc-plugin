@@ -14,7 +14,7 @@
   <!-- <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/> -->
   <!-- <bean id="fusion_plugin.api" class="pt.webdetails.cpk.CpkApi"/> -->
   <bean id="api" class="pt.webdetails.cpf.JAXRSCLPluginServlet"/>
-  <bean id="FusionComponent" class="com.xpandit.fusionplugin.pentaho.content.FusionApi"/>
+  <bean id="xfusion.api" class="com.xpandit.fusionplugin.pentaho.content.FusionApi"/>
 
 	<!--  Content Generator  -->
     <!-- <bean id="cpk" class="pt.webdetails.cpk.CpkContentGenerator" scope="prototype"/> -->

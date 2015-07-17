@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin title="fusion_plugin" loader="DEFAULT">
+<plugin title="fusion_plugin" loader="DEFAULT" name="xfusion">
   
   <overlays>
 		<overlay id="startup.fusion_plugin" resourcebundle="content/fusion_plugin/resources/lang/messages.properties">
@@ -20,8 +20,8 @@
 	      <static-path url="/xfusion/JSClass" localFolder="fusioncharts/JSClass"/>
 	      <static-path url="/xfusion/swf" localFolder="fusioncharts/charts"/>
 	      <static-path url="/xfusion/widgets" localFolder="widgets"/>
-		  <static-path url="/fusion_plugin/static" localFolder="static"/>
-		  <static-path url="/fusion_plugin/resources" localFolder="resources"/>
+		  <static-path url="/xfusion/static" localFolder="static"/>
+		  <static-path url="/xfusion/resources" localFolder="resources"/>
 	  </static-paths> 
   
   	  <content-type>
@@ -54,10 +54,5 @@
     <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
    <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file> --> 
   </external-resources>
-  
-  <content-generator
-		id="fusion_plugin"
-		title="fusion_plugin"
-		type="fusion_plugin"
-		class="pt.webdetails.cpk.CpkContentGenerator"/>
+
 </plugin>
