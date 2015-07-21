@@ -90,7 +90,8 @@ public class ParameterParser {
                 // process all the elements for a parameter
                 String[] parameterArray = requestParams.getStringArrayParameter(parameterKey, null);
                 for (int i = 0; i < parameterArray.length; ++i) {
-                    parameterArray[i] = URLDecoder.decode(parameterArray[i].replaceAll("\\+", "%2B"), ENCODING);
+//                    parameterArray[i] = URLDecoder.decode(parameterArray[i].replaceAll("\\+", "%2B"), ENCODING);
+                	parameterArray[i] = URLDecoder.decode(parameterArray[i], ENCODING);
                 }
 
                 // if only one element set as a string
@@ -174,6 +175,11 @@ public class ParameterParser {
         return parameters.get(name);
     }
     
+    /**
+     * Put a parameter into the final map.
+     * @param key The parameter name.
+     * @param value The parameter value.
+     */
     public void putParameter(String key, Object value) {
     	parameters.put(key, value);
     }

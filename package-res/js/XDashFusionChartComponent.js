@@ -15,7 +15,7 @@ var xLoadFunct= function(){
 			//need in realtimecharts
 			options.webAppPath=webAppPath;
 
-			var urlApi = webAppPath + '/plugin/fusion_plugin/api/renderChart';
+			var urlApi = webAppPath + '/plugin/xfusion/api/renderChart';
 			var urlResources = webAppPath + '/content/xfusion';
 			var myself = this;
 
@@ -252,7 +252,7 @@ var xLoadFunct= function(){
 		//check platform version
 		if(XDashFusionChartComponent.pentahoVersion==undefined)
 		{
-			var url = webAppPath + '/fusion_plugin/api/checkVersions';
+			var url = webAppPath + '/xfusion/api/checkVersions';
 			var myself=this;
 			// get the xml chart
 			var result=$.ajax({url: url, async: false, type: 'GET'}).responseText;

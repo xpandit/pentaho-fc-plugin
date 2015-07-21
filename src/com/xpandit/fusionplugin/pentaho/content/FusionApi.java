@@ -19,14 +19,28 @@ import org.pentaho.platform.engine.core.solution.SimpleParameterProvider;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
+import com.xpandit.fusionplugin.util.LicenseChecker;
 import com.xpandit.fusionplugin.util.VersionChecker;
 
+/**
+ * 
+ * xFusion plugin REST API. This class serves chart requests and version checks.
+ * 
+ * @author bacr
+ * 
+ */
 
 @Path("/{plugin}/api")
 public class FusionApi {
 
 	Logger logger = Logger.getLogger(FusionApi.class);
 
+	/**
+	 * Parameter adapter. We use it so we're able to run the ParameterParser class without the IParameterProvider map given by the old Content Generator.
+	 * @param request HTTP Request with header and request parameters.
+	 * @param jsonStr JSON string obtained through POST calls.
+	 * @return A map with the IParameterProviders "request", "headers", "path".
+	 */
 	private Map<String, IParameterProvider> getParameterProviders(
 			HttpServletRequest request, String jsonStr) {
 
@@ -60,55 +74,127 @@ public class FusionApi {
 		return parameterProviders;
 	}
 
+	/**
+	 * Log in debug mode all the parsed request parameters.
+	 * @param pp ParameterProvider to be logged.
+	 */
 	private void printParameterParser(ParameterParser pp) {
-		logger.debug("START");
 		for (Entry<String, Object> entry : pp.getParameters().entrySet()) {
 			logger.debug(entry.getKey() + " :: " + entry.getValue());
 		}
-		logger.debug("END");
 	}
 	
+	/**
+	 * Build a ParameterParser from a HTTP Request and an optional JSON string.
+	 * @param request HTTP request.
+	 * @param jsonStr Optional JSON string, useful in POST calls.
+	 * @return The ParameterParser to be used in the built chart.
+	 * @throws InvalidParameterException
+	 */
 	private ParameterParser buildParameterParser(HttpServletRequest request, String jsonStr)
 			throws InvalidParameterException {
 		ParameterParser parameterParser = new ParameterParser(getParameterProviders(request, jsonStr));
 		return parameterParser;
 	}
 	
+	/**
+	 * Check Pentaho version
+	 * @return
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/checkVersions")
 	public String getVersion() throws Exception {
 		return VersionChecker.getVersions();
 	}
 	
+	/**
+	 * Get the Fusion Chart XML to be rendered
+	 * @param request HTTP Request
+	 * @return Fusion Chart XML
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/renderChart")
 	public String doGetRenderChart(@Context HttpServletRequest request) throws Exception {
 		logger.debug("\n\nrenderChart START\n----------------");
+		// Build parameter parser
 		ParameterParser pp = buildParameterParser(request, null);
 		printParameterParser(pp);
+		
+		// Check license and act accordingly
+		String licenseChecked = LicenseChecker.verifyKey();
+		if (licenseChecked.startsWith("Error")) {
+			logger.error(licenseChecked);
+			logger.debug("\n----------------\nrenderChart END\n\n");
+			return licenseChecked;
+		}
+		else if (licenseChecked.startsWith("Warning")) {
+			logger.warn(licenseChecked);
+		}
 		FusionComponent fc = new FusionComponent(pp);
 		logger.debug("\n----------------\nrenderChart END\n\n");
-		return fc.renderChartGetData();
+		return licenseChecked + fc.renderChartGetData();
 	}
 
+	/**
+	 * Get a Fusion Chart to be embedded in Analyzer  
+	 * @param request HTTP request
+	 * @param jsonStr POST body with all the parameters and chart data
+	 * @return Fusion Chart XML
+	 * @throws Exception
+	 */
 	@POST
 	@Path("/renderChartExternalData")
 	public String doPostRenderChartExternalData(@Context HttpServletRequest request,
 			@FormParam("json") String jsonStr) throws Exception {
 		logger.debug("\n\nrenderChartExternalData START\n----------------");
+		// Build parameter parser
 		ParameterParser pp = buildParameterParser(request, jsonStr);
 		printParameterParser(pp);
+		
+		// Check license and act accordingly
+		String licenseChecked = LicenseChecker.verifyKey();
+		if (licenseChecked.startsWith("Error")) {
+			logger.error(licenseChecked);
+			logger.debug("\n----------------\nrenderChartExternalData END\n\n");
+			return licenseChecked;
+		}
+		else if (licenseChecked.startsWith("Warning")) {
+			logger.warn(licenseChecked);
+		}
 		FusionComponent fc = new FusionComponent(pp);
 		logger.debug("\n----------------\nrenderChartExternalData END\n\n");
-		return fc.renderChartGetData();
+		return licenseChecked + fc.renderChartGetData();
 	}
 
+	/**
+	 * Build an auto-updating chart to be rendered
+	 * @param request HTTP request
+	 * @return Real time Fusion Chart XML
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/dataStream")
 	public String doGetDataStream(@Context HttpServletRequest request) throws Exception {
 		logger.debug("\n\ndataStream START\n----------------");
+		// Build parameter parser
+		ParameterParser pp = buildParameterParser(request, null);
+		printParameterParser(pp);
+		
+		// Check license and act accordingly
+		String licenseChecked = LicenseChecker.verifyKey();
+		if (licenseChecked.startsWith("Error")) {
+			logger.error(licenseChecked);
+			logger.debug("\n----------------\ndataStream END\n\n");
+			return licenseChecked;
+		}
+		else if (licenseChecked.startsWith("Warning")) {
+			logger.warn(licenseChecked);
+		}
+		FusionComponent fc = new FusionComponent(pp);
 		logger.debug("\n----------------\ndataStream END\n\n");
-		return "";
+		return licenseChecked + fc.dataStream();
 	}
 
 

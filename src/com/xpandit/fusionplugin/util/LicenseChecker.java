@@ -88,11 +88,14 @@ public class LicenseChecker {
 		
 		if(!f.exists()) { 
 			f.createNewFile();
-			return "Error: Fusion Charts Plugin needs a license.";
 		}
 		
 		// get key from file
 		List<String> lines = Files.readAllLines(path, ENCODING);
+		
+		if(lines.size() == 0) {
+			return "Error: Fusion Charts Plugin needs a license.";
+		}
 		String key = lines.get(0);
 		// parse key
 		SerialData key_data = SerialGenerator.parse(key);
@@ -123,7 +126,7 @@ public class LicenseChecker {
 		}
 		else{
 			//OK
-			return null;
+			return "";
 		}
 	}
 }
