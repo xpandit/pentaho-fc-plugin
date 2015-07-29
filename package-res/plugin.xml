@@ -5,7 +5,7 @@
   <overlays>
 		<overlay id="startup.fusion_plugin" resourcebundle="content/fusion_plugin/resources/lang/messages.properties">
 			<menubar id="toolsmenu">
-	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/fusion_plugin/api/default')"/>
+	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/xfusion/api/default')"/>
 	      	</menubar>
 	    </overlay>
 	</overlays>

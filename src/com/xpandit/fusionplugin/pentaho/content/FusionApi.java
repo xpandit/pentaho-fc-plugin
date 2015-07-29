@@ -1,11 +1,13 @@
 package com.xpandit.fusionplugin.pentaho.content;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,6 +17,12 @@ import javax.ws.rs.core.Context;
 import org.apache.log4j.Logger;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.solution.SimpleParameterProvider;
+
+import pt.webdetails.cpf.utils.PluginUtils;
+import pt.webdetails.cpk.CpkCoreService;
+import pt.webdetails.cpk.CpkPentahoEnvironment;
+import pt.webdetails.cpk.elements.IElement;
+import pt.webdetails.cpk.utils.CpkUtils;
 
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
@@ -35,6 +43,17 @@ public class FusionApi {
 
 	Logger logger = Logger.getLogger(FusionApi.class);
 
+	private static final String DEFAULT_NO_DASHBOARD_MESSAGE = "This plugin does not contain a dashboard";
+	private static final String[] reservedWords = { "ping", "default", "reload", "refresh", "version", "status", "getSitemapJson", "elementsList", "listDataAccessTypes", "reloadPlugins" };
+	
+	protected CpkPentahoEnvironment cpkEnv;
+	protected CpkCoreService coreService;
+	
+	FusionApi() {
+		cpkEnv = new CpkPentahoEnvironment( new PluginUtils(), reservedWords );
+		coreService = new CpkCoreService( this.cpkEnv );
+	}
+		
 	/**
 	 * Parameter adapter. We use it so we're able to run the ParameterParser class without the IParameterProvider map given by the old Content Generator.
 	 * @param request HTTP Request with header and request parameters.
@@ -197,5 +216,17 @@ public class FusionApi {
 		return licenseChecked + fc.dataStream();
 	}
 
-
+	
+	@GET
+	@Path( "/default" )
+	public void defaultElement( @Context HttpServletResponse response ) throws IOException {
+		IElement defaultElement = coreService.getDefaultElement();
+		if ( defaultElement != null ) {
+			CpkUtils.redirect( response, defaultElement.getId() );
+		} else {
+			response.getOutputStream().write( DEFAULT_NO_DASHBOARD_MESSAGE.getBytes( "UTF-8" ) );
+			response.getOutputStream().flush();
+		}
+	}
+	
 }

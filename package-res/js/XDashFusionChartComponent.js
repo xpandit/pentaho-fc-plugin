@@ -252,7 +252,7 @@ var xLoadFunct= function(){
 		//check platform version
 		if(XDashFusionChartComponent.pentahoVersion==undefined)
 		{
-			var url = webAppPath + '/xfusion/api/checkVersions';
+			var url = webAppPath + '/plugin/xfusion/api/checkVersions';
 			var myself=this;
 			// get the xml chart
 			var result=$.ajax({url: url, async: false, type: 'GET'}).responseText;
