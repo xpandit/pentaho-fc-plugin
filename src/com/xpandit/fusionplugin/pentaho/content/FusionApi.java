@@ -3,6 +3,7 @@ package com.xpandit.fusionplugin.pentaho.content;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -12,7 +13,9 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 
 import org.apache.log4j.Logger;
 import org.pentaho.platform.api.engine.IParameterProvider;
@@ -24,6 +27,8 @@ import pt.webdetails.cpk.CpkPentahoEnvironment;
 import pt.webdetails.cpk.elements.IElement;
 import pt.webdetails.cpk.utils.CpkUtils;
 
+import com.sun.jersey.api.representation.Form;
+import com.sun.jersey.spi.container.ContainerRequest;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
@@ -217,6 +222,8 @@ public class FusionApi {
 	}
 
 	
+//	WORKAROUND: Replicate some CpkApi code
+	
 	@GET
 	@Path( "/default" )
 	public void defaultElement( @Context HttpServletResponse response ) throws IOException {
@@ -228,5 +235,94 @@ public class FusionApi {
 			response.getOutputStream().flush();
 		}
 	}
+
+
+	  @GET
+	  @Path( "/{param}" )
+	  public void genericEndpointGet( @PathParam( "param" ) String param, @Context HttpServletRequest request,
+	                                  @Context HttpServletResponse response, @Context HttpHeaders headers )
+	    throws Exception {
+	    setCorsHeaders( request, response );
+	    callEndpoint( param, request, response, headers );
+	  }
+
+	  @POST
+	  @Path( "/{param}" )
+	  public void genericEndpointPost( @PathParam( "param" ) String param, @Context HttpServletRequest request,
+	                                   @Context HttpServletResponse response, @Context HttpHeaders headers )
+	    throws Exception {
+	    setCorsHeaders( request, response );
+	    callEndpoint( param, request, response, headers );
+	  }
+
+	  private void setCorsHeaders( HttpServletRequest request, HttpServletResponse response ) {
+	    String origin = request.getHeader( "ORIGIN" );
+	    if ( origin != null ) {
+	      response.setHeader( "Access-Control-Allow-Origin", origin );
+	      response.setHeader( "Access-Control-Allow-Credentials", "true" );
+	    }
+	  }
+
+	  public void createContent( Map<String, Map<String, Object>> bloatedMap ) throws Exception {
+	    coreService.createContent( bloatedMap );
+	  }
+
+	  private void callEndpoint( String endpoint, HttpServletRequest request, HttpServletResponse response,
+	                             HttpHeaders headers )
+	    throws Exception {
+	    Map<String, Map<String, Object>> bloatedMap = buildBloatedMap( request, response, headers );
+	    bloatedMap.get( "path" ).put( "path", "/" + endpoint );
+	    coreService.createContent( bloatedMap );
+
+	    // make sure that everything written in the output stream is sent to the client
+	    response.getOutputStream().flush();
+	  }
+
+	  private Map<String, Map<String, Object>> buildBloatedMap( HttpServletRequest request, HttpServletResponse response,
+	                                                            HttpHeaders headers ) {
+	    Map<String, Map<String, Object>> mainMap = new HashMap<String, Map<String, Object>>();
+
+	    mainMap.put( "request", buildRequestMap( request, headers ) );
+	    mainMap.put( "path" + "", buildPathMap( request, response, headers ) );
+
+	    return mainMap;
+
+	  }
+
+	  private Map<String, Object> buildRequestMap( HttpServletRequest request, HttpHeaders headers ) {
+	    Map<String, Object> requestMap = new HashMap<String, Object>();
+
+	    //requestMap.put( PARAM_WEBAPP_DIR, PentahoSystem.getApplicationContext().getApplicationPath( "" ) );
+
+	    if ( request == null ) {
+	      return requestMap;
+	    }
+	    Enumeration e = request.getParameterNames();
+	    while ( e.hasMoreElements() ) {
+	      Object o = e.nextElement();
+	      requestMap.put( o.toString(), request.getParameter( o.toString() ) );
+	    }
+	    Form form =
+	      ( (ContainerRequest) headers ).getFormParameters();
+	    Iterator<String> it = form.keySet().iterator();
+	    while ( it.hasNext() ) {
+	      String next = it.next();
+	      requestMap.put( next, form.get( next ).get( 0 ) );
+	    }
+	    return requestMap;
+	  }
+
+	  private Map<String, Object> buildPathMap( HttpServletRequest request, HttpServletResponse response,
+	                                            HttpHeaders headers ) {
+
+	    Map<String, Object> pathMap = new HashMap<String, Object>();
+	    pathMap.put( "httprequest", request );
+	    pathMap.put( "httpresponse", response );
+	    if ( headers != null && headers.getRequestHeaders()
+	      .containsKey( "contentType" ) ) {
+	      pathMap.put( "contentType", headers.getRequestHeader( "contentType" ) );
+	    }
+	    return pathMap;
+	  }
 	
 }
