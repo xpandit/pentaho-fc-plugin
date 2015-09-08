@@ -1,0 +1,131 @@
+<script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts_xt.js"></script>
+
+<style>
+    .dashboard-row {
+        position: relative;
+        width: 1100px;
+        margin: 10px;
+    }
+    .chart-title {
+        text-align: center;
+        font-weight: bold;
+    }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+</style>
+
+<div class="dashboardContent">
+
+    <div class="dashboard-row">
+        <div class="left">
+            <div class="chart-title">Real Time Line</div>
+            <div id="RealTimeLine"></div>
+        </div>
+        <div class="right">
+            <div class="chart-title">Real Time Column</div>
+            <div id="RealTimeColumn"></div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="left">
+            <div class="chart-title">Bubble Chart</div>
+            <div id="BubbleChart"></div>
+        </div>
+        <div class="right">
+            <div class="chart-title">Angular Gauge</div>
+            <div id="AngularGauge"></div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="left">
+            <div class="chart-title">Line Chart</div>
+            <div id="LineChart"></div>
+        </div>
+        <div class="right">
+            <div class="chart-title">Pie Chart 2D</div>
+            <div id="PieChart2D"></div>
+        </div>
+    </div>
+
+</div>
+<script language="javascript" type="text/javascript">
+    
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+
+    var RealTimeLine = {
+        name           : "RealTimeLine",
+        htmlObject     : "RealTimeLine",
+        solution       : "/public",
+        path           : "plugin-samples/fusion-charts/Fusion Charts",
+        action         : "RealTimeLine.xfusion",
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var RealTimeColumn = {
+        name           : "RealTimeColumn",
+        htmlObject     : "RealTimeColumn",
+        solution       : "/public",
+        path           : "plugin-samples/fusion-charts/Fusion Charts",
+        action         : "RealTimeColumn.xfusion",
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var BubbleChart = {
+        name           : "BubbleChart",
+        htmlObject     : "BubbleChart",
+        solution       : "/public",
+        path           : "plugin-samples/fusion-charts/Fusion Charts",
+        action         : "BubbleChart.xfusion",
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var AngularGauge = {
+        name           : "AngularGauge",
+        htmlObject     : "AngularGauge",
+        solution       : "/public",
+        path           : "plugin-samples/fusion-charts/Fusion Charts",
+        action         : "AngularGauge.xfusion",
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var LineChart = {
+        name            : "LineChart",
+        htmlObject      : "LineChart",
+        chartDefinition : MetaLayerCharts_xt.LineChart,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponent",
+    }
+
+    var PieChart2D = {
+        name            : "PieChart2D",
+        htmlObject      : "PieChart2D",
+        chartDefinition : MetaLayerCharts_xt.PieChart2D,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponent",
+    }
+
+    function load(){
+
+        var components = [
+            // RealTimeLine , RealTimeColumn ,
+            // BubbleChart  , AngularGauge   ,
+            // LineChart    , PieChart2D     ,
+            AngularGauge
+        ];
+        
+        Dashboards.init(components);
+        
+    }
+    load();
+</script>

@@ -26,8 +26,8 @@ columnTypes[2] = Integer.class;
 TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
 
 Random rand = new Random();
-int randInt_a = rand.nextInt(10) + 10;
-int randInt_b = rand.nextInt(10) + 10;
+int randInt_a = rand.nextInt(50);
+int randInt_b = rand.nextInt(50);
 String time = (new java.text.SimpleDateFormat(&quot;HH:mm:ss&quot;)).format(new Date());
 
 model.addRow(new Object[]{ new String(time),new Integer(randInt_a),new Integer(randInt_b)});
