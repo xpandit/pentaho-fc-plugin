@@ -3,7 +3,7 @@
 <plugin title="fusion_plugin" loader="DEFAULT" name="xfusion">
   
   <overlays>
-		<overlay id="startup.fusion_plugin" resourcebundle="content/fusion_plugin/resources/lang/messages.properties">
+		<overlay id="startup.fusion_plugin" resourcebundle="content/xfusion/resources/lang/messages.properties">
 			<menubar id="toolsmenu">
 	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/xfusion/api/default')"/>
 	      	</menubar>
@@ -25,7 +25,7 @@
 	  </static-paths> 
   
   	  <content-type>
-			<title>fusion_plugin</title>
+			<title>xfusion</title>
 			<description></description>
 			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
 		</content-type>

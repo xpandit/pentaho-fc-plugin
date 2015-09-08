@@ -157,8 +157,9 @@ public class FusionApi {
 			logger.warn(licenseChecked);
 		}
 		FusionComponent fc = new FusionComponent(pp);
+		String fcResult = fc.renderChartGetData();
 		logger.debug("\n----------------\nrenderChart END\n\n");
-		return licenseChecked + fc.renderChartGetData();
+		return licenseChecked + fcResult;
 	}
 
 	/**
@@ -188,6 +189,7 @@ public class FusionApi {
 			logger.warn(licenseChecked);
 		}
 		FusionComponent fc = new FusionComponent(pp);
+		String fcResult = fc.renderChartGetData();
 		logger.debug("\n----------------\nrenderChartExternalData END\n\n");
 		return licenseChecked + fc.renderChartGetData();
 	}
@@ -217,8 +219,9 @@ public class FusionApi {
 			logger.warn(licenseChecked);
 		}
 		FusionComponent fc = new FusionComponent(pp);
+		String fcResult = fc.dataStream();
 		logger.debug("\n----------------\ndataStream END\n\n");
-		return licenseChecked + fc.dataStream();
+		return licenseChecked + fcResult;
 	}
 
 	
