@@ -449,6 +449,11 @@ abstract public class FCItem {
 	                stringBuffer.append("&");
 	            }
 	        }
+
+			while (stringBuffer.indexOf("//") == 0) {
+				stringBuffer.deleteCharAt(0);
+			}
+
 	        return stringBuffer;
 	    }
 

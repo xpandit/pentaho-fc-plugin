@@ -191,7 +191,7 @@ public class FusionApi {
 		FusionComponent fc = new FusionComponent(pp);
 		String fcResult = fc.renderChartGetData();
 		logger.debug("\n----------------\nrenderChartExternalData END\n\n");
-		return licenseChecked + fc.renderChartGetData();
+		return licenseChecked + fcResult;
 	}
 
 	/**

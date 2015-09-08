@@ -14,12 +14,12 @@
 	<dependencies>
 
 		<!-- cpf -->
-		<dependency org="pentaho" name="cpf-core"     rev="5.3.0.1-230" transitive="false" changing="true"/>
-		<dependency org="pentaho" name="cpf-pentaho5" rev="5.3.0.1-230" transitive="false" changing="true"/>
+		<dependency org="pentaho" name="cpf-core"     rev="${dependency.cpf.revision}" transitive="false" changing="true"/>
+		<dependency org="pentaho" name="cpf-pentaho5" rev="${dependency.cpf.revision}" transitive="false" changing="true"/>
 
 		<!-- cpk -->
-		<dependency org="pentaho" name="cpk-core"     rev="5.3-SNAPSHOT" transitive="false" changing="true"/>
-		<dependency org="pentaho" name="cpk-pentaho5" rev="5.3-SNAPSHOT" transitive="false" changing="true"/>
+		<dependency org="pentaho" name="cpk-core"     rev="${dependency.cpk.revision}" transitive="false" changing="true"/>
+		<dependency org="pentaho" name="cpk-pentaho5" rev="${dependency.cpk.revision}" transitive="false" changing="true"/>
 
 		<!-- Required to easily parse CDA results  -->
 		<dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-extensions-cda" rev="${dependency.pentaho-reporting.revision}" transitive="false" changing="true" />
