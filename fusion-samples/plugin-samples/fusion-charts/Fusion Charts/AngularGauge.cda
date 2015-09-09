@@ -12,14 +12,16 @@
         <Query>
 import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
 
-String[] columnNames = new String[1];
-columnNames[0] = &quot;Value&quot;;
+String[] columnNames = new String[2];
+columnNames[0] = &quot;Value1&quot;;
+columnNames[1] = &quot;Value2&quot;;
 
-Class[] columnTypes = new Class[1];
+Class[] columnTypes = new Class[2];
 columnTypes[0] = Integer.class;
+columnTypes[1] = Integer.class;
  
 TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
-model.addRow(new Object[]{new Integer(80)});
+model.addRow(new Object[]{new Integer(80), new Integer(80)});
 return model;
         </Query>
     </DataAccess>

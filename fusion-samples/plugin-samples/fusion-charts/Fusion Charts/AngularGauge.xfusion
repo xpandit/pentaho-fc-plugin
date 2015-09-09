@@ -36,3 +36,5 @@ showLimits=0
 
 toolTipBgColor=545A57
 toolTipBorderColor=262626
+
+webAppPath=pentaho
