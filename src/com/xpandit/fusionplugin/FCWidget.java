@@ -39,7 +39,7 @@ public class FCWidget extends FCItem {
         if (chartType == ChartType.ANGULARGAUGE) {
             categoryLength = results.size();
             StringBuffer stringBuffer = generateDataStreamParameter(pm);
-            params.put("dataStreamURL",stringBuffer.toString());
+            //params.put("dataStreamURL",stringBuffer.toString());
         } else if (chartType == ChartType.HBULLET || chartType == ChartType.VBULLET) {
             categoryLength = 1;
             // default behavior
@@ -49,7 +49,7 @@ public class FCWidget extends FCItem {
 
         // initialize widget
         graph = new FusionGraph("widget", chartType, categoryLength);
-        
+
         //set chart properties
         setChartProperties(params);
         
@@ -96,7 +96,7 @@ public class FCWidget extends FCItem {
                         else 
                         {
                             d.setLable(result.getValueAt(i, 0).toString());
-                            d.setValue(Double.parseDouble(result.getValueAt(i, 1).toString()));
+                            d.setValue(Double.parseDouble(result.getValueAt(i, 0).toString()));
                         }
                     }
                     
@@ -163,7 +163,7 @@ public class FCWidget extends FCItem {
      * @throws Exception
      */
     public String generateChart() throws Exception {
-		ChartFactoryWidget chart	= new ChartFactoryWidget(isFreeVersion());   
+		ChartFactoryWidget chart	= new ChartFactoryWidget(isFreeVersion());
 		//attach graph to chart factory
 		chart.insertGraph(graph);
 		return chart.buildDOMFusionChart(graph.getGraphId()); 

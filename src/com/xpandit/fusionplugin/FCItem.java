@@ -1,23 +1,22 @@
 package com.xpandit.fusionplugin;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
-import org.apache.log4j.Logger;
-import org.pentaho.commons.connection.IPentahoMetaData;
-import org.pentaho.commons.connection.IPentahoResultSet;
-import org.pentaho.platform.engine.core.system.PentahoSystem;
-
 import com.fusioncharts.ChartType;
 import com.fusioncharts.ColorRange;
 import com.fusioncharts.FusionGraph;
 import com.fusioncharts.Series;
 import com.fusioncharts.Series.SeriesType;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
+import org.apache.log4j.Logger;
+import org.pentaho.commons.connection.IPentahoMetaData;
+import org.pentaho.commons.connection.IPentahoResultSet;
+import org.pentaho.platform.engine.core.system.PentahoSystem;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * 
@@ -213,6 +212,11 @@ abstract public class FCItem {
 	 * @param params map with all parameters
 	 */
 	public void setChartProperties(TreeMap<String, Object> params) {
+
+        params.remove("data");
+        params.remove("range");
+        params.remove("2d_3d");
+
 		Set<String> keys = params.keySet();
 		for (String mapKey : keys) { 
 		    if (params.get(mapKey) instanceof String)
