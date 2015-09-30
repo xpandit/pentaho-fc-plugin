@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin title="fusion_plugin" loader="DEFAULT" name="xfusion">
+<plugin title="fusion_plugin" loader="DEFAULT">
   
   <overlays>
 		<overlay id="startup.fusion_plugin" resourcebundle="content/xfusion/resources/lang/messages.properties">
 			<menubar id="toolsmenu">
-	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/xfusion/api/default')"/>
+	        	<menuitem id="fusion_plugin" label="${Launcher.fusion_plugin}" command="mantleXulHandler.openUrl('${Launcher.fusion_plugin}','${Launcher.fusion_plugin_TOOLTIP}','plugin/fusion_plugin/api/default')"/>
 	      	</menubar>
 	    </overlay>
 	</overlays>

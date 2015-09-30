@@ -24,7 +24,7 @@ public class FcPluginEnvironment extends PentahoPluginEnvironment {
     }
 
     public String getPluginId() {
-        return "xfusion";
+        return "fusion_plugin";
     }
 
 }

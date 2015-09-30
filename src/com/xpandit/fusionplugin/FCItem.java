@@ -438,7 +438,7 @@ abstract public class FCItem {
 	        StringBuffer stringBuffer= new StringBuffer();
 	        TreeMap<String, Object> instanceParams =pm.getInstanceParameters();
 
-	        stringBuffer.append("/"+pm.getParams().get("webAppPath")+"/plugin/xfusion/api/dataStream?");
+	        stringBuffer.append("/"+pm.getParams().get("webAppPath")+"/plugin/fusion_plugin/api/dataStream?");
 
 	        String lastKey=instanceParams.lastKey();
 
