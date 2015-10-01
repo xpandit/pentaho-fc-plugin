@@ -37,7 +37,7 @@ var chartSettingsManager = {
     
     fcplugin_angulargauge :  function(){
         var options = {
-                colorRange : 'FF654F;FF654F;F6BD0F;8BBA00'
+                colorRange : 'FF654F;F6BD0F;8BBA00;8BBA00'
         }
         return options;
     },
