@@ -1,6 +1,11 @@
 package com.xpandit.fusionplugin.pentaho.content;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +14,8 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,20 +24,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
+import org.json.JSONException;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.engine.core.solution.SimpleParameterProvider;
 
+import com.sun.jersey.multipart.FormDataParam;
+
 import pt.webdetails.cpf.utils.PluginUtils;
+import pt.webdetails.cpf.utils.MimeTypes;
 import pt.webdetails.cpk.CpkCoreService;
 import pt.webdetails.cpk.CpkPentahoEnvironment;
 import pt.webdetails.cpk.elements.IElement;
 import pt.webdetails.cpk.utils.CpkUtils;
 
 import com.sun.jersey.api.representation.Form;
+import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.xpandit.fusionplugin.exception.InvalidParameterException;
 import com.xpandit.fusionplugin.pentaho.FusionComponent;
+import com.xpandit.fusionplugin.pentaho.FusionPluginSettings;
 import com.xpandit.fusionplugin.pentaho.input.ParameterParser;
 import com.xpandit.fusionplugin.util.LicenseChecker;
 import com.xpandit.fusionplugin.util.VersionChecker;
@@ -49,6 +65,8 @@ public class FusionApi {
 	Logger logger = Logger.getLogger(FusionApi.class);
 
 	private static final String DEFAULT_NO_DASHBOARD_MESSAGE = "This plugin does not contain a dashboard";
+	private static final String DEFAULT_STORE_ERROR_MESSAGE = "Something went wrong when trying to upload the file";
+	private static final String DEFAULT_STORE_UPLOAD_FOLDER = "system/fusion_plugin/fusioncharts/JSClass";
 	private static final String[] reservedWords = { "ping", "default", "reload", "refresh", "version", "status", "getSitemapJson", "elementsList", "listDataAccessTypes", "reloadPlugins" };
 	
 	protected CpkPentahoEnvironment cpkEnv;
@@ -120,6 +138,56 @@ public class FusionApi {
 		ParameterParser parameterParser = new ParameterParser(getParameterProviders(request, jsonStr));
 		return parameterParser;
 	}
+	
+	private String checkRelativePathSanity( String path ) {
+	    String result = path;
+
+	    if ( path != null ) {
+	      if ( result.startsWith( "./" ) ) {
+	        result = result.replaceFirst( "./", "" );
+	      }
+	      if ( result.startsWith( "." ) ) {
+	        result = result.replaceFirst( ".", "" );
+	      }
+	      if ( result.startsWith( "/" ) ) {
+	        result = result.replaceFirst( "/", "" );
+	      }
+
+	      if ( result.endsWith( "/" ) ) {
+	        result = result.substring( 0, result.length() - 1 );
+	      }
+	    }
+
+	    return result;
+	  }
+	
+	private boolean fileExists( String fullName, String baseSystemPath) {
+		    if ( !checkPath( fullName ) ) {
+		      return false;
+		    }
+		    File f;
+		    if ( fullName.startsWith( File.separator ) ) {
+		      f = new File( baseSystemPath + fullName );
+		    } else {
+		      f = new File( baseSystemPath + File.separator + fullName );
+		    }
+		    return f.exists();
+		  }
+	
+	 private boolean checkPath( String path ) {
+		    boolean result = !path.contains( ".." );
+		    if ( !result ) {
+		      logger.warn( "Path parameter contains unsupported back tracking path element: " + path );
+		    }
+		    return result;
+		  }
+	
+	  private String buildResponseJson( boolean status, String message ) throws JSONException {
+		    JSONObject result = new JSONObject();
+		    result.put( "result", status );
+		    result.put( "message", message );
+		    return result.toString();
+		  }
 	
 	/**
 	 * Check Pentaho version
@@ -223,6 +291,72 @@ public class FusionApi {
 		logger.debug("\n----------------\ndataStream END\n\n");
 		return licenseChecked + fcResult;
 	}
+	
+	 @POST
+	  @Path( "/uploadFile" )
+	  @Consumes( "multipart/form-data" )
+	  @Produces( MimeTypes.JSON )
+	  public String store( @FormDataParam( "file" ) InputStream uploadedInputStream,
+	                       @FormDataParam( "file" ) FormDataContentDisposition fileDetail,
+	                       @FormDataParam( "path" ) String path ) throws JSONException {
+
+	    String fileName = checkRelativePathSanity( fileDetail.getFileName() ), savePath = checkRelativePathSanity( path );
+	    ByteArrayOutputStream oStream = new ByteArrayOutputStream();
+	    byte[] contents;
+	    try {
+	      IOUtils.copy( uploadedInputStream, oStream );
+	      oStream.flush();
+	      contents = oStream.toByteArray();
+	      oStream.close();
+	    } catch ( IOException e ) {
+	      logger.error( e );
+	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );
+	    }
+
+	    if ( fileName == null ) {
+	      logger.error( "parameter fileName must not be null" );
+	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );
+	    }
+	    if ( savePath == null ) {
+	      logger.error( "parameter path must not be null" );
+	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );
+	    }
+	    if ( contents == null ) {
+	      logger.error( "File content must not be null" );
+	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );
+	    }
+	    
+	    FusionPluginSettings fps = new FusionPluginSettings();
+	    String basePath = fps.getBasePath() + DEFAULT_STORE_UPLOAD_FOLDER;
+	    String fullPath = FilenameUtils.normalize( savePath + "/" + fileName );
+	    if (fileExists( checkRelativePathSanity( fullPath ), basePath ) ) {
+	      return buildResponseJson( false, "File " + fileName + " already exists!" );
+	    }
+	    
+	    File f;
+	    
+	    if ( checkRelativePathSanity( fullPath ).startsWith( File.separator ) ) {
+		      f = new File( basePath + checkRelativePathSanity( fullPath ) );
+		    } else {
+		      f = new File( basePath + File.separator + checkRelativePathSanity( fullPath ) );
+		    }
+
+	    FileOutputStream fos;
+
+	    try {
+	      fos = new FileOutputStream( f, false );
+	      fos.write( contents );
+	      fos.flush();
+	      fos.close();
+	      return buildResponseJson( true, "File " + fileName + " Saved!" );
+	    } catch ( FileNotFoundException fnfe ) {
+	      logger.error( "Unable to create file. Check permissions on folder " + fullPath, fnfe );
+	      return buildResponseJson( false, "File " + fileName + " not Saved!" );
+	    } catch ( IOException ioe ) {
+	      logger.error( "Error caught while writing file", ioe );
+	      return buildResponseJson( false, "File " + fileName + " not Saved!" );
+	    }
+	  }
 
 	
 //	WORKAROUND: Replicate some CpkApi code
