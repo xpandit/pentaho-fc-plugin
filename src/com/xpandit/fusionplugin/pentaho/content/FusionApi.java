@@ -317,6 +317,10 @@ public class FusionApi {
 	      logger.error( "parameter fileName must not be null" );
 	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );
 	    }
+	    if ( !fileName.endsWith(".zip")){
+	    	logger.error( "parameter fileName must be zip file" );
+		    return buildResponseJson( false, "You are only allowed to upload zip files" );
+	    }
 	    if ( savePath == null ) {
 	      logger.error( "parameter path must not be null" );
 	      return buildResponseJson( false, DEFAULT_STORE_ERROR_MESSAGE );

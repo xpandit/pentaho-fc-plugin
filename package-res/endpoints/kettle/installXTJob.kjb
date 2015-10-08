@@ -160,8 +160,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>23</xloc>
-      <yloc>123</yloc>
+      <xloc>31</xloc>
+      <yloc>230</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -170,8 +170,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1407</xloc>
-      <yloc>277</yloc>
+      <xloc>1621</xloc>
+      <yloc>329</yloc>
       </entry>
     <entry>
       <name>unzip fusion charts zip file</name>
@@ -201,8 +201,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>345</xloc>
-      <yloc>124</yloc>
+      <xloc>353</xloc>
+      <yloc>231</yloc>
       </entry>
     <entry>
       <name>Write To Log</name>
@@ -214,8 +214,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>157</xloc>
-      <yloc>124</yloc>
+      <xloc>165</xloc>
+      <yloc>231</yloc>
       </entry>
     <entry>
       <name>copy the files extracted</name>
@@ -239,8 +239,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>797</xloc>
-      <yloc>275</yloc>
+      <xloc>809</xloc>
+      <yloc>430</yloc>
       </entry>
     <entry>
       <name>Delete temp folders</name>
@@ -257,8 +257,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1189</xloc>
-      <yloc>277</yloc>
+      <xloc>1207</xloc>
+      <yloc>323</yloc>
       </entry>
     <entry>
       <name>move FusionCharts.js from the free version</name>
@@ -298,8 +298,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>796</xloc>
-      <yloc>116</yloc>
+      <xloc>1017</xloc>
+      <yloc>298</yloc>
       </entry>
     <entry>
       <name>rename fusioncharts.js</name>
@@ -339,8 +339,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>987</xloc>
-      <yloc>277</yloc>
+      <xloc>1006</xloc>
+      <yloc>430</yloc>
       </entry>
     <entry>
       <name>rollback</name>
@@ -380,8 +380,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>798</xloc>
-      <yloc>422</yloc>
+      <xloc>806</xloc>
+      <yloc>529</yloc>
       </entry>
     <entry>
       <name>Delete temp rollback folders</name>
@@ -398,8 +398,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>523</xloc>
-      <yloc>423</yloc>
+      <xloc>531</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -409,8 +409,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>349</xloc>
-      <yloc>423</yloc>
+      <xloc>357</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>Checks if files exist</name>
@@ -425,8 +425,99 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>540</xloc>
-      <yloc>120</yloc>
+      <xloc>809</xloc>
+      <yloc>232</yloc>
+      </entry>
+    <entry>
+      <name>install fusion xt</name>
+      <description/>
+      <type>FILES_EXIST</type>
+      <filename/>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x5c;tempXTCharts&#x5c;js</name>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>231</yloc>
+      </entry>
+    <entry>
+      <name>install maps package</name>
+      <description/>
+      <type>FILES_EXIST</type>
+      <filename/>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;tempXTCharts&#x2f;maps</name>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>57</yloc>
+      </entry>
+    <entry>
+      <name>delete zip files uploaded</name>
+      <description/>
+      <type>DELETE_FILES</type>
+      <arg_from_previous>N</arg_from_previous>
+      <include_subfolders>N</include_subfolders>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass</name>
+          <filemask>.&#x2a;&#x5c;.zip</filemask>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1387</xloc>
+      <yloc>325</yloc>
+      </entry>
+    <entry>
+      <name>copy the maps files extracted </name>
+      <description/>
+      <type>COPY_FILES</type>
+      <copy_empty_folders>Y</copy_empty_folders>
+      <arg_from_previous>N</arg_from_previous>
+      <overwrite_files>Y</overwrite_files>
+      <include_subfolders>Y</include_subfolders>
+      <remove_source_files>N</remove_source_files>
+      <add_result_filesname>N</add_result_filesname>
+      <destination_is_a_file>N</destination_is_a_file>
+      <create_destination_folder>Y</create_destination_folder>
+      <fields>
+        <field>
+          <source_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x5c;tempXTCharts&#x5c;maps</source_filefolder>
+          <destination_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x5c;JSClass&#x5c;maps</destination_filefolder>
+          <wildcard>.&#x2a;</wildcard>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1206</xloc>
+      <yloc>58</yloc>
+      </entry>
+    <entry>
+      <name>is 2nd installation</name>
+      <description/>
+      <type>FILES_EXIST</type>
+      <filename/>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;FusionCharts.js</name>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>662</xloc>
+      <yloc>232</yloc>
       </entry>
   </entries>
   <hops>
@@ -438,15 +529,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Delete temp folders</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Write To Log</from>
@@ -521,15 +603,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>unzip fusion charts zip file</from>
-      <to>Checks if files exist</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Checks if files exist</from>
       <to>move FusionCharts.js from the free version</to>
       <from_nr>0</from_nr>
@@ -545,6 +618,96 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>unzip fusion charts zip file</from>
+      <to>install fusion xt</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>install fusion xt</from>
+      <to>install maps package</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete temp folders</from>
+      <to>delete zip files uploaded</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>delete zip files uploaded</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>install maps package</from>
+      <to>copy the maps files extracted </to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>copy the maps files extracted </from>
+      <to>Delete temp folders</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>install maps package</from>
+      <to>Delete temp folders</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>install fusion xt</from>
+      <to>is 2nd installation</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>is 2nd installation</from>
+      <to>Checks if files exist</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>is 2nd installation</from>
+      <to>copy the files extracted</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
