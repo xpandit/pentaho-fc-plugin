@@ -1,28 +1,52 @@
 <script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
 <script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
 <script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts_xt.js"></script>
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+    
 
-<style>
-    .dashboard-row {
-        position: relative;
-        width: 1100px;
-        margin: 10px;
-    }
-    .chart-title {
-        text-align: center;
-        font-weight: bold;
-    }
-    .left {
-        float: left;
-    }
-    .right {
-        float: right;
-    }
-</style>
 
 <div class="dashboardContent">
+    <div class="header">
+        <img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
+            <h2 class="light">Fusion Charts XT Dashboard Samples</h2>
+    </div>
+    
+    
+    <div id="charts">
+        <div id="firstRow">
+            <h5 class="light">Line Chart</h5>
+            <div id="LineChart" style="margin-left:25px;"></div>
+        </div>
+        <div id="SecondRow" style="height:270px;">
+            <h5 class="light">Pie Chart and Angular Gauge Chart</h5>
+            <div id="PieChart2D" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="AngularGauge"></div>
+        </div>
+        <div id="thirdRow" style="height:370px;">
+            <h5 class="light">Real time line Chart and Real time bar Chart</h5>
+            <div id="RealTimeLine" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="RealTimeColumn"></div>
+        </div>
+        <div id="fourRow">
+            <h5 class="light">Column Chart</h5>
+            <div id="BubbleChart" style="margin-left:25px;"></div>
+        </div>
+        
+</div>
+    <div class="light third">
+    Xpand IT supports Pentaho FusionCharts Plugin.
+    <br>
+    If you need more information, sharing ideas or discuss plan details, please reach us by email
+    <a href="mailto:marketing@xpand-it.com" target="_top" class="regular">marketing@xpand-it.com</a> or by phone:
+    <span class="regular">+351 218967150</span>
+</div>
+<div class="logos">
+    <img width="388" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logos-footer.png">
+</div>
+    
 
-    <div class="dashboard-row">
+    <!--<div class="dashboard-row">
         <div class="left">
             <div class="chart-title">Real Time Line</div>
             <div id="RealTimeLine"></div>
@@ -51,7 +75,7 @@
             <div class="chart-title">Pie Chart 2D</div>
             <div id="PieChart2D"></div>
         </div>
-    </div>
+    </div>-->
 
 </div>
 <script language="javascript" type="text/javascript">
@@ -62,9 +86,7 @@
     var RealTimeLine = {
         name           : "RealTimeLine",
         htmlObject     : "RealTimeLine",
-        solution       : "/public",
-        path           : "plugin-samples/fusion-charts/Fusion Charts",
-        action         : "RealTimeLine.xfusion",
+        chartDefinition : MetaLayerCharts_xt.RealTimeLineChart,
         executeAtStart : true,
         type           : "XDashFusionChartComponent",
     }
@@ -92,9 +114,7 @@
     var AngularGauge = {
         name           : "AngularGauge",
         htmlObject     : "AngularGauge",
-        solution       : "/public",
-        path           : "plugin-samples/fusion-charts/Fusion Charts",
-        action         : "AngularGauge.xfusion",
+        chartDefinition : MetaLayerCharts_xt.AngularGaugeChart,
         executeAtStart : true,
         type           : "XDashFusionChartComponent",
     }

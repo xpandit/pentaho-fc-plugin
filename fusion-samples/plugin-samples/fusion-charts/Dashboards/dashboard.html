@@ -1,68 +1,64 @@
 <script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
 <script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
 <script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts.js"></script>
-
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+    
 <div class="dashboardContent">
-    <div id="dashboardRow1" style="position:relative; width:900px;">
-        <div style="float:left; padding:10px;">
-            <div style="text-align:center;font-weight:bold;">
-                Line Chart
-            </div>
-            <div id="lineChart">
-            </div>
-        </div>
-        <div style="float:right; padding:10px;">
-            <div style="text-align:center;font-weight:bold;">
-                Pie Chart
-            </div>
-            <div id="pieChart">
-            </div>
-        </div>
+    <div class="header">
+        <img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
+            <h2 class="light">Fusion Charts Dashboard Samples Free</h2>
     </div>
-    <div id="dashboardRow2" style="position:relative;width:900px;">
-        <div style="float:left; padding:10px;">
-            <div style="text-align:center;font-weight:bold;">
-                Column Chart
-            </div>
-            <div id="columnChart">
-            </div>
-        </div>
-        <div style="float:right; padding:10px;">
-            <div style="text-align:center; font-weight:bold;">
-                Bar Chart
-            </div>
-            <div id="barChart">
-            </div>
-        </div>
+    
+    <div class="Info" style="margin-bottom:30px;">
+        <h5 class="light">How to get Fusion Charts XT</h5>
+   All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+    <div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
     </div>
-    <div id="dashboardRow3" style="position:relative;width:900px;">
-        <div style="float:left; padding:10px;">
-            <div style="text-align:center;font-weight:bold;">
-                Drill Bar Chart
-            </div>
-            <div id="drillBarChart">
-            </div>
+    
+    <div id="charts">
+        <div id="firstRow">
+            <h5 class="light">Line Chart</h5>
+            <div id="lineChart" style="margin-left:25px;"></div>
         </div>
-                
-        <div style="float:right; padding:10px;">
-            <div style="text-align:center; font-weight:bold;">
-               MS Column Chart 3D
-            </div>
-            <div id="msColumnChart">
-            </div>
+        <div id="SecondRow">
+            <h5 class="light">Pie Chart and Column Chart</h5>
+            <div id="pieChart" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="columnChart"></div>
         </div>
-    </div>
+        <div id="thirdRow">
+            <h5 class="light">Bar Chart and drill bar Chart</h5>
+            <div id="barChart" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="drillBarChart"></div>
+        </div>
+        <div id="fourRow">
+            <h5 class="light">Column Chart</h5>
+            <div id="msColumnChart" style="margin-left:25px;"></div>
+        </div>
+        
 </div>
+    <div class="light third">
+    Xpand IT supports Pentaho FusionCharts Plugin.
+    <br>
+    If you need more information, sharing ideas or discuss plan details, please reach us by email
+    <a href="mailto:marketing@xpand-it.com" target="_top" class="regular">marketing@xpand-it.com</a> or by phone:
+    <span class="regular">+351 218967150</span>
+</div>
+<div class="logos">
+    <img width="388" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logos-footer.png">
+</div>
+    
+</div>
+
+
+
 <script language="javascript" type="text/javascript">
     
     // Dashboard Parameters
-    Dashboards.globalContext = false;
+    //Dashboards.globalContext = false;
 
     var lineChart = {
         name: "lineChart",
-        solution: "/public",
-        path: "plugin-samples/fusion-charts/Fusion Charts Free/",
-        action: "LineChart.xfusion",
         executeAtStart: true,
         htmlObject: "lineChart",
         chartDefinition: MetaLayerCharts.lineChartDef,
@@ -73,10 +69,6 @@
 
     var pieChart = {
         name: "pieChart",
-        solution: "/public",
-        //used for testing old mode of referencing files
-        path: "plugin-samples/fusion-charts/Fusion Charts Free",
-        action: "PieChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "pieChart",
         chartDefinition: MetaLayerCharts.pieChartDef,
@@ -88,7 +80,6 @@
 
     var columnChart = {
         name: "columnChart",
-        xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.xfusion",
         executeAtStart: true,
         htmlObject: "columnChart",
         chartDefinition: MetaLayerCharts.columnChartDef,
@@ -98,8 +89,7 @@
     }
 
     var msColumnChart = {
-            name: "columnChart",
-            xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/MSColumnChart3D.xfusion",
+            name: "msColumnChart",
             executeAtStart: true,
             htmlObject: "msColumnChart",
             chartDefinition: MetaLayerCharts.msColumnChartDef,
@@ -110,7 +100,6 @@
 
     var barChart = {
             name: "barChart",
-            xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.xfusion",
             executeAtStart: true,
             htmlObject: "barChart",
             chartDefinition: MetaLayerCharts.barChartDef,
@@ -134,12 +123,23 @@
             }
         }
     
-    function load(){
 
         var components = [lineChart , pieChart , columnChart,msColumnChart , barChart,drillBarChart];
         
-        Dashboards.init(components);
-        
-    }
-    load();
+        function switchToFusionManager() {
+            var url= Dashboards.getWebAppPath() + '/plugin/fusion_plugin/api/settings';
+            //window.location.href=url;
+            window.open(url, '_blank');
+        }
+
+</script>
+
+<script language="javascript" type="text/javascript">
+
+function load(){
+	Dashboards.init(components);
+}
+
+load();
+
 </script>

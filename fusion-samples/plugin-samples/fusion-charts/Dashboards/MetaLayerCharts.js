@@ -1,7 +1,5 @@
 ﻿var MetaLayerCharts = {
 	lineChartDef: {
-		width: "400",
-		height: "150",
 		chartType: "Line",
 		cdaPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/LineChart.cda",
 		cdaDataAccessId: "2",
@@ -10,28 +8,45 @@
 		yAxisName: "Sales",
 		chartType: "Line",
 		height: "200",
-		width: "500",
+		width: "900",
 		free: "true",
 	},
 	pieChartDef: {
 		width: "400",
 		height: "150",
-		chartType: "Pie3D",
-		cdaDataAccessId:"2"
+		cdaPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/PieChart2D.cda",
+		cdaDataAccessId:"2",
+		chartTitle: "Sales Per year",
+		xAxisName: "Years",
+		yAxisName: "Sales",
+		seriesColor: "007878;0A9B9B;29AAAA",
+		chartType: "Pie2D",
+		free : "true",
 	},
 	columnChartDef: {
 		width: "400",
 		height: "150",
 		chartType: "Column3D",
-		cdaDataAccessId:"2"
+		cdaDataAccessId:"2",
+		cdaPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
+		chartTitle: "Sales Per year",
+		xAxisName: "Years",
+		yAxisName: "Sales",
+		seriesColor: "AFD8F8;F6BD0F;8BBA00",
+		free: "true",
 	},
 	
 	msColumnChartDef: {
-		width: "400",
-		height: "150",
+		width: "900",
+		height: "200",
 		chartType: "MSColumn3D",
 		cdaDataAccessId:"2",
-		seriesName:"Sales 1;Sales 2"
+		seriesName:"Sales 1;Sales 2",
+		cdaPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/MSColumnChart3D.cda",
+		chartTitle: "Sales Per year",
+		xAxisName: "Years",
+		yAxisName: "Sales",
+		free: "true",
 	},
 	
 	barChartDef: {
@@ -39,17 +54,28 @@
 		height: "150",
 		chartType: "Bar2D",
 		cdaDataAccessId:"2",
-		outputIndexId:"2"
+        cdaPath: '/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda',
+		outputIndexId:"2",
+		chartTitle: "Sales Per year",
+		xAxisName: "Years",
+		seriesColor: "77D7D7;49BFBF;29AAAA",
+		yAxisName: "Sales",
+		free: "true",
 	},
 	drillBarChartDef: {
 		width: "400",
 		height: "150",
 		chartType: "Bar2D",
 		pathMode: "new",
-		xFusionPath: "/public/plugin-samples/fusion-charts/Fusion Charts Free/DrillBarChart2D.xfusion",
 		seriesParam:"SeriesParamName",
 		categoriesParam:"categoriesParamName",
 		chartLink:"JavaScript:drillBarChart.drillFunction('{SeriesParamName}','{categoriesParamName}')", 	
-		cdaDataAccessId:"2"
+		cdaDataAccessId:"2",
+		cdaPath: '/public/plugin-samples/fusion-charts/Fusion Charts Free/DrillBarChart2D.cda',
+		chartTitle: 'Sales Per year',
+		xAxisName: 'Years',
+		seriesColor: "007878;0A9B9B;29AAAA;77D7D7",
+		yAxisName: 'Sales',
+		free:"true",
 	}
 };

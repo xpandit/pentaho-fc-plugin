@@ -11,7 +11,7 @@ public enum ChartType {
 	DOUGHNUT3D(SingleOrMulti.SINGLE,ChartLibrary.CHARTS, "doughnut3D"), 
 	DOUGHNUT2D(SingleOrMulti.SINGLE, ChartLibrary.CHARTS,"doughnut2D"), 
 	PARETO3D(SingleOrMulti.SINGLE,ChartLibrary.CHARTS, "pareto3d"), 
-	PARETO2D(SingleOrMulti.SINGLE, ChartLibrary.CHARTS,"paredo2d"),
+	PARETO2D(SingleOrMulti.SINGLE, ChartLibrary.CHARTS,"pareto2d"),
 	LINE(SingleOrMulti.SINGLE, ChartLibrary.CHARTS, "Line"), 
 	BAR2D(SingleOrMulti.SINGLE, ChartLibrary.CHARTS, "Bar2D"),
 	AREA2D(SingleOrMulti.SINGLE, ChartLibrary.CHARTS, "AreaD"),
