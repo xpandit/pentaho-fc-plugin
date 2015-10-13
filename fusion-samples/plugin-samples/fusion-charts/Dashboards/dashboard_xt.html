@@ -1,6 +1,7 @@
 <script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
 <script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
 <script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts_xt.js"></script>
+<script type="text/javascript" src="../../../content/xfusion/js/endpointsForSamples.js"></script>    
 <link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
     
@@ -10,6 +11,12 @@
     <div class="header">
         <img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
             <h2 class="light">Fusion Charts XT Dashboard Samples</h2>
+    </div>
+    
+    <div class="Info" style="margin-bottom:30px;">
+        <h5 class="light">How to get Fusion Charts XT</h5>
+   All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+    <div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
     </div>
     
     
@@ -29,7 +36,7 @@
             <div id="RealTimeColumn"></div>
         </div>
         <div id="fourRow">
-            <h5 class="light">Column Chart</h5>
+            <h5 class="light">Bubble Chart</h5>
             <div id="BubbleChart" style="margin-left:25px;"></div>
         </div>
         
@@ -45,37 +52,6 @@
     <img width="388" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logos-footer.png">
 </div>
     
-
-    <!--<div class="dashboard-row">
-        <div class="left">
-            <div class="chart-title">Real Time Line</div>
-            <div id="RealTimeLine"></div>
-        </div>
-        <div class="right">
-            <div class="chart-title">Real Time Column</div>
-            <div id="RealTimeColumn"></div>
-        </div>
-    </div>
-    <div class="dashboard-row">
-        <div class="left">
-            <div class="chart-title">Bubble Chart</div>
-            <div id="BubbleChart"></div>
-        </div>
-        <div class="right">
-            <div class="chart-title">Angular Gauge</div>
-            <div id="AngularGauge"></div>
-        </div>
-    </div>
-    <div class="dashboard-row">
-        <div class="left">
-            <div class="chart-title">Line Chart</div>
-            <div id="LineChart"></div>
-        </div>
-        <div class="right">
-            <div class="chart-title">Pie Chart 2D</div>
-            <div id="PieChart2D"></div>
-        </div>
-    </div>-->
 
 </div>
 <script language="javascript" type="text/javascript">
@@ -94,9 +70,7 @@
     var RealTimeColumn = {
         name           : "RealTimeColumn",
         htmlObject     : "RealTimeColumn",
-        solution       : "/public",
-        path           : "plugin-samples/fusion-charts/Fusion Charts",
-        action         : "RealTimeColumn.xfusion",
+        chartDefinition : MetaLayerCharts_xt.RealTimeBarChart,
         executeAtStart : true,
         type           : "XDashFusionChartComponent",
     }
@@ -104,9 +78,7 @@
     var BubbleChart = {
         name           : "BubbleChart",
         htmlObject     : "BubbleChart",
-        solution       : "/public",
-        path           : "plugin-samples/fusion-charts/Fusion Charts",
-        action         : "BubbleChart.xfusion",
+        chartDefinition : MetaLayerCharts_xt.BubbleChart,
         executeAtStart : true,
         type           : "XDashFusionChartComponent",
     }
@@ -135,16 +107,53 @@
         type            : "XDashFusionChartComponent",
     }
 
-    function load(){
-
         var components = [
             RealTimeLine , RealTimeColumn ,
             BubbleChart  , AngularGauge   ,
             LineChart    , PieChart2D     ,
         ];
         
-        Dashboards.init(components);
+         function switchToFusionManager() {
+            var url= Dashboards.getWebAppPath() + '/plugin/fusion_plugin/api/settings';
+            //window.location.href=url;
+            window.open(url, '_blank');
+        }
         
-    }
-    load();
+        
 </script>
+
+<script language="javascript" type="text/javascript">
+
+function load(){
+	Dashboards.init(components);
+}
+
+load();
+
+$(document).ready(function() {
+    sparkl.runEndpoint( 'fusion_plugin' , 'isfree', {
+            success: successCallback,
+            error: errorCallback
+    });
+});
+
+var successCallback = function (json)
+        {    
+          Dashboards.decrementRunningCalls();
+          for (var index = 0; index < json.resultset.length; index++) {
+              if(json.resultset[index][0] == "free"){
+                  if(json.resultset[index][1] == "false"){
+                      $(".Info").css("display","none");
+                  }else{
+                      $("#charts").css("display","none");
+                  }
+              }
+          }
+        };
+        
+var errorCallback = function (json){
+            Dashboards.decrementRunningCalls();
+        };
+        
+</script>
+
