@@ -172,12 +172,19 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Dummy Data</from><to>Row Normaliser</to><enabled>Y</enabled> </hop>
-  <hop> <from>Row Normaliser</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>read fusioChart properties file</from><to>filter values to change</to><enabled>Y</enabled> </hop>
+  <hop> <from>filter values to change</from><to>concat other values</to><enabled>Y</enabled> </hop>
+  <hop> <from>concat other values</from><to>filter values</to><enabled>Y</enabled> </hop>
+  <hop> <from>filter values to change</from><to>apply logical</to><enabled>Y</enabled> </hop>
+  <hop> <from>apply logical</from><to>concat changed values</to><enabled>Y</enabled> </hop>
+  <hop> <from>concat changed values</from><to>filter values changed</to><enabled>Y</enabled> </hop>
+  <hop> <from>filter values</from><to>join streams</to><enabled>Y</enabled> </hop>
+  <hop> <from>filter values changed</from><to>join streams</to><enabled>Y</enabled> </hop>
+  <hop> <from>join streams</from><to>write to file</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Dummy Data</name>
-    <type>DataGrid</type>
+    <name>apply logical</name>
+    <type>Janino</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -186,44 +193,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <name>free&#x3d;false</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>isHTML5&#x3d;true</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line> <item>free&#x3d;false</item><item>isHTML5&#x3d;true</item> </line>
-    </data>
+       <formula><field_name>eval</field_name>
+<formula_string>Field_000.trim&#x28;&#x29;.equals&#x28;&#x22;free&#x22;&#x29; &#x3f; Field_000.trim&#x28;&#x29;.equals&#x28;&#x22;free&#x22;&#x29; &#x26;&#x26; Field_001.trim&#x28;&#x29;.equals&#x28;&#x22;true&#x22;&#x29;&#x3f;&#x22;false&#x22;&#x3a;Field_001.trim&#x28;&#x29; &#x3a; Field_000.trim&#x28;&#x29;.equals&#x28;&#x22;isHTML5&#x22;&#x29; &#x26;&#x26; Field_001.trim&#x28;&#x29;.equals&#x28;&#x22;false&#x22;&#x29;&#x3f;&#x22;true&#x22;&#x3a;Field_001.trim&#x28;&#x29;</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>125</xloc>
-      <yloc>248</yloc>
+      <xloc>331</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Row Normaliser</name>
-    <type>Normaliser</type>
+    <name>concat changed values</name>
+    <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -232,23 +219,283 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <typefield>typefield</typefield>
-    <fields>      <field>        <name>free&#x3d;false</name>
-        <value>free&#x3d;false</value>
-        <norm/>
-        </field>      <field>        <name>isHTML5&#x3d;true</name>
-        <value>isHTML5&#x3d;true</value>
-        <norm/>
-        </field>      </fields>     <cluster_schema/>
+       <calculation><field_name>const</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>&#x3d;</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>group1st</field_name>
+<calc_type>ADD</calc_type>
+<field_a>Field_000</field_a>
+<field_b>const</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>joinAll</field_name>
+<calc_type>ADD</calc_type>
+<field_a>group1st</field_a>
+<field_b>eval</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>294</xloc>
-      <yloc>248</yloc>
+      <xloc>535</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Text file output</name>
+    <name>concat other values</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>const</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>&#x3d;</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>group1st</field_name>
+<calc_type>ADD</calc_type>
+<field_a>Field_000</field_a>
+<field_b>const</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>joinAll</field_name>
+<calc_type>ADD</calc_type>
+<field_a>group1st</field_a>
+<field_b>Field_001</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>519</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>joinAll</name>
+        <rename>typefield</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>672</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter values changed</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>joinAll</name>
+        <rename>typefield</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>817</xloc>
+      <yloc>98</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filter values to change</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>apply logical</send_true_to>
+<send_false_to>concat other values</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>Field_000</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>free</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Field_000</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>isHTML5</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>335</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>join streams</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>818</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>read fusioChart properties file</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusionCharts.properties</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>&#x3d;</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>N</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>Field_000</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Field_001</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>110</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>write to file</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -258,7 +505,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>&#x3d;</separator>
+    <separator/>
     <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
@@ -275,7 +522,7 @@
       <name>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusionCharts</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>properties</extention>
       <append>N</append>
       <split>N</split>
@@ -299,14 +546,14 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>12</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>515</xloc>
-      <yloc>249</yloc>
+      <xloc>976</xloc>
+      <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
