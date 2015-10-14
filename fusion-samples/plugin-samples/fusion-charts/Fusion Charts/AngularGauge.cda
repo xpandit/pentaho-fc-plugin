@@ -46,7 +46,7 @@ columnTypes[3] = Integer.class;
 
  
 TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
-model.addRow(new Object[]{new Integer(0), new Integer(80),new Integer(80),new Integer(100)});
+model.addRow(new Object[]{new Integer(0), new Integer(60),new Integer(80),new Integer(100)});
 return model;
         </Query>
     </DataAccess>

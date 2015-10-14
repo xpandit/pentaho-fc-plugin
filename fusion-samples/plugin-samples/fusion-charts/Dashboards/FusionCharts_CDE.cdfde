@@ -3,6 +3,29 @@
   "title": "CDF - Sample structure",
   "rows": [
    {
+    "id": "5d7820a2-6b53-d8a4-0bfe-d6be3cf00a34",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "xdashJs",
+      "type": "Id"
+     },
+     {
+      "name": "resourceCode",
+      "value": "var xLoadFunct= function(){\r\n    window.XDashFusionChartComponent = BaseComponent.extend({\r\n\t\ttype: \"XDashFusionChartComponent\",\r\n\t\tupdate: function(){\r\n\r\n\t\t\tvar options = this.getOptions();\r\n\r\n\t\t\t//send the webAppPath to the plugin\r\n\t\t\t//need in realtimecharts\r\n\t\t\toptions.webAppPath=webAppPath;\r\n\r\n\t\t\tvar urlApi = webAppPath + '/plugin/fusion_plugin/api/renderChart';\r\n\t\t\tvar urlResources = webAppPath + '/content/xfusion';\r\n\t\t\tvar myself = this;\r\n\r\n\t\t\t// get the xml chart\r\n\t\t\tvar resultXml = $.ajax({type: 'GET', url: urlApi, data: options, async: false}).responseText;\r\n\r\n\t\t\t// if not graph or chart,  show error \r\n\t\t\tif((resultXml.toLowerCase().indexOf(\"<graph\") == -1) &&\r\n\t\t\t\t\t(resultXml.toLowerCase().indexOf(\"<chart\") == -1))\r\n\t\t\t{\t\t\t\r\n\t\t\t\tif (resultXml.toLowerCase().indexOf(\"error:\") >= 0)\r\n\t\t\t\t{\r\n\t\t\t\t\tvar res = resultXml.replace(\"Error:\",\"\");\r\n\t\t\t\t\t\r\n\t\t\t\t\t$(\"#\"+myself.htmlObject).html(\r\n\t\t\t\t\t\t\t\"<div class=\\\"ui-state-error ui-corner-all\\\" style=\\\"padding: 0 .7em;\\\">\"+\r\n\t\t\t\t\t\t\t\"<p style=\\\"margin: 0 0 .3em;\\\">\"+\r\n\t\t\t\t\t\t\t\"<span class=\\\"ui-icon ui-icon-alert\\\" style=\\\"float: left; margin-right: .3em;\\\"></span>\"+\r\n\t\t\t\t\t\t\t\"<strong>Error:</strong>\"+\r\n\t\t\t\t\t\t\tres+\r\n\t\t\t\t\t\t\t\"</p></div>\");\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t\t$(\"#\"+myself.htmlObject).html(resultXml);\r\n\t\t\t}\r\n\t\t\t// graph + warnings\r\n\t\t\telse\r\n\t\t\t{\t\r\n\t\t\t\tvar hasWarning = false;\r\n\t\t\t\tif (resultXml.toLowerCase().indexOf(\"warning\") >= 0)\r\n\t\t\t\t{\t\t\t\t\r\n\t\t\t\t\tresultXml = resultXml.replace(\"Warning:\",\"\");\r\n\t\t\t\t\tvar index = resultXml.indexOf(\"<\");\t\r\n\t\t\t\t\tvar warning = resultXml.substring(0,index);\r\n\t\t\t\t\thasWarning = true;\r\n\t\t\t\t\t\r\n\t\t\t\t\tresultXml = resultXml.substring(index,resultXml.lenght);\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t\tmyself.xmlResultData = resultXml;\r\n\r\n\t\t\t\t// get chart type from xml\r\n\t\t\t\toptions.chartType = $(resultXml).attr(\"chartType\");\r\n\r\n\t\t\t\t// get HTML5 from xml\r\n\t\t\t\toptions.isHTML5 = eval($(resultXml).attr(\"isHTML5\"));\r\n\r\n\t\t\t\t//test if is for free version\r\n\t\t\t\tvar isFree=eval($(resultXml).attr(\"free\"));\r\n\t\t\t\toptions.chartType=(isFree==false?options.chartType:\"FCF_\"+options.chartType);\r\n\r\n\t\t\t\t// calculate width and height of fusion chart\r\n\t\t\t\tvar widgetNum = this.htmlObject.substring(this.htmlObject.length - 1);\r\n\t\t\t\tvar widgetPanel = document.getElementById(\"content-area-Panel_\" + widgetNum);\r\n\r\n\t\t\t\tif(widgetPanel != undefined) { //we are in an EE dashboard \r\n\t\t\t\t\tvar rect = getRectangle(widgetPanel);\r\n\t\t\t\t\toptions.width = rect.width - 25;\r\n\t\t\t\t\toptions.height = rect.height - 20;\r\n\t\t\t\t}\r\n\r\n\t\t\t\t//if is the first time or if is the flag reload on reloadOnRefresh on the chart will be full loaded\r\n\t\t\t\tif(myself.chartObject == undefined || options.reloadOnRefresh ||isFree) {\r\n\t\t\t\t\tthis.clear();\r\n\r\n\t\t\t\t\t//is to render in HTML5?\r\n\t\t\t\t\tif(options.isHTML5==undefined)\r\n\t\t\t\t\t\toptions.isHTML5=false;\r\n\t\t\t\t\tvar chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:urlResources+\"/swf/\"+options.chartType+\".swf\";\r\n\r\n\t\t\t\t\t//create chart Object\r\n\t\t\t\t\tmyself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+\"-generated\", options.width, options.height, \"0\",\"1\" );\r\n\r\n\t\t\t\t\tmyself.chartObject.setDataXML(resultXml);\r\n\r\n\t\t\t\t\t//set extra configuration for HTML5 charts\r\n\t\t\t\t\tif (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {\r\n\t\t\t\t\t\tmyself.chartObject.chartObject._overrideJSChartConfiguration(options.overrideJSChartConfiguration);\r\n\t\t\t\t\t} \r\n\r\n\t\t\t\t\t// add the chart\r\n\t\t\t\t\tmyself.chartObject.render(myself.htmlObject); \t\r\n\t\t\t\t\t$(\"#\"+options.htmlObject).find(\"embed\").attr(\"wmode\",\"transparent\");\r\n\r\n\t\t\t\t\t// set the back button\r\n\t\t\t\t\tif(myself.backButton) {\r\n\t\t\t\t\t\tvar div=$('<div class=\"ui-state-default ui-corner-all\" title=\"\" style=\"position: absolute;\"><span class=\"ui-icon ui-icon-arrowreturnthick-1-w\"></span></div>');\t\r\n\t\t\t\t\t\tdiv.css(\"left\",Number(myself.chartDefinition.width));\t\r\n\t\t\t\t\t\t$(\"#\"+myself.htmlObject).prepend(div);\t\r\n\t\t\t\t\t\tdiv.click(myself.backButtonCallBack);\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t// add div with warning\r\n\t\t\t\t\tif(hasWarning){\r\n\t\t\t\t\t$(\"#\"+myself.htmlObject).append(\r\n\t\t\t\t\t\t\t\"<div class=\\\"ui-state-highlight ui-corner-all\\\" style=\\\"padding: 0 .7em;\\\">\"+\r\n\t\t\t\t\t\t\t\"<p style=\\\"margin: 0 0 .3em;\\\">\"+\r\n\t\t\t\t\t\t\t\"<span class=\\\"ui-icon ui-icon-alert\\\" style=\\\"float: left; margin-right: 3em;\\\"></span>\"+\r\n\t\t\t\t\t\t\t\"<strong>Warning:</strong>\"+\r\n\t\t\t\t\t\t\twarning+\r\n\t\t\t\t\t\t\t\"</p></div>\");\r\n\t\t\t\t\t}\r\n\t\t\t\t\t\r\n\t\t\t\t\t//on Dashboard EE??\r\n\t\t\t\t\ttry{\r\n\t\t\t\t\t\tif(PentahoDashboardController!=undefined)\r\n\t\t\t\t\t\t\tmyself.chartObject=undefined;\r\n\t\t\t\t\t}\r\n\t\t\t\t\tcatch(e)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tmyself.chartObject=undefined;\r\n\t\t\t\t\t}\r\n\r\n\t\t\t\t} else {\r\n\t\t\t\t\t// just a quick update\r\n\t\t\t\t\tmyself.chartObject.setDataXML(resultXml);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\r\n\t\tgetOptions: function(){\r\n\r\n\t\t\tvar options = {};\r\n\r\n\t\t\tif(typeof this.action !== 'undefined'){\r\n\t\t\t\toptions.solution = this.solution;\r\n\t\t\t\toptions.path = this.path;\r\n\t\t\t\toptions.name = this.action;\r\n\t\t\t} else if(typeof this.xFusionPath !== \"undefined\"){\r\n\t\t\t\toptions.xFusionPath = this.xFusionPath;\r\n\t\t\t}\r\n\r\n\t\t\t// process parameters and build the cdaParameters string\r\n\t\t\tif(typeof this.parameters !== \"undefined\") {\r\n\t\t\t\toptions[\"cdaParameters\"] = \"\";\r\n\t\t\t\tvar isFirst = true;\r\n\r\n\t\t\t\t$.map(this.parameters,function(k){\r\n\t\t\t\t\toptions[k[0]] = k.length==3?k[2]: Dashboards.getParameterValue(k[1]);\r\n\r\n\t\t\t\t\t//update the cdaParameters string\r\n\t\t\t\t\tisFirst? isFirst=false: options[\"cdaParameters\"] += \";\";\t\t\t\t\r\n\t\t\t\t\toptions[\"cdaParameters\"] += k[0]; \r\n\t\t\t\t});\r\n\t\t\t}\r\n\r\n\t\t\t// get all chart properties definition\r\n\t\t\tvar cd = this.chartDefinition;\r\n\t\t\tfor(key in cd){\r\n\t\t\t\tvar value = typeof cd[key]=='function'?cd[key](): cd[key];\r\n\t\t\t\t//tranform the boolean values into FCharts  boolean style 1/0\r\n\t\t\t\tif(typeof(value)==\"boolean\")\r\n\t\t\t\t{\r\n\t\t\t\t\toptions[key] = value?'1':'0';\r\n\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t\tif(typeof(value)==\"string\")\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t//encode values\r\n\t\t\t\t\t\toptions[key] = encodeURIComponent(value);\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse //tranform all the arrays with the exception of rangeValues element\r\n\t\t\t\t\t\tif(value instanceof Array&&key!=\"rangeValues\")\r\n\t\t\t\t\t\t{\t\r\n\t\t\t\t\t\t\tif(value.length>0)\r\n\t\t\t\t\t\t\t\toptions[key] =  value.toString().replace(/,/gi,';');\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\toptions[key] = value;\r\n\t\t\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\t// TODO colocar aqui logica para permitir alterar entre os varios\r\n\t\t\t// tipos de operacoes\r\n\t\t\t// sem ter que saber parametros (edit, command)\t\r\n\t\t\toptions[\"command\"] == undefined? options[\"command\"] = \"open\": false;\r\n\t\t\toptions[\"pathMode\"] == undefined? options[\"pathMode\"] = \"legacy\": false;\r\n\r\n\t\t\t// default options\r\n\t\t\toptions[\"chartXML\"] = true;\r\n\t\t\toptions[\"dashboard-mode\"] = true;\r\n\r\n\r\n\t\t\t//transform the array of range values into a JSON object  \r\n\t\t\tvar cols='{\"cols\":[{\"id\":\"[MEASURE:0]\",\"label\":\"Start\",\"type\":\"number\"}';\r\n\t\t\tvar rows='\"rows\":[{\"c\":[{\"f\":\"0\",\"v\":0}';\r\n\t\t\tif(options.rangeValues!=undefined)\r\n\t\t\t{\r\n\t\t\t\tif( options.rangeValues instanceof Array)\r\n\t\t\t\t{\r\n\r\n\t\t\t\t\tfor (var i=0;i<options.rangeValues.length;++i)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tcols+=',{\"id\":\"[MEASURE:'+i+']\",\"label\":\"Range'+i+'\",\"type\":\"number\"}';\r\n\t\t\t\t\t\trows+=',{\"f\":\"'+options.rangeValues[i]+'\",\"v\":'+options.rangeValues[i]+'}';\r\n\t\t\t\t\t}\r\n\t\t\t\t\tcols+='],';\r\n\t\t\t\t\trows+=']}]}';\r\n\r\n\t\t\t\t\toptions.range=cols+rows;\r\n\t\t\t\t}\r\n\r\n\t\t\t}\r\n\r\n\r\n\t\t\treturn options;\r\n\t\t},\r\n\r\n\t\tgetGUID : function(){\r\n\t\t\tif(this.GUID == null){\r\n\t\t\t\tthis.GUID = WidgetHelper.generateGUID();\r\n\t\t\t}\r\n\t\t\treturn this.GUID;\r\n\t\t}\r\n\t});\r\n\r\n\t/**\r\n\t * \r\n\t * This CDF component renders Fusion Charts Widget in Pentaho Dashboard E E\r\n\t * \r\n\t */\r\n\r\n\tXDashFusionChartComponent.newInstance = function(prptref, localizedFileName) {\r\n\r\n\t\tvar widget = new XDashFusionChartComponent();\r\n\t\twidget.executeAtStart= true;\r\n\t\twidget.localizedName = localizedFileName;\r\n\t\twidget.GUID = WidgetHelper.generateGUID();\r\n\t\twidget.parameters = [];\r\n\t\twidget.outputParameters = [];\r\n\r\n\r\n\t\t//check platform version\r\n\t\tif(XDashFusionChartComponent.pentahoVersion==undefined)\r\n\t\t{\r\n\t\t\tvar url = webAppPath + '/plugin/fusion_plugin/api/checkVersions';\r\n\t\t\tvar myself=this;\r\n\t\t\t// get the xml chart\r\n\t\t\tvar result=$.ajax({url: url, async: false, type: 'GET'}).responseText;\r\n\t\t\teval(result);\r\n\t\t}\r\n\t\t// correct the Index for pentaho version greater than 3.10\r\n\t\tvar indexCorrection=1;\r\n\t\tif(XDashFusionChartComponent.pentahoVersion.MajorVersion>3||XDashFusionChartComponent.pentahoVersion.MajorVersion==3&&XDashFusionChartComponent.pentahoVersion.MinorVersion>10)\r\n\t\t{\r\n\t\t\tindexCorrection=0;\r\n\t\t}\r\n\r\n\t\tvar selectedWidgetIndex = pentahoDashboardController.getSelectedWidget() + indexCorrection; // add one to convert to 1-based\r\n\t\twidget.name = 'widget' + selectedWidgetIndex;\r\n\t\twidget.htmlObject = 'content-area-Panel_' + selectedWidgetIndex;\r\n\t\tvar vals = XActionHelper.parseXaction(prptref);\r\n\t\twidget.staticParameters=true;\r\n\t\twidget.xactionPath = prptref;\r\n\t\twidget.solution = vals[0];\r\n\t\twidget.path = vals[1];\r\n\t\twidget.action = vals[2];\r\n\t\tcurrentWidget = widget;\r\n\t\tvar details = XActionHelper.genXaction(widget.solution, widget.path, widget.action);\r\n\t\tPropertiesPanelHelper.initPropertiesPanel(details);\r\n\t}\r\n\r\n//\tnow load the fusion js file\r\n\r\n\tvar fileref=document.createElement('script');\r\n\tfileref.setAttribute(\"type\",\"text/javascript\");\r\n\tfileref.setAttribute(\"src\", webAppPath+'/content/xfusion/JSClass/FusionCharts.js');\r\n\tif (typeof fileref!=\"undefined\") document.getElementsByTagName(\"head\")[0].appendChild(fileref);\r\n\r\n\tif(typeof(PentahoDashboardController) != \"undefined\")\r\n\t{\r\n\t\tPentahoDashboardController.registerComponentForFileType(\"xfusion\", XDashFusionChartComponent);\r\n\t}\r\n};\r\n\r\n//try the delay way to be used inside pentaho dashboards EE\r\n//if not inside PDEE run the function\r\n\r\nif(typeof(delayedFunctions)!= \"undefined\")\r\n{\r\n\tdelayedFunctions.push(xLoadFunct);\r\n}\r\nelse\r\n{\r\n\txLoadFunct();\r\n} ",
+      "type": "Resource"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     }
+    ]
+   },
+   {
     "id": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
     "type": "LayoutRow",
     "typeDesc": "Row",
@@ -29,14 +52,14 @@
       "type": "RoundCorners"
      },
      {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     },
-     {
       "name": "textAlign",
       "value": "",
       "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
      }
     ]
    },
@@ -87,6 +110,11 @@
       "type": "Boolean"
      },
      {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
       "name": "backgroundColor",
       "value": "",
       "type": "Color"
@@ -97,19 +125,14 @@
       "type": "RoundCorners"
      },
      {
-      "name": "height",
+      "name": "textAlign",
       "value": "",
-      "type": "Integer"
+      "type": "TextAlign"
      },
      {
       "name": "cssClass",
       "value": "",
       "type": "String"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
      }
     ]
    },
@@ -130,14 +153,14 @@
       "type": "Html"
      },
      {
-      "name": "color",
-      "value": "",
-      "type": "Color"
-     },
-     {
       "name": "fontSize",
       "value": "",
       "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
      },
      {
       "name": "cssClass",
@@ -173,14 +196,14 @@
       "type": "RoundCorners"
      },
      {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     },
-     {
       "name": "textAlign",
       "value": "",
       "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
      }
     ]
    },
@@ -231,6 +254,11 @@
       "type": "Boolean"
      },
      {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
       "name": "backgroundColor",
       "value": "",
       "type": "Color"
@@ -241,19 +269,14 @@
       "type": "RoundCorners"
      },
      {
-      "name": "height",
+      "name": "textAlign",
       "value": "",
-      "type": "Integer"
+      "type": "TextAlign"
      },
      {
       "name": "cssClass",
       "value": "",
       "type": "String"
-     },
-     {
-      "name": "textAlign",
-      "value": "",
-      "type": "TextAlign"
      }
     ]
    },
@@ -274,14 +297,14 @@
       "type": "Html"
      },
      {
-      "name": "color",
-      "value": "",
-      "type": "Color"
-     },
-     {
       "name": "fontSize",
       "value": "",
       "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
      },
      {
       "name": "cssClass",
@@ -321,19 +344,49 @@
       "type": "Id"
      },
      {
-      "name": "fusionCdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda",
-      "type": "CdaPath"
-     },
-     {
-      "name": "dataAccessId",
+      "name": "cdaDataAccessId",
       "value": "2",
       "type": "String"
      },
      {
-      "name": "fusionChartType",
-      "value": "MSColumn2D",
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "cdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda",
+      "type": "CdaPath"
+     },
+     {
+      "name": "path",
+      "value": "",
       "type": "String"
+     },
+     {
+      "name": "customfunction",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "height",
+      "value": "300",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "width",
+      "value": "500",
+      "type": "Integer"
      },
      {
       "name": "chartLink",
@@ -341,8 +394,8 @@
       "type": "String"
      },
      {
-      "name": "seriesParam",
-      "value": "series",
+      "name": "chartType",
+      "value": "MSColumn2D",
       "type": "String"
      },
      {
@@ -351,54 +404,24 @@
       "type": "String"
      },
      {
-      "name": "valueParam",
-      "value": "value",
+      "name": "seriesParam",
+      "value": "series",
       "type": "String"
-     },
-     {
-      "name": "width",
-      "value": "500",
-      "type": "Integer"
-     },
-     {
-      "name": "height",
-      "value": "300",
-      "type": "Integer"
-     },
-     {
-      "name": "xActionArrayParameter",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
-      "name": "executeAtStart",
-      "value": "true",
-      "type": "Boolean"
-     },
-     {
-      "name": "preChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postFetch",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "customfunction",
-      "value": "",
-      "type": "JavaScript"
      },
      {
       "name": "htmlObject",
       "value": "chart1",
       "type": "HtmlObject"
+     },
+     {
+      "name": "valueParam",
+      "value": "value",
+      "type": "String"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
      },
      {
       "name": "preExecution",
@@ -411,14 +434,24 @@
       "type": "JavaScript"
      },
      {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
       "name": "tooltip",
       "value": "",
       "type": "Html"
-     },
-     {
-      "name": "listeners",
-      "value": "[]",
-      "type": "Listeners"
      }
     ]
    },
@@ -435,19 +468,49 @@
       "type": "Id"
      },
      {
-      "name": "fusionCdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
-      "type": "CdaPath"
-     },
-     {
-      "name": "dataAccessId",
+      "name": "cdaDataAccessId",
       "value": "2",
       "type": "String"
      },
      {
-      "name": "fusionChartType",
-      "value": "Column3D",
+      "name": "listeners",
+      "value": "[]",
+      "type": "Listeners"
+     },
+     {
+      "name": "cdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda",
+      "type": "CdaPath"
+     },
+     {
+      "name": "path",
+      "value": "",
       "type": "String"
+     },
+     {
+      "name": "customfunction",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "parameters",
+      "value": "[]",
+      "type": "ValuesArray"
+     },
+     {
+      "name": "height",
+      "value": "300",
+      "type": "Integer"
+     },
+     {
+      "name": "priority",
+      "value": 5,
+      "type": "Integer"
+     },
+     {
+      "name": "width",
+      "value": "500",
+      "type": "Integer"
      },
      {
       "name": "chartLink",
@@ -455,8 +518,8 @@
       "type": "String"
      },
      {
-      "name": "seriesParam",
-      "value": "series",
+      "name": "chartType",
+      "value": "Column3D",
       "type": "String"
      },
      {
@@ -465,54 +528,24 @@
       "type": "String"
      },
      {
-      "name": "valueParam",
-      "value": "value",
+      "name": "seriesParam",
+      "value": "series",
       "type": "String"
-     },
-     {
-      "name": "width",
-      "value": "500",
-      "type": "Integer"
-     },
-     {
-      "name": "height",
-      "value": "300",
-      "type": "Integer"
-     },
-     {
-      "name": "xActionArrayParameter",
-      "value": "[]",
-      "type": "ValuesArray"
-     },
-     {
-      "name": "executeAtStart",
-      "value": "true",
-      "type": "Boolean"
-     },
-     {
-      "name": "preChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postChange",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "postFetch",
-      "value": "",
-      "type": "JavaScript"
-     },
-     {
-      "name": "customfunction",
-      "value": "",
-      "type": "JavaScript"
      },
      {
       "name": "htmlObject",
       "value": "chart2",
       "type": "HtmlObject"
+     },
+     {
+      "name": "valueParam",
+      "value": "value",
+      "type": "String"
+     },
+     {
+      "name": "executeAtStart",
+      "value": "true",
+      "type": "Boolean"
      },
      {
       "name": "preExecution",
@@ -525,14 +558,24 @@
       "type": "JavaScript"
      },
      {
+      "name": "postFetch",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "preChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
+      "name": "postChange",
+      "value": "",
+      "type": "JavaScript"
+     },
+     {
       "name": "tooltip",
       "value": "",
       "type": "Html"
-     },
-     {
-      "name": "listeners",
-      "value": "[]",
-      "type": "Listeners"
      }
     ]
    }
