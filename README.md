@@ -9,6 +9,9 @@
 
 Check the downloads release notes [ReleaseArtifacts](https://github.com/xpandit/pentaho-fc-plugin/wiki/ReleaseArtifacts).
 
+# INFO #
+The master branch contains the development code for the Pentaho version 6. If you need for the Pentaho version 5, please, refer to the branch fusion_plugin_pentaho5
+
 # Quick Start #
 [Download](http://xpand-it.com/en/solutions-en/pentaho-fusioncharts-plugin-en) latest release and look at the installation instructions on [Manual](https://github.com/xpandit/pentaho-fc-plugin/wiki/Manual).
 
