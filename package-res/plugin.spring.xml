@@ -12,7 +12,7 @@
 
 	<!-- REST resources -->
    <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/> 
-  <!-- <bean id="fusion_plugin.api" class="pt.webdetails.cpk.CpkApi"/> -->
+ <!--  <bean id="fusion_plugin.api" class="pt.webdetails.cpk.CpkApi"/> -->
   <!--<bean id="api" class="pt.webdetails.cpf.JAXRSCLPluginServlet"/>-->
   <bean id="fusion_plugin.api" class="com.xpandit.fusionplugin.pentaho.content.FusionApi"/>
 
