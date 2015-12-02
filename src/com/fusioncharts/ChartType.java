@@ -34,7 +34,7 @@ public enum ChartType {
 	SCROLLCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollColumn2D"), 
 	SCROLLLINE2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollLine2D"), 
 	SCROLLAREA2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollArea2D"), 
-	SCROLLSTAKEDCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollStackedColumn2D"), 
+	SCROLLSTACKEDCOLUMN2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollStackedColumn2D"), 
 	SCROLLCOMBI2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollCombi2D"), 
 	SCROLLCOMBIDY2D(SingleOrMulti.MULTI,ChartLibrary.CHARTS,"ScrollCombiDY2D"), 
 	ZOOMLINE(SingleOrMulti.MULTI,ChartLibrary.CHARTS, "ZoomLine"), 
