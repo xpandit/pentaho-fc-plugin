@@ -1,0 +1,1002 @@
+{
+ "components": {
+  "rows": [
+   {
+    "id": "CHARTS",
+    "name": "Charts",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "type": "Label",
+      "value": "Charts"
+     }
+    ],
+    "type": "Label",
+    "typeDesc": "<i>Group</i>"
+   },
+   {
+    "id": "a0455421-e25a-94a5-b0f2-563ba179d8fc",
+    "meta_cdwSupport": "true",
+    "parent": "CHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "BarChart"
+     },
+     {
+      "name": "cdaDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/BarChart2D.cda"
+     },
+     {
+      "name": "path",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "customfunction",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "500"
+     },
+     {
+      "name": "chartLink",
+      "type": "String",
+      "value": "JavaScript: alert('{series}','{categories}','{value}')"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "MSColumn2D"
+     },
+     {
+      "name": "categoriesParam",
+      "type": "String",
+      "value": "categories"
+     },
+     {
+      "name": "seriesParam",
+      "type": "String",
+      "value": "series"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "chart1"
+     },
+     {
+      "name": "valueParam",
+      "type": "String",
+      "value": "value"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponent",
+    "typeDesc": "FusionCharts Component"
+   },
+   {
+    "id": "edfb20e4-3077-9121-2342-8b19c23c7fd5",
+    "meta_cdwSupport": "true",
+    "parent": "CHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Column2D"
+     },
+     {
+      "name": "cdaDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda"
+     },
+     {
+      "name": "path",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "customfunction",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "500"
+     },
+     {
+      "name": "chartLink",
+      "type": "String",
+      "value": "JavaScript: alert('{series}','{categories}','{value}')"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "Column3D"
+     },
+     {
+      "name": "categoriesParam",
+      "type": "String",
+      "value": "categories"
+     },
+     {
+      "name": "seriesParam",
+      "type": "String",
+      "value": "series"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "chart2"
+     },
+     {
+      "name": "valueParam",
+      "type": "String",
+      "value": "value"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponent",
+    "typeDesc": "FusionCharts Component"
+   },
+   {
+    "id": "FusionClientRender",
+    "name": "FusionCharts Client-side Render",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "type": "Label",
+      "value": "FusionCharts Client-side Render"
+     }
+    ],
+    "type": "Label",
+    "typeDesc": "<i>Group</i>"
+   },
+   {
+    "id": "708a4e11-5044-2ab2-1a91-1c0da2e5a41d",
+    "meta_cdwSupport": "true",
+    "parent": "FusionClientRender",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "dragnode"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "600"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "900"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "DragNode"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "chart3"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "canvasBgColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xaxismaxvalue",
+      "type": "Integer",
+      "value": "100"
+     },
+     {
+      "name": "xaxismixvalue",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "yaxismaxvalue",
+      "type": "Integer",
+      "value": "100"
+     },
+     {
+      "name": "yaxismixvalue",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\nshowformbtn: \"0\",\nviewmode: \"1\"\n} "
+     },
+     {
+      "name": "allowdrag",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "datasetColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "plotborderalpha",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dataSetScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    plotborderalpha: \"0\"\n} "
+     },
+     {
+      "name": "nodeCallback",
+      "type": "JavaScript",
+      "value": "function(data) {\n    \t\t\tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t\tdata.shape= \"circle\";\n\t\t\t\t\t\tdata.radius = \"40\";\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} "
+     },
+     {
+      "name": "alpha",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "arrowAtEnd",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "arrowAtStart",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "strength",
+      "type": "Float",
+      "value": ""
+     },
+     {
+      "name": "connectorColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "dashed",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dashGap",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dashLen",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "connectorCallback",
+      "type": "JavaScript",
+      "value": "function(data){\n    data.link= \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";\n} "
+     },
+     {
+      "name": "connectorsScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    stdthickness: \"5\"\n} "
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": "\nfunction(data){\n    \t\t\tif(data.endvalue==\"30\"){data.color = \"FF0000\"; data.displayvalue = \"External Network\"};\n\t\t\t\tif(data.endvalue==\"60\"){data.color = \"00FF00\"; data.displayvalue = \"Middleware\"};\n\t\t\t\tif(data.endvalue==\"100\"){data.color = \"0000FF\"; data.displayvalue = \"Internal Network\"};\n\t\t\t\tdata.alpha = \"5\";\n\t\t\t\tdata.istrendzone = \"1\";\n\t\t\t} "
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    path:\"/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda\",\n    dataAccessId: \"2\",\n    vertical:\"1\"\n} "
+     },
+     {
+      "name": "labelCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n    \t\t\tdata.color = \"000000\";\r\n\t\t\t\tdata.fontsize = \"18\";\r\n\t\t\t} "
+     },
+     {
+      "name": "labelsScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    path:\"/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda\",\n    dataAccessId: \"3\",\n} "
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsync",
+    "typeDesc": "Drag Node Chart"
+   },
+   {
+    "id": "SCRIPT",
+    "name": "Scripts",
+    "type": "Label",
+    "typeDesc": "<i>Group</i>",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "value": "Scripts",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "76341407-a587-0f84-f042-4ca0eed90c52",
+    "type": "ComponentsFunction",
+    "typeDesc": "JavaScript function",
+    "parent": "SCRIPT",
+    "properties": [
+     {
+      "name": "name",
+      "value": "nodelink",
+      "type": "Id"
+     },
+     {
+      "name": "javaScript",
+      "value": "function nodelink(data){\n    Dashboards.fireChange('param',data.id);\n    //window.alert(data.id);\n} ",
+      "type": "JavaScript"
+     }
+    ]
+   }
+  ]
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/public/fusion-merge/FusionCharts_CDE_DragNode.cdfde",
+ "layout": {
+  "rows": [
+   {
+    "id": "9cc12657-6e82-1268-7717-7af220bf6de5",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Theme",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "${solution:fusioncharts.theme.custom.js}",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "ChartLine"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutRow",
+    "typeDesc": "Row"
+   },
+   {
+    "id": "932f6bd7-30f9-6232-9939-31982f2b3987",
+    "parent": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "columnSpan",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "columnPrepend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnAppend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnPrependTop",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnAppendBottom",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBigBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutColumn",
+    "typeDesc": "Column"
+   },
+   {
+    "id": "63956c44-5276-c50d-9beb-c276fe0fe913",
+    "parent": "932f6bd7-30f9-6232-9939-31982f2b3987",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "BarChart"
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<span id=\"chart1\"></span> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "bffd0d4b-a0e4-dff6-3bb3-8874ac4f5c10",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutRow",
+    "typeDesc": "Row"
+   },
+   {
+    "id": "880faa29-a858-e6f5-e4c7-66fbdd9ac2b2",
+    "parent": "bffd0d4b-a0e4-dff6-3bb3-8874ac4f5c10",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "columnSpan",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "columnPrepend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnAppend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnPrependTop",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnAppendBottom",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBigBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutColumn",
+    "typeDesc": "Column"
+   },
+   {
+    "id": "43e9bed2-6c11-b6ad-c505-8303128d351e",
+    "parent": "880faa29-a858-e6f5-e4c7-66fbdd9ac2b2",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Column2D"
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<span id=\"chart2\"></span> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "c2a5f1b3-0276-9533-0e97-b7ee20477b1c",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "DragNode"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutRow",
+    "typeDesc": "Row"
+   },
+   {
+    "id": "bde2a29c-bb45-8262-05a1-950d9b221d9d",
+    "parent": "c2a5f1b3-0276-9533-0e97-b7ee20477b1c",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "columnSpan",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "columnPrepend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnAppend",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "columnPrependTop",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnAppendBottom",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "columnBigBorder",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "backgroundColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "roundCorners",
+      "type": "RoundCorners",
+      "value": ""
+     },
+     {
+      "name": "textAlign",
+      "type": "TextAlign",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutColumn",
+    "typeDesc": "Column"
+   },
+   {
+    "id": "d79ae33c-4718-5ad4-12a7-c6bfa5332497",
+    "parent": "bde2a29c-bb45-8262-05a1-950d9b221d9d",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "dragnode"
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<span id=\"chart3\"></span> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   }
+  ],
+  "title": "CDF - Sample structure"
+ }
+}
