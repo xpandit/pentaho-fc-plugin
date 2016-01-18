@@ -118,7 +118,28 @@ public class FusionApi extends CpkApi{
 			public String getVersion() throws Exception {
 				return VersionChecker.getVersions();
 			}
-			
+
+			/**
+	 		* Get the Fusion Chart Plugin key
+	 		* @param request HTTP Request
+	 		* @return Key message
+	 		* @throws Exception
+	 		*/
+			@GET
+			@Path("/verifyKey")
+			public String doGetPluginKey(@Context HttpServletRequest request) throws Exception {
+
+				// Check license
+				String licenseChecked = LicenseChecker.verifyKey();
+				if (licenseChecked.startsWith("Error")) {
+					logger.error(licenseChecked);
+				}
+				else if (licenseChecked.startsWith("Warning")) {
+					logger.warn(licenseChecked);
+				}
+				return licenseChecked;
+			}
+
 			/**
 			 * Get the Fusion Chart XML to be rendered
 			 * @param request HTTP Request
