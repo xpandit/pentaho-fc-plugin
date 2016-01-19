@@ -323,12 +323,15 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		//validate fusion plugin key
 		var urlApi = webAppPath + '/plugin/fusion_plugin/api/verifyKey';
 		var fusionkey = $.ajax({type: 'GET', url: urlApi, async: false}).responseText;
-		if(fusionkey.match("Error")){
+		fusionkey = fusionkey.split("-", 2);
+		if(fusionkey[0].match("Error")){
 			$("#"+myself.htmlObject).html(
 					"<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">"+
 					"<p style=\"margin: 0 0 .3em;\">"+
-					"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+fusionkey+"</p></div>");
-		}else{
+					"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+fusionkey[0]+"</p></div>");
+		}else if (fusionkey[1].match("true")) {
+        	$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
+        }else{
 			if (!_.has(cd, 'chartType') || !_.has(myself, 'htmlObject') || !_.has(cd, 'width') || !_.has(cd, 'height')){
 				// display missing options error
 				$("#"+myself.htmlObject).html(
