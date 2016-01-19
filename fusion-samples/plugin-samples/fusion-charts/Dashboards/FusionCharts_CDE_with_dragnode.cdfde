@@ -418,14 +418,14 @@
       "value": ""
      },
      {
+      "name": "dataSetCallback",
+      "value": "function(data) {\n        \t\tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t\tdata.shape= \"circle\";\n\t\t\t\t\t\tdata.radius = \"40\";\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} ",
+      "type": "JavaScript"
+     },
+     {
       "name": "dataSetScriptProperties",
       "type": "JavaScript",
       "value": "{\n    plotborderalpha: \"0\"\n} "
-     },
-     {
-      "name": "nodeCallback",
-      "type": "JavaScript",
-      "value": "function(data) {\n    \t\t\tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t\tdata.shape= \"circle\";\n\t\t\t\t\t\tdata.radius = \"40\";\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} "
      },
      {
       "name": "alpha",
@@ -504,65 +504,65 @@
    {
     "id": "SCRIPT",
     "name": "Scripts",
-    "type": "Label",
-    "typeDesc": "<i>Group</i>",
     "parent": "UnIqEiD",
     "properties": [
      {
       "name": "Group",
-      "value": "Scripts",
-      "type": "Label"
+      "type": "Label",
+      "value": "Scripts"
      }
-    ]
+    ],
+    "type": "Label",
+    "typeDesc": "<i>Group</i>"
    },
    {
     "id": "76341407-a587-0f84-f042-4ca0eed90c52",
-    "type": "ComponentsFunction",
-    "typeDesc": "JavaScript function",
     "parent": "SCRIPT",
     "properties": [
      {
       "name": "name",
-      "value": "nodelink",
-      "type": "Id"
+      "type": "Id",
+      "value": "nodelink"
      },
      {
       "name": "javaScript",
-      "value": "function nodelink(data){\n    Dashboards.fireChange('param',data.id);\n    //window.alert(data.id);\n} ",
-      "type": "JavaScript"
+      "type": "JavaScript",
+      "value": "function nodelink(data){\n    Dashboards.fireChange('param',data.id);\n    //window.alert(data.id);\n} "
      }
-    ]
+    ],
+    "type": "ComponentsFunction",
+    "typeDesc": "JavaScript function"
    }
   ]
  },
  "datasources": {
   "rows": []
  },
- "filename": "/public/fusion-merge/FusionCharts_CDE_DragNode.cdfde",
+ "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE_with_dragnode.cdfde",
  "layout": {
   "rows": [
    {
     "id": "9cc12657-6e82-1268-7717-7af220bf6de5",
-    "type": "LayoutResourceFile",
-    "typeDesc": "Resource",
     "parent": "UnIqEiD",
     "properties": [
      {
       "name": "name",
-      "value": "Theme",
-      "type": "Id"
+      "type": "Id",
+      "value": "Theme"
      },
      {
       "name": "resourceFile",
-      "value": "${solution:fusioncharts.theme.custom.js}",
-      "type": "ResourceFile"
+      "type": "ResourceFile",
+      "value": "${solution:fusioncharts.theme.custom.js}"
      },
      {
       "name": "resourceType",
-      "value": "Javascript",
-      "type": "Label"
+      "type": "Label",
+      "value": "Javascript"
      }
-    ]
+    ],
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource"
    },
    {
     "id": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",

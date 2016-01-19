@@ -163,7 +163,7 @@
       allowdrag: "1",
       showformbtn: "0",
 			//Function to apply properties to nodes individually
-			nodeCallback: function(data) {
+			dataSetCallback: function(data) {
 				if(data.id == "null" || data.id == "null2" || data.id == "null3"){
 					data.width= "50";
 					data.height = "40";

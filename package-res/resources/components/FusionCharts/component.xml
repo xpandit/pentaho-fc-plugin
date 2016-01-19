@@ -34,7 +34,7 @@
 						<Property>plotborderalpha</Property>
 						<Property>allowdrag</Property>
 						<Property>datasetColor</Property>
-						<Property>nodeCallback</Property>
+						<Property>dataSetCallback</Property>
 						<Property name="dataSetScriptProperties">dataSetScriptProperties</Property>
 					</Definition>
 					<Definition name="connectorsProperties">
@@ -216,7 +216,7 @@
 					</DesignerProperty>
 					<DesignerProperty>
 						<Header>
-							<Name>nodeCallback</Name>
+							<Name>dataSetCallback</Name>
 							<Parent>BaseProperty</Parent>
 							<Description>Nodes Callback</Description>
 							<Tooltip>Apply properties to nodes. The function needs one parameter that will receive the node properties</Tooltip>

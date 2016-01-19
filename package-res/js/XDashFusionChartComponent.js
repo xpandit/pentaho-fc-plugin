@@ -377,7 +377,7 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 				queryDataset = removeDuplicatedNodes(queryDataset);
 
 				//apply node callback function
-				if(_.has(cd.dataSetProperties, 'nodeCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.nodeCallback);};
+				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 
 				//apply connectors callback function
 				if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
@@ -442,11 +442,6 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 						};
 					};
 				};
-
-				// add categories to chart
-				if(_.has(cd, 'categories')){
-					data.categories = cd.categories;
-				}
 
 				// create Fusion chart and render
 				if(myself.chartObject == undefined) {
