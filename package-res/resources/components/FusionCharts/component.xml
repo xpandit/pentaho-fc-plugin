@@ -5,8 +5,8 @@
 			<Name>Drag Node Chart</Name>
 			<IName>XDashFusionChartComponentAsync</IName>
 			<Description>Drag Node Chart</Description>
-			<Category>FusionClientRender</Category>
-			<CatDescription>FusionCharts Client-side Render</CatDescription>
+			<Category>FUSIONCHARTS</Category>
+			<CatDescription>FusionCharts</CatDescription>
 			<Type>PalleteEntry</Type>
 			<Version>1.0</Version>
 		</Header>
@@ -480,8 +480,8 @@
 			<Name>FusionCharts Component</Name>
 			<IName>XDashFusionChartComponent</IName>
 			<Description>FusionCharts Component</Description>
-			<Category>CHARTS</Category>
-			<CatDescription>Charts</CatDescription>
+			<Category>FUSIONCHARTS</Category>
+			<CatDescription>FusionCharts</CatDescription>
 			<Type>PalleteEntry</Type>
 			<Version>1.0</Version>
 		</Header>
