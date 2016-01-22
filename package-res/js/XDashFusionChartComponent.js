@@ -410,7 +410,7 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
                 resultset = buildData(resultset);
                 //apply trendlines callback function
                 if(_.has(cd.trendlinesProperties, 'lineCallback')){
-                    resultset = applyCallBack(resulgittset, cd.trendlinesProperties.lineCallback);
+                    resultset = applyCallBack(resultset, cd.trendlinesProperties.lineCallback);
                 };
                 // draw vertical or horizontal trendlines
                 if(_.has(cd.trendlinesProperties,"vertical")){
