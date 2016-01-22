@@ -317,35 +317,27 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 	 },
 
 	 render: function(values) {
-
 		var myself = this;
 		var cd = myself.chartDefinition;
+
 		//validate fusion plugin key
 		var urlApi = webAppPath + '/plugin/fusion_plugin/api/verifyKey';
 		var fusionkey = $.ajax({type: 'GET', url: urlApi, async: false}).responseText;
 		fusionkey = fusionkey.split("-", 2);
 		if(fusionkey[0].match("Error")){
-			$("#"+myself.htmlObject).html(
-					"<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">"+
-					"<p style=\"margin: 0 0 .3em;\">"+
-					"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+fusionkey[0]+"</p></div>");
+			$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>"+fusionkey[0]+"</div>");
 		}else if (fusionkey[1].match("true")) {
         	$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
         }else{
 			if (!_.has(cd, 'chartType') || !_.has(myself, 'htmlObject') || !_.has(cd, 'width') || !_.has(cd, 'height')){
 				// display missing options error
-				$("#"+myself.htmlObject).html(
-						"<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">"+
-						"<p style=\"margin: 0 0 .3em;\">"+
-						"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+
-						"<strong>Error:</strong>Missing Options (chartType, htmlObject, width or height)</p></div>");
+				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Options (chartType, htmlObject, width or height)</div>");
 			} else if((!_.has(cd, 'chartProperties') && !_.has(myself,'chartProperties')) || (!_.has(cd, 'dataSetProperties') && !_.has(myself,'dataSetProperties')) || (!_.has(cd, 'connectorsProperties') && !_.has(myself,'connectorsProperties'))){
 				//display mission properties error
-				$("#"+myself.htmlObject).html(
-						"<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">"+
-						"<p style=\"margin: 0 0 .3em;\">"+
-						"<span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\"></span>"+
-						"<strong>Error:</strong>Missing chartProperties</p></div>");
+				$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing chartProperties, dataSetProperties or connectorsProperties</div>");
+				
+			} else if (!_.has(cd,'connectorsDataAccessId')){
+				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Property!</strong> Connectors Data Access ID</div>");
 			} else		{
 
 				//Fix CDE properties
@@ -364,20 +356,18 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 					"dataFormat": "json"
 				};
 
-				//allow chartProperties functions
-				$.map(cd.chartProperties,function(v,k){return typeof cd.chartProperties[k]=="function"?cd.chartProperties[k]=cd.chartProperties[k]():cd.chartProperties[k]=v});
+				// build the parameters for the dataSet
+        var queryDataset = buildData(values);
 
-				//create node dataset
-				var queryDataset = values.resultset.map(function(i) {return {"x": i[0], "y": i[1], "id": i[2], "name": i[3]};});
+        //build the parameters for the connectors
+        if(_.has(cd,'connectorsPath')){
+            var queryResult = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
+        }else{
+            var queryResult = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
+        }
+        var resultset = JSON.parse(queryResult);
 
-				// create connectors dataset
-				var queryConnectors = values.resultset.map(function(i) { return (i[4]!=null?{"from": i[2], "to": i[4],"label": i[5]} : undefined); });
-
-				// remove undefined connectors
-				queryConnectors = queryConnectors.filter(function(i){return i!=undefined;});
-
-				//remove duplicated nodes (dragnode)
-				queryDataset = removeDuplicatedNodes(queryDataset);
+        var queryConnectors = buildData(resultset);
 
 				//apply node callback function
 				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
@@ -385,75 +375,92 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 				//apply connectors callback function
 				if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
 
-				// add nodes data to dataset
-				cd.dataSetProperties.data = queryDataset;
-
-				// add connectors data to connectors properties
-				cd.connectorsProperties.connector = queryConnectors;
-
-				// create the chart data
-				var data = {
-						"chart": cd.chartProperties,
-						"dataset": [cd.dataSetProperties],
-						"connectors":[cd.connectorsProperties]
-					};
+				//verify is has required properties
+        var hasProperties = hasRequiredProperties(queryDataset,['x','y','id']);
+        if(hasProperties[0]){
+            //verify if it as required properties
+            hasProperties = hasRequiredProperties(queryConnectors,['from','to']);
+            if(hasProperties[0]){
+                // add nodes data to dataset
+                cd.dataSetProperties.data = queryDataset;
+                // add connectors data to connectors properties
+                cd.connectorsProperties.connector = queryConnectors;
+                // create the chart data
+                var data = {
+                    "chart": cd.chartProperties,
+                    "dataset": [cd.dataSetProperties],
+                    "connectors":[cd.connectorsProperties]
+                };
+            }else{
+                var data = {'chart':{}}
+                hasProperties[1] = "Connectors are "+ hasProperties[1];
+            }
+        }else{
+            var data = {'chart':{}}
+            hasProperties[1] = "Nodes are "+ hasProperties[1];
+        };
 
 				// add trend lines to chart
-				if(_.has(cd, 'trendlinesProperties')){
-					if(_.has(cd.trendlinesProperties, 'dataAccessId') && _.has(cd.trendlinesProperties, 'path')){
-						var responseText = $.ajax({type: 'GET',dataType: 'json', url: webAppPath + "/plugin/cda/api/doQuery?dataAccessId="+cd.trendlinesProperties.dataAccessId+"&path="+cd.trendlinesProperties.path, async: false}).responseText;
-						var resultset = JSON.parse(responseText).resultset;
-						resultset = resultset.map(function(i) {return {"startvalue": i[0], "endvalue": i[1]}});
-						//apply trendlines callback function
-						if(_.has(cd.trendlinesProperties, 'lineCallback')){
-							resultset = applyCallBack(resultset, cd.trendlinesProperties.lineCallback);
-						};
-						// draw vertical or horizontal trendlines
-						if(_.has(cd.trendlinesProperties,"vertical")){
-							if(cd.trendlinesProperties.vertical == "1"){
-								data.vtrendlines = [{line: resultset}];
-							}else{
-								data.trendlines = [{line: resultset}];
-							}
-						}else{
-							data.trendlines = [{line: resultset}];
-						}
-					}else{
-						if(_.has(cd.trendlinesProperties, 'vtrendlines')){
-							data.vtrendlines = cd.trendlinesProperties.vtrendlines;
-						};
-						if(_.has(cd.trendlinesProperties, 'trendlines')){
-							data.trendlines = cd.trendlinesProperties.trendlines;
-						};
-					};
-				};
+        if(_.has(cd, 'trendlinesProperties')){
+            if(_.has(cd.trendlinesProperties, 'dataAccessId') && _.has(cd.trendlinesProperties, 'path')){
+                var responseText = doCDAQuery(cd.trendlinesProperties.path,cd.trendlinesProperties.dataAccessId,myself.parameters);
 
-				// add labels to chart
-				if(_.has(cd, 'labelsProperties')){
-					if(_.has(cd.labelsProperties, 'dataAccessId') && _.has(cd.labelsProperties, 'path')){
-						var responseText = $.ajax({type: 'GET',dataType: 'json', url: webAppPath + "/plugin/cda/api/doQuery?dataAccessId="+cd.labelsProperties.dataAccessId+"&path="+cd.labelsProperties.path, async: false}).responseText;
-						var resultset = JSON.parse(responseText).resultset;
-						resultset = resultset.map(function(i) {return {"x": i[0], "y": i[1], "text": i[2]}});
-						//apply trendlines callback function
-						if(_.has(cd.labelsProperties, 'labelCallback')){
-							resultset = applyCallBack(resultset, cd.labelsProperties.labelCallback);
-						};
-						data.labels = {label: resultset};
-					}else{
-						if(_.has(cd.labelsProperties, 'labels')){
-							data.labels = cd.labelsProperties.labels;
-						};
-					};
-				};
+                var resultset = JSON.parse(responseText);
 
-				// create Fusion chart and render
-				if(myself.chartObject == undefined) {
-					myself.chartObject = new FusionCharts(fusionOptions);
-					myself.chartObject.setJSONData(data);
-					myself.chartObject.render();
-				} else {
-					myself.chartObject.setJSONData(data);
-				}
+                resultset = buildData(resultset);
+                //apply trendlines callback function
+                if(_.has(cd.trendlinesProperties, 'lineCallback')){
+                    resultset = applyCallBack(resulgittset, cd.trendlinesProperties.lineCallback);
+                };
+                // draw vertical or horizontal trendlines
+                if(_.has(cd.trendlinesProperties,"vertical")){
+                    if(cd.trendlinesProperties.vertical == "1"){
+                        data.vtrendlines = [{line: resultset}];
+                    }else{
+                        data.trendlines = [{line: resultset}];
+                    }
+                }else{
+                    data.trendlines = [{line: resultset}];
+                }
+            }else{
+                if(_.has(cd.trendlinesProperties, 'vtrendlines')){
+                    data.vtrendlines = cd.trendlinesProperties.vtrendlines;
+                };
+                if(_.has(cd.trendlinesProperties, 'trendlines')){
+                    data.trendlines = cd.trendlinesProperties.trendlines;
+                };
+            };
+        };
+
+        // add labels to chart
+        if(_.has(cd, 'labelsProperties')){
+            if(_.has(cd.labelsProperties, 'dataAccessId') && _.has(cd.labelsProperties, 'path')){
+                var responseText = doCDAQuery(cd.labelsProperties.path,cd.labelsProperties.dataAccessId,myself.parameters);
+
+                var resultset = JSON.parse(responseText);
+
+                resultset = buildData(resultset);
+                //apply trendlines callback function
+                if(_.has(cd.labelsProperties, 'labelCallback')){
+                    resultset = applyCallBack(resultset, cd.labelsProperties.labelCallback);
+                };
+                data.labels = {label: resultset};
+            }else{
+                if(_.has(cd.labelsProperties, 'labels')){
+                    data.labels = cd.labelsProperties.labels;
+                };
+            };
+        };
+
+        // create Fusion chart and render
+        if(myself.chartObject == undefined) {
+            myself.chartObject = new FusionCharts(fusionOptions);
+            myself.chartObject.setJSONData(data);
+            if(!hasProperties[0]){myself.chartObject.configure('ChartNoDataText',hasProperties[1])};
+            myself.chartObject.render();
+        } else {
+            myself.chartObject.setJSONData(data);
+        }
 			}
 		 }
 		}
@@ -514,3 +521,49 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 	 });
 	 return dataset;
  };
+
+ /*
+ * Do CDA query with or without parameters
+ */
+ function doCDAQuery(cdaPath, cdaDataAcessId, parameters){
+ 	var prefix = 'param';
+ 	var queryData={};
+ 	if(typeof parameters != undefined){
+ 		for (var i = 0; i < _.size(parameters); i++) {
+ 			queryData[prefix.concat(parameters[i][0])]=parameters[i][1];
+ 		};
+ 	};
+ 	var responseText = $.ajax({type: 'GET', dataType: 'json',url: webAppPath + "/plugin/cda/api/doQuery?dataAccessId="+cdaDataAcessId+"&path="+cdaPath, data: queryData, async: false}).responseText;
+	return responseText;
+ };
+
+ /*
+ * Build de data for the chart
+ */
+ function buildData(queryData){
+ 	var cdacolumns = [];
+ 	for (var i = 0; i < queryData.metadata.length; i++) {
+ 		cdacolumns.push(queryData.metadata[i].colName);
+ 	}
+ 	return queryData.resultset.map(function(dt) {
+ 		var data ={};
+ 		for (var i = 0; i < cdacolumns.length; i++) {
+ 			data[cdacolumns[i]]=dt[i];
+ 		}
+ 		return data;
+ 	});
+ };
+
+/*
+* Verify the parameters
+*/
+function hasRequiredProperties(queryDataset,properties){
+	for (var i = 0; i < queryDataset.length; i++) {
+		for (var j = 0; j < properties.length; j++) {
+			if(!queryDataset[i].hasOwnProperty(properties[j])){
+				return [false,"missing property '"+ properties[j]+"'"]
+			}
+		}
+	}
+	return [true,""];
+}

@@ -143,7 +143,9 @@
 		width        : "900",
 		chartType    : "DragNode",
 		path         : "/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda",
-		dataAccessId : "1",
+		dataAccessId : "4",
+		connectorsPath : "/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda",
+        connectorsDataAccessId : "5",
 		//Properties for the chart
 		chartProperties: {
 			palette: "2",

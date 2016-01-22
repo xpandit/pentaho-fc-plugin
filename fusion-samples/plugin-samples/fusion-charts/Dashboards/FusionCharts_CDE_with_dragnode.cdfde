@@ -288,14 +288,24 @@
       "value": "dragnode"
      },
      {
+      "name": "connectorsDataAccessId",
+      "value": "5",
+      "type": "String"
+     },
+     {
       "name": "dataAccessId",
       "type": "String",
-      "value": "1"
+      "value": "4"
      },
      {
       "name": "listeners",
       "type": "Listeners",
       "value": "[]"
+     },
+     {
+      "name": "connectorsPath",
+      "value": "",
+      "type": "CdaPath"
      },
      {
       "name": "path",
@@ -419,8 +429,8 @@
      },
      {
       "name": "dataSetCallback",
-      "value": "function(data) {\n        \t\tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t\tdata.shape= \"circle\";\n\t\t\t\t\t\tdata.radius = \"40\";\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} ",
-      "type": "JavaScript"
+      "type": "JavaScript",
+      "value": "function(data) {\n        \t\tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t\tdata.shape= \"circle\";\n\t\t\t\t\t\tdata.radius = \"40\";\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} "
      },
      {
       "name": "dataSetScriptProperties",
@@ -541,29 +551,6 @@
  "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE_with_dragnode.cdfde",
  "layout": {
   "rows": [
-   {
-    "id": "9cc12657-6e82-1268-7717-7af220bf6de5",
-    "parent": "UnIqEiD",
-    "properties": [
-     {
-      "name": "name",
-      "type": "Id",
-      "value": "Theme"
-     },
-     {
-      "name": "resourceFile",
-      "type": "ResourceFile",
-      "value": "${solution:fusioncharts.theme.custom.js}"
-     },
-     {
-      "name": "resourceType",
-      "type": "Label",
-      "value": "Javascript"
-     }
-    ],
-    "type": "LayoutResourceFile",
-    "typeDesc": "Resource"
-   },
    {
     "id": "54772d82-51f7-14e8-cc01-a3ad3b8656a7",
     "parent": "UnIqEiD",

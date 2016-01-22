@@ -18,6 +18,8 @@
 				<Definition name="chartDefinition">
 					<Property name="path">fusionCdaPath</Property>
 					<Property name="dataAccessId">dataAccessId</Property>
+					<Property>connectorsDataAccessId</Property>
+					<Property>connectorsPath</Property>
 					<Property type="string" name="chartType">fusionChartType</Property>
 					<Property name="width" type="number">width</Property>
 					<Property name="height" type="number">height</Property>
@@ -448,11 +450,38 @@
 							<OutputName>path</OutputName>
 							<Parent>BaseProperty</Parent>
 							<DefaultValue/>
-							<Description>Path</Description>
+							<Description>Nodes Path</Description>
 							<Tooltip>CDA Path</Tooltip>
 							<InputType>CdaPath</InputType>
 							<OutputType>String</OutputType>
 							<Order>27</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsPath</Name>
+							<OutputName>connectorsPath</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Path</Description>
+							<Tooltip>CDA Path</Tooltip>
+							<InputType>CdaPath</InputType>
+							<OutputType>String</OutputType>
+							<Order>27</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsDataAccessId</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue></DefaultValue>
+							<Description>Connectors DataAccess ID</Description>
+							<Tooltip>Connectors DataAccess ID</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>5</Order>
 							<Version>1.0</Version>
 						</Header>
 					</DesignerProperty>
