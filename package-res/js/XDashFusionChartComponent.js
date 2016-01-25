@@ -317,57 +317,88 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 	 },
 
 	 render: function(values) {
-		var myself = this;
-		var cd = myself.chartDefinition;
+		 var myself = this;
+		 var cd = myself.chartDefinition;
+		 //validate fusion plugin key
+		 var urlApi = webAppPath + '/plugin/fusion_plugin/api/verifyKey';
+		 var fusionkey = $.ajax({type: 'GET', url: urlApi, async: false, error: function(xhr, textStatus, error){alert("Error while validating your key. Make sure your key is valid")}}).responseText;
+		 // error validating key
+		 if(fusionkey.match("<html >")){
+			 $("#"+myself.htmlObject).html(fusionkey);
+			 return;
+		 }
+		 // error key expired
+		 fusionkey = fusionkey.split("-", 2);
+		 if(fusionkey[0].match("Error")){
+         	fusionkey[0] = fusionkey[0].replace("Error:"," ");
+         	$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>"+fusionkey[0]+"</div>");
+         	return;
+         }
+		 // Error fusion XT not installed
+		 if (fusionkey[1].match("true")) {
+		    $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
+			return;
+		 }
+		 if (!_.has(cd, 'chartType') || !_.has(myself, 'htmlObject') || !_.has(cd, 'width') || !_.has(cd, 'height')){
+			 // display missing options error
+			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Options (chartType, htmlObject, width or height)</div>");
+			 return;
+		 }
+		 if((!_.has(cd, 'chartProperties') && !_.has(myself,'chartProperties'))){
+			 //display mission properties error
+			 $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing chartProperties</div>");
+			 return;
+		 }
+		 if((!_.has(cd, 'dataSetProperties') && !_.has(myself,'dataSetProperties')) ){
+			 $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing dataSetProperties</div>");
+			 return;
+		 }
 
-		//validate fusion plugin key
-		var urlApi = webAppPath + '/plugin/fusion_plugin/api/verifyKey';
-		var fusionkey = $.ajax({type: 'GET', url: urlApi, async: false}).responseText;
-		fusionkey = fusionkey.split("-", 2);
-		if(fusionkey[0].match("Error")){
-			$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>"+fusionkey[0]+"</div>");
-		}else if (fusionkey[1].match("true")) {
-        	$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
-        }else{
-			if (!_.has(cd, 'chartType') || !_.has(myself, 'htmlObject') || !_.has(cd, 'width') || !_.has(cd, 'height')){
-				// display missing options error
-				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Options (chartType, htmlObject, width or height)</div>");
-			} else if((!_.has(cd, 'chartProperties') && !_.has(myself,'chartProperties')) || (!_.has(cd, 'dataSetProperties') && !_.has(myself,'dataSetProperties')) || (!_.has(cd, 'connectorsProperties') && !_.has(myself,'connectorsProperties'))){
-				//display mission properties error
-				$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing chartProperties, dataSetProperties or connectorsProperties</div>");
-				
-			} else if (!_.has(cd,'connectorsDataAccessId')){
-				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Property!</strong> Connectors Data Access ID</div>");
-			} else		{
 
-				//Fix CDE properties
-				cd = chartDefinitionCDEproperties(myself,cd,'chartProperties','chartScriptProperties');
-				cd = chartDefinitionCDEproperties(myself,cd,'dataSetProperties','dataSetScriptProperties',[['datasetColor','color']]);
-				cd = chartDefinitionCDEproperties(myself,cd,'connectorsProperties','connectorsScriptProperties',[['connectorColor','color']]);
-				cd = chartDefinitionCDEproperties(myself,cd,'trendlinesProperties','trendlinesScriptProperties');
-				cd = chartDefinitionCDEproperties(myself,cd,'labelsProperties','labelsScriptProperties');
+		 //Fix CDE properties
+		 cd = chartDefinitionCDEproperties(myself,cd,'chartProperties','chartScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'dataSetProperties','dataSetScriptProperties',[['datasetColor','color']]);
+		 cd = chartDefinitionCDEproperties(myself,cd,'connectorsProperties','connectorsScriptProperties',[['connectorColor','color']]);
+		 cd = chartDefinitionCDEproperties(myself,cd,'trendlinesProperties','trendlinesScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'labelsProperties','labelsScriptProperties');
 
-				// Creating chart basic options
-				var fusionOptions = {
-					"type": cd.chartType,
-					"renderAt": myself.htmlObject,
-					"width": cd.width,
-					"height": cd.height,
-					"dataFormat": "json"
-				};
+		 // Creating chart basic options
+		 var fusionOptions = {
+			 "type": cd.chartType,
+			 "renderAt": myself.htmlObject,
+			 "width": cd.width,
+			 "height": cd.height,
+			 "dataFormat": "json"
+		 };
+
+		 //allow chartProperties functions
+		 $.map(cd.chartProperties,function(v,k){return typeof cd.chartProperties[k]=="function"?cd.chartProperties[k]=cd.chartProperties[k]():cd.chartProperties[k]=v});
+
+		 // implementation of charts
+		 switch (fusionOptions.type.toLowerCase()) {
+			 case "dragnode":
+			 	//error missing connectorsDataAccessId
+				if (!_.has(cd,'connectorsDataAccessId')){
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Property!</strong> Connectors Data Access ID</div>");
+					return;
+				}
+				//error missing connectors properties
+				if(!_.has(cd, 'connectorsProperties')){
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing connectorsProperties</div>");
+					return;
+				}
 
 				// build the parameters for the dataSet
-        var queryDataset = buildData(values);
+				var queryDataset = buildData(values);
 
-        //build the parameters for the connectors
-        if(_.has(cd,'connectorsPath')){
-            var queryResult = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
-        }else{
-            var queryResult = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
-        }
-        var resultset = JSON.parse(queryResult);
-
-        var queryConnectors = buildData(resultset);
+				//build the parameters for the connectors
+				if(_.has(cd,'connectorsPath')){
+					var queryResult = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
+				}else{
+					var queryResult = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
+				}
+				var resultset = JSON.parse(queryResult);
+				var queryConnectors = buildData(resultset);
 
 				//apply node callback function
 				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
@@ -375,95 +406,100 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 				//apply connectors callback function
 				if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
 
-				//verify is has required properties
-        var hasProperties = hasRequiredProperties(queryDataset,['x','y','id']);
-        if(hasProperties[0]){
-            //verify if it as required properties
-            hasProperties = hasRequiredProperties(queryConnectors,['from','to']);
-            if(hasProperties[0]){
-                // add nodes data to dataset
-                cd.dataSetProperties.data = queryDataset;
-                // add connectors data to connectors properties
-                cd.connectorsProperties.connector = queryConnectors;
-                // create the chart data
-                var data = {
-                    "chart": cd.chartProperties,
-                    "dataset": [cd.dataSetProperties],
-                    "connectors":[cd.connectorsProperties]
-                };
-            }else{
-                var data = {'chart':{}}
-                hasProperties[1] = "Connectors are "+ hasProperties[1];
-            }
-        }else{
-            var data = {'chart':{}}
-            hasProperties[1] = "Nodes are "+ hasProperties[1];
-        };
+				//verify if dataset has required properties
+				var hasProperties = hasRequiredProperties(queryDataset,['x','y','id']);
 
-				// add trend lines to chart
-        if(_.has(cd, 'trendlinesProperties')){
-            if(_.has(cd.trendlinesProperties, 'dataAccessId') && _.has(cd.trendlinesProperties, 'path')){
-                var responseText = doCDAQuery(cd.trendlinesProperties.path,cd.trendlinesProperties.dataAccessId,myself.parameters);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Nodes are "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					return;
+				}
 
-                var resultset = JSON.parse(responseText);
+			 	//verify if connectors have required parameters
+				hasProperties = hasRequiredProperties(queryConnectors,['from','to']);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Connectors are "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					return;
+				}
 
-                resultset = buildData(resultset);
-                //apply trendlines callback function
-                if(_.has(cd.trendlinesProperties, 'lineCallback')){
-                    resultset = applyCallBack(resultset, cd.trendlinesProperties.lineCallback);
-                };
-                // draw vertical or horizontal trendlines
-                if(_.has(cd.trendlinesProperties,"vertical")){
-                    if(cd.trendlinesProperties.vertical == "1"){
-                        data.vtrendlines = [{line: resultset}];
-                    }else{
-                        data.trendlines = [{line: resultset}];
-                    }
-                }else{
-                    data.trendlines = [{line: resultset}];
-                }
-            }else{
-                if(_.has(cd.trendlinesProperties, 'vtrendlines')){
-                    data.vtrendlines = cd.trendlinesProperties.vtrendlines;
-                };
-                if(_.has(cd.trendlinesProperties, 'trendlines')){
-                    data.trendlines = cd.trendlinesProperties.trendlines;
-                };
-            };
-        };
+				// add nodes data to dataset
+				cd.dataSetProperties.data = queryDataset;
+				// add connectors data to connectors properties
+				cd.connectorsProperties.connector = queryConnectors;
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dataset": [cd.dataSetProperties],
+					"connectors":[cd.connectorsProperties]
+				};
+		 		break;
+		 	default:
+				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Chart Not Supported!</strong> This chart is not supported by the component</div>");
+				return;
 
-        // add labels to chart
-        if(_.has(cd, 'labelsProperties')){
-            if(_.has(cd.labelsProperties, 'dataAccessId') && _.has(cd.labelsProperties, 'path')){
-                var responseText = doCDAQuery(cd.labelsProperties.path,cd.labelsProperties.dataAccessId,myself.parameters);
-
-                var resultset = JSON.parse(responseText);
-
-                resultset = buildData(resultset);
-                //apply trendlines callback function
-                if(_.has(cd.labelsProperties, 'labelCallback')){
-                    resultset = applyCallBack(resultset, cd.labelsProperties.labelCallback);
-                };
-                data.labels = {label: resultset};
-            }else{
-                if(_.has(cd.labelsProperties, 'labels')){
-                    data.labels = cd.labelsProperties.labels;
-                };
-            };
-        };
-
-        // create Fusion chart and render
-        if(myself.chartObject == undefined) {
-            myself.chartObject = new FusionCharts(fusionOptions);
-            myself.chartObject.setJSONData(data);
-            if(!hasProperties[0]){myself.chartObject.configure('ChartNoDataText',hasProperties[1])};
-            myself.chartObject.render();
-        } else {
-            myself.chartObject.setJSONData(data);
-        }
-			}
 		 }
-		}
+
+		 // add trend lines to chart
+		 if(_.has(cd, 'trendlinesProperties')){
+			 if(_.has(cd.trendlinesProperties, 'dataAccessId') && _.has(cd.trendlinesProperties, 'path')){
+				 var responseText = doCDAQuery(cd.trendlinesProperties.path,cd.trendlinesProperties.dataAccessId,myself.parameters);
+				 var resultset = JSON.parse(responseText);
+
+				 resultset = buildData(resultset);
+				 //apply trendlines callback function
+				 if(_.has(cd.trendlinesProperties, 'lineCallback')){
+					 resultset = applyCallBack(resultset, cd.trendlinesProperties.lineCallback);
+				 };
+				 // draw vertical or horizontal trendlines
+				 if(_.has(cd.trendlinesProperties,"vertical")){
+					 if(cd.trendlinesProperties.vertical == "1"){
+						 data.vtrendlines = [{line: resultset}];
+					 }else{
+						 data.trendlines = [{line: resultset}];
+					 }
+				 }else{
+					 data.trendlines = [{line: resultset}];
+				 }
+			 }else{
+				 if(_.has(cd.trendlinesProperties, 'vtrendlines')){
+					 data.vtrendlines = cd.trendlinesProperties.vtrendlines;
+				 };
+				 if(_.has(cd.trendlinesProperties, 'trendlines')){
+					 data.trendlines = cd.trendlinesProperties.trendlines;
+				 };
+			 };
+		 };
+
+		 // add labels to chart
+		 if(_.has(cd, 'labelsProperties')){
+			 if(_.has(cd.labelsProperties, 'dataAccessId') && _.has(cd.labelsProperties, 'path')){
+				 var responseText = doCDAQuery(cd.labelsProperties.path,cd.labelsProperties.dataAccessId,myself.parameters);
+
+				 var resultset = JSON.parse(responseText);
+
+				 resultset = buildData(resultset);
+				 //apply trendlines callback function
+				 if(_.has(cd.labelsProperties, 'labelCallback')){
+					 resultset = applyCallBack(resultset, cd.labelsProperties.labelCallback);
+				 };
+				 data.labels = {label: resultset};
+			 }else{
+				 if(_.has(cd.labelsProperties, 'labels')){
+					 data.labels = cd.labelsProperties.labels;
+				 };
+			 };
+		 };
+
+		 // create Fusion chart and render
+		 if(myself.chartObject == undefined) {
+			 myself.chartObject = new FusionCharts(fusionOptions);
+			 myself.chartObject.setJSONData(data);
+			 myself.chartObject.render();
+		 } else {
+			 myself.chartObject.setJSONData(data);
+		 }
+	 }
 
  });
 

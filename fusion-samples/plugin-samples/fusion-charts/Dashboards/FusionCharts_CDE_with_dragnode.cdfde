@@ -289,8 +289,8 @@
      },
      {
       "name": "connectorsDataAccessId",
-      "value": "5",
-      "type": "String"
+      "type": "String",
+      "value": "5"
      },
      {
       "name": "dataAccessId",
@@ -304,8 +304,8 @@
      },
      {
       "name": "connectorsPath",
-      "value": "",
-      "type": "CdaPath"
+      "type": "CdaPath",
+      "value": ""
      },
      {
       "name": "path",
@@ -410,12 +410,12 @@
      {
       "name": "chartScriptProperties",
       "type": "JavaScript",
-      "value": "{\nshowformbtn: \"0\",\nviewmode: \"1\"\n} "
+      "value": "{\nshowformbtn: \"0\",\nviewmode: \"0\"\n} "
      },
      {
       "name": "allowdrag",
       "type": "Integer",
-      "value": "0"
+      "value": "1"
      },
      {
       "name": "datasetColor",
