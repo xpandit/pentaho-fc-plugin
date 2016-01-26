@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+        <Connection id="2" type="sql.jndi">
+            <Jndi>DragNode</Jndi>
+        </Connection>
+    </DataSources>
+
+    <!-- DataAccess object controls the query itself
+
+	Access controls if the datasource can be seen from the outside or is to
+	be used from a Compound datasource only
+
+	-->
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Hardcode DragNode Data</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[6];
+          columnNames[0] = &quot;x&quot;;             <!--X position of the node-->
+          columnNames[1] = &quot;y&quot;;             <!--Y position of the node-->
+          columnNames[2] = &quot;id&quot;;            <!--Node id-->
+          columnNames[3] = &quot;label&quot;;         <!--Node Label-->
+          columnNames[4] = &quot;destination&quot;;   <!--Connector destination-->
+          columnNames[5] = &quot;label&quot;;         <!--Connector label-->
+
+
+          Class[] columnTypes = new Class[6];
+          columnTypes[0] = Integer.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = String.class;
+          columnTypes[3] = String.class;
+          columnTypes[4] = String.class;
+          columnTypes[5] = String.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new Integer(8), new Integer(69),new String("pc1"),new String("Desktop"),new String("internet"),new String("10/100Mbps")});
+          model.addRow(new Object[]{new Integer(8), new Integer(30),new String("pc2"),new String("Laptop"),new String("internet"),new String("10/100Mbps")});
+          model.addRow(new Object[]{new Integer(19), new Integer(50),new String("internet"),new String("Internet"),new String("firewall"),new String("T1 Line")});
+          model.addRow(new Object[]{new Integer(34), new Integer(20),new String("PN1"),new String("Branch Office 1"),null,null,null});
+          model.addRow(new Object[]{new Integer(34), new Integer(90),new String("BO1"),new String("Branch Office 1"),null,null,null});
+          model.addRow(new Object[]{new Integer(44), new Integer(70),new String("BO3"),new String("Branch Head Office"),new String("firewall"),new String("Secured")});
+          model.addRow(new Object[]{new Integer(44), new Integer(70),new String("BO3"),new String("Branch Head Office"),new String("BO1"),null});
+          model.addRow(new Object[]{new Integer(44), new Integer(70),new String("BO3"),new String("Branch Head Office"),new String("BO2"),null});
+          model.addRow(new Object[]{new Integer(44), new Integer(30),new String("PH0"),new String("Head Office"),new String("firewall"),new String("Secured")});
+          model.addRow(new Object[]{new Integer(44), new Integer(8),new String("PN3"),new String("Head Office"),null,null});
+          model.addRow(new Object[]{new Integer(44), new Integer(85),new String("null"),new String("Branch Network"),null,null});
+          model.addRow(new Object[]{new Integer(44), new Integer(50),new String("firewall"),new String("Firewall"),null,null});
+          model.addRow(new Object[]{new Integer(44), new Integer(18),new String("null2"),new String("Perimeter Network"),null,null});
+          model.addRow(new Object[]{new Integer(53), new Integer(20),new String("PN2"),new String("Branch Office 2"),null,null});
+          model.addRow(new Object[]{new Integer(54), new Integer(90),new String("BO2"),new String("Branch Office 2"),null,null});
+          model.addRow(new Object[]{new Integer(64), new Integer(40),new String("CN4"),new String("Branch Catalog Server"),new String("CN3"),null});
+          model.addRow(new Object[]{new Integer(64), new Integer(40),new String("CN4"),new String("Branch Catalog Server"),new String("CNS"),null});
+          model.addRow(new Object[]{new Integer(64), new Integer(60),new String("CNS"),new String("Head Office"),null,null,null});
+          model.addRow(new Object[]{new Integer(77), new Integer(50),new String("null3"),new String("Corporate Network"),null,null});
+          model.addRow(new Object[]{new Integer(78), new Integer(70),new String("CN1"),new String("Branch Office 1"),new String("CN2"),null});
+          model.addRow(new Object[]{new Integer(78), new Integer(70),new String("CN1"),new String("Branch Office 1"),new String("CNS"),null});
+          model.addRow(new Object[]{new Integer(78), new Integer(30),new String("CN3"),new String("CRM Server"),null,null});
+          model.addRow(new Object[]{new Integer(88), new Integer(40),new String("CN5"),new String("2003 Server"),new String("CN2"),null});
+          model.addRow(new Object[]{new Integer(88), new Integer(40),new String("CN5"),new String("2003 Server"),new String("CN3"),null});
+          model.addRow(new Object[]{new Integer(88), new Integer(60),new String("CN2"),new String("Branch Office 2"),null,null});
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+		<Name>DragNode Trendlines</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;startvalue&quot;;
+          columnNames[1] = &quot;endvalue&quot;;
+
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = Integer.class;
+          columnTypes[1] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new Integer(0), new Integer(30)});
+          model.addRow(new Object[]{new Integer(30), new Integer(60)});
+          model.addRow(new Object[]{new Integer(60), new Integer(100)});
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="3" connection="1" type="scriptable" access="public">
+		<Name>DragNode Labels</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;x&quot;;
+          columnNames[1] = &quot;y&quot;;
+          columnNames[2] = &quot;text&quot;;
+
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = Integer.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = String.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new Integer(12), new Integer(99), new String("External Network")});
+          model.addRow(new Object[]{new Integer(45), new Integer(99),new String("Middleware")});
+          model.addRow(new Object[]{new Integer(75), new Integer(99),new String("Internal Network")});
+          return model;
+        </Query>
+    </DataAccess>
+
+        <DataAccess id="4" connection="1" type="scriptable" access="public">
+    		<Name>Hardcode DragNode DataSet</Name>
+            <Query>
+              import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+              String[] columnNames = new String[4];
+              columnNames[0] = &quot;x&quot;;             <!--X position of the node-->
+              columnNames[1] = &quot;y&quot;;             <!--Y position of the node-->
+              columnNames[2] = &quot;id&quot;;            <!--Node id-->
+              columnNames[3] = &quot;label&quot;;         <!--Node Label-->
+
+
+              Class[] columnTypes = new Class[4];
+              columnTypes[0] = Integer.class;
+              columnTypes[1] = Integer.class;
+              columnTypes[2] = String.class;
+              columnTypes[3] = String.class;
+
+
+              TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+              model.addRow(new Object[]{new Integer(8), new Integer(69),new String("pc1"),new String("Desktop")});
+              model.addRow(new Object[]{new Integer(8), new Integer(30),new String("pc2"),new String("Laptop")});
+              model.addRow(new Object[]{new Integer(19), new Integer(50),new String("internet"),new String("Internet")});
+              model.addRow(new Object[]{new Integer(34), new Integer(20),new String("PN1"),new String("Branch Office 1")});
+              model.addRow(new Object[]{new Integer(34), new Integer(90),new String("BO1"),new String("Branch Office 1")});
+              model.addRow(new Object[]{new Integer(44), new Integer(70),new String("BO3"),new String("Branch Head Office")});
+              model.addRow(new Object[]{new Integer(44), new Integer(30),new String("PH0"),new String("Head Office")});
+              model.addRow(new Object[]{new Integer(44), new Integer(8),new String("PN3"),new String("Head Office")});
+              model.addRow(new Object[]{new Integer(44), new Integer(85),new String("null"),new String("Branch Network")});
+              model.addRow(new Object[]{new Integer(44), new Integer(50),new String("firewall"),new String("Firewall")});
+              model.addRow(new Object[]{new Integer(44), new Integer(18),new String("null2"),new String("Perimeter Network")});
+              model.addRow(new Object[]{new Integer(53), new Integer(20),new String("PN2"),new String("Branch Office 2")});
+              model.addRow(new Object[]{new Integer(54), new Integer(90),new String("BO2"),new String("Branch Office 2")});
+              model.addRow(new Object[]{new Integer(64), new Integer(40),new String("CN4"),new String("Branch Catalog Server")});
+              model.addRow(new Object[]{new Integer(64), new Integer(60),new String("CNS"),new String("Head Office")});
+              model.addRow(new Object[]{new Integer(77), new Integer(50),new String("null3"),new String("Corporate Network")});
+              model.addRow(new Object[]{new Integer(78), new Integer(70),new String("CN1"),new String("Branch Office 1")});
+              model.addRow(new Object[]{new Integer(78), new Integer(30),new String("CN3"),new String("CRM Server")});
+              model.addRow(new Object[]{new Integer(88), new Integer(40),new String("CN5"),new String("2003 Server")});
+              model.addRow(new Object[]{new Integer(88), new Integer(60),new String("CN2"),new String("Branch Office 2")});
+              return model;
+            </Query>
+        </DataAccess>
+
+        <DataAccess id="5" connection="1" type="scriptable" access="public">
+    		<Name>Hardcode DragNode Connectors</Name>
+            <Query>
+              import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+              String[] columnNames = new String[3];
+              columnNames[0] = &quot;from&quot;;
+              columnNames[1] = &quot;to&quot;;
+              columnNames[2] = &quot;label&quot;;
+
+
+              Class[] columnTypes = new Class[3];
+              columnTypes[0] = String.class;
+              columnTypes[1] = String.class;
+              columnTypes[2] = String.class;
+
+
+              TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+              model.addRow(new Object[]{new String("pc1"),new String("internet"),new String("10/100Mbps")});
+              model.addRow(new Object[]{new String("pc2"),new String("internet"),new String("10/100Mbps")});
+              model.addRow(new Object[]{new String("internet"),new String("firewall"),new String("T1 Line")});
+              model.addRow(new Object[]{new String("BO3"),new String("firewall"),new String("Secured")});
+              model.addRow(new Object[]{new String("BO3"),new String("BO1"),null});
+              model.addRow(new Object[]{new String("BO3"),new String("BO2"),null});
+              model.addRow(new Object[]{new String("PH0"),new String("firewall"),new String("Secured")});
+              model.addRow(new Object[]{new String("CN4"),new String("CN3"),null});
+              model.addRow(new Object[]{new String("CN4"),new String("CNS"),null});
+              model.addRow(new Object[]{new String("CN1"),new String("CN2"),null});
+              model.addRow(new Object[]{new String("CN1"),new String("CNS"),null});
+              model.addRow(new Object[]{new String("CN5"),new String("CN2"),null});
+              model.addRow(new Object[]{new String("CN5"),new String("CN3"),null});
+              return model;
+            </Query>
+        </DataAccess>
+
+        <!--Example of DragNode query with SQL and parameters-->
+        <DataAccess id="6" connection="2" type="sql" access="public" cache="true" cacheDuration="5">
+            <Name>DragNode SQL</Name>
+            <Query>
+            select d.x, d.y, d.id, d.label, c.destination, c.label from dataset d
+                left join connectors c on d.id = c.source
+        </Query>
+        <Parameters>
+            <Parameter name="param"    type="String" default="param"/>
+        </Parameters>
+        </DataAccess>
+        <DataAccess id="7" connection="2" type="sql" access="public" cache="true" cacheDuration="5">
+            <Name>DragNode DataSet</Name>
+            <Query>
+            select d.x, d.y, d.id, d.label from dataset d
+        </Query>
+        <Parameters>
+            <Parameter name="param"    type="String" default="param"/>
+        </Parameters>
+        </DataAccess>
+        <DataAccess id="8" connection="2" type="sql" access="public" cache="true" cacheDuration="5">
+            <Name>DragNode Connectors</Name>
+            <Query>
+            select source as from, destination as to, label from connectors
+        </Query>
+        <Parameters>
+            <Parameter name="param"    type="String" default="param"/>
+        </Parameters>
+        </DataAccess>
+</CDADescriptor>

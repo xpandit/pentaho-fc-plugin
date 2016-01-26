@@ -29,15 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -118,7 +111,54 @@ public class FusionApi extends CpkApi{
 			public String getVersion() throws Exception {
 				return VersionChecker.getVersions();
 			}
-			
+
+			/**
+	 		* Get the Fusion Chart Plugin key and FusionCharts XT
+	 		* @param request HTTP Request
+	 		* @return Key message
+	 		* @throws Exception
+	 		*/
+			@GET
+			@Path("/verifyKey")
+			public String doGetPluginKey(@Context HttpServletRequest request) throws Exception {
+
+				// Check license
+				String licenseChecked = LicenseChecker.verifyKey();
+				if (licenseChecked.startsWith("Error")) {
+					logger.error(licenseChecked);
+				}
+				else if (licenseChecked.startsWith("Warning")) {
+					logger.warn(licenseChecked);
+				}
+
+				Properties prop = new Properties();
+				InputStream input = null;
+				try {
+
+					String filename = "fusionCharts.properties";
+
+					input = FusionApi.class.getClassLoader().getResourceAsStream(filename);
+					if(input==null){
+						logger.error("Unable to find " + filename);
+						return licenseChecked +" - ";
+					}
+						//load a properties file from class path, inside static method
+						prop.load(input);
+						return licenseChecked +" -"+prop.getProperty("free");
+
+				} catch (IOException ex) {
+				} finally{
+					if(input!=null){
+						try {
+							input.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				return licenseChecked +" - ";
+			}
+
 			/**
 			 * Get the Fusion Chart XML to be rendered
 			 * @param request HTTP Request

@@ -1,0 +1,181 @@
+<script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.ocean.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.zune.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.carbon.js'></script>
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts_xt_with_dragnode.js"></script>
+<script type="text/javascript" src="../../../content/xfusion/js/endpointsForSamples.js"></script>
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+
+
+
+<div class="dashboardContent">
+    <div class="header">
+        <img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
+            <h2 class="light">Fusion Charts XT Dashboard Samples</h2>
+    </div>
+
+    <div class="Info" style="margin-bottom:30px;">
+        <h5 class="light">How to get Fusion Charts XT</h5>
+   All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+    <div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+    </div>
+
+
+    <div id="charts">
+        <div id="firstRow">
+            <h5 class="light">Line Chart</h5>
+            <div id="LineChart" style="margin-left:25px;"></div>
+        </div>
+        <div id="SecondRow" style="height:270px;">
+            <h5 class="light">Pie Chart and Angular Gauge Chart</h5>
+            <div id="PieChart2D" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="AngularGauge"></div>
+        </div>
+        <div id="thirdRow" style="height:370px;">
+            <h5 class="light">Real time line Chart and Real time bar Chart</h5>
+            <div id="RealTimeLine" style="float:left;margin-left:25px;margin-right:25px;"></div>
+            <div id="RealTimeColumn"></div>
+        </div>
+        <div id="fourthRow">
+            <h5 class="light">Bubble Chart</h5>
+            <div id="BubbleChart" style="margin-left:25px;"></div>
+        </div>
+        <div id="fiftRow">
+            <h5 class="light">Drag Node</h5>
+            <div id="DragNode" style="margin-left:25px;"></div>
+        </div>
+
+</div>
+    <div class="light third">
+    Xpand IT supports Pentaho FusionCharts Plugin.
+    <br>
+    If you need more information, sharing ideas or discuss plan details, please reach us by email
+    <a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
+</div>
+<div class="logos">
+    <img width="150" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png">
+</div>
+
+
+</div>
+<script language="javascript" type="text/javascript">
+
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+    Dashboards.addParameter("param", "hello");
+
+    var RealTimeLine = {
+        name           : "RealTimeLine",
+        htmlObject     : "RealTimeLine",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.RealTimeLineChart,
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var RealTimeColumn = {
+        name           : "RealTimeColumn",
+        htmlObject     : "RealTimeColumn",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.RealTimeBarChart,
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var BubbleChart = {
+        name           : "BubbleChart",
+        htmlObject     : "BubbleChart",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.BubbleChart,
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+        listeners      : ["param"]
+    }
+
+    var AngularGauge = {
+        name           : "AngularGauge",
+        htmlObject     : "AngularGauge",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.AngularGaugeChart,
+        executeAtStart : true,
+        type           : "XDashFusionChartComponent",
+    }
+
+    var LineChart = {
+        name            : "LineChart",
+        htmlObject      : "LineChart",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.LineChart,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponent",
+    }
+
+    var PieChart2D = {
+        name            : "PieChart2D",
+        htmlObject      : "PieChart2D",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.PieChart2D,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponent",
+    }
+
+    var DragNode = {
+        name            : "DragNode",
+        htmlObject      : "DragNode",
+        chartDefinition : MetaLayerCharts_xt_with_dragnode.DragNode,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponentAsync",
+    }
+
+        var components = [
+            RealTimeLine , RealTimeColumn ,
+            BubbleChart  , AngularGauge   ,
+            LineChart    , PieChart2D     ,
+            DragNode
+        ];
+
+         function switchToFusionManager() {
+            var url= Dashboards.getWebAppPath() + '/plugin/fusion_plugin/api/settings';
+            //window.location.href=url;
+            window.open(url, '_blank');
+        }
+
+        // Define functions to use in DragNode link property
+        function nodelink(data){
+          Dashboards.fireChange("param",data.id)
+            //window.alert(data.id);
+        }
+
+
+</script>
+
+<script language="javascript" type="text/javascript">
+
+function load(){
+	Dashboards.init(components);
+}
+
+load();
+
+$(document).ready(function() {
+    sparkl.runEndpoint( 'fusion_plugin' , 'isfree', {
+            success: successCallback,
+            error: errorCallback
+    });
+});
+
+var successCallback = function (json)
+        {
+          Dashboards.decrementRunningCalls();
+          for (var index = 0; index < json.resultset.length; index++) {
+              if(json.resultset[index][0] == "free"){
+                  if(json.resultset[index][1] == "false"){
+                      $(".Info").css("display","none");
+                  }else{
+                      $("#charts").css("display","none");
+                  }
+              }
+          }
+        };
+
+var errorCallback = function (json){
+            Dashboards.decrementRunningCalls();
+        };
+
+</script>

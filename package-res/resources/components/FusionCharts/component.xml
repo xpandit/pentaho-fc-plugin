@@ -2,11 +2,515 @@
 <DesignerComponents>
 	<DesignerComponent>
 		<Header>
+			<Name>Drag Node Chart</Name>
+			<IName>XDashFusionChartComponentAsync</IName>
+			<Description>Drag Node Chart</Description>
+			<Category>FUSIONCHARTS</Category>
+			<CatDescription>FusionCharts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="path">fusionCdaPath</Property>
+					<Property name="dataAccessId">dataAccessId</Property>
+					<Property>connectorsDataAccessId</Property>
+					<Property>connectorsPath</Property>
+					<Property type="string" name="chartType">fusionChartType</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+					<Definition name="chartProperties">
+						<Property>canvasBgColor</Property>
+						<Property>xaxismixvalue</Property>
+						<Property>xaxismaxvalue</Property>
+						<Property>yaxismixvalue</Property>
+						<Property>yaxismaxvalue</Property>
+						<Property>theme</Property>
+						<Property name="chartScriptProperties">chartScriptProperties</Property>
+					</Definition>
+					<Definition name="dataSetProperties">
+						<Property>plotborderalpha</Property>
+						<Property>allowdrag</Property>
+						<Property>datasetColor</Property>
+						<Property>dataSetCallback</Property>
+						<Property name="dataSetScriptProperties">dataSetScriptProperties</Property>
+					</Definition>
+					<Definition name="connectorsProperties">
+						<Property>alpha</Property>
+						<Property>arrowAtEnd</Property>
+						<Property>arrowAtStart</Property>
+						<Property>strength</Property>
+						<Property>connectorColor</Property>
+						<Property>dashGap</Property>
+						<Property>dashLen</Property>
+						<Property>dashed</Property>
+						<Property>connectorCallback</Property>
+						<Property name="connectorsScriptProperties">connectorsScriptProperties</Property>
+					</Definition>
+					<Definition name="trendlinesProperties">
+						<Property>lineCallback</Property>
+						<Property>trendlinesScriptProperties</Property>
+					</Definition>
+					<Definition name="labelsProperties">
+						<Property>labelCallback</Property>
+						<Property>labelsScriptProperties</Property>
+					</Definition>
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+			<Implementation>
+				<CustomProperties>
+					<!--Chart Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>canvasBgColor</Name>
+							<OutputName>canvasBgColor</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Chart Canvas Background Color</Description>
+							<Tooltip>Background Color in Hex</Tooltip>
+							<InputType>Color</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>xaxismixvalue</Name>
+							<OutputName>xaxismixvalue</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>0</DefaultValue>
+							<Description>Chart X Axis Min Value</Description>
+							<Tooltip>X Axis Minimum Value</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>xaxismaxvalue</Name>
+							<OutputName>xaxismaxvalue</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>100</DefaultValue>
+							<Description>Chart X Axis Max Value</Description>
+							<Tooltip>X Axis Max Value</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>yaxismixvalue</Name>
+							<OutputName>yaxismixvalue</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>0</DefaultValue>
+							<Description>Chart Y Axis Min Value</Description>
+							<Tooltip>Y Axis Minimum Value</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>yaxismaxvalue</Name>
+							<OutputName>yaxismaxvalue</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>100</DefaultValue>
+							<Description>Chart Y Axis Max Value</Description>
+							<Tooltip>Y Axis Max Value</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>theme</Name>
+							<OutputName>theme</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Chart Theme</Description>
+							<Tooltip>Theme Name</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>chartScriptProperties</Name>
+							<OutputName>chartScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Chart Script Properties</Description>
+							<Tooltip>Chart JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>101</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Data Set Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>plotborderalpha</Name>
+							<OutputName>plotborderalpha</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Nodes Plot Border Alpha</Description>
+							<Tooltip>Alpha for data plot border of this data-set</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>102</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>allowdrag</Name>
+							<OutputName>allowdrag</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Nodes Allow Drag</Description>
+							<Tooltip>Whether to allow the end users to drag the nodes belonging to this data-set</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>102</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>datasetColor</Name>
+							<OutputName>color</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Nodes Color</Description>
+							<Tooltip>Nodes Color in Hex</Tooltip>
+							<InputType>Color</InputType>
+							<OutputType>String</OutputType>
+							<Order>102</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dataSetCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Nodes Callback</Description>
+							<Tooltip>Apply properties to nodes. The function needs one parameter that will receive the node properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>103</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dataSetScriptProperties</Name>
+							<OutputName>dataSetScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Nodes Script Properties</Description>
+							<Tooltip>DataSet JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>103</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Connectors Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>alpha</Name>
+							<OutputName>alpha</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Alpha</Description>
+							<Tooltip>Alpha for all the connectors on the chart.</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>104</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>arrowAtEnd</Name>
+							<OutputName>arrowAtEnd</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Arrow at End</Description>
+							<Tooltip>Whether to show arrows at the end point of connectors</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>104</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>arrowAtStart</Name>
+							<OutputName>arrowAtStart</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Arrow at Start</Description>
+							<Tooltip>Whether to show arrows at the origin of connectors</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>104</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>strength</Name>
+							<OutputName>strength</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Strength</Description>
+							<Tooltip>Default strength for all connectors.</Tooltip>
+							<InputType>Float</InputType>
+							<OutputType>String</OutputType>
+							<Order>104</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorColor</Name>
+							<OutputName>color</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Connectors Color</Description>
+							<Tooltip>Color for all the connectors on the chart</Tooltip>
+							<InputType>Color</InputType>
+							<OutputType>String</OutputType>
+							<Order>105</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dashGap</Name>
+							<OutputName>dashGap</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Dash Gap</Description>
+							<Tooltip>If the connectors are to appear as dashed, this attribute lets you define the gap between two consecutive dashes</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>106</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dashLen</Name>
+							<OutputName>dashLen</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Dash Length</Description>
+							<Tooltip>If the connectors are to appear as dashed, this attribute lets you define the length of each dash</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>106</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dashed</Name>
+							<OutputName>dashed</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Dashed</Description>
+							<Tooltip>Whether the connectors on the chart should appear as dashed</Tooltip>
+							<InputType>Integer</InputType>
+							<OutputType>Number</OutputType>
+							<Order>106</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Connectors Callback</Description>
+							<Tooltip>Apply properties to connectors. The function needs one parameter that will receive the connector properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsScriptProperties</Name>
+							<OutputName>connectorsScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Connectors Script Properties</Description>
+							<Tooltip>Connectors JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Trendlines Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>lineCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Trendlines Callback</Description>
+							<Tooltip>Apply properties to Trendlines. The function needs one parameter that will receive the trendline properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>108</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>trendlinesScriptProperties</Name>
+							<OutputName>trendlinesScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Trendlines</Description>
+							<Tooltip>Trendlines</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>108</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Labels Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>labelCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Labels Callback</Description>
+							<Tooltip>Apply properties to labels. The function needs one parameter that will receive the label properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>109</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>labelsScriptProperties</Name>
+							<OutputName>labelsScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Labels</Description>
+							<Tooltip>Labels</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>109</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Other Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>fusionCdaPath</Name>
+							<OutputName>path</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Nodes Path</Description>
+							<Tooltip>CDA Path</Tooltip>
+							<InputType>CdaPath</InputType>
+							<OutputType>String</OutputType>
+							<Order>27</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsPath</Name>
+							<OutputName>connectorsPath</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Connectors Path</Description>
+							<Tooltip>CDA Path</Tooltip>
+							<InputType>CdaPath</InputType>
+							<OutputType>String</OutputType>
+							<Order>27</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsDataAccessId</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue></DefaultValue>
+							<Description>Connectors DataAccess ID</Description>
+							<Tooltip>Connectors DataAccess ID</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>5</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>fusionChartType</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>DragNode</DefaultValue>
+							<Description>Fusion Charts Type</Description>
+							<Tooltip>Fusion Charts Type </Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>87</Order>
+							<Advanced>false</Advanced>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+				</CustomProperties>
+			</Implementation>
+		</Contents>
+	</DesignerComponent>
+	<!--END NEW-->
+	<DesignerComponent>
+		<Header>
 			<Name>FusionCharts Component</Name>
 			<IName>XDashFusionChartComponent</IName>
 			<Description>FusionCharts Component</Description>
-			<Category>CHARTS</Category>
-			<CatDescription>Charts</CatDescription>
+			<Category>FUSIONCHARTS</Category>
+			<CatDescription>FusionCharts</CatDescription>
 			<Type>PalleteEntry</Type>
 			<Version>1.0</Version>
 		</Header>

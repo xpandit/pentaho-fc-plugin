@@ -94,7 +94,7 @@ public class LicenseChecker {
 		List<String> lines = Files.readAllLines(path, ENCODING);
 		
 		if(lines.size() == 0) {
-			return "Error: Fusion Charts Plugin needs a license.";
+			return "Error: Fusion Charts Plugin requires a license.";
 		}
 		String key = lines.get(0);
 		// parse key
@@ -107,7 +107,7 @@ public class LicenseChecker {
 		if(key_data.getTimeStamp() < now_seconds)
 		{
 			//License expired
-			return "Error: Fusion Charts Plugin needs a license.";
+			return "Error: Fusion Charts Plugin license expired. Get a new license.";
 		}
 		else if(key_data.getTimeStamp() - now_seconds <= FIVE_DAY_WARNING)
 		{
