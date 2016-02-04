@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+		
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Bullet Sample</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;value&quot;;
+        columnNames[1] = &quot;target&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+
+        Random rand = new Random();
+        int randInt_a = rand.nextInt(120);
+        int randInt_b = rand.nextInt(120);
+
+        model.addRow(new Object[]{new Integer(82), new Integer(90)});
+        return model;
+        </Query>
+    </DataAccess>
+     <DataAccess id="2" connection="1" type="scriptable" access="public">
+    	<Name>Bullet ColorRange</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;minValue&quot;;
+        columnNames[1] = &quot;maxValue&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+        model.addRow(new Object[]{new Integer(0),new Integer(50)});
+        model.addRow(new Object[]{new Integer(50),new Integer(75)});
+        model.addRow(new Object[]{new Integer(75),new Integer(100)});
+        return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

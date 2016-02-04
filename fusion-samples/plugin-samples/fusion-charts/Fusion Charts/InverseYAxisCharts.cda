@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>Inverse Y Data</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("27")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("22")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("25")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("27")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("21")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("29")});
+          model.addRow(new Object[]{new String("food.hsm.com"), new String("22")});
+          
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("42")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("38")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("39")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("36")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("43")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("44")});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new String("35")});
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>Inserve Y Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Mon")});
+          model.addRow(new Object[]{new String("Tue")});
+          model.addRow(new Object[]{new String("Web")});
+          model.addRow(new Object[]{new String("Thu")});
+          model.addRow(new Object[]{new String("Fri")});
+          model.addRow(new Object[]{new String("Sat")});
+          model.addRow(new Object[]{new String("Sun")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

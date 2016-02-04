@@ -4,6 +4,6 @@
 	<author>Xpand IT</author>
 	<description></description>
 	<icon></icon>
-	<template>dashboard_xt_with_dragnode.html</template>
+	<template>dashboard_xt_async_component.html</template>
 	<style>clean</style>
 </cdf>

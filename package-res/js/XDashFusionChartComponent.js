@@ -339,28 +339,44 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		    $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
 			return;
 		 }
-		 if (!_.has(cd, 'chartType') || !_.has(myself, 'htmlObject') || !_.has(cd, 'width') || !_.has(cd, 'height')){
+		 if (!_.has(cd, 'chartType')){
 			 // display missing options error
-			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Options (chartType, htmlObject, width or height)</div>");
+			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Chart Type (chartType)</div>");
 			 return;
 		 }
-		 if((!_.has(cd, 'chartProperties') && !_.has(myself,'chartProperties'))){
-			 //display mission properties error
-			 $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing chartProperties</div>");
-			 return;
-		 }
-		 if((!_.has(cd, 'dataSetProperties') && !_.has(myself,'dataSetProperties')) ){
-			 $("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing dataSetProperties</div>");
+		 if (!_.has(myself, 'htmlObject')){
+			 // display missing options error
+			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing HTML Object ID (htmlObject)</div>");
 			 return;
 		 }
 
+		 //apply default value to width if not defined
+		 if(!_.has(cd, 'width')){
+			 cd.width = 500;
+		 }
+		 //apply default value to height if not defined
+		 if(!_.has(cd, 'height')){
+			 cd.height = 300;
+		 }
 
 		 //Fix CDE properties
 		 cd = chartDefinitionCDEproperties(myself,cd,'chartProperties','chartScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'dataSetProperties','dataSetScriptProperties',[['datasetColor','color']]);
 		 cd = chartDefinitionCDEproperties(myself,cd,'connectorsProperties','connectorsScriptProperties',[['connectorColor','color']]);
 		 cd = chartDefinitionCDEproperties(myself,cd,'trendlinesProperties','trendlinesScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'vtrendlinesProperties','vtrendlinesScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'labelsProperties','labelsScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'categoriesProperties','categoriesScriptProperties',[['categoriesPath','path'],['categoriesDataAccessId','dataAccessId']]);
+		 cd = chartDefinitionCDEproperties(myself,cd,'linesetProperties','linesetScriptProperties',[['linesetPath','path'],['linesetDataAccessId','dataAccessId']]);
+		 cd = chartDefinitionCDEproperties(myself,cd,'colorRangeProperties','colorRangeScriptProperties',[['colorRangePath','path'],['colorRangeDataAccessId','dataAccessId']]);
+		 cd = chartDefinitionCDEproperties(myself,cd,'trendPointProperties','trendPointScriptProperties',[['trendPointPath','path'],['trendPointDataAccessId','dataAccessId']]);
+
+		 //CDE Gant Properties
+		 cd = chartDefinitionCDEproperties(myself,cd,'tasksProperties','tasksScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'processesProperties','processesScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'datatableProperties','datatableScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'milestonesProperties','milestonesScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'legendProperties','legendScriptProperties');
 
 		 // Creating chart basic options
 		 var fusionOptions = {
@@ -370,6 +386,11 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 			 "height": cd.height,
 			 "dataFormat": "json"
 		 };
+
+		 // verify if chartProperties exists
+		 if(!_.has(cd,'chartProperties')){
+			 cd.chartProperties = {};
+		 }
 
 		 //allow chartProperties functions
 		 $.map(cd.chartProperties,function(v,k){return typeof cd.chartProperties[k]=="function"?cd.chartProperties[k]=cd.chartProperties[k]():cd.chartProperties[k]=v});
@@ -400,9 +421,17 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 				var resultset = JSON.parse(queryResult);
 				var queryConnectors = buildData(resultset);
 
+				//verify if dataSetProperties exists
+				if(!_.has(cd,'dataSetProperties')){
+					cd.dataSetProperties = {};
+				}
 				//apply node callback function
 				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 
+				//verify if dataSetProperties exists
+				if(!_.has(cd,'connectorsProperties')){
+					cd.connectorsProperties = {};
+				}
 				//apply connectors callback function
 				if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
 
@@ -434,6 +463,374 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 					"connectors":[cd.connectorsProperties]
 				};
 		 		break;
+			 // Single Series Charts
+			 case "column2d":
+			 case "column3d":
+			 case "line":
+			 case "area2d":
+			 case "bar2d":
+			 case "bar3d":
+			 case "pie2d":
+			 case "pie3d":
+			 case "doughnut2d":
+			 case "doughnut3d":
+			 case "pareto2d":
+			 case "pareto3d":
+			 //Others (Widgets)
+			 case "funnel":
+			 case "pyramid":
+			 //Spline Charts
+			 case "spline":
+			 case "splinearea":
+			 //Miscellaneous Power Charts
+			 case "waterfall2d":
+			 case "kagi":
+			  // build data
+				var queryDataset = buildData(values);
+				// apply callback
+				if(_.has(cd,'dataSetProperties')){
+					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+				}
+				//verify properties
+				var hasProperties = hasRequiredProperties(queryDataset,['value']);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Data is "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					return;
+				};
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"data": queryDataset
+				};
+				break;
+			 // Multi Series Charts
+			 case "mscolumn2d":
+			 case "mscolumn3d":
+			 case "msline":
+			 case "msbar2d":
+			 case "msbar3d":
+			 case "msarea":
+			 case "marimekko":
+			 case "zoomline":
+			 case "zoomlinedy":
+			 // Stacked Charts
+			 case "stackedcolumn2d":
+			 case "stackedcolumn3d":
+			 case "stackedbar2d":
+			 case "stackedbar3d":
+			 case "stackedarea2d":
+			 //XY Plot Charts
+			 case "scatter":
+			 case "zoomscatter":
+			 case "bubble":
+			 //Scroll Charts
+			 case "scrollstackedcolumn2d":
+			 //RealTimeCharts
+			 case "realtimearea":
+			 case "realtimecolumn":
+			 case "realtimeline":
+			 case "realtimestackedarea":
+			 case "realtimestackedcolumn":
+			 case "realtimelinedy":
+			 //Logarithmic Charts
+			 case "logmscolumn2d":
+			 case "logmsline":
+			 //Spline Charts
+			 case "msspline":
+			 case "mssplinearea":
+			 //Error Charts
+			 case "errorbar2d":
+			 case "errorline":
+			 case "errorscatter":
+			 //Inverse Y Axis Chart
+			 case "inversemsarea":
+			 case "inversemscolumn2d":
+			 case "inversemsline":
+			 //Miscellaneous Power Charts
+			 case "selectscatter":
+				// build dataset
+				var queryDataset = buildGroupedData(values,'seriesname','data');
+				//apply callback
+				if(_.has(cd,'dataSetProperties')){
+						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+				}
+
+				// Verify required properties
+				var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Data is "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					return;
+				};
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dataset": queryDataset
+				};
+				break;
+				//Special Cases Charts
+			 case "msstackedcolumn2d":
+			 case "msstackedcolumn2dlinedy":
+			 	// chart requires a array of objects (datasets)
+			 	var dataset = [];
+			 	// build the first dataset
+			 	var queryDataset = buildGroupedData(values,'seriesname','data');
+				//apply callback
+				if(_.has(cd,'dataSetProperties')){
+						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+				}
+				// Verify required properties
+				var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Data is "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					return;
+				};
+				dataset.push({dataset:queryDataset});
+
+				//build the other datasets
+				for (var i = 0; i < cd.cdaArray.length; i++) {
+					var responseText = doCDAQuery(cd.cdaArray[i].path,cd.cdaArray[i].dataAccessId,myself.parameters);
+ 				 	var resultset = JSON.parse(responseText);
+					queryDataset = buildGroupedData(resultset,'seriesname','data');
+					//apply callback
+					if(_.has(cd,'dataSetProperties')){
+							if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+							if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+					}
+					// Verify required properties
+					var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Data is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					dataset.push({dataset:queryDataset});
+				}
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dataset": dataset
+				};
+				break;
+			//Combination Charts
+			case "mscombi2d":
+			case "mscombi3d":
+			case "mscolumnline3d":
+			case "stackedcolumn2dline":
+			case "stackedcolumn3dline":
+			case "mscombidy2d":
+			case "mscolumn3dlinedy":
+			case "stackedcolumn3dlinedy":
+			//Scroll Charts
+			case "scrollcombi2d":
+			case "scrollcombidy2d":
+			//Drag-able Charts
+			case "dragcolumn2d":
+			case "dragline":
+			case "dragarea":
+			//Miscellaneous Power Charts
+			case "radar":
+			case "msstepline":
+				// build data
+				var queryDataset = buildGroupedColumnData(values,'seriesname','data','value');
+				//apply callback
+				if(_.has(cd,'dataSetProperties')){
+						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+				}
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dataset": queryDataset
+				};
+				break;
+			//Scroll Charts
+			case "scrollcolumn2d":
+			case "scrollline2d":
+			case "scrollarea2d":
+			//Spark charts
+			case "sparkline":
+			case "sparkcolumn":
+			case "sparkwinloss":
+				// build data
+				var queryDataset = buildData(values);
+				//verify datasetproperties
+				if(!_.has(cd,'dataSetProperties')){
+					cd.dataSetProperties = {};
+				}
+				//apply callback
+				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+
+				cd.dataSetProperties.data = queryDataset;
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dataset": [cd.dataSetProperties],
+				};
+				break;
+			//Gauge
+			case "angulargauge":
+				// build data
+				var queryDataset = buildData(values);
+				//apply callback
+				if(_.has(cd, 'dataSetProperties')){
+					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+				};
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"dials":{"dial":queryDataset}
+				};
+				break;
+			//Gauge
+			case "bulb":
+			case "cylinder":
+			case "hled":
+			case "thermometer":
+			case "vled":
+			//Bullet Graphs
+			case "hbullet":
+			case "vbullet":
+				// build data
+				var queryDataset = buildData(values);
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+				};
+				//add to chart data properties like value and target
+				for(var key in queryDataset[0]){
+					data[key] = queryDataset[0][key];
+				}
+				break;
+			//Gauge
+			case "hlineargauge":
+				// build data
+				var queryDataset = buildData(values);
+				//apply callback
+				if(_.has(cd, 'dataSetProperties')){
+					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+				};
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"pointers":{"pointer":queryDataset}
+				};
+				break;
+			case "gantt":
+
+				// verify Properties
+				if(!_.has(cd,'processesProperties')){cd.processesProperties = {}};
+				if(!_.has(cd,'datatableProperties')){cd.datatableProperties = {}};
+				if(!_.has(cd,'tasksProperties')){cd.tasksProperties = {}};
+				if(!_.has(cd,'milestonesProperties')){cd.milestonesProperties = {}};
+				if(!_.has(cd,'connectorsProperties')){cd.connectorsProperties = {}};
+
+				//Tasks
+				//get Chart Data
+				var tasksData = buildData(values);
+				// apply Callback
+				if(_.has(cd.tasksProperties,'taskCallback')){tasksData = applyCallBack(tasksData,cd.tasksProperties.taskCallback);};
+				//Verify Required Properties
+				hasProperties = hasRequiredProperties(tasksData,['processid','id','start','end']);
+				if(!hasProperties[0]){
+					hasProperties[1] = "Tasks are "+ hasProperties[1];
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+					return;
+				};
+				//apply Properties
+				cd.tasksProperties.task = tasksData;
+
+				//Processes
+				if(_.has(cd,'processesPath') && _.has(cd,'processesDataAccessId')){
+					// get Chart data
+					var responseText = doCDAQuery(cd.processesPath,cd.processesDataAccessId,myself.parameters);
+					responseText = JSON.parse(responseText);
+					var processesData = buildData(responseText);
+					//apply Callback
+					if(_.has(cd.processesProperties,'processCallback')){processesData = applyCallBack(processesData,cd.processesProperties.processCallback);};
+					//verify requiredProperties
+					var hasProperties = hasRequiredProperties(processesData,['id','label']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Processes are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//apply Properties
+					cd.processesProperties.process = processesData;
+				}
+
+				//Datatable
+				if(_.has(cd,'datatablePath') && _.has(cd,'datatableDataAccessId')){
+					// get Chart data
+					responseText = doCDAQuery(cd.datatablePath,cd.datatableDataAccessId,myself.parameters);
+					responseText = JSON.parse(responseText);
+					var datatableData = buildGroupedColumnData(responseText,'headertext','text','label');
+					//apply Callback
+					if(_.has(cd.datatableProperties,'textCallback')){datatableData = applyGroupedCallBack(datatableData,cd.datatableProperties.textCallback,'headertext','text');};
+					if(_.has(cd.datatableProperties,'datacolumnCallback')){datatableData = applyCallBack(datatableData,cd.datatableProperties.datacolumnCallback);};
+					//verify requiredProperties
+					hasProperties = hasRequiredProperties(datatableData,['label'],'text');
+					if(!hasProperties[0]){
+						hasProperties[1] = "DataTable is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//apply Properties
+					cd.datatableProperties.datacolumn = datatableData;
+				}
+
+				//Milestones
+				if(_.has(cd,'milestonesPath') && _.has(cd,'milestonesDataAccessId')){
+					// get Chart data
+					responseText = doCDAQuery(cd.milestonesPath,cd.milestonesDataAccessId,myself.parameters);
+					responseText = JSON.parse(responseText);
+					var milestonesData = buildData(responseText);
+					//apply Callback
+					if(_.has(cd.milestonesProperties,'milestoneCallback')){milestonesData = applyCallBack(milestonesData,cd.milestonesProperties.milestoneCallback);};
+					//verify requiredProperties
+					hasProperties = hasRequiredProperties(milestonesData,['taskid','date']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Milestones are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//apply Properties
+					cd.milestonesProperties.milestone = milestonesData;
+				}
+
+				//Connectors
+				if(_.has(cd,'connectorsPath') && _.has(cd,'connectorsDataAccessId')){
+					// get Chart data
+					responseText = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
+					responseText = JSON.parse(responseText);
+					var connectorsData = buildData(responseText);
+					//apply Callback
+					if(_.has(cd.connectorsProperties,'connectorCallback')){connectorsData = applyCallBack(connectorsData,cd.connectorsProperties.connectorCallback);};
+					//verify requiredProperties
+					hasProperties = hasRequiredProperties(connectorsData,['fromtaskid','totaskid']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Connectors are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//apply Properties
+					cd.connectorsProperties.connector = connectorsData;
+				}
+
+				// create the chart data
+				var data = {
+					"chart": cd.chartProperties,
+					"processes":cd.processesProperties,
+					"datatable":cd.datatableProperties,
+					"tasks":cd.tasksProperties,
+					"milestones":cd.milestonesProperties,
+					"connectors":[cd.connectorsProperties],
+				};
+				break;
 		 	default:
 				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Chart Not Supported!</strong> This chart is not supported by the component</div>");
 				return;
@@ -451,25 +848,35 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 				 if(_.has(cd.trendlinesProperties, 'lineCallback')){
 					 resultset = applyCallBack(resultset, cd.trendlinesProperties.lineCallback);
 				 };
-				 // draw vertical or horizontal trendlines
-				 if(_.has(cd.trendlinesProperties,"vertical")){
-					 if(cd.trendlinesProperties.vertical == "1"){
-						 data.vtrendlines = [{line: resultset}];
-					 }else{
-						 data.trendlines = [{line: resultset}];
-					 }
-				 }else{
-					 data.trendlines = [{line: resultset}];
-				 }
+				 // draw horizontal trendlines
+				 data.trendlines = [{line: resultset}];
 			 }else{
-				 if(_.has(cd.trendlinesProperties, 'vtrendlines')){
-					 data.vtrendlines = cd.trendlinesProperties.vtrendlines;
-				 };
 				 if(_.has(cd.trendlinesProperties, 'trendlines')){
 					 data.trendlines = cd.trendlinesProperties.trendlines;
 				 };
 			 };
 		 };
+
+		 // add trend lines to chart
+		 if(_.has(cd, 'vtrendlinesProperties')){
+			 if(_.has(cd.vtrendlinesProperties, 'dataAccessId') && _.has(cd.vtrendlinesProperties, 'path')){
+				 var responseText = doCDAQuery(cd.vtrendlinesProperties.path,cd.vtrendlinesProperties.dataAccessId,myself.parameters);
+				 var resultset = JSON.parse(responseText);
+
+				 resultset = buildData(resultset);
+				 //apply trendlines callback function
+				 if(_.has(cd.vtrendlinesProperties, 'vlineCallback')){
+					 resultset = applyCallBack(resultset, cd.vtrendlinesProperties.vlineCallback);
+				 };
+				 // draw vertical trendlines
+				 data.vtrendlines = [{line: resultset}];
+			 }else{
+				 if(_.has(cd.vtrendlinesProperties, 'vtrendlines')){
+					 data.vtrendlines = cd.vtrendlinesProperties.vtrendlines;
+				 };
+			 };
+		 };
+
 
 		 // add labels to chart
 		 if(_.has(cd, 'labelsProperties')){
@@ -491,6 +898,94 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 			 };
 		 };
 
+		 // add categories to chart
+		 if(_.has(cd, 'categoriesProperties')){
+			 if(_.has(cd.categoriesProperties, 'dataAccessId') && _.has(cd.categoriesProperties, 'path')){
+				 var responseText = doCDAQuery(cd.categoriesProperties.path,cd.categoriesProperties.dataAccessId,myself.parameters);
+
+				 var resultset = JSON.parse(responseText);
+
+				 //Evaluate chart type (Gantt or other)
+				 if(fusionOptions.type.toLowerCase()==="gantt"){
+					 resultset = buildGroupedData(resultset,'categoryName','category');
+					 if(_.has(cd.categoriesProperties, 'categoriesCallback')){resultset = applyCallBack(resultset, cd.categoriesProperties.categoriesCallback);};
+					 if(_.has(cd.categoriesProperties, 'categoryCallback')){resultset = applyGroupedCallBack(resultset, cd.categoriesProperties.categoryCallback,'categoryName','category');};
+					 data.categories = resultset;
+				 }else{
+					  resultset = buildData(resultset);
+						//apply trendlines callback function
+	 				 	if(_.has(cd.categoriesProperties, 'categoryCallback')){resultset = applyCallBack(resultset, cd.categoriesProperties.categoryCallback);};
+	 				 	data.categories = [cd.categoriesProperties];
+	 				 	data.categories[0].category = resultset;
+				 }
+			 }else{
+				 if(_.has(cd.categoriesProperties, 'categories')){
+					 data.categories = cd.categoriesProperties.categories;
+				 };
+			 };
+		 };
+
+		 // add trendPoints to chart
+		 if(_.has(cd, 'trendPointProperties')){
+			 if(_.has(cd.trendPointProperties, 'dataAccessId') && _.has(cd.trendPointProperties, 'path')){
+				 var responseText = doCDAQuery(cd.trendPointProperties.path,cd.trendPointProperties.dataAccessId,myself.parameters);
+
+				 var resultset = JSON.parse(responseText);
+				 resultset = buildData(resultset);
+				 //apply trendlines callback function
+				 if(_.has(cd.trendPointProperties, 'pointCallback')){
+					 resultset = applyCallBack(resultset, cd.trendPointProperties.point);
+				 };
+				 data.trendpoints = [cd.trendPointProperties];
+				 data.trendpoints[0].point = resultset;
+			 }else{
+				 if(_.has(cd.trendPointProperties, 'trendPoint')){
+					 data.trendpoints = cd.trendPointProperties.trendPoint;
+				 };
+			 };
+		 };
+
+		 // add lineset to chart
+		 if(_.has(cd, 'linesetProperties')){
+			 if(_.has(cd.linesetProperties, 'dataAccessId') && _.has(cd.linesetProperties, 'path')){
+				 var responseText = doCDAQuery(cd.linesetProperties.path,cd.linesetProperties.dataAccessId,myself.parameters);
+				 var resultset = JSON.parse(responseText);
+				 resultset = buildGroupedData(resultset,'seriesname','data');
+				 if(_.has(cd.linesetProperties, 'linesetCallback')){resultset = applyCallBack(resultset,cd.linesetProperties.linesetCallback);};
+				 if(_.has(cd.linesetProperties, 'linesetDataCallback')){resultset = applyGroupedCallBack(resultset,cd.linesetProperties.linesetDataCallback,'seriesname','data');};
+
+				 data.lineset = resultset;
+			 }
+		 };
+
+		 // add lineset to chart
+		 if(_.has(cd, 'colorRangeProperties')){
+			 if(_.has(cd.colorRangeProperties, 'dataAccessId') && _.has(cd.colorRangeProperties, 'path')){
+				 var responseText = doCDAQuery(cd.colorRangeProperties.path,cd.colorRangeProperties.dataAccessId,myself.parameters);
+				 var resultset = JSON.parse(responseText);
+				 resultset = buildData(resultset);
+				 if(_.has(cd.colorRangeProperties, 'colorCallback')){resultset = applyCallBack(resultset,cd.colorRangeProperties.colorCallback);};
+				 data.colorrange = {color: resultset};
+			 }else{
+				 if(_.has(cd.colorRangeProperties, 'colorRange')){
+					 data.colorrange = {color: cd.colorRangeProperties.colorRange};
+				 };
+			 }
+		 };
+
+		 // add lineset to chart
+		 if(_.has(cd, 'legendProperties')){
+			 if(_.has(cd.legendProperties, 'dataAccessId') && _.has(cd.legendProperties, 'path')){
+				 var responseText = doCDAQuery(cd.legendProperties.path,cd.legendProperties.dataAccessId,myself.parameters);
+				 var resultset = JSON.parse(responseText);
+				 resultset = buildData(resultset);
+				 cd.legendProperties.item = resultset;
+				 data.legend = cd.legendProperties;
+			 }else{
+					data.legend = cd.legendProperties;
+			 }
+		 };
+
 		 // create Fusion chart and render
 		 if(myself.chartObject == undefined) {
 			 myself.chartObject = new FusionCharts(fusionOptions);
@@ -499,8 +994,17 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		 } else {
 			 myself.chartObject.setJSONData(data);
 		 }
-	 }
 
+		 //Apply refresh to realtime chart
+		 if(_.has(cd,'cdaRefreshInterval')){
+			 setInterval(function(){
+				 	var responseText = doCDAQuery(cd.path,cd.dataAccessId,myself.parameters);
+ 					var resultset = JSON.parse(responseText);
+					var dataset = buildRealTimeData(resultset);
+					myself.chartObject.feedData(dataset);
+			 }, cd.cdaRefreshInterval*1000);
+		 };
+	 }
  });
 
 /*
@@ -530,21 +1034,6 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 	 return chartDefinition;
  };
 
-/*
-* Remove duplicated values
-* Parameter: Data Set
-* Output: New Data Set
-*/
- function removeDuplicatedNodes(dataset){
-	 var nodes = [];
-	 var uniqueVals = [];
-	 $.each(dataset, function(i, el){
-		 if($.inArray(el["id"], uniqueVals) === -1) {uniqueVals.push(el["id"]); nodes.push(el);}
-	 });
-
-	 return nodes;
- };
-
  /*
  * Apply Functions to Data Set
  * Parameter: data, function
@@ -556,6 +1045,38 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		 return i
 	 });
 	 return dataset;
+ };
+
+ /*
+ * Apply Functions to Data Set with series
+ * Parameter: data, function
+ * Output: New Data Set
+ */
+ // function applySeriesCallBack(dataset, _function){
+ // dataset = dataset.map(function(i){
+ // 	i.data = i.data.map(function(j){
+ // 		_function(i.seriesname,j);
+ // 		return j;
+ // 	});
+ // 	return i
+ // });
+ // return dataset;
+ // };
+
+ /*
+ * Apply Functions to Data Set grouped by property
+ * Parameter: data, function, propertyname
+ * Output: New Data Set
+ */
+ function applyGroupedCallBack(dataset, _function, propertyName, subGroupName){
+	dataset = dataset.map(function(i){
+		i[subGroupName] = i[subGroupName].map(function(j){
+			_function(i[propertyName],j);
+			return j;
+		});
+		return i
+	});
+	return dataset;
  };
 
  /*
@@ -574,7 +1095,7 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
  };
 
  /*
- * Build de data for the chart
+ * Build the data for the chart
  */
  function buildData(queryData){
  	var cdacolumns = [];
@@ -590,16 +1111,161 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
  	});
  };
 
+ /*
+ * Build the data for the chart with series
+ */
+ // function buildSeriesData(queryData){
+ // 	var qData = [];
+ // 	var cdacolumns = [];
+ // 	var seriescolumn = 0;
+ // 	for (var i = 0; i < queryData.metadata.length; i++) {
+ // 		if(queryData.metadata[i].colName==="seriesname"){seriescolumn = i;}
+ // 		cdacolumns.push(queryData.metadata[i].colName);
+ // 	}
+ //
+ // 	for (var i = 0; i < queryData.resultset.length; i++) {
+ // 		var data = {};
+ // 		var row = queryData.resultset[i];
+ // 		for (var j = 0; j < row.length; j++) {
+ // 			if(j!=seriescolumn){data[cdacolumns[j]]=row[j]}
+ // 		}
+ // 		var serie_row = lookup_seriesname(row[seriescolumn],qData, 'seriesname');
+ // 		if(serie_row===qData.length){
+ // 			qData.push({'seriesname':row[seriescolumn],'data':[data]});
+ // 		}else{
+ // 			qData[serie_row].data.push(data);
+ // 		}
+ // 	}
+ // 	return qData;
+ // };
+
+ /*
+ * Build the data grouped by a property with the other values in the subgroup
+ */
+ function buildGroupedData(queryData, groupby, subgroup){
+ 	var qData = [];
+ 	var cdacolumns = [];
+ 	var seriescolumn = 0;
+ 	for (var i = 0; i < queryData.metadata.length; i++) {
+ 		if(queryData.metadata[i].colName===groupby){seriescolumn = i;}
+ 		cdacolumns.push(queryData.metadata[i].colName);
+ 	}
+
+ 	for (var i = 0; i < queryData.resultset.length; i++) {
+ 		var data = {};
+ 		var row = queryData.resultset[i];
+ 		for (var j = 0; j < row.length; j++) {
+ 			if(j!=seriescolumn){data[cdacolumns[j]]=row[j]}
+ 		}
+ 		var serie_row = lookup_seriesname(row[seriescolumn],qData, groupby);
+ 		if(serie_row===qData.length){
+			var hash = {};
+			hash[groupby] = row[seriescolumn];
+			hash[subgroup] = [data];
+ 			qData.push(hash);
+ 		}else{
+ 			qData[serie_row][subgroup].push(data);
+ 		}
+ 	}
+ 	return qData;
+ };
+
+ /*
+ * Build the data for the chart with series
+ */
+ // function buildSeriesColumnData(queryData){
+ // 	var qData = [];
+ // 	var cdacolumns = [];
+ // 	for (var i = 0; i < queryData.metadata.length; i++) {
+ // 	qData.push({seriesname: queryData.metadata[i].colName,data:[]});
+ // 	}
+ //
+ // 	for (var i = 0; i < queryData.resultset.length; i++) {
+ // 		var row = queryData.resultset[i];
+ // 	for (var j = 0; j < row.length; j++) {
+ // 		qData[j].data.push({value: row[j]});
+ // 	}
+ // 	}
+ // 	return qData;
+ // };
+
+ /*
+ * Build the data for the chart grouped by columns name
+ */
+ function buildGroupedColumnData(queryData,groupName,subGroupName,propertyName){
+ 	var qData = [];
+ 	var cdacolumns = [];
+ 	for (var i = 0; i < queryData.metadata.length; i++) {
+		hash = {};
+		hash[groupName] = queryData.metadata[i].colName;
+		hash[subGroupName] = [];
+		qData.push(hash);
+ 	}
+
+ 	for (var i = 0; i < queryData.resultset.length; i++) {
+ 		var row = queryData.resultset[i];
+		for (var j = 0; j < row.length; j++) {
+			hash = {};
+			hash[propertyName] = row[j];
+			qData[j][subGroupName].push(hash);
+		}
+ 	}
+ 	return qData;
+ };
+
+ /*
+ * Build the data to feed Realtime Charts
+ */
+ function buildRealTimeData(queryData){
+ 	var cols = [];
+ 	for (var i = 0; i < queryData.metadata.length; i++) {
+		cols.push([queryData.metadata[i].colName,""]);
+ 	}
+ 	for (var i = 0; i < queryData.resultset.length; i++) {
+ 		var row = queryData.resultset[i];
+		for (var j = 0; j < row.length; j++) {
+			if(cols[j][0].match("label")){
+				if(cols[j][1].length === 0){
+					cols[j][1] = cols[j][1].concat(row[j] + "|");
+				}
+			}else{
+				cols[j][1] = cols[j][1].concat(row[j] + "|");
+			}
+		}
+ 	}
+	var qData ="";
+	for (var i = 0; i < cols.length; i++) {
+		qData = qData + "&"+cols[i][0]+"="+cols[i][1].substring(0, cols[i][1].length - 1);;
+	}
+ 	return qData;
+ };
+
+
+ function lookup_seriesname( name , array, seriesname) {
+ 	for(var i = 0, len = array.length; i < len; i++) {
+ 			if( array[ i ][seriesname] === name )
+ 					return i;
+ 	};
+ 	return array.length;
+};
+
 /*
 * Verify the parameters
 */
-function hasRequiredProperties(queryDataset,properties){
+function hasRequiredProperties(queryDataset,properties,subProperty){
+	if(subProperty != undefined){
+		var arr = [];
+		for (var i = 0; i < queryDataset.length; i++) {
+			arr = arr.concat(queryDataset[i][subProperty]);
+		}
+		queryDataset = arr;
+	}
 	for (var i = 0; i < queryDataset.length; i++) {
 		for (var j = 0; j < properties.length; j++) {
 			if(!queryDataset[i].hasOwnProperty(properties[j])){
 				return [false,"missing property '"+ properties[j]+"'"]
-			}
-		}
-	}
+			};
+		};
+	};
 	return [true,""];
-}
+};

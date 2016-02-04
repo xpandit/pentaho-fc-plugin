@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>MSSpline Chart Data</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("15123")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("14233")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("25507")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("9110")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("15529")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("20803")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new String("19202")});
+          
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("13400")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("12800")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("22800")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("12400")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("15800")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("19800")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new String("21800")});
+
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>MSSpline Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Monday")});
+          model.addRow(new Object[]{new String("Tuesday")});
+          model.addRow(new Object[]{new String("Wednesday")});
+          model.addRow(new Object[]{new String("National holiday")});
+          model.addRow(new Object[]{new String("Thursday")});
+          model.addRow(new Object[]{new String("Friday")});
+          model.addRow(new Object[]{new String("Saturday")});
+          model.addRow(new Object[]{new String("Sunday")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>Sample Bubble</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[5];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;name&quot;;
+          columnNames[2] = &quot;x&quot;;
+          columnNames[3] = &quot;y&quot;;
+          columnNames[4] = &quot;z&quot;;
+
+
+          Class[] columnTypes = new Class[5];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = Integer.class;
+          columnTypes[3] = Integer.class;
+          columnTypes[4] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Nike"), new String("Nike"), new Integer(80), new Integer(15000), new Integer(24)});
+          model.addRow(new Object[]{new String("Adidas"), new String("Adidas"), new Integer(60), new Integer(18500), new Integer(26)});
+          model.addRow(new Object[]{new String("Puma"), new String("Puma"), new Integer(50), new Integer(19450), new Integer(19)});
+          model.addRow(new Object[]{new String("Fila"), new String("Fila"), new Integer(65), new Integer(10500), new Integer(8)});
+          model.addRow(new Object[]{new String("Lotto"), new String("Lotto"), new Integer(43), new Integer(8750), new Integer(5)});
+          model.addRow(new Object[]{new String("Reebok"), new String("Reebok"), new Integer(32), new Integer(22000), new Integer(10)});
+          model.addRow(new Object[]{new String("Woodland"), new String("Woodland"), new Integer(44), new Integer(13000), new Integer(9)});
+
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>Categories Sample Bubble</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;x&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("$0"), new String("0")});
+          model.addRow(new Object[]{new String("$20"), new String("20")});
+          model.addRow(new Object[]{new String("$40"), new String("40")});
+          model.addRow(new Object[]{new String("$60"), new String("60")});
+          model.addRow(new Object[]{new String("$80"), new String("80")});
+          model.addRow(new Object[]{new String("$100"), new String("100")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+        <DataAccess id="3" connection="1" type="scriptable" access="public">
+        <Name>Sample Scatter</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;x&quot;;
+          columnNames[2] = &quot;y&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(23), new Integer(1560)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(24), new Integer(1500)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(24), new Integer(1680)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(25), new Integer(1780)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(25), new Integer(1620)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(26), new Integer(1810)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(34), new Integer(3960)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(40), new Integer(4190)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(67), new Integer(6100)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(82), new Integer(7000)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(89), new Integer(7400)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(92), new Integer(7640)});
+          
+          model.addRow(new Object[]{new String("Beer"), new Integer(23), new Integer(3160)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(29), new Integer(3620)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(38), new Integer(4480)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(53), new Integer(4770)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(61), new Integer(5086)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(87), new Integer(5410)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(90), new Integer(5500)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="4" connection="1" type="scriptable" access="public">
+        <Name>Categories Sample Scatter</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;x&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("23ºF"), new String("23")});
+          model.addRow(new Object[]{new String("32ºF"), new String("32")});
+          model.addRow(new Object[]{new String("50ºF"), new String("50")});
+          model.addRow(new Object[]{new String("68ºF"), new String("68")});
+          model.addRow(new Object[]{new String("80ºF"), new String("80")});
+          model.addRow(new Object[]{new String("95ºF"), new String("95")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

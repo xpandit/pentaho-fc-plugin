@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+		
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Sample Spark Column</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[1];
+        columnNames[0] = &quot;value&quot;;
+
+        Class[] columnTypes = new Class[1];
+        columnTypes[0] = Integer.class;
+
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+            
+        model.addRow(new Object[]{new Integer(783000)});
+        model.addRow(new Object[]{new Integer(601000)});
+        model.addRow(new Object[]{new Integer(515000)});
+        model.addRow(new Object[]{new Integer(315900)});
+        model.addRow(new Object[]{new Integer(388000)});
+        model.addRow(new Object[]{new Integer(433000)});
+        model.addRow(new Object[]{new Integer(910000)});
+        model.addRow(new Object[]{new Integer(798000)});
+        model.addRow(new Object[]{new Integer(483300)});
+        model.addRow(new Object[]{new Integer(562000)});
+        model.addRow(new Object[]{new Integer(359400)});
+        model.addRow(new Object[]{new Integer(485000)});
+        return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>
