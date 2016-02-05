@@ -378,6 +378,9 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		 cd = chartDefinitionCDEproperties(myself,cd,'milestonesProperties','milestonesScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'legendProperties','legendScriptProperties');
 
+		 //allow chartDefinition functions
+         $.map(cd,function(v,k){return typeof cd[k]=="function"?cd[k]=cd[k]():cd[k]=v});
+
 		 // Creating chart basic options
 		 var fusionOptions = {
 			 "type": cd.chartType,
@@ -1048,22 +1051,6 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
  };
 
  /*
- * Apply Functions to Data Set with series
- * Parameter: data, function
- * Output: New Data Set
- */
- // function applySeriesCallBack(dataset, _function){
- // dataset = dataset.map(function(i){
- // 	i.data = i.data.map(function(j){
- // 		_function(i.seriesname,j);
- // 		return j;
- // 	});
- // 	return i
- // });
- // return dataset;
- // };
-
- /*
  * Apply Functions to Data Set grouped by property
  * Parameter: data, function, propertyname
  * Output: New Data Set
@@ -1112,34 +1099,6 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
  };
 
  /*
- * Build the data for the chart with series
- */
- // function buildSeriesData(queryData){
- // 	var qData = [];
- // 	var cdacolumns = [];
- // 	var seriescolumn = 0;
- // 	for (var i = 0; i < queryData.metadata.length; i++) {
- // 		if(queryData.metadata[i].colName==="seriesname"){seriescolumn = i;}
- // 		cdacolumns.push(queryData.metadata[i].colName);
- // 	}
- //
- // 	for (var i = 0; i < queryData.resultset.length; i++) {
- // 		var data = {};
- // 		var row = queryData.resultset[i];
- // 		for (var j = 0; j < row.length; j++) {
- // 			if(j!=seriescolumn){data[cdacolumns[j]]=row[j]}
- // 		}
- // 		var serie_row = lookup_seriesname(row[seriescolumn],qData, 'seriesname');
- // 		if(serie_row===qData.length){
- // 			qData.push({'seriesname':row[seriescolumn],'data':[data]});
- // 		}else{
- // 			qData[serie_row].data.push(data);
- // 		}
- // 	}
- // 	return qData;
- // };
-
- /*
  * Build the data grouped by a property with the other values in the subgroup
  */
  function buildGroupedData(queryData, groupby, subgroup){
@@ -1169,25 +1128,6 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
  	}
  	return qData;
  };
-
- /*
- * Build the data for the chart with series
- */
- // function buildSeriesColumnData(queryData){
- // 	var qData = [];
- // 	var cdacolumns = [];
- // 	for (var i = 0; i < queryData.metadata.length; i++) {
- // 	qData.push({seriesname: queryData.metadata[i].colName,data:[]});
- // 	}
- //
- // 	for (var i = 0; i < queryData.resultset.length; i++) {
- // 		var row = queryData.resultset[i];
- // 	for (var j = 0; j < row.length; j++) {
- // 		qData[j].data.push({value: row[j]});
- // 	}
- // 	}
- // 	return qData;
- // };
 
  /*
  * Build the data for the chart grouped by columns name
