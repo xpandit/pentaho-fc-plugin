@@ -5801,6 +5801,362 @@
 			</Implementation>
 		</Contents>
 	</DesignerComponent>
+	<!--Maps-->
+	<DesignerComponent>
+		<Header>
+			<Name>Maps</Name>
+			<IName>XDashFusionChartComponentAsyncMaps</IName>
+			<Description>FusionMaps XT</Description>
+			<Category>FUSIONCHARTS</Category>
+			<CatDescription>FusionCharts</CatDescription>
+			<Type>PalleteEntry</Type>
+			<Version>1.0</Version>
+		</Header>
+		<Metadata>
+			<meta name='cdwSupport'>true</meta>
+		</Metadata>
+		<Contents>
+			<Model>
+				<Definition name="chartDefinition">
+					<Property name="path">fusionCdaPath</Property>
+					<Property name="dataAccessId">dataAccessId</Property>
+					<Property>connectorsDataAccessId</Property>
+					<Property>shapesDataAccessId</Property>
+					<Property>entityDefDataAccessId</Property>
+					<Property name="markers">useMarkers</Property>
+					<Property type="string" name="chartType">fusionChartType</Property>
+					<Property name="width" type="number">width</Property>
+					<Property name="height" type="number">height</Property>
+					<Definition name="chartProperties">
+						<Property>caption</Property>
+						<Property>subcaption</Property>
+						<Property>theme</Property>
+						<Property name="chartScriptProperties">chartScriptProperties</Property>
+					</Definition>
+					<Definition name="dataSetProperties">
+						<Property>dataSetCallback</Property>
+					</Definition>
+					<Definition name="markersProperties">
+						<Property>itemsCallback</Property>
+						<Property>connectorsCallback</Property>
+						<Property>shapesCallback</Property>
+						<Property>markersScriptProperties</Property>
+					</Definition>
+					<Definition name="entityDefProperties">
+						<Property>entityDefCallback</Property>
+						<Property>entityDefScriptProperties</Property>
+					</Definition>
+					<Definition name="colorRangeProperties">
+						<Property name="colorRangePath">colorRangeCDAPath</Property>
+						<Property name="colorRangeDataAccessId">colorRangeDataAccessId</Property>
+						<Property>colorCallback</Property>
+						<Property>colorRangeScriptProperties</Property>
+					</Definition>
+				</Definition>
+				<Property name="parameters">xActionArrayParameter</Property>
+				<Property type="boolean">executeAtStart</Property>
+				<Property type="function">preChange</Property>
+				<Property type="function">postChange</Property>
+				<Property type="function">postFetch</Property>
+				<Property type="string">htmlObject</Property>
+				<Property type="function">preExecution</Property>
+				<Property type="function">postExecution</Property>
+				<Property type="number">tooltip</Property>
+				<Property type="number">listeners</Property>
+			</Model>
+			<Implementation>
+				<CustomProperties>
+					<!--Chart Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>caption</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Chart Caption</Description>
+							<Tooltip>Caption of the chart</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>subcaption</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Chart Sub-caption</Description>
+							<Tooltip>Sub-caption of the chart</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>theme</Name>
+							<OutputName>theme</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Chart Theme</Description>
+							<Tooltip>Theme Name</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>chartScriptProperties</Name>
+							<OutputName>chartScriptProperties</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Chart Script Properties</Description>
+							<Tooltip>Chart JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>101</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Data Set Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>dataSetCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Data Callback</Description>
+							<Tooltip>Apply properties to data. The function needs one parameter that will receive the data properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>103</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Color Range Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>colorRangeCDAPath</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>ColorRange CDA Path</Description>
+							<Tooltip>ColorRange CDA Path</Tooltip>
+							<InputType>CdaPath</InputType>
+							<OutputType>String</OutputType>
+							<Order>28</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+					<Header>
+						<Name>colorRangeDataAccessId</Name>
+						<Parent>BaseProperty</Parent>
+						<DefaultValue></DefaultValue>
+						<Description>ColorRange DataAccess ID</Description>
+						<Tooltip>ColorRange DataAccess ID</Tooltip>
+						<InputType>String</InputType>
+						<OutputType>String</OutputType>
+						<Order>28</Order>
+						<Version>1.0</Version>
+					</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>colorCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Color Callback</Description>
+							<Tooltip>Apply properties to color. The function needs one parameter that will receive the color properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>106</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>colorRangeScriptProperties</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Color Range Script Properties</Description>
+							<Tooltip>Color Range JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>106</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Markers Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>itemsCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Items Callback</Description>
+							<Tooltip>Apply properties to items. The function needs one parameter that will receive the items properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>connectorsCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Connectors Callback</Description>
+							<Tooltip>Apply properties to connectors. The function needs one parameter that will receive the connectors properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>shapesCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>Shapes Callback</Description>
+							<Tooltip>Apply properties to shapes. The function needs one parameter that will receive the shapes properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>markersScriptProperties</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>Markers Script Properties</Description>
+							<Tooltip>Markers JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>107</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Entity Def Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>entityDefCallback</Name>
+							<Parent>BaseProperty</Parent>
+							<Description>EntityDef Callback</Description>
+							<Tooltip>Apply properties to entityDef. The function needs one parameter that will receive the entityDef properties that got from CDA</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Function</OutputType>
+							<Advanced>true</Advanced>
+							<Order>108</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>entityDefScriptProperties</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>{}</DefaultValue>
+							<Description>EntityDef Script Properties</Description>
+							<Tooltip>EntityDef JavaScript Properties</Tooltip>
+							<InputType>JavaScript</InputType>
+							<OutputType>Array</OutputType>
+							<Advanced>true</Advanced>
+							<Order>108</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<!--Other Properties-->
+					<DesignerProperty>
+						<Header>
+							<Name>fusionCdaPath</Name>
+							<OutputName>path</OutputName>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue/>
+							<Description>Data CDA Path</Description>
+							<Tooltip>CDA Path</Tooltip>
+							<InputType>CdaPath</InputType>
+							<OutputType>String</OutputType>
+							<Order>27</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>fusionChartType</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>maps/world</DefaultValue>
+							<Description>Fusion Charts Type</Description>
+							<Tooltip>Fusion Charts Type </Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>87</Order>
+							<Advanced>false</Advanced>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>useMarkers</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>"false"</DefaultValue>
+							<Description>Markers</Description>
+							<Tooltip>Use the CDA Data as Markers or Data</Tooltip>
+							<InputType>Boolean</InputType>
+							<OutputType>Boolean</OutputType>
+							<Order>6</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+					<Header>
+						<Name>connectorsDataAccessId</Name>
+						<Parent>BaseProperty</Parent>
+						<DefaultValue></DefaultValue>
+						<Description>Connectors DataAccess ID</Description>
+						<Tooltip>Connectors DataAccess ID</Tooltip>
+						<InputType>String</InputType>
+						<OutputType>String</OutputType>
+						<Order>5</Order>
+						<Version>1.0</Version>
+					</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+					<Header>
+						<Name>shapesDataAccessId</Name>
+						<Parent>BaseProperty</Parent>
+						<DefaultValue></DefaultValue>
+						<Description>Shapes DataAccess ID</Description>
+						<Tooltip>Shapes DataAccess ID</Tooltip>
+						<InputType>String</InputType>
+						<OutputType>String</OutputType>
+						<Order>5</Order>
+						<Version>1.0</Version>
+					</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+					<Header>
+						<Name>entityDefDataAccessId</Name>
+						<Parent>BaseProperty</Parent>
+						<DefaultValue></DefaultValue>
+						<Description>EntityDef DataAccess ID</Description>
+						<Tooltip>EntityDef DataAccess ID</Tooltip>
+						<InputType>String</InputType>
+						<OutputType>String</OutputType>
+						<Order>5</Order>
+						<Version>1.0</Version>
+					</Header>
+					</DesignerProperty>
+				</CustomProperties>
+			</Implementation>
+		</Contents>
+	</DesignerComponent>
 	<!--END ASYNC COMPONENT-->
 	<DesignerComponent>
 		<Header>

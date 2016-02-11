@@ -85,13 +85,18 @@
             <div id="Waterfall" style="float:left;margin-right:25px;"></div>
             <div id="Kagi"></div>
         </div>
-        <div id="lastButOneRow">
+        <div id="thirteenthRow">
             <h5 class="light">Drag Node</h5>
             <div id="DragNode" style="margin-left:25px;"></div>
         </div>
-        <div id="lastRow">
+        <div id="fourteenthRow">
             <h5 class="light">Gantt Chart</h5>
             <div id="Gantt" style="margin-left:25px;"></div>
+        </div>
+        <div id="fifteenthRow">
+            <h5 class="light">Maps</h5>
+            <div id="Map" style="margin-left:25px;"></div>
+            <div id="MapWithMarkers"></div>
         </div>
 
 </div>
@@ -337,6 +342,21 @@
         type            : "XDashFusionChartComponentAsync",
     }
 
+    var Map = {
+        name            : "Map",
+        htmlObject      : "Map",
+        chartDefinition : MetaLayerCharts.Map,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponentAsync",
+    }
+    var MapWithMarkers = {
+        name            : "MapWithMarkers",
+        htmlObject      : "MapWithMarkers",
+        chartDefinition : MetaLayerCharts.MapWithMarkers,
+        executeAtStart  : true,
+        type            : "XDashFusionChartComponentAsync",
+    }
+
         var components = [
             PieChart3D     , Marimekko,
             StackedColumn2D, MSStackedColumn2D,
@@ -350,7 +370,8 @@
             DragAble, Radar,
             StepLine, SelectScatter,
             Waterfall, Kagi,
-            DragNode, Gantt
+            DragNode, Gantt,
+            Map, MapWithMarkers
         ];
 
          function switchToFusionManager() {

@@ -371,15 +371,18 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		 cd = chartDefinitionCDEproperties(myself,cd,'colorRangeProperties','colorRangeScriptProperties',[['colorRangePath','path'],['colorRangeDataAccessId','dataAccessId']]);
 		 cd = chartDefinitionCDEproperties(myself,cd,'trendPointProperties','trendPointScriptProperties',[['trendPointPath','path'],['trendPointDataAccessId','dataAccessId']]);
 
-		 //CDE Gant Properties
+		 //CDE Gantt Properties
 		 cd = chartDefinitionCDEproperties(myself,cd,'tasksProperties','tasksScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'processesProperties','processesScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'datatableProperties','datatableScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'milestonesProperties','milestonesScriptProperties');
 		 cd = chartDefinitionCDEproperties(myself,cd,'legendProperties','legendScriptProperties');
+		 //CDE Maps Properties
+		 cd = chartDefinitionCDEproperties(myself,cd,'markersProperties','markersScriptProperties');
+		 cd = chartDefinitionCDEproperties(myself,cd,'entityDefProperties','entityDefScriptProperties');
 
 		 //allow chartDefinition functions
-         $.map(cd,function(v,k){return typeof cd[k]=="function"?cd[k]=cd[k]():cd[k]=v});
+		 $.map(cd,function(v,k){return typeof cd[k]=="function"?cd[k]=cd[k]():cd[k]=v});
 
 		 // Creating chart basic options
 		 var fusionOptions = {
@@ -398,446 +401,572 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 		 //allow chartProperties functions
 		 $.map(cd.chartProperties,function(v,k){return typeof cd.chartProperties[k]=="function"?cd.chartProperties[k]=cd.chartProperties[k]():cd.chartProperties[k]=v});
 
-		 // implementation of charts
-		 switch (fusionOptions.type.toLowerCase()) {
-			 case "dragnode":
-			 	//error missing connectorsDataAccessId
-				if (!_.has(cd,'connectorsDataAccessId')){
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Property!</strong> Connectors Data Access ID</div>");
-					return;
-				}
-				//error missing connectors properties
-				if(!_.has(cd, 'connectorsProperties')){
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing connectorsProperties</div>");
-					return;
-				}
+		 //choose between map or chart
+		 if(fusionOptions.type.toLowerCase().match(/maps\/.*/g)){
+			 // verify existence of Markers Property
+			 if (!_.has(cd, 'markers')){
+				 // display missing options error
+				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\">Missing Markers Properties (markers)</div>");
+				 return;
+			 }
 
-				// build the parameters for the dataSet
-				var queryDataset = buildData(values);
+			 // build data
+			 var queryDataset = buildData(values);
 
-				//build the parameters for the connectors
-				if(_.has(cd,'connectorsPath')){
-					var queryResult = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
-				}else{
-					var queryResult = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
-				}
-				var resultset = JSON.parse(queryResult);
-				var queryConnectors = buildData(resultset);
+			 // create map data object
+			 var data = {
+				 "chart": cd.chartProperties,
+			 };
 
-				//verify if dataSetProperties exists
-				if(!_.has(cd,'dataSetProperties')){
-					cd.dataSetProperties = {};
-				}
-				//apply node callback function
-				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+			 if(cd.markers){
+				 //create markers object
+				 data.markers = {};
+				 // markersProperties default value
+				 if(!_.has(cd,"markersProperties")){
+					 cd.markersProperties = {};
+				 }
+				 //apply items CallBack
+				 if(_.has(cd.markersProperties, 'itemsCallback')){queryDataset = applyCallBack(queryDataset,cd.markersProperties.itemsCallback);};
+				 // add items to markers
 
-				//verify if dataSetProperties exists
-				if(!_.has(cd,'connectorsProperties')){
-					cd.connectorsProperties = {};
-				}
-				//apply connectors callback function
-				if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
+				 data.markers.items = queryDataset;
 
-				//verify if dataset has required properties
-				var hasProperties = hasRequiredProperties(queryDataset,['x','y','id']);
+				 // check if needs connectors
+				 if(_.has(cd,"connectorsDataAccessId")){
+					 // query for connectors
+					 queryDataset = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
+					 queryDataset = JSON.parse(queryDataset);
+					 queryDataset = buildData(queryDataset);
+					 //apply connectors callback
+					 if(_.has(cd.markersProperties, 'connectorsCallback')){queryDataset = applyCallBack(queryDataset,cd.markersProperties.connectorsCallback);};
+					 // add items to markers
+					 data.markers.connectors = queryDataset;
+				 }else{
+					 //apply connectors
+					 if(_.has(cd.markersProperties,"connectors")){
+						 data.markers.connectors = cd.markersProperties.connectors;
+					 }
+				 }
+				 // check if needs shapes
+				 if(_.has(cd,"shapesDataAccessId")){
+					 // query for connectors
+					 queryDataset = doCDAQuery(cd.path,cd.shapesDataAccessId,myself.parameters);
+					 queryDataset = JSON.parse(queryDataset);
+					 queryDataset = buildData(queryDataset);
+					 //apply connectors callback
+					 if(_.has(cd.markersProperties, 'shapesCallback')){queryDataset = applyCallBack(queryDataset,cd.markersProperties.shapesCallback);};
+					 // add items to markers
+					 data.markers.shapes = queryDataset;
+				 }else{
+					 //apply shapes
+					 if(_.has(cd.markersProperties,"shapes")){
+						 data.markers.shapes = cd.markersProperties.shapes;
+					 }
+				 }
+			 }else{
+				 // apply callback
+				 if(_.has(cd,'dataSetProperties')){
+					 if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+				 }
+				 //verify properties
+				 var hasProperties = hasRequiredProperties(queryDataset,['id','value']);
+				 if(!hasProperties[0]){
+					 hasProperties[1] = "Data is "+ hasProperties[1];
+					 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+					 return;
+				 };
+				 // create the chart data
+				 data.data = queryDataset;
+			 }
+			 // check if needs new entities
+			 if(_.has(cd,"entityDefDataAccessId")){
+				 if(!_.has(cd,'entityDefProperties')){
+					 cd.entityDefProperties = {};
+				 }
+				 // query for connectors
+				 queryDataset = doCDAQuery(cd.path,cd.entityDefDataAccessId,myself.parameters);
+				 queryDataset = JSON.parse(queryDataset);
+				 queryDataset = buildData(queryDataset);
+				 //apply connectors callback
+				 if(_.has(cd.entityDefProperties, 'entityDefCallback')){queryDataset = applyCallBack(queryDataset,cd.entityDefProperties.entityDefCallback);};
+				 // add items to markers
+				 data.markers.entityDef = queryDataset;
+			 }else{
+				 //apply shapes
+				 if(_.has(cd,'entityDefProperties')){
+					 if(_.has(cd.entityDefProperties,"entityDef")){
+						 data.entityDef = cd.entityDef;
+					 }
+				 }
+			 }
+		 }else {
 
-				if(!hasProperties[0]){
-					hasProperties[1] = "Nodes are "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
-					return;
-				}
+			 // switch chart type
+			 switch (fusionOptions.type.toLowerCase()) {
+				 case "dragnode":
+				 	//error missing connectorsDataAccessId
+					if (!_.has(cd,'connectorsDataAccessId')){
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Property!</strong> Connectors Data Access ID</div>");
+						return;
+					}
+					//error missing connectors properties
+					if(!_.has(cd, 'connectorsProperties')){
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>Missing connectorsProperties</div>");
+						return;
+					}
 
-			 	//verify if connectors have required parameters
-				hasProperties = hasRequiredProperties(queryConnectors,['from','to']);
-				if(!hasProperties[0]){
-					hasProperties[1] = "Connectors are "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
-					return;
-				}
+					// build the parameters for the dataSet
+					var queryDataset = buildData(values);
 
-				// add nodes data to dataset
-				cd.dataSetProperties.data = queryDataset;
-				// add connectors data to connectors properties
-				cd.connectorsProperties.connector = queryConnectors;
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dataset": [cd.dataSetProperties],
-					"connectors":[cd.connectorsProperties]
-				};
-		 		break;
-			 // Single Series Charts
-			 case "column2d":
-			 case "column3d":
-			 case "line":
-			 case "area2d":
-			 case "bar2d":
-			 case "bar3d":
-			 case "pie2d":
-			 case "pie3d":
-			 case "doughnut2d":
-			 case "doughnut3d":
-			 case "pareto2d":
-			 case "pareto3d":
-			 //Others (Widgets)
-			 case "funnel":
-			 case "pyramid":
-			 //Spline Charts
-			 case "spline":
-			 case "splinearea":
-			 //Miscellaneous Power Charts
-			 case "waterfall2d":
-			 case "kagi":
-			  // build data
-				var queryDataset = buildData(values);
-				// apply callback
-				if(_.has(cd,'dataSetProperties')){
+					//build the parameters for the connectors
+					if(_.has(cd,'connectorsPath')){
+						var queryResult = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
+					}else{
+						var queryResult = doCDAQuery(cd.path,cd.connectorsDataAccessId,myself.parameters);
+					}
+					var resultset = JSON.parse(queryResult);
+					var queryConnectors = buildData(resultset);
+
+					//verify if dataSetProperties exists
+					if(!_.has(cd,'dataSetProperties')){
+						cd.dataSetProperties = {};
+					}
+					//apply node callback function
 					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-				}
-				//verify properties
-				var hasProperties = hasRequiredProperties(queryDataset,['value']);
-				if(!hasProperties[0]){
-					hasProperties[1] = "Data is "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
-					return;
-				};
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"data": queryDataset
-				};
-				break;
-			 // Multi Series Charts
-			 case "mscolumn2d":
-			 case "mscolumn3d":
-			 case "msline":
-			 case "msbar2d":
-			 case "msbar3d":
-			 case "msarea":
-			 case "marimekko":
-			 case "zoomline":
-			 case "zoomlinedy":
-			 // Stacked Charts
-			 case "stackedcolumn2d":
-			 case "stackedcolumn3d":
-			 case "stackedbar2d":
-			 case "stackedbar3d":
-			 case "stackedarea2d":
-			 //XY Plot Charts
-			 case "scatter":
-			 case "zoomscatter":
-			 case "bubble":
-			 //Scroll Charts
-			 case "scrollstackedcolumn2d":
-			 //RealTimeCharts
-			 case "realtimearea":
-			 case "realtimecolumn":
-			 case "realtimeline":
-			 case "realtimestackedarea":
-			 case "realtimestackedcolumn":
-			 case "realtimelinedy":
-			 //Logarithmic Charts
-			 case "logmscolumn2d":
-			 case "logmsline":
-			 //Spline Charts
-			 case "msspline":
-			 case "mssplinearea":
-			 //Error Charts
-			 case "errorbar2d":
-			 case "errorline":
-			 case "errorscatter":
-			 //Inverse Y Axis Chart
-			 case "inversemsarea":
-			 case "inversemscolumn2d":
-			 case "inversemsline":
-			 //Miscellaneous Power Charts
-			 case "selectscatter":
-				// build dataset
-				var queryDataset = buildGroupedData(values,'seriesname','data');
-				//apply callback
-				if(_.has(cd,'dataSetProperties')){
-						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
-				}
 
-				// Verify required properties
-				var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
-				if(!hasProperties[0]){
-					hasProperties[1] = "Data is "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
-					return;
-				};
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dataset": queryDataset
-				};
-				break;
-				//Special Cases Charts
-			 case "msstackedcolumn2d":
-			 case "msstackedcolumn2dlinedy":
-			 	// chart requires a array of objects (datasets)
-			 	var dataset = [];
-			 	// build the first dataset
-			 	var queryDataset = buildGroupedData(values,'seriesname','data');
-				//apply callback
-				if(_.has(cd,'dataSetProperties')){
-						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
-				}
-				// Verify required properties
-				var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
-				if(!hasProperties[0]){
-					hasProperties[1] = "Data is "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
-					return;
-				};
-				dataset.push({dataset:queryDataset});
+					//verify if dataSetProperties exists
+					if(!_.has(cd,'connectorsProperties')){
+						cd.connectorsProperties = {};
+					}
+					//apply connectors callback function
+					if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
 
-				//build the other datasets
-				for (var i = 0; i < cd.cdaArray.length; i++) {
-					var responseText = doCDAQuery(cd.cdaArray[i].path,cd.cdaArray[i].dataAccessId,myself.parameters);
- 				 	var resultset = JSON.parse(responseText);
-					queryDataset = buildGroupedData(resultset,'seriesname','data');
+					//verify if dataset has required properties
+					var hasProperties = hasRequiredProperties(queryDataset,['x','y','id']);
+
+					if(!hasProperties[0]){
+						hasProperties[1] = "Nodes are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+						return;
+					}
+
+				 	//verify if connectors have required parameters
+					hasProperties = hasRequiredProperties(queryConnectors,['from','to']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Connectors are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+						return;
+					}
+
+					// add nodes data to dataset
+					cd.dataSetProperties.data = queryDataset;
+					// add connectors data to connectors properties
+					cd.connectorsProperties.connector = queryConnectors;
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dataset": [cd.dataSetProperties],
+						"connectors":[cd.connectorsProperties]
+					};
+			 		break;
+					// Cases where the the chart uses a data object
+				 	// Single Series Charts
+				 case "column2d":
+				 case "column3d":
+				 case "line":
+				 case "area2d":
+				 case "bar2d":
+				 case "bar3d":
+				 case "pie2d":
+				 case "pie3d":
+				 case "doughnut2d":
+				 case "doughnut3d":
+				 case "pareto2d":
+				 case "pareto3d":
+				 //Others (Widgets)
+				 case "funnel":
+				 case "pyramid":
+				 //Spline Charts
+				 case "spline":
+				 case "splinearea":
+				 //Miscellaneous Power Charts
+				 case "waterfall2d":
+				 case "kagi":
+				  // build data
+					var queryDataset = buildData(values);
+					// apply callback
+					if(_.has(cd,'dataSetProperties')){
+						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+					}
+					//verify properties
+					var hasProperties = hasRequiredProperties(queryDataset,['value']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Data is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"data": queryDataset
+					};
+					break;
+					// Cases where the chart as the data separated by series
+				 // Multi Series Charts
+				 case "mscolumn2d":
+				 case "mscolumn3d":
+				 case "msline":
+				 case "msbar2d":
+				 case "msbar3d":
+				 case "msarea":
+				 case "marimekko":
+				 case "zoomline":
+				 case "zoomlinedy":
+				 // Stacked Charts
+				 case "stackedcolumn2d":
+				 case "stackedcolumn3d":
+				 case "stackedbar2d":
+				 case "stackedbar3d":
+				 case "stackedarea2d":
+				 //XY Plot Charts
+				 case "scatter":
+				 case "zoomscatter":
+				 case "bubble":
+				 //Scroll Charts
+				 case "scrollstackedcolumn2d":
+				 //RealTimeCharts
+				 case "realtimearea":
+				 case "realtimecolumn":
+				 case "realtimeline":
+				 case "realtimestackedarea":
+				 case "realtimestackedcolumn":
+				 case "realtimelinedy":
+				 //Logarithmic Charts
+				 case "logmscolumn2d":
+				 case "logmsline":
+				 //Spline Charts
+				 case "msspline":
+				 case "mssplinearea":
+				 //Error Charts
+				 case "errorbar2d":
+				 case "errorline":
+				 case "errorscatter":
+				 //Inverse Y Axis Chart
+				 case "inversemsarea":
+				 case "inversemscolumn2d":
+				 case "inversemsline":
+				 //Miscellaneous Power Charts
+				 case "selectscatter":
+					// build dataset
+					var queryDataset = buildGroupedData(values,'seriesname','data');
+					//apply callback
+					if(_.has(cd,'dataSetProperties')){
+							if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+							if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+					}
+
+					// Verify required properties
+					var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Data is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dataset": queryDataset
+					};
+					break;
+					//Charts where the chart has multiple datasets separated by series
+				 case "msstackedcolumn2d":
+				 case "msstackedcolumn2dlinedy":
+				 	// chart requires a array of objects (datasets)
+				 	var dataset = [];
+				 	// build the first dataset
+				 	var queryDataset = buildGroupedData(values,'seriesname','data');
 					//apply callback
 					if(_.has(cd,'dataSetProperties')){
 							if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 							if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
 					}
 					// Verify required properties
-					var hasProperties = hasRequiredProperties(queryDataset,['seriesname']);
+					var hasProperties = hasRequiredProperties(queryDataset,['value'],'data');
 					if(!hasProperties[0]){
 						hasProperties[1] = "Data is "+ hasProperties[1];
-						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>"+hasProperties[1]+"</div>");
 						return;
 					};
 					dataset.push({dataset:queryDataset});
-				}
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dataset": dataset
-				};
-				break;
-			//Combination Charts
-			case "mscombi2d":
-			case "mscombi3d":
-			case "mscolumnline3d":
-			case "stackedcolumn2dline":
-			case "stackedcolumn3dline":
-			case "mscombidy2d":
-			case "mscolumn3dlinedy":
-			case "stackedcolumn3dlinedy":
-			//Scroll Charts
-			case "scrollcombi2d":
-			case "scrollcombidy2d":
-			//Drag-able Charts
-			case "dragcolumn2d":
-			case "dragline":
-			case "dragarea":
-			//Miscellaneous Power Charts
-			case "radar":
-			case "msstepline":
-				// build data
-				var queryDataset = buildGroupedColumnData(values,'seriesname','data','value');
-				//apply callback
-				if(_.has(cd,'dataSetProperties')){
+
+					//build the other datasets
+					for (var i = 0; i < cd.cdaArray.length; i++) {
+						var responseText = doCDAQuery(cd.cdaArray[i].path,cd.cdaArray[i].dataAccessId,myself.parameters);
+	 				 	var resultset = JSON.parse(responseText);
+						queryDataset = buildGroupedData(resultset,'seriesname','data');
+						//apply callback
+						if(_.has(cd,'dataSetProperties')){
+								if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+								if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+						}
+						// Verify required properties
+						var hasProperties = hasRequiredProperties(queryDataset,['value'], 'data');
+						if(!hasProperties[0]){
+							hasProperties[1] = "Data is "+ hasProperties[1];
+							$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+							return;
+						};
+						dataset.push({dataset:queryDataset});
+					}
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dataset": dataset
+					};
+					break;
+					//Charts builded with the series name as the column name
+				//Combination Charts
+				case "mscombi2d":
+				case "mscombi3d":
+				case "mscolumnline3d":
+				case "stackedcolumn2dline":
+				case "stackedcolumn3dline":
+				case "mscombidy2d":
+				case "mscolumn3dlinedy":
+				case "stackedcolumn3dlinedy":
+				//Scroll Charts
+				case "scrollcombi2d":
+				case "scrollcombidy2d":
+				//Drag-able Charts
+				case "dragcolumn2d":
+				case "dragline":
+				case "dragarea":
+				//Miscellaneous Power Charts
+				case "radar":
+				case "msstepline":
+					// build data
+					var queryDataset = buildGroupedColumnData(values,'seriesname','data','value');
+					//apply callback
+					if(_.has(cd,'dataSetProperties')){
+							if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+							if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
+					}
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dataset": queryDataset
+					};
+					break;
+					//Charts with a data object inside of the dataset object
+				//Scroll Charts
+				case "scrollcolumn2d":
+				case "scrollline2d":
+				case "scrollarea2d":
+				//Spark charts
+				case "sparkline":
+				case "sparkcolumn":
+				case "sparkwinloss":
+					// build data
+					var queryDataset = buildData(values);
+					//verify datasetproperties
+					if(!_.has(cd,'dataSetProperties')){
+						cd.dataSetProperties = {};
+					}
+					//apply callback
+					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+					//verify required Properties
+					hasProperties = hasRequiredProperties(queryDataset,['value']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Dial is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//Add data to dataset
+					cd.dataSetProperties.data = queryDataset;
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dataset": [cd.dataSetProperties],
+					};
+					break;
+					//Charts with dials instead of dataset
+				//Gauge
+				case "angulargauge":
+					// build data
+					var queryDataset = buildData(values);
+					//apply callback
+					if(_.has(cd, 'dataSetProperties')){
 						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-						if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
-				}
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dataset": queryDataset
-				};
-				break;
-			//Scroll Charts
-			case "scrollcolumn2d":
-			case "scrollline2d":
-			case "scrollarea2d":
-			//Spark charts
-			case "sparkline":
-			case "sparkcolumn":
-			case "sparkwinloss":
-				// build data
-				var queryDataset = buildData(values);
-				//verify datasetproperties
-				if(!_.has(cd,'dataSetProperties')){
-					cd.dataSetProperties = {};
-				}
-				//apply callback
-				if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+					};
+					hasProperties = hasRequiredProperties(queryDataset,['value']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Dial is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"dials":{"dial":queryDataset}
+					};
+					break;
+					//Charts without dataset that use value and target for data
+				//Gauge
+				case "bulb":
+				case "cylinder":
+				case "hled":
+				case "thermometer":
+				case "vled":
+				//Bullet Graphs
+				case "hbullet":
+				case "vbullet":
+					// build data
+					var queryDataset = buildData(values);
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+					};
+					//add to chart data properties like value and target
+					for(var key in queryDataset[0]){
+						data[key] = queryDataset[0][key];
+					}
+					break;
+					//Charts with pointers instead of dataset
+				//Gauge
+				case "hlineargauge":
+					// build data
+					var queryDataset = buildData(values);
+					//apply callback
+					if(_.has(cd, 'dataSetProperties')){
+						if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
+					};
+					// create the chart data
+					hasProperties = hasRequiredProperties(queryDataset,['value']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Pointer is "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					var data = {
+						"chart": cd.chartProperties,
+						"pointers":{"pointer":queryDataset}
+					};
+					break;
+				case "gantt":
+					// verify Properties
+					if(!_.has(cd,'processesProperties')){cd.processesProperties = {}};
+					if(!_.has(cd,'datatableProperties')){cd.datatableProperties = {}};
+					if(!_.has(cd,'tasksProperties')){cd.tasksProperties = {}};
+					if(!_.has(cd,'milestonesProperties')){cd.milestonesProperties = {}};
+					if(!_.has(cd,'connectorsProperties')){cd.connectorsProperties = {}};
 
-				cd.dataSetProperties.data = queryDataset;
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dataset": [cd.dataSetProperties],
-				};
-				break;
-			//Gauge
-			case "angulargauge":
-				// build data
-				var queryDataset = buildData(values);
-				//apply callback
-				if(_.has(cd, 'dataSetProperties')){
-					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-				};
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"dials":{"dial":queryDataset}
-				};
-				break;
-			//Gauge
-			case "bulb":
-			case "cylinder":
-			case "hled":
-			case "thermometer":
-			case "vled":
-			//Bullet Graphs
-			case "hbullet":
-			case "vbullet":
-				// build data
-				var queryDataset = buildData(values);
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-				};
-				//add to chart data properties like value and target
-				for(var key in queryDataset[0]){
-					data[key] = queryDataset[0][key];
-				}
-				break;
-			//Gauge
-			case "hlineargauge":
-				// build data
-				var queryDataset = buildData(values);
-				//apply callback
-				if(_.has(cd, 'dataSetProperties')){
-					if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
-				};
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"pointers":{"pointer":queryDataset}
-				};
-				break;
-			case "gantt":
+					//Tasks
+					//get Chart Data
+					var tasksData = buildData(values);
+					// apply Callback
+					if(_.has(cd.tasksProperties,'taskCallback')){tasksData = applyCallBack(tasksData,cd.tasksProperties.taskCallback);};
+					//Verify Required Properties
+					hasProperties = hasRequiredProperties(tasksData,['processid','id','start','end']);
+					if(!hasProperties[0]){
+						hasProperties[1] = "Tasks are "+ hasProperties[1];
+						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+						return;
+					};
+					//apply Properties
+					cd.tasksProperties.task = tasksData;
 
-				// verify Properties
-				if(!_.has(cd,'processesProperties')){cd.processesProperties = {}};
-				if(!_.has(cd,'datatableProperties')){cd.datatableProperties = {}};
-				if(!_.has(cd,'tasksProperties')){cd.tasksProperties = {}};
-				if(!_.has(cd,'milestonesProperties')){cd.milestonesProperties = {}};
-				if(!_.has(cd,'connectorsProperties')){cd.connectorsProperties = {}};
+					//Processes
+					if(_.has(cd,'processesPath') && _.has(cd,'processesDataAccessId')){
+						// get Chart data
+						var responseText = doCDAQuery(cd.processesPath,cd.processesDataAccessId,myself.parameters);
+						responseText = JSON.parse(responseText);
+						var processesData = buildData(responseText);
+						//apply Callback
+						if(_.has(cd.processesProperties,'processCallback')){processesData = applyCallBack(processesData,cd.processesProperties.processCallback);};
+						//verify requiredProperties
+						var hasProperties = hasRequiredProperties(processesData,['id','label']);
+						if(!hasProperties[0]){
+							hasProperties[1] = "Processes are "+ hasProperties[1];
+							$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+							return;
+						};
+						//apply Properties
+						cd.processesProperties.process = processesData;
+					}
 
-				//Tasks
-				//get Chart Data
-				var tasksData = buildData(values);
-				// apply Callback
-				if(_.has(cd.tasksProperties,'taskCallback')){tasksData = applyCallBack(tasksData,cd.tasksProperties.taskCallback);};
-				//Verify Required Properties
-				hasProperties = hasRequiredProperties(tasksData,['processid','id','start','end']);
-				if(!hasProperties[0]){
-					hasProperties[1] = "Tasks are "+ hasProperties[1];
-					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+					//Datatable
+					if(_.has(cd,'datatablePath') && _.has(cd,'datatableDataAccessId')){
+						// get Chart data
+						responseText = doCDAQuery(cd.datatablePath,cd.datatableDataAccessId,myself.parameters);
+						responseText = JSON.parse(responseText);
+						var datatableData = buildGroupedColumnData(responseText,'headertext','text','label');
+						//apply Callback
+						if(_.has(cd.datatableProperties,'textCallback')){datatableData = applyGroupedCallBack(datatableData,cd.datatableProperties.textCallback,'headertext','text');};
+						if(_.has(cd.datatableProperties,'datacolumnCallback')){datatableData = applyCallBack(datatableData,cd.datatableProperties.datacolumnCallback);};
+						//verify requiredProperties
+						hasProperties = hasRequiredProperties(datatableData,['label'],'text');
+						if(!hasProperties[0]){
+							hasProperties[1] = "DataTable is "+ hasProperties[1];
+							$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+							return;
+						};
+						//apply Properties
+						cd.datatableProperties.datacolumn = datatableData;
+					}
+
+					//Milestones
+					if(_.has(cd,'milestonesPath') && _.has(cd,'milestonesDataAccessId')){
+						// get Chart data
+						responseText = doCDAQuery(cd.milestonesPath,cd.milestonesDataAccessId,myself.parameters);
+						responseText = JSON.parse(responseText);
+						var milestonesData = buildData(responseText);
+						//apply Callback
+						if(_.has(cd.milestonesProperties,'milestoneCallback')){milestonesData = applyCallBack(milestonesData,cd.milestonesProperties.milestoneCallback);};
+						//verify requiredProperties
+						hasProperties = hasRequiredProperties(milestonesData,['taskid','date']);
+						if(!hasProperties[0]){
+							hasProperties[1] = "Milestones are "+ hasProperties[1];
+							$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+							return;
+						};
+						//apply Properties
+						cd.milestonesProperties.milestone = milestonesData;
+					}
+
+					//Connectors
+					if(_.has(cd,'connectorsPath') && _.has(cd,'connectorsDataAccessId')){
+						// get Chart data
+						responseText = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
+						responseText = JSON.parse(responseText);
+						var connectorsData = buildData(responseText);
+						//apply Callback
+						if(_.has(cd.connectorsProperties,'connectorCallback')){connectorsData = applyCallBack(connectorsData,cd.connectorsProperties.connectorCallback);};
+						//verify requiredProperties
+						hasProperties = hasRequiredProperties(connectorsData,['fromtaskid','totaskid']);
+						if(!hasProperties[0]){
+							hasProperties[1] = "Connectors are "+ hasProperties[1];
+							$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
+							return;
+						};
+						//apply Properties
+						cd.connectorsProperties.connector = connectorsData;
+					}
+
+					// create the chart data
+					var data = {
+						"chart": cd.chartProperties,
+						"processes":cd.processesProperties,
+						"datatable":cd.datatableProperties,
+						"tasks":cd.tasksProperties,
+						"milestones":cd.milestonesProperties,
+						"connectors":[cd.connectorsProperties],
+					};
+					break;
+			 	default:
+					$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Chart Not Supported!</strong> This chart is not supported by the component</div>");
 					return;
-				};
-				//apply Properties
-				cd.tasksProperties.task = tasksData;
 
-				//Processes
-				if(_.has(cd,'processesPath') && _.has(cd,'processesDataAccessId')){
-					// get Chart data
-					var responseText = doCDAQuery(cd.processesPath,cd.processesDataAccessId,myself.parameters);
-					responseText = JSON.parse(responseText);
-					var processesData = buildData(responseText);
-					//apply Callback
-					if(_.has(cd.processesProperties,'processCallback')){processesData = applyCallBack(processesData,cd.processesProperties.processCallback);};
-					//verify requiredProperties
-					var hasProperties = hasRequiredProperties(processesData,['id','label']);
-					if(!hasProperties[0]){
-						hasProperties[1] = "Processes are "+ hasProperties[1];
-						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
-						return;
-					};
-					//apply Properties
-					cd.processesProperties.process = processesData;
-				}
-
-				//Datatable
-				if(_.has(cd,'datatablePath') && _.has(cd,'datatableDataAccessId')){
-					// get Chart data
-					responseText = doCDAQuery(cd.datatablePath,cd.datatableDataAccessId,myself.parameters);
-					responseText = JSON.parse(responseText);
-					var datatableData = buildGroupedColumnData(responseText,'headertext','text','label');
-					//apply Callback
-					if(_.has(cd.datatableProperties,'textCallback')){datatableData = applyGroupedCallBack(datatableData,cd.datatableProperties.textCallback,'headertext','text');};
-					if(_.has(cd.datatableProperties,'datacolumnCallback')){datatableData = applyCallBack(datatableData,cd.datatableProperties.datacolumnCallback);};
-					//verify requiredProperties
-					hasProperties = hasRequiredProperties(datatableData,['label'],'text');
-					if(!hasProperties[0]){
-						hasProperties[1] = "DataTable is "+ hasProperties[1];
-						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
-						return;
-					};
-					//apply Properties
-					cd.datatableProperties.datacolumn = datatableData;
-				}
-
-				//Milestones
-				if(_.has(cd,'milestonesPath') && _.has(cd,'milestonesDataAccessId')){
-					// get Chart data
-					responseText = doCDAQuery(cd.milestonesPath,cd.milestonesDataAccessId,myself.parameters);
-					responseText = JSON.parse(responseText);
-					var milestonesData = buildData(responseText);
-					//apply Callback
-					if(_.has(cd.milestonesProperties,'milestoneCallback')){milestonesData = applyCallBack(milestonesData,cd.milestonesProperties.milestoneCallback);};
-					//verify requiredProperties
-					hasProperties = hasRequiredProperties(milestonesData,['taskid','date']);
-					if(!hasProperties[0]){
-						hasProperties[1] = "Milestones are "+ hasProperties[1];
-						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
-						return;
-					};
-					//apply Properties
-					cd.milestonesProperties.milestone = milestonesData;
-				}
-
-				//Connectors
-				if(_.has(cd,'connectorsPath') && _.has(cd,'connectorsDataAccessId')){
-					// get Chart data
-					responseText = doCDAQuery(cd.connectorsPath,cd.connectorsDataAccessId,myself.parameters);
-					responseText = JSON.parse(responseText);
-					var connectorsData = buildData(responseText);
-					//apply Callback
-					if(_.has(cd.connectorsProperties,'connectorCallback')){connectorsData = applyCallBack(connectorsData,cd.connectorsProperties.connectorCallback);};
-					//verify requiredProperties
-					hasProperties = hasRequiredProperties(connectorsData,['fromtaskid','totaskid']);
-					if(!hasProperties[0]){
-						hasProperties[1] = "Connectors are "+ hasProperties[1];
-						$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong>"+hasProperties[1]+"</div>");
-						return;
-					};
-					//apply Properties
-					cd.connectorsProperties.connector = connectorsData;
-				}
-
-				// create the chart data
-				var data = {
-					"chart": cd.chartProperties,
-					"processes":cd.processesProperties,
-					"datatable":cd.datatableProperties,
-					"tasks":cd.tasksProperties,
-					"milestones":cd.milestonesProperties,
-					"connectors":[cd.connectorsProperties],
-				};
-				break;
-		 	default:
-				$("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Chart Not Supported!</strong> This chart is not supported by the component</div>");
-				return;
-
+			 }
 		 }
 
 		 // add trend lines to chart
@@ -961,7 +1090,7 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 			 }
 		 };
 
-		 // add lineset to chart
+		 // add color Range to chart
 		 if(_.has(cd, 'colorRangeProperties')){
 			 if(_.has(cd.colorRangeProperties, 'dataAccessId') && _.has(cd.colorRangeProperties, 'path')){
 				 var responseText = doCDAQuery(cd.colorRangeProperties.path,cd.colorRangeProperties.dataAccessId,myself.parameters);
@@ -976,7 +1105,7 @@ var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
 			 }
 		 };
 
-		 // add lineset to chart
+		 // add legend to chart
 		 if(_.has(cd, 'legendProperties')){
 			 if(_.has(cd.legendProperties, 'dataAccessId') && _.has(cd.legendProperties, 'path')){
 				 var responseText = doCDAQuery(cd.legendProperties.path,cd.legendProperties.dataAccessId,myself.parameters);

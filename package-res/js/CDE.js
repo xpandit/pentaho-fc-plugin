@@ -23,4 +23,4 @@ var XDashFusionChartComponentAsyncError = XDashFusionChartComponentAsync.extend(
 var XDashFusionChartComponentAsyncInverseYAxis = XDashFusionChartComponentAsync.extend();
 var XDashFusionChartComponentAsyncDragAble = XDashFusionChartComponentAsync.extend();
 var XDashFusionChartComponentAsyncMiscellaneous = XDashFusionChartComponentAsync.extend();
-var XDashFusionChartComponentAsyncMiscellaneous = XDashFusionChartComponentAsync.extend();
+var XDashFusionChartComponentAsyncMaps = XDashFusionChartComponentAsync.extend();
