@@ -4,6 +4,6 @@
 	<author>Xpand IT</author>
 	<description></description>
 	<icon></icon>
-	<template>dashboard_xt_async_component.html</template>
+	<template>dashboard_XPFusionChartComponent.html</template>
 	<style>clean</style>
 </cdf>

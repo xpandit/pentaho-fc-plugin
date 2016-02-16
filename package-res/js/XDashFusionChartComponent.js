@@ -310,7 +310,7 @@ else
  *
  */
 
-var XDashFusionChartComponentAsync = UnmanagedComponent.extend({
+var XPFusionChartComponent = UnmanagedComponent.extend({
 	 update: function() {
 		var render = _.bind(this.render, this);
 		 this.triggerQuery(this.chartDefinition, render);
