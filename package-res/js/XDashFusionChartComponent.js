@@ -405,12 +405,12 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 if(fusionOptions.type.toLowerCase().match(/maps\/.*/g)){
 			 var data = myself.buildMap(cd,values);
 		 }else {
-			 if (typeof XDashCharts === 'undefined') {
-				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing XDashCharts</strong> Import the XDashCharts.js file</div>");
+			 if (typeof XPCharts === 'undefined') {
+				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing XPCharts</strong> Import the XPCharts.js file</div>");
 				 return;
 			 }
 			 // switch chart type
-			 var XDashChartType = XDashCharts[fusionOptions.type.toLowerCase()];
+			 var XDashChartType = XPCharts[fusionOptions.type.toLowerCase()];
 			 switch (XDashChartType) {
 				 case "dataSetAndConnectors":
 				 	var data = myself.buildChartDataSetAndConnectors(cd,values);
@@ -562,7 +562,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 if(_.has(cd.connectorsProperties, 'connectorCallback')){queryConnectors = applyCallBack(queryConnectors,cd.connectorsProperties.connectorCallback);};
 
 		 //verify if dataset has required properties
-		 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsDataSetAndConnectors.requiredProperties);
+		 var hasProperties = hasRequiredProperties(queryDataset,XPChartsDataSetAndConnectors.requiredProperties);
 
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>Nodes are "+hasProperties[1]+"</div>");
@@ -570,7 +570,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 }
 
 		 //verify if connectors have required parameters
-		 hasProperties = hasRequiredProperties(queryConnectors,XDashChartsDataSetAndConnectors.requiredConnectorsProperties);
+		 hasProperties = hasRequiredProperties(queryConnectors,XPChartsDataSetAndConnectors.requiredConnectorsProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Connectors are "+hasProperties[1]+"</div>");
 			 return;
@@ -600,7 +600,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 		 }
 		 //verify properties
-		 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsData.requiredProperties);
+		 var hasProperties = hasRequiredProperties(queryDataset,XPChartsData.requiredProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong>Data is "+hasProperties[1]+"</div>");
 			 return;
@@ -626,7 +626,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 }
 
 		 // Verify required properties
-		 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsSeries.requiredProperties,'data');
+		 var hasProperties = hasRequiredProperties(queryDataset,XPChartsSeries.requiredProperties,'data');
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Data is "+hasProperties[1]+"</div>");
 			 return;
@@ -654,7 +654,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 				 if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
 		 }
 		 // Verify required properties
-		 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsMultipleDataSets.requiredProperties,'data');
+		 var hasProperties = hasRequiredProperties(queryDataset,XPChartsMultipleDataSets.requiredProperties,'data');
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Data is "+hasProperties[1]+"</div>");
 			 return;
@@ -671,7 +671,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 					 if(_.has(cd.dataSetProperties, 'dataCallback')){queryDataset = applyGroupedCallBack(queryDataset,cd.dataSetProperties.dataCallback,'seriesname','data');};
 			 }
 			 // Verify required properties
-			 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsMultipleDataSets.requiredProperties, 'data');
+			 var hasProperties = hasRequiredProperties(queryDataset,XPChartsMultipleDataSets.requiredProperties, 'data');
 			 if(!hasProperties[0]){
 				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Data is "+hasProperties[1]+"</div>");
 				 return;
@@ -700,7 +700,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 }
 
 		 // Verify required properties
-		 var hasProperties = hasRequiredProperties(queryDataset,XDashChartsSeriesColumn.requiredProperties, 'data');
+		 var hasProperties = hasRequiredProperties(queryDataset,XPChartsSeriesColumn.requiredProperties, 'data');
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Data is "+hasProperties[1]+"</div>");
 			 return;
@@ -726,7 +726,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 //apply callback
 		 if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 		 //verify required Properties
-		 hasProperties = hasRequiredProperties(queryDataset,XDashChartsDataSet.requiredProperties);
+		 hasProperties = hasRequiredProperties(queryDataset,XPChartsDataSet.requiredProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Data is "+hasProperties[1]+"</div>");
 			 return;
@@ -752,7 +752,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 if(_.has(cd, 'dataSetProperties')){
 			 if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 		 };
-		 hasProperties = hasRequiredProperties(queryDataset,XDashChartsDials.requiredProperties);
+		 hasProperties = hasRequiredProperties(queryDataset,XPChartsDials.requiredProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Dial is "+hasProperties[1]+"</div>");
 			 return;
@@ -776,7 +776,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 var data = {
 			 "chart": cd.chartProperties,
 		 };
-		 hasProperties = hasRequiredProperties(queryDataset,XDashChartsValue.requiredProperties);
+		 hasProperties = hasRequiredProperties(queryDataset,XPChartsValue.requiredProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Dial is "+hasProperties[1]+"</div>");
 			 return;
@@ -800,7 +800,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 if(_.has(cd.dataSetProperties, 'dataSetCallback')){queryDataset = applyCallBack(queryDataset,cd.dataSetProperties.dataSetCallback);};
 		 };
 		 // create the chart data
-		 hasProperties = hasRequiredProperties(queryDataset,XDashChartsPointers.requiredProperties);
+		 hasProperties = hasRequiredProperties(queryDataset,XPChartsPointers.requiredProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Pointer is "+hasProperties[1]+"</div>");
 			 return;
@@ -830,7 +830,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 		 // apply Callback
 		 if(_.has(cd.tasksProperties,'taskCallback')){tasksData = applyCallBack(tasksData,cd.tasksProperties.taskCallback);};
 		 //Verify Required Properties
-		 hasProperties = hasRequiredProperties(tasksData,XDashChartsGantt.requiredTasksProperties);
+		 hasProperties = hasRequiredProperties(tasksData,XPChartsGantt.requiredTasksProperties);
 		 if(!hasProperties[0]){
 			 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Tasks are "+hasProperties[1]+"</div>");
 			 return;
@@ -846,7 +846,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 //apply Callback
 			 if(_.has(cd.processesProperties,'processCallback')){processesData = applyCallBack(processesData,cd.processesProperties.processCallback);};
 			 //verify requiredProperties
-			 var hasProperties = hasRequiredProperties(processesData,XDashChartsGantt.requiredProcessesProperties);
+			 var hasProperties = hasRequiredProperties(processesData,XPChartsGantt.requiredProcessesProperties);
 			 if(!hasProperties[0]){
 				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Processes are "+hasProperties[1]+"</div>");
 				 return;
@@ -864,7 +864,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 if(_.has(cd.datatableProperties,'textCallback')){datatableData = applyGroupedCallBack(datatableData,cd.datatableProperties.textCallback,'headertext','text');};
 			 if(_.has(cd.datatableProperties,'datacolumnCallback')){datatableData = applyCallBack(datatableData,cd.datatableProperties.datacolumnCallback);};
 			 //verify requiredProperties
-			 hasProperties = hasRequiredProperties(datatableData,XDashChartsGantt.requiredDataTableProperties,'text');
+			 hasProperties = hasRequiredProperties(datatableData,XPChartsGantt.requiredDataTableProperties,'text');
 			 if(!hasProperties[0]){
 				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> DataTable is "+hasProperties[1]+"</div>");
 				 return;
@@ -881,7 +881,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 //apply Callback
 			 if(_.has(cd.milestonesProperties,'milestoneCallback')){milestonesData = applyCallBack(milestonesData,cd.milestonesProperties.milestoneCallback);};
 			 //verify requiredProperties
-			 hasProperties = hasRequiredProperties(milestonesData,XDashChartsGantt.requiredMilestonesProperties);
+			 hasProperties = hasRequiredProperties(milestonesData,XPChartsGantt.requiredMilestonesProperties);
 			 if(!hasProperties[0]){
 				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Milestones are "+hasProperties[1]+"</div>");
 				 return;
@@ -898,7 +898,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 			 //apply Callback
 			 if(_.has(cd.connectorsProperties,'connectorCallback')){connectorsData = applyCallBack(connectorsData,cd.connectorsProperties.connectorCallback);};
 			 //verify requiredProperties
-			 hasProperties = hasRequiredProperties(connectorsData,XDashChartsGantt.requiredConnectorsProperties);
+			 hasProperties = hasRequiredProperties(connectorsData,XPChartsGantt.requiredConnectorsProperties);
 			 if(!hasProperties[0]){
 				 $("#"+myself.htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Connectors are "+hasProperties[1]+"</div>");
 				 return;

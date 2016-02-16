@@ -1,7 +1,7 @@
 /*
-* XDashCharts Types
+* XPCharts Types
 */
-var XDashCharts ={
+var XPCharts ={
   column2d                : "data",  // Single Series Charts
   column3d                : "data",  // Single Series Charts
   line                    : "data",  // Single Series Charts
@@ -92,47 +92,47 @@ var XDashCharts ={
 }
 
 /*
-* XDashCharts Types Properties
+* XPCharts Types Properties
 */
 
-var XDashChartsData = {
+var XPChartsData = {
   requiredProperties:['value'],
 }
 
-var XDashChartsDataSet = {
+var XPChartsDataSet = {
   requiredProperties:['value'],
 }
 
-var XDashChartsSeries = {
+var XPChartsSeries = {
   requiredProperties:[],
 }
 
-var XDashChartsSeriesColumn = {
+var XPChartsSeriesColumn = {
   requiredProperties:['value'],
 }
 
-var XDashChartsMultipleDataSets = {
+var XPChartsMultipleDataSets = {
   requiredProperties:['value'],
 }
 
-var XDashChartsDataSetAndConnectors = {
+var XPChartsDataSetAndConnectors = {
   requiredProperties:['x','y','id'],
   requiredConnectorsProperties: ['from','to'],
 }
 
-var XDashChartsDials = {
+var XPChartsDials = {
   requiredProperties:['value'],
 }
 
-var XDashChartsValue = {
+var XPChartsValue = {
   requiredProperties:['value'],
 }
 
-var XDashChartsPointers = {
+var XPChartsPointers = {
   requiredProperties:['value'],
 }
 
-var XDashChartsGantt = {
+var XPChartsGantt = {
   requiredTasksProperties:['processid','id','start','end'],
   requiredProcessesProperties:['id','label'],
   requiredDataTableProperties:['label'],
