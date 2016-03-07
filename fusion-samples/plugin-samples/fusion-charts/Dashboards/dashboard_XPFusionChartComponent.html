@@ -1,0 +1,426 @@
+<script type='text/javascript' src='../../../content/xfusion/JSClass/FusionCharts.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/js/XDashFusionChartComponent.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/js/XPCharts.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.ocean.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.zune.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.carbon.js'></script>
+<script type='text/javascript' src='../../../content/xfusion/JSClass/themes/fusioncharts.theme.fint.js'></script>
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:MetaLayerCharts_XPFusionChartComponent.js"></script>
+<script type="text/javascript" src="../../../content/xfusion/js/endpointsForSamples.js"></script>
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+
+
+
+<div class="dashboardContent">
+    <div class="header">
+        <img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
+            <h2 class="light">FusionCharts XT Dashboard Sample</h2>
+    </div>
+
+    <div class="Info" style="margin-bottom:30px;">
+        <h5 class="light">How to get Fusion Charts XT</h5>
+   All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+    <div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+    </div>
+
+
+    <div id="charts">
+        <div id="firstRow">
+            <h5 class="light">Single Series Charts and Multi-Series Charts</h5>
+            <div id="PieChart3D" style="float:left;margin-right:25px;"></div>
+            <div id="Marimekko"></div>
+        </div>
+        <div id="secondRow">
+            <h5 class="light">Stacked Charts</h5>
+            <div id="StackedColumn2D" style="float:left;margin-right:25px;"></div>
+            <div id="MSStackedColumn2D"></div>
+        </div>
+        <div id="thirdRow">
+            <h5 class="light">Combination Charts</h5>
+            <div id="MSComb2D" style="float:left;margin-right:25px;"></div>
+            <div id="MSComb2DLinedy"></div>
+        </div>
+        <div id="fourthRow">
+            <h5 class="light">Scroll Charts and XY Plot Charts</h5>
+            <div id="ScrollChart" style="float:left;margin-right:25px;"></div>
+            <div id="XYPlotChart"></div>
+        </div>
+        <div id="fifthRow">
+            <h5 class="light">Gauges</h5>
+            <div id="Angular" style="float:left;margin-right:25px;"></div>
+            <div id="LED"></div>
+        </div>
+        <div id="sixthRow">
+            <h5 class="light">RealTime and Spark Charts</h5>
+            <div id="RealTime" style="float:left;margin-right:25px;"></div>
+            <div id="Spark"></div>
+        </div>
+        <div id="seventhRow">
+            <h5 class="light">Bullet Graphs and Others</h5>
+            <div id="Bullet" style="float:left;margin-right:25px;"></div>
+            <div id="Other"></div>
+        </div>
+        <div id="octaveRow">
+            <h5 class="light">Logarithmic and Spline Charts</h5>
+            <div id="Logarithmic" style="float:left;margin-right:25px;"></div>
+            <div id="Spline"></div>
+        </div>
+        <div id="ninthRow">
+            <h5 class="light">Error and Inverse Y Axis Charts</h5>
+            <div id="ErrorChart" style="float:left;margin-right:25px;"></div>
+            <div id="InverseY"></div>
+        </div>
+        <div id="tenthRow">
+            <h5 class="light">Drag-able Charts and Radar Chart</h5>
+            <div id="DragAble" style="float:left;margin-right:25px;"></div>
+            <div id="Radar"></div>
+        </div>
+        <div id="eleventhRow">
+            <h5 class="light">Step Line and Select-Scatter Chart</h5>
+            <div id="StepLine" style="float:left;margin-right:25px;"></div>
+            <div id="SelectScatter"></div>
+        </div>
+        <div id="twelfth">
+            <h5 class="light">Waterfall and Kagi Chart</h5>
+            <div id="Waterfall" style="float:left;margin-right:25px;"></div>
+            <div id="Kagi"></div>
+        </div>
+        <div id="thirteenthRow">
+            <h5 class="light">Drag Node</h5>
+            <div id="DragNode" style="margin-left:25px;"></div>
+        </div>
+        <div id="fourteenthRow">
+            <h5 class="light">Gantt Chart</h5>
+            <div id="Gantt" style="margin-left:25px;"></div>
+        </div>
+        <div id="fifteenthRow">
+            <h5 class="light">Maps</h5>
+            <div id="Map" style="margin-left:25px;"></div>
+            <div id="MapWithMarkers"></div>
+        </div>
+
+</div>
+    <div class="light third">
+    Xpand IT supports Pentaho FusionCharts Plugin.
+    <br>
+    If you need more information, sharing ideas or discuss plan details, please reach us by email
+    <a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
+</div>
+<div class="logos">
+    <img width="150" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png">
+</div>
+
+
+</div>
+<script language="javascript" type="text/javascript">
+
+    // Dashboard Parameters
+    Dashboards.globalContext = false;
+    Dashboards.addParameter("param", "hello");
+
+    var PieChart3D = {
+        name            : "PieChart3D",
+        htmlObject      : "PieChart3D",
+        chartDefinition : MetaLayerCharts.PieChart3D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Column2D = {
+        name            : "Column2D",
+        htmlObject      : "Column2D",
+        chartDefinition : MetaLayerCharts.Column2D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Marimekko = {
+        name            : "Marimekko",
+        htmlObject      : "Marimekko",
+        chartDefinition : MetaLayerCharts.Marimekko,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var MSColumn2D = {
+        name            : "MSColumn2D",
+        htmlObject      : "MSColumn2D",
+        chartDefinition : MetaLayerCharts.MSColumn2D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var StackedColumn2D = {
+        name            : "StackedColumn2D",
+        htmlObject      : "StackedColumn2D",
+        chartDefinition : MetaLayerCharts.StackedColumn2D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var MSStackedColumn2D = {
+        name            : "MSStackedColumn2D",
+        htmlObject      : "MSStackedColumn2D",
+        chartDefinition : MetaLayerCharts.MSStackedColumn2D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var MSComb2D = {
+        name            : "MSComb2D",
+        htmlObject      : "MSComb2D",
+        chartDefinition : MetaLayerCharts.MSComb2D,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var MSComb2DLinedy = {
+        name            : "MSComb2DLinedy",
+        htmlObject      : "MSComb2DLinedy",
+        chartDefinition : MetaLayerCharts.MSComb2DLinedy,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var ScrollChart = {
+        name            : "ScrollChart",
+        htmlObject      : "ScrollChart",
+        chartDefinition : MetaLayerCharts.ScrollChart,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var XYPlotChart = {
+        name            : "XYPlotChart",
+        htmlObject      : "XYPlotChart",
+        chartDefinition : MetaLayerCharts.XYPlotChart,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Angular= {
+        name           : "Angular",
+        htmlObject     : "Angular",
+        chartDefinition : MetaLayerCharts.Angular,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Led= {
+        name           : "LED",
+        htmlObject     : "LED",
+        chartDefinition : MetaLayerCharts.LED,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var RealTime= {
+        name           : "RealTime",
+        htmlObject     : "RealTime",
+        chartDefinition : MetaLayerCharts.RealTime,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Spark= {
+        name           : "Spark",
+        htmlObject     : "Spark",
+        chartDefinition : MetaLayerCharts.Spark,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Bullet= {
+        name           : "Bullet",
+        htmlObject     : "Bullet",
+        chartDefinition : MetaLayerCharts.Bullet,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Logarithmic = {
+        name           : "Logarithmic",
+        htmlObject     : "Logarithmic",
+        chartDefinition : MetaLayerCharts.Logarithmic,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Spline = {
+        name           : "Spline",
+        htmlObject     : "Spline",
+        chartDefinition : MetaLayerCharts.Spline,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var ErrorChart = {
+        name           : "ErrorChart",
+        htmlObject     : "ErrorChart",
+        chartDefinition : MetaLayerCharts.ErrorChart,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var InverseY = {
+        name           : "InverseY",
+        htmlObject     : "InverseY",
+        chartDefinition : MetaLayerCharts.InverseY,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var DragAble = {
+        name           : "DragAble",
+        htmlObject     : "DragAble",
+        chartDefinition : MetaLayerCharts.DragAble,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Radar = {
+        name           : "Radar",
+        htmlObject     : "Radar",
+        chartDefinition : MetaLayerCharts.Radar,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var StepLine = {
+        name           : "StepLine",
+        htmlObject     : "StepLine",
+        chartDefinition : MetaLayerCharts.StepLine,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var SelectScatter = {
+        name           : "SelectScatter",
+        htmlObject     : "SelectScatter",
+        chartDefinition : MetaLayerCharts.SelectScatter,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Waterfall = {
+        name           : "Waterfall",
+        htmlObject     : "Waterfall",
+        chartDefinition : MetaLayerCharts.Waterfall,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Kagi = {
+        name           : "Kagi",
+        htmlObject     : "Kagi",
+        chartDefinition : MetaLayerCharts.Kagi,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var DragNode = {
+        name            : "DragNode",
+        htmlObject      : "DragNode",
+        chartDefinition : MetaLayerCharts.DragNode,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Funnel= {
+        name           : "Funnel",
+        htmlObject     : "Other",
+        chartDefinition : MetaLayerCharts.Funnel,
+        executeAtStart : true,
+        type           : "XPFusionChartComponent",
+    }
+
+    var Gantt = {
+        name            : "Gantt",
+        htmlObject      : "Gantt",
+        chartDefinition : MetaLayerCharts.Gantt,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Map = {
+        name            : "Map",
+        htmlObject      : "Map",
+        chartDefinition : MetaLayerCharts.Map,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+    var MapWithMarkers = {
+        name            : "MapWithMarkers",
+        htmlObject      : "MapWithMarkers",
+        chartDefinition : MetaLayerCharts.MapWithMarkers,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+        var components = [
+            PieChart3D     , Marimekko,
+            StackedColumn2D, MSStackedColumn2D,
+            MSComb2D, MSComb2DLinedy,
+            XYPlotChart, ScrollChart,
+            Angular, Led,
+            RealTime, Spark,
+            Bullet, Funnel,
+            Logarithmic,Spline,
+            ErrorChart, InverseY,
+            DragAble, Radar,
+            StepLine, SelectScatter,
+            Waterfall, Kagi,
+            DragNode, Gantt,
+            Map, MapWithMarkers
+        ];
+
+         function switchToFusionManager() {
+            var url= Dashboards.getWebAppPath() + '/plugin/fusion_plugin/api/settings';
+            //window.location.href=url;
+            window.open(url, '_blank');
+        }
+
+        // Define functions to use in DragNode link property
+        function nodelink(data){
+          Dashboards.fireChange("param",data.id)
+            //window.alert(data.id);
+        }
+
+
+</script>
+
+<script language="javascript" type="text/javascript">
+
+function load(){
+	Dashboards.init(components);
+}
+
+load();
+
+$(document).ready(function() {
+    sparkl.runEndpoint( 'fusion_plugin' , 'isfree', {
+            success: successCallback,
+            error: errorCallback
+    });
+});
+
+var successCallback = function (json)
+        {
+          Dashboards.decrementRunningCalls();
+          for (var index = 0; index < json.resultset.length; index++) {
+              if(json.resultset[index][0] == "free"){
+                  if(json.resultset[index][1] == "false"){
+                      $(".Info").css("display","none");
+                  }else{
+                      $("#charts").css("display","none");
+                  }
+              }
+          }
+        };
+
+var errorCallback = function (json){
+            Dashboards.decrementRunningCalls();
+        };
+
+</script>

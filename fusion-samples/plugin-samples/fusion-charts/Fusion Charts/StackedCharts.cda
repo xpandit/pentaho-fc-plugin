@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>Sample</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Food Products"), new Integer(121000)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(135000)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(123500)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(145000)});
+          
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(131400)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(154800)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(98300)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(131800)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>Categories Sample</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Q1")});
+          model.addRow(new Object[]{new String("Q2")});
+          model.addRow(new Object[]{new String("Q3")});
+          model.addRow(new Object[]{new String("Q4")});
+          
+
+          
+          return model;
+        </Query>
+        <Output indexes="0"/>
+    </DataAccess>
+    
+    <DataAccess id="3" connection="1" type="scriptable" access="public">
+        <Name>Sample MSStacked 1</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Electronics"), new Integer(27)});
+          model.addRow(new Object[]{new String("Electronics"), new Integer(25)});
+          model.addRow(new Object[]{new String("Electronics"), new Integer(28)});
+          model.addRow(new Object[]{new String("Electronics"), new Integer(26)});
+          
+          model.addRow(new Object[]{new String("Apparels"), new Integer(17)});
+          model.addRow(new Object[]{new String("Apparels"), new Integer(15)});
+          model.addRow(new Object[]{new String("Apparels"), new Integer(18)});
+          model.addRow(new Object[]{new String("Apparels"), new Integer(16)});
+          
+          model.addRow(new Object[]{new String("Others"), new Integer(12)});
+          model.addRow(new Object[]{new String("Others"), new Integer(17)});
+          model.addRow(new Object[]{new String("Others"), new Integer(16)});
+          model.addRow(new Object[]{new String("Others"), new Integer(15)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="4" connection="1" type="scriptable" access="public">
+        <Name>Sample MSStacked 2</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Processed Food"), new Integer(30)});
+          model.addRow(new Object[]{new String("Processed Food"), new Integer(26)});
+          model.addRow(new Object[]{new String("Processed Food"), new Integer(29)});
+          model.addRow(new Object[]{new String("Processed Food"), new Integer(31)});
+          
+          model.addRow(new Object[]{new String("Un-Processed Food"), new Integer(21)});
+          model.addRow(new Object[]{new String("Un-Processed Food"), new Integer(28)});
+          model.addRow(new Object[]{new String("Un-Processed Food"), new Integer(39)});
+          model.addRow(new Object[]{new String("Un-Processed Food"), new Integer(41)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

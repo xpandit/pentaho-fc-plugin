@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>Drag-able Chart Data</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;Available Stock&quot;;
+          columnNames[1] = &quot;Estimated Demand&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("6000"), new String("19000")});
+          model.addRow(new Object[]{new String("9500"), new String("16500")});
+          model.addRow(new Object[]{new String("11900"), new String("14300")});
+          model.addRow(new Object[]{new String("8000"), new String("10000")});
+          model.addRow(new Object[]{new String("9700"), new String("9800")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+    
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>Drag-able Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Poultry")});
+          model.addRow(new Object[]{new String("Rice")});
+          model.addRow(new Object[]{new String("Peanut Butter")});
+          model.addRow(new Object[]{new String("Salmon")});
+          model.addRow(new Object[]{new String("Cereal")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

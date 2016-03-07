@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+		<Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>		
+    </DataSources>
+		
+	 <DataAccess id="1" connection="1" type="scriptable" access="public">
+		<Name>Sample RealTime</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[3];
+        columnNames[0] = &quot;label&quot;;
+        columnNames[1] = &quot;seriesname&quot;;
+        columnNames[2] = &quot;value&quot;;
+
+        Class[] columnTypes = new Class[3];
+        columnTypes[0] = String.class;
+        columnTypes[1] = String.class;
+        columnTypes[2] = Integer.class;
+
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+
+        Random rand = new Random();
+        int randInt_a = rand.nextInt(50);
+        int randInt_b = rand.nextInt(50);
+        String time = (new java.text.SimpleDateFormat(&quot;HH:mm:ss&quot;)).format(new Date());
+            
+        model.addRow(new Object[]{ new String(time),new String("SeriesOne"),new Integer(randInt_a)});
+        model.addRow(new Object[]{ new String(time),new String("SeriesTwo"),new Integer(randInt_b)});
+        return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>
