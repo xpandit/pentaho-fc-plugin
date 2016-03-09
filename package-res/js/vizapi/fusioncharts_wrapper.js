@@ -259,6 +259,120 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
+        id : 'fcplugin_funnel', 
+        type : 'chart', 
+        source : 'FusionCharts', 
+        name : 'FusionCharts Funnel', 
+        'class' : 'pentaho.fcplugin', 
+        chartType: "Funnel",
+        args : {
+          
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [  {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'x_axis',
+              required: true,
+              allowMultiple: true
+            },
+            {
+              id: 'columns',
+              dataType: 'string',
+              dataStructure: 'column',
+              caption: 'y_axis',
+              required: false,
+              allowMultiple: true
+            },
+            {
+                id : 'measures',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Measures',
+                required : true,
+                allowMultiple : true,
+                ui : {
+                    group : "data"
+                }
+            }]
+        } ]
+    },
+    {
+        id : 'fcplugin_doughnut2d',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Doughnut',
+        'class' : 'pentaho.fcplugin',
+        chartType: "Doughnut2D",     
+        args : {
+           
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [    
+            {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'Series',
+              required: true,
+              allowMultiple: false
+            },
+            {
+                id : 'measures',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Measures',
+                required : true,
+                allowMultiple : true,
+                ui : {
+                    group : "data"
+                }
+            }]
+        } ]
+    },
+    {
+        id : 'fcplugin_pie2d', 
+        type : 'chart', 
+        source : 'FusionCharts', 
+        name : 'FusionCharts Pie', 
+        'class' : 'pentaho.fcplugin', 
+        chartType: "Pie2D",
+        args : {
+          
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [  {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'Series',
+              required: true,
+              allowMultiple: false
+            },
+            {
+                id : 'measures',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Measures',
+                required : true,
+                allowMultiple : true,
+                ui : {
+                    group : "data"
+                }
+            }]
+        } ]
+    },
+    {
         id : 'fcplugin_angulargauge',
         type : 'chart',
         source : 'FusionCharts',
