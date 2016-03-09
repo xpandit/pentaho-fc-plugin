@@ -272,21 +272,14 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         dataReqs : [
         {
             name : 'Default',
-            reqs : [  {
+            reqs : [    
+            {
               id: 'rows',
               dataType: 'string',
               dataStructure: 'row',
-              caption: 'x_axis',
+              caption: 'Series',
               required: true,
-              allowMultiple: true
-            },
-            {
-              id: 'columns',
-              dataType: 'string',
-              dataStructure: 'column',
-              caption: 'y_axis',
-              required: false,
-              allowMultiple: true
+              allowMultiple: false
             },
             {
                 id : 'measures',
@@ -294,7 +287,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column',
                 caption : 'Measures',
                 required : true,
-                allowMultiple : true,
+                allowMultiple : false,
                 ui : {
                     group : "data"
                 }
@@ -330,7 +323,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column',
                 caption : 'Measures',
                 required : true,
-                allowMultiple : true,
+                allowMultiple : false,
                 ui : {
                     group : "data"
                 }
@@ -365,7 +358,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 dataStructure : 'column',
                 caption : 'Measures',
                 required : true,
-                allowMultiple : true,
+                allowMultiple : false,
                 ui : {
                     group : "data"
                 }
