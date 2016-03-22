@@ -1,6 +1,6 @@
 /**
  * Wrapper for the FusionCharts plugin
- * 
+ *
  */
 pen.require(["common-ui/vizapi/VizController"], function(){
 
@@ -14,15 +14,15 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         source : 'FusionCharts', // id of the source library
         name : 'FusionCharts Bar', // visible name, this will come from a properties file eventually
         'class' : 'pentaho.fcplugin',
-		chartType: "Bar2D",		
+		chartType: "Bar2D",
         args : {
-           
+
         },
         propMap : [],
         dataReqs : [ //data requirements of this visualization
         {
             name : 'Default',
-            reqs : [ 	
+            reqs : [
 			{
               id: 'rows',
               dataType: 'string',
@@ -50,38 +50,38 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                     group : "data"
                 }
             },{
-				id: "orientation", 
-				dataType: "string", 
-				values: ["vertical", "horizontal"], 
+				id: "orientation",
+				dataType: "string",
+				values: ["vertical", "horizontal"],
 				ui: {
-					labels: ["Vertical", "Horizontal"], 
-					group: "options", 
+					labels: ["Vertical", "Horizontal"],
+					group: "options",
 					type: "combo", // combo, checkbox, slider, textbox, gem, gemBar, and button are valid ui types
 					caption: "Orientation"
 					}
 			},
 			{
-				id: "2d_3d", 
-				dataType: "string", 
-				values: ["2D", "3D"], 
+				id: "2d_3d",
+				dataType: "string",
+				values: ["2D", "3D"],
 				ui: {
-					labels: ["2D", "3D"], 
-					group: "options", 
-					type: "combo", 
+					labels: ["2D", "3D"],
+					group: "options",
+					type: "combo",
 					caption: "2D/3D"
 					}
 			}]
         } ]
     },
     {
-        id : 'fcplugin_line', 
-        type : 'chart', 
-        source : 'FusionCharts', 
-        name : 'FusionCharts Line', 
-        'class' : 'pentaho.fcplugin', 
+        id : 'fcplugin_line',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Line',
+        'class' : 'pentaho.fcplugin',
 		chartType: "Line",
         args : {
-          
+
         },
         propMap : [],
         dataReqs : [
@@ -117,14 +117,14 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
 	{
-        id : 'fcplugin_area', 
-        type : 'chart', 
-        source : 'FusionCharts', 
-        name : 'FusionCharts Area', 
-        'class' : 'pentaho.fcplugin', 
+        id : 'fcplugin_area',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Area',
+        'class' : 'pentaho.fcplugin',
 		chartType: "Area",
         args : {
-          
+
         },
         propMap : [],
         dataReqs : [
@@ -134,8 +134,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 id : 'rows',
                 dataType : 'string',
                 dataStructure : 'column',
-                caption : 'Series', 
-                required : true, 
+                caption : 'Series',
+                required : true,
                 allowMultiple : false,
                 ui : {
                     group : 'data'
@@ -158,21 +158,21 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         type : 'chart',
         source : 'FusionCharts',
         name : 'FusionCharts Combi',
-        'class' : 'pentaho.fcplugin', 
+        'class' : 'pentaho.fcplugin',
 		 chartType: "MSCombi",
         args : {
-           
+
         },
         propMap : [],
-        dataReqs : [ 
+        dataReqs : [
         {
             name : 'Default',
             reqs : [ {
-                id : 'rows', 
-                dataType : 'string', 
-                dataStructure : 'column', 
+                id : 'rows',
+                dataType : 'string',
+                dataStructure : 'column',
                 caption : 'X-Axis',
-                required : true, 
+                required : true,
                 allowMultiple : false,
                 ui : {
                     group : 'data'
@@ -208,27 +208,27 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                     group : "data"
                 }
             },{
-				id: "2d_3d", 
-				dataType: "string", 
-				values: ["2D", "3D"], 
+				id: "2d_3d",
+				dataType: "string",
+				values: ["2D", "3D"],
 				ui: {
-					labels: ["2D", "3D"], 
-					group: "options", 
-					type: "combo",   
+					labels: ["2D", "3D"],
+					group: "options",
+					type: "combo",
 					caption: "2D/3D"
 					}
 				}]
         } ]
     },
 	{
-        id : 'fcplugin_marimekko', 
-        type : 'chart', 
-        source : 'FusionCharts', 
-        name : 'FusionCharts Marimekko', 
-        'class' : 'pentaho.fcplugin', 
+        id : 'fcplugin_marimekko',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Marimekko',
+        'class' : 'pentaho.fcplugin',
 		chartType: "Marimekko",
         args : {
-          
+
         },
         propMap : [],
         dataReqs : [
@@ -249,7 +249,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
               caption: 'y_axis',
               required: false,
               allowMultiple: true
-            },{   
+            },{
 				id: 'measures',
               dataType: 'number',
               dataStructure: 'column',
@@ -259,20 +259,20 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
-        id : 'fcplugin_funnel', 
-        type : 'chart', 
-        source : 'FusionCharts', 
-        name : 'FusionCharts Funnel', 
-        'class' : 'pentaho.fcplugin', 
+        id : 'fcplugin_funnel',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Funnel',
+        'class' : 'pentaho.fcplugin',
         chartType: "Funnel",
         args : {
-          
+
         },
         propMap : [],
         dataReqs : [
         {
             name : 'Default',
-            reqs : [    
+            reqs : [
             {
               id: 'rows',
               dataType: 'string',
@@ -300,15 +300,15 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         source : 'FusionCharts',
         name : 'FusionCharts Doughnut',
         'class' : 'pentaho.fcplugin',
-        chartType: "Doughnut2D",     
+        chartType: "Doughnut2D",
         args : {
-           
+
         },
         propMap : [],
         dataReqs : [
         {
             name : 'Default',
-            reqs : [    
+            reqs : [
             {
               id: 'rows',
               dataType: 'string',
@@ -331,14 +331,14 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
-        id : 'fcplugin_pie2d', 
-        type : 'chart', 
-        source : 'FusionCharts', 
-        name : 'FusionCharts Pie', 
-        'class' : 'pentaho.fcplugin', 
+        id : 'fcplugin_pie2d',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Pie',
+        'class' : 'pentaho.fcplugin',
         chartType: "Pie2D",
         args : {
-          
+
         },
         propMap : [],
         dataReqs : [
@@ -370,7 +370,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         type : 'chart',
         source : 'FusionCharts',
         name : 'FusionCharts Gauge',
-        'class' : 'pentaho.fcplugin', 
+        'class' : 'pentaho.fcplugin',
 		 chartType: "AngularGauge",
         args : {
         },
@@ -429,7 +429,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         type : 'chart',
         source : 'FusionCharts',
         name : 'FusionCharts Bullet',
-        'class' : 'pentaho.fcplugin', 
+        'class' : 'pentaho.fcplugin',
 		 chartType: "VBullet",
         args : {
         },
@@ -484,10 +484,30 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     }
     );
+    //
+    // Add theme Support
+    //
+    pentaho.visualizations.forEach(function(viz){
+      var theme = {id: "theme",
+				dataType: "string",
+        //Default value needs to have a space so it can render the dropbox in pentaho right and also use the default graph
+				values: [" ","carbon", "ocean","zune","fint"],
+				ui: {
+					labels: ["Default","Carbon", "Ocean","Zune","Fint"],
+					group: "options",
+					type: "combo",
+					caption: "Theme"
+					}
+        };
+        viz.dataReqs = viz.dataReqs || [{}];
+        viz.dataReqs[0].reqs = viz.dataReqs[0].reqs || [];
+        viz.dataReqs[0].reqs.push(theme)
+      });
+
 
     /**
      * The constructor of the visualization class
-     * 
+     *
      * element HTML element, which acts as the parent node of your visualization
      */
     pentaho.fcplugin = function(canvasElement) {
@@ -496,7 +516,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         this.containerDiv.id = "chartContainer"
         this.canvasElement.appendChild(this.containerDiv);
     };
-	
+
 	//
 	//set the charType in the options object
 	//
@@ -504,10 +524,13 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 	 {
 		var args=this.controller.currentViz.args;
 		var chartType="";
+    //Apply default theme colors instead of the defaults
+    if(args.theme!="") delete options.paletteColors;
+
 		switch (this.controller.currentViz.chartType)
 		{
 			// only for column ou Bar charts
-		    //TODO move a separate funtions on each of the charts above 
+		    //TODO move a separate funtions on each of the charts above
 			case "Bar2D":
 						if(options.orientation=="vertical")
 							chartType=options.data.cols.length>2?"MSColumn":"Column";
@@ -521,15 +544,15 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 							chartType+="2D";
 							options.chartType=chartType;
 							return true;
-						}	
+						}
 						//set 2D or 3D
-						chartType+=options["2d_3d"];	
+						chartType+=options["2d_3d"];
 						break;
 					case "MSCombi":
 						var seriesTypes="";
 						$(options.data.cols).each(
 								function(index, element)
-								{	
+								{
 									if(index>0)
 									{
 										//when the chart type change, the variables are undefined but we know that all are lines
@@ -550,7 +573,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						options.seriesTypes=seriesTypes;
 						chartType="MSCombi";
 						//set 2D or 3D
-						chartType+=options["2d_3d"];	
+						chartType+=options["2d_3d"];
 					break;
 					case "Line":
 						chartType=options.data.cols.length>2?"MSLine":"Line";
@@ -563,17 +586,17 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 						var valRow=this._dataTable.dataTable.jsonTable.rows[0];
 						options.range='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"},{"id":"[MEASURE:0]","label":"Range1","type":"number"},{"id":"[MEASURE:0]","label":"Range2","type":"number"},{"id":"[MEASURE:0]","label":"Final","type":"number"}],'+
 						'"rows":[{"c":[{"f":"0","v":0},{"f":"'+valRow.c[1].f+'","v":'+valRow.c[1].v+'},{"f":"'+valRow.c[2].f+'","v":'+valRow.c[2].v+'},{"f":"'+valRow.c[3].f+'","v":'+valRow.c[3].v+'}]}]}';
-					
-						
+
+
 					default:
 						chartType=this.controller.currentViz.chartType;
 						break;
-					
-					
+
+
 			}
-			options.chartType=chartType;	
+			options.chartType=chartType;
 	 };
-	
+
 	pentaho.fcplugin.prototype._prepareOptions = function () {
 		var vizOptions = this._vizOptions;
 	};
@@ -582,7 +605,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      * Function that resizes visualizations. The resize function is called every
      * time the visualization renders as a different size, and allows the
      * visualization to adjust calculations
-     * 
+     *
      * height width
      */
     pentaho.fcplugin.prototype.resize = function(width, height) {
@@ -593,31 +616,31 @@ pen.require(["common-ui/vizapi/VizController"], function(){
       this.draw(this._dataTable, vizOptions);
     };
 
-	
+
 	/**
 	Function that cleans the Json table and check th correctFormat of the table
 	*/
-	pentaho.fcplugin.prototype.cleanJsonTable = function(dataTable) 
+	pentaho.fcplugin.prototype.cleanJsonTable = function(dataTable)
 	{
-	
+
 		for (var row=0;row<dataTable.rows.length;++row)
 		{
 			for (var col=0;col<dataTable.rows[row].c.length;++col)
 			{
-				//if null replace by the object of null		
+				//if null replace by the object of null
 				if(dataTable.rows[row].c[col]==null)
 				{
 					dataTable.rows[row].c[col]={"f":"0","v":0};
 				}
 			}
 		}
-	
+
 		return dataTable;
 	}
-	
+
     /**
      * Function that renders the visualizations
-     * 
+     *
      * dataTable a pentaho.DataTable object with the data to display vizOptions
      * the options for the visualization
      */
@@ -626,92 +649,94 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		this._dataTable=datView;
 		this._originalVizOptions = $.extend({}, vizOptions);
 		var args=this.controller.currentViz.args;
-		
+
         var options = {
                 height: this.canvasElement.offsetHeight,
                 width: this.canvasElement.offsetWidth,
                 data: this.cleanJsonTable(datView.dataTable.jsonTable)
                 //TODO convert to Google datatable to be more generic convertCdaToDataTable see pentaho-solutions\system\common-ui\resources\web\vizapi\DataTable.js
         }
-        
-		
-		
+
+
+
 		if(vizOptions.isResize)
 		{
 			    options.height= vizOptions.height;
                 options.width=vizOptions.width;
 		}
-		
-		
+
+
 		//set default values
 		args["2d_3d"]=args["2d_3d"]!=undefined?args["2d_3d"]:"2D";
 		args.orientation=args.orientation!=undefined?args.orientation:"vertical";
-		
+    args["theme"]=args["theme"]!=undefined?args["theme"]:"";
+
+
         //Set options
         //Set arguments of visualization as options.
-        $.each(args, function(key, value) { 			
+        $.each(args, function(key, value) {
 			options[key] = value;
         });
-        
-		
+
+
         //Get overall look & feel options
-        $.each(chartSettingsManager.getOverallSettings(), function(key, value) { 
+        $.each(chartSettingsManager.getOverallSettings(), function(key, value) {
             options[key] = value;
         });
-        
+
         //Override with any specific look & feel options if function is defined on chartSettingsManager
         var chartFn = chartSettingsManager[this.controller.currentViz.id];
         if(typeof chartFn === 'function') {
-            $.each(chartFn(), function(key, value) { 
+            $.each(chartFn(), function(key, value) {
                 options[key] = value;
             });
         }
-		
+
 		//generate the ChartType considering the options
 		this._chartTypeByOptions(options);
-		
-		
+
+
 		// default options
 		options["chartXML"] = true;
 		options["dashboard-mode"] = true;
-		
+
         // finish set options
-        
-        //TODO reuse XDashFusionChartComp and replace logic bellow. 
+
+        //TODO reuse XDashFusionChartComp and replace logic bellow.
         var url = webAppPath + '/content/xfusion';
         // get the xml chart
-        var resultXml = $.ajax({type: 'post', 
-                                url: url+'/renderChartExternalData', 
+        var resultXml = $.ajax({type: 'post',
+                                url: url+'/renderChartExternalData',
                                 data: {json: JSON.stringify(options)},
                                 async: false}).responseText;
         //render the chart
         //test if is for free version
         var isFree=options.isFree;
         options.chartType=(isFree==false?options.chartType:"FCF_"+options.chartType);
-	
+
 	// get HTML5 from xml
 	options.isHTML5 = eval($(resultXml).attr("isHTML5"));
 
 	if(options.isHTML5==undefined)
 		options.isHTML5=false;
 
-	//create the logic to get the correct chart name for the chart based if is HTML 5 or not	
-	var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";        
-	
+	//create the logic to get the correct chart name for the chart based if is HTML 5 or not
+	var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
+
 	//create chart Object
 	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
-	
+
 	// fix the bug that avoid the error on analyzer when using HTML5
 	//resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
 
         this.chartObject.setDataXML(resultXml);
         this.chartObject.render(this.containerDiv.id);
-        
+
         //place chart object available
         this.chart = $("#"+this.containerDiv.id).find("object");
-        
-        this.chart.attr("wmode","transparent"); 
-        //TODO end of reuse XDashFusionChartComp and replace logic bellow. 
+
+        this.chart.attr("wmode","transparent");
+        //TODO end of reuse XDashFusionChartComp and replace logic bellow.
     }
-    
+
 });
