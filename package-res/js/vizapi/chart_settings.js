@@ -30,18 +30,22 @@ var chartSettingsManager = {
             canvasBorderalpha : 0,
             paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47",
             placeValuesInside: 1,
-            valuePosition: "ABOVE"
+            valuePosition: "ABOVE",
+            exportEnabled: "1",
+            exportAtClientSide: "1",
+            toolbarHalign:'left',
+            exportFormats:"PNG=Download as PNG|PDF=Download as PDF",
         }
         return options;
-    }, 
-    
+    },
+
     fcplugin_angulargauge :  function(){
         var options = {
                 colorRange : 'FF654F;F6BD0F;8BBA00;8BBA00'
         }
         return options;
     },
-    
+
     fcplugin_bullet :  function(){
         var options = {
                 colorRange : 'FF654F;F6BD0F;8BBA00;8BBA00'
