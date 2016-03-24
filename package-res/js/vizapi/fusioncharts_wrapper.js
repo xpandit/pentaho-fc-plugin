@@ -525,7 +525,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		var args=this.controller.currentViz.args;
 		var chartType="";
     //Apply default theme colors instead of the defaults
-    if(args.theme!="") delete options.paletteColors;
+    if(args.theme.trim()!="") delete options.paletteColors;
 
 		switch (this.controller.currentViz.chartType)
 		{
