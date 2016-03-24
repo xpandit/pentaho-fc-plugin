@@ -33,8 +33,7 @@ var chartSettingsManager = {
             valuePosition: "ABOVE",
             exportEnabled: "1",
             exportAtClientSide: "1",
-            toolbarHalign:'left',
-            exportFormats:"PNG=Download as PNG|PDF=Download as PDF",
+            exportShowMenuItem: "0",
         }
         return options;
     },

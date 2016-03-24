@@ -723,9 +723,57 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 	//create the logic to get the correct chart name for the chart based if is HTML 5 or not
 	var chartTypeFull=(options.isHTML5&&!isFree)?options.chartType:url+"/swf/"+options.chartType+".swf";
 
+
+
+
+
+
+  require(['amd!cdf/lib/bootstrap'],function(){
+
+      // Export Button
+      var divButton ='<div class="dropdown" style="position: absolute; left:10px ; top:8px;" title="Export chart">';
+      divButton += '<div class="pentaho-exportbutton" type="button" data-toggle="dropdown"></div>';
+      divButton += '<ul class="dropdown-menu" style="min-width: 10px;">';
+      divButton += '<li class="dropdown-submenu">';
+      divButton += '<a id="exportpng" href="#">Download as PNG</a></li>    <li><a id="exportpdf" href="#">Download as PDF</a></li></ul>';
+      divButton += '</div>'
+      $("#chartContainer").append(divButton);
+      //Fix for the height of the analyzer buttons
+      $("#reportBtns").css("height", "40px");
+      // Cross-browser event listening
+       var addListener = function (elem, evt, fn) {
+           if (elem && elem.addEventListener) {
+               elem.addEventListener(evt, fn);
+           }
+           else if (elem && elem.attachEvent) {
+               elem.attachEvent("on" + evt, fn);
+           }
+           else {
+               elem["on" + evt] = fn;
+           }
+       };
+      var exportFC = function () {
+          e=currentChart;
+          var types = {
+              "exportpdf": "pdf",
+              "exportpng": "png"
+          };
+          if (e && e.exportChart) {
+               e.exportChart({
+                  exportFileName: e.jsVars.type+"chart",
+                  exportFormat: types[this.id]
+              });
+          }
+      };
+      addListener(document.getElementById("exportpdf"), "click", exportFC);
+      addListener(document.getElementById("exportpng"), "click", exportFC);
+  });
+
 	//create chart Object
 	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
 
+  //Access in window to chart
+  window.currentChart=this.chartObject;
 	// fix the bug that avoid the error on analyzer when using HTML5
 	//resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
 
