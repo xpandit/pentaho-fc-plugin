@@ -540,8 +540,10 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                                           name: function(val){return val == "GRADIENT" ? "bgratio": "backgroundFill";}},
           "backgroundColorEnd"        : {value: function(val,op){return op.bgColor ? op.bgColor+","+val : val;},
                                           name: function(){return "bgColor";}},
-
-
+          "valueAxisLowerLimit"       :   {value: function(val,op){op.xaxisminvalue = val; return val;},
+                                          name: function(){return "yaxisminvalue";}},
+          "valueAxisUpperLimit"       :   {value: function(val,op){op.xaxismaxvalue = val; return val;},
+                                          name: function(){return "yaxismaxvalue";}},
         };
     };
 
@@ -655,7 +657,6 @@ pen.require(["common-ui/vizapi/VizController"], function(){
      //Delete Invalid propperties
      delete _pentahoChartOptions.chartType;
      if(_pentahoChartOptions.backgroundFill == "NONE") delete _pentahoChartOptions.bgColor;
-     console.log(_pentahoChartOptions);
      options = $.extend(true, _defaultOptions , _pentahoChartOptions);
    };
 
