@@ -504,7 +504,6 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         viz.dataReqs[0].reqs.push(theme)
       });
 
-
     /**
      * The constructor of the visualization class
      *
@@ -515,6 +514,35 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         this.containerDiv = document.createElement("div");
         this.containerDiv.id = "chartContainer"
         this.canvasElement.appendChild(this.containerDiv);
+        //Mapping of pentaho chart Options to Fusion Charts Options
+        this.mapChartOptionsPentaho = {
+          "labelColor"                : "labelFontColor",
+          "labelFontFamily"           : "labelFont",
+          "labelSize"                 : "labelFontSize",
+          "labelStyle"                : {value: function(val){return 1;},name: function(val){
+                                          if(val=="PLAIN") return "labelStyle";
+                                          return val=="BOLD" ? "labelFontBold" : "labelFontItalic";
+                                        }},
+          "legendPosition"            : {value: function(val){return val.toLowerCase();},
+                                         name: function(val){return "legendPosition";}},
+          "legendBackgroundColor"     : "legendBgColor",
+          "legendFontFamily"          : "legendCaptionFont",
+          "legendSize"                : "legendCaptionFontSize",
+          "legendStyle"               : {value: function(val){return 1;},
+                                          name: function(val){
+                                          if(val=="PLAIN") return "legendStyle";
+                                          return val=="BOLD" ? "legendCaptionBold" : "legendStyle";
+                                        }},
+          "legendColor"               : "legendCaptionFontColor",
+          "backgroundColor"           : {value: function(val,op){return op.bgColor ? op.bgColor+","+val : val;},
+                                          name: function(){return "bgColor";}},
+          "backgroundFill"            : {value: function(val){return val == "GRADIENT" ? "50,50": val;},
+                                          name: function(val){return val == "GRADIENT" ? "bgratio": "backgroundFill";}},
+          "backgroundColorEnd"        : {value: function(val,op){return op.bgColor ? op.bgColor+","+val : val;},
+                                          name: function(){return "bgColor";}},
+
+
+        };
     };
 
 	//
@@ -525,7 +553,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		var args=this.controller.currentViz.args;
 		var chartType="";
     //Apply default theme colors instead of the defaults
-    if(args.theme.trim()!="") delete options.paletteColors;
+    if(args.theme.trim()!=="") delete options.paletteColors;
 
 		switch (this.controller.currentViz.chartType)
 		{
@@ -600,6 +628,36 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 	pentaho.fcplugin.prototype._prepareOptions = function () {
 		var vizOptions = this._vizOptions;
 	};
+
+  /*
+   * Function that gets the custom settings applied in pentaho analyzer, maps them to valid Fusion Chart settings and applies them to the chart received
+   */
+   pentaho.fcplugin.prototype._applyPentahoChartOptions= function(options){
+     var _defaultOptions  = options || {};
+     var _pentahoSettings = {};
+     try{
+       _pentahoSettings=cv.getActiveReport().reportDoc.getChartOptions();
+     }
+     catch (e){
+       console.warn("No options! The default options will be used.");
+       return;
+     }
+     // Get List of pentaho ChartOptions and Map the options to Fusion Chart Options
+     var _pentahoChartOptions = {};
+     for (var i=0; i < _pentahoSettings.attributes.length ; i++){
+       // Get the Mapped Value
+       var _property = this.mapChartOptionsPentaho[_pentahoSettings.attributes[i].nodeName] || _pentahoSettings.attributes[i].nodeName;
+       var mappedOption = {};
+       mappedOption.value = (typeof _property === "object" && _property.value) ? _property.value(_pentahoSettings.attributes[i].value,_pentahoChartOptions) : _pentahoSettings.attributes[i].value;
+       mappedOption.name = (typeof _property === "object" && _property.name) ? _property.name(_pentahoSettings.attributes[i].value,_pentahoChartOptions) : _property;
+       _pentahoChartOptions[mappedOption.name]= mappedOption.value;
+     }
+     //Delete Invalid propperties
+     delete _pentahoChartOptions.chartType;
+     if(_pentahoChartOptions.backgroundFill == "NONE") delete _pentahoChartOptions.bgColor;
+     console.log(_pentahoChartOptions);
+     options = $.extend(true, _defaultOptions , _pentahoChartOptions);
+   };
 
     /**
      * Function that resizes visualizations. The resize function is called every
@@ -704,6 +762,8 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 
         //TODO reuse XDashFusionChartComp and replace logic bellow.
         var url = webAppPath + '/content/xfusion';
+        // Apply Pentaho chartSettings
+        this._applyPentahoChartOptions(options);
         // get the xml chart
         var resultXml = $.ajax({type: 'post',
                                 url: url+'/renderChartExternalData',
@@ -769,14 +829,13 @@ pen.require(["common-ui/vizapi/VizController"], function(){
       addListener(document.getElementById("exportpng"), "click", exportFC);
   });
 
+
 	//create chart Object
 	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
-
   //Access in window to chart
   window.currentChart=this.chartObject;
 	// fix the bug that avoid the error on analyzer when using HTML5
 	//resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
-
         this.chartObject.setDataXML(resultXml);
         this.chartObject.render(this.containerDiv.id);
 
