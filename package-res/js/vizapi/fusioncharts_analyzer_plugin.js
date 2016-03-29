@@ -95,6 +95,9 @@ analyzerPlugins.push(
       // fired it is for the theme
 			if(config.byId('theme')!=undefined)
 				this.report.visualization.args['theme'] = config.byId('theme').value;
+      // fired it is for the trendline
+			if(config.byId('trendPoints')!=undefined)
+				this.report.visualization.args['trendPoints'] = config.byId('trendPoints').value;
 
 			//update the visualization
 			this.report.visualizationController.updateVisualization(this.report.generateVizOptions);

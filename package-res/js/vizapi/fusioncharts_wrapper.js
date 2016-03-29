@@ -421,7 +421,17 @@ pen.require(["common-ui/vizapi/VizController"], function(){
                 ui : {
                     group : "data"
                 }
-            }]
+            },{
+        id: "trendPoints",
+        dataType: "number",
+        //values: ["2D", "3D"],
+        ui: {
+          //labels: ["2D", "3D"],
+          group: "options",
+          type: "textbox",
+          caption: "Trendline"
+        }
+        }]
         }]
 	},
 	{
@@ -537,7 +547,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
           "backgroundColor"           : {value: function(val,op){return op.bgColor ? op.bgColor+","+val : val;},
                                           name: function(){return "bgColor";}},
           "backgroundFill"            : {value: function(val){return val == "GRADIENT" ? "50,50": "100,0";},
-                                                                          name: function(val){return "bgratio";}},
+                                          name: function(val){return "bgratio";}},
           "backgroundColorEnd"        : {value: function(val,op){return op.bgColor ? op.bgColor+","+val : val;},
                                           name: function(){return "bgColor";}},
           "valueAxisLowerLimit"       :   {value: function(val,op){op.xaxisminvalue = val; return val;},
@@ -729,6 +739,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
 		args["2d_3d"]=args["2d_3d"]!=undefined?args["2d_3d"]:"2D";
 		args.orientation=args.orientation!=undefined?args.orientation:"vertical";
     args["theme"]=args["theme"]!=undefined?args["theme"]:"";
+    args["trendPoints"]=args["trendPoints"]!=undefined? args["trendPoints"] : 0;
 
 
         //Set options
@@ -742,6 +753,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         $.each(chartSettingsManager.getOverallSettings(), function(key, value) {
             options[key] = value;
         });
+
 
         //Override with any specific look & feel options if function is defined on chartSettingsManager
         var chartFn = chartSettingsManager[this.controller.currentViz.id];
@@ -829,8 +841,14 @@ pen.require(["common-ui/vizapi/VizController"], function(){
       addListener(document.getElementById("exportpdf"), "click", exportFC);
       addListener(document.getElementById("exportpng"), "click", exportFC);
   });
+  if(vizOptions.trendPoints){
+    //trendPoints/TrendLine option
+    trendXML=$.parseXML("<trendPoints><point value='"+options.trendPoints+"' displayValue=' '/></trendPoints>")
+    xmlparse= $.parseXML("<root>"+resultXml+"</root>");
+    xmlparse.getElementsByTagName("chart")[0].appendChild(trendXML.firstChild);
+    resultXml=xmlparse.firstChild.innerHTML;
 
-
+  }
 	//create chart Object
 	this.chartObject = new FusionCharts( chartTypeFull, this.containerDiv.id+"-generated"+(Math.random()*16), options.width, options.height, "0","1" );
   //Access in window to chart
