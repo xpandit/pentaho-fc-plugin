@@ -796,7 +796,7 @@ pen.require(["common-ui/vizapi/VizController"], function(){
       divButton += '<div class="pentaho-exportbutton" type="button" data-toggle="dropdown"></div>';
       divButton += '<ul class="dropdown-menu" style="min-width: 10px;">';
       divButton += '<li class="dropdown-submenu">';
-      divButton += '<a id="exportpng" href="#">Download as PNG</a></li>    <li><a id="exportpdf" href="#">Download as PDF</a></li></ul>';
+      divButton += '<a id="exportpng" href="#" style="font-size: 13px;">Download as PNG</a></li>    <li><a id="exportpdf" href="#" style="font-size: 13px;">Download as PDF</a></li></ul>';
       divButton += '</div>'
       $("#chartContainer").append(divButton);
       //Fix for the height of the analyzer buttons
