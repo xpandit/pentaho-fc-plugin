@@ -295,6 +295,42 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         } ]
     },
     {
+        id : 'fcplugin_pyramid',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Pyramid',
+        'class' : 'pentaho.fcplugin',
+        chartType: "Pyramid",
+        args : {
+
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [
+            {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'Series',
+              required: true,
+              allowMultiple: false
+            },
+            {
+                id : 'measures',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Measures',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            }]
+        } ]
+    },
+    {
         id : 'fcplugin_doughnut2d',
         type : 'chart',
         source : 'FusionCharts',
@@ -337,6 +373,41 @@ pen.require(["common-ui/vizapi/VizController"], function(){
         name : 'FusionCharts Pie',
         'class' : 'pentaho.fcplugin',
         chartType: "Pie2D",
+        args : {
+
+        },
+        propMap : [],
+        dataReqs : [
+        {
+            name : 'Default',
+            reqs : [  {
+              id: 'rows',
+              dataType: 'string',
+              dataStructure: 'row',
+              caption: 'Series',
+              required: true,
+              allowMultiple: false
+            },
+            {
+                id : 'measures',
+                dataType : 'number',
+                dataStructure : 'column',
+                caption : 'Measures',
+                required : true,
+                allowMultiple : false,
+                ui : {
+                    group : "data"
+                }
+            }]
+        } ]
+    },
+    {
+        id : 'fcplugin_pareto2d',
+        type : 'chart',
+        source : 'FusionCharts',
+        name : 'FusionCharts Pareto',
+        'class' : 'pentaho.fcplugin',
+        chartType: "Pareto2D",
         args : {
 
         },
