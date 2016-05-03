@@ -1982,334 +1982,6 @@
     "typeDesc": "FusionWidgets XT Gauges"
    },
    {
-    "id": "389fd884-44bc-dd70-ec18-885abde67167",
-    "meta_cdwSupport": "true",
-    "parent": "FUSIONCHARTS",
-    "properties": [
-     {
-      "name": "name",
-      "type": "Id",
-      "value": "Cylinder"
-     },
-     {
-      "name": "dataAccessId",
-      "type": "String",
-      "value": "1"
-     },
-     {
-      "name": "listeners",
-      "type": "Listeners",
-      "value": "[]"
-     },
-     {
-      "name": "cdaRefreshInterval",
-      "type": "String",
-      "value": "5"
-     },
-     {
-      "name": "path",
-      "type": "CdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
-     },
-     {
-      "name": "colorRangeDataAccessId",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "colorRangePath",
-      "type": "CdaPath",
-      "value": ""
-     },
-     {
-      "name": "parameters",
-      "type": "ValuesArray",
-      "value": "[]"
-     },
-     {
-      "name": "height",
-      "type": "Integer",
-      "value": "350"
-     },
-     {
-      "name": "priority",
-      "type": "Integer",
-      "value": 5
-     },
-     {
-      "name": "width",
-      "type": "Integer",
-      "value": "450"
-     },
-     {
-      "name": "chartType",
-      "type": "GaugesTypeCustom",
-      "value": "cylinder"
-     },
-     {
-      "name": "htmlObject",
-      "type": "HtmlObject",
-      "value": "${h:Cylinder}"
-     },
-     {
-      "name": "executeAtStart",
-      "type": "Boolean",
-      "value": "true"
-     },
-     {
-      "name": "preExecution",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postExecution",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postFetch",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "preChange",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postChange",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "tooltip",
-      "type": "Html",
-      "value": ""
-     },
-     {
-      "name": "caption",
-      "type": "String",
-      "value": "Diesel Level in Generator"
-     },
-     {
-      "name": "subcaption",
-      "type": "String",
-      "value": "Bakersfield Central"
-     },
-     {
-      "name": "theme",
-      "type": "String",
-      "value": "fint"
-     },
-     {
-      "name": "chartScriptProperties",
-      "type": "JavaScript",
-      "value": "{\n    \"lowerLimit\"    \t: \"0\",\n    \"upperLimit\"\t\t: \"120\",\n    \"lowerLimitDisplay\"\t: \"Empty\",\n    \"upperLimitDisplay\"\t: \"Full\",\n    \"numberSuffix\"\t\t: \" ltrs\",\n    \"showValue\"\t\t\t: \"1\",\n    \"chartBottomMargin\"\t: \"45\" \n} "
-     },
-     {
-      "name": "dataSetCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "colorCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "colorRangeScriptProperties",
-      "type": "JavaScript",
-      "value": {}
-     },
-     {
-      "name": "pointCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "trendPointDataAccessId",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "trendPointPath",
-      "type": "CdaPath",
-      "value": ""
-     },
-     {
-      "name": "trendPointScriptProperties",
-      "type": "JavaScript",
-      "value": {}
-     }
-    ],
-    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
-    "typeDesc": "FusionWidgets XT Gauges"
-   },
-   {
-    "id": "6e50d0ae-f9cb-7cbd-6d35-c76db516420b",
-    "meta_cdwSupport": "true",
-    "parent": "FUSIONCHARTS",
-    "properties": [
-     {
-      "name": "name",
-      "type": "Id",
-      "value": "Thermometer"
-     },
-     {
-      "name": "dataAccessId",
-      "type": "String",
-      "value": "3"
-     },
-     {
-      "name": "listeners",
-      "type": "Listeners",
-      "value": "[]"
-     },
-     {
-      "name": "cdaRefreshInterval",
-      "type": "String",
-      "value": "5"
-     },
-     {
-      "name": "path",
-      "type": "CdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
-     },
-     {
-      "name": "colorRangeDataAccessId",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "colorRangePath",
-      "type": "CdaPath",
-      "value": ""
-     },
-     {
-      "name": "parameters",
-      "type": "ValuesArray",
-      "value": "[]"
-     },
-     {
-      "name": "height",
-      "type": "Integer",
-      "value": "350"
-     },
-     {
-      "name": "priority",
-      "type": "Integer",
-      "value": 5
-     },
-     {
-      "name": "width",
-      "type": "Integer",
-      "value": "240"
-     },
-     {
-      "name": "chartType",
-      "type": "GaugesTypeCustom",
-      "value": "thermometer"
-     },
-     {
-      "name": "htmlObject",
-      "type": "HtmlObject",
-      "value": "${h:Thermometer}"
-     },
-     {
-      "name": "executeAtStart",
-      "type": "Boolean",
-      "value": "true"
-     },
-     {
-      "name": "preExecution",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postExecution",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postFetch",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "preChange",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "postChange",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "tooltip",
-      "type": "Html",
-      "value": ""
-     },
-     {
-      "name": "caption",
-      "type": "String",
-      "value": "Temperature Monitor"
-     },
-     {
-      "name": "subcaption",
-      "type": "String",
-      "value": " Central cold store"
-     },
-     {
-      "name": "theme",
-      "type": "String",
-      "value": "fint"
-     },
-     {
-      "name": "chartScriptProperties",
-      "type": "JavaScript",
-      "value": "{\n    \"lowerLimit\": \"-10\",\n    \"upperLimit\": \"40\",\n    \"decimals\": \"1\",\n    \"numberSuffix\": \"°C\",\n    \"showhovereffect\": \"1\",\n    \"thmFillColor\": \"#008ee4\",\n    \"showGaugeBorder\": \"1\",\n    \"gaugeBorderColor\": \"#008ee4\",\n    \"gaugeBorderThickness\": \"2\",\n    \"gaugeBorderAlpha\": \"30\",\n    \"thmOriginX\": \"100\",\n    \"chartBottomMargin\": \"20\",\n    \"valueFontColor\": \"#000000\" \n} "
-     },
-     {
-      "name": "dataSetCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "colorCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "colorRangeScriptProperties",
-      "type": "JavaScript",
-      "value": {}
-     },
-     {
-      "name": "pointCallback",
-      "type": "JavaScript",
-      "value": ""
-     },
-     {
-      "name": "trendPointDataAccessId",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "trendPointPath",
-      "type": "CdaPath",
-      "value": ""
-     },
-     {
-      "name": "trendPointScriptProperties",
-      "type": "JavaScript",
-      "value": {}
-     }
-    ],
-    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
-    "typeDesc": "FusionWidgets XT Gauges"
-   },
-   {
     "id": "8ed9bc3b-2aa6-eb1d-0031-bbbd5943e070",
     "meta_cdwSupport": "true",
     "parent": "FUSIONCHARTS",
@@ -5177,31 +4849,31 @@
  "datasources": {
   "rows": []
  },
- "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE_XPFusionChartComponent.cdfde",
+ "filename": "/public/fusion-charts-dev/FusionCharts_CDE_async_component.cdfde",
  "layout": {
   "rows": [
    {
     "id": "4508e95c-8085-d759-0199-c0fd1b26436c",
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource",
     "parent": "UnIqEiD",
     "properties": [
      {
       "name": "name",
-      "type": "Id",
-      "value": "FusionChartsFintTheme"
+      "value": "FusionChartsFintTheme",
+      "type": "Id"
      },
      {
       "name": "resourceCode",
-      "type": "Resource",
-      "value": "/*\n Fint Theme v0.0.3\n FusionCharts JavaScript Library\n\n Copyright FusionCharts Technologies LLP\n License Information at <http://www.fusioncharts.com/license>\n*/\nFusionCharts.register(\"theme\",{name:\"fint\",theme:{base:{chart:{paletteColors:\"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#0e948c,#8cbb2c,#f3de00,#c02d00,#5b0101\",labelDisplay:\"auto\",baseFontColor:\"#333333\",baseFont:\"Helvetica Neue,Arial\",captionFontSize:\"14\",subcaptionFontSize:\"14\",subcaptionFontBold:\"0\",showBorder:\"0\",bgColor:\"#ffffff\",showShadow:\"0\",canvasBgColor:\"#ffffff\",showCanvasBorder:\"0\",useplotgradientcolor:\"0\",useRoundEdges:\"0\",showPlotBorder:\"0\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",\ntoolTipColor:\"#ffffff\",toolTipBorderThickness:\"0\",toolTipBgColor:\"#000000\",toolTipBgAlpha:\"80\",toolTipBorderRadius:\"2\",toolTipPadding:\"5\",legendBgAlpha:\"0\",legendBorderAlpha:\"0\",legendShadow:\"0\",legendItemFontSize:\"10\",legendItemFontColor:\"#666666\",legendCaptionFontSize:\"9\",divlineAlpha:\"100\",divlineColor:\"#999999\",divlineThickness:\"1\",divLineIsDashed:\"1\",divLineDashLen:\"1\",divLineGapLen:\"1\",scrollheight:\"10\",flatScrollBars:\"1\",scrollShowButtons:\"0\",scrollColor:\"#cccccc\",showHoverEffect:\"1\",valueFontSize:\"10\",\nshowXAxisLine:\"1\",xAxisLineThickness:\"1\",xAxisLineColor:\"#999999\"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:\"0\",fillColor:\"#0075c2\",showBorder:\"1\",borderColor:\"#eeeeee\",borderThickness:\"1\",borderAlpha:\"50\",entityFillhoverColor:\"#0075c2\",entityFillhoverAlpha:\"80\",connectorColor:\"#cccccc\",connectorThickness:\"1.5\",markerFillHoverAlpha:\"90\"}},pie2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-\n(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},doughnut2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",centerLabelFontSize:\"12\",centerLabelBold:\"1\",centerLabelFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},line:{chart:{lineThickness:\"2\"}},spline:{chart:{lineThickness:\"2\"}},column2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},\nbar2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},column3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},bar3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},area2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},splinearea:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},mscolumn2d:{chart:{valueFontColor:\"#ffffff\",\nplaceValuesInside:\"1\",rotateValues:\"1\"}},mscolumn3d:{chart:{showValues:\"0\"}},msstackedcolumn2dlinedy:{chart:{showValues:\"0\"}},stackedcolumn2d:{chart:{showValues:\"0\"}},stackedarea2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},stackedbar2d:{chart:{showValues:\"0\"}},msstackedcolumn2d:{chart:{showValues:\"0\"}},mscombi3d:{chart:{showValues:\"0\"}},mscombi2d:{chart:{showValues:\"0\"}},mscolumn3dlinedy:{chart:{showValues:\"0\"}},stackedcolumn3dline:{chart:{showValues:\"0\"}},\nstackedcolumn2dline:{chart:{showValues:\"0\"}},scrollstackedcolumn2d:{chart:{valueFontColor:\"#ffffff\"}},scrollcombi2d:{chart:{showValues:\"0\"}},scrollcombidy2d:{chart:{showValues:\"0\"}},logstackedcolumn2d:{chart:{showValues:\"0\"}},logmsline:{chart:{showValues:\"0\"}},logmscolumn2d:{chart:{showValues:\"0\"}},msstackedcombidy2d:{chart:{showValues:\"0\"}},scrollcolumn2d:{chart:{valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},pareto2d:{chart:{paletteColors:\"#0075c2\",showValues:\"0\"}},pareto3d:{chart:{paletteColors:\"#0075c2\",\nshowValues:\"0\"}},angulargauge:{chart:{pivotFillColor:\"#ffffff\",pivotRadius:\"4\",gaugeFillMix:\"{light+0}\",showTickValues:\"1\",majorTMHeight:\"12\",majorTMThickness:\"2\",majorTMColor:\"#000000\",minorTMNumber:\"0\",tickValueDistance:\"10\",valueFontSize:\"24\",valueFontBold:\"1\",gaugeInnerRadius:\"50%\",showHoverEffect:\"0\"},dials:{dial:[{baseWidth:\"10\",rearExtension:\"7\",bgColor:\"#000000\",bgAlpha:\"100\",borderColor:\"#666666\",bgHoverAlpha:\"20\"}]}},hlineargauge:{chart:{pointerFillColor:\"#ffffff\",gaugeFillMix:\"{light+0}\",\nshowTickValues:\"1\",majorTMHeight:\"3\",majorTMColor:\"#000000\",minorTMNumber:\"0\",valueFontSize:\"18\",valueFontBold:\"1\"},pointers:{pointer:[{}]}},bubble:{chart:{use3dlighting:\"0\",showplotborder:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",plotFillHoverColor:\"#2b8ecf\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},\nscatter:{chart:{use3dlighting:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},boxandwhisker2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},thermometer:{chart:{gaugeFillColor:\"#0075c2\"}},\ncylinder:{chart:{cylFillColor:\"#0075c2\"}},sparkline:{chart:{linecolor:\"#0075c2\"}},sparkcolumn:{chart:{plotFillColor:\"#0075c2\"}},sparkwinloss:{chart:{winColor:\"#0075c2\",lossColor:\"#1aaf5d\",drawColor:\"#f2c500\",scoreLessColor:\"#f45b00\"}},hbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}},vbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}}}});\n "
+      "value": "/*\n Fint Theme v0.0.3\n FusionCharts JavaScript Library\n\n Copyright FusionCharts Technologies LLP\n License Information at <http://www.fusioncharts.com/license>\n*/\nFusionCharts.register(\"theme\",{name:\"fint\",theme:{base:{chart:{paletteColors:\"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#0e948c,#8cbb2c,#f3de00,#c02d00,#5b0101\",labelDisplay:\"auto\",baseFontColor:\"#333333\",baseFont:\"Helvetica Neue,Arial\",captionFontSize:\"14\",subcaptionFontSize:\"14\",subcaptionFontBold:\"0\",showBorder:\"0\",bgColor:\"#ffffff\",showShadow:\"0\",canvasBgColor:\"#ffffff\",showCanvasBorder:\"0\",useplotgradientcolor:\"0\",useRoundEdges:\"0\",showPlotBorder:\"0\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",\ntoolTipColor:\"#ffffff\",toolTipBorderThickness:\"0\",toolTipBgColor:\"#000000\",toolTipBgAlpha:\"80\",toolTipBorderRadius:\"2\",toolTipPadding:\"5\",legendBgAlpha:\"0\",legendBorderAlpha:\"0\",legendShadow:\"0\",legendItemFontSize:\"10\",legendItemFontColor:\"#666666\",legendCaptionFontSize:\"9\",divlineAlpha:\"100\",divlineColor:\"#999999\",divlineThickness:\"1\",divLineIsDashed:\"1\",divLineDashLen:\"1\",divLineGapLen:\"1\",scrollheight:\"10\",flatScrollBars:\"1\",scrollShowButtons:\"0\",scrollColor:\"#cccccc\",showHoverEffect:\"1\",valueFontSize:\"10\",\nshowXAxisLine:\"1\",xAxisLineThickness:\"1\",xAxisLineColor:\"#999999\"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:\"0\",fillColor:\"#0075c2\",showBorder:\"1\",borderColor:\"#eeeeee\",borderThickness:\"1\",borderAlpha:\"50\",entityFillhoverColor:\"#0075c2\",entityFillhoverAlpha:\"80\",connectorColor:\"#cccccc\",connectorThickness:\"1.5\",markerFillHoverAlpha:\"90\"}},pie2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-\n(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},doughnut2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",centerLabelFontSize:\"12\",centerLabelBold:\"1\",centerLabelFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},line:{chart:{lineThickness:\"2\"}},spline:{chart:{lineThickness:\"2\"}},column2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},\nbar2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},column3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},bar3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},area2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},splinearea:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},mscolumn2d:{chart:{valueFontColor:\"#ffffff\",\nplaceValuesInside:\"1\",rotateValues:\"1\"}},mscolumn3d:{chart:{showValues:\"0\"}},msstackedcolumn2dlinedy:{chart:{showValues:\"0\"}},stackedcolumn2d:{chart:{showValues:\"0\"}},stackedarea2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},stackedbar2d:{chart:{showValues:\"0\"}},msstackedcolumn2d:{chart:{showValues:\"0\"}},mscombi3d:{chart:{showValues:\"0\"}},mscombi2d:{chart:{showValues:\"0\"}},mscolumn3dlinedy:{chart:{showValues:\"0\"}},stackedcolumn3dline:{chart:{showValues:\"0\"}},\nstackedcolumn2dline:{chart:{showValues:\"0\"}},scrollstackedcolumn2d:{chart:{valueFontColor:\"#ffffff\"}},scrollcombi2d:{chart:{showValues:\"0\"}},scrollcombidy2d:{chart:{showValues:\"0\"}},logstackedcolumn2d:{chart:{showValues:\"0\"}},logmsline:{chart:{showValues:\"0\"}},logmscolumn2d:{chart:{showValues:\"0\"}},msstackedcombidy2d:{chart:{showValues:\"0\"}},scrollcolumn2d:{chart:{valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},pareto2d:{chart:{paletteColors:\"#0075c2\",showValues:\"0\"}},pareto3d:{chart:{paletteColors:\"#0075c2\",\nshowValues:\"0\"}},angulargauge:{chart:{pivotFillColor:\"#ffffff\",pivotRadius:\"4\",gaugeFillMix:\"{light+0}\",showTickValues:\"1\",majorTMHeight:\"12\",majorTMThickness:\"2\",majorTMColor:\"#000000\",minorTMNumber:\"0\",tickValueDistance:\"10\",valueFontSize:\"24\",valueFontBold:\"1\",gaugeInnerRadius:\"50%\",showHoverEffect:\"0\"},dials:{dial:[{baseWidth:\"10\",rearExtension:\"7\",bgColor:\"#000000\",bgAlpha:\"100\",borderColor:\"#666666\",bgHoverAlpha:\"20\"}]}},hlineargauge:{chart:{pointerFillColor:\"#ffffff\",gaugeFillMix:\"{light+0}\",\nshowTickValues:\"1\",majorTMHeight:\"3\",majorTMColor:\"#000000\",minorTMNumber:\"0\",valueFontSize:\"18\",valueFontBold:\"1\"},pointers:{pointer:[{}]}},bubble:{chart:{use3dlighting:\"0\",showplotborder:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",plotFillHoverColor:\"#2b8ecf\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},\nscatter:{chart:{use3dlighting:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},boxandwhisker2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},thermometer:{chart:{gaugeFillColor:\"#0075c2\"}},\ncylinder:{chart:{cylFillColor:\"#0075c2\"}},sparkline:{chart:{linecolor:\"#0075c2\"}},sparkcolumn:{chart:{plotFillColor:\"#0075c2\"}},sparkwinloss:{chart:{winColor:\"#0075c2\",lossColor:\"#1aaf5d\",drawColor:\"#f2c500\",scoreLessColor:\"#f45b00\"}},hbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}},vbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}}}});\n ",
+      "type": "Resource"
      },
      {
       "name": "resourceType",
-      "type": "Label",
-      "value": "Javascript"
+      "value": "Javascript",
+      "type": "Label"
      }
-    ],
-    "type": "LayoutResourceCode",
-    "typeDesc": "Resource"
+    ]
    },
    {
     "id": "20ba0648-6bf1-4948-4aa2-71c5d52e4d10",
@@ -5317,7 +4989,7 @@
      {
       "name": "html",
       "type": "Html",
-      "value": "<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:300,400\" rel=\"stylesheet\" type=\"text/css\">\n<img width=\"auto\" height=\"70\" src=\"../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png\">\n<h2 class=\"light\">FusionCharts XT CDE Dashboard Samples</h2> "
+      "value": "<img width=\"auto\" height=\"70\" src=\"../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png\">\n<h2 class=\"light\">FusionCharts XT CDE Dashboard Samples</h2> "
      },
      {
       "name": "fontSize",
@@ -5642,67 +5314,6 @@
     ],
     "type": "LayoutHtml",
     "typeDesc": "Html"
-   },
-   {
-    "id": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
-    "type": "LayoutFreeForm",
-    "typeDesc": "FreeForm",
-    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
-    "properties": [
-     {
-      "name": "name",
-      "value": "sixteenhRow",
-      "type": "Id"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     },
-     {
-      "name": "elementTag",
-      "value": "div",
-      "type": "String"
-     },
-     {
-      "name": "otherAttributes",
-      "value": "[]",
-      "type": "OtherAttributesArray"
-     }
-    ]
-   },
-   {
-    "id": "bbc6cb76-3618-e032-348e-427a948cd519",
-    "type": "LayoutHtml",
-    "typeDesc": "Html",
-    "parent": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
-    "properties": [
-     {
-      "name": "name",
-      "value": "",
-      "type": "Id"
-     },
-     {
-      "name": "html",
-      "value": "<h5 class=\"light\">Gauges Example 2</h5>\r\n<div id=\"Cylinder\" style=\"float:left;margin-right:130px;\"></div>\r\n<div id=\"Thermometer\"></div> ",
-      "type": "Html"
-     },
-     {
-      "name": "fontSize",
-      "value": "",
-      "type": "Integer"
-     },
-     {
-      "name": "color",
-      "value": "",
-      "type": "Color"
-     },
-     {
-      "name": "cssClass",
-      "value": "",
-      "type": "String"
-     }
-    ]
    },
    {
     "id": "d62127aa-c1f5-602f-638e-b57a71cfb2df",
@@ -6354,7 +5965,7 @@
      {
       "name": "html",
       "type": "Html",
-      "value": "<div class=\"light third\">\r\n    Xpand IT supports Pentaho FusionCharts Plugin.\r\n    <br>\r\n    If you need more information, sharing ideas or discuss plan details, please reach us by email\r\n    <a href=\"mailto:marketing@xpand-it.com\" target=\"_top\" class=\"regular\">pentaho@xpand-it.com</a>\r\n</div> \r\n<div class=\"logos\">\r\n    <img width=\"150\" height=\"33\" src=\"../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png\">\r\n</div> "
+      "value": "<img width=\"150\" height=\"33\" src=\"../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png\"> \r\n<div class=\"light third\">\r\n    Xpand IT supports Pentaho FusionCharts Plugin.\r\n    <br>\r\n    If you need more information, sharing ideas or discuss plan details, please reach us by email\r\n    <a href=\"mailto:marketing@xpand-it.com\" target=\"_top\" class=\"regular\">pentaho@xpand-it.com</a>\r\n</div> "
      },
      {
       "name": "fontSize",

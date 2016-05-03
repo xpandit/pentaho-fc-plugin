@@ -49,26 +49,4 @@
         return model;
         </Query>
     </DataAccess>
-
-    <DataAccess id="3" connection="1" type="scriptable" access="public">
-        <Name>Thermometer</Name>
-        <Query>
-        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
-        import java.util.Random;
-
-        String[] columnNames = new String[1];
-        columnNames[0] = &quot;value&quot;;
-
-        Class[] columnTypes = new Class[1];
-        columnTypes[0] = Integer.class;
- 
-        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
-
-        Random rand = new Random();
-        int randInt_a = rand.nextInt(35);
-
-        model.addRow(new Object[]{new Integer(randInt_a)});
-        return model;
-        </Query>
-    </DataAccess>
 </CDADescriptor>
