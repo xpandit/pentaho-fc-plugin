@@ -52,53 +52,59 @@
             <div id="LED"></div>
         </div>
         <div id="sixthRow">
+            <h5 class="light">Gauges Example 2</h5>
+            <div id="Cylinder" style="float:left;margin-right:130px;"></div>
+            <div id="Thermometer"></div>
+        </div>
+        <div id="seventhRow">
             <h5 class="light">RealTime and Spark Charts</h5>
             <div id="RealTime" style="float:left;margin-right:25px;"></div>
             <div id="Spark"></div>
         </div>
-        <div id="seventhRow">
+        <div id="octaveRow">
             <h5 class="light">Bullet Graphs and Others</h5>
             <div id="Bullet" style="float:left;margin-right:25px;"></div>
             <div id="Other"></div>
         </div>
-        <div id="octaveRow">
+        <div id="ninthRow">
             <h5 class="light">Logarithmic and Spline Charts</h5>
             <div id="Logarithmic" style="float:left;margin-right:25px;"></div>
             <div id="Spline"></div>
         </div>
-        <div id="ninthRow">
+        <div id="tenthRow">
             <h5 class="light">Error and Inverse Y Axis Charts</h5>
             <div id="ErrorChart" style="float:left;margin-right:25px;"></div>
             <div id="InverseY"></div>
         </div>
-        <div id="tenthRow">
+        <div id="eleventhRow">
             <h5 class="light">Drag-able Charts and Radar Chart</h5>
             <div id="DragAble" style="float:left;margin-right:25px;"></div>
             <div id="Radar"></div>
         </div>
-        <div id="eleventhRow">
+        <div id="twelfth">
             <h5 class="light">Step Line and Select-Scatter Chart</h5>
             <div id="StepLine" style="float:left;margin-right:25px;"></div>
             <div id="SelectScatter"></div>
         </div>
-        <div id="twelfth">
+        <div id="thirteenthRow">
             <h5 class="light">Waterfall and Kagi Chart</h5>
             <div id="Waterfall" style="float:left;margin-right:25px;"></div>
             <div id="Kagi"></div>
         </div>
-        <div id="thirteenthRow">
+        <div id="fourteenthRow">
             <h5 class="light">Drag Node</h5>
             <div id="DragNode" style="margin-left:25px;"></div>
         </div>
-        <div id="fourteenthRow">
+        <div id="fifteenthRow">
             <h5 class="light">Gantt Chart</h5>
             <div id="Gantt" style="margin-left:25px;"></div>
         </div>
-        <div id="fifteenthRow">
+        <div id="sixteenthRow">
             <h5 class="light">Maps</h5>
             <div id="Map" style="margin-left:25px;"></div>
             <div id="MapWithMarkers"></div>
         </div>
+        
 
 </div>
     <div class="light third">
@@ -358,12 +364,30 @@
         type            : "XPFusionChartComponent",
     }
 
+    var Cylinder = {
+        name            : "Cylinder",
+        htmlObject      : "Cylinder",
+        chartDefinition : MetaLayerCharts.Cylinder,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+
+    var Thermometer = {
+        name            : "Thermometer",
+        htmlObject      : "Thermometer",
+        chartDefinition : MetaLayerCharts.Thermometer,
+        executeAtStart  : true,
+        type            : "XPFusionChartComponent",
+    }
+    
+
         var components = [
             PieChart3D     , Marimekko,
             StackedColumn2D, MSStackedColumn2D,
             MSComb2D, MSComb2DLinedy,
             XYPlotChart, ScrollChart,
             Angular, Led,
+            Cylinder,Thermometer,
             RealTime, Spark,
             Bullet, Funnel,
             Logarithmic,Spline,

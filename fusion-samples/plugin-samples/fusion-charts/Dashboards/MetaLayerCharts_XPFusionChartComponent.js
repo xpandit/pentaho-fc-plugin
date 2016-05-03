@@ -1645,4 +1645,52 @@
 			}
 		},
 	},
+
+	Cylinder: {
+		path         		: "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda",
+		chartType			: "cylinder",
+		height				: "350",
+		width				: "450",
+		dataAccessId		: "1",
+		cdaRefreshInterval 	: "5",
+		chartProperties: {
+			"caption"			: "Diesel Level in Generator",
+            "subcaption"		: "Bakersfield Central",
+            "lowerLimit"		: "0",
+            "theme"				: "fint",
+            "upperLimit"		: "120",
+            "lowerLimitDisplay"	: "Empty",
+            "upperLimitDisplay"	: "Full",
+            "numberSuffix"		: " ltrs",
+            "showValue"			: "1",
+            "chartBottomMargin"	: "45"
+        },
+	},
+
+	Thermometer: {
+		path         		: "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda",
+		chartType			: "thermometer",
+		height				: "350",
+		width				: "240",
+		dataAccessId		: "3",
+		cdaRefreshInterval 	: "5",
+		chartProperties: {
+			"caption": "Temperature Monitor",
+            "subcaption": " Central cold store",
+            "lowerLimit": "-10",
+            "upperLimit": "40",
+            "decimals": "1",
+            "numberSuffix": "°C",
+            "showhovereffect": "1",
+            "thmFillColor": "#008ee4",
+            "showGaugeBorder": "1",
+            "gaugeBorderColor": "#008ee4",
+            "gaugeBorderThickness": "2",
+            "gaugeBorderAlpha": "30",
+            "thmOriginX": "100",
+            "chartBottomMargin": "20",
+            "valueFontColor": "#000000",
+            "theme": "fint"
+        },
+	}
 };
