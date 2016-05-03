@@ -1982,6 +1982,334 @@
     "typeDesc": "FusionWidgets XT Gauges"
    },
    {
+    "id": "389fd884-44bc-dd70-ec18-885abde67167",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Cylinder"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "350"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "cylinder"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "${h:Cylinder}"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Diesel Level in Generator"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Bakersfield Central"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "fint"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\"    \t: \"0\",\n    \"upperLimit\"\t\t: \"120\",\n    \"lowerLimitDisplay\"\t: \"Empty\",\n    \"upperLimitDisplay\"\t: \"Full\",\n    \"numberSuffix\"\t\t: \" ltrs\",\n    \"showValue\"\t\t\t: \"1\",\n    \"chartBottomMargin\"\t: \"45\" \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
+    "id": "6e50d0ae-f9cb-7cbd-6d35-c76db516420b",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Thermometer"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "350"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "240"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "thermometer"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "${h:Thermometer}"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Temperature Monitor"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": " Central cold store"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "fint"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\": \"-10\",\n    \"upperLimit\": \"40\",\n    \"decimals\": \"1\",\n    \"numberSuffix\": \"°C\",\n    \"showhovereffect\": \"1\",\n    \"thmFillColor\": \"#008ee4\",\n    \"showGaugeBorder\": \"1\",\n    \"gaugeBorderColor\": \"#008ee4\",\n    \"gaugeBorderThickness\": \"2\",\n    \"gaugeBorderAlpha\": \"30\",\n    \"thmOriginX\": \"100\",\n    \"chartBottomMargin\": \"20\",\n    \"valueFontColor\": \"#000000\" \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
     "id": "8ed9bc3b-2aa6-eb1d-0031-bbbd5943e070",
     "meta_cdwSupport": "true",
     "parent": "FUSIONCHARTS",
@@ -5314,6 +5642,67 @@
     ],
     "type": "LayoutHtml",
     "typeDesc": "Html"
+   },
+   {
+    "id": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "sixteenhRow",
+      "type": "Id"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "elementTag",
+      "value": "div",
+      "type": "String"
+     },
+     {
+      "name": "otherAttributes",
+      "value": "[]",
+      "type": "OtherAttributesArray"
+     }
+    ]
+   },
+   {
+    "id": "bbc6cb76-3618-e032-348e-427a948cd519",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<h5 class=\"light\">Gauges Example 2</h5>\r\n<div id=\"Cylinder\" style=\"float:left;margin-right:130px;\"></div>\r\n<div id=\"Thermometer\"></div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
    },
    {
     "id": "d62127aa-c1f5-602f-638e-b57a71cfb2df",
