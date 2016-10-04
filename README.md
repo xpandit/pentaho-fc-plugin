@@ -1,4 +1,4 @@
-# Release 4.2.1 is available! #
+# Release 4.2.2 is available! #
 
 [![](http://img215.imageshack.us/img215/2140/downloadnoversion.png)](http://xpand-it.com/en/solutions-en/pentaho-fusioncharts-plugin-en)
 
