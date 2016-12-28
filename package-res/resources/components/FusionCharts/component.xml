@@ -52,8 +52,9 @@
 			<Implementation>
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
-					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
 					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+					<Dependency src="../../../js/XPCharts.js" version="1.0">XPCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -288,7 +289,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -590,7 +592,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -908,7 +911,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -1279,7 +1283,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -1603,7 +1608,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -1916,7 +1922,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -2214,7 +2221,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -2511,7 +2519,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -2672,7 +2681,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -2869,7 +2879,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -3039,7 +3050,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -3332,7 +3344,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -3631,7 +3644,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -3954,7 +3968,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -4248,7 +4263,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -4546,7 +4562,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -4895,7 +4912,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -5436,7 +5454,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -5965,7 +5984,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<!--Chart Properties-->
@@ -6304,7 +6324,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
@@ -6471,7 +6492,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
@@ -7106,7 +7128,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
@@ -7745,7 +7768,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
@@ -8426,7 +8450,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
@@ -9105,7 +9130,8 @@
 				<Code src="../../../js/CDE.js"/>
 				<Dependencies>
 					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../fusioncharts/JSClass/FusionCharts.js" version="1.0">FusionCharts</Dependency>
+					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
+<Dependency src="../../../fusioncharts/JSClass/XPCharts.js" version="1.0">FusionCharts</Dependency>
 				</Dependencies>
 				<CustomProperties>
 					<DesignerProperty>
