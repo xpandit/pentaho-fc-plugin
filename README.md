@@ -1,6 +1,6 @@
 # Release 4.2.3 is available! #
 
-[![](http://img215.imageshack.us/img215/2140/downloadnoversion.png)](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho/)
+[![](http://www.xpand-it.com/wp-content/uploads/2015/12/01-FusionCharts-Plugin-for-Pentaho-2016.jpg)](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho/)
 
 <img src='http://www.xpand-it.com/wp-content/uploads/2015/12/08-SampleBar2D.png'  alt='dashboard 1' width='250px' />
 <img src='http://www.xpand-it.com/wp-content/uploads/2015/12/11-SampleFusionMaps.png'    alt='dashboard 1' width='250px' />
