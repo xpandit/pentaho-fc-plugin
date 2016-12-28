@@ -901,7 +901,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
  * This CDF component renders Fusion Charts Graph
  *
  */
- 
+
 var xLoadFunct= function(){
 	window.XDashFusionChartComponent = BaseComponent.extend({
 		type: "XDashFusionChartComponent",
@@ -1096,6 +1096,25 @@ var xLoadFunct= function(){
 			// default options
 			options["chartXML"] = true;
 			options["dashboard-mode"] = true;
+
+
+			//if has relative path in CDA calculates the absolute path
+			 var dashboardPath=Dashboards.context.path.split("/");
+			 dashboardPath.pop();
+			 var cdaPath=decodeURI(options.cdaPath).split("%2F");
+			 var i=0;
+			 if(cdaPath[0]=="..")
+			 {
+					 for (;i<cdaPath.length;++i)
+					 {
+							 if(cdaPath[0]=="..")
+							 {
+									 dashboardPath.pop();
+									 cdaPath.shift();
+							 }
+					 }
+					 options.cdaPath=dashboardPath.concat(cdaPath).join("/");
+			 }
 
 
 			//transform the array of range values into a JSON object
