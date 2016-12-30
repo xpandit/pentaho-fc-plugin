@@ -4,7 +4,7 @@
 		width           : "450",
 		chartType       : "Pie3D",
 		path         		: "/public/plugin-samples/fusion-charts/Fusion Charts/SingleSeriesCharts.cda",
-		dataAccessId 		: "2",
+		dataAccessId 		: "1",
 		chartProperties:{
 			caption     		: "Sales Per Year",
 			xAxisName       : "Years",
@@ -19,7 +19,7 @@
 		width           : "450",
 		chartType       : "Column2D",
 		path         		: "/public/plugin-samples/fusion-charts/Fusion Charts/SingleSeriesCharts.cda",
-		dataAccessId 		: "2",
+		dataAccessId 		: "1",
 		chartProperties:{
 			caption      		: "Sales Per Year",
 			xAxisName       : "Years",

@@ -2,23 +2,23 @@
  "components": {
   "rows": [
    {
-    "id": "CHARTS",
-    "name": "Charts",
+    "id": "FUSIONCHARTS",
+    "name": "FusionCharts",
     "parent": "UnIqEiD",
     "properties": [
      {
       "name": "Group",
       "type": "Label",
-      "value": "Charts"
+      "value": "FusionCharts"
      }
     ],
     "type": "Label",
     "typeDesc": "<i>Group</i>"
    },
    {
-    "id": "a0455421-e25a-94a5-b0f2-563ba179d8fc",
+    "id": "846494b3-8a26-1c66-56ac-8b361b283f2e",
     "meta_cdwSupport": "true",
-    "parent": "CHARTS",
+    "parent": "FUSIONCHARTS",
     "properties": [
      {
       "name": "name",
@@ -26,9 +26,9 @@
       "value": "BarChart"
      },
      {
-      "name": "cdaDataAccessId",
+      "name": "dataAccessId",
       "type": "String",
-      "value": "2"
+      "value": "1"
      },
      {
       "name": "listeners",
@@ -36,19 +36,9 @@
       "value": "[]"
      },
      {
-      "name": "cdaPath",
-      "type": "CdaPath",
-      "value": "../Fusion Charts Free/BarChart2D.cda"
-     },
-     {
       "name": "path",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "customfunction",
-      "type": "JavaScript",
-      "value": ""
+      "type": "CdaPath",
+      "value": "../Fusion Charts/SingleSeriesCharts.cda"
      },
      {
       "name": "parameters",
@@ -68,37 +58,17 @@
      {
       "name": "width",
       "type": "Integer",
-      "value": "500"
-     },
-     {
-      "name": "chartLink",
-      "type": "String",
-      "value": "JavaScript: alert('{series}','{categories}','{value}')"
+      "value": "300"
      },
      {
       "name": "chartType",
-      "type": "String",
-      "value": "MSColumn2D"
-     },
-     {
-      "name": "categoriesParam",
-      "type": "String",
-      "value": "categories"
-     },
-     {
-      "name": "seriesParam",
-      "type": "String",
-      "value": "series"
+      "type": "singleSeriesChartsTypeCustom",
+      "value": "column2d"
      },
      {
       "name": "htmlObject",
       "type": "HtmlObject",
-      "value": "chart1"
-     },
-     {
-      "name": "valueParam",
-      "type": "String",
-      "value": "value"
+      "value": "${h:chart1}"
      },
      {
       "name": "executeAtStart",
@@ -134,25 +104,71 @@
       "name": "tooltip",
       "type": "Html",
       "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Year"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Sales"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
      }
     ],
-    "type": "ComponentsXDashFusionChartComponent",
-    "typeDesc": "FusionCharts Component"
+    "rowName": "Single Series Charts",
+    "type": "ComponentsXDashFusionChartComponentAsyncSingleSeries",
+    "typeDesc": "FusionCharts XT Single Series Charts"
    },
    {
-    "id": "edfb20e4-3077-9121-2342-8b19c23c7fd5",
+    "id": "064aadb5-5002-dff2-de9d-52b18df9c53e",
     "meta_cdwSupport": "true",
-    "parent": "CHARTS",
+    "parent": "FUSIONCHARTS",
     "properties": [
      {
       "name": "name",
       "type": "Id",
-      "value": "Column2D"
+      "value": "PieChart"
      },
      {
-      "name": "cdaDataAccessId",
+      "name": "dataAccessId",
       "type": "String",
-      "value": "2"
+      "value": "1"
      },
      {
       "name": "listeners",
@@ -160,19 +176,9 @@
       "value": "[]"
      },
      {
-      "name": "cdaPath",
-      "type": "CdaPath",
-      "value": "/public/plugin-samples/fusion-charts/Fusion Charts Free/ColumnChart3D.cda"
-     },
-     {
       "name": "path",
-      "type": "String",
-      "value": ""
-     },
-     {
-      "name": "customfunction",
-      "type": "JavaScript",
-      "value": ""
+      "type": "CdaPath",
+      "value": "../Fusion Charts/SingleSeriesCharts.cda"
      },
      {
       "name": "parameters",
@@ -195,34 +201,14 @@
       "value": "500"
      },
      {
-      "name": "chartLink",
-      "type": "String",
-      "value": "JavaScript: alert('{series}','{categories}','{value}')"
-     },
-     {
       "name": "chartType",
-      "type": "String",
-      "value": "Column3D"
-     },
-     {
-      "name": "categoriesParam",
-      "type": "String",
-      "value": "categories"
-     },
-     {
-      "name": "seriesParam",
-      "type": "String",
-      "value": "series"
+      "type": "singleSeriesChartsTypeCustom",
+      "value": "pie3d"
      },
      {
       "name": "htmlObject",
       "type": "HtmlObject",
-      "value": "chart2"
-     },
-     {
-      "name": "valueParam",
-      "type": "String",
-      "value": "value"
+      "value": "${h:chart2}"
      },
      {
       "name": "executeAtStart",
@@ -258,10 +244,56 @@
       "name": "tooltip",
       "type": "Html",
       "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Year"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Sales"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
      }
     ],
-    "type": "ComponentsXDashFusionChartComponent",
-    "typeDesc": "FusionCharts Component"
+    "rowName": "Single Series Charts",
+    "type": "ComponentsXDashFusionChartComponentAsyncSingleSeries",
+    "typeDesc": "FusionCharts XT Single Series Charts"
    }
   ]
  },
