@@ -9,4 +9,4 @@ $(fusionChartsScript).load(function() {  
                                                 }      
                             }    
                         }
-                    }
+                    })});
