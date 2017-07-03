@@ -1,0 +1,494 @@
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:Series:MetaLayerCharts_XPFusionChartComponent.js"></script>
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+
+<div class="dashboardContent">
+	<div class="header">
+		<img width="auto" height="70" src="../../../api/repos/FusionCharts/static/custom/img/Logo-FusionChartsPlugin.png">
+		<h2 class="light">FusionCharts XT Type Series Sample</h2>
+	</div>
+
+	<div class="Info" style="margin-bottom:30px;">
+		<h5 class="light">How to get Fusion Charts XT</h5>
+		All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+		<div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+	</div>
+
+	<div id="charts">
+		<div id="firstRow">
+			<h5 class="light">Multi-series Column 2D and Multi-series Column 3D (Multi-series Charts)</h5>
+			<div id="MsColumn2D" style="float:left;margin-right:25px;"></div>
+			<div id="MsColumn3D"></div>
+		</div>
+		<div id="secondRow">
+			<h5 class="light">Multi-series Line 2D and Multi-series Bar 2D (Multi-series Charts)</h5>
+			<div id="MsLine" style="float:left;margin-right:25px;"></div>
+			<div id="MsBar2D"></div>
+		</div>
+		<div id="thirdRow">
+			<h5 class="light">Multi-series Bar 3D and Multi-series Area 2D (Multi-series Charts)</h5>
+			<div id="MsBar3D" style="float:left;margin-right:25px;"></div>
+			<div id="MsArea"></div>
+		</div>
+		<div id="fourthRow">
+			<h5 class="light">Marimekko and Zoom Line (Multi-series Charts)</h5>
+			<div id="Marimekko" style="float:left;margin-right:25px;"></div>
+			<div id="ZoomLine"></div>
+		</div>
+		<div id="fifthRow">
+			<h5 class="light">Stacked Column 2D and Stacked Column 3D (Stacked Charts)</h5>
+			<div id="StackedColumn2D" style="float:left;margin-right:25px;"></div>
+			<div id="StackedColumn3D"></div>
+		</div>
+		<div id="sixthRow">
+			<h5 class="light">Stacked Bar 2D and Stacked Bar 3D (Stacked Charts)</h5>
+			<div id="StackedBar2D" style="float:left;margin-right:25px;"></div>
+			<div id="StackedBar3D"></div>
+		</div>
+		<div id="seventhRow">
+			<h5 class="light">Stacked Area 2D (Stacked Charts) and Scatter Chart (XY Plot Charts)</h5>
+			<div id="StackedArea2D" style="float:left;margin-right:25px;"></div>
+			<div id="Scatter"></div>
+		</div>
+		<div id="eighthRow">
+			<h5 class="light">Bubble Chart (Stacked Charts) and Scroll Stacked Column 2D (Scroll Charts)</h5>
+			<div id="Bubble" style="float:left;margin-right:25px;"></div>
+			<div id="ScrollStackedColumn2D"></div>
+		</div>
+		<div id="ninethRow">
+			<h5 class="light">Real-time Area and Real-time Column (Real-time Data-streaming Charts)</h5>
+			<div id="RealTimeArea" style="float:left;margin-right:25px;"></div>
+			<div id="RealTimeColumn"></div>
+		</div>
+		<div id="tenthRow">
+			<h5 class="light">Real-time Line and Real-time Stacked Area (Real-time Data-streaming Charts)</h5>
+			<div id="RealTimeLine" style="float:left;margin-right:25px;"></div>
+			<div id="RealTimeStackedArea"></div>
+		</div>
+		<div id="eleventhRow">
+			<h5 class="light">Real-time Stacked Column and Real-time Line (Dual Y) (Real-time Data-streaming Charts)</h5>
+			<div id="RealTimeStackedColumn" style="float:left;margin-right:25px;"></div>
+			<div id="RealTimeLineDy"></div>
+		</div>
+		<div id="twelfthRow">
+			<h5 class="light">Logarithmic Column 2D Chart and Logarithmic Line 2D Chart (Logarithmic Charts)</h5>
+			<div id="LogMsColumn2D" style="float:left;margin-right:25px;"></div>
+			<div id="LogMsLine"></div>
+		</div>
+		<div id="thirteenthRow">
+			<h5 class="light">Multi-Series Spline 2D and Multi-Series Spline Area 2D (Spline Charts)</h5>
+			<div id="MsSpline" style="float:left;margin-right:25px;"></div>
+			<div id="MsSplineArea"></div>
+		</div>
+		<div id="fourteenthRow">
+			<h5 class="light">Error Bar Chart and Error Line 2D Chart (Error Charts)</h5>
+			<div id="ErrorBar2D" style="float:left;margin-right:25px;"></div>
+			<div id="ErrorLine"></div>
+		</div>
+		<div id="fifteenthRow">
+			<h5 class="light">Error Scatter Chart (Error Charts) and Inverse y-Axis Area 2D Chart (Inverse Y Axis Charts)</h5>
+			<div id="ErrorScatter" style="float:left;margin-right:25px;"></div>
+			<div id="InverseArea"></div>
+		</div>
+		<div id="sixteenthRow">
+			<h5 class="light">Inverse y-Axis Column 2D Chart and Inverse y-Axis Line 2D Chart (Inverse Y Axis Charts)</h5>
+			<div id="InverseMsColumn2D" style="float:left;margin-right:25px;"></div>
+			<div id="InverseMsLine"></div>
+		</div>
+		<div id="seventeenthRow">
+			<h5 class="light">Select-Scatter Chart (Miscellaneous Power Charts)</h5>
+			<div id="SelectScatter" style="float:left;margin-right:25px;"></div>
+			<div id=""></div>
+		</div>
+	</div>
+
+	<div class="light third">
+		Xpand IT supports Pentaho FusionCharts Plugin.
+		<br>
+		If you need more information, sharing ideas or discuss plan details, please reach us by email
+		<a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
+	</div>
+	<div class="logos">
+		<img width="150" height="33" src="../../../api/repos/FusionCharts/static/custom/img/logo-xpand.png">
+	</div>
+
+</div>
+<script language="javascript" type="text/javascript">
+// Dashboard Parameters
+var dashboard;
+
+require([
+	'cdf/lib/jquery',
+	'cdf/Dashboard.Bootstrap',
+	'xfusion/charts/XDashFCComponent'],
+	function($, Dashboard, XDashFCComponent) {
+
+		dashboard = new Dashboard();
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsColumn2D",
+			htmlObject      : "MsColumn2D",
+			chartDefinition : MetaLayerCharts.MsColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "1",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsColumn3D",
+			htmlObject      : "MsColumn3D",
+			chartDefinition : MetaLayerCharts.MsColumn3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "2",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsLine",
+			htmlObject      : "MsLine",
+			chartDefinition : MetaLayerCharts.MsLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "3",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsBar2D",
+			htmlObject      : "MsBar2D",
+			chartDefinition : MetaLayerCharts.MsBar2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "4",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsBar3D",
+			htmlObject      : "MsBar3D",
+			chartDefinition : MetaLayerCharts.MsBar3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "5",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsArea",
+			htmlObject      : "MsArea",
+			chartDefinition : MetaLayerCharts.MsArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "6",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "Marimekko",
+			htmlObject      : "Marimekko",
+			chartDefinition : MetaLayerCharts.Marimekko,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "7",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ZoomLine",
+			htmlObject      : "ZoomLine",
+			chartDefinition : MetaLayerCharts.ZoomLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "8",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedColumn2D",
+			htmlObject      : "StackedColumn2D",
+			chartDefinition : MetaLayerCharts.StackedColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "9",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedColumn3D",
+			htmlObject      : "StackedColumn3D",
+			chartDefinition : MetaLayerCharts.StackedColumn3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "10",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedBar2D",
+			htmlObject      : "StackedBar2D",
+			chartDefinition : MetaLayerCharts.StackedBar2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "11",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedBar3D",
+			htmlObject      : "StackedBar3D",
+			chartDefinition : MetaLayerCharts.StackedBar3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "12",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedArea2D",
+			htmlObject      : "StackedArea2D",
+			chartDefinition : MetaLayerCharts.StackedArea2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "13",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "Scatter",
+			htmlObject      : "Scatter",
+			chartDefinition : MetaLayerCharts.Scatter,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "14",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "Bubble",
+			htmlObject      : "Bubble",
+			chartDefinition : MetaLayerCharts.Bubble,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "15",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ScrollStackedColumn2D",
+			htmlObject      : "ScrollStackedColumn2D",
+			chartDefinition : MetaLayerCharts.ScrollStackedColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "16",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeArea",
+			htmlObject      : "RealTimeArea",
+			chartDefinition : MetaLayerCharts.RealTimeArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "17",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeColumn",
+			htmlObject      : "RealTimeColumn",
+			chartDefinition : MetaLayerCharts.RealTimeColumn,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "18",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeLine",
+			htmlObject      : "RealTimeLine",
+			chartDefinition : MetaLayerCharts.RealTimeLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "19",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeStackedArea",
+			htmlObject      : "RealTimeStackedArea",
+			chartDefinition : MetaLayerCharts.RealTimeStackedArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "20",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeStackedColumn",
+			htmlObject      : "RealTimeStackedColumn",
+			chartDefinition : MetaLayerCharts.RealTimeStackedColumn,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "21",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "RealTimeLineDy",
+			htmlObject      : "RealTimeLineDy",
+			chartDefinition : MetaLayerCharts.RealTimeLineDy,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "22",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "LogMsColumn2D",
+			htmlObject      : "LogMsColumn2D",
+			chartDefinition : MetaLayerCharts.LogMsColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "23",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "LogMsLine",
+			htmlObject      : "LogMsLine",
+			chartDefinition : MetaLayerCharts.LogMsLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "24",
+		}));
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsSpline",
+			htmlObject      : "MsSpline",
+			chartDefinition : MetaLayerCharts.MsSpline,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "25",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsSplineArea",
+			htmlObject      : "MsSplineArea",
+			chartDefinition : MetaLayerCharts.MsSplineArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "26",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ErrorBar2D",
+			htmlObject      : "ErrorBar2D",
+			chartDefinition : MetaLayerCharts.ErrorBar2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "27",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ErrorLine",
+			htmlObject      : "ErrorLine",
+			chartDefinition : MetaLayerCharts.ErrorLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "28",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ErrorScatter",
+			htmlObject      : "ErrorScatter",
+			chartDefinition : MetaLayerCharts.ErrorScatter,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "29",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "InverseArea",
+			htmlObject      : "InverseArea",
+			chartDefinition : MetaLayerCharts.InverseArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "30",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "InverseMsColumn2D",
+			htmlObject      : "InverseMsColumn2D",
+			chartDefinition : MetaLayerCharts.InverseMsColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "31",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "InverseMsLine",
+			htmlObject      : "InverseMsLine",
+			chartDefinition : MetaLayerCharts.InverseMsLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "32",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "SelectScatter",
+			htmlObject      : "SelectScatter",
+			chartDefinition : MetaLayerCharts.SelectScatter,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "Series",
+			priority        : "33",
+		}));
+
+		dashboard.init();
+		window.Dashboard = dashboard;
+	});
+
+</script>

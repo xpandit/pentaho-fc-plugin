@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+      <Name>Sample Bulb Gauges</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(60 - 5) + 5;
+              
+          model.addRow(new Object[]{new Integer(randInt_a)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+      <Name>Sample Bulb Gauges ColorRange</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;minValue&quot;;
+        columnNames[1] = &quot;maxValue&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+        model.addRow(new Object[]{new Integer(5),new Integer(25)});
+        model.addRow(new Object[]{new Integer(25),new Integer(35)});
+        model.addRow(new Object[]{new Integer(35),new Integer(60)});
+        return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="3" connection="1" type="scriptable" access="public">
+      <Name>Sample Cylinder Gauges</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(110 - 25) + 25;
+              
+          model.addRow(new Object[]{new Integer(randInt_a)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="4" connection="1" type="scriptable" access="public">
+      <Name>Sample HLed Gauges</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(100);
+              
+          model.addRow(new Object[]{new Integer(randInt_a)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="5" connection="1" type="scriptable" access="public">
+      <Name>Sample HLed Gauges ColorRange</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;minValue&quot;;
+        columnNames[1] = &quot;maxValue&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+        model.addRow(new Object[]{new Integer(0),new Integer(45)});
+        model.addRow(new Object[]{new Integer(45),new Integer(75)});
+        model.addRow(new Object[]{new Integer(75),new Integer(100)});
+        return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="6" connection="1" type="scriptable" access="public">
+      <Name>Sample Thermometer Gauges</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(25);
+              
+          model.addRow(new Object[]{new Integer(randInt_a)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="7" connection="1" type="scriptable" access="public">
+      <Name>Sample Bullet</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;value&quot;;
+        columnNames[1] = &quot;target&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+
+        Random rand = new Random();
+        int randInt_a = rand.nextInt(120);
+        int randInt_b = rand.nextInt(120);
+
+        model.addRow(new Object[]{new Integer(82), new Integer(90)});
+        return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="8" connection="1" type="scriptable" access="public">
+      <Name>Sample Bullet ColorRange</Name>
+        <Query>
+        import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+        import java.util.Random;
+
+        String[] columnNames = new String[2];
+        columnNames[0] = &quot;minValue&quot;;
+        columnNames[1] = &quot;maxValue&quot;;
+
+        Class[] columnTypes = new Class[2];
+        columnTypes[0] = Integer.class;
+        columnTypes[1] = Integer.class;
+ 
+        TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+        model.addRow(new Object[]{new Integer(0),new Integer(50)});
+        model.addRow(new Object[]{new Integer(50),new Integer(75)});
+        model.addRow(new Object[]{new Integer(75),new Integer(100)});
+        return model;
+        </Query>
+    </DataAccess>
+
+</CDADescriptor>

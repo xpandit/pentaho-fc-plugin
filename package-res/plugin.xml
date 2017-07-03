@@ -20,8 +20,8 @@
 	      <static-path url="/xfusion/JSClass" localFolder="fusioncharts/JSClass"/>
 	      <static-path url="/xfusion/swf" localFolder="fusioncharts/charts"/>
 	      <static-path url="/xfusion/widgets" localFolder="widgets"/>
-		  <static-path url="/xfusion/static" localFolder="static"/>
-		  <static-path url="/xfusion/resources" localFolder="resources"/>
+		  	<static-path url="/xfusion/static" localFolder="static"/>
+		  	<static-path url="/xfusion/resources" localFolder="resources"/>
 	  </static-paths>
 
   	  <content-type>
@@ -30,7 +30,7 @@
 			<company name="" url="" logo="@PLUGIN_COMPANY_LOGO@"></company>
 		</content-type>
 
-	  <content-type type="xfusion" mime-type="text/html">
+	  <!-- <content-type type="xfusion" mime-type="text/html">
 	    <title>Fusion Config</title>
 	    <description>Fusion Config File</description>
 	    <icon-url>content/xfusion/res/icon.jpg</icon-url>
@@ -40,23 +40,24 @@
 	        <id>RUN</id>
 	      </operation>
 	    </operations>
-	  </content-type>
+	  </content-type> -->
   </content-types>
 
   <external-resources>
+		<file context="requirejs">content/xfusion/resources/fusion-plugin-require-js-cfg.js</file>
   	<!-- Integration with EE Dashboards-->
-    <file context="dashboards">content/xfusion/js/XDashFusionChartComponent.js</file>
+    <!--<file context="dashboards">content/xfusion/js/XDashFusionChartComponent.js</file>-->
     <!-- Integration with Analyzer -->
-  	<file context="analyzer">content/xfusion/js/vizapi/fusioncharts_wrapper.js</file>
-    <file context="analyzer">content/xfusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>
+  	<!--<file context="analyzer">content/xfusion/js/vizapi/fusioncharts_wrapper.js</file>-->
+    <!--<file context="analyzer">content/xfusion/js/vizapi/fusioncharts_analyzer_plugin.js</file>-->
     <!-- Required dependencies -->
-    <file context="analyzer">content/xfusion/js/vizapi/chart_settings.js</file>
-    <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
+    <!--<file context="analyzer">content/xfusion/js/vizapi/chart_settings.js</file>-->
+    <!--<file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>-->
     <!-- Themes -->
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.carbon.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.fint.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.ocean.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.zune.js</file>
+    <!--<file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.carbon.js</file>-->
+    <!--<file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.fint.js</file>-->
+    <!--<file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.ocean.js</file>-->
+    <!--<file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.zune.js</file>-->
    <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file> -->
   </external-resources>
 

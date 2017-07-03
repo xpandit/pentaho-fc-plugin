@@ -1,0 +1,251 @@
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:SeriesColumn:MetaLayerCharts_XPFusionChartComponent.js"></script>
+<link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
+
+<div class="dashboardContent">
+	<div class="header">
+		<img width="auto" height="70" src="../../../api/repos/FusionCharts/static/custom/img/Logo-FusionChartsPlugin.png">
+		<h2 class="light">FusionCharts XT Type SeriesColumn Sample</h2>
+	</div>
+
+	<div class="Info" style="margin-bottom:30px;">
+		<h5 class="light">How to get Fusion Charts XT</h5>
+		All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
+		<div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+	</div>
+
+	<div id="charts">
+		<div id="firstRow">
+			<h5 class="light">Multi-series 2D Single Y Combination Chart and Multi-series 3D Single Y Combination Chart (Combination  Charts)</h5>
+			<div id="MsCombi2D" style="float:left;margin-right:25px;"></div>
+			<div id="MsCombi3D"></div>
+		</div>
+		<div id="secondRow">
+			<h5 class="light">Multi-series Column 3D + Line - Single Y Axis and Stacked Column2D + Line single Y Axis (Combination Charts)</h5>
+			<div id="MsColumnLine3D" style="float:left;margin-right:25px;"></div>
+			<div id="StackedColumn2DLine"></div>
+		</div>
+		<div id="thirdRow">
+			<h5 class="light">Stacked Column3D + Line single Y Axis and Multi-series 2D Dual Y Combination Chart (Combination Charts)</h5>
+			<div id="StackedColumn3DLine" style="float:left;margin-right:25px;"></div>
+			<div id="MsCombiDy2D"></div>
+		</div>
+		<div id="fourthRow">
+			<h5 class="light">Multi-series Column 3D + Line - Dual Y Axis and Stacked Column 3D + Line Dual Y Axis (Combination Charts)</h5>
+			<div id="MsColumn3DLineDy" style="float:left;margin-right:25px;"></div>
+			<div id="StackedColumn3DLineDy"></div>
+		</div>
+		<div id="fifthRow">
+			<h5 class="light">Scroll Combination 2D (Single Y) and Scroll Combination 2D (Dual Y) (Scroll Charts)</h5>
+			<div id="ScrollCombi2D" style="float:left;margin-right:25px;"></div>
+			<div id="ScrollCombiDy2D"></div>
+		</div>
+		<div id="sixthRow">
+			<h5 class="light">Drag-able Column 2D Chart and Drag-able Line 2D Chart (Drag-able Charts)</h5>
+			<div id="DragColumn2D" style="float:left;margin-right:25px;"></div>
+			<div id="DragLine"></div>
+		</div>
+		<div id="seventhRow">
+			<h5 class="light">Drag-able Area 2D Chart (Drag-able Charts) and Radar Chart (Miscellaneous Power Charts)</h5>
+			<div id="DragArea" style="float:left;margin-right:25px;"></div>
+			<div id="Radar"></div>
+		</div>
+		<div id="eighthRow">
+			<h5 class="light">Step Line Charts (Miscellaneous Power Charts)</h5>
+			<div id="MsStepLine" style="float:left;margin-right:25px;"></div>
+		</div>
+	</div>
+
+	<div class="light third">
+		Xpand IT supports Pentaho FusionCharts Plugin.
+		<br>
+		If you need more information, sharing ideas or discuss plan details, please reach us by email
+		<a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
+	</div>
+	<div class="logos">
+		<img width="150" height="33" src="../../../api/repos/FusionCharts/static/custom/img/logo-xpand.png">
+	</div>
+
+</div>
+<script language="javascript" type="text/javascript">
+// Dashboard Parameters
+var dashboard;
+
+require([
+	'cdf/lib/jquery',
+	'cdf/Dashboard.Bootstrap',
+	'xfusion/charts/XDashFCComponent'],
+	function($, Dashboard, XDashFCComponent) {
+
+		dashboard = new Dashboard();
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsCombi2D",
+			htmlObject      : "MsCombi2D",
+			chartDefinition : MetaLayerCharts.MsCombi2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "1",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsCombi3D",
+			htmlObject      : "MsCombi3D",
+			chartDefinition : MetaLayerCharts.MsCombi3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "2",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsColumnLine3D",
+			htmlObject      : "MsColumnLine3D",
+			chartDefinition : MetaLayerCharts.MsColumnLine3D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "3",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedColumn2DLine",
+			htmlObject      : "StackedColumn2DLine",
+			chartDefinition : MetaLayerCharts.StackedColumn2DLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "4",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedColumn3DLine",
+			htmlObject      : "StackedColumn3DLine",
+			chartDefinition : MetaLayerCharts.StackedColumn3DLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "5",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsCombiDy2D",
+			htmlObject      : "MsCombiDy2D",
+			chartDefinition : MetaLayerCharts.MsCombiDy2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "6",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsColumn3DLineDy",
+			htmlObject      : "MsColumn3DLineDy",
+			chartDefinition : MetaLayerCharts.MsColumn3DLineDy,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "7",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "StackedColumn3DLineDy",
+			htmlObject      : "StackedColumn3DLineDy",
+			chartDefinition : MetaLayerCharts.StackedColumn3DLineDy,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "8",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ScrollCombi2D",
+			htmlObject      : "ScrollCombi2D",
+			chartDefinition : MetaLayerCharts.ScrollCombi2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "9",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "ScrollCombiDy2D",
+			htmlObject      : "ScrollCombiDy2D",
+			chartDefinition : MetaLayerCharts.ScrollCombiDy2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "10",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "DragColumn2D",
+			htmlObject      : "DragColumn2D",
+			chartDefinition : MetaLayerCharts.DragColumn2D,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "11",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "DragLine",
+			htmlObject      : "DragLine",
+			chartDefinition : MetaLayerCharts.DragLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "12",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "DragArea",
+			htmlObject      : "DragArea",
+			chartDefinition : MetaLayerCharts.DragArea,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "13",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "Radar",
+			htmlObject      : "Radar",
+			chartDefinition : MetaLayerCharts.Radar,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "14",
+		}));
+
+
+		dashboard.addComponent(new XDashFCComponent({
+			name            : "MsStepLine",
+			htmlObject      : "MsStepLine",
+			chartDefinition : MetaLayerCharts.MsStepLine,
+			executeAtStart  : true,
+			type            : "XDashFCComponent",
+			dataType        : "SeriesColumn",
+			priority        : "15",
+		}));
+
+		dashboard.init();
+		window.Dashboard = dashboard;
+	});
+
+</script>

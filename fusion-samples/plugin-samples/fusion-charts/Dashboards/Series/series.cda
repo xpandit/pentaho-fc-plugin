@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+    	<Name>Sample Multi-Series Column 2D</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Previous Year"), new Integer(10000)});
+          model.addRow(new Object[]{new String("Previous Year"), new Integer(11500)});
+          model.addRow(new Object[]{new String("Previous Year"), new Integer(12500)});
+          model.addRow(new Object[]{new String("Previous Year"), new Integer(15000)});
+
+          model.addRow(new Object[]{new String("Current Year"), new Integer(25400)});
+          model.addRow(new Object[]{new String("Current Year"), new Integer(29800)});
+          model.addRow(new Object[]{new String("Current Year"), new Integer(21800)});
+          model.addRow(new Object[]{new String("Current Year"), new Integer(26800)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+      <Name>Sample Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Q1")});
+          model.addRow(new Object[]{new String("Q2")});
+          model.addRow(new Object[]{new String("Q3")});
+          model.addRow(new Object[]{new String("Q4")});        
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="3" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Line</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(15123)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(14233)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(25507)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(9110)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(15529)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(20803)});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(19202)});
+
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(13400)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(12800)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(22800)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(12400)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(15800)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(19800)});
+          model.addRow(new Object[]{new String("Los Angeles Topanga"), new Integer(21800)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="4" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Line Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Mon")});
+          model.addRow(new Object[]{new String("Tue")});
+          model.addRow(new Object[]{new String("Wed")});
+          model.addRow(new Object[]{new String("National holiday")});
+          model.addRow(new Object[]{new String("Thu")});
+          model.addRow(new Object[]{new String("Fri")});
+          model.addRow(new Object[]{new String("Sat")});
+          model.addRow(new Object[]{new String("Sun")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="5" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Bar</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Food Products"), new Integer(17000)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(19500)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(12500)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(14500)});
+          model.addRow(new Object[]{new String("Food Products"), new Integer(17500)});
+
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(25400)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(29800)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(21800)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(19500)});
+          model.addRow(new Object[]{new String("Non-Food Products"), new Integer(11500)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="6" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Line Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Bakersfield Central")});
+          model.addRow(new Object[]{new String("Garden Groove harbour")});
+          model.addRow(new Object[]{new String("Los Angeles Topanga")});
+          model.addRow(new Object[]{new String("Compton-Rancho Dom")});
+          model.addRow(new Object[]{new String("Daly City Serramonte")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="7" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Area</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(13000)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(14500)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(13500)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(15000)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(15500)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(17650)});
+          model.addRow(new Object[]{new String("Previous Week"), new Integer(19500)});
+
+          model.addRow(new Object[]{new String("Current Week"), new Integer(8400)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(9800)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(11800)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(14400)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(18800)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(24800)});
+          model.addRow(new Object[]{new String("Current Week"), new Integer(30800)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="8" connection="1" type="scriptable" access="public">
+      <Name>Sample Multi-series Area Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Mon")});
+          model.addRow(new Object[]{new String("Tue")});
+          model.addRow(new Object[]{new String("Thu")});
+          model.addRow(new Object[]{new String("Fri")});
+          model.addRow(new Object[]{new String("Sat")});
+          model.addRow(new Object[]{new String("Sun")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="9" connection="1" type="scriptable" access="public">
+      <Name>Sample Marimekko</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;seriesname&quot;;
+          columnNames[2] = &quot;value&quot;;
+
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = Integer.class;
+
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Bose"), new String("California"), new Integer(335000)});
+          model.addRow(new Object[]{new String("Dell"), new String("California"), new Integer(225100)});
+          model.addRow(new Object[]{new String("Apple"), new String("California"), new Integer(164200)});
+          
+          model.addRow(new Object[]{new String("Bose"), new String("Washington"), new Integer(215000)});
+          model.addRow(new Object[]{new String("Dell"), new String("Washington"), new Integer(198000)});
+          model.addRow(new Object[]{new String("Apple"), new String("Washington"), new Integer(120000)});
+          
+          model.addRow(new Object[]{new String("Bose"), new String("Nevada"), new Integer(298000)});
+          model.addRow(new Object[]{new String("Dell"), new String("Nevada"), new Integer(109300)});
+          model.addRow(new Object[]{new String("Apple"), new String("Nevada"), new Integer(153600)});
+          
+          return model;
+        </Query>
+        <Output indexes="1,2"/>
+    </DataAccess>
+    
+    <DataAccess id="10" connection="1" type="scriptable" access="public">
+        <Name>Sample Marimekko Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Bose")});
+          model.addRow(new Object[]{new String("Dell")});
+          model.addRow(new Object[]{new String("Apple")});
+          
+          return model;
+        </Query>
+        <Output indexes="0"/>
+    </DataAccess>
+
+    <DataAccess id="11" connection="1" type="scriptable" access="public">
+        <Name>Sample ZoomLine</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(978)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(976)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(955)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(981)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(992)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(964)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(973)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(949)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(985)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(962)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(977)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(955)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(988)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(959)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(985)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(965)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(991)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(985)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(966)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(989)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(960)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(944)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(976)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(980)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(940)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(941)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(945)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(952)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(973)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(946)});
+          model.addRow(new Object[]{new String("harrysfoodmart.com"), new Integer(951)});
+
+
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1053)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1057)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1084)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1082)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1098)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1055)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1068)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1067)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1074)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1056)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1067)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1078)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1079)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1084)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1041)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1052)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1066)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1080)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1049)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1051)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1049)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1044)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1083)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1053)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1038)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1077)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1046)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1067)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1053)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1033)});
+          model.addRow(new Object[]{new String("harrysfashion.com"), new Integer(1047)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="12" connection="1" type="scriptable" access="public">
+      <Name>Sample ZoomLine Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Jan 01")});
+          model.addRow(new Object[]{new String("Jan 02")});
+          model.addRow(new Object[]{new String("Jan 03")});
+          model.addRow(new Object[]{new String("Jan 04")});
+          model.addRow(new Object[]{new String("Jan 05")});
+          model.addRow(new Object[]{new String("Jan 06")});
+          model.addRow(new Object[]{new String("Jan 07")});
+          model.addRow(new Object[]{new String("Jan 08")});
+          model.addRow(new Object[]{new String("Jan 09")});
+          model.addRow(new Object[]{new String("Jan 10")});
+          model.addRow(new Object[]{new String("Jan 11")});
+          model.addRow(new Object[]{new String("Jan 12")});
+          model.addRow(new Object[]{new String("Jan 13")});
+          model.addRow(new Object[]{new String("Jan 14")});
+          model.addRow(new Object[]{new String("Jan 15")});
+          model.addRow(new Object[]{new String("Jan 16")});
+          model.addRow(new Object[]{new String("Jan 17")});
+          model.addRow(new Object[]{new String("Jan 18")});
+          model.addRow(new Object[]{new String("Jan 19")});
+          model.addRow(new Object[]{new String("Jan 20")});
+          model.addRow(new Object[]{new String("Jan 21")});
+          model.addRow(new Object[]{new String("Jan 22")});
+          model.addRow(new Object[]{new String("Jan 23")});
+          model.addRow(new Object[]{new String("Jan 24")});
+          model.addRow(new Object[]{new String("Jan 25")});
+          model.addRow(new Object[]{new String("Jan 26")});
+          model.addRow(new Object[]{new String("Jan 27")});
+          model.addRow(new Object[]{new String("Jan 28")});
+          model.addRow(new Object[]{new String("Jan 29")});
+          model.addRow(new Object[]{new String("Jan 30")});
+          model.addRow(new Object[]{new String("Jan 31")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="13" connection="1" type="scriptable" access="public">
+      <Name>Sample Scatter</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;x&quot;;
+          columnNames[2] = &quot;y&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(23), new Integer(1560)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(24), new Integer(1500)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(24), new Integer(1680)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(25), new Integer(1780)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(25), new Integer(1620)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(26), new Integer(1810)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(27), new Integer(2310)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(29), new Integer(2620)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(31), new Integer(2500)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(32), new Integer(2410)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(35), new Integer(2880)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(36), new Integer(3910)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(34), new Integer(3960)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(38), new Integer(4080)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(40), new Integer(4190)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(41), new Integer(4170)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(42), new Integer(4280)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(54), new Integer(5180)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(53), new Integer(5770)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(55), new Integer(5900)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(56), new Integer(5940)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(58), new Integer(6090)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(61), new Integer(6086)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(67), new Integer(6100)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(68), new Integer(6200)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(70), new Integer(6360)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(75), new Integer(6450)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(79), new Integer(6650)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(80), new Integer(6710)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(79), new Integer(6975)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(82), new Integer(7000)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(85), new Integer(7150)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(86), new Integer(7160)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(86), new Integer(7200)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(88), new Integer(7230)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(87), new Integer(7210)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(86), new Integer(7480)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(89), new Integer(7540)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(89), new Integer(7400)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(90), new Integer(7500)});
+          model.addRow(new Object[]{new String("Ice Cream"), new Integer(92), new Integer(7640)});
+
+          model.addRow(new Object[]{new String("Beer"), new Integer(23), new Integer(3160)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(24), new Integer(3000)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(24), new Integer(3080)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(25), new Integer(3680)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(25), new Integer(3320)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(26), new Integer(3810)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(27), new Integer(5310)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(29), new Integer(3620)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(31), new Integer(4100)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(32), new Integer(3910)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(35), new Integer(4280)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(36), new Integer(4210)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(34), new Integer(4160)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(38), new Integer(4480)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(40), new Integer(4890)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(41), new Integer(4770)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(42), new Integer(4880)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(54), new Integer(4980)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(53), new Integer(4770)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(55), new Integer(4900)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(56), new Integer(4940)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(58), new Integer(4990)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(61), new Integer(5086)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(67), new Integer(5100)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(68), new Integer(4700)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(70), new Integer(5360)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(75), new Integer(5150)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(79), new Integer(5450)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(80), new Integer(5010)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(79), new Integer(4975)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(82), new Integer(5400)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(85), new Integer(5150)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(86), new Integer(5460)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(86), new Integer(5000)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(88), new Integer(5200)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(87), new Integer(5410)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(86), new Integer(5480)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(89), new Integer(5440)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(89), new Integer(5300)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(90), new Integer(5500)});
+          model.addRow(new Object[]{new String("Beer"), new Integer(92), new Integer(5240)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="14" connection="1" type="scriptable" access="public">
+      <Name>Sample Scatter Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;x&quot;;
+          columnNames[1] = &quot;label&quot;;
+          columnNames[2] = &quot;showverticalline&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = Integer.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new Integer(23), new String("23° F"), new Integer(0)});
+          model.addRow(new Object[]{new Integer(32), new String("32° F"), new Integer(1)});
+          model.addRow(new Object[]{new Integer(50), new String("50° F"), new Integer(1)});
+          model.addRow(new Object[]{new Integer(68), new String("68° F"), new Integer(1)});
+          model.addRow(new Object[]{new Integer(80), new String("80° F"), new Integer(1)});
+          model.addRow(new Object[]{new Integer(95), new String("95° F"), new Integer(1)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="15" connection="1" type="scriptable" access="public">
+      <Name>Sample Bubble</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[5];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;name&quot;;
+          columnNames[2] = &quot;x&quot;;
+          columnNames[3] = &quot;y&quot;;
+          columnNames[4] = &quot;z&quot;;
+
+          Class[] columnTypes = new Class[5];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = Integer.class;
+          columnTypes[3] = Integer.class;
+          columnTypes[4] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Nike"), new String("Nike"), new Integer(80), new Integer(15000), new Integer(24)});
+          model.addRow(new Object[]{new String("Adidas"), new String("Adidas"), new Integer(60), new Integer(18500), new Integer(26)});
+          model.addRow(new Object[]{new String("Puma"), new String("Puma"), new Integer(50), new Integer(19450), new Integer(19)});
+          model.addRow(new Object[]{new String("Fila"), new String("Fila"), new Integer(65), new Integer(10500), new Integer(8)});
+          model.addRow(new Object[]{new String("Lotto"), new String("Lotto"), new Integer(43), new Integer(8750), new Integer(5)});
+          model.addRow(new Object[]{new String("Reebok"), new String("Reebok"), new Integer(32), new Integer(22000), new Integer(10)});
+          model.addRow(new Object[]{new String("Woodland"), new String("Woodland"), new Integer(44), new Integer(13000), new Integer(9)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="16" connection="1" type="scriptable" access="public">
+      <Name>Sample Bubble Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;x&quot;;
+          columnNames[2] = &quot;showverticalline&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("$0"), new Integer(0), new Integer(0)});
+          model.addRow(new Object[]{new String("$20"), new Integer(20), new Integer(1)});
+          model.addRow(new Object[]{new String("$40"), new Integer(40), new Integer(1)});
+          model.addRow(new Object[]{new String("$60"), new Integer(60), new Integer(1)});
+          model.addRow(new Object[]{new String("$80"), new Integer(80), new Integer(1)});
+          model.addRow(new Object[]{new String("$100"), new Integer(100), new Integer(1)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="17" connection="1" type="scriptable" access="public">
+      <Name>Sample Scroll Stacked Column</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Products"), new Integer(27400)});
+          model.addRow(new Object[]{new String("Products"), new Integer(29800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(25800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(26800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(29600)});
+          model.addRow(new Object[]{new String("Products"), new Integer(32600)});
+          model.addRow(new Object[]{new String("Products"), new Integer(31800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(36700)});
+          model.addRow(new Object[]{new String("Products"), new Integer(29700)});
+          model.addRow(new Object[]{new String("Products"), new Integer(31900)});
+          model.addRow(new Object[]{new String("Products"), new Integer(34800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(24800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(25400)});
+          model.addRow(new Object[]{new String("Products"), new Integer(27800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(23800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(23800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(21600)});
+          model.addRow(new Object[]{new String("Products"), new Integer(30600)});
+          model.addRow(new Object[]{new String("Products"), new Integer(24800)});
+          model.addRow(new Object[]{new String("Products"), new Integer(30700)});
+          model.addRow(new Object[]{new String("Products"), new Integer(27400)});
+          model.addRow(new Object[]{new String("Products"), new Integer(28200)});
+          model.addRow(new Object[]{new String("Products"), new Integer(31500)});
+          model.addRow(new Object[]{new String("Products"), new Integer(24300)});
+
+
+          model.addRow(new Object[]{new String("Services"), new Integer(10000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(11500)});
+          model.addRow(new Object[]{new String("Services"), new Integer(12500)});
+          model.addRow(new Object[]{new String("Services"), new Integer(15000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(11000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(9800)});
+          model.addRow(new Object[]{new String("Services"), new Integer(11800)});
+          model.addRow(new Object[]{new String("Services"), new Integer(19700)});
+          model.addRow(new Object[]{new String("Services"), new Integer(21700)});
+          model.addRow(new Object[]{new String("Services"), new Integer(21900)});
+          model.addRow(new Object[]{new String("Services"), new Integer(22900)});
+          model.addRow(new Object[]{new String("Services"), new Integer(20800)});
+          model.addRow(new Object[]{new String("Services"), new Integer(12000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(10300)});
+          model.addRow(new Object[]{new String("Services"), new Integer(11200)});
+          model.addRow(new Object[]{new String("Services"), new Integer(13000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(15000)});
+          model.addRow(new Object[]{new String("Services"), new Integer(11800)});
+          model.addRow(new Object[]{new String("Services"), new Integer(9800)});
+          model.addRow(new Object[]{new String("Services"), new Integer(14600)});
+          model.addRow(new Object[]{new String("Services"), new Integer(19200)});
+          model.addRow(new Object[]{new String("Services"), new Integer(20100)});
+          model.addRow(new Object[]{new String("Services"), new Integer(21200)});
+          model.addRow(new Object[]{new String("Services"), new Integer(19500)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+ 
+    <DataAccess id="18" connection="1" type="scriptable" access="public">
+      <Name>Sample Scroll Stacked Column Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Jan 2012")});
+          model.addRow(new Object[]{new String("Feb 2012")});
+          model.addRow(new Object[]{new String("Mar 2012")});
+          model.addRow(new Object[]{new String("Apr 2012")});
+          model.addRow(new Object[]{new String("May 2012")});
+          model.addRow(new Object[]{new String("Jun 2012")});
+          model.addRow(new Object[]{new String("Jul 2012")});
+          model.addRow(new Object[]{new String("Aug 2012")});
+          model.addRow(new Object[]{new String("Sep 2012")});
+          model.addRow(new Object[]{new String("Oct 2012")});
+          model.addRow(new Object[]{new String("Nov 2012")});
+          model.addRow(new Object[]{new String("Dec 2012")});
+          model.addRow(new Object[]{new String("Jan 2013")});
+          model.addRow(new Object[]{new String("Feb 2013")});
+          model.addRow(new Object[]{new String("Mar 2013")});
+          model.addRow(new Object[]{new String("Apr 2013")});
+          model.addRow(new Object[]{new String("May 2013")});
+          model.addRow(new Object[]{new String("Jun 2013")});
+          model.addRow(new Object[]{new String("Jul 2013")});
+          model.addRow(new Object[]{new String("Aug 2013")});
+          model.addRow(new Object[]{new String("Sep 2013")});
+          model.addRow(new Object[]{new String("Oct 2013")});
+          model.addRow(new Object[]{new String("Nov 2013")});
+          model.addRow(new Object[]{new String("Dec 2013")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="19" connection="1" type="scriptable" access="public">
+      <Name>Sample Real-time</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(36);
+          String time = (new java.text.SimpleDateFormat(&quot;HH:mm:ss&quot;)).format(new Date());
+              
+          model.addRow(new Object[]{ new String(time), new Integer(randInt_a)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="20" connection="1" type="scriptable" access="public">
+      <Name>Sample Real-time Stacked</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+          import java.util.Random;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;seriesname&quot;;
+          columnNames[2] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+
+          Random rand = new Random();
+          int randInt_a = rand.nextInt(35 - 10) + 10;
+          int randInt_b = rand.nextInt(45 - 20) + 20;
+          String time = (new java.text.SimpleDateFormat(&quot;HH:mm:ss&quot;)).format(new Date());
+              
+          model.addRow(new Object[]{ new String(time), new String("clothing.hsm.com"), new Integer(randInt_a)});
+          model.addRow(new Object[]{ new String(time), new String("food.hsm.com"), new Integer(randInt_b)});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="21" connection="1" type="scriptable" access="public">
+      <Name>Sample Logarithmic</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Total footfalls"), new String("126734")});
+          model.addRow(new Object[]{new String("Total footfalls"), new String("159851")});
+          model.addRow(new Object[]{new String("Total footfalls"), new String("197393")});
+          model.addRow(new Object[]{new String("Total footfalls"), new String("168560")});
+          
+          model.addRow(new Object[]{new String("Online visitors"), new String("1126059")});
+          model.addRow(new Object[]{new String("Online visitors"), new String("1292145")});
+          model.addRow(new Object[]{new String("Online visitors"), new String("1496849")});
+          model.addRow(new Object[]{new String("Online visitors"), new String("1460249")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="22" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Bar Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+          columnNames[2] = &quot;errorvalue&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Daly City Serramonte"), new Integer(8), new String("2")});
+          model.addRow(new Object[]{new String("Daly City Serramonte"), new Integer(3), new String("0.5")});
+          model.addRow(new Object[]{new String("Daly City Serramonte"), new Integer(2), new String("1")});
+          model.addRow(new Object[]{new String("Daly City Serramonte"), new Integer(6), new String("1.8")});
+          model.addRow(new Object[]{new String("Daly City Serramonte"), new Integer(8), new String("1.2")});
+
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(7), new String("1")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(4), new String("0.5")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(2), new String("1")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(4), new String("0.8")});
+          model.addRow(new Object[]{new String("Bakersfield Central"), new Integer(7), new String("1")});
+
+          model.addRow(new Object[]{new String("Garden Groove harbour"), new Integer(9), new String("2")});
+          model.addRow(new Object[]{new String("Garden Groove harbour"), new Integer(3), new String("0.7")});
+          model.addRow(new Object[]{new String("Garden Groove harbour"), new Integer(3), new String("1")});
+          model.addRow(new Object[]{new String("Garden Groove harbour"), new Integer(6), new String("1.8")});
+          model.addRow(new Object[]{new String("Garden Groove harbour"), new Integer(7), new String("1.2")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="23" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Bar Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Central AC")});
+          model.addRow(new Object[]{new String("Computers")});
+          model.addRow(new Object[]{new String("Bar-code Scanners")});
+          model.addRow(new Object[]{new String("Packaging Machines")});
+          model.addRow(new Object[]{new String("Chilling Compartments")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="24" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Line Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+          columnNames[2] = &quot;errorvalue&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Revenues"), new String("16000"), new String("2000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("20000"), new String("4000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("18000"), new String("1000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("19000"), new String("1500")});
+          model.addRow(new Object[]{new String("Revenues"), new String("15000"), new String("1000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("21000"), new String("4500")});
+          model.addRow(new Object[]{new String("Revenues"), new String("16000"), new String("1500")});
+          model.addRow(new Object[]{new String("Revenues"), new String("20000"), new String("3000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("17000"), new String("2000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("22000"), new String("4000")});
+          model.addRow(new Object[]{new String("Revenues"), new String("19000"), new String("2500")});
+          model.addRow(new Object[]{new String("Revenues"), new String("23000"), new String("3000")});
+          
+          model.addRow(new Object[]{new String("Profits"), new String("8000"), new String("2000")});
+          model.addRow(new Object[]{new String("Profits"), new String("9000"), new String("2000")});
+          model.addRow(new Object[]{new String("Profits"), new String("7000"), new String("2700")});
+          model.addRow(new Object[]{new String("Profits"), new String("8000"), new String("2750")});
+          model.addRow(new Object[]{new String("Profits"), new String("6000"), new String("1200")});
+          model.addRow(new Object[]{new String("Profits"), new String("11000"), new String("3000")});
+          model.addRow(new Object[]{new String("Profits"), new String("6900"), new String("1250")});
+          model.addRow(new Object[]{new String("Profits"), new String("8000"), new String("1400")});
+          model.addRow(new Object[]{new String("Profits"), new String("6500"), new String("1200")});
+          model.addRow(new Object[]{new String("Profits"), new String("12000"), new String("3000")});
+          model.addRow(new Object[]{new String("Profits"), new String("6000"), new String("1500")});
+          model.addRow(new Object[]{new String("Profits"), new String("11000"), new String("2500")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="25" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Line Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[1];
+          columnNames[0] = &quot;label&quot;;
+
+          Class[] columnTypes = new Class[1];
+          columnTypes[0] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Jan")});
+          model.addRow(new Object[]{new String("Feb")});
+          model.addRow(new Object[]{new String("Mar")});
+          model.addRow(new Object[]{new String("Apr")});
+          model.addRow(new Object[]{new String("May")});
+          model.addRow(new Object[]{new String("Jun")});
+          model.addRow(new Object[]{new String("Jul")});
+          model.addRow(new Object[]{new String("Aug")});
+          model.addRow(new Object[]{new String("Sep")});
+          model.addRow(new Object[]{new String("Oct")});
+          model.addRow(new Object[]{new String("Nov")});
+          model.addRow(new Object[]{new String("Dec")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="26" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Scatter Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[4];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;y&quot;;
+          columnNames[2] = &quot;x&quot;;
+          columnNames[3] = &quot;verticalErrorValue&quot;;
+
+          Class[] columnTypes = new Class[4];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+          columnTypes[2] = Integer.class;
+          columnTypes[3] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("This Year"), new Integer(450000), new Integer(20), new Integer(50000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(860000), new Integer(30), new Integer(69000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(750000), new Integer(40), new Integer(69000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(570000), new Integer(50), new Integer(60000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(910000), new Integer(60), new Integer(50000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(580000), new Integer(70), new Integer(55000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(610000), new Integer(80), new Integer(87000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(620000), new Integer(90), new Integer(45000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(520000), new Integer(100), new Integer(59000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(530000), new Integer(110), new Integer(72000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(950000), new Integer(120), new Integer(69000)});
+          model.addRow(new Object[]{new String("This Year"), new Integer(770000), new Integer(130), new Integer(69000)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="27" connection="1" type="scriptable" access="public">
+      <Name>Sample Error Scatter Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;label&quot;;
+          columnNames[1] = &quot;x&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Jan"), new Integer(20)});
+          model.addRow(new Object[]{new String("Feb"), new Integer(30)});
+          model.addRow(new Object[]{new String("Mar"), new Integer(40)});
+          model.addRow(new Object[]{new String("Apr"), new Integer(50)});
+          model.addRow(new Object[]{new String("May"), new Integer(60)});
+          model.addRow(new Object[]{new String("Jun"), new Integer(70)});
+          model.addRow(new Object[]{new String("Jul"), new Integer(80)});
+          model.addRow(new Object[]{new String("Aug"), new Integer(90)});
+          model.addRow(new Object[]{new String("Sep"), new Integer(100)});
+          model.addRow(new Object[]{new String("Oct"), new Integer(110)});
+          model.addRow(new Object[]{new String("Nov"), new Integer(120)});
+          model.addRow(new Object[]{new String("Dec"), new Integer(130)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="28" connection="1" type="scriptable" access="public">
+      <Name>Sample Inverse Y axis Area Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = Integer.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(27)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(22)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(25)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(27)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(21)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(29)});
+          model.addRow(new Object[]{new String("food.hsm.com"), new Integer(22)});
+
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(42)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(38)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(39)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(36)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(43)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(44)});
+          model.addRow(new Object[]{new String("cloth.hsm.com"), new Integer(35)});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="29" connection="1" type="scriptable" access="public">
+      <Name>Sample Inverse Y axis Column Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);  
+          model.addRow(new Object[]{new String("Loading Time"), new String("6")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("5.8")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("5")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("4.3")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("4.1")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("3.8")});
+          model.addRow(new Object[]{new String("Loading Time"), new String("3.2")});
+
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="30" connection="1" type="scriptable" access="public">
+        <Name>Sample Select-scatter Chart</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[4];
+          columnNames[0] = &quot;seriesname&quot;;
+          columnNames[1] = &quot;id&quot;;
+          columnNames[2] = &quot;y&quot;;
+          columnNames[3] = &quot;x&quot;;
+
+          Class[] columnTypes = new Class[4];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+          columnTypes[3] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_1"), new String("559"), new String("714")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_2"), new String("293"), new String("988")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_3"), new String("231"), new String("970")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_4"), new String("528"), new String("142")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_5"), new String("95"), new String("800")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_6"), new String("515"), new String("813")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_7"), new String("444"), new String("928")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_8"), new String("592"), new String("238")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_9"), new String("229"), new String("521")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_10"), new String("559"), new String("714")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_11"), new String("285"), new String("222")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_12"), new String("524"), new String("863")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_13"), new String("422"), new String("820")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_14"), new String("344"), new String("984")});
+          model.addRow(new Object[]{new String("Televisions"), new String("TV_15"), new String("510"), new String("785")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+    <DataAccess id="31" connection="1" type="scriptable" access="public">
+        <Name>Sample Select-scatter Chart Categories</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;categoryName&quot;;
+          columnNames[1] = &quot;label&quot;;
+          columnNames[2] = &quot;x&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("Televisions"), new String("$100"), new String("100")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$200"), new String("200")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$300"), new String("300")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$400"), new String("400")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$500"), new String("500")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$600"), new String("600")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$700"), new String("700")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$800"), new String("800")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$900"), new String("900")});
+          model.addRow(new Object[]{new String("Televisions"), new String("$1000"), new String("1000")});
+          
+          return model;
+        </Query>
+    </DataAccess>
+
+</CDADescriptor>

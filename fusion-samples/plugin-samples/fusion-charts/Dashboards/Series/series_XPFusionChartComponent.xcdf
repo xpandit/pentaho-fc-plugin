@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+        <title>Sample Dashboard</title>
+        <author>Xpand IT</author>
+        <description></description>
+        <icon></icon>
+        <template>series_XPFusionChartComponent.html</template>
+        <style>clean</style>
+        <require>true</require>
+</cdf>

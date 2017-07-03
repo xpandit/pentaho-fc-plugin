@@ -1,10 +1,11 @@
 <DesignerComponents>
 	<!--ASYNC COMPONENT-->
 	<!--SingleSeries Charts-->
+	<!--SingleSeries Charts-->
 	<DesignerComponent>
 		<Header>
 			<Name>Single Series Charts</Name>
-			<IName>XDashFusionChartComponentAsyncSingleSeries</IName>
+			<IName>DataCde</IName>
 			<Description>FusionCharts XT Single Series Charts</Description>
 			<Category>FUSIONCHARTS</Category>
 			<CatDescription>FusionCharts</CatDescription>
@@ -42,6 +43,7 @@
 				<Property type="boolean">executeAtStart</Property>
 				<Property type="function">preChange</Property>
 				<Property type="function">postChange</Property>
+				<Property >dataType</Property>
 				<Property type="function">postFetch</Property>
 				<Property type="string">htmlObject</Property>
 				<Property type="function">preExecution</Property>
@@ -49,14 +51,7 @@
 				<Property type="number">tooltip</Property>
 				<Property type="number">listeners</Property>
 			</Model>
-			<Implementation>
-				<Code src="../../../js/CDE.js"/>
-				<Dependencies>
-					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../js/XPCharts.js" version="1.0">XPCharts</Dependency>
-					<Dependency src="../../../js/XPTheme.js" version="1.0">XPTheme</Dependency>
-
-				</Dependencies>
+			<Implementation supportsLegacy="true" supportsAMD="true">
 				<CustomProperties>
 					<!--Chart Properties-->
 					<DesignerProperty>
@@ -79,6 +74,19 @@
 							<DefaultValue/>
 							<Description>Chart Y Axis Name</Description>
 							<Tooltip>Y-axis title of the chart.</Tooltip>
+							<InputType>String</InputType>
+							<OutputType>String</OutputType>
+							<Order>100</Order>
+							<Version>1.0</Version>
+						</Header>
+					</DesignerProperty>
+					<DesignerProperty>
+						<Header>
+							<Name>dataType</Name>
+							<Parent>BaseProperty</Parent>
+							<DefaultValue>data</DefaultValue>
+							<Description>Data Type</Description>
+							<Tooltip>Data Type of the chart</Tooltip>
 							<InputType>String</InputType>
 							<OutputType>String</OutputType>
 							<Order>100</Order>
@@ -205,7 +213,7 @@
 							<DefaultValue>column2d</DefaultValue>
 							<Description>Chart Type</Description>
 							<Tooltip>Single Series Charts Type</Tooltip>
-							<InputType type="valuelist"/>
+							<InputType type="valuelist" />
 							<OutputType>String</OutputType>
 							<Order>89</Order>
 							<Advanced>false</Advanced>

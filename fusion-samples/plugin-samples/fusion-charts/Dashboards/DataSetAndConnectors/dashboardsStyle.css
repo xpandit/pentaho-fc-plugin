@@ -1,0 +1,38 @@
+.dashboardContent{
+	width: 950px;
+	margin: 0 auto;
+}
+
+.header {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.header img {
+    float: left;
+    margin-right: 42px;
+}
+
+.light {
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 36px;
+    font-family: "Open Sans";
+    margin: 0px;
+    padding-top: 10px;
+}
+
+.third {
+    font-size: 12px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+h5 {
+    border-bottom: 1px solid #1973bc;
+    font-size: 18px;
+    color: #1973bc;
+    font-family: "Open Sans";
+    margin-bottom: 20px;
+}

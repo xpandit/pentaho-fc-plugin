@@ -8,14 +8,14 @@
                            http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
                            http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
     <context:annotation-config/>
-	<bean id="xfusion" class="com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator" scope="prototype" />
+	<!-- <bean id="xfusion" class="com.xpandit.fusionplugin.pentaho.content.FusionContentGenerator" scope="prototype" /> -->
 
 	<!-- REST resources -->
-   <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/> 
+   <bean id="api" class="org.pentaho.platform.web.servlet.JAXRSPluginServlet"/>
  <!--  <bean id="fusion_plugin.api" class="pt.webdetails.cpk.CpkApi"/> -->
   <!--<bean id="api" class="pt.webdetails.cpf.JAXRSCLPluginServlet"/>-->
   <bean id="fusion_plugin.api" class="com.xpandit.fusionplugin.pentaho.content.FusionApi"/>
 
 	<!--  Content Generator  -->
     <!-- <bean id="cpk" class="pt.webdetails.cpk.CpkContentGenerator" scope="prototype"/> -->
-</beans>    
+</beans>
