@@ -4,7 +4,7 @@
         <author>Xpand IT</author>
         <description></description>
         <icon></icon>
-        <template>data.html</template>
+        <template>series_cdf.html</template>
         <style>clean</style>
         <require>true</require>
 </cdf>

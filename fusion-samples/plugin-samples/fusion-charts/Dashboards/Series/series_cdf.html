@@ -1,17 +1,17 @@
-<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:Series:MetaLayerCharts_XPFusionChartComponent.js"></script>
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:Series:MetaLayerCharts.js"></script>
 <link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
 
 <div class="dashboardContent">
 	<div class="header">
-		<img width="auto" height="70" src="../../../api/repos/FusionCharts/static/custom/img/Logo-FusionChartsPlugin.png">
+		<img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
 		<h2 class="light">FusionCharts XT Type Series Sample</h2>
 	</div>
 
 	<div class="Info" style="margin-bottom:30px;">
 		<h5 class="light">How to get Fusion Charts XT</h5>
 		All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
-		<div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+		<div class="regular"> Then you only need to install them in the <a onClick="Dashboard.switchToFusionManager()">FusionCharts Manager page</a>.  </div>
 	</div>
 
 	<div id="charts">
@@ -109,7 +109,7 @@
 		<a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
 	</div>
 	<div class="logos">
-		<img width="150" height="33" src="../../../api/repos/FusionCharts/static/custom/img/logo-xpand.png">
+		<img width="150" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png">
 	</div>
 
 </div>
@@ -120,372 +120,379 @@ var dashboard;
 require([
 	'cdf/lib/jquery',
 	'cdf/Dashboard.Bootstrap',
-	'xfusion/charts/XDashFCComponent'],
-	function($, Dashboard, XDashFCComponent) {
+	'xfusion/XDashFusionChartComponent'],
+	function($, Dashboard, XPFusionChartComponent) {
 
 		dashboard = new Dashboard();
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsColumn2D",
 			htmlObject      : "MsColumn2D",
 			chartDefinition : MetaLayerCharts.MsColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "1",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsColumn3D",
 			htmlObject      : "MsColumn3D",
 			chartDefinition : MetaLayerCharts.MsColumn3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "2",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsLine",
 			htmlObject      : "MsLine",
 			chartDefinition : MetaLayerCharts.MsLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "3",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsBar2D",
 			htmlObject      : "MsBar2D",
 			chartDefinition : MetaLayerCharts.MsBar2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "4",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsBar3D",
 			htmlObject      : "MsBar3D",
 			chartDefinition : MetaLayerCharts.MsBar3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "5",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsArea",
 			htmlObject      : "MsArea",
 			chartDefinition : MetaLayerCharts.MsArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "6",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "Marimekko",
 			htmlObject      : "Marimekko",
 			chartDefinition : MetaLayerCharts.Marimekko,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "7",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ZoomLine",
 			htmlObject      : "ZoomLine",
 			chartDefinition : MetaLayerCharts.ZoomLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "8",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedColumn2D",
 			htmlObject      : "StackedColumn2D",
 			chartDefinition : MetaLayerCharts.StackedColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "9",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedColumn3D",
 			htmlObject      : "StackedColumn3D",
 			chartDefinition : MetaLayerCharts.StackedColumn3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "10",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedBar2D",
 			htmlObject      : "StackedBar2D",
 			chartDefinition : MetaLayerCharts.StackedBar2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "11",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedBar3D",
 			htmlObject      : "StackedBar3D",
 			chartDefinition : MetaLayerCharts.StackedBar3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "12",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedArea2D",
 			htmlObject      : "StackedArea2D",
 			chartDefinition : MetaLayerCharts.StackedArea2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "13",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "Scatter",
 			htmlObject      : "Scatter",
 			chartDefinition : MetaLayerCharts.Scatter,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "14",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "Bubble",
 			htmlObject      : "Bubble",
 			chartDefinition : MetaLayerCharts.Bubble,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "15",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ScrollStackedColumn2D",
 			htmlObject      : "ScrollStackedColumn2D",
 			chartDefinition : MetaLayerCharts.ScrollStackedColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "16",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeArea",
 			htmlObject      : "RealTimeArea",
 			chartDefinition : MetaLayerCharts.RealTimeArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "17",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeColumn",
 			htmlObject      : "RealTimeColumn",
 			chartDefinition : MetaLayerCharts.RealTimeColumn,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "18",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeLine",
 			htmlObject      : "RealTimeLine",
 			chartDefinition : MetaLayerCharts.RealTimeLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "19",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeStackedArea",
 			htmlObject      : "RealTimeStackedArea",
 			chartDefinition : MetaLayerCharts.RealTimeStackedArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "20",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeStackedColumn",
 			htmlObject      : "RealTimeStackedColumn",
 			chartDefinition : MetaLayerCharts.RealTimeStackedColumn,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "21",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "RealTimeLineDy",
 			htmlObject      : "RealTimeLineDy",
 			chartDefinition : MetaLayerCharts.RealTimeLineDy,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "22",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "LogMsColumn2D",
 			htmlObject      : "LogMsColumn2D",
 			chartDefinition : MetaLayerCharts.LogMsColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "23",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "LogMsLine",
 			htmlObject      : "LogMsLine",
 			chartDefinition : MetaLayerCharts.LogMsLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "24",
 		}));
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsSpline",
 			htmlObject      : "MsSpline",
 			chartDefinition : MetaLayerCharts.MsSpline,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "25",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsSplineArea",
 			htmlObject      : "MsSplineArea",
 			chartDefinition : MetaLayerCharts.MsSplineArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "26",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ErrorBar2D",
 			htmlObject      : "ErrorBar2D",
 			chartDefinition : MetaLayerCharts.ErrorBar2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "27",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ErrorLine",
 			htmlObject      : "ErrorLine",
 			chartDefinition : MetaLayerCharts.ErrorLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "28",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ErrorScatter",
 			htmlObject      : "ErrorScatter",
 			chartDefinition : MetaLayerCharts.ErrorScatter,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "29",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "InverseArea",
 			htmlObject      : "InverseArea",
 			chartDefinition : MetaLayerCharts.InverseArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "30",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "InverseMsColumn2D",
 			htmlObject      : "InverseMsColumn2D",
 			chartDefinition : MetaLayerCharts.InverseMsColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "31",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "InverseMsLine",
 			htmlObject      : "InverseMsLine",
 			chartDefinition : MetaLayerCharts.InverseMsLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "32",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "SelectScatter",
 			htmlObject      : "SelectScatter",
 			chartDefinition : MetaLayerCharts.SelectScatter,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "Series",
 			priority        : "33",
 		}));
+
+		dashboard.switchToFusionManager = function() {
+			var path = window.location.pathname.split('/');
+			var url = window.location.origin + "/" + path[1] + '/plugin/fusion_plugin/api/settings';
+			//window.location.href=url;
+			window.open(url, '_blank');
+		}
 
 		dashboard.init();
 		window.Dashboard = dashboard;

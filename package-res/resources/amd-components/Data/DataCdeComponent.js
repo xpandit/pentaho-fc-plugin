@@ -3,15 +3,15 @@ define([
     'amd!cdf/lib/underscore',
     'cdf/lib/jquery',
     'cdf/Logger',
-    'xfusion/XDashFCComponent',
+    'xfusion/XDashFusionChartComponent',
     'xfusion/charts/ChartUtils',
-], function ( Utils, _, $, Logger, XDashFCComponent,ChartUtils) {
+], function ( Utils, _, $, Logger, XPFusionChartComponent,ChartUtils) {
     'use strict';
-    
 
-    var DataCdeComponent = XDashFCComponent.extend({
-        
-        beforeProcessUpdate: XDashFCComponent.prototype.update,
+
+    var DataCdeComponent = XPFusionChartComponent.extend({
+
+        beforeProcessUpdate: XPFusionChartComponent.prototype.update,
 
         update: function () {
             try {

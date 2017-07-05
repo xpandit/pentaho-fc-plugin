@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CDADescriptor>
+    <DataSources>
+        <Connection id="1" type="scripting.scripting">
+            <Language>beanshell</Language>
+            <InitScript/>
+        </Connection>
+    </DataSources>
+
+    <DataAccess id="1" connection="1" type="scriptable" access="public">
+        <Name>WorldMap Data</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[2];
+          columnNames[0] = &quot;id&quot;;
+          columnNames[1] = &quot;value&quot;;
+
+          Class[] columnTypes = new Class[2];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("NA"), new String("515")});
+          model.addRow(new Object[]{new String("SA"), new String("373")});
+          model.addRow(new Object[]{new String("AS"), new String("3875")});
+          model.addRow(new Object[]{new String("EU"), new String("727")});
+          model.addRow(new Object[]{new String("AF"), new String("885")});
+          model.addRow(new Object[]{new String("AU"), new String("32")});
+
+          return model;
+        </Query>
+    </DataAccess>
+    <DataAccess id="2" connection="1" type="scriptable" access="public">
+        <Name>World Map Color Range</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[4];
+          columnNames[0] = &quot;minvalue&quot;;
+          columnNames[1] = &quot;maxvalue&quot;;
+          columnNames[2] = &quot;displayValue&quot;;
+          columnNames[3] = &quot;code&quot;;
+
+          Class[] columnTypes = new Class[4];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+          columnTypes[3] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("0"), new String("100"), new String("&lt; 100M"), new String("D0DFA3")});
+          model.addRow(new Object[]{new String("100"), new String("500"), new String("100M-500M"),new String("B0BF92")});
+          model.addRow(new Object[]{new String("500"), new String("1000"), new String("500M-1B"), new String("91AF64")});
+          model.addRow(new Object[]{new String("1000"), new String("5000"), new String("&gt; 1B"), new String("A9FF8D")});
+
+          return model;
+        </Query>
+    </DataAccess>
+    <DataAccess id="3" connection="1" type="scriptable" access="public">
+        <Name>World Map Markers Items</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[5];
+          columnNames[0] = &quot;id&quot;;
+          columnNames[1] = &quot;label&quot;;
+          columnNames[2] = &quot;tooltext&quot;;
+          columnNames[3] = &quot;x&quot;;
+          columnNames[4] = &quot;y&quot;;
+
+          Class[] columnTypes = new Class[5];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+          columnTypes[3] = String.class;
+          columnTypes[4] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("lon"), new String("LHR"), new String("Heathrow International Airport"), new String("340.23"), new String("125.9")});
+          model.addRow(new Object[]{new String("nyc"), new String("JFK"), new String("John F Kennedy Airport"), new String("178.14"), new String("154.9")});
+          model.addRow(new Object[]{new String("dub"), new String("DBX"), new String("Dubai International Airport"), new String("458.14"), new String("203.9")});
+          model.addRow(new Object[]{new String("sg"), new String("SIN"), new String("Singapore International Airport"), new String("558.14"), new String("255.9")});
+          model.addRow(new Object[]{new String("hk"), new String("HKG"), new String("Hong Kong International Airport"), new String("573.14"), new String("202.9")});
+
+
+          return model;
+        </Query>
+    </DataAccess>
+    <DataAccess id="4" connection="1" type="scriptable" access="public">
+        <Name>World Map Markers Connectors</Name>
+        <Query>
+          import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;
+
+          String[] columnNames = new String[3];
+          columnNames[0] = &quot;from&quot;;
+          columnNames[1] = &quot;to&quot;;
+          columnNames[2] = &quot;tooltext&quot;;
+
+          Class[] columnTypes = new Class[3];
+          columnTypes[0] = String.class;
+          columnTypes[1] = String.class;
+          columnTypes[2] = String.class;
+
+          TypedTableModel model = new TypedTableModel(columnNames, columnTypes);
+          model.addRow(new Object[]{new String("lon"), new String("hk"), new String("1801520")});
+          model.addRow(new Object[]{new String("lon"), new String("sg"), new String("1507032")});
+          model.addRow(new Object[]{new String("lon"), new String("nyc"), new String("2551276")});
+          model.addRow(new Object[]{new String("lon"), new String("dub"), new String("1974078")});
+
+          return model;
+        </Query>
+    </DataAccess>
+</CDADescriptor>

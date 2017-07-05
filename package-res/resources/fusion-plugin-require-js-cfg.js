@@ -21,8 +21,10 @@
     prefixJS = '../js';
   }
 
+	//Samples
+	requirePaths['xfusion/SampleEndpoints'] = prefixJS + '/endpointsForSamples';
   //Core Component
-  requirePaths['xfusion/XDashFCComponent'] = prefixJS + '/XDashFCComponent';
+  requirePaths['xfusion/XDashFusionChartComponent'] = prefixJS + '/XDashFusionChartComponent';
 
   //FC Plugin javascript classes
   requirePaths['xfusion/charts/Chart'] = prefixJS + '/xfusion/Chart';

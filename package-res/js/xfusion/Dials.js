@@ -80,18 +80,18 @@ define([
 						queryDataset = ChartUtils.prototype.applyCallBack(queryDataset, cd.dataSetProperties.dataSetCallback);
 					}
 				}
-		 
+
 				// Verify required properties
 				var hasProperties = ChartUtils.prototype.hasRequiredProperties(queryDataset, this._requiredProperties);
 				 if(!hasProperties[0]){
 					 $("#"+this._htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties! </strong> Dial is "+hasProperties[1]+"</div>");
 					 return;
 				 };
-				
+
 				// create the chart data
 				this._data = {
 					"chart": cd.chartProperties,
-					"dials": queryDataset
+					"dials": {"dial":queryDataset}
 				};
 
 				return this;

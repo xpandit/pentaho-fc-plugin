@@ -4,7 +4,7 @@
         <author>Xpand IT</author>
         <description></description>
         <icon></icon>
-        <template>dials_XPFusionChartComponent.html</template>
+        <template>dataSet_cdf.html</template>
         <style>clean</style>
         <require>true</require>
 </cdf>

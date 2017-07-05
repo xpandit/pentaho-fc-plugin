@@ -1,17 +1,17 @@
-<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:SeriesColumn:MetaLayerCharts_XPFusionChartComponent.js"></script>
+<script type="text/javascript" src="../../repo/files/:public:plugin-samples:fusion-charts:Dashboards:SeriesColumn:MetaLayerCharts.js"></script>
 <link rel="stylesheet" type="text/css" href="dashboardsStyle.css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">
 
 <div class="dashboardContent">
 	<div class="header">
-		<img width="auto" height="70" src="../../../api/repos/FusionCharts/static/custom/img/Logo-FusionChartsPlugin.png">
+		<img width="auto" height="70" src="../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png">
 		<h2 class="light">FusionCharts XT Type SeriesColumn Sample</h2>
 	</div>
 
 	<div class="Info" style="margin-bottom:30px;">
 		<h5 class="light">How to get Fusion Charts XT</h5>
 		All you need is to obtain the FusionCharts XT zip file by acquiring a  <a href="http://www.xpand-it.com/en/technology/fusioncharts" target="_blank"> FusionCharts license </a>  or by downloading a free trial  <a href=" http://www.fusioncharts.com/download/" target="_blank">http://www.fusioncharts.com/download</a> <br>
-		<div class="regular"> Then you only need to install them in the <a onClick="switchToFusionManager()">FusionCharts Manager page</a>.  </div>
+		<div class="regular"> Then you only need to install them in the <a onClick="Dashboard.switchToFusionManager()">FusionCharts Manager page</a>.  </div>
 	</div>
 
 	<div id="charts">
@@ -63,7 +63,7 @@
 		<a href="mailto:marketing@xpand-it.com" target="_top" class="regular">pentaho@xpand-it.com</a>
 	</div>
 	<div class="logos">
-		<img width="150" height="33" src="../../../api/repos/FusionCharts/static/custom/img/logo-xpand.png">
+		<img width="150" height="33" src="../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png">
 	</div>
 
 </div>
@@ -74,175 +74,182 @@ var dashboard;
 require([
 	'cdf/lib/jquery',
 	'cdf/Dashboard.Bootstrap',
-	'xfusion/charts/XDashFCComponent'],
-	function($, Dashboard, XDashFCComponent) {
+	'xfusion/XDashFusionChartComponent'],
+	function($, Dashboard, XPFusionChartComponent) {
 
 		dashboard = new Dashboard();
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsCombi2D",
 			htmlObject      : "MsCombi2D",
 			chartDefinition : MetaLayerCharts.MsCombi2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "1",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsCombi3D",
 			htmlObject      : "MsCombi3D",
 			chartDefinition : MetaLayerCharts.MsCombi3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "2",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsColumnLine3D",
 			htmlObject      : "MsColumnLine3D",
 			chartDefinition : MetaLayerCharts.MsColumnLine3D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "3",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedColumn2DLine",
 			htmlObject      : "StackedColumn2DLine",
 			chartDefinition : MetaLayerCharts.StackedColumn2DLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "4",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedColumn3DLine",
 			htmlObject      : "StackedColumn3DLine",
 			chartDefinition : MetaLayerCharts.StackedColumn3DLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "5",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsCombiDy2D",
 			htmlObject      : "MsCombiDy2D",
 			chartDefinition : MetaLayerCharts.MsCombiDy2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "6",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsColumn3DLineDy",
 			htmlObject      : "MsColumn3DLineDy",
 			chartDefinition : MetaLayerCharts.MsColumn3DLineDy,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "7",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "StackedColumn3DLineDy",
 			htmlObject      : "StackedColumn3DLineDy",
 			chartDefinition : MetaLayerCharts.StackedColumn3DLineDy,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "8",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ScrollCombi2D",
 			htmlObject      : "ScrollCombi2D",
 			chartDefinition : MetaLayerCharts.ScrollCombi2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "9",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "ScrollCombiDy2D",
 			htmlObject      : "ScrollCombiDy2D",
 			chartDefinition : MetaLayerCharts.ScrollCombiDy2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "10",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "DragColumn2D",
 			htmlObject      : "DragColumn2D",
 			chartDefinition : MetaLayerCharts.DragColumn2D,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "11",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "DragLine",
 			htmlObject      : "DragLine",
 			chartDefinition : MetaLayerCharts.DragLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "12",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "DragArea",
 			htmlObject      : "DragArea",
 			chartDefinition : MetaLayerCharts.DragArea,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "13",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "Radar",
 			htmlObject      : "Radar",
 			chartDefinition : MetaLayerCharts.Radar,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "14",
 		}));
 
 
-		dashboard.addComponent(new XDashFCComponent({
+		dashboard.addComponent(new XPFusionChartComponent({
 			name            : "MsStepLine",
 			htmlObject      : "MsStepLine",
 			chartDefinition : MetaLayerCharts.MsStepLine,
 			executeAtStart  : true,
-			type            : "XDashFCComponent",
+			type            : "XPFusionChartComponent",
 			dataType        : "SeriesColumn",
 			priority        : "15",
 		}));
+
+		dashboard.switchToFusionManager = function() {
+			var path = window.location.pathname.split('/');
+			var url = window.location.origin + "/" + path[1] + '/plugin/fusion_plugin/api/settings';
+			//window.location.href=url;
+			window.open(url, '_blank');
+		}
 
 		dashboard.init();
 		window.Dashboard = dashboard;

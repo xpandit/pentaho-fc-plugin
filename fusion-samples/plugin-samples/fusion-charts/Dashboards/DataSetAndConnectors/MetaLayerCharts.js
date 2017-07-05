@@ -22,7 +22,7 @@ var MetaLayerCharts= {
             },
             // Properties for the dataset (nodes)
             dataSetProperties: {
-                  plotborderalpha   : "1",
+                  plotborderalpha   : "0",
                   allowdrag               : "1",
                   showformbtn             : "0",
                   //Function to apply properties to nodes individually
@@ -40,7 +40,7 @@ var MetaLayerCharts= {
                                     data.imageurl = "http://www.fusioncharts.com/explore/Resources/desktop.png";
                                     data.tooltext = "Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac";
                                     // apply a Javascript link to node with the data as a argument
-                                    data.link = "JavaScript:nodelink("+JSON.stringify(data)+")";
+                                    data.link = "JavaScript:Dashboard.nodelink("+data.id+","+data.tooltext+")";
                                     data.color="FE3233";
                                     data.alpha = "0"
                                     data.labelalign = "top";

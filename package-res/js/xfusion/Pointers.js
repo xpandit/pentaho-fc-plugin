@@ -62,6 +62,14 @@ define([
 				return (Chart.prototype.renderChart.call(this, object, options, data));
 			},
 
+			realtimeChart: function (object, cd) {
+				setInterval(function () {
+					var responseText = ChartUtils.prototype.doCDAQuery(cd.path, cd.dataAccessId, object.parameters);
+					var dataset = ChartUtils.prototype.buildRealTimeData(responseText);
+					object.chartObject.feedData(dataset);
+				}, cd.cdaRefreshInterval * 1000);
+			},
+
 			setBuildChartPointers: function (chartDefinition, values) {
 				var cd = chartDefinition;
 
@@ -78,7 +86,7 @@ define([
 					$("#"+this._htmlObject).html("<div class=\"alert alert-info\"><strong>Missing Properties!</strong> Pointer is "+hasProperties[1]+"</div>");
 					return;
 				};
-				
+
 				// create the chart data
 				this._data = {
 					"chart": cd.chartProperties,
