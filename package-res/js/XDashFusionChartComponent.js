@@ -3,16 +3,17 @@ define([
   'cdf/dashboard/Utils',
   'amd!cdf/lib/underscore',
   'cdf/lib/jquery',
-  'cdf/Logger'
-], function(UnmanagedComponent, Utils, _, $, Logger) {
+  'cdf/Logger',
+  'xfusion/charts/ChartUtils'
+], function(UnmanagedComponent, Utils, _, $, Logger, ChartUtils) {
   'use strict';
   var XPFusionChartComponent = UnmanagedComponent.extend({
 
     update: function() {
       var render = _.bind(this.render, this);
+      this.chartDefinition.path = ChartUtils.prototype.calculateRelativePath(this.chartDefinition.path,this.dashboard.context.path);
       this.triggerQuery(this.chartDefinition, render);
     },
-
 
     render: function(values) {
       var myself = this;
@@ -117,7 +118,7 @@ define([
             if (_.has(cd, 'cdaRefreshInterval')) {
               chart.realtimeChart(myself, cd);
             }
-            
+
             return chart;
           });
           break;

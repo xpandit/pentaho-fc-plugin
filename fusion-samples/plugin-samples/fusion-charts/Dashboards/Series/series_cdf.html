@@ -120,8 +120,10 @@ var dashboard;
 require([
 	'cdf/lib/jquery',
 	'cdf/Dashboard.Bootstrap',
-	'xfusion/XDashFusionChartComponent'],
-	function($, Dashboard, XPFusionChartComponent) {
+	'xfusion/XDashFusionChartComponent',
+	'xfusion/SampleEndpoints'
+],
+	function($, Dashboard, XPFusionChartComponent, sparkl) {
 
 		dashboard = new Dashboard();
 
@@ -496,6 +498,31 @@ require([
 
 		dashboard.init();
 		window.Dashboard = dashboard;
+
+		var successCallback = function(json) {
+			window.Dashboard.decrementRunningCalls();
+			for (var index = 0; index < json.resultset.length; index++) {
+				if (json.resultset[index][0] == "free") {
+					if (json.resultset[index][1] == "false") {
+						$(".Info").css("display", "none");
+					} else {
+						$("#charts").css("display", "none");
+					}
+				}
+			}
+		};
+
+		var errorCallback = function(json) {
+			window.Dashboard.decrementRunningCalls();
+		};
+
+		$(document).ready(function() {
+			sparkl.runEndpoint('fusion_plugin', 'isfree', {
+				success: successCallback,
+				error: errorCallback
+			});
+		});
+
 	});
 
 </script>

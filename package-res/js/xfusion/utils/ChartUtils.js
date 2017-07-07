@@ -454,6 +454,27 @@ define([
 				}
 			}
 		},
+
+		calculateRelativePath : function(cdaPath,location){
+ 		 //if has relative path in CDA calculates the absolute path
+ 			var dashboardPathArray=location.split("/");
+ 			dashboardPathArray.pop();
+ 			var cdaPathArray=decodeURI(cdaPath).split("%2F")[0].split("/");
+ 			var i=0;
+ 			if(cdaPathArray[0]=="..")
+ 			{
+ 					for (;i<cdaPathArray.length;++i)
+ 					{
+ 							if(cdaPathArray[0]=="..")
+ 							{
+ 									dashboardPathArray.pop();
+ 									cdaPathArray.shift();
+ 							}
+ 					}
+ 					cdaPath=dashboardPathArray.concat(cdaPathArray).join("/");
+ 			}
+ 			return cdaPath;
+ 	 }
 	}
 
 	return ChartUtils;
