@@ -8,10 +8,8 @@ define([
 ], function ( Utils, _, $, Logger, XPFusionChartComponent,ChartUtils) {
     'use strict';
 
-
-    var DataCdeComponent = XPFusionChartComponent.extend({
-
-        beforeProcessUpdate: XPFusionChartComponent.prototype.update,
+    var FCMultiSeriesCDEComponent = XPFusionChartComponent.extend({
+          beforeProcessUpdate: XPFusionChartComponent.prototype.update,
 
         update: function () {
             try {
@@ -24,6 +22,6 @@ define([
 
     });
 
-    return DataCdeComponent;
+    return FCMultiSeriesCDEComponent;
 
 });

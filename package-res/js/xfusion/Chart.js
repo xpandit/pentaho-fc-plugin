@@ -69,6 +69,14 @@ define([
 									});
 									return object;
 									break;
+								case 'xfusiontheme':
+									window.require(['xfusion/XPTheme'], function () {
+										object.chartObject.setChartAttribute('theme', 'XFusionTheme');
+										object.chartObject.setJSONData(data);
+										object.chartObject.render();
+									});
+									return object;
+									break;
 								default:
 									object.chartObject.setJSONData(data);
 									object.chartObject.render();
@@ -83,7 +91,7 @@ define([
 					object.chartObject.setJSONData(data);
 				}
 			},
-			
+
 			setAdditionalOptions: function (cd) {
 				for (var index = 0; index < _.keys(cd).length; index++) {
 					switch (_.keys(cd)[index].toString().toLowerCase()) {

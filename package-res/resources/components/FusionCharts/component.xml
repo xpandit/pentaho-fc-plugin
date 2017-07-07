@@ -1,14 +1,13 @@
 <DesignerComponents>
 	<!--ASYNC COMPONENT-->
 	<!--SingleSeries Charts-->
-	<!--SingleSeries Charts-->
 	<DesignerComponent>
 		<Header>
 			<Name>Single Series Charts</Name>
-			<IName>DataCde</IName>
+			<IName>FCSingleSeriesCDE</IName>
 			<Description>FusionCharts XT Single Series Charts</Description>
 			<Category>FUSIONCHARTS</Category>
-			<CatDescription>FusionCharts</CatDescription>
+			<CatDescription>Fusion Charts XT</CatDescription>
 			<Type>PalleteEntry</Type>
 			<Version>1.0</Version>
 		</Header>
@@ -39,11 +38,11 @@
 						<Property>trendlinesScriptProperties</Property>
 					</Definition>
 				</Definition>
+				<Property type="string">dataType</Property>
 				<Property name="parameters">xActionArrayParameter</Property>
 				<Property type="boolean">executeAtStart</Property>
 				<Property type="function">preChange</Property>
 				<Property type="function">postChange</Property>
-				<Property >dataType</Property>
 				<Property type="function">postFetch</Property>
 				<Property type="string">htmlObject</Property>
 				<Property type="function">preExecution</Property>
@@ -87,11 +86,14 @@
 							<DefaultValue>data</DefaultValue>
 							<Description>Data Type</Description>
 							<Tooltip>Data Type of the chart</Tooltip>
-							<InputType>String</InputType>
+							<InputType type="valuelist" />
 							<OutputType>String</OutputType>
 							<Order>100</Order>
 							<Version>1.0</Version>
 						</Header>
+						<Values>
+							<Value display="data">data</Value>
+						</Values>
 					</DesignerProperty>
 					<DesignerProperty>
 						<Header>
@@ -240,305 +242,317 @@
 	</DesignerComponent>
 	<!--Multi-Series Charts-->
 	<DesignerComponent>
-		<Header>
-			<Name>Multi-Series Charts</Name>
-			<IName>XDashFusionChartComponentAsyncMultiSeries</IName>
-			<Description>FusionCharts XT Multi-Series Charts</Description>
-			<Category>FUSIONCHARTS</Category>
-			<CatDescription>FusionCharts</CatDescription>
-			<Type>PalleteEntry</Type>
-			<Version>1.0</Version>
-		</Header>
-		<Metadata>
-			<meta name='cdwSupport'>true</meta>
-		</Metadata>
-		<Contents>
-			<Model>
-				<Definition name="chartDefinition">
-					<Property name="path">fusionCdaPath</Property>
-					<Property name="dataAccessId">dataAccessId</Property>
-					<Property type="string" name="chartType">MultiSeriesChartsType</Property>
-					<Property name="width" type="number">width</Property>
-					<Property name="height" type="number">height</Property>
-					<Definition name="chartProperties">
-						<Property>caption</Property>
-						<Property>subcaption</Property>
-						<Property>theme</Property>
-						<Property>xAxisName</Property>
-						<Property>yAxisName</Property>
-						<Property name="chartScriptProperties">chartScriptProperties</Property>
-					</Definition>
-					<Definition name="dataSetProperties">
-						<Property>dataSetCallback</Property>
-						<Property>dataCallback</Property>
-					</Definition>
-					<Definition name="trendlinesProperties">
-						<Property>lineCallback</Property>
-						<Property>trendlinesScriptProperties</Property>
-					</Definition>
-					<Definition name="categoriesProperties">
-						<Property name="categoriesPath">categoriesCDAPath</Property>
-						<Property name="categoriesDataAccessId">categoryDataAccessId</Property>
-						<Property>categoryCallback</Property>
-						<Property>categoriesScriptProperties</Property>
-					</Definition>
-				</Definition>
-				<Property name="parameters">xActionArrayParameter</Property>
-				<Property type="boolean">executeAtStart</Property>
-				<Property type="function">preChange</Property>
-				<Property type="function">postChange</Property>
-				<Property type="function">postFetch</Property>
-				<Property type="string">htmlObject</Property>
-				<Property type="function">preExecution</Property>
-				<Property type="function">postExecution</Property>
-				<Property type="number">tooltip</Property>
-				<Property type="number">listeners</Property>
-			</Model>
-			<Implementation>
-				<Code src="../../../js/CDE.js"/>
-				<Dependencies>
-					<Dependency src="../../../js/XDashFusionChartComponent.js" version="1.0">CDE_Components</Dependency>
-					<Dependency src="../../../js/XPCharts.js" version="1.0">XPCharts</Dependency>
-					<Dependency src="../../../js/XPTheme.js" version="1.0">XPTheme</Dependency>
-				</Dependencies>
-				<CustomProperties>
-					<!--Chart Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>xAxisName</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Chart X Axis Name</Description>
-							<Tooltip>X-axis title of the chart</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>100</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>yAxisName</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Chart Y Axis Name</Description>
-							<Tooltip>Y-axis title of the chart.</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>100</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>caption</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Chart Caption</Description>
-							<Tooltip>Caption of the chart</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>100</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>subcaption</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Chart Sub-caption</Description>
-							<Tooltip>Sub-caption of the chart</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>100</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>theme</Name>
-							<OutputName>theme</OutputName>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Chart Theme</Description>
-							<Tooltip>Theme Name</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>100</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>chartScriptProperties</Name>
-							<OutputName>chartScriptProperties</OutputName>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue>{}</DefaultValue>
-							<Description>Chart Script Properties</Description>
-							<Tooltip>Chart JavaScript Properties</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Array</OutputType>
-							<Advanced>true</Advanced>
-							<Order>101</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<!--Data Set Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>dataSetCallback</Name>
-							<Parent>BaseProperty</Parent>
-							<Description>Data Series Callback</Description>
-							<Tooltip>Apply properties to series. The function needs one parameter that will receive the series name property received from the CDA</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Function</OutputType>
-							<Advanced>true</Advanced>
-							<Order>103</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>dataCallback</Name>
-							<Parent>BaseProperty</Parent>
-							<Description>Data Callback</Description>
-							<Tooltip>Apply properties to data if it is separated by series (Otherwise use Data Series Callback). The function needs two parameters that will receive the series name and the data</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Function</OutputType>
-							<Advanced>true</Advanced>
-							<Order>104</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<!--Categories Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>categoryCallback</Name>
-							<Parent>BaseProperty</Parent>
-							<Description>Category Callback</Description>
-							<Tooltip>Apply properties to Categories. The function needs one parameter that will receive the categories properties</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Function</OutputType>
-							<Advanced>true</Advanced>
-							<Order>106</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>categoriesScriptProperties</Name>
-							<OutputName>categoriesScriptProperties</OutputName>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue>{}</DefaultValue>
-							<Description>Categories Script Properties</Description>
-							<Tooltip>Categories Script Properties</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Array</OutputType>
-							<Advanced>true</Advanced>
-							<Order>106</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<!--Trendlines Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>lineCallback</Name>
-							<Parent>BaseProperty</Parent>
-							<Description>Trendlines Callback</Description>
-							<Tooltip>Apply properties to Trendlines. The function needs one parameter that will receive the trendline properties</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Function</OutputType>
-							<Advanced>true</Advanced>
-							<Order>108</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>trendlinesScriptProperties</Name>
-							<OutputName>trendlinesScriptProperties</OutputName>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue>{}</DefaultValue>
-							<Description>Trendlines</Description>
-							<Tooltip>Trendlines</Tooltip>
-							<InputType>JavaScript</InputType>
-							<OutputType>Array</OutputType>
-							<Advanced>true</Advanced>
-							<Order>108</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<!--Categories Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>categoriesCDAPath</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Categories CDA Path</Description>
-							<Tooltip>Categories CDA Path</Tooltip>
-							<InputType>CdaPath</InputType>
-							<OutputType>String</OutputType>
-							<Order>28</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>categoryDataAccessId</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue></DefaultValue>
-							<Description>Categories DataAccess ID</Description>
-							<Tooltip>Categories DataAccess ID</Tooltip>
-							<InputType>String</InputType>
-							<OutputType>String</OutputType>
-							<Order>28</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<!--Other Properties-->
-					<DesignerProperty>
-						<Header>
-							<Name>fusionCdaPath</Name>
-							<OutputName>path</OutputName>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue/>
-							<Description>Data CDA Path</Description>
-							<Tooltip>CDA Path</Tooltip>
-							<InputType>CdaPath</InputType>
-							<OutputType>String</OutputType>
-							<Order>27</Order>
-							<Version>1.0</Version>
-						</Header>
-					</DesignerProperty>
-					<DesignerProperty>
-						<Header>
-							<Name>MultiSeriesChartsType</Name>
-							<Parent>BaseProperty</Parent>
-							<DefaultValue>mscolumn2d</DefaultValue>
-							<Description>Chart Type</Description>
-							<Tooltip>Single Series Charts Type</Tooltip>
-							<InputType type="valuelist"/>
-							<OutputType>String</OutputType>
-							<Order>89</Order>
-							<Advanced>false</Advanced>
-							<Version>1.0</Version>
-						</Header>
-						<Values>
-							<Value display="Multi-series Column 2D">mscolumn2d</Value>
-							<Value display="Multi-series Column 3D">mscolumn3d</Value>
-							<Value display="Multi-series Line 2D">msline</Value>
-							<Value display="Multi-series Bar 2D">msbar2d</Value>
-							<Value display="Multi-series Bar 3D">msbar3d</Value>
-							<Value display="Multi-series Area 2D">msarea</Value>
-							<Value display="Marimekko">marimekko</Value>
-							<Value display="Zoom Line">zoomline</Value>
-							<Value display="Zoom Line DY">zoomlinedy</Value>
-						</Values>
-					</DesignerProperty>
-				</CustomProperties>
-			</Implementation>
-		</Contents>
+	  <Header>
+	    <Name>Multi-Series Charts</Name>
+	    <IName>FCMultiSeriesCDE</IName>
+	    <Description>FusionCharts XT Multi-Series Charts</Description>
+	    <Category>FUSIONCHARTS</Category>
+	    <CatDescription>Fusion Charts XT</CatDescription>
+	    <Type>PalleteEntry</Type>
+	    <Version>1.0</Version>
+	  </Header>
+	  <Metadata>
+	    <meta name='cdwSupport'>true</meta>
+	  </Metadata>
+	  <Contents>
+	    <Model>
+	      <Definition name="chartDefinition">
+	        <Property name="path">fusionCdaPath</Property>
+	        <Property name="dataAccessId">dataAccessId</Property>
+	        <Property type="string" name="chartType">MultiSeriesChartsType</Property>
+	        <Property name="width" type="number">width</Property>
+	        <Property name="height" type="number">height</Property>
+	        <Definition name="chartProperties">
+	          <Property>caption</Property>
+	          <Property>subcaption</Property>
+	          <Property>theme</Property>
+	          <Property>xAxisName</Property>
+	          <Property>yAxisName</Property>
+	          <Property name="chartScriptProperties">chartScriptProperties</Property>
+	        </Definition>
+	        <Definition name="dataSetProperties">
+	          <Property>dataSetCallback</Property>
+	          <Property>dataCallback</Property>
+	        </Definition>
+	        <Definition name="trendlinesProperties">
+	          <Property>lineCallback</Property>
+	          <Property>trendlinesScriptProperties</Property>
+	        </Definition>
+	        <Definition name="categoriesProperties">
+	          <Property name="categoriesPath">categoriesCDAPath</Property>
+	          <Property name="categoriesDataAccessId">categoryDataAccessId</Property>
+	          <Property>categoryCallback</Property>
+	          <Property>categoriesScriptProperties</Property>
+	        </Definition>
+	      </Definition>
+	      <Property type="string">dataType</Property>
+	      <Property name="parameters">xActionArrayParameter</Property>
+	      <Property type="boolean">executeAtStart</Property>
+	      <Property type="function">preChange</Property>
+	      <Property type="function">postChange</Property>
+	      <Property type="function">postFetch</Property>
+	      <Property type="string">htmlObject</Property>
+	      <Property type="function">preExecution</Property>
+	      <Property type="function">postExecution</Property>
+	      <Property type="number">tooltip</Property>
+	      <Property type="number">listeners</Property>
+	    </Model>
+	    <Implementation supportsLegacy="true" supportsAMD="true">
+	      <CustomProperties>
+	        <!--Chart Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>xAxisName</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Chart X Axis Name</Description>
+	            <Tooltip>X-axis title of the chart</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>yAxisName</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Chart Y Axis Name</Description>
+	            <Tooltip>Y-axis title of the chart.</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>dataType</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue>series</DefaultValue>
+	            <Description>Data Type</Description>
+	            <Tooltip>Data Type of the chart</Tooltip>
+	            <InputType type="valuelist" />
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	          <Values>
+	            <Value display="series">series</Value>
+	            <Value display="seriesColumn">seriesColumn</Value>
+	          </Values>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>caption</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Chart Caption</Description>
+	            <Tooltip>Caption of the chart</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>subcaption</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Chart Sub-caption</Description>
+	            <Tooltip>Sub-caption of the chart</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>theme</Name>
+	            <OutputName>theme</OutputName>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Chart Theme</Description>
+	            <Tooltip>Theme Name</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>100</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>chartScriptProperties</Name>
+	            <OutputName>chartScriptProperties</OutputName>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue>{}</DefaultValue>
+	            <Description>Chart Script Properties</Description>
+	            <Tooltip>Chart JavaScript Properties</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Array</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>101</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <!--Data Set Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>dataSetCallback</Name>
+	            <Parent>BaseProperty</Parent>
+	            <Description>Data Series Callback</Description>
+	            <Tooltip>Apply properties to series. The function needs one parameter that will receive the series name property received from the CDA</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Function</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>103</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>dataCallback</Name>
+	            <Parent>BaseProperty</Parent>
+	            <Description>Data Callback</Description>
+	            <Tooltip>Apply properties to data if it is separated by series (Otherwise use Data Series Callback). The function needs two parameters that will receive the series name and the data</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Function</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>104</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <!--Categories Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>categoryCallback</Name>
+	            <Parent>BaseProperty</Parent>
+	            <Description>Category Callback</Description>
+	            <Tooltip>Apply properties to Categories. The function needs one parameter that will receive the categories properties</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Function</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>106</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>categoriesScriptProperties</Name>
+	            <OutputName>categoriesScriptProperties</OutputName>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue>{}</DefaultValue>
+	            <Description>Categories Script Properties</Description>
+	            <Tooltip>Categories Script Properties</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Array</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>106</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <!--Trendlines Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>lineCallback</Name>
+	            <Parent>BaseProperty</Parent>
+	            <Description>Trendlines Callback</Description>
+	            <Tooltip>Apply properties to Trendlines. The function needs one parameter that will receive the trendline properties</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Function</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>108</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>trendlinesScriptProperties</Name>
+	            <OutputName>trendlinesScriptProperties</OutputName>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue>{}</DefaultValue>
+	            <Description>Trendlines</Description>
+	            <Tooltip>Trendlines</Tooltip>
+	            <InputType>JavaScript</InputType>
+	            <OutputType>Array</OutputType>
+	            <Advanced>true</Advanced>
+	            <Order>108</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <!--Categories Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>categoriesCDAPath</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Categories CDA Path</Description>
+	            <Tooltip>Categories CDA Path</Tooltip>
+	            <InputType>CdaPath</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>28</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>categoryDataAccessId</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue></DefaultValue>
+	            <Description>Categories DataAccess ID</Description>
+	            <Tooltip>Categories DataAccess ID</Tooltip>
+	            <InputType>String</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>28</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <!--Other Properties-->
+	        <DesignerProperty>
+	          <Header>
+	            <Name>fusionCdaPath</Name>
+	            <OutputName>path</OutputName>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue/>
+	            <Description>Data CDA Path</Description>
+	            <Tooltip>CDA Path</Tooltip>
+	            <InputType>CdaPath</InputType>
+	            <OutputType>String</OutputType>
+	            <Order>27</Order>
+	            <Version>1.0</Version>
+	          </Header>
+	        </DesignerProperty>
+	        <DesignerProperty>
+	          <Header>
+	            <Name>MultiSeriesChartsType</Name>
+	            <Parent>BaseProperty</Parent>
+	            <DefaultValue>mscolumn2d</DefaultValue>
+	            <Description>Chart Type</Description>
+	            <Tooltip>Single Series Charts Type</Tooltip>
+	            <InputType type="valuelist"/>
+	            <OutputType>String</OutputType>
+	            <Order>89</Order>
+	            <Advanced>false</Advanced>
+	            <Version>1.0</Version>
+	          </Header>
+	          <Values>
+	            <Value display="Multi-series Column 2D">mscolumn2d</Value>
+	            <Value display="Multi-series Column 3D">mscolumn3d</Value>
+	            <Value display="Multi-series Line 2D">msline</Value>
+	            <Value display="Multi-series Bar 2D">msbar2d</Value>
+	            <Value display="Multi-series Bar 3D">msbar3d</Value>
+	            <Value display="Multi-series Area 2D">msarea</Value>
+	            <Value display="Marimekko">marimekko</Value>
+	            <Value display="Zoom Line">zoomline</Value>
+	            <Value display="Zoom Line DY">zoomlinedy</Value>
+	          </Values>
+	        </DesignerProperty>
+	      </CustomProperties>
+	    </Implementation>
+	  </Contents>
 	</DesignerComponent>
 	<!--Stacked Charts-->
 	<DesignerComponent>

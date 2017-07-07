@@ -429,7 +429,6 @@ define([
 * Returns: Chart Definition
 */
 		chartDefinitionCDEproperties: function (chart, properties) {
-			console.log("");
 			if (!_.isEmpty(properties)) {
 				console.log("Parse object");
 				for (var key in properties.properties) {
@@ -445,11 +444,15 @@ define([
 						chart.chartDefinition[key] = {};
 						_.extend(chart.chartDefinition[key], chart[key]);
 						if (properties.properties[key].changeProperties != null) {
-							console.log("change properties");
+							$.each(properties.properties[key].changeProperties, function(i, el){
+			 				 if(_.has(chart.chartDefinition[key],el[0])){
+			 					 chart.chartDefinition[key][el[1]] = chart.chartDefinition[key][el[0]]
+								 delete chart.chartDefinition[key][el[0]]
+			 				 }
+			 			 });
 
 						}
 						delete chart[key];
-						console.log("");
 					}
 				}
 			}

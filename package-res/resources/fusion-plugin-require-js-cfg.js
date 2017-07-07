@@ -42,14 +42,16 @@
   requirePaths['xfusion/charts/ChartUtils'] = prefixJS + '/xfusion/utils/ChartUtils';
 
   //CDE Require scripts
-  requirePaths['fusion_plugin/components/SeriesCdeComponent']  = prefixResources + '/amd-components/Series/SeriesCdeComponent';
-  requirePaths['fusion_plugin/components/DataCdeComponent']  = prefixResources + '/amd-components/Data/DataCdeComponent';
+	requirePaths['fusion_plugin/components/FCSingleSeriesCDEComponent']  = prefixResources + '/amd-components/SingleSeries/FCSingleSeriesCDEComponent';
+  requirePaths['fusion_plugin/components/FCMultiSeriesCDEComponent']  = prefixResources + '/amd-components/MultiSeries/FCMultiSeriesCDEComponent';
 
   //FC Library
   requirePaths['xfusion/fclib/FusionCharts'] = prefixFC + '/FusionCharts';
+	//Themes
   requirePaths['xfusion/fclib/fusioncharts.theme.ocean'] = prefixFC + '/themes/fusioncharts.theme.ocean';
   requirePaths['xfusion/fclib/fusioncharts.theme.carbon'] = prefixFC + '/themes/fusioncharts.theme.carbon';
   requirePaths['xfusion/fclib/fusioncharts.theme.zune'] = prefixFC + '/themes/fusioncharts.theme.zune';
   requirePaths['xfusion/fclib/fusioncharts.theme.fint'] = prefixFC + '/themes/fusioncharts.theme.fint';
+	requirePaths['xfusion/XPTheme'] = prefixJS + '/XPTheme';
 
 })();
