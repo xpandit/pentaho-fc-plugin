@@ -26,11 +26,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================================================-->
 <!--===========================================================================
     == SUBFLOOR-PKG ==
-    
+
     $Rev$
     $Date$
     Project Home: http://code.google.com/p/subfloor/
-    
+
     Provides default targets for creating application archives such as zip and tar.gzip
     files.
     ============================================================================-->
@@ -92,6 +92,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   </target>
 
   <target name="assemble.init">
+        <mkdir dir="${dist.dir}" />
     <mkdir dir="${approot.stage.dir}" />
   </target>
 
@@ -137,16 +138,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		</zipfileset>
 	</zip>
   </target>
-  
+
   <target name="samples-targz">
     <tar destfile="${dist.dir}/fusion_samples-${project.revision}.tar.gz" longfile="gnu" compression="gzip">
       <tarfileset dir="${dir.samples}/plugin-samples/" mode="755">
       	<include name="**"/>
       </tarfileset>
     </tar>
-  </target>	
-  
-  
+  </target>
+
+
     <target name="pentaho-CDE-zip">
   	<zip destfile="${dist.dir}/fusion_pentaho-CDE-${project.revision}.zip">
 		<zipfileset dir="${dir.cdf-dd-res}">
@@ -154,19 +155,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		</zipfileset>
 	</zip>
   </target>
-  
+
   <target name="pentaho-CDE-targz">
     <tar destfile="${dist.dir}/fusion_pentaho-CDE-${project.revision}.tar.gz" longfile="gnu" compression="gzip">
       <tarfileset dir="${dir.cdf-dd-res}" mode="755">
       	<include name="**"/>
       </tarfileset>
     </tar>
-  </target>	
-  
-  
+  </target>
+
+
   <!--=======================================================================
 	    create-pom (override)
-	    
+
 	    Creates the POM files for publishing the jar and gwt zip package to the Maven repository
 	    ====================================================================-->
   <target name="create-pom"
@@ -174,8 +175,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           description="Creates a POM file based on the ivy dependencies" />
 
   <!--=======================================================================
-	    create-package-pom 
-	    
+	    create-package-pom
+
 	    Creates a POM file for the package
 	    ====================================================================-->
   <target name="create-package-pom"
@@ -187,7 +188,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <!--=======================================================================
       publish-nojar (override)
-      
+
       Publishes the jar and zip package to the Maven repository
       ====================================================================-->
   <target name="publish-nojar" depends="install-antcontrib,create-pom,ivy.deliver,subfloor.publish-nojar">
@@ -200,7 +201,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <!--=======================================================================
       publish-local-nojar (override)
-      
+
       Publishes jar and zip package locally
       ====================================================================-->
   <target name="publish-local-nojar" depends="install-ivy,subfloor.publish-local-nojar">

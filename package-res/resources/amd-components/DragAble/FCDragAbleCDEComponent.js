@@ -3,7 +3,7 @@ define([
     'amd!cdf/lib/underscore',
     'cdf/lib/jquery',
     'cdf/Logger',
-    'xfusion/XDashFusionChartComponent',
+    'xfusion/XDashFusionChartComponentRequireJS',
     'xfusion/charts/ChartUtils',
 ], function ( Utils, _, $, Logger, XPFusionChartComponent,ChartUtils) {
     'use strict';

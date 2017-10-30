@@ -1,0 +1,6381 @@
+{
+ "components": {
+  "rows": [
+   {
+    "id": "SCRIPT",
+    "name": "Scripts",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "type": "Label",
+      "value": "Scripts"
+     }
+    ],
+    "type": "Label",
+    "typeDesc": "<i>Group</i>"
+   },
+   {
+    "id": "76341407-a587-0f84-f042-4ca0eed90c52",
+    "parent": "SCRIPT",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "nodelink"
+     },
+     {
+      "name": "javaScript",
+      "type": "JavaScript",
+      "value": "function nodelink(data){\n    Dashboards.fireChange('param',data.id);\n    //window.alert(data.id);\n} "
+     }
+    ],
+    "type": "ComponentsFunction",
+    "typeDesc": "JavaScript function"
+   },
+   {
+    "id": "FUSIONCHARTS",
+    "name": "FusionCharts",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "Group",
+      "type": "Label",
+      "value": "FusionCharts"
+     }
+    ],
+    "type": "Label",
+    "typeDesc": "<i>Group</i>"
+   },
+   {
+    "id": "07453b31-d70e-4c4c-cbd2-1539ec915224",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "dragnode"
+     },
+     {
+      "name": "connectorsDataAccessId",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "4"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "connectorsPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "600"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "900"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "DragNode"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "DragNode"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "canvasBgColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xaxismaxvalue",
+      "type": "Integer",
+      "value": 100
+     },
+     {
+      "name": "xaxismixvalue",
+      "type": "Integer",
+      "value": 0
+     },
+     {
+      "name": "yaxismaxvalue",
+      "type": "Integer",
+      "value": 100
+     },
+     {
+      "name": "yaxismixvalue",
+      "type": "Integer",
+      "value": 0
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\nshowformbtn: \"0\",\nviewmode: \"0\"\n} "
+     },
+     {
+      "name": "allowdrag",
+      "type": "Integer",
+      "value": "1"
+     },
+     {
+      "name": "datasetColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "plotborderalpha",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data) {\n            \tif(data.id == \"null\" || data.id == \"null2\" || data.id == \"null3\"){\n\t\t\t\t\tdata.width= \"50\";\n\t\t\t\t\tdata.height = \"40\";\n\t\t\t\t\tdata.alpha = \"0\";\n\t\t\t\t\tdata.allowdrag = \"0\";\n\t\t\t\t}else{\n\t\t\t\t\tif(data.id == \"pc1\"){\n                        data.shape= null;\n            \t\t    data.radius = null;\n\t\t\t\t\t\tdata.width = \"110\";\n\t\t\t\t\t\tdata.height = \"90\";\n\t\t\t\t\t\tdata.imagenode = \"1\";\n\t\t\t\t\t\tdata.imageurl = \"http://www.fusioncharts.com/explore/Resources/desktop.png\";\n\t\t\t\t\t\tdata.tooltext = \"Name: PC1 <br> IP: 202.11.32.123 <br> Owner: Harry Mac\";\n\t\t\t\t\t\t// apply a Javascript link to node with the data as a argument\n\t\t\t\t\t\tdata.link = \"JavaScript:nodelink(\"+JSON.stringify(data)+\")\";\n\t\t\t\t\t\tdata.color=\"FE3233\";\n\t\t\t\t\t\tdata.alpha = \"0\"\n\t\t\t\t\t\tdata.labelalign = \"top\";\n\t\t\t\t\t\tdata.imagealign = \"middle\";\n\t\t\t\t\t\tdata.imagewidth = \"107\";\n            data.imageheight = \"67\";\n\t\t\t\t\t\tdata.allowdrag = \"1\"\n\t\t\t\t\t}else{\n\t\t\t\t\t\t// apply a webpage link to a node\n\t\t\t\t\t\tif(data.name == \"Internet\"){data.link = \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";}\n\t\t\t\t\t    data.shape= \"circle\";\n        \t\t\t    data.radius = \"40\";\n                        data.imageurl = null;\n                    }\n\t\t\t\t}\n} "
+     },
+     {
+      "name": "dataSetScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    plotborderalpha: \"0\"\n} "
+     },
+     {
+      "name": "alpha",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "arrowAtEnd",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "arrowAtStart",
+      "type": "Integer",
+      "value": "0"
+     },
+     {
+      "name": "strength",
+      "type": "Float",
+      "value": ""
+     },
+     {
+      "name": "connectorColor",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "dashed",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dashGap",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "dashLen",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "connectorCallback",
+      "type": "JavaScript",
+      "value": "function(data){\n    data.link= \"n-http://www.fusioncharts.com/charts/drag-node-charts/\";\n} "
+     },
+     {
+      "name": "connectorsScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    stdthickness: \"5\"\n} "
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": "function(data){\n            \tif(data.endvalue==\"30\"){data.color = \"FF0000\"; data.displayvalue = \"External Network\"};\n\t\t\t\tif(data.endvalue==\"60\"){data.color = \"00FF00\"; data.displayvalue = \"Middleware\"};\n\t\t\t\tif(data.endvalue==\"100\"){data.color = \"0000FF\"; data.displayvalue = \"Internal Network\"};\n\t\t\t\tdata.alpha = \"5\";\n\t\t\t\tdata.istrendzone = \"1\";\n\t\t\t} "
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    path:\"/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda\",\n    dataAccessId: \"2\",\n    vertical:\"1\"\n} "
+     },
+     {
+      "name": "labelCallback",
+      "type": "JavaScript",
+      "value": "function(data){\n        \t\tdata.color = \"000000\";\n\t\t\t\tdata.fontsize = \"18\";\n\t\t\t} "
+     },
+     {
+      "name": "labelsScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    path:\"/public/plugin-samples/fusion-charts/Fusion Charts/DragNodeChart.cda\",\n    dataAccessId: \"3\",\n} "
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsync",
+    "typeDesc": "PowerCharts XT Drag Node Chart"
+   },
+   {
+    "id": "07b760f1-8fad-2501-53f5-1b749af1811b",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "PieChart3D"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/SingleSeriesCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "singleSeriesChartsTypeCustom",
+      "value": "pie3d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "PieChart3D"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Sales Per Year"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "ocean"
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Years"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Sales"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    pieRadius  : \"70\",\n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncSingleSeries",
+    "typeDesc": "FusionCharts XT Single Series Charts"
+   },
+   {
+    "id": "b1017724-3a2a-9ad3-48aa-dfa4047525cd",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Marimekko"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MultiSeriesCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MultiSeriesCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MultiSeriesChartsTypeCustom",
+      "value": "marimekko"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Marimekko"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "fint"
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\r\ncaption: \"Top 3 Electronic Brands in Top 3 Revenue Earning States\",\r\n      subcaption: \"Last month\",\r\n      aligncaptiontocanvas: \"0\",\r\n      yaxisname: \"Statewise Sales (in %)\",\r\n      xaxisname: \"Brand\",\r\n      numberprefix: \"$\",\r\n      valueBgColor: \"#FFFFFF\",\r\n      valueBgAlpha: \"60\",\r\n      showPlotBorder: \"1\",\r\n      plotBorderThickness: \"0.25\",\r\n      showxaxispercentvalues: \"1\",\r\n      showsum: \"1\",\r\n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMultiSeries",
+    "typeDesc": "FusionCharts XT Multi-Series Charts"
+   },
+   {
+    "id": "0a0d1515-cfca-8a98-567a-aa8dee60dc2b",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "StackedColumn2D"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/StackedCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/StackedCharts.cda"
+     },
+     {
+      "name": "cdaArray",
+      "type": "JavaScript",
+      "value": []
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "StackedChartsTypeCustom",
+      "value": "stackedcolumn2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "StackedColumn2D"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Product-wise quarterly revenue in current year"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Harry's SuperMart"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Quarter"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Revenue (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"numberPrefix\": \"$\",\n    \"paletteColors\": \"#0075c2,#1aaf5d\",\n    \"bgColor\": \"#ffffff\",\n    \"borderAlpha\": \"20\",\n    \"showCanvasBorder\": \"0\",\n    \"usePlotGradientColor\": \"0\",\n    \"plotBorderAlpha\": \"10\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"valueFontColor\": \"#ffffff\",\n    \"showXAxisLine\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"divlineColor\": \"#999999\",\n    \"divLineDashed\": \"1\",\n    \"showAlternateHGridColor\": \"0\",\n    \"subcaptionFontBold\": \"0\",\n    \"subcaptionFontSize\": \"14\",\n    \"showHoverEffect\": \"1\",\n\t\"showBorder\": \"0\",\n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncStacked",
+    "typeDesc": "FusionCharts XT Stacked Charts"
+   },
+   {
+    "id": "6527245a-5680-3500-ddcc-243c36cda40e",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "MSStackedColumn2D"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "4"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/StackedCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/StackedCharts.cda"
+     },
+     {
+      "name": "cdaArray",
+      "type": "JavaScript",
+      "value": "[\r\n    {\r\n        path: \"/public/plugin-samples/fusion-charts/Fusion Charts/StackedCharts.cda\", \r\n        dataAccessId: \"3\"\r\n    },\r\n] "
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "StackedChartsTypeCustom",
+      "value": "msstackedcolumn2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "MSStackedColumn2D"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Product-wise break-up of quarterly revenue in last year"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Harry's SuperMart"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Quarter"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Sales (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"paletteColors\": \"#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90\",\n        \"numberPrefix\": \"$\",\n        \"numbersuffix\": \"M\",\n        \"bgColor\": \"#ffffff\",\n        \"borderAlpha\": \"20\",\n        \"showCanvasBorder\": \"0\",\n        \"usePlotGradientColor\": \"0\",\n        \"plotBorderAlpha\": \"10\",\n        \"legendBorderAlpha\": \"0\",\n        \"legendShadow\": \"0\",\n        \"valueFontColor\": \"#ffffff\",\n        \"showXAxisLine\": \"1\",\n        \"xAxisLineColor\": \"#999999\",\n        \"divlineColor\": \"#999999\",\n        \"divLineDashed\": \"1\",\n        \"showAlternateHGridColor\": \"0\",\n        \"subcaptionFontBold\": \"0\",\n        \"subcaptionFontSize\": \"14\",\n    \t\"showBorder\": \"0\",\n    } "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncStacked",
+    "typeDesc": "FusionCharts XT Stacked Charts"
+   },
+   {
+    "id": "b17b18ff-a866-46b4-c7ac-e75b82084f16",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "MSComb2D"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda"
+     },
+     {
+      "name": "cdaArray",
+      "type": "JavaScript",
+      "value": []
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "CombinationChartsTypeCustom",
+      "value": "mscombidy2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "MSComb2D"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Revenues and Profits"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "For last year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"xAxisname\": \"Month\",\n    \"pYAxisName\": \"Amount (In USD)\",\n\t\"sYAxisName\": \"Profit %\",\n\t\"numberPrefix\": \"$\",\n\t\"sNumberSuffix\": \"%\",\n\t\"sYAxisMaxValue\": \"50\",\n\t\"paletteColors\": \"#0075c2,#1aaf5d,#f2c500\",\n\t\"baseFontColor\": \"#333333\",\n\t\"baseFont\": \"Helvetica Neue,Arial\",\n\t\"captionFontSize\": \"14\",\n\t\"subcaptionFontSize\": \"14\",\n\t\"subcaptionFontBold\": \"0\",\n\t\"showBorder\": \"0\",\n\t\"bgColor\": \"#ffffff\",\n\t\"showShadow\": \"0\",\n\t\"canvasBgColor\": \"#ffffff\",\n\t\"canvasBorderAlpha\": \"0\",\n\t\"divlineAlpha\": \"100\",\n\t\"divlineColor\": \"#999999\",\n\t\"divlineThickness\": \"1\",\n\t\"divLineDashed\": \"1\",\n\t\"divLineDashLen\": \"1\",\n\t\"divLineGapLen\": \"1\",\n\t\"usePlotGradientColor\": \"0\",\n\t\"showplotborder\": \"0\",\n\t\"showXAxisLine\": \"1\",\n\t\"xAxisLineThickness\": \"1\",\n\t\"xAxisLineColor\": \"#999999\",\n\t\"showAlternateHGridColor\": \"0\",\n\t\"showAlternateVGridColor\": \"0\",\n\t\"legendBgAlpha\": \"0\",\n\t\"legendBorderAlpha\": \"0\",\n\t\"legendShadow\": \"0\",\n\t\"legendItemFontSize\": \"10\",\n\t\"legendItemFontColor\": \"#666666\"\n    } "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data) {\r\n    \t\t\tif(data.seriesname ===\"Profits\"){\r\n                    data.renderAs= \"area\";\r\n\t\t\t\t\tdata.showValues = \"0\";\r\n\t\t\t\t};\r\n\t\t\t\tif(data.seriesname ===\"Profit %\"){\r\n                    data.parentYAxis = \"S\"\r\n\t\t\t\t\tdata.renderAs= \"line\";\r\n\t\t\t\t\tdata.showValues = \"0\";\r\n\t\t\t\t};\r\n\t\t\t} "
+     },
+     {
+      "name": "linesetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "linesetDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "linesetDataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "linesetPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncCombination",
+    "typeDesc": "FusionCharts XT Combination Charts"
+   },
+   {
+    "id": "d5e872b7-8f7b-6869-ba97-939b01ef574e",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "MSComb2DLinedy"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda"
+     },
+     {
+      "name": "cdaArray",
+      "type": "JavaScript",
+      "value": "[\r\n    {\r\n        path: \"/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda\", \r\n        dataAccessId: \"4\"\r\n    },\r\n] "
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "CombinationChartsTypeCustom",
+      "value": "msstackedcolumn2dlinedy"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "MSComb2DLinedy"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Quarterly Sales vs. Profit % in Last Year"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Product-wise Break-up - Harry's SuperMart"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"xAxisName\": \"Quarter\",\n\t\"pYAxisName\": \"Sales\",\n\t\"sYAxisName\": \"Profit %\",\n\t\"numberPrefix\": \"$\",\n\t\"numbersuffix\": \"M\",\n\t\"sNumberSuffix\": \"%\",\n\t\"sYAxisMaxValue\": \"25\",\n\t\"paletteColors\": \"#5598c3,#2785c3,#31cc77,#1aaf5d,#f45b00\",\n\t\"baseFontColor\": \"#333333\",\n\t\"baseFont\": \"Helvetica Neue,Arial\",\n\t\"captionFontSize\": \"14\",\n\t\"subcaptionFontSize\": \"14\",\n\t\"subcaptionFontBold\": \"0\",\n\t\"showBorder\": \"0\",\n\t\"bgColor\": \"#ffffff\",\n\t\"showShadow\": \"0\",\n\t\"canvasBgColor\": \"#ffffff\",\n\t\"canvasBorderAlpha\": \"0\",\n\t\"divlineAlpha\": \"100\",\n\t\"divlineColor\": \"#999999\",\n\t\"divlineThickness\": \"1\",\n\t\"divLineDashed\": \"1\",\n\t\"divLineDashLen\": \"1\",\n\t\"divLineGapLen\": \"1\",\n\t\"usePlotGradientColor\": \"0\",\n\t\"showplotborder\": \"0\",\n\t\"valueFontColor\": \"#ffffff\",\n\t\"placeValuesInside\": \"1\",\n\t\"showXAxisLine\": \"1\",\n\t\"xAxisLineThickness\": \"1\",\n\t\"xAxisLineColor\": \"#999999\",\n\t\"showAlternateHGridColor\": \"0\",\n\t\"legendBgAlpha\": \"0\",\n\t\"legendBorderAlpha\": \"0\",\n\t\"legendShadow\": \"0\",\n\t\"legendItemFontSize\": \"10\",\n\t\"legendItemFontColor\": \"#666666\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "linesetCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n    \t\t\tdata.showValues = \"0\";\r\n\t\t\t} "
+     },
+     {
+      "name": "linesetDataAccessId",
+      "type": "String",
+      "value": "6"
+     },
+     {
+      "name": "linesetDataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "linesetPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/CombinationCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncCombination",
+    "typeDesc": "FusionCharts XT Combination Charts"
+   },
+   {
+    "id": "b34b9bcd-3169-1bfb-b572-2aae1caf38f0",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Bubble"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/XYPlotCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/XYPlotCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "XYPlotChartsTypeCustom",
+      "value": "bubble"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "XYPlotChart"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Sales Analysis of Shoe Brands"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last Quarter"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Average Price"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Units Sold"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"plotFillAlpha\": \"70\",\n    \"plotFillHoverColor\": \"#6baa01\",\n    \"showPlotBorder\": \"0\",\n    \"numDivlines\": \"2\",\n    \"showValues\": \"1\",\n    \"showTrendlineLabels\": \"0\",\n    \"plotTooltext\": \"$name : Profit Contribution - $zvalue%\",\n    \"drawQuadrant\": \"1\",\n    \"quadrantLineAlpha\": \"80\",\n    \"quadrantLineThickness\": \"3\",\n    \"quadrantXVal\": \"50\",\n    \"quadrantYVal\": \"15000\",\n    \"quadrantLabelTL\": \"Low Price / High Sale\",\n    \"quadrantLabelTR\": \"High Price / High Sale\",\n    \"quadrantLabelBL\": \"Low Price / Low Sale\",\n    \"quadrantLabelBR\": \"High Price / Low Sale\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showShadow\": \"0\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"canvasBorderAlpha\": \"0\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"use3dlighting\": \"0\",\n    \"showplotborder\": \"0\",\n    \"showYAxisLine\": \"1\",\n    \"yAxisLineThickness\": \"1\",\n    \"yAxisLineColor\": \"#999999\",\n    \"showXAxisLine\": \"1\",\n    \"xAxisLineThickness\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showAlternateVGridColor\": \"0\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncXYPlot",
+    "typeDesc": "FusionCharts XT XY Plot Charts"
+   },
+   {
+    "id": "6d9b8794-d7bf-135e-41bf-7f66b3ea6d98",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "ScrollCombi2D"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/ScrollCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/ScrollCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "ScrollChartsTypeCustom",
+      "value": "scrollcombi2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "ScrollChart"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Actual Revenue, Targeted Revenues & Profits"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "FY 2012 - FY 2013"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Month"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Amount (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"numberPrefix\": \"$\",\n\t\"numVisiblePlot\": \"12\",\n\t\"paletteColors\": \"#0075c2,#1aaf5d,#f2c500\",\n\t\"baseFontColor\": \"#333333\",\n\t\"baseFont\": \"Helvetica Neue,Arial\",\n\t\"captionFontSize\": \"14\",\n\t\"subcaptionFontSize\": \"14\",\n\t\"subcaptionFontBold\": \"0\",\n\t\"showBorder\": \"0\",\n\t\"bgColor\": \"#ffffff\",\n\t\"showShadow\": \"0\",\n\t\"canvasBgColor\": \"#ffffff\",\n\t\"canvasBorderAlpha\": \"0\",\n\t\"showValues\": \"0\",\n\t\"divlineAlpha\": \"100\",\n\t\"divlineColor\": \"#999999\",\n\t\"divlineThickness\": \"1\",\n\t\"divLineDashed\": \"1\",\n\t\"divLineDashLen\": \"1\",\n\t\"divLineGapLen\": \"1\",\n\t\"usePlotGradientColor\": \"0\",\n\t\"showplotborder\": \"0\",\n\t\"showXAxisLine\": \"1\",\n\t\"xAxisLineThickness\": \"1\",\n\t\"xAxisLineColor\": \"#999999\",\n\t\"showAlternateHGridColor\": \"0\",\n\t\"showAlternateVGridColor\": \"0\",\n\t\"legendBgAlpha\": \"0\",\n\t\"legendBorderAlpha\": \"0\",\n\t\"legendShadow\": \"0\",\n\t\"legendItemFontSize\": \"10\",\n\t\"legendItemFontColor\": \"#666666\",\n\t\"scrollheight\": \"10\",\n\t\"flatScrollBars\": \"1\",\n\t\"scrollShowButtons\": \"0\",\n\t\"scrollColor\": \"#cccccc\",\n\t\"showHoverEffect\": \"1\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data) {\r\n\tif(data.seriesname ===\"Projected Revenue\"){\r\n\t\tdata.renderAs= \"line\";\r\n\t\tdata.showValues = \"0\";\r\n\t};\r\n\tif(data.seriesname ===\"Profit\"){\r\n\t\tdata.renderAs= \"area\";\r\n\t\tdata.showValues = \"0\";\r\n\t};\r\n} "
+     },
+     {
+      "name": "dataSetScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncScroll",
+    "typeDesc": "FusionCharts XT Scroll Charts"
+   },
+   {
+    "id": "09b1a866-427e-3478-6ddb-24894717dfef",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Angular"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "10"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "angulargauge"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Angular"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Angular Gauge Sample"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "(Refreshes every 10 seconds)"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    bgColor        \t\t\t: \"ffffff\",\n\tbgRatio\t\t\t\t\t: \"100\",\n\tbgAlpha\t\t\t\t\t: \"100\",\n\tgaugeFillMix\t\t: \"{color}\",\n\tgaugeStartAngle\t: \"250\",\n\tgaugeEndAngle\t\t: \"-70\",\n\tgaugeOuterRadius: \"95\",\n\tgaugeInnerRadius: \"55%\",\n\tgaugeBorderColor: \"545A57\",\n\tpivotRadius\t\t\t: \"5\",\n\tshowPivotBorder\t: \"0\",\n\tpivotFillColor\t: \"545A57\",\n\tpivotFillAlpha\t: \"100\",\n\tmajorTMNumber\t\t: \"7\",\n\tmajorTMColor\t\t: \"000000\",\n\tminorTMColor\t\t: \"545A57\",\n\tbaseFontColor\t\t: \"000000\",\n\tbaseFontSize\t\t: \"16\",\n\tshowLimits\t\t\t: \"0\",\n\ttoolTipBgColor\t: \"545A57\",\n\ttoolTipBorderColor:\"262626\",\n\tborderColor\t\t\t: \"ffffff\",\n\tfree\t\t\t\t\t\t: \"false\",    \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data){\n    data.bgColor =\"000000\";    \n} "
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": " function(data){\r\n    if(data.maxValue === 60){\r\n    \tdata.code = \"#e44a00\";\r\n    }\r\n    if(data.maxValue === 80){\r\n    \tdata.code = \"#f8bd19\";\r\n    }\r\n    if(data.maxValue === 100){\r\n    \tdata.code = \"#6baa01\";\r\n    }\r\n } "
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"trendPoint\":\n            {\n                \"point\":\n                [\n                    {\n                        \"startvalue\": \"70\",\n                        \"displayvalue\": \"TrendPoint\",\n                        \"color\": \"666666\",\n                        \"thickness\": \"2\",\n                        \"alpha\": \"100\"\n                    }\n                ]\n            } \n         \n} "
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
+    "id": "92ddbba8-ba97-aa82-0331-f3f75f02a1fa",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "LED"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "10"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "hled"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "LED"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Horizontal LED Sample"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "(Refreshes every 10 seconds)"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\": \"0\",\n    \"upperLimit\": \"100\",\n    \"numberPrefix\": \"$\",\n    \"numberSuffix\": \"K\",\n    \"plotFillColor\": \"#0075c2\",\n    \"targetColor\": \"#8e0000\",\n    \"showHoverEffect\": \"1\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showShadow\": \"0\",\n    \"colorRangeFillMix\": \"{light+0}\",\n    \"valuePadding\": \"7\"  \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.maxValue === 60){\r\n\t\tdata.code = \"#e44a00\";\r\n\t}\r\n\tif(data.maxValue === 80){\r\n\t\tdata.code = \"#f8bd19\";\r\n\t}\r\n\tif(data.maxValue === 100){\r\n\t\tdata.code = \"#6baa01\";\r\n\t}\r\n} "
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
+    "id": "389fd884-44bc-dd70-ec18-885abde67167",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Cylinder"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "350"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "cylinder"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "${h:Cylinder}"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Diesel Level in Generator"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Bakersfield Central"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "fint"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\"    \t: \"0\",\n    \"upperLimit\"\t\t: \"120\",\n    \"lowerLimitDisplay\"\t: \"Empty\",\n    \"upperLimitDisplay\"\t: \"Full\",\n    \"numberSuffix\"\t\t: \" ltrs\",\n    \"showValue\"\t\t\t: \"1\",\n    \"chartBottomMargin\"\t: \"45\" \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
+    "id": "6e50d0ae-f9cb-7cbd-6d35-c76db516420b",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Thermometer"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Gauges.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "350"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "240"
+     },
+     {
+      "name": "chartType",
+      "type": "GaugesTypeCustom",
+      "value": "thermometer"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "${h:Thermometer}"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Temperature Monitor"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": " Central cold store"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "fint"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\": \"-10\",\n    \"upperLimit\": \"40\",\n    \"decimals\": \"1\",\n    \"numberSuffix\": \"°C\",\n    \"showhovereffect\": \"1\",\n    \"thmFillColor\": \"#008ee4\",\n    \"showGaugeBorder\": \"1\",\n    \"gaugeBorderColor\": \"#008ee4\",\n    \"gaugeBorderThickness\": \"2\",\n    \"gaugeBorderAlpha\": \"30\",\n    \"thmOriginX\": \"100\",\n    \"chartBottomMargin\": \"20\",\n    \"valueFontColor\": \"#000000\" \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "pointCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendPointDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "trendPointPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "trendPointScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGauges",
+    "typeDesc": "FusionWidgets XT Gauges"
+   },
+   {
+    "id": "8ed9bc3b-2aa6-eb1d-0031-bbbd5943e070",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "RealTimeColumn"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "cdaRefreshInterval",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/RealTimeCharts.cda"
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "RealTimeChartsTypeCustom",
+      "value": "realtimecolumn"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "RealTime"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Real-Time Sample"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "(Refreshes every 5 seconds)"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "ocean"
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Time"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Sales"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\r\n\tfree:\"false\",\r\n\tlabelDisplay:\"rotate\",\r\n\tlabelStep:\"1\",\r\n\tbgColor \t\t: \"ffffff\",\r\n\tborderColor\t\t: \"ffffff\",\r\n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    categories:[{\"category\": [{\"label\": \"Day Start\"}]}]\n} "
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncRealTime",
+    "typeDesc": "FusionWidgets XT Real-time Charts"
+   },
+   {
+    "id": "8d2f9b21-d505-10d3-2745-c247ef4fa364",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "SparkColumn"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/SparkCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "SparkChartsTypeCustom",
+      "value": "sparkcolumn"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Spark"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Revenue by Month"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"chartTopMargin\": \"10\",\n    \"chartBottomMargin\": \"10\",\n    \"chartRightMargin\": \"10\",\n    \"numberPrefix\": \"$\",\n    \"showBorder\": \"0\",\n    \"canvasBorderThickness\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"plotFillColor\": \"#0075c2\",\n    \"highColor\": \"#1aaf5d\",\n    \"lowColor\": \"#8e0000\",\n    \"showHoverEffect\": \"1\"    \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncSpark",
+    "typeDesc": "FusionWidgets XT Spark Charts"
+   },
+   {
+    "id": "d1253d2b-4404-628c-b2de-aa8074359bae",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "HorizontalBullet"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/BulletGraphs.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/BulletGraphs.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "BulletChartsTypeCustom",
+      "value": "hbullet"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Bullet"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Monthly Revenue"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Actual vs Target<br>Bakersfield Central"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"lowerLimit\": \"0\",\n    \"upperLimit\": \"100\",\n    \"numberPrefix\": \"$\",\n    \"numberSuffix\": \"K\",\n    \"plotFillColor\": \"#0075c2\",\n    \"targetColor\": \"#8e0000\",\n    \"showHoverEffect\": \"1\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showShadow\": \"0\",\n    \"colorRangeFillMix\": \"{light+0}\",\n    \"valuePadding\": \"7\"    \n} "
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.maxValue===50){\r\n\t\tdata.code = \"#e44a00\";\r\n\t\tdata.alpha = \"70\";\r\n\t};\r\n\tif(data.maxValue===75){\r\n\t\tdata.code = \"#f2c500\";\r\n\t\tdata.alpha = \"70\";\r\n\t};\r\n\tif(data.maxValue===100){\r\n\t\tdata.code = \"#1aaf5d\";\r\n\t\tdata.alpha = \"70\";\r\n\t};\r\n} "
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncBullet",
+    "typeDesc": "FusionWidgets XT Bullet Charts"
+   },
+   {
+    "id": "e69d2a8f-a2e4-61ad-7326-f9332597b571",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Funnel"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "OtherChartsTypeCustom",
+      "value": "funnel"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Other"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Website - Harry's SuperMart"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Visit to purchase - Conversion analysis for last year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"paletteColors\": \"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000\",\n    \"bgColor\": \"#ffffff\",\n    \"decimals\": \"1\",\n    \"showBorder\": \"0\",\n    \"isHollow\": \"1\",\n    \"labelDistance\": \"15\",\n    \"is2D\": \"1\",\n    \"plotTooltext\": \"Success : $percentOfPrevValue\",\n    \"showPercentValues\": \"1\"\n    } "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncOther",
+    "typeDesc": "FusionWidgets XT Other Charts"
+   },
+   {
+    "id": "6aa3a0ea-3de2-8f61-32b4-28cad0bff74a",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Gantt"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "600"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": "-985"
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "900"
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Construction management of a new store in Denver"
+     },
+     {
+      "name": "dateformat",
+      "type": "String",
+      "value": "dd/mm/yyyy"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Planned vs Actual"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"outputdateformat\": \"ddds mns yy\",\n    \"ganttPaneDuration\": \"40\",\n    \"ganttPaneDurationUnit\": \"d\",\n    \"plottooltext\": \"$processName{br} $label starting date $start{br}$label ending date $end\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"usePlotGradientColor\": \"0\",\n    \"showCanvasBorder\": \"0\",\n    \"flatScrollBars\": \"1\",\n    \"gridbordercolor\": \"#333333\",\n    \"gridborderalpha\": \"20\",\n    \"slackFillColor\": \"#e44a00\",\n    \"taskBarFillMix\": \"light+0\"\n} "
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "Gantt"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "taskCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.height = \"32%\";\r\n\tif(data.label === \"Planned\"){\r\n\t\tdata.toppadding = \"12%\";\r\n\t}else{\r\n\t\tdata.toppadding = \"56%\";\r\n\t};\r\n} "
+     },
+     {
+      "name": "tasksScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "processCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.id===\"2\"){\r\n\t\tdata.hoverBandColor = \"E44A00\";\r\n\t\tdata.hoverBandAlpha = \"40\";\r\n\t}\r\n} "
+     },
+     {
+      "name": "processesDataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "processesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "processesScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"headertext\": \"Task\",\n    \"fontcolor\": \"#000000\",\n    \"fontsize\": \"11\",\n    \"isanimated\": \"1\",\n    \"bgcolor\": \"#6baa01\",\n    \"headervalign\": \"bottom\",\n    \"headeralign\": \"left\",\n    \"headerbgcolor\": \"#999999\",\n    \"headerfontcolor\": \"#ffffff\",\n    \"headerfontsize\": \"12\",\n    \"align\": \"left\",\n    \"isbold\": \"1\",\n    \"bgalpha\": \"25\",\n    } "
+     },
+     {
+      "name": "datacolumnCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.bgcolor = \"#eeeeee\";\r\n\tdata.headertext = data.headertext.replace(/ /g,\"{br}\");\r\n} "
+     },
+     {
+      "name": "datatableDataAccessId",
+      "type": "String",
+      "value": "4"
+     },
+     {
+      "name": "datatablePath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "datatableScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"showprocessname\": \"1\",\n    \"namealign\": \"left\",\n    \"fontcolor\": \"#000000\",\n    \"fontsize\": \"10\",\n    \"valign\": \"right\",\n    \"align\": \"center\",\n    \"headervalign\": \"bottom\",\n    \"headeralign\": \"center\",\n    \"headerbgcolor\": \"#999999\",\n    \"headerfontcolor\": \"#ffffff\",\n    \"headerfontsize\": \"12\",\n    } "
+     },
+     {
+      "name": "textCallback",
+      "type": "JavaScript",
+      "value": "function(headertext,data){\r\n\tif(headertext === \"Actual Start Date\"){\r\n\t\tif(data.label === \"26/4/2014\"){\r\n\t\t\tdata.bgcolor = \"E44A00\";\r\n\t\t\tdata.bgAlpha = \"40\";\r\n\t\t};\r\n\t};\r\n} "
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Gantt"
+     },
+     {
+      "name": "milestoneCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "milestonesDataAccessId",
+      "type": "String",
+      "value": "6"
+     },
+     {
+      "name": "milestonesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "milestonesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "connectorCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.color = \"008EE4\";\r\n\tdata.thickness = \"2\";\r\n} "
+     },
+     {
+      "name": "connectorsDataAccessId",
+      "type": "String",
+      "value": "7"
+     },
+     {
+      "name": "connectorsPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "connectorsScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "legendScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"item\": [\n             {\n        \t\t \"label\": \"Planned\",\n        \t\t \"color\": \"#008ee4\"\n             },\n             {\n        \t\t \"label\": \"Actual\",\n        \t\t \"color\": \"#6baa01\"\n             },\n             {\n        \t\t \"label\": \"Slack (Delay)\",\n        \t\t \"color\": \"#e44a00\"\n             }\n\t\t\t]    \n} "
+     },
+     {
+      "name": "categoriesCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.bgcolor = \"999999\";\r\n\tdata.align = \"middle\";\r\n\tdata.fontcolor = \"ffffff\";\r\n\tdata.fontsize = \"12\";\r\n} "
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Others.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncGantt",
+    "typeDesc": "FusionWidgets XT Gantt Chart"
+   },
+   {
+    "id": "7e40ea3c-3083-eabb-0bb2-f310d417aec0",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Logarithmic"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/LogarithmicCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "LogarithmicChartsTypeCustom",
+      "value": "logmscolumn2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Logarithmic"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Store footfall vs Online visitors "
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last Year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Quarter"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "No of visitors"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n\t\"captionFontSize\": \"14\",\n\t\"subcaptionFontSize\": \"14\",\n\t\"subcaptionFontBold\": \"0\",\n\t\"baseFontColor\": \"#333333\",\n\t\"baseFont\": \"Helvetica Neue,Arial\",\n\t\"paletteColors\": \"#0075c2,#1aaf5d\",\n\t\"bgColor\": \"#ffffff\",\n\t\"showBorder\": \"0\",\n\t\"showCanvasBorder\": \"0\",\n\t\"showPlotBorder\": \"0\",\n\t\"showAlternateHgridColor\": \"0\",\n\t\"showXAxisLine\": \"1\",\n\t\"usePlotGradientcolor\": \"0\",\n\t\"valueFontColor\": \"#ffffff\",\n\t\"placeValuesInside\": \"1\",\n\t\"rotateValues\": \"1\",\n\t\"LegendShadow\": \"0\",\n\t\"legendBorderAlpha\": \"0\",\n\t\"base\": \"10\",\n\t\"axisLineAlpha\": \"10\",\n\t\"toolTipColor\": \"#ffffff\",\n\t\"toolTipBorderThickness\": \"0\",\n\t\"toolTipBgColor\": \"#000000\",\n\t\"toolTipBgAlpha\": \"80\",\n\t\"toolTipBorderRadius\": \"2\",\n\t\"toolTipPadding\": \"5\",\n\t\"divlineAlpha\": \"100\",\n\t\"divlineColor\": \"#999999\",\n\t\"divlineThickness\": \"1\",\n\t\"divLineDashed\": \"1\",\n\t\"divLineDashLen\": \"1\",\n\t\"divLineGapLen\": \"1\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/LogarithmicCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncLogarithmic",
+    "typeDesc": "PowerCharts XT Logarithmic Charts"
+   },
+   {
+    "id": "5698d81e-28b6-7da9-3fd1-b460d2ce1a23",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Spline"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/SplineCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "SplineChartsTypeCustom",
+      "value": "msspline"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Spline"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Number of visitors last week"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Bakersfield Central vs Los Angeles Topanga"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Day"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "No of Visitors"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"subcaptionFontBold\": \"0\",\n    \"showValues\": \"0\",\n    \"paletteColors\": \"#0075c2,#1aaf5d\",\n    \"bgColor\": \"#ffffff\",\n    \"showBorder\": \"0\",\n    \"showShadow\": \"0\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showCanvasBorder\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"xAxisLineThickness\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/SplineCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.label ===\"National holiday\"){\r\n\t\tdata.vline = \"true\";\r\n\t\tdata.lineposition = \"0\";\r\n\t\tdata.color = \"6BAA01\";\r\n\t\tdata.labelHAlign = \"right\";\r\n\t\tdata.labelPosition = \"0\";\r\n\t}\r\n} "
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncSpline",
+    "typeDesc": "PowerCharts XT Spline Charts"
+   },
+   {
+    "id": "7f277e26-bb4f-38a6-eedc-da1de82c06e9",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "ErrorChart"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/ErrorCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "ErrorChartsTypeCustom",
+      "value": "errorline"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "ErrorChart"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Revenues and Profits"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Predicted for next year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Month"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Amount (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"numberPrefix\": \"$\",\n    \"halferrorbar\": \"0\",\n    \"plotTooltext\": \"<div id='nameDiv' style='font-size: 14px; border-bottom: 1px dashed #999999; font-weight:bold; padding-bottom: 3px; margin-bottom: 5px; display: inline-block;'>$label :</div>{br}$seriesName : <b>$dataValue</b>{br}Deviation : <b>± $errorDataValue</b>\",\n    \"paletteColors\": \"#0075c2,#1aaf5d,#f2c500\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showValues\": \"0\",\n    \"showShadow\": \"0\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"canvasBorderAlpha\": \"0\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"usePlotGradientColor\": \"0\",\n    \"showplotborder\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"xAxisLineThickness\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showAlternateVGridColor\": \"0\",\n    \"legendBgAlpha\": \"0\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"legendItemFontSize\": \"10\",\n    \"legendItemFontColor\": \"#666666\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n      \"toolTipPadding\": \"5\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/ErrorCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncError",
+    "typeDesc": "PowerCharts XT Error Charts"
+   },
+   {
+    "id": "7ef19c0c-7814-3b86-589d-11d646557b6e",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "InverseY"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/InverseYAxisCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "InverseYAxisChartsTypeCustom",
+      "value": "inversemsarea"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "InverseY"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Daily bounce rate"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last week"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Day"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Percentage"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"numberSuffix\": \"%\",\n    \"showBorder\": \"0\",\n    \"paletteColors\": \"#0075c2,#1aaf5d\",\n    \"bgColor\": \"#ffffff\",\n    \"usePlotGradientColor\": \"0\",\n    \"plotFillAlpha\": \"50\",\n    \"showCanvasBorder\": \"0\",\n    \"LegendShadow\": \"0\",\n    \"legendBorderAlpha\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"axisLineAlpha\": \"40\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"showAlternateHgridColor\": \"0\",\n    \"showValues\": \"0\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n    \"toolTipPadding\": \"5\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/InverseYAxisCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncInverseYAxis",
+    "typeDesc": "PowerCharts XT Inverse Y Axis Charts"
+   },
+   {
+    "id": "c9ca05a0-6244-d2c4-4340-9f7c81c89fd0",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "DragAble"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/DragAbleCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "DragAbleChartsTypeCustom",
+      "value": "dragcolumn2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "DragAble"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Inventory status - Bakersfield Central"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Top 5 Food items"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Food Item"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "No. of Units"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"paletteColors\": \"#0075c2,#1aaf5d\",\n    \"bgColor\": \"#ffffff\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showBorder\": \"0\",\n    \"showCanvasBorder\": \"0\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"usePlotGradientColor\": \"0\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n    \"toolTipPadding\": \"5\",\n    \"legendBgAlpha\": \"0\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"legendItemFontSize\": \"10\",\n    \"legendItemFontColor\": \"#666666\",\n    \"legendCaptionFontSize\": \"9\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.seriesname === \"Available Stock\"){\r\n\t\tdata.allowDrag = \"0\";\r\n\t}\r\n\tif(data.seriesname === \"Estimated Demand\"){\r\n\t\tdata.dashed = \"1\";\r\n\t}\r\n} "
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/DragAbleCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncDragAble",
+    "typeDesc": "PowerCharts XT Drag-able Charts"
+   },
+   {
+    "id": "2c97966a-a9d0-00c1-47a6-2d891a94f01f",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Radar"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MiscellaneousChartsTypeCustom",
+      "value": "radar"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Radar"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Budget analysis"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Current month"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"numberPrefix\": \"$\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"subcaptionFontBold\": \"0\",\n    \"paletteColors\": \"#008ee4,#6baa01\",\n    \"bgColor\": \"#ffffff\",\n    \"radarfillcolor\": \"#ffffff\",\n    \"showBorder\": \"0\",\n    \"showShadow\": \"0\",\n    \"showCanvasBorder\": \"0\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"divLineAlpha\": \"10\",\n    \"usePlotGradientColor\": \"0\",\n    \"numberPreffix\": \"$\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMiscellaneous",
+    "typeDesc": "PowerCharts XT Miscellaneous Power Charts"
+   },
+   {
+    "id": "cab48c5b-68de-ea01-ef47-7ae2daf0d4ee",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "StepLine"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MiscellaneousChartsTypeCustom",
+      "value": "msstepLine"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "StepLine"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Revenue Vs Expense"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last Year"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Month"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Amount (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"usePlotGradientColor\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"palettecolors\": \"#6baa01, #d35400\",\n    \"showBorder\": \"0\",\n    \"showPlotBorder\": \"0\",\n    \"showValues\": \"0\",\n    \"showShadow\": \"0\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showCanvasBorder\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"numberprefix\": \"$\",\n    \"drawverticaljoints\": \"1\",\n    \"useforwardsteps\": \"0\",\n    \"xAxisLineThickness\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n    \"toolTipPadding\": \"5\"\n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "4"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMiscellaneous",
+    "typeDesc": "PowerCharts XT Miscellaneous Power Charts"
+   },
+   {
+    "id": "012322b0-07f0-12ab-c9a9-e1c0b7faa787",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "SelectScatter"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "5"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MiscellaneousChartsTypeCustom",
+      "value": "selectscatter"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "SelectScatter"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Products Sold vs Price points"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "This Week at Harry's SuperMart"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Quantity Sold"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Price(In US $)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"xaxismaxvalue\": \"1000\",\n    \"xaxisminvalue\": \"100\",\n    \"yaxismaxvalue\": \"200\",\n    \"xnumberprefix\": \"$\",\n    \"ynumbersuffix\": \" units\",\n    \"showcanvasborder\": \"1\",\n    \"canvasborderthickness\": \"0.5\",\n    \"canvasborderalpha\": \"50\",\n    \"showXAxisLine\": \"0\",\n    \"showformbtn\": \"1\",\n    \"formAction\": \"#\",\n    \"submitdataasxml\": \"1\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showValues\": \"0\",\n    \"showShadow\": \"0\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"usePlotGradientColor\": \"0\",\n    \"showplotborder\": \"0\",\n    \"showAlternateHGridColor\": \"0\",\n    \"showAlternateVGridColor\": \"0\",\n    \"legendBgAlpha\": \"0\",\n    \"legendBorderAlpha\": \"0\",\n    \"legendShadow\": \"0\",\n    \"legendItemFontSize\": \"10\",\n    \"legendItemFontColor\": \"#666666\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n    \"toolTipPadding\": \"5\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.drawline = \"0\";\r\n\tdata.color = \"6BAA01\";\r\n\tdata.anchorbgcolor = \"6BAA01\";\r\n\tdata.anchorbordercolor = \"6BAA01\";\r\n} "
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": "6"
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.showverticalline = \"1\";\r\n} "
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMiscellaneous",
+    "typeDesc": "PowerCharts XT Miscellaneous Power Charts"
+   },
+   {
+    "id": "bb22ed80-407b-9831-dccb-8b18910e4e48",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Waterfall"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "7"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MiscellaneousChartsTypeCustom",
+      "value": "waterfall2d"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Waterfall"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Total Profit Calculation"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last month"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Amount (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"numberprefix\": \"$\",\n    \"connectordashed\": \"1\",\n    \"sumlabel\": \"Total {br} Profit\",\n    \"positiveColor\": \"#6baa01\",\n    \"negativeColor\": \"#e44a00\",\n    \"paletteColors\": \"#0075c2,#1aaf5d,#f2c500\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showShadow\": \"0\",\n    \"canvasBgColor\": \"#ffffff\",\n    \"canvasBorderAlpha\": \"0\",\n    \"divlineAlpha\": \"100\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"usePlotGradientColor\": \"0\",\n    \"showplotborder\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"xAxisLineThickness\": \"1\",\n    \"xAxisLineColor\": \"#999999\",\n    \"showAlternateHGridColor\": \"0\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tif(data.label === \"Total Sales\"){\r\n\t\tdata.issum = \"1\";\r\n\t};\r\n\tif(data.label === \"Total Costs\"){\r\n\t\tdata.issum = \"1\";\r\n\t\tdata.cumulative = \"0\";\r\n\t}\r\n} "
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMiscellaneous",
+    "typeDesc": "PowerCharts XT Miscellaneous Power Charts"
+   },
+   {
+    "id": "5664a853-1d6e-e793-bb42-c2113cd2c3a0",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Kagi"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "8"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/MiscellaneousPowerCharts.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "300"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "450"
+     },
+     {
+      "name": "chartType",
+      "type": "MiscellaneousChartsTypeCustom",
+      "value": "kagi"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Kagi"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Stock Price HRYS"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "Last 20 days"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "xAxisName",
+      "type": "String",
+      "value": "Day"
+     },
+     {
+      "name": "yAxisName",
+      "type": "String",
+      "value": "Amount (In USD)"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"showValues\": \"0\",\n    \"drawAnchors\": \"0\",\n    \"labelDisplay\": \"Rotate\",\n    \"reversalPercentage\": \"5\",\n    \"showBorder\": \"0\",\n    \"bgColor\": \"#ffffff\",\n    \"showCanvasBorder\": \"0\",\n    \"showXAxisLine\": \"1\",\n    \"axisLineAlpha\": \"40\",\n    \"divlineColor\": \"#999999\",\n    \"divlineThickness\": \"1\",\n    \"divLineDashed\": \"1\",\n    \"divLineDashLen\": \"1\",\n    \"divLineGapLen\": \"1\",\n    \"rallycolor\": \"#0075c2\",\n    \"declinecolor\": \"#8e0000\",\n    \"rallythickness\": \"3\",\n    \"declinethickness\": \"3\",\n    \"baseFontColor\": \"#333333\",\n    \"baseFont\": \"Helvetica Neue,Arial\",\n    \"captionFontSize\": \"14\",\n    \"subcaptionFontSize\": \"14\",\n    \"subcaptionFontBold\": \"0\",\n    \"showAlternateHGridColor\": \"0\",\n    \"toolTipColor\": \"#ffffff\",\n    \"toolTipBorderThickness\": \"0\",\n    \"toolTipBgColor\": \"#000000\",\n    \"toolTipBgAlpha\": \"80\",\n    \"toolTipBorderRadius\": \"2\",\n    \"toolTipPadding\": \"5\"    \n} "
+     },
+     {
+      "name": "dataCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "categoriesDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "categoriesPath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "categoriesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "categoryCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "lineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "trendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "vlineCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "vtrendlinesScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMiscellaneous",
+    "typeDesc": "PowerCharts XT Miscellaneous Power Charts"
+   },
+   {
+    "id": "61bdea84-f79b-071e-8703-d73fdc369e6b",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Map"
+     },
+     {
+      "name": "connectorsDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "1"
+     },
+     {
+      "name": "entityDefDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "shapesDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "markers",
+      "type": "Boolean",
+      "value": "false"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Maps.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": "2"
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Maps.cda"
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "500"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "900"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "maps/world"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "Map"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Global Population"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "ocean"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"formatNumberScale\": \"0\",\n    \"numberSuffix\": \"M\",\n    \"showLabels\": \"1\",\n    \"includeNameInLabels\": \"1\",\n    \"useSNameInLabels\": \"0\"    \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "connectorsCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "itemsCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "markersScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "shapesCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "entityDefCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "entityDefScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMaps",
+    "typeDesc": "FusionMaps XT"
+   },
+   {
+    "id": "9de5b940-44f0-7217-62d9-eea1aa5f7078",
+    "meta_cdwSupport": "true",
+    "parent": "FUSIONCHARTS",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "MapWithMarkers"
+     },
+     {
+      "name": "connectorsDataAccessId",
+      "type": "String",
+      "value": "4"
+     },
+     {
+      "name": "dataAccessId",
+      "type": "String",
+      "value": "3"
+     },
+     {
+      "name": "entityDefDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "shapesDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "markers",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "listeners",
+      "type": "Listeners",
+      "value": "[]"
+     },
+     {
+      "name": "path",
+      "type": "CdaPath",
+      "value": "/public/plugin-samples/fusion-charts/Fusion Charts/Maps.cda"
+     },
+     {
+      "name": "colorRangeDataAccessId",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "colorRangePath",
+      "type": "CdaPath",
+      "value": ""
+     },
+     {
+      "name": "parameters",
+      "type": "ValuesArray",
+      "value": "[]"
+     },
+     {
+      "name": "height",
+      "type": "Integer",
+      "value": "500"
+     },
+     {
+      "name": "priority",
+      "type": "Integer",
+      "value": 5
+     },
+     {
+      "name": "width",
+      "type": "Integer",
+      "value": "900"
+     },
+     {
+      "name": "chartType",
+      "type": "String",
+      "value": "maps/world"
+     },
+     {
+      "name": "htmlObject",
+      "type": "HtmlObject",
+      "value": "MapWithMarkers"
+     },
+     {
+      "name": "executeAtStart",
+      "type": "Boolean",
+      "value": "true"
+     },
+     {
+      "name": "preExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postExecution",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postFetch",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "preChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "postChange",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "tooltip",
+      "type": "Html",
+      "value": ""
+     },
+     {
+      "name": "caption",
+      "type": "String",
+      "value": "Busiest Routes from Heathrow Airport"
+     },
+     {
+      "name": "subcaption",
+      "type": "String",
+      "value": "2014"
+     },
+     {
+      "name": "theme",
+      "type": "String",
+      "value": "ocean"
+     },
+     {
+      "name": "chartScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    \"markerBgColor\": \"#FF0000\",\n    \"markerRadius\": \"10\",\n    \"showMarkerLabels\": \"1\",\n    \"connectorColor\": \"#0CB2B0\",\n    \"connectorHoverColor\": \"#339933\",\n    \"entityFillColor\": \"#CECED2\",\n    \"entityFillHoverColor\": \"#E5E5E9\"    \n} "
+     },
+     {
+      "name": "dataSetCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "colorRangeScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     },
+     {
+      "name": "connectorsCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.tooltext = \"Total Passengers: \"+ data.tooltext;\r\n} "
+     },
+     {
+      "name": "itemsCallback",
+      "type": "JavaScript",
+      "value": "function(data){\r\n\tdata.shapeid = \"airport\";\r\n} "
+     },
+     {
+      "name": "markersScriptProperties",
+      "type": "JavaScript",
+      "value": "{\n    shapes: [\n          {\n              \"id\": \"airport\",\n              \"type\": \"image\",\n              \"url\": \"http://static.fusioncharts.com/docs/assets/airplane-99047_150.png\",\n              \"xscale\": \"15\",\n              \"yscale\": \"15\",\n              \"labelPadding\": \"15\"\n          }\n      ]\n} "
+     },
+     {
+      "name": "shapesCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "entityDefCallback",
+      "type": "JavaScript",
+      "value": ""
+     },
+     {
+      "name": "entityDefScriptProperties",
+      "type": "JavaScript",
+      "value": {}
+     }
+    ],
+    "type": "ComponentsXDashFusionChartComponentAsyncMaps",
+    "typeDesc": "FusionMaps XT"
+   }
+  ]
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/public/plugin-samples/fusion-charts/Dashboards/FusionCharts_CDE_XPFusionChartComponent.cdfde",
+ "layout": {
+  "rows": [
+   {
+    "id": "4508e95c-8085-d759-0199-c0fd1b26436c",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "FusionChartsFintTheme"
+     },
+     {
+      "name": "resourceCode",
+      "type": "Resource",
+      "value": "/*\n Fint Theme v0.0.3\n FusionCharts JavaScript Library\n\n Copyright FusionCharts Technologies LLP\n License Information at <http://www.fusioncharts.com/license>\n*/\nFusionCharts.register(\"theme\",{name:\"fint\",theme:{base:{chart:{paletteColors:\"#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#0e948c,#8cbb2c,#f3de00,#c02d00,#5b0101\",labelDisplay:\"auto\",baseFontColor:\"#333333\",baseFont:\"Helvetica Neue,Arial\",captionFontSize:\"14\",subcaptionFontSize:\"14\",subcaptionFontBold:\"0\",showBorder:\"0\",bgColor:\"#ffffff\",showShadow:\"0\",canvasBgColor:\"#ffffff\",showCanvasBorder:\"0\",useplotgradientcolor:\"0\",useRoundEdges:\"0\",showPlotBorder:\"0\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",\ntoolTipColor:\"#ffffff\",toolTipBorderThickness:\"0\",toolTipBgColor:\"#000000\",toolTipBgAlpha:\"80\",toolTipBorderRadius:\"2\",toolTipPadding:\"5\",legendBgAlpha:\"0\",legendBorderAlpha:\"0\",legendShadow:\"0\",legendItemFontSize:\"10\",legendItemFontColor:\"#666666\",legendCaptionFontSize:\"9\",divlineAlpha:\"100\",divlineColor:\"#999999\",divlineThickness:\"1\",divLineIsDashed:\"1\",divLineDashLen:\"1\",divLineGapLen:\"1\",scrollheight:\"10\",flatScrollBars:\"1\",scrollShowButtons:\"0\",scrollColor:\"#cccccc\",showHoverEffect:\"1\",valueFontSize:\"10\",\nshowXAxisLine:\"1\",xAxisLineThickness:\"1\",xAxisLineColor:\"#999999\"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:\"0\",fillColor:\"#0075c2\",showBorder:\"1\",borderColor:\"#eeeeee\",borderThickness:\"1\",borderAlpha:\"50\",entityFillhoverColor:\"#0075c2\",entityFillhoverAlpha:\"80\",connectorColor:\"#cccccc\",connectorThickness:\"1.5\",markerFillHoverAlpha:\"90\"}},pie2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-\n(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},doughnut2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",centerLabelFontSize:\"12\",centerLabelBold:\"1\",centerLabelFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},line:{chart:{lineThickness:\"2\"}},spline:{chart:{lineThickness:\"2\"}},column2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},\nbar2d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},column3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},bar3d:{chart:{paletteColors:\"#0075c2\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},area2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},splinearea:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},mscolumn2d:{chart:{valueFontColor:\"#ffffff\",\nplaceValuesInside:\"1\",rotateValues:\"1\"}},mscolumn3d:{chart:{showValues:\"0\"}},msstackedcolumn2dlinedy:{chart:{showValues:\"0\"}},stackedcolumn2d:{chart:{showValues:\"0\"}},stackedarea2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},stackedbar2d:{chart:{showValues:\"0\"}},msstackedcolumn2d:{chart:{showValues:\"0\"}},mscombi3d:{chart:{showValues:\"0\"}},mscombi2d:{chart:{showValues:\"0\"}},mscolumn3dlinedy:{chart:{showValues:\"0\"}},stackedcolumn3dline:{chart:{showValues:\"0\"}},\nstackedcolumn2dline:{chart:{showValues:\"0\"}},scrollstackedcolumn2d:{chart:{valueFontColor:\"#ffffff\"}},scrollcombi2d:{chart:{showValues:\"0\"}},scrollcombidy2d:{chart:{showValues:\"0\"}},logstackedcolumn2d:{chart:{showValues:\"0\"}},logmsline:{chart:{showValues:\"0\"}},logmscolumn2d:{chart:{showValues:\"0\"}},msstackedcombidy2d:{chart:{showValues:\"0\"}},scrollcolumn2d:{chart:{valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},pareto2d:{chart:{paletteColors:\"#0075c2\",showValues:\"0\"}},pareto3d:{chart:{paletteColors:\"#0075c2\",\nshowValues:\"0\"}},angulargauge:{chart:{pivotFillColor:\"#ffffff\",pivotRadius:\"4\",gaugeFillMix:\"{light+0}\",showTickValues:\"1\",majorTMHeight:\"12\",majorTMThickness:\"2\",majorTMColor:\"#000000\",minorTMNumber:\"0\",tickValueDistance:\"10\",valueFontSize:\"24\",valueFontBold:\"1\",gaugeInnerRadius:\"50%\",showHoverEffect:\"0\"},dials:{dial:[{baseWidth:\"10\",rearExtension:\"7\",bgColor:\"#000000\",bgAlpha:\"100\",borderColor:\"#666666\",bgHoverAlpha:\"20\"}]}},hlineargauge:{chart:{pointerFillColor:\"#ffffff\",gaugeFillMix:\"{light+0}\",\nshowTickValues:\"1\",majorTMHeight:\"3\",majorTMColor:\"#000000\",minorTMNumber:\"0\",valueFontSize:\"18\",valueFontBold:\"1\"},pointers:{pointer:[{}]}},bubble:{chart:{use3dlighting:\"0\",showplotborder:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",plotFillHoverColor:\"#2b8ecf\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},\nscatter:{chart:{use3dlighting:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},boxandwhisker2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},thermometer:{chart:{gaugeFillColor:\"#0075c2\"}},\ncylinder:{chart:{cylFillColor:\"#0075c2\"}},sparkline:{chart:{linecolor:\"#0075c2\"}},sparkcolumn:{chart:{plotFillColor:\"#0075c2\"}},sparkwinloss:{chart:{winColor:\"#0075c2\",lossColor:\"#1aaf5d\",drawColor:\"#f2c500\",scoreLessColor:\"#f45b00\"}},hbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}},vbullet:{chart:{plotFillColor:\"#0075c2\",targetColor:\"#1aaf5d\"}}}});\n "
+     },
+     {
+      "name": "resourceType",
+      "type": "Label",
+      "value": "Javascript"
+     }
+    ],
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource"
+   },
+   {
+    "id": "20ba0648-6bf1-4948-4aa2-71c5d52e4d10",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "FusionChartOceanTheme"
+     },
+     {
+      "name": "resourceCode",
+      "type": "Resource",
+      "value": "/*\n Ocean Theme v0.0.3\n FusionCharts JavaScript Library\n\n Copyright FusionCharts Technologies LLP\n License Information at <http://www.fusioncharts.com/license>\n*/\nFusionCharts.register(\"theme\",{name:\"ocean\",theme:{base:{chart:{paletteColors:\"#04476c,#4d998d,#77be99,#a7dca6,#cef19a,#0e948c,#64ad93,#8fcda0,#bbe7a0,#dcefc1\",labelDisplay:\"auto\",baseFontColor:\"#333333\",baseFont:\"Helvetica Neue,Arial\",captionFontSize:\"14\",subcaptionFontSize:\"14\",subcaptionFontBold:\"0\",showBorder:\"0\",bgColor:\"#ffffff\",showShadow:\"0\",canvasBgColor:\"#ffffff\",showCanvasBorder:\"0\",useplotgradientcolor:\"0\",useRoundEdges:\"0\",showPlotBorder:\"0\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\",\ntoolTipColor:\"#ffffff\",toolTipBorderThickness:\"0\",toolTipBgColor:\"#000000\",toolTipBgAlpha:\"80\",toolTipBorderRadius:\"2\",toolTipPadding:\"5\",legendBgAlpha:\"0\",legendBorderAlpha:\"0\",legendShadow:\"0\",legendItemFontSize:\"10\",legendItemFontColor:\"#666666\",legendCaptionFontSize:\"9\",divlineAlpha:\"100\",divlineColor:\"#999999\",divlineThickness:\"1\",divLineIsDashed:\"1\",divLineDashLen:\"1\",divLineGapLen:\"1\",scrollheight:\"10\",flatScrollBars:\"1\",scrollShowButtons:\"0\",scrollColor:\"#cccccc\",showHoverEffect:\"1\",valueFontSize:\"10\",\nshowXAxisLine:\"1\",xAxisLineThickness:\"1\",xAxisLineColor:\"#999999\"},dataset:[{}],trendlines:[{}]},geo:{chart:{showLabels:\"0\",fillColor:\"#04476c\",showBorder:\"1\",borderColor:\"#eeeeee\",borderThickness:\"1\",borderAlpha:\"50\",entityFillhoverColor:\"#04476c\",entityFillhoverAlpha:\"80\",connectorColor:\"#cccccc\",connectorThickness:\"1.5\",markerFillHoverAlpha:\"90\"}},pie2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-\n(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},doughnut2d:{chart:{placeValuesInside:\"0\",use3dlighting:\"0\",valueFontColor:\"#333333\",centerLabelFontSize:\"12\",centerLabelBold:\"1\",centerLabelFontColor:\"#333333\",captionPadding:\"15\"},data:function(c,a,b){a=window.Math;return{alpha:100-(50<b?a.round(100/a.ceil(b/10)):20)*a.floor(c/10)}}},line:{chart:{lineThickness:\"2\"}},spline:{chart:{lineThickness:\"2\"}},column2d:{chart:{paletteColors:\"#04476c\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},\nbar2d:{chart:{paletteColors:\"#04476c\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},column3d:{chart:{paletteColors:\"#04476c\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},bar3d:{chart:{paletteColors:\"#04476c\",valueFontColor:\"#ffffff\",placeValuesInside:\"1\"}},area2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},splinearea:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},mscolumn2d:{chart:{valueFontColor:\"#ffffff\",\nplaceValuesInside:\"1\",rotateValues:\"1\"}},mscolumn3d:{chart:{showValues:\"0\"}},msstackedcolumn2dlinedy:{chart:{showValues:\"0\"}},stackedcolumn2d:{chart:{showValues:\"0\"}},stackedarea2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},stackedbar2d:{chart:{showValues:\"0\"}},msstackedcolumn2d:{chart:{showValues:\"0\"}},mscombi3d:{chart:{showValues:\"0\"}},mscombi2d:{chart:{showValues:\"0\"}},mscolumn3dlinedy:{chart:{showValues:\"0\"}},stackedcolumn3dline:{chart:{showValues:\"0\"}},\nstackedcolumn2dline:{chart:{showValues:\"0\"}},scrollstackedcolumn2d:{chart:{valueFontColor:\"#ffffff\"}},scrollcombi2d:{chart:{showValues:\"0\"}},scrollcombidy2d:{chart:{showValues:\"0\"}},logstackedcolumn2d:{chart:{showValues:\"0\"}},logmsline:{chart:{showValues:\"0\"}},logmscolumn2d:{chart:{showValues:\"0\"}},msstackedcombidy2d:{chart:{showValues:\"0\"}},scrollcolumn2d:{chart:{valueFontColor:\"#ffffff\",placeValuesInside:\"1\",rotateValues:\"1\"}},pareto2d:{chart:{paletteColors:\"#04476c\",showValues:\"0\"}},pareto3d:{chart:{paletteColors:\"#04476c\",\nshowValues:\"0\"}},angulargauge:{chart:{pivotFillColor:\"#ffffff\",pivotRadius:\"4\",gaugeFillMix:\"{light+0}\",showTickValues:\"1\",majorTMHeight:\"12\",majorTMThickness:\"2\",majorTMColor:\"#000000\",minorTMNumber:\"0\",tickValueDistance:\"10\",valueFontSize:\"24\",valueFontBold:\"1\",gaugeInnerRadius:\"50%\",showHoverEffect:\"0\"},dials:{dial:[{baseWidth:\"10\",rearExtension:\"7\",bgColor:\"#000000\",bgAlpha:\"100\",borderColor:\"#666666\",bgHoverAlpha:\"20\"}]}},hlineargauge:{chart:{pointerFillColor:\"#ffffff\",gaugeFillMix:\"{light+0}\",\nshowTickValues:\"1\",majorTMHeight:\"3\",majorTMColor:\"#000000\",minorTMNumber:\"0\",valueFontSize:\"18\",valueFontBold:\"1\"},pointers:{pointer:[{}]}},bubble:{chart:{use3dlighting:\"0\",showplotborder:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},\nscatter:{chart:{use3dlighting:\"0\",showYAxisLine:\"1\",yAxisLineThickness:\"1\",yAxisLineColor:\"#999999\",showAlternateHGridColor:\"0\",showAlternateVGridColor:\"0\"},categories:[{verticalLineDashed:\"1\",verticalLineDashLen:\"1\",verticalLineDashGap:\"1\",verticalLineThickness:\"1\",verticalLineColor:\"#000000\",category:[{}]}],vtrendlines:[{line:[{alpha:\"0\"}]}]},boxandwhisker2d:{chart:{valueBgColor:\"#ffffff\",valueBgAlpha:\"90\",valueBorderPadding:\"-2\",valueBorderRadius:\"2\"}},thermometer:{chart:{gaugeFillColor:\"#04476c\"}},\ncylinder:{chart:{cylFillColor:\"#04476c\"}},sparkline:{chart:{linecolor:\"#04476c\"}},sparkcolumn:{chart:{plotFillColor:\"#04476c\"}},sparkwinloss:{chart:{winColor:\"#04476c\",lossColor:\"#4d998d\",drawColor:\"#77be99\",scoreLessColor:\"#a7dca6\"}},hbullet:{chart:{plotFillColor:\"#04476c\",targetColor:\"#4d998d\"}},vbullet:{chart:{plotFillColor:\"#04476c\",targetColor:\"#4d998d\"}}}}); "
+     },
+     {
+      "name": "resourceType",
+      "type": "Label",
+      "value": "Javascript"
+     }
+    ],
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource"
+   },
+   {
+    "id": "8bad79c3-ca37-0f21-bdd0-73894f161f3d",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "dashboardStyle"
+     },
+     {
+      "name": "resourceCode",
+      "type": "Resource",
+      "value": ".dashboardContent{\n    width: 950px;\n\tmargin: 0 auto;\n}\n\n.header {\n    margin-top: 20px;\n    margin-bottom: 60px;\n}\n\n.header img {\n    float: left;\n    margin-right: 42px;\n}\n\n.light {\n    font-weight: 300;\n}\n\nh2 {\n    font-size: 36px;\n    font-family: \"Open Sans\";\n    margin: 0px;\n    padding-top: 10px;\n}\n\n.third {\n    font-size: 12px;\n    margin-bottom: 20px;\n    display: inline-block;\n}\nh5 {\n    border-bottom: 1px solid #1973bc;\n    font-size: 18px;\n    color: #1973bc;\n    font-family: \"Open Sans\";\n    margin-bottom: 20px;\n} "
+     },
+     {
+      "name": "resourceType",
+      "type": "Label",
+      "value": "Css"
+     }
+    ],
+    "type": "LayoutResourceCode",
+    "typeDesc": "Resource"
+   },
+   {
+    "id": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "charts"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "d461de47-26ef-51d9-8bf4-f15c04082dd7",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "header"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": "header"
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "4a37fcaf-819c-9e8c-8bd0-1efeeb9ba720",
+    "parent": "d461de47-26ef-51d9-8bf4-f15c04082dd7",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Title"
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:300,400\" rel=\"stylesheet\" type=\"text/css\">\n<img width=\"auto\" height=\"70\" src=\"../../../api/repos/fusion_plugin/static/custom/img/Logo-FusionChartsPlugin.png\">\n<h2 class=\"light\">FusionCharts XT CDE Dashboard Samples</h2> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "03032f6e-7618-5b5c-8a05-c5489ae835f6",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "firstRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "7dd9a84f-0e91-169c-630a-5084cbf74448",
+    "parent": "03032f6e-7618-5b5c-8a05-c5489ae835f6",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "Title"
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Single Series Charts and Multi-Series Charts</h5>\n<div id=\"PieChart3D\" style=\"float:left;margin-right:25px;\"></div>\n<div id=\"Marimekko\"></div>\n "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "f45f280a-3387-1906-72c1-1bd0f2f297a2",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "secondRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "970d9d74-8966-1925-11b3-93d5c8649ba3",
+    "parent": "f45f280a-3387-1906-72c1-1bd0f2f297a2",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Stacked Charts</h5>\r\n            <div id=\"StackedColumn2D\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"MSStackedColumn2D\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "49c7212a-d058-9eef-de03-63039a5e23a1",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "thirdRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "e24a9003-f18b-f358-e243-cdbc0d07bb9c",
+    "parent": "49c7212a-d058-9eef-de03-63039a5e23a1",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Combination Charts</h5>\r\n            <div id=\"MSComb2D\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"MSComb2DLinedy\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "b2d0bef7-c953-6833-ef4d-fdc0ca557455",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "fourthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "e41a2b98-8a11-054c-34a4-77ed645161cc",
+    "parent": "b2d0bef7-c953-6833-ef4d-fdc0ca557455",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Scroll Charts and XY Plot Charts</h5>\r\n            <div id=\"ScrollChart\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"XYPlotChart\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "6a19ae3e-efd4-3507-f4fd-814c9a0e2996",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "fifthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "88393c26-61ce-6b10-7bc8-fd645b05bfdc",
+    "parent": "6a19ae3e-efd4-3507-f4fd-814c9a0e2996",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Gauges</h5>\r\n            <div id=\"Angular\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"LED\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "value": "sixteenhRow",
+      "type": "Id"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "elementTag",
+      "value": "div",
+      "type": "String"
+     },
+     {
+      "name": "otherAttributes",
+      "value": "[]",
+      "type": "OtherAttributesArray"
+     }
+    ]
+   },
+   {
+    "id": "bbc6cb76-3618-e032-348e-427a948cd519",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "7d6799e6-e842-4fe9-cd06-b8bc69eaa817",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<h5 class=\"light\">Gauges Example 2</h5>\r\n<div id=\"Cylinder\" style=\"float:left;margin-right:130px;\"></div>\r\n<div id=\"Thermometer\"></div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "d62127aa-c1f5-602f-638e-b57a71cfb2df",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "sixthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "ea96d0e7-2dcb-68b3-fb83-0117071482e5",
+    "parent": "d62127aa-c1f5-602f-638e-b57a71cfb2df",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">RealTime and Spark Charts</h5>\r\n            <div id=\"RealTime\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"Spark\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "ee09c10a-efc8-ed0b-1eb1-d7456617631b",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "seventhRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "6ef1aa9d-5bfb-56ca-a01a-ff0c0b330815",
+    "parent": "ee09c10a-efc8-ed0b-1eb1-d7456617631b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Bullet Graphs and Others</h5>\r\n            <div id=\"Bullet\" style=\"float:left;margin-right:25px;\"></div>\r\n            <div id=\"Other\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "e4317c88-f137-d1e4-ca54-21d6459e2733",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "octaveRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "648dd91e-9a8d-3251-ef53-9581c545cac7",
+    "parent": "e4317c88-f137-d1e4-ca54-21d6459e2733",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Logarithmic and Spline Charts</h5>\r\n<div id=\"Logarithmic\" style=\"float:left;margin-right:25px;\"></div>\r\n<div id=\"Spline\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "99cbcde6-8723-dbaf-645f-5742a5f97eff",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "ninthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "9a31badf-703d-1b9f-7733-3183391552a5",
+    "parent": "99cbcde6-8723-dbaf-645f-5742a5f97eff",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Error and Inverse Y Axis Charts</h5>\r\n<div id=\"ErrorChart\" style=\"float:left;margin-right:25px;\"></div>\r\n<div id=\"InverseY\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "3aaf1e25-220b-ab05-e383-c356b18b8177",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "tenthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "94d83f56-e3e7-28ae-4d77-de534ef94228",
+    "parent": "3aaf1e25-220b-ab05-e383-c356b18b8177",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Drag-able Charts and Radar Chart</h5>\r\n<div id=\"DragAble\" style=\"float:left;margin-right:25px;\"></div>\r\n<div id=\"Radar\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "4e71a980-ea94-7239-eb07-066e17ed179b",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "eleventhRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "e2531198-5d94-b26f-1f70-5337d448fdd4",
+    "parent": "4e71a980-ea94-7239-eb07-066e17ed179b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Step Line and Select-Scatter Chart</h5>\r\n<div id=\"StepLine\" style=\"float:left;margin-right:25px;\"></div>\r\n<div id=\"SelectScatter\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "37249fc2-c087-cff5-8e3d-056c038a42ca",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "twelfth"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "75ef3fc7-f1f4-c063-ff1a-ee196aecbae9",
+    "parent": "37249fc2-c087-cff5-8e3d-056c038a42ca",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Waterfall and Kagi Chart</h5>\r\n<div id=\"Waterfall\" style=\"float:left;margin-right:25px;\"></div>\r\n<div id=\"Kagi\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "ec9b33c8-3108-4faf-24af-b31e34fb9721",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "thirteenth"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "f4f82d75-c9ab-75fb-8b55-3cfbfc2f46f8",
+    "parent": "ec9b33c8-3108-4faf-24af-b31e34fb9721",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Drag Node</h5>\n<div id=\"DragNode\" style=\"margin-left:25px;\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "904bae99-0370-4a29-1490-4a475a2a4e7b",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "fourteenth"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "7ffea8cc-72de-3dd4-a8b2-397e568dce67",
+    "parent": "904bae99-0370-4a29-1490-4a475a2a4e7b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Gantt</h5>\n<div id=\"Gantt\" style=\"margin-left:25px;\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "8d2cd4f9-bfd4-9faf-abf8-e07e19739f2d",
+    "parent": "26126f96-00ed-5289-ed1f-7406bfd06b4b",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "fifteenthRow"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "d2363ee0-7e15-fc52-f9eb-ea6453b9cffa",
+    "parent": "8d2cd4f9-bfd4-9faf-abf8-e07e19739f2d",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<h5 class=\"light\">Maps</h5>\r\n<div id=\"Map\" style=\"margin-left:25px;\"></div>\r\n<div id=\"MapWithMarkers\"></div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   },
+   {
+    "id": "80e4f286-fd09-7296-8611-60d4b7fa840f",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": "bottom"
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     },
+     {
+      "name": "elementTag",
+      "type": "String",
+      "value": "div"
+     },
+     {
+      "name": "otherAttributes",
+      "type": "OptionArray",
+      "value": "[]"
+     }
+    ],
+    "type": "LayoutFreeForm",
+    "typeDesc": "FreeForm"
+   },
+   {
+    "id": "e8d02533-2df7-545e-0109-ff1412e0a26d",
+    "parent": "80e4f286-fd09-7296-8611-60d4b7fa840f",
+    "properties": [
+     {
+      "name": "name",
+      "type": "Id",
+      "value": ""
+     },
+     {
+      "name": "html",
+      "type": "Html",
+      "value": "<div class=\"light third\">\r\n    Xpand IT supports Pentaho FusionCharts Plugin.\r\n    <br>\r\n    If you need more information, sharing ideas or discuss plan details, please reach us by email\r\n    <a href=\"mailto:marketing@xpand-it.com\" target=\"_top\" class=\"regular\">pentaho@xpand-it.com</a>\r\n</div> \r\n<div class=\"logos\">\r\n    <img width=\"150\" height=\"33\" src=\"../../../api/repos/fusion_plugin/static/custom/img/logo-xpand.png\">\r\n</div> "
+     },
+     {
+      "name": "fontSize",
+      "type": "Integer",
+      "value": ""
+     },
+     {
+      "name": "color",
+      "type": "Color",
+      "value": ""
+     },
+     {
+      "name": "cssClass",
+      "type": "String",
+      "value": ""
+     }
+    ],
+    "type": "LayoutHtml",
+    "typeDesc": "Html"
+   }
+  ],
+  "title": "CDF - Sample structure"
+ }
+}
