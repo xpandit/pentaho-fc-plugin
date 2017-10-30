@@ -2,15 +2,14 @@
 
 [![](http://www.xpand-it.com/wp-content/uploads/2015/12/01-FusionCharts-Plugin-for-Pentaho-2016.jpg)](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho/)
 
-<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/08-SampleBar2D.png'  alt='dashboard 1' width='250px' />
-<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/11-SampleFusionMaps.png'    alt='dashboard 1' width='250px' />
-<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/10-SampleAngularGauge.png' alt='dashboard 1' width='250px' />
-<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/13-SampleMulti-SeriesLineChart.png'  alt='dashboard 1' width='250px' />
+<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/08-SampleBar2D.png'  alt='dashboard 1' width='250px' /> <img src='http://www.xpand-it.com/wp-content/uploads/2015/12/11-SampleFusionMaps.png'    alt='dashboard 1' width='250px' />
+
+<img src='http://www.xpand-it.com/wp-content/uploads/2015/12/10-SampleAngularGauge.png' alt='dashboard 1' width='250px' /> <img src='http://www.xpand-it.com/wp-content/uploads/2015/12/13-SampleMulti-SeriesLineChart.png'  alt='dashboard 1' width='250px' />
 
 Check the downloads release notes [ReleaseArtifacts](https://github.com/xpandit/pentaho-fc-plugin/wiki/ReleaseArtifacts).
 
 # INFO #
-The master branch contains the development code for the Pentaho version 6. If you need for the Pentaho version 5, please, refer to the branch fusion_plugin_pentaho5
+The master branch contains the development code for the Pentaho version 6. If you need for the Pentaho version 5, please, refer to the branch fusion_plugin_pentaho5.
 
 # Quick Start #
 [Download](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho) latest release and look at the installation instructions on [Manual](https://github.com/xpandit/pentaho-fc-plugin/wiki/Manual).
