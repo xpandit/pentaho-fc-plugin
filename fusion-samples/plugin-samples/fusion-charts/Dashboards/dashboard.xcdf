@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<cdf>
-	<title>Fusion Charts Samples</title>
-	<author>XPAND-IT</author>
-	<description>This dashboard shows a sample of Fusion Charts free</description>
-	<icon></icon>
-	<template>dashboard.html</template>
-	<style>clean</style>
-</cdf>
