@@ -7,7 +7,8 @@
 var XPFusionChartComponent = UnmanagedComponent.extend({
 	 update: function() {
 		var render = _.bind(this.render, this);
-		 this.triggerQuery(this.chartDefinition, render);
+		this.chartDefinition.path=this.calculateRelativePath(this.chartDefinition.path,Dashboards.context.path);
+		this.triggerQuery(this.chartDefinition, render);
 	 },
 
 	 render: function(values) {
@@ -893,6 +894,27 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
 				 }
 			 }
 		 }
+	 },
+	 calculateRelativePath : function(cdaPath,location)
+	 {
+		 //if has relative path in CDA calculates the absolute path
+			var dashboardPathArray=location.split("/");
+			dashboardPathArray.pop();
+			var cdaPathArray=decodeURI(cdaPath).split("%2F")[0].split("/");
+			var i=0;
+			if(cdaPathArray[0]=="..")
+			{
+					for (;i<cdaPathArray.length;++i)
+					{
+							if(cdaPathArray[0]=="..")
+							{
+									dashboardPathArray.pop();
+									cdaPathArray.shift();
+							}
+					}
+					cdaPath=dashboardPathArray.concat(cdaPathArray).join("/");
+			}
+			return cdaPath;
 	 }
  });
 
@@ -901,7 +923,7 @@ var XPFusionChartComponent = UnmanagedComponent.extend({
  * This CDF component renders Fusion Charts Graph
  *
  */
- 
+
 var xLoadFunct= function(){
 	window.XDashFusionChartComponent = BaseComponent.extend({
 		type: "XDashFusionChartComponent",
@@ -1097,6 +1119,7 @@ var xLoadFunct= function(){
 			options["chartXML"] = true;
 			options["dashboard-mode"] = true;
 
+			options.cdaPath=XPFusionChartComponent.prototype.calculateRelativePath(options.cdaPath,Dashboards.context.path);
 
 			//transform the array of range values into a JSON object
 			var cols='{"cols":[{"id":"[MEASURE:0]","label":"Start","type":"number"}';

@@ -28,23 +28,34 @@ var chartSettingsManager = {
             bgAngle : 0,
             plotGradientColor : '',
             canvasBorderalpha : 0,
-            paletteColors: "afd8f8,f6bd0e,8cba00,ff8f47",
+            paletteColors: "AFD8F8,F6BD0E,8CBA00,FF8F47",
             placeValuesInside: 1,
-            valuePosition: "ABOVE"
-        }
-        return options;
-    }, 
-    
-    fcplugin_angulargauge :  function(){
-        var options = {
-                colorRange : 'FF654F;F6BD0F;8BBA00;8BBA00'
+            valuePosition: "ABOVE",
+            exportEnabled: "1",
+            exportAtClientSide: "1",
+            exportShowMenuItem: "0",
+            labelDisplay: "STAGGER"
         }
         return options;
     },
-    
+
+    fcplugin_angulargauge :  function(){
+        var options = {
+                width      : '800',
+                height     : '500',
+                showValue  : '1',
+                valueBelowPivot : '1',
+                colorRange : 'E44A00;F8BD19;6BAA01;8BBA00'               
+        }
+        return options;
+    },
+
     fcplugin_bullet :  function(){
         var options = {
-                colorRange : 'FF654F;F6BD0F;8BBA00;8BBA00'
+                width      : '800',
+                height     : '500',
+                colorRange : 'E44A00;F8BD19;6BAA01;8BBA00',
+                colorRangeFillMix : '{light-30}'
         }
         return options;
     }

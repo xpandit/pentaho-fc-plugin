@@ -307,8 +307,8 @@ abstract public class FCItem {
 		String[] colorValues = colorRange.split(";");
 		// we have color to all ranges?
 		if (colorValues.length < rangeResultSet.getColumnCount()) {
-			throw new InvalidParameterException(InvalidParameterException.ERROR_005
-					+ "Parameter COLORRANGE have few values. need at least:" + (rangeResultSet.getColumnCount() - 1));
+			log.error("Parameter COLORRANGE have few values. need at least:" + (rangeResultSet.getColumnCount() - 1) + "! The default colors will be used.");
+			colorValues=null;
 		}
 
 		// has the DISPLAYVALUE property?
@@ -319,8 +319,8 @@ abstract public class FCItem {
 			displayValues = displayValue.split(";");
 			// we have values to all ranges?
 			if (displayValues.length < rangeResultSet.getColumnCount()) {
-				throw new InvalidParameterException(InvalidParameterException.ERROR_005
-						+ "Parameter DISPLAYVALUE have few values. need at least:" + (rangeResultSet.getColumnCount() - 1));
+				log.error("Parameter DISPLAYVALUE has few values. Need at least:" + (rangeResultSet.getColumnCount() - 1) + "! The default column names will be used.");
+				displayValues=null;
 			}
 		}
 
