@@ -1,4 +1,4 @@
-# Release 4.2.3 is available! #
+# Release 4.2.4 is available! #
 
 [![](http://www.xpand-it.com/wp-content/uploads/2015/12/01-FusionCharts-Plugin-for-Pentaho-2016.jpg)](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho/)
 
@@ -10,7 +10,7 @@
 Check the downloads release notes [ReleaseArtifacts](https://github.com/xpandit/pentaho-fc-plugin/wiki/ReleaseArtifacts).
 
 # INFO #
-The master branch contains the development code for the Pentaho version 6. If you need for the Pentaho version 5, please, refer to the branch fusion_plugin_pentaho5
+The master branch contains the development code for the Pentaho version +7.1. If you need for the Pentaho version 5, please, refer to the branch fusion_plugin_pentaho5
 
 # Quick Start #
 [Download](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho) latest release and look at the installation instructions on [Manual](https://github.com/xpandit/pentaho-fc-plugin/wiki/Manual).

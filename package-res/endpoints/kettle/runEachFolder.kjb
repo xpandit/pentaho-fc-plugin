@@ -92,29 +92,6 @@
             <description>the folders path where the fusion xt is unziped</description>
         </parameter>
     </parameters>
-  <connection>
-    <name>AgileBI</name>
-    <server>localhost</server>
-    <type>MONETDB</type>
-    <access>Native</access>
-    <database>pentaho-instaview</database>
-    <port>50006</port>
-    <username>monetdb</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb14a17edb86abd8</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <read_only>true</read_only>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_INFOBRIGHT.characterEncoding</code><attribute>UTF-8</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>50006</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-    </attributes>
-  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -277,15 +254,15 @@
       <fields>
         <field>
           <source_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass&#x2f;fusioncharts.js</source_filefolder>
-          <destination_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass&#x2f;FusionCharts.js</destination_filefolder>
+          <destination_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass&#x2f;fusioncharts_tmp.js</destination_filefolder>
           <wildcard/>
         </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1424</xloc>
-      <yloc>528</yloc>
+      <xloc>1344</xloc>
+      <yloc>544</yloc>
       </entry>
     <entry>
       <name>rollback</name>
@@ -521,6 +498,47 @@
       <xloc>1248</xloc>
       <yloc>416</yloc>
       </entry>
+    <entry>
+      <name>rename fusioncharts.js 2</name>
+      <description/>
+      <type>MOVE_FILES</type>
+      <move_empty_folders>N</move_empty_folders>
+      <arg_from_previous>N</arg_from_previous>
+      <include_subfolders>N</include_subfolders>
+      <add_result_filesname>N</add_result_filesname>
+      <destination_is_a_file>Y</destination_is_a_file>
+      <create_destination_folder>N</create_destination_folder>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <nr_errors_less_than>10</nr_errors_less_than>
+      <success_condition>success_if_no_errors</success_condition>
+      <AddDateBeforeExtension>N</AddDateBeforeExtension>
+      <DoNotKeepFolderStructure>N</DoNotKeepFolderStructure>
+      <iffileexists>overwrite_file</iffileexists>
+      <destinationFolder/>
+      <ifmovedfileexists>do_nothing</ifmovedfileexists>
+      <moved_date_time_format/>
+      <create_move_to_folder>N</create_move_to_folder>
+      <add_moved_date>N</add_moved_date>
+      <add_moved_time>N</add_moved_time>
+      <SpecifyMoveFormat>N</SpecifyMoveFormat>
+      <AddMovedDateBeforeExtension>N</AddMovedDateBeforeExtension>
+      <simulate>N</simulate>
+      <fields>
+        <field>
+          <source_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass&#x2f;fusioncharts_tmp.js</source_filefolder>
+          <destination_filefolder>&#x24;&#x7b;&#x23;cpk.plugin.dir&#x7d;&#x2f;fusioncharts&#x2f;JSClass&#x2f;FusionCharts.js</destination_filefolder>
+          <wildcard/>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1536</xloc>
+      <yloc>544</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -695,8 +713,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>rename fusioncharts.js</from>
+      <from>Checks if files fusioncharts.js exist</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>rename fusioncharts.js</from>
+      <to>rename fusioncharts.js 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -704,12 +731,12 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Checks if files fusioncharts.js exist</from>
+      <from>rename fusioncharts.js 2</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
