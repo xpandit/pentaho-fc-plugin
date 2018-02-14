@@ -2,7 +2,9 @@
 
 (function() {
 
-	var requirePaths = requireCfg.paths;
+  var requirePaths = requireCfg.paths;
+  var requireTypeInfo = requireCfg.config["pentaho/typeInfo"] || (requireCfg.config["pentaho/typeInfo"] = {});
+  var requireInstInfo = requireCfg.config["pentaho/instanceInfo"] || (requireCfg.config["pentaho/instanceInfo"] = {});
   var path = window.location.pathname.split('/');
 
   if (typeof CONTEXT_PATH !== "undefined") { // production
@@ -27,18 +29,15 @@
   requirePaths['xfusion/XDashFusionChartComponentRequireJS'] = prefixJS + '/XDashFusionChartComponentRequireJS';
 
   //FC Plugin javascript classes
-  requirePaths['xfusion/charts/Chart'] = prefixJS + '/xfusion/Chart';
-  requirePaths['xfusion/charts/Series'] = prefixJS + '/xfusion/Series';
-  requirePaths['xfusion/charts/Data'] = prefixJS + '/xfusion/Data';
-  requirePaths['xfusion/charts/DataSet'] = prefixJS + '/xfusion/DataSet';
-  requirePaths['xfusion/charts/Dials'] = prefixJS + '/xfusion/Dials';
-  requirePaths['xfusion/charts/MultipleDataSets'] = prefixJS + '/xfusion/MultipleDataSets';
-  requirePaths['xfusion/charts/SeriesColumn'] = prefixJS + '/xfusion/SeriesColumn';
-  requirePaths['xfusion/charts/Value'] = prefixJS + '/xfusion/Value';
-  requirePaths['xfusion/charts/Pointers'] = prefixJS + '/xfusion/Pointers';
-  requirePaths['xfusion/charts/Gantt'] = prefixJS + '/xfusion/Gantt';
-  requirePaths['xfusion/charts/DataSetAndConnectors'] = prefixJS + '/xfusion/DataSetAndConnectors';
-  requirePaths['xfusion/charts/Maps'] = prefixJS + '/xfusion/Maps';
+
+  [
+    "Chart", "Series", "Data",
+    "DataSet", "Dials", "MultipleDataSets",
+    "SeriesColumn", "Value", "Pointers",
+    "Gantt", "DataSetAndConnectors", "Maps"
+  ].forEach(function(name) {
+    requirePaths["xfusion/charts/" + name] = prefixJS + "/xfusion/" + name;
+  });
   requirePaths['xfusion/charts/ChartUtils'] = prefixJS + '/xfusion/utils/ChartUtils';
 
   //CDE Require scripts
@@ -70,6 +69,19 @@
   requirePaths['xfusion/fclib/fusioncharts.theme.carbon'] = prefixFC + '/themes/fusioncharts.theme.carbon';
   requirePaths['xfusion/fclib/fusioncharts.theme.zune'] = prefixFC + '/themes/fusioncharts.theme.zune';
   requirePaths['xfusion/fclib/fusioncharts.theme.fint'] = prefixFC + '/themes/fusioncharts.theme.fint';
-	requirePaths['xfusion/XPTheme'] = prefixJS + '/XPTheme';
+  requirePaths['xfusion/XPTheme'] = prefixJS + '/XPTheme';
+  
+  //VizAPI
 
+  requirePaths["xViz"] = prefixJS + "/viz3";
+
+  requireInstInfo["xViz/config"] = {type: "pentaho.config.spec.IRuleSet"};
+
+  [
+    "xViz/model-data",
+    "xViz/model-series",
+    "xViz/model-map"
+  ].forEach(function(name) {
+    requireTypeInfo[name] = {base: "pentaho/visual/base/model"};
+  });
 })();
