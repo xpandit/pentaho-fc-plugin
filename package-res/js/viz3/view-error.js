@@ -8,10 +8,10 @@ define([
 
   return [
     "pentaho/visual/base/view",
-    "./model-series",
+    "./model-error",
     function(BaseView, Model) {
       // Create the View subclass
-      var BarView = BaseView.extend({
+      var ErrorView = BaseView.extend({
         $type: {
           id: module.id,
           props: [
@@ -37,10 +37,12 @@ define([
           var categoryAttribute = model.category.attributes.at(0).name;
           var measureAttribute = model.measure.attributes.at(0).name;
           var seriesAttribute = model.series.attributes.at(0).name;
+          var errorAttribute = model.error.attributes.at(0).name;
           
           var categoryColumn = dataTable.getColumnIndexByAttribute(categoryAttribute);
           var measureColumn = dataTable.getColumnIndexByAttribute(measureAttribute);
-          var seriesColumn = dataTable.getColumnIndexByAttribute(seriesAttribute);   
+          var seriesColumn = dataTable.getColumnIndexByAttribute(seriesAttribute);
+          var errorColumn = dataTable.getColumnIndexByAttribute(errorAttribute); 
 
           var category = [];
           var dataSet = [];
@@ -90,7 +92,8 @@ define([
           for (var i = 0; i < category.length; i++) {
             dataVal.push({
               label: category[i].label,
-              value: 0
+              value: 0,
+              errorvalue: 0
             });
           };
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
@@ -109,6 +112,7 @@ define([
             seriesIndex = dataSet.findIndex(function(obj){return obj.seriesname === serieName});
             categoryIndex = category.findIndex(function(obj){return obj.label === categoryName});
             dataSet[seriesIndex].data[categoryIndex].value = dataTable.getValue(i, measureColumn);
+            dataSet[seriesIndex].data[categoryIndex].errorvalue = dataTable.getValue(i, errorColumn);
           };
 
           chartoptions.categories.push({
@@ -122,7 +126,7 @@ define([
         }
       });
 
-      return BarView;
+      return ErrorView;
     }
   ];
 });

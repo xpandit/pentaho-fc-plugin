@@ -21,7 +21,7 @@ define([
                         "width": "100%",
                         "height": "100%",
                         "dataFormat": "json",
-                        "renderAt": container,
+                        //"renderAt": container,
                     });
                 }
                 //Set Chart Type
@@ -32,8 +32,11 @@ define([
                 if(model.theme != "none"){
                     model.chartObject.setChartAttribute('theme', model.theme);
                 }
+                //Enable Export
+                model.chartObject.setChartAttribute('exportEnabled', "1");
+                model.chartObject.setChartAttribute('exportAtClientSide', "1");
                 //Render the Chart
-                model.chartObject.render();
+                model.chartObject.render(container);
                 
                 return model;
 			},

@@ -21,9 +21,11 @@ define(["module"], function(module) {
         priority: -1,
         select: {
           type: [
-          module.id.replace(/(\w+)$/, "model-data"),
-          module.id.replace(/(\w+)$/, "model-series"),
-          module.id.replace(/(\w+)$/, "model-map"),
+            module.id.replace(/(\w+)$/, "model-combination"),
+            module.id.replace(/(\w+)$/, "model-data"),
+            module.id.replace(/(\w+)$/, "model-error"),
+            module.id.replace(/(\w+)$/, "model-series"),
+            module.id.replace(/(\w+)$/, "model-map"),
           ],
           application: "pentaho-det"
         },

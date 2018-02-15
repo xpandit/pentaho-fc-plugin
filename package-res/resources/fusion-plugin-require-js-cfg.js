@@ -78,7 +78,9 @@
   requireInstInfo["xViz/config"] = {type: "pentaho.config.spec.IRuleSet"};
 
   [
+    "xViz/model-combination",
     "xViz/model-data",
+    "xViz/model-error",
     "xViz/model-series",
     "xViz/model-map"
   ].forEach(function(name) {

@@ -10,12 +10,12 @@ define([
     "pentaho/visual/base/view",
     "./model-map",
     function(BaseView, Model) {
-      // Create the Bar View subclass
+      // Create the View subclass
       var MapView = BaseView.extend({
         $type: {
           id: module.id,
           props: [
-            // Specialize the inherited model property to the Bar model type
+            // Specialize the inherited model property to the model type
             {
               name: "model",
               valueType: Model

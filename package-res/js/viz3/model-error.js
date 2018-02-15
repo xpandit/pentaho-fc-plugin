@@ -1,6 +1,5 @@
 define([
-	"module",
-	"css!./css/model"
+	"module"
 ], function(module){
 	"use strict";
 
@@ -10,7 +9,7 @@ define([
 		"./types/chartTypeOptions",
 		function(BaseModel,ThemeOptions,ChartTypeOptions) {
 		 	// Create the Bar Model subclass
-	    var DataModel = BaseModel.extend({
+	    var ErrorModel = BaseModel.extend({
 	    	$type: {
 		        id: module.id,
 
@@ -18,22 +17,35 @@ define([
 		        styleClass:"fusioncharts",
 
 		        // The label may show up in menus
-		        label: "Viz3 FusionCharts Data Charts",
+		        label: "Viz3 FusionCharts Error Charts",
 
 		        // The default view to use to render this visualization is
-		        defaultView: "./view-data",
+		        defaultView: "./view-error",
 
 		        // Properties
 		        props: [
-		          // General properties
-		          {
+				  // General properties
+				  {
+            		name: "series",
+            		base: "pentaho/visual/role/property",
+            		levels: "ordinal",
+					attributes: { isRequired: true, countMax: 1 }
+				  },
+				  {
             		name: "category",
             		base: "pentaho/visual/role/property",
             		levels: "ordinal",
-            		attributes: { isRequired: true, countMax: 1 }
-          		  },
-          		  {
+					attributes: { isRequired: true, countMax: 1 }
+				  },
+				  {
             		name: "measure",
+		            base: "pentaho/visual/role/property",
+		            levels: "quantitative",
+		            dataType: "number",
+		            attributes: { isRequired: true, countMax: 1 }
+				  },
+				  {
+            		name: "error",
 		            base: "pentaho/visual/role/property",
 		            levels: "quantitative",
 		            dataType: "number",
@@ -43,19 +55,10 @@ define([
 					name: "chartType",
 					valueType: ChartTypeOptions,
 					domain: [
-					"area2d",
-					"bar2d", "bar3d", 
-					"column2d", "column3d",
-					"doughnut2d","doughnut3d",
-					"funnel",
-					"kagi",
-					"line",
-					"pareto2d","pareto3d","pie2d","pie3d","pyramid",
-					"spline",
-					"splinearea",
-					"waterfall2d"],
+						"errorbar2d","errorline",
+					],
 					isRequired: true,
-					defaultValue: "column2d"
+					defaultValue: "errorbar2d"
 				  },
 				  {
 					name: "theme",
@@ -64,9 +67,10 @@ define([
 					isRequired: true,
 					defaultValue: "none"
 				  }
-				]
+		        ]
 	 		}
 	 	});
-	 	return DataModel;
+	 	return ErrorModel;
 	}]
 });
+

@@ -8,10 +8,10 @@ define([
 
   return [
     "pentaho/visual/base/view",
-    "./model-series",
+    "./model-combination",
     function(BaseView, Model) {
       // Create the View subclass
-      var BarView = BaseView.extend({
+      var CombinationView = BaseView.extend({
         $type: {
           id: module.id,
           props: [
@@ -35,24 +35,28 @@ define([
           var renderContainer = this.domContainer;
           
           var categoryAttribute = model.category.attributes.at(0).name;
-          var measureAttribute = model.measure.attributes.at(0).name;
-          var seriesAttribute = model.series.attributes.at(0).name;
-          
           var categoryColumn = dataTable.getColumnIndexByAttribute(categoryAttribute);
-          var measureColumn = dataTable.getColumnIndexByAttribute(measureAttribute);
-          var seriesColumn = dataTable.getColumnIndexByAttribute(seriesAttribute);   
-
+          var measuresArray = model.measures.attributes.toArray();
+          var measuresAttributes = [];
+          var measuresColumns = [];
+          for(var i = 0, R = measuresArray.length; i < R; i++) {
+            measuresAttributes[i] = {
+              attribute: model.measures.attributes.at(i).name,
+              name: model.measures.attributes.at(i).dataAttribute.label,
+              column: dataTable.getColumnIndexByAttribute(model.measures.attributes.at(i).name)
+            }
+          }
+                    
           var category = [];
           var dataSet = [];
 
           var categoryIndex = -1;
           var seriesIndex = -1;
-          var categoryName, serieName;
+          var categoryName;
 
           var chartoptions = {
             "chart": {
               xAxisName : model.category.attributes.at(0).dataAttribute.label,
-              yAxisName : model.measure.attributes.at(0).dataAttribute.label,
               bgColor: "#ffffff",
               showBorder: "0",
               use3DLighting: "0",
@@ -93,22 +97,29 @@ define([
               value: 0
             });
           };
-          for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
-            serieName = dataTable.getFormattedValue(i, seriesColumn);
-            seriesIndex = dataSet.findIndex(function(obj){return obj.seriesname === serieName});
-            if(seriesIndex == -1){
-              dataSet.push({
-                "seriesname" : serieName,
-                "data" : JSON.parse(JSON.stringify(dataVal))
-              });
-            };
+          for(var i = 0, R = measuresAttributes.length; i < R; i++) {
+            var serieName = measuresAttributes[i].name;
+            dataSet.push({
+              "seriesname" : serieName,
+              "data" : JSON.parse(JSON.stringify(dataVal))
+            });
           };
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
-            serieName = dataTable.getFormattedValue(i, seriesColumn);
-            categoryName = dataTable.getFormattedValue(i, categoryColumn);
-            seriesIndex = dataSet.findIndex(function(obj){return obj.seriesname === serieName});
-            categoryIndex = category.findIndex(function(obj){return obj.label === categoryName});
-            dataSet[seriesIndex].data[categoryIndex].value = dataTable.getValue(i, measureColumn);
+            for (var j = 0, S = measuresAttributes.length; j < S; j++) {
+              categoryName = dataTable.getFormattedValue(i, categoryColumn);
+              seriesIndex = dataSet.findIndex(function(obj){return obj.seriesname === measuresAttributes[j].name});
+              categoryIndex = dataSet[seriesIndex].data.findIndex(function(obj){return obj.label === categoryName});
+              dataSet[seriesIndex].data[categoryIndex].value = dataTable.getValue(i, measuresAttributes[j].column);
+              if(seriesIndex == model["render line"]){
+                dataSet[seriesIndex].renderAs = "line";
+              }
+              if(seriesIndex == model["render area"]){
+                dataSet[seriesIndex].renderAs = "area";
+              }
+              if(seriesIndex == model["secondary y-axis"]){
+                dataSet[seriesIndex].parentYAxis = "S";
+              }
+            }
           };
 
           chartoptions.categories.push({
@@ -122,7 +133,7 @@ define([
         }
       });
 
-      return BarView;
+      return CombinationView;
     }
   ];
 });
