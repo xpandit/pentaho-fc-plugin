@@ -24,12 +24,11 @@ define([
         },
       
         _updateAll: function() {
-          if(!sessionStorage.getItem("validFusionKey") || !sessionStorage.getItem("validFusionXT")){
-            if(!Utils.prototype.validateFusionKey(this.domContainer)){
-              return
-            }
+          //Validate FusionXT and Key
+          if(!Utils.prototype.validateFusionKey(this.domContainer)){
+            return
           }
-
+          
           var model = this.model;
           var dataTable = model.data;
           var renderContainer = this.domContainer;
@@ -50,33 +49,11 @@ define([
           var categoryName, serieName;
 
           var chartoptions = {
-            "chart": {
-              xAxisName : model.category.attributes.at(0).dataAttribute.label,
-              yAxisName : model.measure.attributes.at(0).dataAttribute.label,
-              bgColor: "#ffffff",
-              showBorder: "0",
-              use3DLighting: "0",
-              showShadow: "0",
-              enableSmartLabels: "0",
-              startingAngle: "0",
-              toolTipColor: "#ffffff",
-              toolTipBorderThickness: "0",
-              toolTipBgColor: "#000000",
-              toolTipBgAlpha: "80",
-              toolTipBorderRadius: "2",
-              toolTipPadding: "5",
-              showHoverEffect: "1",
-              showLegend: "1",
-              legendBgColor: "#ffffff",
-              legendBorderAlpha: "0",
-              legendShadow: "0",
-              legendItemFontSize: "10",
-              legendItemFontColor: "#666666",
-              useDataPlotColorForLabels: "1"
-            },
+            "chart": {},
             categories : []
           }
 
+          //Create Chart Data Structure
           // build Categories
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             categoryName = dataTable.getFormattedValue(i, categoryColumn);
@@ -86,6 +63,7 @@ define([
               });
             };
           }
+          // build Data
           var dataVal = [];
           for (var i = 0; i < category.length; i++) {
             dataVal.push({
@@ -93,6 +71,7 @@ define([
               value: 0
             });
           };
+          //build Series
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             serieName = dataTable.getFormattedValue(i, seriesColumn);
             seriesIndex = dataSet.findIndex(function(obj){return obj.seriesname === serieName});
@@ -103,6 +82,7 @@ define([
               });
             };
           };
+          // Set Data Values
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             serieName = dataTable.getFormattedValue(i, seriesColumn);
             categoryName = dataTable.getFormattedValue(i, categoryColumn);
@@ -116,7 +96,7 @@ define([
           });
           chartoptions.dataset = dataSet;
           model.chartOptions = chartoptions;
-
+          //Render Chart
           var chart = new Chart();
           chart.renderChart(model, renderContainer);
         }

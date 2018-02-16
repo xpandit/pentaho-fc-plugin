@@ -24,10 +24,9 @@ define([
         },
       
         _updateAll: function() {
-          if(!sessionStorage.getItem("validFusionKey") || !sessionStorage.getItem("validFusionXT")){
-            if(!Utils.prototype.validateFusionKey(this.domContainer)){
-              return
-            }
+          //Validate FusionXT and Key
+          if(!Utils.prototype.validateFusionKey(this.domContainer)){
+            return
           }
           
           var model = this.model;
@@ -45,17 +44,26 @@ define([
           chartoptions.chart ={};
 
           var scenes = [];
-          
+          //Create Chart Data Structure
+          // build Data
+          var minValue = dataTable.getValue(0, measureColumn);
+          var maxValue = dataTable.getValue(0, measureColumn);;
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             scenes.push({
               id: dataTable.getFormattedValue(i, categoryColumn),
               value: dataTable.getValue(i, measureColumn),
             });
+            if(dataTable.getValue(i, measureColumn)< minValue){minValue = dataTable.getValue(i, measureColumn)};
+            if(dataTable.getValue(i, measureColumn)> maxValue){maxValue = dataTable.getValue(i, measureColumn)};
           }
           
           chartoptions.data = scenes;
+          chartoptions.map = {
+            "minValue": minValue,
+            "maxValue":maxValue
+          };
           model.chartOptions = chartoptions;
-
+          //Render Chart
           var chart = new Chart();
           chart.renderChart(model, renderContainer);
         }

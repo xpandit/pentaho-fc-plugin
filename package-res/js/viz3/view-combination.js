@@ -24,10 +24,9 @@ define([
         },
       
         _updateAll: function() {
-          if(!sessionStorage.getItem("validFusionKey") || !sessionStorage.getItem("validFusionXT")){
-            if(!Utils.prototype.validateFusionKey(this.domContainer)){
-              return
-            }
+          //Validate FusionXT and Key
+          if(!Utils.prototype.validateFusionKey(this.domContainer)){
+            return
           }
 
           var model = this.model;
@@ -55,32 +54,10 @@ define([
           var categoryName;
 
           var chartoptions = {
-            "chart": {
-              xAxisName : model.category.attributes.at(0).dataAttribute.label,
-              bgColor: "#ffffff",
-              showBorder: "0",
-              use3DLighting: "0",
-              showShadow: "0",
-              enableSmartLabels: "0",
-              startingAngle: "0",
-              toolTipColor: "#ffffff",
-              toolTipBorderThickness: "0",
-              toolTipBgColor: "#000000",
-              toolTipBgAlpha: "80",
-              toolTipBorderRadius: "2",
-              toolTipPadding: "5",
-              showHoverEffect: "1",
-              showLegend: "1",
-              legendBgColor: "#ffffff",
-              legendBorderAlpha: "0",
-              legendShadow: "0",
-              legendItemFontSize: "10",
-              legendItemFontColor: "#666666",
-              useDataPlotColorForLabels: "1"
-            },
+            "chart": {},
             categories : []
           }
-
+          //Create Chart Data Structure
           // build Categories
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             categoryName = dataTable.getFormattedValue(i, categoryColumn);
@@ -90,6 +67,7 @@ define([
               });
             };
           }
+          // build data
           var dataVal = [];
           for (var i = 0; i < category.length; i++) {
             dataVal.push({
@@ -97,6 +75,7 @@ define([
               value: 0
             });
           };
+          //build Series
           for(var i = 0, R = measuresAttributes.length; i < R; i++) {
             var serieName = measuresAttributes[i].name;
             dataSet.push({
@@ -104,6 +83,7 @@ define([
               "data" : JSON.parse(JSON.stringify(dataVal))
             });
           };
+          // build data values
           for(var i = 0, R = dataTable.getNumberOfRows(); i < R; i++) {
             for (var j = 0, S = measuresAttributes.length; j < S; j++) {
               categoryName = dataTable.getFormattedValue(i, categoryColumn);
@@ -127,7 +107,7 @@ define([
           });
           chartoptions.dataset = dataSet;
           model.chartOptions = chartoptions;
-
+          //create chart and render
           var chart = new Chart();
           chart.renderChart(model, renderContainer);
         }

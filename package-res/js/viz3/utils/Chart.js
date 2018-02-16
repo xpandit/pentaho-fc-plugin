@@ -6,6 +6,7 @@ define([
     'xfusion/fclib/fusioncharts.theme.carbon',
     'xfusion/fclib/fusioncharts.theme.zune',
     'xfusion/fclib/fusioncharts.theme.fint',
+    'xViz/properties/chart_properties'
 ], function ($, _) {
 		'use strict';
         
@@ -21,17 +22,29 @@ define([
                         "width": "100%",
                         "height": "100%",
                         "dataFormat": "json",
-                        //"renderAt": container,
                     });
                 }
                 //Set Chart Type
                 model.chartObject.chartType(model.chartType);
+                //Customize Map 
+                if(model.chartType.match(/maps\/.*/g)){
+                    model.chartOptions.colorrange = chartSettingsManager.mapsColorRange(model.chartOptions.map.minValue,model.chartOptions.map.maxValue);
+                }
+                //Customize Chart
+                if(model.theme != "none"){
+                    model.chartOptions.chart.theme = model.theme;
+                }else{
+                    model.chartOptions.chart = chartSettingsManager.getOverallSettings();
+                }
+                if(model.measure != undefined){
+                    model.chartOptions.chart.yAxisName = model.measure.attributes.at(0).dataAttribute.label;
+                }
+                if(model.category!= undefined){
+                    model.chartOptions.chart.xAxisName = model.category.attributes.at(0).dataAttribute.label;
+                }
                 //Set Chart Data
                 model.chartObject.setJSONData(model.chartOptions);
-                //Set Chart Theme
-                if(model.theme != "none"){
-                    model.chartObject.setChartAttribute('theme', model.theme);
-                }
+
                 //Enable Export
                 model.chartObject.setChartAttribute('exportEnabled', "1");
                 model.chartObject.setChartAttribute('exportAtClientSide', "1");
