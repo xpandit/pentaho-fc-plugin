@@ -18,33 +18,38 @@ define([
     render: function(values) {
       var myself = this;
       var cd = myself.chartDefinition;
-      var path = window.location.pathname.split('/');
-      var urlApi = window.location.origin + "/" + path[1] + '/plugin/fusion_plugin/api/verifyKey';
-      var fusionkey = $.ajax({
-        type: 'GET',
-        url: urlApi,
-        async: false,
-        error: function(xhr, textStatus, error) {
-          alert("Error while validating your key. Make sure your key is valid")
+      if(!sessionStorage.getItem("validFusionKey") || !sessionStorage.getItem("validFusionXT")){
+        var path = window.location.pathname.split('/');
+        var urlApi = window.location.origin + "/" + path[1] + '/plugin/fusion_plugin/api/verifyKey';
+        var fusionkey = $.ajax({
+          type: 'GET',
+          url: urlApi,
+          async: false,
+          error: function(xhr, textStatus, error) {
+            alert("Error while validating your key. Make sure your key is valid")
+          }
+        }).responseText;
+        // error validating key
+        if (fusionkey.match("<html >")) {
+          $("#" + myself.htmlObject).html(fusionkey);
+          return;
         }
-      }).responseText;
-      // error validating key
-      if (fusionkey.match("<html >")) {
-        $("#" + myself.htmlObject).html(fusionkey);
-        return;
-      }
-
-      // error key expired
-      fusionkey = fusionkey.split("-", 2);
-      if (fusionkey[0].match("Error")) {
-        fusionkey[0] = fusionkey[0].replace("Error:", " ");
-        $("#" + myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>" + fusionkey[0] + "</div>");
-        return;
-      }
-      // Error fusion XT not installed
-      if (fusionkey[1].match("true")) {
-        $("#" + myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
-        return;
+        // error key expired
+        fusionkey = fusionkey.split("-", 2);
+        if (fusionkey[0].match("Error")) {
+          fusionkey[0] = fusionkey[0].replace("Error:", " ");
+          $("#" + myself.htmlObject).html("<div class=\"alert alert-danger\"><strong>Error!</strong>" + fusionkey[0] + "</div>");
+          return;
+        }else{
+          sessionStorage.validFusionKey=true;
+        }
+        // Error fusion XT not installed
+        if (fusionkey[1].match("true")) {
+          $("#" + myself.htmlObject).html("<div class=\"alert alert-danger\">You need to install FusionCharts XT to render the chart</div>");
+          return;
+        }else{
+          sessionStorage.validFusionXT=true;
+        }
       }
       if (!_.has(cd, 'chartType')) {
         // display missing options error
