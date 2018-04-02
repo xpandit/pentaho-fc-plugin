@@ -887,6 +887,12 @@ require(["common-ui/vizapi/VizController"], function() {
     if (options.isHTML5 == undefined)
       options.isHTML5 = false;
 
+ //Remove Theme option for older
+   if (!options.isHTML5 || isFree) {
+      if($('*[id^="theme"]').prev().text()=="Theme")
+        $('*[id^="theme"]').prev().remove()
+        $('*[id^="theme"]').remove()
+    }
     //create the logic to get the correct chart name for the chart based if is HTML 5 or not
     var chartTypeFull = (options.isHTML5 && !isFree) ? options.chartType : url + "/swf/" + options.chartType + ".swf";
 
