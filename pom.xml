@@ -1,0 +1,275 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.pentaho</groupId>
+  <artifactId>fusion_plugin</artifactId>
+  <packaging>jar</packaging>
+  <version>5.1.0-SNAPSHOT</version>
+
+  <name>Pentaho Fusion Plugin</name>
+  <url>https://github.com/xpandit/pentaho-fc-plugin</url>
+
+
+  <properties>
+    <java.version>1.8</java.version>
+    <cpf.revision>7.1.0.0-12</cpf.revision>
+    <cpk.revision>7.1.0.0-12</cpk.revision>
+    <pentaho-reporting.revision>7.0.0.6-91</pentaho-reporting.revision>
+    <bi-platform.revision>7.1.0.0-12</bi-platform.revision>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <directory>${project.basedir}/target</directory>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+
+    <plugins>
+      <!--Compile JAR and  move it to lib folder-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <executions>
+          <execution>
+            <id>default</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.basedir}/target/output/lib</outputDirectory>
+              </configuration>
+          </execution>
+            <execution>
+              <id>distribution</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.basedir}/dist/output</outputDirectory>
+                </configuration>
+            </execution>
+        </executions>
+      </plugin>
+
+    <!--Copy the resources to target path-->
+    <plugin>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>3.0.1</version>
+      <executions>
+           <execution>
+              <id>copy-resources</id>
+              <!-- here the phase you need -->
+              <phase>package</phase>
+              <goals>
+                 <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                 <outputDirectory>${basedir}/target/output/</outputDirectory>
+                 <addDefaultExcludes></addDefaultExcludes>
+                 <resources>
+                      <resource>
+                          <directory>package-res</directory>
+                          <filtering>false</filtering>
+                      </resource>
+                 </resources>
+              </configuration>
+          </execution>
+       </executions>
+     </plugin>
+
+     <!--Copy the dependencies that are not provided to lib path-->
+     <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/output/lib</outputDirectory>
+                  <overWriteReleases>false</overWriteReleases>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                  <excludeTransitive>true</excludeTransitive>
+                  <excludeScope>provided</excludeScope>
+                </configuration>
+              </execution>
+            </executions>
+    </plugin>
+
+    <!--Compilation plugin-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+         <version>3.3</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
+    <!--Prepare the files by compressing the project folders-->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+              <id>main-plugin</id>
+              <phase>package</phase>
+              <goals>
+                  <goal>single</goal>
+              </goals>
+              <configuration>
+                  <descriptors>
+                      <descriptor>asm_plugin.xml</descriptor>
+                  </descriptors>
+                  <outputDirectory>${basedir}/dist/output</outputDirectory>
+                  <finalName>${project.artifactId}-${project.version}</finalName>
+                  <appendAssemblyId>false</appendAssemblyId>
+              </configuration>
+          </execution>
+            <execution>
+                <id>cde-plugin</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>single</goal>
+                </goals>
+                <configuration>
+                    <descriptors>
+                        <descriptor>asm_cde_plugin.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>${basedir}/dist/output</outputDirectory>
+                    <finalName>${project.artifactId}-CDE-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+  </plugins>
+  </build>
+  <dependencies>
+
+    <!-- Pentaho cpf -->
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>cpf-core</artifactId>
+      <version>${cpf.revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>cpf-pentaho</artifactId>
+      <version>${cpk.revision}</version>
+    </dependency>
+
+    <!-- Pentaho cpk -->
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>cpk-pentaho5</artifactId>
+      <version>${cpk.revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>cpk-core</artifactId>
+      <version>${cpk.revision}</version>
+    </dependency>
+
+    <!-- Pentaho Reportin Engine to use CDA to parse results -->
+    <dependency>
+      <groupId>pentaho-reporting-engine</groupId>
+      <artifactId>pentaho-reporting-engine-classic-extensions-cda</artifactId>
+      <version>${pentaho-reporting.revision}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho-reporting-engine</groupId>
+      <artifactId>pentaho-reporting-engine-classic-core</artifactId>
+      <version>${pentaho-reporting.revision}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--Pentaho Platform-->
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>pentaho-platform-core</artifactId>
+      <version>${bi-platform.revision}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>pentaho-platform-api</artifactId>
+      <version>${bi-platform.revision}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>pentaho-platform-repository</artifactId>
+      <version>${bi-platform.revision}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>pentaho-connections</artifactId>
+      <version>2.2.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho-library</groupId>
+      <artifactId>libbase</artifactId>
+      <version>1.2.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>pentaho-versionchecker</artifactId>
+      <version>2.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- other -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>3.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.9</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.0</version>
+      <scope>provided</scope>
+    </dependency>
+<!-- Local dependency -->
+  <dependency>
+  	<groupId>com.xpandit.keygen.serial</groupId>
+  	<artifactId>key-generator</artifactId>
+  	<version>0.1</version>
+  	<scope>system</scope>
+	   <systemPath>${basedir}/dev-lib/key-generator-0.1.jar</systemPath>
+</dependency>
+</dependencies>
+
+  <repositories>
+        <repository>
+            <id>pentaho</id>
+            <url>http://nexus.pentaho.org/content/groups/omni/</url>
+        </repository>
+  </repositories>
+
+</project>
