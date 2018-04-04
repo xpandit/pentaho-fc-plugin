@@ -1,0 +1,29 @@
+#
+# Auto-generated build properties file.  Description of properties:
+# project.revision - the version of your plugin
+# ivy.artifact.id - the name of your final artifact (jar and/or zip or tar.gz)
+# impl.title - natural language description of your plugin (may contain spaces)
+#
+
+dependency.bi-platform.revision=8.0.0.0-28
+dependency.pentaho-reporting.revision=7.0.0.6-91
+dependency.cpf.revision=8.0.0.0-28
+dependency.cpk.revision=8.0.0.0-28
+ivy.artifact.group=com.pentaho
+impl.title=fusion_plugin
+project.revision=5.1.0
+ivy.artifact.id=fusion_plugin
+
+###########################################################################
+#                                                                         #
+# Properties that require setup                                           #
+#																		  #
+###########################################################################
+
+# Pentaho Solutions directory
+# E.g. Windows: C:\\Pentaho\\server\\pentaho-server\\pentaho-solutions
+# E.g. Unix: /opt/Pentaho/server/pentaho-server/pentaho-solutions
+#
+# Note: do not end path with / (slash).
+#
+dir.solutions=/home/jtas/Tools/pentaho/8.0/suite/server/pentaho-server/pentaho-solutions

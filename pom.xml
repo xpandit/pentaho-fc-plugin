@@ -6,7 +6,6 @@
   <artifactId>fusion_plugin</artifactId>
   <packaging>jar</packaging>
   <version>5.1.0-SNAPSHOT</version>
-
   <name>Pentaho Fusion Plugin</name>
   <url>https://github.com/xpandit/pentaho-fc-plugin</url>
 
@@ -18,6 +17,7 @@
     <pentaho-reporting.revision>7.0.0.6-91</pentaho-reporting.revision>
     <bi-platform.revision>7.1.0.0-12</bi-platform.revision>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <dir.solution>/home/jtas/Tools/pentaho/8.0/suite/server/pentaho-server/pentaho-solutions/test</dir.solution>
   </properties>
 
   <build>
@@ -48,7 +48,7 @@
                   <goal>jar</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${project.basedir}/dist/output</outputDirectory>
+                  <outputDirectory>${project.basedir}/dist</outputDirectory>
                 </configuration>
             </execution>
         </executions>
@@ -127,7 +127,7 @@
                   <descriptors>
                       <descriptor>asm_plugin.xml</descriptor>
                   </descriptors>
-                  <outputDirectory>${basedir}/dist/output</outputDirectory>
+                  <outputDirectory>${basedir}/dist</outputDirectory>
                   <finalName>${project.artifactId}-${project.version}</finalName>
                   <appendAssemblyId>false</appendAssemblyId>
               </configuration>
@@ -142,13 +142,44 @@
                     <descriptors>
                         <descriptor>asm_cde_plugin.xml</descriptor>
                     </descriptors>
-                    <outputDirectory>${basedir}/dist/output</outputDirectory>
+                    <outputDirectory>${basedir}/dist</outputDirectory>
                     <finalName>${project.artifactId}-CDE-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </execution>
+            <execution>
+                <id>main-plugin-install</id>
+                <phase>install</phase>
+                <goals>
+                    <goal>single</goal>
+                </goals>
+                <configuration>
+                    <descriptors>
+                        <descriptor>asm_install_plugin.xml</descriptor>
+                    </descriptors>
+                    <attach>false</attach>
+                    <outputDirectory>${dir.solution}</outputDirectory>
+                    <finalName>fusion_plugin</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </execution>
         </executions>
     </plugin>
+
+    <!--  Cleanup environmnent  -->
+    <plugin>
+    <artifactId>maven-clean-plugin</artifactId>
+    <version>3.0.0</version>
+    <configuration>
+      <filesets>
+        <fileset>
+          <directory>dist</directory>
+          <followSymlinks>false</followSymlinks>
+        </fileset>
+      </filesets>
+    </configuration>
+  </plugin>
+
   </plugins>
   </build>
   <dependencies>
@@ -254,21 +285,27 @@
       <artifactId>javax.ws.rs-api</artifactId>
       <version>2.0</version>
       <scope>provided</scope>
-    </dependency>
-<!-- Local dependency -->
-  <dependency>
-  	<groupId>com.xpandit.keygen.serial</groupId>
-  	<artifactId>key-generator</artifactId>
-  	<version>0.1</version>
-  	<scope>system</scope>
-	   <systemPath>${basedir}/dev-lib/key-generator-0.1.jar</systemPath>
-</dependency>
+      </dependency>
+  <!-- Local repostitory dependency -->
+    <dependency>
+    	<groupId>com.xpandit</groupId>
+    	<artifactId>key-generator</artifactId>
+    	<version>0.1</version>
+  </dependency>
+
+
 </dependencies>
 
   <repositories>
         <repository>
             <id>pentaho</id>
             <url>http://nexus.pentaho.org/content/groups/omni/</url>
+        </repository>
+        <repository>
+            <id>fusion.local</id>
+            <name>fusion</name>
+            <url>file:${project.basedir}/dev-lib</url>
+            <layout>default</layout>
         </repository>
   </repositories>
 

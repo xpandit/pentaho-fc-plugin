@@ -10,6 +10,7 @@
   <fileSets>
     <fileSet>
       <directory>${basedir}/target/output</directory>
+      <outputDirectory>fusion_plugin</outputDirectory>
     </fileSet>
   </fileSets>
 </assembly>
