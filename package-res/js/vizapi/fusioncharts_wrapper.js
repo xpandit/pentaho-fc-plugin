@@ -890,8 +890,7 @@ require(["common-ui/vizapi/VizController"], function() {
  //Remove Theme option for older
    if (!options.isHTML5 || isFree) {
       if($('*[id^="theme"]').prev().text()=="Theme")
-        $('*[id^="theme"]').prev().remove()
-        $('*[id^="theme"]').remove()
+        $('*[id^="theme"]').attr('title', 'Full support for themes is available only on the licensed version of Fusion Charts');
     }
     //create the logic to get the correct chart name for the chart based if is HTML 5 or not
     var chartTypeFull = (options.isHTML5 && !isFree) ? options.chartType : url + "/swf/" + options.chartType + ".swf";
