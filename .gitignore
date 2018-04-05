@@ -1,4 +1,5 @@
 dist/
+target/
 lib/
 test-lib/
 .idea
