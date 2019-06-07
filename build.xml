@@ -14,6 +14,8 @@
       <fileset file="${lib.dir}/cpf-pentaho-${dependency.cpf.revision}.jar" />
       <fileset file="${lib.dir}/cpk-core-${dependency.cpk.revision}.jar" />
       <fileset file="${lib.dir}/cpk-pentaho5-${dependency.cpk.revision}.jar" />
+      <fileset file="${lib.dir}/jackson-mapper-asl-1.9.12.jar" />
+      <fileset file="${lib.dir}/jackson-core-asl-1.9.12.jar" />
     </copy>
   </target>
 
