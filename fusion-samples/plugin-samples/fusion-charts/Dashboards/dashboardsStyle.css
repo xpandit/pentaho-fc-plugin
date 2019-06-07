@@ -3,6 +3,14 @@
 	margin: 0 auto;
 }
 
+a {
+    color: #428bca;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
 .header {
     margin-top: 20px;
     margin-bottom: 60px;
@@ -17,11 +25,13 @@
     font-weight: 300;
 }
 
+
 h2 {
     font-size: 36px;
     font-family: "Open Sans";
     margin: 0px;
     padding-top: 10px;
+		line-height: 1.1;
 }
 
 .third {
@@ -35,4 +45,10 @@ h5 {
     color: #1973bc;
     font-family: "Open Sans";
     margin-bottom: 20px;
+		line-height: 1.1;s
+}
+
+body, div{
+	    font-size: 14px;
+			line-height: 1.42857143;
 }
