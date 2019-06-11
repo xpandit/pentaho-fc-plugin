@@ -3,6 +3,7 @@
 (function() {
 
   var requirePaths = requireCfg.paths;
+  var requireShims = requireCfg.shim;
   var requireTypeInfo = requireCfg.config["pentaho/typeInfo"] || (requireCfg.config["pentaho/typeInfo"] = {});
   var requireInstInfo = requireCfg.config["pentaho/instanceInfo"] || (requireCfg.config["pentaho/instanceInfo"] = {});
   var path = window.location.pathname.split('/');
@@ -42,7 +43,7 @@
 
   //CDE Require scripts
 	requirePaths['fusion_plugin/components/FCSingleSeriesCDEComponent']  = prefixResources + '/amd-components/SingleSeries/FCSingleSeriesCDEComponent';
-  requirePaths['fusion_plugin/components/FCMultiSeriesCDEComponent']  = prefixResources + '/amd-components/MultiSeries/FCMultiSeriesCDEComponent';
+  	requirePaths['fusion_plugin/components/FCMultiSeriesCDEComponent']  = prefixResources + '/amd-components/MultiSeries/FCMultiSeriesCDEComponent';
 	requirePaths['fusion_plugin/components/FCStackedCDEComponent']  = prefixResources + '/amd-components/Stacked/FCStackedCDEComponent';
 	requirePaths['fusion_plugin/components/FCCombinationCDEComponent']  = prefixResources + '/amd-components/Combination/FCCombinationCDEComponent';
 	requirePaths['fusion_plugin/components/FCXYPlotCDEComponent']  = prefixResources + '/amd-components/XYPlot/FCXYPlotCDEComponent';
@@ -64,11 +65,15 @@
 
   //FC Library
   requirePaths['xfusion/fclib/FusionCharts'] = prefixFC + '/FusionCharts';
-	//Themes
+  //Themes
   requirePaths['xfusion/fclib/fusioncharts.theme.ocean'] = prefixFC + '/themes/fusioncharts.theme.ocean';
   requirePaths['xfusion/fclib/fusioncharts.theme.carbon'] = prefixFC + '/themes/fusioncharts.theme.carbon';
   requirePaths['xfusion/fclib/fusioncharts.theme.zune'] = prefixFC + '/themes/fusioncharts.theme.zune';
   requirePaths['xfusion/fclib/fusioncharts.theme.fint'] = prefixFC + '/themes/fusioncharts.theme.fint';
+  requirePaths['xfusion/fclib/fusioncharts.theme.candy'] = prefixFC + '/themes/fusioncharts.theme.candy';
+  requirePaths['xfusion/fclib/fusioncharts.theme.umber'] = prefixFC + '/themes/fusioncharts.theme.umber';
+  requirePaths['xfusion/fclib/fusioncharts.theme.gammel'] = prefixFC + '/themes/fusioncharts.theme.gammel';
+  requirePaths['xfusion/fclib/fusioncharts.theme.fusion'] = prefixFC + '/themes/fusioncharts.theme.fusion';
   requirePaths['xfusion/XPTheme'] = prefixJS + '/XPTheme';
   
   //VizAPI
@@ -76,6 +81,8 @@
   requirePaths["xViz"] = prefixJS + "/viz3";
 
   requireInstInfo["xViz/config"] = {type: "pentaho.config.spec.IRuleSet"};
+
+
 
   [
     "xViz/model-combination",
@@ -86,4 +93,16 @@
   ].forEach(function(name) {
     requireTypeInfo[name] = {base: "pentaho/visual/base/model"};
   });
+
+  // Shims with the dependencies
+  requireShims['xfusion/fclib/fusioncharts.theme.ocean'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.carbon'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.zune'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.fint'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.candy'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.gammel'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.umber'] = ['xfusion/fclib/FusionCharts'];
+  requireShims['xfusion/fclib/fusioncharts.theme.fusion'] = ['xfusion/fclib/FusionCharts'];
+
+
 })();
