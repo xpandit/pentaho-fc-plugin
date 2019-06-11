@@ -6,6 +6,10 @@ define([
     'xfusion/fclib/fusioncharts.theme.carbon',
     'xfusion/fclib/fusioncharts.theme.zune',
     'xfusion/fclib/fusioncharts.theme.fint',
+    'xfusion/fclib/fusioncharts.theme.candy',
+    'xfusion/fclib/fusioncharts.theme.gammel',
+    'xfusion/fclib/fusioncharts.theme.umber',
+    'xfusion/fclib/fusioncharts.theme.fusion',
     'xViz/properties/chart_properties'
 ], function ($, _) {
 		'use strict';
@@ -14,7 +18,7 @@ define([
 		}
 
         Chart.prototype = {
-            renderChart: function (model, container) {
+            renderChart: function (model, dataTable, container) {
                 if (model.chartObject == undefined) {
                     //Create FusionChart if it does not exist
                     model.chartObject = new FusionCharts({
@@ -37,10 +41,12 @@ define([
                     model.chartOptions.chart = chartSettingsManager.getOverallSettings();
                 }
                 if(model.measure != undefined){
-                    model.chartOptions.chart.yAxisName = model.measure.attributes.at(0).dataAttribute.label;
+                    var measureIndex=dataTable.getColumnIndexById(model.measure.fields.at(0).name); 
+                    model.chartOptions.chart.yAxisName = dataTable.getColumnLabel(measureIndex);
                 }
                 if(model.category!= undefined){
-                    model.chartOptions.chart.xAxisName = model.category.attributes.at(0).dataAttribute.label;
+                    var categoryIndex=dataTable.getColumnIndexById(model.category.fields.at(0).name); 
+                    model.chartOptions.chart.xAxisName = dataTable.getColumnLabel(categoryIndex);
                 }
                 //Set Chart Data
                 model.chartObject.setJSONData(model.chartOptions);

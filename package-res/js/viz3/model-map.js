@@ -28,15 +28,17 @@ define([
 		          {
             		name: "id",
             		base: "pentaho/visual/role/property",
-            		levels: "ordinal",
-            		attributes: { isRequired: true, countMax: 1 }
+            		modes: [
+            			{dataType: "string"},
+            			{dataType: "date"}
+            		],
+            		fields: {isRequired: true}
           		  },
           		  {
             		name: "value",
 		            base: "pentaho/visual/role/property",
-		            levels: "quantitative",
-		            dataType: "number",
-		            attributes: { isRequired: true, countMax: 1 }
+		            modes: [{dataType: "number"}],
+		            fields: { isRequired: true }
 				  },
 				  {
 					name: "chartType",
@@ -49,7 +51,7 @@ define([
 				  {
 					name: "theme",
 					valueType: ThemeOptions,
-					domain: ["none", "zune", "fint", "carbon", "ocean"],
+					domain: ["none", "zune", "fint", "carbon", "ocean", "candy", "gammel", "umber", "fusion"],
 					isRequired: true,
 					defaultValue: "none"
 				  }

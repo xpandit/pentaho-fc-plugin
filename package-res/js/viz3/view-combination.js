@@ -33,16 +33,18 @@ define([
           var dataTable = model.data;
           var renderContainer = this.domContainer;
           
-          var categoryAttribute = model.category.attributes.at(0).name;
-          var categoryColumn = dataTable.getColumnIndexByAttribute(categoryAttribute);
-          var measuresArray = model.measures.attributes.toArray();
+          var categoryAttribute = model.category.fields.at(0).name;
+          var categoryColumn = dataTable.getColumnIndexById(categoryAttribute);
+          var measuresArray = model.measures.fields.count;
           var measuresAttributes = [];
           var measuresColumns = [];
+
           for(var i = 0, R = measuresArray.length; i < R; i++) {
+            var measureIndex=dataTable.getColumnIndexById(model.measure.fields.at(i).name);           
             measuresAttributes[i] = {
-              attribute: model.measures.attributes.at(i).name,
-              name: model.measures.attributes.at(i).dataAttribute.label,
-              column: dataTable.getColumnIndexByAttribute(model.measures.attributes.at(i).name)
+              attribute: model.measures.fields.at(i).name,
+              name: dataTable.getColumnLabel(measureIndex);,
+              column: dataTable.getColumnIndexById(model.measures.fields.at(i).name)
             }
           }
                     
@@ -109,7 +111,7 @@ define([
           model.chartOptions = chartoptions;
           //create chart and render
           var chart = new Chart();
-          chart.renderChart(model, renderContainer);
+          chart.renderChart(model, dataTable, renderContainer);
         }
       });
 

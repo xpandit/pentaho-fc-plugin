@@ -33,11 +33,11 @@ define([
           var dataTable = model.data;
           var renderContainer = this.domContainer;
 
-          var categoryAttribute = model.id.attributes.at(0).name;
-          var measureAttribute = model.value.attributes.at(0).name;
+          var categoryAttribute = model.id.fields.at(0).name;
+          var measureAttribute = model.value.fields.at(0).name;
 
-          var categoryColumn = dataTable.getColumnIndexByAttribute(categoryAttribute);
-          var measureColumn = dataTable.getColumnIndexByAttribute(measureAttribute);
+          var categoryColumn = dataTable.getColumnIndexById(categoryAttribute);
+          var measureColumn = dataTable.getColumnIndexById(measureAttribute);
           
           var chartoptions = {};
           
@@ -65,7 +65,7 @@ define([
           model.chartOptions = chartoptions;
           //Render Chart
           var chart = new Chart();
-          chart.renderChart(model, renderContainer);
+          chart.renderChart(model, dataTable, renderContainer);
         }
       });
 

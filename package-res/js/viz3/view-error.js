@@ -33,15 +33,15 @@ define([
           var dataTable = model.data;
           var renderContainer = this.domContainer;
           
-          var categoryAttribute = model.category.attributes.at(0).name;
-          var measureAttribute = model.measure.attributes.at(0).name;
-          var seriesAttribute = model.series.attributes.at(0).name;
-          var errorAttribute = model.error.attributes.at(0).name;
+          var categoryAttribute = model.category.fields.at(0).name;
+          var measureAttribute = model.measure.fields.at(0).name;
+          var seriesAttribute = model.series.fields.at(0).name;
+          var errorAttribute = model.error.fields.at(0).name;
           
-          var categoryColumn = dataTable.getColumnIndexByAttribute(categoryAttribute);
-          var measureColumn = dataTable.getColumnIndexByAttribute(measureAttribute);
-          var seriesColumn = dataTable.getColumnIndexByAttribute(seriesAttribute);
-          var errorColumn = dataTable.getColumnIndexByAttribute(errorAttribute); 
+          var categoryColumn = dataTable.getColumnIndexById(categoryAttribute);
+          var measureColumn = dataTable.getColumnIndexById(measureAttribute);
+          var seriesColumn = dataTable.getColumnIndexById(seriesAttribute);
+          var errorColumn = dataTable.getColumnIndexById(errorAttribute); 
 
           var category = [];
           var dataSet = [];
@@ -102,7 +102,7 @@ define([
           model.chartOptions = chartoptions;
           //Render Chart
           var chart = new Chart();
-          chart.renderChart(model, renderContainer);
+          chart.renderChart(model, dataTable, renderContainer);
         }
       });
 

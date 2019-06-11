@@ -10,7 +10,12 @@ define(function() {
                 {v: "fint", f: "Fint"},
                 {v: "zune", f: "Zune"},
                 {v: "ocean", f: "Ocean"},
-                {v: "carbon", f: "Carbon"}
+                {v: "carbon", f: "Carbon"},
+                {v: "candy", f: "Candy"},
+                {v: "gammel", f: "Gammel"},
+                {v: "umber", f: "Umber"},
+                {v: "fusion", f: "Fusion"}
+
             ]
         }
         });
