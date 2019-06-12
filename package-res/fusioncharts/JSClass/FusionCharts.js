@@ -2,8 +2,8 @@
  * FusionCharts: Flash Player detection and Chart embedding.
  * Version 1.2.3F ( 22 November 2008) - Specialized for FusionChartsFREE 
  * 					Checking Flash Version >=6 and added updateChartXML() for FREE Charts.
- * Version: 1.2.3 (1st September, 2008) - Added Fix for % and & characters, scaled dimensions, fixes in to properly handling of double quotes and single quotes in setXMLData() function.
- * Version: 1.2.2 (10th July, 2008) - Added Fix for % scaled dimensions, fixes in setXMLData() and setDataURL() functions
+ * Version: 1.2.3 (1st September, 2008) - Added Fix for % and & characters, scaled dimensions, fixes in to properly handling of double quotes and single quotes in setDataXML() function.
+ * Version: 1.2.2 (10th July, 2008) - Added Fix for % scaled dimensions, fixes in setDataXML() and setDataURL() functions
  * Version: 1.2.1 (21st December, 2007) - Added setting up Transparent/opaque mode: setTransparent() function 
  * Version: 1.2 (1st November, 2007) - Added FORM fixes for IE 
  * Version: 1.1 (29th June, 2007) - Added Player detection, New conditional fixes for IE
@@ -180,7 +180,7 @@ infosoftglobal.FusionCharts.prototype = {
 			return strDataXML;
 
 	},
-	setXMLData: function(strDataXML){
+	setDataXML: function(strDataXML){
 		//If being set initially
 		if (this.initialDataSet==false){
 			//This method sets the data XML for the chart INITIALLY.
@@ -198,7 +198,7 @@ infosoftglobal.FusionCharts.prototype = {
 			
 			//old code
 			//var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
-			//chartObj.setXMLData(strDataXML);
+			//chartObj.setDataXML(strDataXML);
 			
 			//new code
 			this.addVariable('dataXML',this.encodeDataXML(strDataXML));

@@ -1016,8 +1016,12 @@ var xLoadFunct= function(){
 					//create chart Object
 					myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
 
-					myself.chartObject.setXMLData(resultXml);
-
+					var fusion_version=(FusionCharts.version == undefined)? [1,0]:FusionCharts.version;
+					if(fusion_version[0]>=3 && fusion_version[1]>=2) 
+						myself.chartObject.setXMLData(resultXml);
+					else 
+						myself.chartObject.setDataXML(resultXml);
+					
 					//set extra configuration for HTML5 charts
 					if (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
 						myself.chartObject.chartObject._overrideJSChartConfiguration(options.overrideJSChartConfiguration);
@@ -1058,7 +1062,11 @@ var xLoadFunct= function(){
 
 				} else {
 					// just a quick update
-					myself.chartObject.setXMLData(resultXml);
+					var fusion_version=(FusionCharts.version == undefined)? [1,0]:FusionCharts.version;
+					if(fusion_version[0]>=3 && fusion_version[1]>=2) 
+						myself.chartObject.setXMLData(resultXml);
+					else 
+						myself.chartObject.setDataXML(resultXml);
 				}
 			}
 		},

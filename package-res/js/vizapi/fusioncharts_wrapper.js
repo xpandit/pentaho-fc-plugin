@@ -952,7 +952,12 @@ require(["common-ui/vizapi/VizController"], function() {
     window.currentChart = this.chartObject;
     // fix the bug that avoid the error on analyzer when using HTML5
     //resultXml=$(resultXml)[0].outerHTML.replace(/2d_3d/gi,"_2d_3d")
-    this.chartObject.setXMLData(resultXml);
+    var fusion_version=(FusionCharts.version == undefined)? [1,0]:FusionCharts.version;
+    if(fusion_version[0]>=3 && fusion_version[1]>=2) 
+      this.chartObject.setXMLData(resultXml);
+    else 
+      this.chartObject.setDataXML(resultXml);
+    
     this.chartObject.render(this.containerDiv.id);
 
     //place chart object available
