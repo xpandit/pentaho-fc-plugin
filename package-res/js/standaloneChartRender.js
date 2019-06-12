@@ -20,7 +20,10 @@ function renderChart()
 	var myChart = new FusionCharts( "../../../content/xfusion/swf/"+chartData.chartType+".swf", "myChartId", chartData.width, chartData.height, "0","1" );
 
 	//set the data
-	myChart.setDataXML(chartData.xmlData);
+	var fusion_version=(FusionCharts.version == undefined)? [1,0]:FusionCharts.version;
+	if(fusion_version[0]>=3 && fusion_version[1]>=2) 
+		myChart.setXMLData(chartData.xmlData); 
+	else myChart.setDataXML(chartData.xmlData);
 
 	//add the chart
 	myChart.render("chartPlaceHolder"); 
