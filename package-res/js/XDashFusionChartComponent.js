@@ -1016,7 +1016,7 @@ var xLoadFunct= function(){
 					//create chart Object
 					myself.chartObject = new FusionCharts( chartTypeFull, myself.htmlObject+"-generated", options.width, options.height, "0","1" );
 
-					myself.chartObject.setDataXML(resultXml);
+					myself.chartObject.setXMLData(resultXml);
 
 					//set extra configuration for HTML5 charts
 					if (!!myself.chartObject._overrideJSChartConfiguration&&options.overrideJSChartConfiguration!=undefined) {
@@ -1058,7 +1058,7 @@ var xLoadFunct= function(){
 
 				} else {
 					// just a quick update
-					myself.chartObject.setDataXML(resultXml);
+					myself.chartObject.setXMLData(resultXml);
 				}
 			}
 		},
