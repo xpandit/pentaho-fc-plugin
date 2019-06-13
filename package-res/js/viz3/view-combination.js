@@ -35,15 +35,15 @@ define([
           
           var categoryAttribute = model.category.fields.at(0).name;
           var categoryColumn = dataTable.getColumnIndexById(categoryAttribute);
-          var measuresArray = model.measures.fields.count;
+          var measuresArrayCount = model.measures.fields.count;
           var measuresAttributes = [];
           var measuresColumns = [];
 
-          for(var i = 0, R = measuresArray.length; i < R; i++) {
-            var measureIndex=dataTable.getColumnIndexById(model.measure.fields.at(i).name);           
+          for(var i = 0; i<measuresArrayCount; i++) {
+            var measureIndex=dataTable.getColumnIndexById(model.measures.fields.at(i).name);
             measuresAttributes[i] = {
               attribute: model.measures.fields.at(i).name,
-              name: dataTable.getColumnLabel(measureIndex);,
+              name: dataTable.getColumnLabel(measureIndex),
               column: dataTable.getColumnIndexById(model.measures.fields.at(i).name)
             }
           }
