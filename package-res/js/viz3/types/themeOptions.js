@@ -1,7 +1,7 @@
-define(function() {
-    
-    return ["string", function(PenString) {
-
+define([
+     "pentaho/module!_",
+     "pentaho/type/String"
+    ], function(module, PenString) {    
         return PenString.extend({
         $type: {
             mixins: ["enum"],
@@ -18,6 +18,5 @@ define(function() {
 
             ]
         }
-        });
-    }];
+        }).configure({$type: module.config});;
 });

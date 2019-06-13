@@ -27,7 +27,7 @@ define(["module"], function(module) {
             module.id.replace(/(\w+)$/, "model-series"),
             module.id.replace(/(\w+)$/, "model-map"),
           ],
-          application: "pentaho-det"
+          application: "pentaho-analyzer"
         },
         apply: {
           supportedModes: ["STREAM", "MODEL"]

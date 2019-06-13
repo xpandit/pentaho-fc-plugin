@@ -1,15 +1,12 @@
 define([
   "require",
-  "module",
+  "pentaho/module!_",
   "xViz/utils/Utils",
   "xViz/utils/Chart",
-], function(require,module,Utils,Chart) {
-  "use strict";
-
-  return [
-    "pentaho/visual/base/view",
-    "./model-series",
-    function(BaseView, Model) {
+  "pentaho/visual/base/View",
+  "./Model-Series",
+], function(require,module,Utils,Chart,BaseView, Model) {
+    "use strict";
       // Create the View subclass
       var BarView = BaseView.extend({
         $type: {
@@ -102,7 +99,5 @@ define([
         }
       });
 
-      return BarView;
-    }
-  ];
+      return BarView.configure({$type: module.config});
 });

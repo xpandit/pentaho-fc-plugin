@@ -4,8 +4,8 @@
 
   var requirePaths = requireCfg.paths;
   var requireShims = requireCfg.shim;
-  var requireTypeInfo = requireCfg.config["pentaho/typeInfo"] || (requireCfg.config["pentaho/typeInfo"] = {});
-  var requireInstInfo = requireCfg.config["pentaho/instanceInfo"] || (requireCfg.config["pentaho/instanceInfo"] = {});
+  var requireModules = requireCfg.config["pentaho/modules"] || (requireCfg.config["pentaho/modules"] = {});
+  //var requireInstInfo = requireCfg.config["pentaho/instanceInfo"] || (requireCfg.config["pentaho/instanceInfo"] = {});
   var path = window.location.pathname.split('/');
 
   if (typeof CONTEXT_PATH !== "undefined") { // production
@@ -80,18 +80,18 @@
 
   requirePaths["xViz"] = prefixJS + "/viz3";
 
-  requireInstInfo["xViz/config"] = {type: "pentaho.config.spec.IRuleSet"};
+  requireModules["xViz/config"] = {type: "pentaho.config.spec.IRuleSet"};
 
 
 
   [
-    "xViz/model-combination",
-    "xViz/model-data",
-    "xViz/model-error",
-    "xViz/model-series",
-    "xViz/model-map"
+    "xViz/Model-Combination",
+    "xViz/Model-Data",
+    "xViz/Model-Error",
+    "xViz/Model-Series",
+    "xViz/Model-Map"
   ].forEach(function(name) {
-    requireTypeInfo[name] = {base: "pentaho/visual/base/model"};
+    requireModules[name] = {base: "pentaho/visual/base/Model"};
   });
 
   // Shims with the dependencies

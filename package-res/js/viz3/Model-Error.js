@@ -1,13 +1,10 @@
 define([
-	"module"
-], function(module){
-	"use strict";
-
-	return [
-		"pentaho/visual/base/model",
-		"./types/themeOptions",
-		"./types/chartTypeOptions",
-		function(BaseModel,ThemeOptions,ChartTypeOptions) {
+	"pentaho/module!_",
+	"pentaho/visual/base/Model",
+    "./types/themeOptions",
+	"./types/chartTypeOptions",
+], function(module,BaseModel,ThemeOptions,ChartTypeOptions){
+    "use strict";
 		 	// Create the Bar Model subclass
 	    var ErrorModel = BaseModel.extend({
 	    	$type: {
@@ -20,14 +17,14 @@ define([
 		        label: "Viz3 FusionCharts Error Charts",
 
 		        // The default view to use to render this visualization is
-		        defaultView: "./view-error",
+		        defaultView: "./View-Error",
 
 		        // Properties
 		        props: [
 				  // General properties
 				  {
             		name: "series",
-            		base: "pentaho/visual/role/property",
+            		base: "pentaho/visual/role/Property",
             		modes: [
             			{dataType: "string"},
             			{dataType: "date"}
@@ -36,7 +33,7 @@ define([
 				  },
 				  {
             		name: "category",
-            		base: "pentaho/visual/role/property",
+            		base: "pentaho/visual/role/Property",
             		modes: [
             			{dataType: "string"},
             			{dataType: "date"}
@@ -45,13 +42,13 @@ define([
 				  },
 				  {
             		name: "measure",
-		            base: "pentaho/visual/role/property",
+		            base: "pentaho/visual/role/Property",
 		            modes: [{dataType: "number"}],
 		            fields: { isRequired: true }
 				  },
 				  {
             		name: "error",
-		            base: "pentaho/visual/role/property",
+		            base: "pentaho/visual/role/Property",
 		            modes: [{dataType: "number"}],
 		            fields: { isRequired: true }
 				  },
@@ -74,7 +71,6 @@ define([
 		        ]
 	 		}
 	 	});
-	 	return ErrorModel;
-	}]
-});
+	 	return ErrorModel.configure({$type: module.config});
+ });
 

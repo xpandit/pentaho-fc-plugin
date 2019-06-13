@@ -1,15 +1,12 @@
 define([
 	"module",
+	"pentaho/visual/base/Model",
+	"./types/themeOptions",
+	"./types/chartTypeOptions",
 	"css!./css/model"
-], function(module){
-	"use strict";
-
-	return [
-		"pentaho/visual/base/model",
-		"./types/themeOptions",
-		"./types/chartTypeOptions",
-		function(BaseModel,ThemeOptions,ChartTypeOptions) {
-		 	// Create the Bar Model subclass
+], function(module,BaseModel,ThemeOptions,ChartTypeOptions){
+ 	"use strict";
+	 	// Create the Bar Model subclass
 	    var DataModel = BaseModel.extend({
 	    	$type: {
 		        id: module.id,
@@ -21,14 +18,14 @@ define([
 		        label: "Viz3 FusionCharts Data Charts",
 
 		        // The default view to use to render this visualization is
-		        defaultView: "./view-data",
+		        defaultView: "./View-Data",
 
 		        // Properties
 		        props: [
 		          // General properties
 		          {
             		name: "category",
-            		base: "pentaho/visual/role/property",
+            		base: "pentaho/visual/role/Property",
             		modes: [
             			{dataType: "string"},
             			{dataType: "date"}
@@ -37,7 +34,7 @@ define([
           		  },
           		  {
             		name: "measure",
-		            base: "pentaho/visual/role/property",
+		            base: "pentaho/visual/role/Property",
 		            modes: [{dataType: "number"}],
 		            fields: { isRequired: true }
 				  },
@@ -69,6 +66,5 @@ define([
 				]
 	 		}
 	 	});
-	 	return DataModel;
-	}]
+	 	return DataModel.configure({$type: module.config});
 });

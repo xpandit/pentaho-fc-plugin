@@ -1,6 +1,7 @@
-define(function() {
-    
-    return ["string", function(PenString) {
+define([
+     "pentaho/module!_",
+     "pentaho/type/String"
+    ], function(module, PenString) {    
 
         return PenString.extend({
         $type: {
@@ -12,6 +13,5 @@ define(function() {
                 {v: "2", f: "Measure 3"},
             ]
         }
-        });
-    }];
+        }).configure({$type: module.config});;
 });
