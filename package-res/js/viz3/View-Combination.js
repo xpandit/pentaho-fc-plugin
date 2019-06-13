@@ -1,15 +1,12 @@
 define([
   "require",
-  "module",
+  "pentaho/module!_",
   "xViz/utils/Utils",
   "xViz/utils/Chart",
-], function(require,module,Utils,Chart) {
-  "use strict";
-
-  return [
-    "pentaho/visual/base/view",
-    "./model-combination",
-    function(BaseView, Model) {
+  "pentaho/visual/base/View",
+  "./Model-Combination"
+], function(require,module,Utils,Chart,BaseView, Model) {
+    "use strict";
       // Create the View subclass
       var CombinationView = BaseView.extend({
         $type: {
@@ -35,15 +32,15 @@ define([
           
           var categoryAttribute = model.category.fields.at(0).name;
           var categoryColumn = dataTable.getColumnIndexById(categoryAttribute);
-          var measuresArray = model.measures.fields.count;
+          var measuresArraycount = model.measures.fields.count;
           var measuresAttributes = [];
           var measuresColumns = [];
 
-          for(var i = 0, R = measuresArray.length; i < R; i++) {
-            var measureIndex=dataTable.getColumnIndexById(model.measure.fields.at(i).name);           
+          for(var i = 0; i < measuresArraycount; i++) {
+            var measureIndex=dataTable.getColumnIndexById(model.measures.fields.at(i).name);           
             measuresAttributes[i] = {
               attribute: model.measures.fields.at(i).name,
-              name: dataTable.getColumnLabel(measureIndex);,
+              name: dataTable.getColumnLabel(measureIndex),
               column: dataTable.getColumnIndexById(model.measures.fields.at(i).name)
             }
           }
@@ -115,7 +112,5 @@ define([
         }
       });
 
-      return CombinationView;
-    }
-  ];
+      return CombinationView.configure({$type: module.config});
 });

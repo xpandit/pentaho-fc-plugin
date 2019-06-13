@@ -1,15 +1,12 @@
 define([
   "require",
-  "module",
+  "pentaho/module!_",
   "xViz/utils/Utils",
   "xViz/utils/Chart",
-], function(require,module,Utils,Chart) {
-  "use strict";
-
-  return [
-    "pentaho/visual/base/view",
-    "./model-error",
-    function(BaseView, Model) {
+  "pentaho/visual/base/View",
+  "./Model-Error",
+], function(require,module,Utils,Chart,BaseView, Model) {
+    "use strict";
       // Create the View subclass
       var ErrorView = BaseView.extend({
         $type: {
@@ -106,7 +103,5 @@ define([
         }
       });
 
-      return ErrorView;
-    }
-  ];
+      return ErrorView.configure({$type: module.config});
 });

@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define(["module"], function(module) {
+define(function() {
+  "use strict";
   return {
     rules: [
       // DET integration
       {
         priority: -1,
         select: {
-          type: [
-            module.id.replace(/(\w+)$/, "model-combination"),
-            module.id.replace(/(\w+)$/, "model-data"),
-            module.id.replace(/(\w+)$/, "model-error"),
-            module.id.replace(/(\w+)$/, "model-series"),
-            module.id.replace(/(\w+)$/, "model-map"),
+          module: [
+            "xviz/Model-Combination",
+            "xviz/Model-Data",
+            "xviz/Model-Error",
+            "xviz/Model-Series",
+            "xviz/Model-Map",
           ],
-          application: "pentaho-det"
+          application: [
+            "pentaho-analyzer",
+            "pentaho-det"
+          ]
         },
         apply: {
           supportedModes: ["STREAM", "MODEL"]

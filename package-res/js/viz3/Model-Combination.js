@@ -1,14 +1,11 @@
 define([
-	"module"
-], function(module){
-	"use strict";
-
-	return [
-		"pentaho/visual/base/model",
-		"./types/themeOptions",
-		"./types/chartTypeOptions",
-		"./types/renderAsOptions",
-		function(BaseModel,ThemeOptions,ChartTypeOptions, RenderAsOptions) {
+	"pentaho/module!_",
+	"pentaho/visual/base/Model",
+    "./types/themeOptions",
+    "./types/chartTypeOptions",
+    "./types/renderAsOptions",
+], function(module,BaseModel,ThemeOptions,ChartTypeOptions, RenderAsOptions){
+    "use strict";
 		 	// Create the Bar Model subclass
 	    var CombinationModel = BaseModel.extend({
 	    	$type: {
@@ -21,14 +18,14 @@ define([
 		        label: "Viz3 FusionCharts Combination Charts",
 
 		        // The default view to use to render this visualization is
-		        defaultView: "./view-combination",
+		        defaultView: "./View-Combination",
 
 		        // Properties
 		        props: [
 				  // General properties
 				  {
             		name: "category",
-            		base: "pentaho/visual/role/property",
+            		base: "pentaho/visual/role/Property",
             		modes: [
             			{dataType: "string"},
             			{dataType: "date"}
@@ -37,7 +34,7 @@ define([
 				  },
 				  {
             		name: "measures",
-		            base: "pentaho/visual/role/property",
+		            base: "pentaho/visual/role/Property",
 		            modes: [{dataType: ["number"]}],
 		            fields: { isRequired: true, countMax: 3 }
 				  },
@@ -83,7 +80,6 @@ define([
 		        ]
 	 		}
 	 	});
-	 	return CombinationModel;
-	}]
+	 	return CombinationModel.configure({$type: module.config});
 });
 
