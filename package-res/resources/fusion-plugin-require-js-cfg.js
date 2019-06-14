@@ -82,8 +82,6 @@
 
   requireModules["xViz/config"] = {type: "pentaho/config/spec/IRuleSet"};
 
-
-
   [
     "xViz/Model-Combination",
     "xViz/Model-Data",
