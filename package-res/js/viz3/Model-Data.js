@@ -1,5 +1,5 @@
 define([
-	"module",
+	"pentaho/module!_",
 	"pentaho/visual/base/Model",
 	"./types/themeOptions",
 	"./types/chartTypeOptions",
