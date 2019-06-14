@@ -5,6 +5,10 @@
   <property name="dir.samples" value="fusion-samples"/>
   <property name="dir.cdf-dd-res" value="pentaho-cdf-dd-package-res"/>
 
+  <presetdef name="javac">
+    <javac includeantruntime="false" encoding="UTF-8" />
+  </presetdef>
+
   <target name="assemble.copy-libs">
     <copy todir="${approot.stage.dir}/lib">
       <!-- Add jar files from dev lib -->
@@ -29,34 +33,34 @@
     <copy todir="${dir.system}/${package.root.dir}" >
       <fileset dir="${approot.stage.dir}" />
     </copy>
-    <echo message="${approot.stage.dir}"></echo>
-    <echo message="${dir.system}/${package.root.dir}"></echo>
+    <echo message="${approot.stage.dir}"/>
+    <echo message="${dir.system}/${package.root.dir}"/>
   </target>
 
   <target name="reinstall-plugin">
-    <echo message="Cleaning plugin folder..."></echo>
+    <echo message="Cleaning plugin folder..."/>
     <delete dir="${dir.system}/${package.root.dir}"/>
     <antcall target="install-plugin"/>
   </target>
 
   <target name="install-samples">
-    <echo message="Copying samples from ./${dir.samples}/plugin-samples/fusion-charts"></echo>
-    <echo message="To ${dir.solutions}/plugin-samples/fusion-charts"></echo>
+    <echo message="Copying samples from ./${dir.samples}/plugin-samples/fusion-charts"/>
+    <echo message="To ${dir.solutions}/plugin-samples/fusion-charts"/>
     <copy todir="${dir.solutions}/plugin-samples/fusion-charts">
       <fileset dir="${dir.samples}/plugin-samples/fusion-charts"/>
     </copy>
-  	<echo message="Warning: Only tested on 7.1!"></echo>
+    <echo message="Warning: Only tested on 7.1!"/>
   </target>
 
   <target name="reinstall-samples">
-    <echo message="Cleaning samples folder..."></echo>
+    <echo message="Cleaning samples folder..."/>
     <delete dir="${dir.solutions}/plugin-samples/fusion-charts"/>
     <antcall target="install-samples"/>
   </target>
 
   <target name="install-cdf-dd-res">
-    <echo message="Copying samples from ./${dir.cdf-dd-res}"></echo>
-    <echo message="To ${dir.solutions}/system/pentaho-cdf-dd"></echo>
+    <echo message="Copying samples from ./${dir.cdf-dd-res}"/>
+    <echo message="To ${dir.solutions}/system/pentaho-cdf-dd"/>
     <copy todir="${dir.solutions}/system/pentaho-cdf-dd" overwrite="true">
       <fileset dir="${dir.cdf-dd-res}" />
     </copy>

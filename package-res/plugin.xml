@@ -53,12 +53,6 @@
     <!-- Required dependencies -->
     <file context="analyzer">content/xfusion/js/vizapi/chart_settings.js</file>
     <file context="analyzer">content/xfusion/JSClass/FusionCharts.js</file>
-    <!-- Themes -->
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.carbon.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.fint.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.ocean.js</file>
-    <file context="analyzer">content/xfusion/JSClass/themes/fusioncharts.theme.zune.js</file>
-    <!-- <file context="analyzer">content/xfusion/js/XDashFusionChartComponent.js</file>-->
   </external-resources>
 
 </plugin>
