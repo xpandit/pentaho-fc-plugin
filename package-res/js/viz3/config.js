@@ -29,8 +29,10 @@ define(function() {
             "xviz/Model-Map",
           ],
           application: [
-            "pentaho-analyzer",
-            "pentaho-det"
+            "pentaho/analyzer",
+            "pentaho/dashboard",
+            "pentaho/det",
+            "pentaho/cdf"
           ]
         },
         apply: {

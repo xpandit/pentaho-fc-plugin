@@ -1,6 +1,6 @@
 define([
 	"pentaho/module!_",
-	"pentaho/visual/base/Model",
+	"pentaho/visual/Model",
     "./types/themeOptions",
     "./types/chartTypeOptions",
     "./types/renderAsOptions",
@@ -80,6 +80,6 @@ define([
 		        ]
 	 		}
 	 	});
-	 	return CombinationModel.configure({$type: module.config});
+	 	return CombinationModel.configure();
 });
 

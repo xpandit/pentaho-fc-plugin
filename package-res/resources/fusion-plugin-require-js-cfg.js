@@ -83,14 +83,20 @@
   requireModules["xViz/config"] = {type: "pentaho/config/spec/IRuleSet"};
 
   [
-    "xViz/Model-Combination",
-    "xViz/Model-Data",
-    "xViz/Model-Error",
-    "xViz/Model-Series",
-    "xViz/Model-Map"
-  ].forEach(function(name) {
-    requireModules[name] = {base: "pentaho/visual/base/Model"};
+    {model: "xViz/Model-Combination", view: "xViz/View-Combination"},
+    {model: "xViz/Model-Data", view: "xViz/View-Data"},
+    {model: "xViz/Model-Error", view: "xViz/View-Error"},
+    {model: "xViz/Model-Series", view: "xViz/view-Series"},
+    {model: "xViz/Model-Map", view: "xViz/View-Map"}
+  ].forEach(function(modules) {
+    requireModules[modules.model] = {
+      base: "pentaho/visual/Model",
+      annotations: {
+        "pentaho/visual/DefaultView": {module: modules.view}
+      }
+    }
   });
+
 
   // Shims with the dependencies
   requireShims['xfusion/fclib/fusioncharts.theme.ocean'] = ['xfusion/fclib/FusionCharts'];

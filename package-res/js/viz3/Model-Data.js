@@ -1,6 +1,6 @@
 define([
 	"pentaho/module!_",
-	"pentaho/visual/base/Model",
+	"pentaho/visual/Model",
 	"./types/themeOptions",
 	"./types/chartTypeOptions",
 	"css!./css/model"
@@ -66,5 +66,5 @@ define([
 				]
 	 		}
 	 	});
-	 	return DataModel.configure({$type: module.config});
+	 	return DataModel.configure();
 });

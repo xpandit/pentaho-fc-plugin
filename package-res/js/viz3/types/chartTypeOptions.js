@@ -87,5 +87,5 @@ define([
                 {v: "maps/usa", f: "USA Map"}
             ]
         }
-        }).configure({$type: module.config});
+        }).configure();
 });

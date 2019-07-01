@@ -1,6 +1,6 @@
 define([
 	"pentaho/module!_",
-	"pentaho/visual/base/Model",
+	"pentaho/visual/Model",
     "./types/themeOptions",
 	"./types/chartTypeOptions",
 ], function(module,BaseModel,ThemeOptions,ChartTypeOptions){
@@ -71,6 +71,6 @@ define([
 		        ]
 	 		}
 	 	});
-	 	return ErrorModel.configure({$type: module.config});
+	 	return ErrorModel.configure();
  });
 

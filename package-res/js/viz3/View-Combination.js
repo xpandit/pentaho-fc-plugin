@@ -3,23 +3,12 @@ define([
   "pentaho/module!_",
   "xViz/utils/Utils",
   "xViz/utils/Chart",
-  "pentaho/visual/base/View",
-  "./Model-Combination"
-], function(require,module,Utils,Chart,BaseView, Model) {
+  "pentaho/visual/impl/View"
+], function(require,module,Utils,Chart,BaseView) {
     "use strict";
       // Create the View subclass
-      var CombinationView = BaseView.extend({
-        $type: {
-          id: module.id,
-          props: [
-            // Specialize the inherited model property to the model type
-            {
-              name: "model",
-              valueType: Model
-            }
-          ]
-        },
-      
+      var CombinationView = BaseView.extend(module.id,{
+            
         _updateAll: function() {
           //Validate FusionXT and Key
           if(!Utils.prototype.validateFusionKey(this.domContainer)){
@@ -112,5 +101,5 @@ define([
         }
       });
 
-      return CombinationView.configure({$type: module.config});
+      return CombinationView.configure();
 });

@@ -1,4 +1,4 @@
-define([
+sdefine([
      "pentaho/module!_",
      "pentaho/type/String"
     ], function(module, PenString) {    
@@ -13,5 +13,5 @@ define([
                 {v: "2", f: "Measure 3"},
             ]
         }
-        }).configure({$type: module.config});
+        }).configure();
 });
