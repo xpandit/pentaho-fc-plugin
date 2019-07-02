@@ -55,5 +55,5 @@ define([
         }
       });
 
-      return MapView.configure();
+      return MapView;
  });

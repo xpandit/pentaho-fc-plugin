@@ -101,5 +101,5 @@ define([
         }
       });
 
-      return CombinationView.configure();
+      return CombinationView;
 });

@@ -47,5 +47,5 @@ define([
         }
       });
 
-      return DataView.configure();
+      return DataView;
  });

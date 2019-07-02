@@ -88,5 +88,5 @@ define([
         }
       });
 
-      return BarView.configure();
+      return BarView;
 });

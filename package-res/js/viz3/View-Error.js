@@ -92,5 +92,5 @@ define([
         }
       });
 
-      return ErrorView.configure();
+      return ErrorView;
 });
