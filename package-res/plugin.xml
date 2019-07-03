@@ -33,7 +33,6 @@
 	    <title>Fusion Config</title>
 	    <description>Fusion Config File</description>
 	    <icon-url>content/xfusion/resources/icon.jpg</icon-url>
-	    <meta-provider>com.xpandit.fusionplugin.pentaho.content.FusionContentTypeMetaProvider</meta-provider>
 	    <operations>
 	      <operation>
 	        <id>RUN</id>

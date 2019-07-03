@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>template</name>
-    <description>Clean Transformation</description>
+    <name>properties</name>
+    <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>key</name>
-        <default_value>${NULL_VALUE}</default_value>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>key_filename</name>
-        <default_value>../../key</default_value>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>key_value</name>
-        <default_value>${NULL_VALUE}</default_value>
-        <description/>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -443,29 +427,34 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2013/07/04 18:48:57.073</created_date>
+    <created_date>2019/07/03 10:39:29.160</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2013/07/04 18:48:57.073</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/07/03 10:39:29.160</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>Get Variables</from>
-      <to>Properties</to>
+      <from>VALIDATION</from>
+      <to>KEY VALIDATED</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Properties</from>
-      <to>Text file output</to>
+      <from>KEY VALIDATED</from>
+      <to>Properties Out</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Text file input</from>
+      <to>VALIDATION</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
+    <name>VALIDATION</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -474,32 +463,89 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>filename</name>
-        <variable>${key_filename}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>value</name>
-        <variable>${key}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+    <send_true_to>KEY VALIDATED</send_true_to>
+    <send_false_to>Get Variables</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <leftvalue>att</leftvalue>
+                <function>=</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>free</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+              <condition>
+                <negated>N</negated>
+                <operator>AND</operator>
+                <leftvalue>value</leftvalue>
+                <function>=</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>true</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <conditions>
+              <condition>
+                <negated>N</negated>
+                <operator>AND</operator>
+                <leftvalue>att</leftvalue>
+                <function>=</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>isHTML5</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+              <condition>
+                <negated>N</negated>
+                <operator>AND</operator>
+                <leftvalue>value</leftvalue>
+                <function>=</function>
+                <rightvalue/>
+                <value>
+                  <name>constant</name>
+                  <type>String</type>
+                  <text>false</text>
+                  <length>-1</length>
+                  <precision>-1</precision>
+                  <isnull>N</isnull>
+                  <mask/>
+                </value>
+              </condition>
+            </conditions>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -509,13 +555,46 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>48</yloc>
+      <xloc>272</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output</name>
+    <name>KEY VALIDATED</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>value</field_name>
+      <formula_string>value.equals("true")?"false":"true"</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field>value</replace_field>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Properties Out</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -525,10 +604,10 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
+    <separator>=</separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
@@ -539,10 +618,10 @@
     <fileNameField>filename</fileNameField>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>${Internal.Transformation.Filename.Directory}/${key_filename}</name>
+      <name>${Internal.Transformation.Filename.Directory}/../../fusionCharts</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
+      <extention>properties</extention>
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
@@ -556,6 +635,18 @@
       <splitevery>0</splitevery>
     </file>
     <fields>
+      <field>
+        <name>att</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
       <field>
         <name>value</name>
         <type>String</type>
@@ -578,14 +669,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>48</yloc>
+      <xloc>608</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Properties</name>
-    <type>TransExecutor</type>
+    <name>Text file input</name>
+    <type>TextFileInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -594,36 +685,101 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id/>
-    <trans_name/>
-    <filename>${Internal.Entry.Current.Directory}/properties.ktr</filename>
-    <directory_path/>
-    <group_size>1</group_size>
-    <group_field/>
-    <group_time/>
-    <parameters>
-      <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    <execution_result_target_step/>
-    <execution_time_field>ExecutionTime</execution_time_field>
-    <execution_result_field>ExecutionResult</execution_result_field>
-    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
-    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
-    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
-    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
-    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
-    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
-    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
-    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
-    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
-    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
-    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
-    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step/>
-    <result_files_target_step/>
-    <result_files_file_name_field>FileName</result_files_file_name_field>
-    <executors_output_step>Text file output</executors_output_step>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
+    <separator>=</separator>
+    <enclosure/>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
+    <header>N</header>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>DOS</format>
+    <encoding/>
+    <length>Characters</length>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>${Internal.Transformation.Filename.Directory}/../../fusionCharts.properties</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
+    <fields>
+      <field>
+        <name>att</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <ifnull/>
+        <position>-1</position>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>value</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <ifnull/>
+        <position>-1</position>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>en_US</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -633,8 +789,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>48</yloc>
+      <xloc>160</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -649,13 +805,6 @@
       <attribute>
         <key>NamedCluster</key>
         <value>{"namespace":"NamedClusters","id":"NamedCluster","name":"NamedCluster","description":"A NamedCluster","metaStoreName":null}</value>
-      </attribute>
-    </group>
-    <group>
-      <name>explorerState</name>
-      <attribute>
-        <key>Properties</key>
-        <value/>
       </attribute>
     </group>
     <group>
