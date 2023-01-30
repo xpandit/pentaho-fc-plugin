@@ -1,4 +1,4 @@
-# This plugin is no longer updated and thus it won't be compatible with versions of Pentaho above 8.1#
+# This plugin is no longer updated and thus it won't be compatible with versions of Pentaho above 8.1 #
 
 # Release 6.1.0 is available! #
 
