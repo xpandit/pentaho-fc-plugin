@@ -1,3 +1,5 @@
+# This plugin is no longer updated and thus it won't be compatible with versions of Pentaho above 8.1#
+
 # Release 6.1.0 is available! #
 
 [![](http://www.xpand-it.com/wp-content/uploads/2015/12/01-FusionCharts-Plugin-for-Pentaho-2016.jpg)](http://www.xpand-it.com/fusioncharts-plugin-for-pentaho/)
